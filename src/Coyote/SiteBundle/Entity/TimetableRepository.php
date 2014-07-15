@@ -12,10 +12,10 @@ use Doctrine\ORM\EntityRepository;
  */
 class TimetableRepository extends EntityRepository
 {
-    /*public function myFindDate($no_week, $year)
+    public function myFindDate($no_week, $year)
     {
         $qb = $this->_em->createQueryBuilder();
-        $qb->select('t')//.date')
+        $qb->select('t.date')
            ->from('CoyoteSiteBundle:Timetable', 't')
            ->where('t.no_week = :no_week and t.year = :year')
            ->setParameters(array('no_week' => $no_week, 'year' => $year));
@@ -44,7 +44,7 @@ class TimetableRepository extends EntityRepository
         $time =  $qb->getQuery()
                     ->getResult();
         return $time;
-    }*/
+    }
 
     public function myFindScheduleId($no_week, $year, $user_id)
     {

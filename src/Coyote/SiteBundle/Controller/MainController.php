@@ -47,8 +47,13 @@ class MainController extends Controller
             //return $this->render('CoyoteSiteBundle:Admin:index.html.twig');
             return $this->redirect($this->generateUrl('sonata_admin_dashboard'));
         }
+        if($this->get('security.context')->isGranted('ROLE_CONFIG'))
+        {
+            return $this->redirect($this->generateUrl('coyote_configurator'));
+        }
         else
         {
+            //return $this->render('CoyoteSiteBundle:Accueil:maintenance.html.twig');
             $em = $this->getDoctrine()->getManager();
             
             $iduser = $this->get('security.context')->getToken()->getUser()->getId();

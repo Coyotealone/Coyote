@@ -11,16 +11,6 @@ security:
         ROLE_PICHON:        [ROLE_TECH, ROLE_CADRE, ROLE_ADMIN]
         ROLE_ADMIN:         [ROLE_ADMIN, ROLE_CHEF_BE, ROLE_COMPTA]
         ROLE_SUPER_ADMIN:   [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
-        #     - ROLE_TECH
-#             - ROLE_CADRE
-#             - ROLE_ADMIN
-#         ROLE_ADMIN:
-#             - ROLE_ADMIN
-#             - ROLE_CHEF_BE
-#             - ROLE_COMPTA
-#         ROLE_SUPER_ADMIN:
-#             - ROLE_ADMIN
-#             - ROLE_ALLOWED_TO_SWITCH
 
     providers:
         main:
