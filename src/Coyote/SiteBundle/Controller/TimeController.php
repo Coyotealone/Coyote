@@ -102,11 +102,21 @@ class TimeController extends Controller
             return $this->redirect($this->generateUrl('fos_user_security_login'));
         else
         {
-            $date = $em->getRepository('CoyoteSiteBundle:Timetable')->myFindDate($session->get('no_week'), $session->get('year'));
-            $time = $em->getRepository('CoyoteSiteBundle:Timetable')->myFindTime($session->get('no_week'), $session->get('year'), $session->get('userid'));
+            //$date = $em->getRepository('CoyoteSiteBundle:Timetable')->myFindDate($session->get('no_week'), $session->get('year'));
+            //$time = $em->getRepository('CoyoteSiteBundle:Timetable')->myFindTime($session->get('no_week'), $session->get('year'), $session->get('userid'));
+            
+            //$date = $em->getRepository('CoyoteSiteBundle:Timetable')->findBy(array('no_week' => 28,'year' => 2014,));
+            //$time = $em->getRepository('CoyoteSiteBundle:Schedule')->findBy(array('timetable' => $date, 'user' => 15));
+            
+            
+            $date = $em->getRepository('CoyoteSiteBundle:Timetable')->findBy(array('no_week' => $session->get('no_week'),'year' => $session->get('year'),));
+            $time = $em->getRepository('CoyoteSiteBundle:Schedule')->findBy(array('timetable' => $date, 'user' => $session->get('userid')));
+            
             
             if(count($time) == 0)
             {
+                //return $this->render('CoyoteSiteBundle:Time:test.html.twig', array('date' => $date));
+                //return new Response('vide');
                 $session->set('id_lundi', '');
                 $session->set('id_mardi', '');
                 $session->set('id_mercredi', '');
@@ -118,6 +128,9 @@ class TimeController extends Controller
             }
             else
             {
+                //$id = $em->getRepository('CoyoteSiteBundle:Timetable')->myFindScheduleId(28, 2014, 15);
+                //$timetable_id = $em->getRepository('CoyoteSiteBundle:Timetable')->myFindTimetableId(28, 2014);
+                
                 $id = $em->getRepository('CoyoteSiteBundle:Timetable')->myFindScheduleId($session->get('no_week'), $session->get('year'), $session->get('userid'));
                 $timetable_id = $em->getRepository('CoyoteSiteBundle:Timetable')->myFindTimetableId($session->get('no_week'), $session->get('year'));
                 
@@ -839,7 +852,7 @@ class TimeController extends Controller
             $absencecayear = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsenceYear($mois, $annee, $user, "ca");
             $absencecpyear = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsenceYear($mois, $annee, $user, "cp");
             $absence = explode(';', $absence);
-            if($session->get('status') == "cadre")
+            if($this->get('security.context')->isGranted('ROLE_CADRE'))
                 return $this->render('CoyoteSiteBundle:Time:showfm.html.twig', array(
                     'data' => $data,
                     'rtt' => $absence[1],

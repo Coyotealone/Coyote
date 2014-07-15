@@ -12,4 +12,42 @@ use Doctrine\ORM\EntityRepository;
  */
 class ConfiguringTankersRepository extends EntityRepository
 {
+    public function findLink($link)
+    {
+        $qb = $this->_em->createQueryBuilder();
+        $qb->select('ct')
+           ->from('CoyoteSiteBundle:ConfiguringTankers', 'ct')
+           ->where("ct.link = :link and ct.amount != 'NULL'")
+           ->setParameters(array('link' => $link));
+        
+        $data =  $qb->getQuery()
+                    ->getResult();
+        return $data;
+    }
+    
+    public function findLinkComment($link, $comment)
+    {
+        $qb = $this->_em->createQueryBuilder();
+        $qb->select('ct')
+           ->from('CoyoteSiteBundle:ConfiguringTankers', 'ct')
+           ->where("ct.link = :link and ct.comment = :comment")
+           ->setParameters(array('link' => $link, 'comment' => $comment));
+        
+        $data =  $qb->getQuery()
+                    ->getResult();
+        return $data;
+    }
+    
+    public function findlinkCommun($link)
+    {
+        $qb = $this->_em->createQueryBuilder();
+        $qb->select('ct.comment')
+           ->from('CoyoteSiteBundle:ConfiguringTankers', 'ct')
+           ->where("ct.link = :link and ct.comment LIKE 'C%'")
+           ->setParameters(array('link' => $link));
+        
+        $data =  $qb->getQuery()
+                    ->getResult();
+        return $data;
+    }
 }

@@ -25,12 +25,12 @@ class ExpenseAdmin extends Admin
             ->add('fee')
             ->add('userfees')
             ->add('date')
-            ->add('status')
+            ->add('status', 'checkbox', array('required' => false))
             ->add('amount')
             ->add('actual_amount')
             ->add('amount_TTC')
             ->add('amount_TVA')
-            ->add('comment')
+            ->add('comment', 'text', array('required' => false))
         ;
     }
 
