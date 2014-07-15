@@ -1,0 +1,30 @@
+schedule:
+    pattern:  /
+    defaults: { _controller: "CoyoteSiteBundle:Schedule:index" }
+
+schedule_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "CoyoteSiteBundle:Schedule:show" }
+
+schedule_new:
+    pattern:  /new
+    defaults: { _controller: "CoyoteSiteBundle:Schedule:new" }
+
+schedule_create:
+    pattern:  /create
+    defaults: { _controller: "CoyoteSiteBundle:Schedule:create" }
+    requirements: { _method: post }
+
+schedule_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "CoyoteSiteBundle:Schedule:edit" }
+
+schedule_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "CoyoteSiteBundle:Schedule:update" }
+    requirements: { _method: post|put }
+
+schedule_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "CoyoteSiteBundle:Schedule:delete" }
+    requirements: { _method: post|delete }

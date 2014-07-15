@@ -1,0 +1,13 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<div class="fos_user_user_show">
+    <p>{{'Si vous rencontrez une erreur sur votre profil, merci de contacter votre administrateur'|trans}}</p>
+    <br>
+    <p>{{ 'profile.show.username'|trans }}: {{ user.username }}</p>
+    <p>{{ 'Nom prénom'|trans }}: {{ user.name }}</p>
+    <p>{{ 'profile.show.email'|trans }}: {{ user.email }}</p>
+    <p>{{ 'N° Téléphone'|trans }} : {{ user.phone }}</p>
+    {% if user.cell %}
+    <p>{{ 'N° Portable'|trans }} : {{ user.cell }}</p>
+    {% endif %}
+</div>

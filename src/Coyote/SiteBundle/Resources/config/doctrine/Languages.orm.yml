@@ -1,0 +1,29 @@
+Coyote\SiteBundle\Entity\Languages:
+    type: entity
+    table: languages
+    repositoryClass: Coyote\SiteBundle\Entity\LanguagesRepository
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        language:
+            type: string
+            lenght: 3
+        entitled:
+            type: string
+            lenght: 45
+        logon_language:
+            type: boolean
+        conversion:
+            type: string
+            lenght: 45
+    oneToMany:
+        offer_headers:
+            targetEntity: OfferHeader
+            mappedBy: languages
+            cascade: ["persist", "merge"]
+        comments_sales:
+            targetEntity: CommentsSale
+            mappedBy: languages
+            cascade: ["persist", "merge"]

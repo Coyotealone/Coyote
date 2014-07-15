@@ -1,0 +1,33 @@
+Coyote\SiteBundle\Entity\Country:
+    type: entity
+    table: country
+    repositoryClass: Coyote\SiteBundle\Entity\CountryRepository
+    id:
+        id:
+            type: integer
+            unique: true
+            generator: { strategy: AUTO }
+    fields:
+        code:
+            type: integer
+            lenght: 3
+            unique: true
+        alpha2:
+            type: string
+            lenght: 2
+            unique: true
+        alpha3:
+            type: string
+            lenght: 3
+            unique: true
+        entitledfr:
+            type: string
+            lenght: 45
+        entitledgb:
+            type: string
+            lenght: 45
+    oneToMany:
+        configuring_tankerss:
+            targetEntity: ConfiguringTankers
+            mappedBy: country
+            cascade: ["persist", "merge"]

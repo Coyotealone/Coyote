@@ -1,0 +1,36 @@
+Coyote\SiteBundle\Entity\OfferContent:
+    type: entity
+    table: offer_content
+    repositoryClass: Coyote\SiteBundle\Entity\OfferContentRepository
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        amount:
+            type: integer
+        price:
+            type: float
+        price_currency:
+            type: float
+        discount:
+            type: float
+    manyToOne:
+        item:
+            targetEntity: Item
+            inversedBy: offer_contents
+            joinColumn:
+                name: item_id
+                referencedColumnName: id
+        comments_sale:
+            targetEntity: CommentsSale
+            inversedBy: offer_contents
+            joinColumn:
+                name: comments_sale_id
+                referencedColumnName: id
+        offer_header:
+            targetEntity: OfferHeader
+            inversedBy: offer_contents
+            joinColumn:
+                name: offer_header_id
+                referencedColumnName: id

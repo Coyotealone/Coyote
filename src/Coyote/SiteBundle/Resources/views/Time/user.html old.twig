@@ -1,0 +1,344 @@
+{% extends 'CoyoteSiteBundle:Time:index.html.twig' %}
+
+{% block javascripts %}
+        <script src="{{ asset('bundles/coyotesite/js/jquery-min.js') }}"/></script>
+        <script src="{{ asset('bundles/coyotesite/js/script_timeusers.js') }}"/></script>
+        <script src="{{ asset('bundles/coyotesite/js/script_timeusers_change.js') }}"/></script>
+{% endblock %}
+
+{% block content %}
+
+{% for flashMessage in app.session.flashbag.get('save') %}
+
+    {{ flashMessage }}
+
+{% endfor %}
+
+<form role="form" action="{{ path('coyote_time_savetime') }}" method='post'>
+<div id="contenu">
+    <p>Voici la semaine {{ app.session.get('no_week') }} d'affichée de l'année {{ app.session.get('year') }}</p>
+    <div class='table-responsive'>
+    	<table id='table_temps' class='table'>
+    		<h2>Temps de travail</h2>
+    		<thead>
+    			<tr>
+    				<td>Jour de la semaine</td>
+    				<td>Début</td>
+    				<td>Fin</td>
+    				<td>Pause</td>
+    				<td>Temps de travail</td>
+    				<td>Journée travaillée</td>
+    				<td>Déplacement</td>
+    				<td>Absence</td>
+    				<td>Commentaire</td>
+    				
+    			</tr>
+    		</thead>
+    		<tbody> <!-- Corps du tableau -->
+    			<tr>
+    				<td id="{{ id[0]['id'] }}" data-value={{ id[0]['id'] }} data-id={{ timetable.0.id }} class='jour'>{{ 'Lundi'|trans }} :
+    				    <input class='input' type='text' disabled name='datelundi' id='datelundi' data-value={{ date[0]['date'] }} value={{ date[0]['date'] }} />
+    				</td>
+    				<td>
+    				    <input class='input' type='text' placeholder='9:00' maxlength='5' name='debutlundi' id='debutlundi' data-value={{ time[0]['start'] }} value={{ time[0]['start'] }} />
+    				</td>
+    				<td>
+    				    <input class='input' type='text' placeholder='17:00' maxlength='5' name='finlundi' id='finlundi' data-value={{ time[0]['end'] }} value={{ time[0]['end'] }} />
+    				</td>
+    				<td>
+    				    <input class='input' type='text' placeholder='1:00' maxlength='5' name='pauselundi' id='pauselundi' data-value={{ time[0]['break'] }} value={{ time[0]['break'] }} />
+    				</td>
+    				<td>
+    				    <input class='input' disabled type='text' maxlength='5' name='tpslundi' id='tpslundi' data-value={{ time[0]['working_time'] }} value={{ time[0]['working_time'] }} />
+    				</td>
+    				<td>
+    				    <input class='input' disabled type='text' name='jourlundi' id='jourlundi' data-value={{ time[0]['working_hours'] }} value={{ time[0]['working_hours'] }} />
+    				</td>
+    				<td class='deplacement'>
+    					<select name='deplacementlundi' id='deplacementlundi' data-value={{ time.0.travel }} >
+    					    <option value='0'>Non</option>
+                            <option value='1'>Oui</option>
+    					</select>
+    				</td>
+    				<td>
+    					<select name='absencelundi' id='absencelundi' data-value={{ time[0]['absence'] }} >
+        					<option value='aucune'></option>
+        					<option value='rtt'>RTT</option>
+        					<option value='cp'>Congés payés</option>
+        					<option value='ca'>CA</option>
+        					<option value='cef'>CEF</option>
+        					<option value='css'>Congés sans solde</option>
+        					<option value='mal'>Maladie/At/Pat</option>
+    					</select>
+    				</td>
+    				<td>
+    				    <input type='text' name='commentairelundi' id='commentairelundi' placeholder='Saisir un commentaire' data-value={{ time[0]['comment'] }} value="{{ time[0]['comment'] }}" />
+    				</td>
+    			</tr>
+    			<tr>
+    				<td id="{{ id[1]['id'] }}" data-value={{ id[1]['id'] }} data-id={{ timetable.1.id }} class='jour'>{{ 'Mardi'|trans }} : 
+    				    <input class='input' type='text' disabled name='datemardi' id='datemardi' data-value={{ date[1]['date'] }} value={{ date[1]['date'] }} />
+    				</td>
+    				<td>
+    				    <input class='input' type='text' maxlength='5' name='debutmardi' id='debutmardi' data-value={{ time[1]['start'] }} value={{ time[1]['start'] }} />
+    				</td>
+    				<td>
+    				    <input class='input' type='text' maxlength='5' name='finmardi' id='finmardi' data-value={{ time[1]['end'] }} value={{ time[1]['end'] }} />
+    				</td>
+    				<td>
+    				    <input class='input' type='text' maxlength='5' name='pausemardi' id='pausemardi' data-value={{ time[1]['break'] }} value={{ time[1]['break'] }} />
+    				</td>
+    				<td>
+    				    <input class='input' disabled maxlength='5' type='text' name='tpsmardi' id='tpsmardi' data-value={{ time[1]['working_time'] }} value={{ time[1]['working_time'] }} />
+    				</td>
+    				<td>
+    				    <input class='input' disabled type='text' name='jourmardi' id='jourmardi' data-value={{ time[1]['working_hours'] }} value={{ time[1]['working_hours'] }} />
+    				</td>
+    				<td class='deplacement' data-value={{ time[1]['travel'] }} >
+    					<select name='deplacementmardi' id='deplacementmardi'>
+        					<option value='0'>Non</option>
+        					<option value='1'>Oui</option>
+    					</select>
+    				</td>
+    				<td>
+    					<select name='absencemardi' id='absencemardi' data-value={{ time[1]['absence'] }} >
+        					<option value='aucune'></option>
+        					<option value='rtt'>RTT</option>
+        					<option value='cp'>Congés payés</option>
+        					<option value='ca'>CA</option>
+        					<option value='cef'>CEF</option>
+        					<option value='css'>Congés sans solde</option>
+        					<option value='mal'>Maladie/At/Pat</option>
+    					</select>
+    				</td>
+    				<td>
+    				    <input type='text' name='commentairemardi' id='commentairemardi' placeholder='Saisir un commentaire' data-value={{ time[1]['comment'] }} value="{{ time[1]['comment'] }}" />
+    				</td>
+    			</tr>
+    			<tr>
+    				<td id="{{ id[2]['id'] }}" data-value={{ id[2]['id'] }} data-id={{ timetable.2.id }} class='jour'>Mercredi : 
+    				    <input class='input' type='text' disabled name='datemercredi' id='datemercredi' data-value={{ date[2]['date'] }} value={{ date[2]['date'] }} />
+    				</td>
+    				<td>
+    				    <input class='input' maxlength='5' type='text' name='debutmercredi' id='debutmercredi' data-value={{ time[2]['start'] }} value={{ time[2]['start'] }} />
+    				</td>
+    				<td>
+    				    <input class='input' maxlength='5' type='text' name='finmercredi' id='finmercredi' data-value={{ time[2]['end'] }} value={{ time[2]['end'] }} />
+                    </td>
+    				<td>
+    				    <input class='input' maxlength='5' type='text' name='pausemercredi' id='pausemercredi' data-value={{ time[2]['break'] }} value={{ time[2]['break'] }} />
+    				</td>
+    				<td>
+    				    <input class='input' maxlength='5' disabled type='text' name='tpsmercredi' id='tpsmercredi' data-value={{ time[2]['working_time'] }} value={{ time[2]['working_time'] }} />
+    				</td>
+    				<td>
+    				    <input class='input' disabled type='text' name='jourmercredi' id='jourmercredi' data-value={{ time[2]['working_hours'] }} value={{ time[2]['working_hours'] }} />
+    				</td>
+    				<td class='deplacement'>
+    					<select name='deplacementmercredi' id='deplacementmercredi' data-value={{ time[2]['travel'] }} >
+        					<option value='0'>Non</option>
+        					<option value='1'>Oui</option>
+    					</select>
+    				</td>
+    				<td>
+    					<select name='absencemercredi' id='absencemercredi' data-value={{ time[2]['absence'] }} >
+        					<option value='aucune'></option>
+        					<option value='rtt'>RTT</option>
+        					<option value='cp'>Congés payés</option>
+        					<option value='ca'>CA</option>
+        					<option value='cef'>CEF</option>
+        					<option value='css'>Congés sans solde</option>
+        					<option value='mal'>Maladie/At/Pat</option>
+    					</select>
+    				</td>
+    				<td>
+    				    <input type='text' name='commentairemercredi' id='commentairemercredi' placeholder='Saisir un commentaire' data-value={{ time[2]['comment'] }} value="{{ time[2]['comment'] }}" />
+    				</td>
+    			</tr>
+    			<tr>
+    				<td id="{{ id[3]['id'] }}" data-value={{ id[3]['id'] }} data-id={{ timetable.3.id }} class='jour'>Jeudi : 
+    				    <input class='input' type='text' disabled name='datejeudi' id='datejeudi' data-value={{ date[3]['date'] }} value={{ date[3]['date'] }} />
+    				</td>
+    				<td>
+    				    <input class='input' maxlength='5' type='text' name='debutjeudi' id='debutjeudi' data-value={{ time[3]['start'] }} value={{ time[3]['start'] }} />
+    				</td>
+    				<td>
+    				    <input class='input' maxlength='5' type='text' name='finjeudi' id='finjeudi' data-value={{ time[3]['end'] }} value={{ time[3]['end'] }} />
+    				</td>
+    				<td>
+    				    <input class='input' maxlength='5' type='text' name='pausejeudi' id='pausejeudi' data-value={{ time[3]['break'] }} value={{ time[3]['break'] }} />
+    				</td>
+    				<td>
+    				    <input class='input' maxlength='5' disabled type='text' name='tpsjeudi' id='tpsjeudi' data-value={{ time[3]['working_time'] }} value={{ time[3]['working_time'] }} />
+    				</td>
+    				<td>
+    				    <input class='input' disabled type='text' name='jourjeudi' id='jourjeudi' data-value={{ time[3]['working_hours'] }} value={{ time[3]['working_hours'] }} />
+    				</td>
+    				<td class='deplacement'>
+    					<select name='deplacementjeudi' id='deplacementjeudi' data-value={{ time[3]['travel'] }} >
+        					<option value='0'>Non</option>
+        					<option value='1'>Oui</option>
+    					</select>
+    				</td>
+    				<td>
+    					<select name='absencejeudi' id='absencejeudi' data-value={{ time[3]['absence'] }} >
+        					<option value='aucune'></option>
+        					<option value='rtt'>RTT</option>
+        					<option value='cp'>Congés payés</option>
+        					<option value='ca'>CA</option>
+        					<option value='cef'>CEF</option>
+        					<option value='css'>Congés sans solde</option>
+        					<option value='mal'>Maladie/At/Pat</option>
+    					</select>
+    				</td>
+    				<td>
+    				    <input type='text' name='commentairejeudi' id='commentairejeudi' placeholder='Saisir un commentaire' data-value={{ time[3]['comment'] }} value="{{ time[3]['comment'] }}" />
+    				</td>
+    			</tr>
+    			<tr>
+    				<td id="{{ id[4]['id'] }}" data-value={{ id[4]['id'] }} data-id={{ timetable.4.id }} class='jour'>Vendredi : 
+    				    <input class='input' type='text' disabled name='datevendredi' id='datevendredi' data-value={{ date[4]['date'] }} value={{ date[4]['date'] }} />
+    				</td>
+    				<td>
+    				    <input class='input' maxlength='5' type='text' name='debutvendredi' id='debutvendredi' data-value={{ time[4]['start'] }} value={{ time[4]['start'] }} >
+    				</td>
+    				<td>
+    				    <input class='input' maxlength='5' type='text' name='finvendredi' id='finvendredi' data-value={{ time[4]['end'] }} value={{ time[4]['end'] }} />
+    				</td>
+    				<td>
+    				    <input class='input' maxlength='5' type='text' name='pausevendredi' id='pausevendredi' data-value={{ time[4]['break'] }} value={{ time[4]['break'] }} />
+    				</td>
+    				<td>
+    				    <input class='input' maxlength='5' disabled type='text' name='tpsvendredi' id='tpsvendredi' data-value={{ time[4]['working_time'] }} value={{ time[4]['working_time'] }} />
+    				</td>
+    				<td>
+    				    <input class='input' disabled type='text' name='jourvendredi' id='jourvendredi' data-value={{ time[4]['working_hours'] }} value={{ time[4]['working_hours'] }} />
+    				</td>
+    				<td class='deplacement'>
+    					<select name='deplacementvendredi' id='deplacementvendredi' data-value={{ time[4]['travel'] }} >
+    					    <option value='0'>Non</option>
+                            <option value='1'>Oui</option>
+    					</select>
+    				</td>
+    				<td>
+    					<select name='absencevendredi' id='absencevendredi' data-value={{ time[4]['absence'] }} >
+        					<option value='aucune'></option>
+        					<option value='rtt'>RTT</option>
+        					<option value='cp'>Congés payés</option>
+        					<option value='ca'>CA</option>
+        					<option value='cef'>CEF</option>
+        					<option value='css'>Congés sans solde</option>
+        					<option value='mal'>Maladie/At/Pat</option>
+    					</select>
+    				</td>
+    				<td>
+    				    <input type='text' name='commentairevendredi' id='commentairevendredi' placeholder='Saisir un commentaire' data-value={{ time[4]['comment'] }} value="{{ time[4]['comment'] }}" />
+    				</td>
+    			</tr>
+    			<tr>
+    				<td id="{{ id[5]['id'] }}" data-value={{ id[5]['id'] }} data-id={{ timetable.5.id }} class='jour'>Samedi : 
+    				    <input class='input' type='text' disabled name='datesamedi' id='datesamedi' data-value={{ date[5]['date'] }} value= {{ date[5]['date'] }} />
+    				</td>
+    				<td>
+    				    <input class='input' maxlength='5' type='text' name='debutsamedi' id='debutsamedi' data-value={{ time[5]['start'] }} value={{ time[5]['start'] }} />
+    				</td>
+    				<td>
+    				    <input class='input' maxlength='5' type='text' name='finsamedi' id='finsamedi' data-value={{ time[5]['end'] }} value={{ time[5]['end'] }} />
+    				</td>
+    				<td>
+    				    <input class='input' maxlength='5' type='text' name='pausesamedi' id='pausesamedi' data-value={{ time[5]['break'] }} value={{ time[5]['break'] }} />
+    				</td>
+    				<td>
+    				    <input class='input' maxlength='5' disabled type='text' name='tpssamedi' id='tpssamedi' data-value={{ time[5]['working_time'] }} value={{ time[5]['working_time'] }} />
+    				</td>
+    				<td>
+    				    <input class='input' disabled type='text' name='joursamedi' id='joursamedi' data-value={{ time[5]['working_hours'] }} value={{ time[5]['working_hours'] }} />
+    				</td>
+    				<td class='deplacement'>
+    					<select name='deplacementsamedi' id='deplacementsamedi' data-value={{ time[5]['travel'] }} >
+        					<option value='0'>Non</option>
+        					<option value='1'>Oui</option>
+    					</select>
+    				</td>
+    				<td>
+    					<select name='absencesamedi' id='absencesamedi' data-value={{ time[5]['absence'] }} >
+        					<option value='aucune'></option>
+        					<option value='rtt'>RTT</option>
+        					<option value='cp'>Congés payés</option>
+        					<option value='ca'>CA</option>
+        					<option value='cef'>CEF</option>
+        					<option value='css'>Congés sans solde</option>
+        					<option value='mal'>Maladie/At/Pat</option>
+    					</select>
+    				</td>
+    				<td>
+    				    <input type='text' name='commentairesamedi' id='commentairesamedi' placeholder='Saisir un commentaire' data-value={{ time[5]['comment'] }} value="{{ time[5]['comment'] }}" />
+    				</td>
+    			</tr>
+    			<tr>
+    				<td id="{{ id[6]['id'] }}" data-value={{ id[6]['id'] }} data-id={{ timetable.6.id }} class='jour'>Dimanche : 
+    				    <input class='input' type='text' disabled name='datedimanche' id='datedimanche' data-value={{ date[6]['date'] }} value= {{ date[6]['date'] }} />
+    				</td>
+    				<td>
+    				    <input class='input' maxlength='5' type='text' name='debutdimanche' id='debutdimanche' data-value={{ time[6]['start'] }} value={{ time[6]['start'] }} />
+    				</td>
+    				<td>
+    				    <input class='input' maxlength='5' type='text' name='findimanche' id='findimanche' data-value={{ time[6]['end'] }} value={{ time[6]['end'] }} >
+    				</td>
+    				<td>
+    				    <input class='input' maxlength='5' type='text' name='pausedimanche' id='pausedimanche' data-value={{ time[6]['break'] }} value={{ time[6]['break'] }} />
+    				</td>
+    				<td>
+    				    <input class='input' maxlength='5' disabled type='text' name='tpsdimanche' id='tpsdimanche' data-value={{ time[6]['working_time'] }} value={{ time[6]['working_time'] }} />
+    				</td>
+    				<td>
+    				    <input class='input' disabled type='text' name='jourdimanche' id='jourdimanche' data-value={{ time[6]['working_hours'] }} value={{ time[6]['working_hours'] }} />
+    				</td>
+    				<td class='deplacement'>
+    					<select name='deplacementdimanche' id='deplacementdimanche' data-value={{ time[6]['travel'] }} >
+        					<option value='0'>Non</option>
+        					<option value='1'>Oui</option>
+    					</select>
+    				</td>
+    				<td>
+    					<select name='absencedimanche' id='absencedimanche' data-value={{ time[6]['absence'] }} >
+        					<option value='aucune'></option>
+        					<option value='rtt'>RTT</option>
+        					<option value='cp'>Congés payés</option>
+        					<option value='ca'>CA</option>
+        					<option value='cef'>CEF</option>
+        					<option value='css'>Congés sans solde</option>
+        					<option value='mal'>Maladie/At/Pat</option>
+    					</select>
+    				</td>
+    				<td>
+    				    <input type='text' name='commentairedimanche' id='commentairedimanche' placeholder='Saisir un commentaire' data-value={{ time[6]['comment'] }} value="{{ time[6]['comment'] }}" />
+    				</td>
+    			</tr>
+    		</tbody>
+    	</table>
+	</div>
+	<div>
+	    <br>
+		    Saisie automatique des heures (Cochez les jours que vous souhaitez remplir et saisissez les valeurs dans les champs début fin pause ci-dessous)
+		<br>
+		<input type='checkbox' name='lundi' id='check_lundi'>{{ 'Lundi'|trans }} 
+		<input type='checkbox' name='mardi' id='check_mardi'> {{ 'Mardi'|trans }} 
+		<input type='checkbox' name='mercredi' id='check_mercredi'>{{ 'Mercredi'|trans }} 
+		<input type='checkbox' name='jeudi' id='check_jeudi'>{{ 'Jeudi'|trans }}
+		<input type='checkbox' name='vendredi' id='check_vendredi'>{{ 'Vendredi'|trans }}
+		<input type='checkbox' name='samedi' id='check_samedi'>{{ 'Samedi'|trans }}
+		<input type='checkbox' name='dimanche' id='check_dimanche'>{{ 'Dimanche'|trans }}<br>
+		{{ 'Debut'|trans }}<input class='input' type='text' id='debutauto'>
+		{{ 'Fin'|trans }}<input class='input' type='text' id='finauto'>
+		{{ 'Pause'|trans }}<input class='input' type='text' id='pauseauto'>
+	</div><br>
+    <a id='saisie_auto' class='btnauto' onclick='saisie_auto()'>Saisie Automatique</a><br><br>
+    <a id='work_less' class='btnpage' href="{{ path('coyote_time_workless')}}" >Semaine Précédente</a>
+    <a id='work_more' class='btnpage' href="{{ path('coyote_time_workmore')}}" >Semaine Suivante</a><br><br>
+    
+    <button class='btnsave' type="submit" value="Enregistrer" id="enregistrer">{{ 'Enregistrer'|trans }}</button>
+</form>
+
+
+{% endblock %}

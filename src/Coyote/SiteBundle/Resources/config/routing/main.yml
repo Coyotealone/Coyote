@@ -1,0 +1,22 @@
+# coyote_index:
+#     pattern:    /
+#     defaults:   { _controller: "CoyoteSiteBundle:Main:index" }
+# 
+# 
+# coyote_main:
+#     pattern:    /
+#     defaults:   { _controller: "CoyoteSiteBundle:Main:index" }
+#     requirements:
+#         _locale: fr|en
+
+coyote_main_login:
+    pattern:    /login
+    defaults:   { _controller: "CoyoteSiteBundle:Main:login" }
+
+coyote_main_menu:
+    pattern:    /menu
+    defaults:   { _controller: "CoyoteSiteBundle:Menu:menu" }
+
+coyote_main_language:
+    pattern:    /
+    defaults:   { _controller: "CoyoteSiteBundle:Main:language"}

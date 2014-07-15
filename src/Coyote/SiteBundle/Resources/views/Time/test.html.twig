@@ -1,0 +1,111 @@
+{% extends 'CoyoteSiteBundle:Time:index.html.twig' %}
+
+{% block javascripts %}
+        <script src="{{ asset('bundles/coyotesite/js/jquery-min.js') }}"/></script>
+        {% endblock %}
+
+{% block content %}
+{#<form role="form" action="{{ path('coyote_time_savetime') }}" method='post'>
+    <div id="contenu">
+        <p>{{'Voici la semaine'|trans}} {{ app.session.get('no_week') }} {{"d'affichée de l'année"|trans}} {{ app.session.get('year') }}</p>
+        <div class='table-responsive'>
+<table id='table_temps' class='table'>
+    <h2>{{'Temps de travail'|trans}}</h2>
+    <thead>
+    	<tr>
+			<td>{{'Jour de la semaine'|trans}}</td>
+			<td>{{'Début'|trans}}</td>
+			<td>{{'Fin'|trans}}</td>
+			<td>{{'Pause'|trans}}</td>
+			<td>{{'Temps de travail'|trans}}</td>
+			<td>{{'Journée travaillée'|trans}}</td>
+			<td>{{'Déplacement'|trans}}</td>
+			<td>{{'Absence'|trans}}</td>
+			<td>{{'Commentaire'|trans}}</td>    				
+        </tr>
+    </thead>
+    <tbody> <!-- Corps du tableau -->
+        {% for entity in data %}
+
+    	<tr>
+    		<td class='jour'>{{ jour[loop.index0]|capitalize|trans }} :
+    		    <input class='input' type='text' disabled name="{{ 'date'~jour[loop.index0] }}" id="{{ 'date'~jour[loop.index0] }}" value={{ entity.date }} />
+    		</td>
+    		<td>
+    		    <input class='input' type='text' placeholder='9:00' maxlength='5' name="{{ 'debut'~jour[loop.index0] }}" id="{{ 'debut'~jour[loop.index0] }}" value=''/>
+    		</td>
+    		<td>
+    		    <input class='input' type='text' placeholder='17:00' maxlength='5' name="{{ 'fin'~jour[loop.index0] }}" id="{{ 'fin'~jour[loop.index0] }}" value='' />
+    		</td>
+    		<td>
+    		    <input class='input' type='text' placeholder='1:00' maxlength='5' name="{{ 'pause'~jour[loop.index0] }}" id="{{ 'pause'~jour[loop.index0] }}" value='' />
+    		</td>
+    		<td>
+    		    <input class='input' disabled type='text' maxlength='5' name="{{ 'tps'~jour[loop.index0] }}" id="{{ 'tps'~jour[loop.index0] }}" value='' />
+    		</td>
+    		<td>
+    		    <input class='input' disabled type='text' name="{{ 'jour'~jour[loop.index0] }}" id="{{ 'jour'~jour[loop.index0] }}" value='' />
+    		</td>
+    		<td class='deplacement'>
+    			<select name="{{ 'deplacement'~jour[loop.index0] }}" id="{{ 'deplacement'~jour[loop.index0] }}" >
+    			    <option value='0'>{{'Non'|trans}}</option>
+                    <option value='1'>{{'Oui'|trans}}</option>
+    			</select>
+    		</td>
+    		<td>
+    			<select name="{{ 'absence'~jour[loop.index0] }}" id="{{ 'absence'~jour[loop.index0] }}" >
+    				<option value='aucune'></option>
+    				<option value='rtt'>RTT</option>
+    				<option value='cp'>Congés payés</option>
+    				<option value='ca'>CA</option>
+    				<option value='cef'>CEF</option>
+    				<option value='css'>Congés sans solde</option>
+    				<option value='mal'>Maladie/At/Pat</option>
+    			</select>
+    		</td>
+    		<td>
+    		    <input type='text' name="{{ 'commentaire'~jour[loop.index0] }}" id="{{ 'commentaire'~jour[loop.index0] }}" placeholder='{{'Saisir un commentaire'|trans}}' value='' />
+    		</td>
+    	</tr>
+    	{% endfor %}
+    </tbody>
+</table>
+
+</div>
+	<div>
+	    <br>
+		    {{'Saisie automatique des heures (Cochez les jours que vous souhaitez remplir et saisissez les valeurs dans les champs début fin pause ci-dessous)'|trans}}
+		<br>
+		<input type='checkbox' name='lundi' id='check_lundi'>{{ 'Lundi'|trans }} 
+		<input type='checkbox' name='mardi' id='check_mardi'> {{ 'Mardi'|trans }} 
+		<input type='checkbox' name='mercredi' id='check_mercredi'>{{ 'Mercredi'|trans }} 
+		<input type='checkbox' name='jeudi' id='check_jeudi'>{{ 'Jeudi'|trans }}
+		<input type='checkbox' name='vendredi' id='check_vendredi'>{{ 'Vendredi'|trans }}
+		<input type='checkbox' name='samedi' id='check_samedi'>{{ 'Samedi'|trans }}
+		<input type='checkbox' name='dimanche' id='check_dimanche'>{{ 'Dimanche'|trans }}<br>
+		{{ 'Début'|trans }}<input class='input' type='text' id='debutauto'>
+		{{ 'Fin'|trans }}<input class='input' type='text' id='finauto'>
+		{{ 'Pause'|trans }}<input class='input' type='text' id='pauseauto'>
+	</div><br>
+    <a id='saisie_auto' class='btnauto' onclick='saisie_auto()'>{{'Saisie Automatique'|trans}}</a><br><br>
+    <a id='work_less' class='btnpage' href="{{ path('coyote_time_workless')}}" >{{'Semaine Précédente'|trans}}</a>
+    <a id='work_more' class='btnpage' href="{{ path('coyote_time_workmore')}}" >{{'Semaine Suivante'|trans}}</a><br><br>
+    
+    <button class='btnsave' type="submit" value="Enregistrer" id="enregistrer">{{ 'Enregistrer'|trans }}</button>
+</form>#}
+
+    {% for entity in week %}
+        
+        {{ entity }} <br>
+        
+    {% endfor %}
+    
+    {% for entity in data %}
+        
+        {{ entity }} <br>
+        
+    {% endfor %}
+    
+    {#{{form(form)}}#}
+    {{data.0}}
+{% endblock %}

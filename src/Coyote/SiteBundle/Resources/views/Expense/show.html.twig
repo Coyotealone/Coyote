@@ -1,0 +1,52 @@
+{% extends 'CoyoteSiteBundle:Expense:index.html.twig' %}
+
+{% block javascripts %}
+    <script src="{{ asset('bundles/coyotesite/js/jquery-min.js') }}"/></script>
+{% endblock %}
+
+{% block content %}
+
+{% for flashMessage in app.session.flashbag.get('saveexpense') %}
+
+    <p id="flashmessage">{{ flashMessage }}</p>
+
+{% endfor %}
+
+<div class='table-responsive'>
+    <table class='table' id='tab_expense'>
+    	<tr>
+    	    <th>Id</th>
+    		<th id='tab_expense_site'>Site</th>
+    		<th id='tab_expense_date'>Date</th>
+    		<th id='tab_expense_item'>Code Article</th>
+    		<th id='tab_expense_devise'>Devise</th>
+    		<th id='tab_expense_qte'>Quantité</th>
+    		<th id='tab_expense_amount'>Montant réel</th>
+    		<th id='tab_expense_amounttc'>Montant TTC</th>
+    		<th id='tab_expense_amounttva'>Montant TVA</th>
+    		<th id='tab_expense_business'>Affaire</th>
+    		<th id='tab_expense_comment'>Commentaire</th>
+    		<th>Editer</th>
+    	</tr>
+    	{% for entity in data %}
+            <tr>
+                <td><a href="{{ path('coyote_expense_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.site.code }}</td>
+                <td>{{ entity.date }}</td>
+                <td>{{ entity.fee.code }}</td>
+                <td>{{ entity.currency.code }}</td>
+                <td>{{ entity.amount }}</td>
+                <td>{{ entity.actualamount }}</td>
+                <td>{{ entity.amountttc }}</td>
+                <td>{{ entity.amounttva }}</td>
+                <td id='tab_expense_business'>{{ entity.business.name }}</td>
+                <td id='tab_expense_comment'>{{ entity.comment }}</td>
+                <td>
+                    <a href="{{ path('coyote_expense_edit', { 'id': entity.id }) }}">{{'Edité'|trans}}</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+</div><br>
+
+{% endblock %}

@@ -1,0 +1,56 @@
+Coyote\SiteBundle\Entity\Expense:
+    type: entity
+    table: expense
+    repositoryClass: Coyote\SiteBundle\Entity\ExpenseRepository
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        date:
+            type: string
+            lenght: 8
+        status:
+            type: boolean
+        amount:
+            type: float
+        actual_amount:
+            type: float
+        amount_TTC:
+            type: float
+        amount_TVA:
+            type: float
+        comment:
+            type: string
+            lenght: 255
+    manyToOne:
+        site:
+            targetEntity: Site
+            inversedBy: expenses
+            joinColumn:
+                name: site_id
+                referencedColumnName: id
+        currency:
+            targetEntity: Currency
+            inversedBy: expenses
+            joinColumn:
+                name: currency_id
+                referencedColumnName: id
+        business:
+            targetEntity: Business
+            inversedBy: expenses
+            joinColumn:
+                name: business_id
+                referencedColumnName: id
+        fee:
+            targetEntity: Fee
+            inversedBy: expenses
+            joinColumn:
+                name: fee_id
+                referencedColumnName: id
+        userfees:
+            targetEntity: UserFees
+            inversedBy: expenses
+            joinColumn:
+                name: userfees_id
+                referencedColumnName: id

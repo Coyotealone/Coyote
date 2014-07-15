@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+        {% block title %}
+            Pichon - WebSite
+        {% endblock %}
+    </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/main.css') }}" type="text/css" media="all" />
+        <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/bootstrap.css') }}" type="text/css" media="all" />
+        <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/justified-nav.css') }}" type="text/css" media="all" />
+        <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/signin.css') }}" type="text/css" media="all" />
+    {% endblock %}
+    
+    {% block javascripts %}
+    {% endblock %}
+    
+    <link rel="shortcut icon" href="{{ asset('bundles/coyotesite/images/pichonicon.ico') }}" />
+</head>
+<div id="page">
+    <body>
+        <header>
+      
+            <div class="masthead">
+                <h1><a href="{{ path('accueil') }}">
+                    <img src="{{ asset('bundles/coyotesite/images/logo.png') }}" alt="PICHON" id="logo"/>
+                </a></h1>
+                    <div id="choisir_langue">{{ 'Choisissez votre pays'|trans}} :
+                        <a href="{{ path('coyote_main_language', {'_locale' : 'fr'}) }}">
+                            <img src="{{ asset('bundles/coyotesite/images/flag_francais.jpg') }}" alt="flag_french" id="flag_french"/>
+                        </a> |
+                        <a href="{{ path('coyote_main_language', {'_locale' : 'en'}) }}">
+                            <img src="{{ asset('bundles/coyotesite/images/flag_grande_bretagne.jpg') }}" alt="flag_english" id="flag_english"/>
+                        </a>
+                    </div>
+                {% block userinfo %}
+                {% endblock %}
+                {% block link %}
+                {% endblock %}
+                
+            </div>
+        </header>
+            <section id="login">
+                {% block login %}
+                {% endblock %}
+            </section>
+            <section>
+                {% block content %}
+                {% endblock %}
+            </section>
+        
+        <footer>
+            <p>
+                Copyright ©2014 PICHON - Tous droits réservés
+            </p>
+        </footer>
+    </body>
+</div>
+</html>

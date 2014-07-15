@@ -1,0 +1,49 @@
+{% extends 'PichonSiteBundle::layout.html.twig' %}
+
+{% block userinfo %}
+
+{{ 'Bienvenue'|trans }} {{ app.session.get('name') }}
+
+{% endblock %}
+
+{% block link %}
+
+	<ul class="nav nav-justified">
+		<li ><a href="{{ path('pichon_menu_index')}}">Accueil</a></li>
+		<li id="gestion"><a href="{{ path('pichon_gestion_index')}}">Administration</a></li>
+		<li class="active" id="site"><a href="{{ path('pichon_time_index')}}">Présence</a></li>
+		<li id="frais"><a>Note de Frais</a></li>
+		<li id="config"><a href="{{ path('pichon_config_index')}}">Configurateur</a></li>
+		<li><a>Contact</a></li>
+		<li><a href="{{ path('accueil') }}">Déconnexion</a></li>
+	</ul>
+	
+{% endblock %}
+
+{% block content %}
+
+    <div class="jumbotron">
+        <p class="lead"><u>Choisissez votre vanne</u></p>
+        <select>
+            <option></option>
+            <option>.</option>
+            <option>..</option>
+            <option>...</option>
+            <option>....</option>
+        </select>
+        <p class="lead"><u>Choisissez vos tuyaux</u></p>
+        <input type="checkbox" name="essieu" value="1">X
+        <input type="checkbox" name="essieu" value="2">Y
+        <input type="checkbox" name="essieu" value="3">Z
+        
+        <ul class="lienconfig">
+            <li><a href="{{ path('pichon_config_cuves')}}">Cuves</a></li>
+            <li class="active"><a href="{{ path('pichon_config_pompage')}}">Pompage / Compresseurs</a></li>
+            <li><a href="{{ path('pichon_config_epandage')}}">Epandage</a></li>
+            <li><a href="{{ path('pichon_config_hydraulique')}}">Hydraulique</a></li>
+        </ul>
+    </div>
+    
+    
+
+{% endblock %}

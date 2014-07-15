@@ -1,0 +1,114 @@
+{% extends 'CoyoteSiteBundle:Expense:index.html.twig' %}
+
+{% block javascripts %}
+    <script src="{{ asset('bundles/coyotesite/js/jquery-min.js') }}"/></script>
+    <script src="{{ asset('bundles/coyotesite/js/script_expense.js') }}"/></script>
+    <script src="{{ asset('bundles/coyotesite/js/script_expense_change.js') }}"/></script>
+{% endblock %}
+
+{% block link %}
+<nav class="navbar navbar-default" role="navigation">
+  <div class="container-fluid">
+	<ul class="nav navbar-nav">
+		<li><a href="{{ path('accueil') }}">{{'Accueil'|trans}}</a></li>
+		<li id="frais" class="dropdown">
+          <a href="{{ path('coyote_time_index') }}" class="dropdown-toggle" data-toggle="dropdown">{{'Présence'|trans}}<b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="{{ path('coyote_time_index') }}">{{'Saisie'|trans}}</a></li>
+            <li><a href="{{ path('coyote_time_show') }}">{{'Consultation'|trans}}</a></li>
+          </ul>
+        </li>
+        <li id="frais" class="dropdown">
+          <a href="{{ path('coyote_expense_index') }}" class="dropdown-toggle" data-toggle="dropdown">{{'Note de Frais'|trans}}<b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="{{ path('coyote_expense_index') }}">{{'Index'|trans}}</a></li>
+            <li class="active"><a href="{{ path('coyote_expense_create') }}">{{'Saisie'|trans}}</a></li>
+            <li><a href="{{ path('coyote_expense_indexshow') }}">{{'Consultation'|trans}}</a></li>
+          </ul>
+        </li>
+        <li id="profil" class="dropdown">
+          <a href="{{ path('fos_user_profile_show') }}" class="dropdown-toggle" data-toggle="dropdown">{{'Profil'|trans}}<b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="{{ path('fos_user_profile_show') }}">{{'Information Profil'|trans}}</a></li>
+            <li><a href="{{ path('coyote_changepassword') }}">{{'Changement de mot de passe'|trans}}</a></li>
+          </ul>
+        </li>
+	</ul>
+  </div>
+</nav>
+	
+{% endblock %}
+
+
+{% block content %}
+
+{% for flashMessage in app.session.flashbag.get('saveexpense') %}
+
+    <p id="flashmessage">{{ flashMessage }}</p>
+
+{% endfor %}
+
+<form role="form" action="{{ path('coyote_expense_save') }}" method='post'>
+<div class='table-responsive'>
+    <table class='table' id='tab_expense'>
+    	<tr>
+    		<th id='tab_expense_site'>Site</th>
+    		<th id='tab_expense_date'>Date</th>
+    		<th id='tab_expense_item'>Code Article</th>
+    		<th id='tab_expense_devise'>Devise</th>
+    		<th id='tab_expense_qte'>Quantité</th>
+    		<th id='tab_expense_amount'>Montant réel</th>
+    		<th id='tab_expense_amounttc'>Montant TTC</th>
+    		<th id='tab_expense_amounttva'>Montant TVA</th>
+    		<th id='tab_expense_business'>Affaire</th>
+    		<th id='tab_expense_comment'>Commentaire</th>
+    	</tr>
+    	{% for i in 0..5 %}
+    	<tr>
+    		<th id='tab_expense_site'>
+    			<select name='site{{i}}' id='site{{i}}'>
+    			    {% for datasite in site %}
+    			        <option value={{ datasite.id }}>{{ datasite }}</option>
+    			    {% endfor %}
+    			</select>
+    		</th>
+    		<th id='tab_expense_date'><input type='text' name='date{{i}}' id='date{{i}}' placeholder='01/01/14' ></th>
+    		<th id='tab_expense_item'>
+    		    <select name='article{{i}}' id='article{{i}}' class='itemfrais'>
+    		        <option></option>
+    				{% for datafee in fee %}
+    				    <option id={{ datafee.id }} data-value={{ datafee.rate }} value={{ datafee.id }}>{{ datafee.code }} : {{ datafee.name }}</option>
+    				{% endfor %}
+    			</select>
+            </th>
+    		<th id='tab_expense_devise'>
+    			<select name='devise{{i}}' id='devise{{i}}'>
+    			    {% for datacurrency in currency %}
+    			        <option value={{ datacurrency.id }}>{{ datacurrency }}</option>
+    			    {% endfor %}
+    			</select>
+    		</th>
+    		<th id='tab_expense_qte'><input type='text' name='qte{{i}}' id='qte{{i}}' ></th>
+    		<th id='tab_expense_amount'><input type='text' name='reel{{i}}' id='reel{{i}}' ></th>
+    		<th id='tab_expense_amountttc'><input type='text' name='ttc{{i}}' id='ttc{{i}}' ></th>
+    		<th id='tab_expense_amounttva'><input type='text' name='tva{{i}}' id='tva{{i}}' ></th>
+    		<th id='tab_expense_business'>
+    			<select name='affaire{{i}}' id='affaire{{i}}'>
+    			    {% for databusiness in business %}
+    			        <option value={{ databusiness.id }}>{{ databusiness }}</option>
+    			    {% endfor %}
+    			</select>
+    		</th>
+    		<th id='tab_expense_comment'><input type='text' name='com{{i}}' id='com{{i}}' ></th>    		
+    	</tr>
+    	{% endfor %}
+    </table>
+</div><br>
+
+
+<button class='btnsave' type="submit" value="Enregistrer" id="enregistrer">{{ 'Enregistrer'|trans }}</button>
+</form>
+
+
+
+{% endblock %}

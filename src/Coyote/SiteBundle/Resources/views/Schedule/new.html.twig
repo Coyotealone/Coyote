@@ -1,0 +1,16 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Schedule creation</h1>
+
+    {{ form(form) }}
+    {{ entity.date|date('Y-m-d H:i:s') }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('schedule') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+{% endblock %}

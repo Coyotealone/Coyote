@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            {% block title %}
+                Pichon - WebSite
+            {% endblock %}
+        </title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/style.css') }}" type="text/css" media="all" />
+            <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/bootstrap.css') }}" type="text/css" media="all" />
+            <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/justified-nav.css') }}" type="text/css" media="all" />
+            <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/signin.css') }}" type="text/css" media="all" />
+        {% endblock %}
+        
+        {% block javascripts %}
+        {% endblock %}
+        
+        <link rel="shortcut icon" href="{{ asset('bundles/coyotesite/images/pichonicon.ico') }}" />
+    </head>
+    <body>
+        <header>
+            <div id="lien">
+                <a href="{{ path('accueil') }}"><img src="{{ asset('bundles/coyotesite/images/logo1.png') }}" alt="PICHON" id="logo"/></a>
+                <a href="http://www.pichonindustries.fr" class="lien">Site Pichon</a>
+                <a href="{{ path('accueil') }}" class="lien">Contact</a>
+            </div>
+            <nav>
+                <div id="choisir_langue">{{ 'Choisissez votre pays'|trans}} :
+                    <a href="{{ path('coyote_main_language', {'_locale' : 'fr'}) }}">
+                        <img src="{{ asset('bundles/coyotesite/images/flag_francais.jpg') }}" alt="flag_french" id="flag_french"/>
+                    </a> |
+                    <a href="{{ path('coyote_main_language', {'_locale' : 'en'}) }}">
+                        <img src="{{ asset('bundles/coyotesite/images/flag_grande_bretagne.jpg') }}" alt="flag_english" id="flag_english"/>
+                    </a>
+                </div>
+                {% block userinfo %}
+                {% endblock %}
+                {% block link %}
+                {% endblock %}
+            </nav>
+            <nav id="welcome">
+                <h4>Bienvenue sur le site Pichon</h4>
+            </nav>
+        </header>
+        <section>
+            <article>
+                {% block content %}
+                {% endblock %}
+            </article>
+        </section>    
+        <footer>
+            <p>Copyright ©2014 PICHON - Tous droits réservés</p>
+        </footer>
+    </body>
+</html>

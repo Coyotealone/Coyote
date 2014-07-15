@@ -1,0 +1,26 @@
+Coyote\SiteBundle\Entity\Currency:
+    type: entity
+    table: currency
+    repositoryClass: Coyote\SiteBundle\Entity\CurrencyRepository
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        code:
+            type: string
+            length: 3
+        name:
+            type: string
+            lenght: 45
+        exchange_rate:
+            type: float
+    oneToMany:
+        offer_headers:
+            targetEntity: OfferHeader
+            mappedBy: currency
+            cascade: ["persist", "merge"]
+        expenses:
+            targetEntity: Expense
+            mappedBy: currency
+            cascade: ["persist", "merge"]

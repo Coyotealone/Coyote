@@ -1,0 +1,30 @@
+Coyote\SiteBundle\Entity\ConfiguringTankers:
+    type: entity
+    table: configuring_tankers
+    repositoryClass: Coyote\SiteBundle\Entity\ConfiguringTankersRepository
+    id:
+        id:
+            type: integer
+            unique: true
+    fields:
+        amount:
+            type: integer
+        link:
+            type: string
+            lenght: 10
+        comment:
+            type: string
+            lenght: 255
+    manyToOne:
+        country:
+            targetEntity: Country
+            inversedBy: configuring_tankerss
+            joinColumn:
+                name: country_id
+                referencedColumnName: id
+        item:
+            targetEntity: Item
+            inversedBy: configuring_tankerss
+            joinColumn:
+                name: item_id
+                referencedColumnName: id

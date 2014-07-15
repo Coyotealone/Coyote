@@ -1,0 +1,36 @@
+Coyote\SiteBundle\Entity\Timetable:
+    type: entity
+    table: timetable
+    repositoryClass: Coyote\SiteBundle\Entity\TimetableRepository
+    id:
+        id:
+            type: integer
+            unique: true
+            generator: { strategy: AUTO }
+    fields:
+        no_week:
+            type: integer
+            notnull: true
+        year:
+            type: integer
+            notnull: true
+        day:
+            type: string
+            lenght: 8
+            notnull: true
+        date:
+            type: string
+            lenght: 10
+            notnull: true
+        holiday:
+            type: boolean
+            notnull: true
+        pay_period:
+            type: string
+            lenght: 45
+            notnull: true
+    oneToMany:
+        schedules:
+            targetEntity: Schedule
+            mappedBy: timetable
+            cascade: ["persist", "merge"]

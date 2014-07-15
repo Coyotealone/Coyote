@@ -1,0 +1,115 @@
+<?php
+
+namespace Coyote\SiteBundle\Controller;
+
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Compenent\Form\FormBuilder;
+use Symfony\Component\HttpFoundation\Session\Session;
+
+use Doctrine\ORM\EntityRepository;
+
+use Coyote\SiteBundle\Entity\Schedule;
+use Coyote\SiteBundle\Entity\Timetable;
+use Coyote\SiteBundle\Entity\UserInfo;
+use Coyote\SiteBundle\Entity\User;
+
+/**
+ * Admin controller.
+ *
+ */
+class AdminController extends Controller
+{
+    public function exportExpenseAction()
+    {
+        if($this->get('security.context')->isGranted('ROLE_COMPTA'))
+        {
+            $em = $this->getDoctrine()->getManager();
+            $dataexpense = $em->getRepository('CoyoteSiteBundle:Expense')->findforCompta();
+            $em->getRepository('CoyoteSiteBundle:Expense')->updateStatus($em);
+            return new Response($dataexpense, 200, array(
+                'Content-Type' => 'application/force-download',
+                'Content-Disposition' => 'attachment; filename="export.csv"'
+            ));
+        }
+        else
+            return $this->redirect($this->generateUrl('accueil'));
+    }
+    
+    public function changePasswordAction()
+    {
+        return $this->redirect($this->generateUrl('fos_user_change_password'));
+    }
+    
+    public function resettingAction()
+    {
+        $message = \Swift_Message::newInstance()
+        ->setSubject('Hello Email')
+        ->setFrom('provinianthony@gmail.com')
+        ->setTo('si@pichonindustries.com')
+        ->setBody($this->renderView('CoyoteSiteBundle:Admin:email.txt.twig', array('name' => 'Anthony')));
+        $this->get('mailer')->send($message);
+        return new Response('mail envoyé');
+        //return $this->redirect($this->generateUrl('fos_user_resetting_request'));
+    }
+    
+    public function profilAction()
+    {
+        $user = $this->container->get('security.context')->getToken()->getUser();
+        return $this->render('CoyoteSiteBundle:Profile:show.html.twig', array('user' => $user));
+    }
+    
+    public function profileditAction()
+    {
+        return $this->redirect($this->generateUrl('accueil'));
+    }
+    
+    public function showexportAction()
+    {
+        if($this->get('security.context')->isGranted('ROLE_CHEF_BE'))
+        {
+            return $this->render('CoyoteSiteBundle:Admin:index_export.html.twig');
+        }
+        else
+            return $this->redirect($this->generateUrl('accueil'));
+    }
+    
+    public function exportDataUserAction()
+    {
+        if($this->get('security.context')->isGranted('ROLE_CHEF_BE'))
+        {
+            $doctrine = $this->getDoctrine();
+            $em = $doctrine->getManager();
+            $tabuserid = array(14, 17, 41, 42, 44, 45, 46, 49, 50, 52, 54, 62);
+            
+            $request = Request::createFromGlobals();
+            $data = $request->request->all();
+            if($data == null)
+                return $this->render('CoyoteSiteBundle:Admin:index_export.html.twig');
+            else
+            {
+                $date = $data['mois'].'/'.$data['annee'];
+                $year = $data['annee'];
+            
+                $result = '';
+                for($i=0;$i<count($tabuserid);$i++)
+                {
+                    $user = $tabuserid[$i]; //$date = '06/2014'; $year = 2014;
+                    $datauser = $em->getRepository('CoyoteSiteBundle:User')->find($user);
+                    $user_name = $datauser->getName();
+                    $res_temp = $em->getRepository('CoyoteSiteBundle:Schedule')->findforBE($user, $date, $year, $user_name);
+                    $result .= $res_temp;
+                }
+                return new Response($result, 200, array(
+                    'Content-Type' => 'application/force-download',
+                    'Content-Disposition' => 'attachment; filename="datauser.csv"'
+                ));
+            }
+        }
+        else
+            return $this->redirect($this->generateUrl('accueil'));
+            
+    }
+    
+}

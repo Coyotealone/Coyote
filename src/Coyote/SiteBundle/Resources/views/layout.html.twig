@@ -1,0 +1,30 @@
+{% extends 'CoyoteSiteBundle::base.html.twig' %}
+
+{% block language %}
+    <div id="choisir_langue">{{ 'Choisissez votre pays'|trans}} :
+        <a href="{{ path('coyote_main_language', {'_locale' : 'fr'}) }}">
+            <img src="{{ asset('bundles/coyotesite/images/flag_francais.jpg') }}" alt="flag_french" id="flag_french"/>
+        </a> |
+        <a href="{{ path('coyote_main_language', {'_locale' : 'en'}) }}">
+            <img src="{{ asset('bundles/coyotesite/images/flag_grande_bretagne.jpg') }}" alt="flag_english" id="flag_english"/>
+        </a>
+    </div>
+{% endblock %}
+
+{% block content %}
+        
+        {% for type, messages in app.session.flashbag.all() %}
+            {% for message in messages %}
+                <div class="flash-{{ type }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+
+        <div>
+            {% block fos_user_content %}
+            {% endblock fos_user_content %}
+        </div>
+        
+        
+{% endblock %}

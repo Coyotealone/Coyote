@@ -1,0 +1,49 @@
+{% extends 'CoyoteSiteBundle:Config:pageun.html.twig' %}
+
+{% block content %}
+<form role="form" action="{{ path('coyote_configurator_pagehuit') }}" method='post'>
+    {% if commun is defined %}
+        {% if commun %}
+        <p id="titreconfig">Buses</p>
+        <table class='table' id='tab_expense'>
+            <tr>
+                <th>Code</th>
+                <th>Désignation</th>
+                <th>Prix HT</th>
+                <th>Sélection</th>
+            </tr>
+        {% for entity in commun %}
+            <tr>
+                <td>{{ entity.item.code }}</td>
+                <td>{{ entity.item.designation1 }} </td>
+                <td>{{ entity.item.price }} €</td>
+                <td><input type="checkbox" name="indicateurs" value="{{entity.id}}" ></td>
+            </tr>
+        {% endfor %}
+        </table>
+        {% endif %}
+    {% endif %}
+    {% if data is defined %}
+        {% if data %}
+        <p id="titreconfig">Divers</p>
+        <table class='table' id='tab_expense'>
+            <tr>
+                <th>Code</th>
+                <th>Désignation</th>
+                <th>Prix HT</th>
+                <th>Sélection</th>
+            </tr>
+        {% for entity in data %}
+            <tr>
+                <td>{{ entity.item.code }}</td>
+                <td>{{ entity.item.designation1 }} </td>
+                <td>{{ entity.item.price }} €</td>
+                <td><input type="checkbox" name="indicateurs" value="{{entity.id}}" ></td>
+            </tr>
+        {% endfor %}
+        </table>
+        {% endif %}
+    {% endif %}
+    <button class='btnpage' type="submit" value="Afficher" id="afficher">{{ 'Afficher'|trans }}</button>
+</form>
+{% endblock %}

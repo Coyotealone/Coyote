@@ -1,0 +1,42 @@
+{% extends 'CoyoteSiteBundle::layout.html.twig' %}
+
+
+
+{% block link %}
+    <ul class="nav nav-justified">
+        <li class="active"><a >{{ 'Accueil'|trans }}</a></li>
+        <li><a >{{ 'Contact'|trans }}</a></li>
+    </ul>
+{% endblock %}
+
+{% block content %}
+
+    <div class="jumbotron">
+        <p class="lead">{{ 'Bienvenue sur le site PICHON.'|trans }}
+            <br>{{ "En cas de problème de mot de passe, merci de contacter votre administrateur ou d'envoyer un mail dans l'onglet Contact."|trans }}
+        </p>
+        
+        {#<form class="form-signin" role="form" method='post'>
+            <input type="text" class="form-control" placeholder="{{ 'Identifiant'|trans }}" name="login" required autofocus>
+            <input type="password" name="password" id="password" class="form-control" placeholder="{{ 'Mot de passe'|trans }}" required>
+            <button class="btn btn-lg btn-primary btn-block" type="submit" value="Connexion" id="connexion">{{ 'Connexion'|trans }}</button>
+        </form>#}
+        
+        <form action="{{ path("fos_user_security_check") }}" method="post">
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+
+    <label for="username">{{ 'security.login.username'|trans }}</label>
+    <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" />
+
+    <label for="password">{{ 'security.login.password'|trans }}</label>
+    <input type="password" id="password" name="_password" required="required" />
+
+    <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+    <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
+
+    <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
+</form>
+    </div>
+
+{% endblock %}
+

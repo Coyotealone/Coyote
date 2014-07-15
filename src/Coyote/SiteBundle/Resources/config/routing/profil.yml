@@ -1,0 +1,15 @@
+coyote_changepassword:
+    pattern:    /changepassword
+    defaults:   { _controller: "CoyoteSiteBundle:Admin:changePassword" }
+    
+coyote_profile:
+    pattern:    /
+    defaults:   { _controller: "CoyoteSiteBundle:Admin:profil" }
+    
+coyote_resetting:
+    pattern:    /resetting
+    defaults:   { _controller: "CoyoteSiteBundle:Admin:resetting"}
+    
+coyote_profile_edit:
+    pattern:    /edit
+    defaults:   { _controller: "CoyoteSiteBundle:Admin:profiledit"}

@@ -1,0 +1,39 @@
+coyote_time_savetime:
+    pattern:    /timeusers/save
+    defaults:   { _controller: "CoyoteSiteBundle:Time:savetime"}
+
+coyote_time_savetimefm:
+    pattern:    /timeframes/save
+    defaults:   { _controller: "CoyoteSiteBundle:Time:savetimefm"}
+
+coyote_time_workmore:
+    pattern:    /timeusers/workmore
+    defaults:   { _controller: "CoyoteSiteBundle:Time:workmore"}
+
+coyote_time_workless:
+    pattern:    /timeusers/workless
+    defaults:   { _controller: "CoyoteSiteBundle:Time:workless"}
+    
+coyote_time_workmorefm:
+    pattern:    /timeframes/workmore
+    defaults:   { _controller: "CoyoteSiteBundle:Time:workmorefm"}
+
+coyote_time_worklessfm:
+    pattern:    /timeframes/workless
+    defaults:   { _controller: "CoyoteSiteBundle:Time:worklessfm"}
+
+coyote_time_user:
+    pattern:    /timeusers
+    defaults:   { _controller: "CoyoteSiteBundle:Time:user"}
+
+coyote_time_framework:
+    pattern:    /timeframes
+    defaults:   { _controller: "CoyoteSiteBundle:Time:framework"}
+
+coyote_time_index:
+    pattern:    /
+    defaults:   { _controller: "CoyoteSiteBundle:Time:index"}
+
+coyote_time_show:
+    pattern:    /show
+    defaults:   { _controller: "CoyoteSiteBundle:Time:show"}

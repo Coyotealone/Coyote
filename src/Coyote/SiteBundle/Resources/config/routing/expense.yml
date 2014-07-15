@@ -1,0 +1,39 @@
+coyote_expense_index:
+    pattern:    /
+    defaults:   { _controller: "CoyoteSiteBundle:Expense:index"}
+
+coyote_expense_create:
+    pattern:    /create
+    defaults:   { _controller: "CoyoteSiteBundle:Expense:create"}
+
+coyote_expense_save:
+    pattern:    /save
+    defaults:   { _controller: "CoyoteSiteBundle:Expense:save"}
+    requirements:
+        _method:    POST
+    
+coyote_expense_show:
+    pattern:    /show
+    defaults:   { _controller: "CoyoteSiteBundle:Expense:show"}
+
+coyote_expense_print:
+    pattern:    /print
+    defaults:   { _controller: "CoyoteSiteBundle:Expense:print"}
+
+coyote_expense_indexshow:
+    pattern:    /indexshow
+    defaults:   { _controller: "CoyoteSiteBundle:Expense:showindex"}
+    
+coyote_expense_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "CoyoteSiteBundle:Expense:edit" }
+
+coyote_expense_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "CoyoteSiteBundle:Expense:update" }
+    requirements: { _method: post|put }
+
+coyote_expense_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "CoyoteSiteBundle:Expense:delete" }
+    requirements: { _method: post|delete|get }

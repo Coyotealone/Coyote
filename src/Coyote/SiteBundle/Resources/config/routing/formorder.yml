@@ -1,0 +1,30 @@
+formorder:
+    pattern:  /
+    defaults: { _controller: "CoyoteSiteBundle:FormOrder:index" }
+
+formorder_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "CoyoteSiteBundle:FormOrder:show" }
+
+formorder_new:
+    pattern:  /new
+    defaults: { _controller: "CoyoteSiteBundle:FormOrder:new" }
+
+formorder_create:
+    pattern:  /create
+    defaults: { _controller: "CoyoteSiteBundle:FormOrder:create" }
+    requirements: { _method: post }
+
+formorder_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "CoyoteSiteBundle:FormOrder:edit" }
+
+formorder_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "CoyoteSiteBundle:FormOrder:update" }
+    requirements: { _method: post|put }
+
+formorder_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "CoyoteSiteBundle:FormOrder:delete" }
+    requirements: { _method: post|delete }

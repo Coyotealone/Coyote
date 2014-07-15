@@ -1,0 +1,72 @@
+security:
+    encoders:
+        Coyote\SiteBundle\Entity\User: sha512
+        FOS\UserBundle\Model\UserInterface: sha512
+
+    role_hierarchy:
+        ROLE_USER:          ROLE_USER
+        ROLE_TECH:          ROLE_TECH
+        ROLE_CADRE:         ROLE_CADRE
+        ROLE_PROVIDER:      ROLE_PROVIDER
+        ROLE_PICHON:        [ROLE_TECH, ROLE_CADRE, ROLE_ADMIN]
+        ROLE_ADMIN:         [ROLE_ADMIN, ROLE_CHEF_BE, ROLE_COMPTA]
+        ROLE_SUPER_ADMIN:   [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+        #     - ROLE_TECH
+#             - ROLE_CADRE
+#             - ROLE_ADMIN
+#         ROLE_ADMIN:
+#             - ROLE_ADMIN
+#             - ROLE_CHEF_BE
+#             - ROLE_COMPTA
+#         ROLE_SUPER_ADMIN:
+#             - ROLE_ADMIN
+#             - ROLE_ALLOWED_TO_SWITCH
+
+    providers:
+        main:
+            id: fos_user.user_provider.username
+        in_memory:
+            memory:
+                users:
+                    user:  { password: userpass, roles: [ 'ROLE_USER' ] }
+                    admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
+
+    firewalls:
+        main:
+            pattern: ^/
+            anonymous: true
+            provider: main
+            form_login:
+                login_path: fos_user_security_login
+                check_path: fos_user_security_check
+            logout:
+                path:   fos_user_security_logout
+                target: /
+        dev:
+            pattern:  ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        login:
+            pattern:  ^/demo/secured/login$
+            security: false
+
+        secured_area:
+            pattern:    /logout
+            form_login:
+                check_path: _security_check
+                login_path: _demo_login
+            logout:
+                path:   /logout
+                target: /
+            #anonymous: ~
+            #http_basic:
+            #    realm: "Secured Demo Area"
+
+    access_control:
+        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register/, roles: ROLE_SUPER_ADMIN }
+        - { path: ^/resetting, role: ROLE_SUPER_ADMIN }
+        - { path: ^/admin/, role: ROLE_SUPER_ADMIN }
+        - { path: ^/profile, role: ROLE_PICHON }
+
+        #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }

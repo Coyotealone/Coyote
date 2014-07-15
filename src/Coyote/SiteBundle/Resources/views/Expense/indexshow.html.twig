@@ -1,0 +1,72 @@
+{% extends 'CoyoteSiteBundle:Expense:index.html.twig' %}
+
+{% block link %}
+<nav class="navbar navbar-default" role="navigation">
+  <div class="container-fluid">
+	<ul class="nav navbar-nav">
+		<li><a href="{{ path('accueil') }}">{{'Accueil'|trans}}</a></li>
+		<li id="frais" class="dropdown">
+          <a href="{{ path('coyote_time_index') }}" class="dropdown-toggle" data-toggle="dropdown">{{'Présence'|trans}}<b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="{{ path('coyote_time_index') }}">{{'Saisie'|trans}}</a></li>
+            <li><a href="{{ path('coyote_time_show') }}">{{'Consultation'|trans}}</a></li>
+          </ul>
+        </li>
+        <li id="frais" class="dropdown">
+          <a href="{{ path('coyote_expense_index') }}" class="dropdown-toggle" data-toggle="dropdown">{{'Note de Frais'|trans}}<b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="{{ path('coyote_expense_index') }}">{{'Index'|trans}}</a></li>
+            <li><a href="{{ path('coyote_expense_create') }}">{{'Saisie'|trans}}</a></li>
+            <li class="active"><a href="{{ path('coyote_expense_indexshow') }}">{{'Consultation'|trans}}</a></li>
+          </ul>
+        </li>
+        <li id="profil" class="dropdown">
+          <a href="{{ path('fos_user_profile_show') }}" class="dropdown-toggle" data-toggle="dropdown">{{'Profil'|trans}}<b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="{{ path('fos_user_profile_show') }}">{{'Information Profil'|trans}}</a></li>
+            <li><a href="{{ path('coyote_changepassword') }}">{{'Changement de mot de passe'|trans}}</a></li>
+          </ul>
+        </li>
+	</ul>
+  </div>
+</nav>
+	
+{% endblock %}
+
+{% block content %}
+<form role="form" action="{{ path('coyote_expense_indexshow') }}" method='post'>
+    <table class='table' id='tab_expense'>
+    	<tr>
+    	    <th>{{'Mois'|trans}}</th>
+    		<th>{{'Année'|trans}}</th>
+    	</tr>
+        <tr>
+            <td>
+                <select name='mois' id='mois' >
+					<option value='vide'></option>
+					<option value='01'>{{'Janvier'|trans}}</option>
+					<option value='02'>{{'Février'|trans}}</option>
+					<option value='03'>{{'Mars'|trans}}</option>
+					<option value='04'>{{'Avril'|trans}}</option>
+					<option value='05'>{{'Mai'|trans}}</option>
+					<option value='06'>{{'Juin'|trans}}</option>
+					<option value='07' selected>{{'Juillet'|trans}}</option>
+					<option value='08'>{{'Août'|trans}}</option>
+					<option value='09'>{{'Septembre'|trans}}</option>
+					<option value='10'>{{'Octobre'|trans}}</option>
+					<option value='11'>{{'Novembre'|trans}}</option>
+					<option value='12'>{{'Décembre'|trans}}</option>
+				</select>
+            </td>
+            <td>
+                <select name='annee' id='annee' >
+					<option value='14'>2014</option>
+					<option value='15'>2015</option>
+					<option value='16'>2016</option>
+				</select>
+            </td>
+        </tr>
+    </table>
+    <button class='btnsave' type="submit" value="Afficher" id="afficher">{{ 'Afficher'|trans }}</button>
+</form>
+{% endblock %}

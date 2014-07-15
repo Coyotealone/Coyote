@@ -1,0 +1,43 @@
+{% extends 'CoyoteSiteBundle:Expense:index.html.twig' %}
+
+{% block content %}
+<h3>Edition de la note de frais</h3>
+<form action="{{ path('coyote_expense_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+    <input type="hidden" name="_method" value="PUT" />
+    <div class='table-responsive'>
+    <table class='table' id='tab_expense'>
+    	<tr>
+    		<th id='tab_expense_site'>{{ form_label(edit_form.site, 'Site') }}</th>
+    		<th id='tab_expense_date'>{{ form_label(edit_form.date, 'Date') }}</th>
+    		<th id='tab_expense_item'>{{ form_label(edit_form.fee, 'Code Article') }}</th>
+    		<th id='tab_expense_devise'>{{ form_label(edit_form.currency, 'Devise') }}</th>
+    		<th id='tab_expense_qte'>{{ form_label(edit_form.amount, 'Quantité') }}</th>
+    		<th id='tab_expense_amount'>{{ form_label(edit_form.actual_amount) }}</th>
+    		<th id='tab_expense_amountttc'>{{ form_label(edit_form.amount_TTC, 'Montant TTC') }}</th>
+    		<th id='tab_expense_amounttva'>{{ form_label(edit_form.amount_TVA, 'Montant TVA') }}</th>
+    		<th id='tab_expense_business'>{{ form_label(edit_form.business, 'Affaire') }}</th>
+    		<th id='tab_expense_comment'>{{ form_label(edit_form.comment) }}</th>
+    	</tr>
+        <tr>
+            <td id='tab_expense_site'>{{ form_widget(edit_form.site) }}</td>
+            <td id='tab_expense_date'>{{ form_widget(edit_form.date) }}</td>
+            <td id='tab_expense_item'>{{ form_widget(edit_form.fee) }}</td>
+            <td id='tab_expense_devise'>{{ form_widget(edit_form.currency) }}</td>
+            <td id='tab_expense_qte'>{{ form_widget(edit_form.amount) }}</td>
+            <td id='tab_expense_amount'>{{ form_widget(edit_form.actual_amount) }}</td>
+            <td id='tab_expense_amountttc'>{{ form_widget(edit_form.amount_TTC) }}</td>
+            <td id='tab_expense_amounttva'>{{ form_widget(edit_form.amount_TVA) }}</td>
+            <td id='tab_expense_business'>{{ form_widget(edit_form.business) }}</td>
+            <td id='tab_expense_comment'>{{ form_widget(edit_form.comment) }}</td>
+        </tr>
+    </table>
+</div>
+
+    {{ form_widget(edit_form._token) }}
+    <p>
+        <button type="submit" class="btn btn-success">{{ 'Mise à jour'|trans }}</button>
+    </p>
+</form>
+
+
+{% endblock %}

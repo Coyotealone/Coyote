@@ -1,0 +1,35 @@
+Coyote\SiteBundle\Entity\UserFees:
+    type: entity
+    table: userfees
+    repositoryClass: Coyote\SiteBundle\Entity\UserFeesRepository
+    id:
+        id:
+            type: integer
+            unique: true
+            generator: { strategy: AUTO }
+    fields:
+        login:
+            type: string
+            lenght: 45
+            unique: true
+            notnull: true
+        code:
+            type: string
+            lenght: 45
+            notnull: true
+        service:
+            type: string
+            lenght: 45
+            notnull: true
+    oneToMany:
+        expenses:
+            targetEntity: Expense
+            mappedBy: userfees
+            cascade: ["persist", "merge"]
+    manyToOne:
+        user:
+            targetEntity: User
+            inversedBy: userfeess
+            joinColumn:
+                name: user_id
+                referencedColumnName: id

@@ -1,0 +1,26 @@
+{% extends 'PichonSiteBundle::layout.html.twig' %}
+
+{% block link %}
+    <ul class="nav nav-justified">
+        <li class="active"><a href="{{ path('pichon_main') }}">Accueil</a></li>
+        <li><a href="{{ path('pichon_main') }}">Contact</a></li>
+    </ul>
+{% endblock %}
+
+{% block content %}
+
+    <div class="jumbotron">
+        <p class="lead">Bienvenue sur le site PICHON.
+            <br>En cas de problème de mot de passe, merci de contacter votre administrateur ou d'envoyer un mail dans l'onglet Contact.
+        </p>
+        <p>{{ "Erreur d'identifiant ou de mot de passe"|trans }}</p>
+        <form class="form-signin" role="form" action="{{ path('pichon_main_connexion') }}" method='post'>
+            <h2 class="form-signin-heading">Merci de vous connecter</h2>
+            <input type="text" class="form-control" placeholder="Identifiant" name="login"  autofocus>
+            <input type="password" name="password" id="password" class="form-control" placeholder="Mot de passe" >
+            <button class="btn btn-lg btn-primary btn-block" type="submit" value="Connexion" id="connexion">Connexion</button>
+        </form>
+        
+    </div>
+
+{% endblock %}

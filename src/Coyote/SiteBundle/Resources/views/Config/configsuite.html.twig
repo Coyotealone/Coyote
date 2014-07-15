@@ -1,0 +1,197 @@
+{% extends 'CoyoteSiteBundle::base.html.twig' %}
+
+{% block userinfo %}
+
+{{ 'Bienvenue'|trans }} {{ app.session.get('username') }} |
+<a href="{{ path('fos_user_security_logout') }}">
+    {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+</a>
+
+{% endblock %}
+
+{% block link %}
+<nav class="navbar navbar-default" role="navigation">
+  <div class="container-fluid">
+	<ul class="nav navbar-nav">
+		<li class="active"><a href="{{ path('coyote_index') }}">{{'Accueil'|trans}}</a></li>
+		<li id="frais" class="dropdown">
+          <a href="{{ path('coyote_time_index') }}" class="dropdown-toggle" data-toggle="dropdown">{{'Présence'|trans}}<b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="{{ path('coyote_time_index') }}">{{'Saisie'|trans}}</a></li>
+            <li><a href="{{ path('coyote_time_show') }}">{{'Consultation'|trans}}</a></li>
+          </ul>
+        </li>
+        <li id="frais" class="dropdown">
+          <a href="{{ path('coyote_expense_index') }}" class="dropdown-toggle" data-toggle="dropdown">{{'Note de Frais'|trans}}<b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="{{ path('coyote_expense_index') }}">{{'Index'|trans}}</a></li>
+            <li><a href="{{ path('coyote_expense_create') }}">{{'Saisie'|trans}}</a></li>
+            <li><a href="{{ path('coyote_expense_indexshow') }}">{{'Consultation'|trans}}</a></li>
+          </ul>
+        </li>
+        <li id="profil" class="dropdown">
+          <a href="{{ path('fos_user_profile_show') }}" class="dropdown-toggle" data-toggle="dropdown">{{'Profil'|trans}}<b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="{{ path('fos_user_profile_show') }}">{{'Information Profil'|trans}}</a></li>
+            <li><a href="{{ path('coyote_changepassword') }}">{{'Changement de mot de passe'|trans}}</a></li>
+          </ul>
+        </li>
+        <li id="config" class="dropdown">
+          <a href="{{ path('coyote_configurator') }}" class="dropdown-toggle" data-toggle="dropdown">{{'Configurateur'|trans}}<b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="{{ path('coyote_configurator') }}">{{'Création d\'une config'|trans}}</a></li>
+          </ul>
+        </li>
+	</ul>
+  </div>
+</nav>
+	
+{% endblock %}
+
+
+{% block content %}
+<form role="form" action="{{ path('coyote_configurator_show') }}" method='post'>
+    <p>Sélection des suppléments de la cuve</p>
+    <p> Les Portes </p>
+    <table>
+        <tr>
+            <th>Code</th>
+            <th>Désignation</th>
+            <th>Prix HT</th>
+            <th>Sélection</th>
+        </tr>
+    {% for entity in data %}
+        {% if 'PORT' in entity.item.designation1 %}
+        <tr>
+            <td>{{ entity.item.code }}</td>
+            <td>{{ entity.item.designation1 }} </td>
+            <td>{{ entity.item.price }} €</td>
+            <td><input type="radio" name="porte" value="{{entity.id}}" ></td>
+        </tr>
+        {% endif %}
+    {% endfor %}
+    </table>
+    
+    <p> Les Vannes </p>
+    <table>
+        <tr>
+            <th>Code</th>
+            <th>Désignation</th>
+            <th>Prix HT</th>
+            <th>Sélection</th>
+        </tr>
+    {% for entity in data %}
+        {% if 'VAN' in entity.item.designation1 %}
+        <tr>
+            <td>{{ entity.item.code }}</td>
+            <td>{{ entity.item.designation1 }} </td>
+            <td>{{ entity.item.price }} €</td>
+            <td><input type="radio" name="vanne" value="{{entity.id}}" ></td>
+        </tr>
+        {% endif %}
+    {% endfor %}
+    </table>
+    
+    <p> Les Essieux </p>
+    <table>
+        <tr>
+            <th>Code</th>
+            <th>Désignation</th>
+            <th>Prix HT</th>
+            <th>Sélection</th>
+        </tr>
+    {% for entity in data %}
+        {% if 'ESSIEU' in entity.item.designation1 %}
+        <tr>
+            <td>{{ entity.item.code }}</td>
+            <td>{{ entity.item.designation1 }} </td>
+            <td>{{ entity.item.price }} €</td>
+            <td><input type="radio" name="essieu" value="{{entity.id}}" ></td>
+        </tr>
+        {% endif %}
+    {% endfor %}
+    </table>
+    
+    <p> Les Roues </p>
+    <table>
+        <tr>
+            <th>Code</th>
+            <th>Désignation</th>
+            <th>Prix HT</th>
+            <th>Sélection</th>
+        </tr>
+    {% for entity in data %}
+        {% if 'ROUE' in entity.item.designation1 %}
+        <tr>
+            <td>{{ entity.item.code }}</td>
+            <td>{{ entity.item.designation1 }} </td>
+            <td>{{ entity.item.price }} €</td>
+            <td><input type="radio" name="roue" value="{{entity.id}}" ></td>
+        </tr>
+        {% endif %}
+    {% endfor %}
+    </table>
+    
+    <p> Eclairage / Signalisation </p>
+    <table>
+        <tr>
+            <th>Code</th>
+            <th>Désignation</th>
+            <th>Prix HT</th>
+            <th>Sélection</th>
+        </tr>
+    {% for entity in data %}
+        {% if 'GYRO' in entity.item.designation1 %}
+        <tr>
+            <td>{{ entity.item.code }}</td>
+            <td>{{ entity.item.designation1 }} </td>
+            <td>{{ entity.item.price }} €</td>
+            <td><input type="radio" name="signal" value="{{entity.id}}" ></td>
+        </tr>
+        {% elseif 'PHARE' in entity.item.designation1 %}
+        <tr>
+            <td>{{ entity.item.code }}</td>
+            <td>{{ entity.item.designation1 }} </td>
+            <td>{{ entity.item.price }} €</td>
+            <td><input type="radio" name="signal" value="{{entity.id}}" ></td>
+        </tr>
+        {% elseif 'SIGNA' in entity.item.designation1 %}
+        <tr>
+            <td>{{ entity.item.code }}</td>
+            <td>{{ entity.item.designation1 }} </td>
+            <td>{{ entity.item.price }} €</td>
+            <td><input type="radio" name="signal" value="{{entity.id}}" ></td>
+        </tr>
+        {% elseif 'ECLAIR' in entity.item.designation1 %}
+        <tr>
+            <td>{{ entity.item.code }}</td>
+            <td>{{ entity.item.designation1 }} </td>
+            <td>{{ entity.item.price }} €</td>
+            <td><input type="radio" name="signal" value="{{entity.id}}" ></td>
+        </tr>
+        {% endif %}
+    {% endfor %}
+    </table>
+    
+    <p> Suppléments Cuves </p>
+    <table>
+        <tr>
+            <th>Code</th>
+            <th>Désignation</th>
+            <th>Prix HT</th>
+            <th>Sélection</th>
+        </tr>
+    {% for entity in data %}
+        <tr>
+        {% if 'ACCRO' in entity.item.designation1 %}
+            <td>{{ entity.item.code }}</td>
+            <td>{{ entity.item.designation1 }} </td>
+            <td>{{ entity.item.price }} €</td>
+            <td><input type="radio" name="suppl" value="{{entity.id}}" ></td>
+        </tr>
+        {% endif %}
+    {% endfor %}
+    </table>
+    <button class='btnpage' type="submit" value="Afficher" id="afficher">{{ 'Afficher'|trans }}</button>
+</form>
+{% endblock %}

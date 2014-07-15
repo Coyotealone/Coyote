@@ -1,0 +1,132 @@
+services:
+    sonata.admin.userfees:
+        class: Coyote\SiteBundle\Admin\UserFeesAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Utilisateur", label: "Informations Utilisateurs Notes de frais" }
+        arguments:
+            - ~
+            - Coyote\SiteBundle\Entity\UserFees
+            - ~
+        calls:
+            - [ setTranslationDomain, [CoyoteSiteBundle]]
+    sonata.admin.fosuser:
+        class: Coyote\SiteBundle\Admin\FosUserAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Utilisateur", label: "Comptes utilisateurs" }
+        arguments:
+            - ~
+            - Coyote\SiteBundle\Entity\User
+            - ~
+        calls:
+            - [ setTranslationDomain, [CoyoteSiteBundle]]
+    sonata.admin.business:
+        class: Coyote\SiteBundle\Admin\BusinessAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Notes de frais", label: "Affaire" }
+        arguments:
+            - ~
+            - Coyote\SiteBundle\Entity\Business
+            - ~
+        calls:
+            - [ setTranslationDomain, [CoyoteSiteBundle]]        
+    sonata.admin.configuringtankers:
+        class: Coyote\SiteBundle\Admin\ConfiguringTankersAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Configurateur", label: "Configuration des tonnes" }
+        arguments:
+            - ~
+            - Coyote\SiteBundle\Entity\ConfiguringTankers
+            - ~
+        calls:
+            - [ setTranslationDomain, [CoyoteSiteBundle]]
+    sonata.admin.country:
+        class: Coyote\SiteBundle\Admin\CountryAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Divers", label: "Pays" }
+        arguments:
+            - ~
+            - Coyote\SiteBundle\Entity\Country
+            - ~
+        calls:
+            - [ setTranslationDomain, [CoyoteSiteBundle]]
+    sonata.admin.currency:
+        class: Coyote\SiteBundle\Admin\CurrencyAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Divers", label: "Monnaie" }
+        arguments:
+            - ~
+            - Coyote\SiteBundle\Entity\Currency
+            - ~
+        calls:
+            - [ setTranslationDomain, [CoyoteSiteBundle]]
+    sonata.admin.expense:
+        class: Coyote\SiteBundle\Admin\ExpenseAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Notes de frais", label: "Notes de frais" }
+        arguments:
+            - ~
+            - Coyote\SiteBundle\Entity\Expense
+            - ~
+        calls:
+            - [ setTranslationDomain, [CoyoteSiteBundle]]
+    sonata.admin.fee:
+        class: Coyote\SiteBundle\Admin\FeeAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Notes de frais", label: "Articles" }
+        arguments:
+            - ~
+            - Coyote\SiteBundle\Entity\Fee
+            - ~
+        calls:
+            - [ setTranslationDomain, [CoyoteSiteBundle]]
+    sonata.admin.infoitem:
+        class: Coyote\SiteBundle\Admin\InfoItemAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Configurateur", label: "Informations articles" }
+        arguments:
+            - ~
+            - Coyote\SiteBundle\Entity\InfoItem
+            - ~
+        calls:
+            - [ setTranslationDomain, [CoyoteSiteBundle]]
+    sonata.admin.item:
+        class: Coyote\SiteBundle\Admin\ItemAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Configurateur", label: "Articles" }
+        arguments:
+            - ~
+            - Coyote\SiteBundle\Entity\Item
+            - ~
+        calls:
+            - [ setTranslationDomain, [CoyoteSiteBundle]]
+    sonata.admin.schedule:
+        class: Coyote\SiteBundle\Admin\ScheduleAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Présence", label: "Temps de présence" }
+        arguments:
+            - ~
+            - Coyote\SiteBundle\Entity\Schedule
+            - ~
+        calls:
+            - [ setTranslationDomain, [CoyoteSiteBundle]]
+    sonata.admin.site:
+        class: Coyote\SiteBundle\Admin\SiteAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Notes de frais", label: "Site" }
+        arguments:
+            - ~
+            - Coyote\SiteBundle\Entity\Site
+            - ~
+        calls:
+            - [ setTranslationDomain, [CoyoteSiteBundle]]
+    sonata.admin.timetable:
+        class: Coyote\SiteBundle\Admin\TimetableAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Présence", label: "Calendrier" }
+        arguments:
+            - ~
+            - Coyote\SiteBundle\Entity\Timetable
+            - ~
+        calls:
+            - [ setTranslationDomain, [CoyoteSiteBundle]]
+    

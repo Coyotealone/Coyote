@@ -1,0 +1,41 @@
+Coyote\SiteBundle\Entity\Item:
+    type: entity
+    table: item
+    repositoryClass: Coyote\SiteBundle\Entity\ItemRepository
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        code:
+            type: string
+            lenght: 10
+            unique: true
+        price:
+            type: float
+        designation1:
+            type: string
+            lenght: 30
+        designation2:
+            type: string
+            lenght: 30
+    manyToOne:
+        infoitem:
+            targetEntity: InfoItem
+            inversedBy: items
+            joinColumn:
+                name: infoitem_id
+                referencedColumnName: id
+    oneToMany:
+        configuring_tankerss:
+            targetEntity: ConfiguringTankers
+            mappedBy: item
+            cascade: ["persist", "merge"]
+        offer_contents:
+            targetEntity: OfferContent
+            mappedBy: item
+            cascade: ["persist", "merge"]
+        formorders:
+            targetEntity: FormOrder
+            mappedBy: item
+            cascade: ["persist", "merge"]

@@ -1,0 +1,46 @@
+{% extends 'CoyoteSiteBundle::base.html.twig' %}
+
+{% block userinfo %}
+
+<a href="{{ path('fos_user_security_logout') }}">
+    {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+</a>
+
+{% endblock %}
+
+{% block link %}
+<nav class="navbar navbar-default" role="navigation">
+  <div class="container-fluid">
+	<ul class="nav navbar-nav">
+		<li class="active"><a href="{{ path('accueil') }}">{{'Accueil'|trans}}</a></li>
+		<li id="frais" class="dropdown">
+          <a href=# class="dropdown-toggle" data-toggle="dropdown">{{'Export Présence'|trans}}<b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="{{ path('coyote_export_index')}}">{{'Export données BE'|trans}}</a></li>
+          </ul>
+        </li>
+        <li id="frais" class="dropdown">
+          <a href=# class="dropdown-toggle" data-toggle="dropdown">{{'Note de Frais'|trans}}<b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="{{ path('coyote_export') }}">{{'Export données note de frais'|trans}}</a></li>
+          </ul>
+        </li>
+	</ul>
+  </div>
+</nav>
+	
+{% endblock %}
+
+{% block content %}
+
+    <div class="jumbotron">
+        
+        <p class="lead">{{ 'Bienvenue sur le site Pichon'|trans }}
+            <br><br>
+            Partie Administration
+            <br>
+        </p>
+
+    </div>
+
+{% endblock %}

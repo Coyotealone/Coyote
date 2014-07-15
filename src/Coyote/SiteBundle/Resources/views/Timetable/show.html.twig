@@ -1,0 +1,52 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Timetable</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>No_week</th>
+                <td>{{ entity.noweek }}</td>
+            </tr>
+            <tr>
+                <th>Year</th>
+                <td>{{ entity.year }}</td>
+            </tr>
+            <tr>
+                <th>Day</th>
+                <td>{{ entity.day }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ entity.date }}</td>
+            </tr>
+            <tr>
+                <th>Holiday</th>
+                <td>{{ entity.holiday }}</td>
+            </tr>
+            <tr>
+                <th>Pay_period</th>
+                <td>{{ entity.payperiod }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('timetable') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('timetable_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

@@ -1,0 +1,93 @@
+{% extends 'CoyoteSiteBundle:Config:pageun.html.twig' %}
+
+{% block javascripts %}
+    <script src="{{ asset('bundles/coyotesite/js/jquery-min.js') }}"/></script>
+    <script src="{{ asset('bundles/coyotesite/js/script_configpagedeux.js') }}"/></script>
+{% endblock %}
+
+
+{% block content %}
+<form name="pagedeux" role="form" action="{{ path('coyote_configurator_pagetrois') }}" method='post'>
+    
+    <p id="titreconfig">Portes</p>
+    <table class='table' id='tab_expense'>
+        <tr>
+            <th>Code</th>
+            <th>Désignation</th>
+            <th>Prix HT</th>
+            <th>Sélection</th>
+        </tr>
+        {% for entity in data %}
+        {% if entity.item.infoitem.family == "Portes montees sur charnieres" %}
+        <tr>
+            <td>{{ entity.item.code }}</td>
+            <td>{{ entity.item.designation1 }} </td>
+            <td>{{ entity.item.price }} €</td>
+            <td><input type="radio" name="porte" value="{{entity.id}}" ></td>
+        </tr>
+        {% endif %}
+        {% endfor %}
+    </table>
+    
+    <p id="titreconfig">Essieux</p>
+    <table class='table' id='tab_expense'>
+        <tr>
+            <th>Code</th>
+            <th>Désignation</th>
+            <th>Prix HT</th>
+            <th>Sélection</th>
+        </tr>
+        {% for entity in data %}
+        {% if "Essieux" in entity.item.infoitem.family %}
+        <tr>
+            <td>{{ entity.item.code }}</td>
+            <td>{{ entity.item.designation1 }} </td>
+            <td>{{ entity.item.price }} €</td>
+            <td><input type="radio" name="essieux" value="{{entity.id}}:{{entity.comment}}" data-value={{ entity.comment }} ></td>
+        </tr>
+        {% endif %}
+        {% endfor %}
+    </table>
+    
+    <p id="titreconfig">Roues</p>
+    <table class='table' id='tab_expense'>
+        <tr>
+            <th>Code</th>
+            <th>Désignation</th>
+            <th>Prix HT</th>
+            <th>Sélection</th>
+        </tr>
+        {% for entity in data %}
+        {% if entity.item.infoitem.family == "Roues" %}
+        <tr>
+            <td>{{ entity.item.code }}</td>
+            <td>{{ entity.item.designation1 }} </td>
+            <td>{{ entity.item.price }} €</td>
+            <td><input type="radio" name="roues" value="{{entity.id}}" id={{ entity.comment }} ></td>
+        </tr>
+        {% endif %}
+        {% endfor %}
+    </table>
+    
+    
+    <p id="titreconfig"> Les Vannes </p>
+    <table class='table' id='tab_expense'>
+        <tr>
+            <th>Code</th>
+            <th>Désignation</th>
+            <th>Prix HT</th>
+            <th>Sélection</th>
+        </tr>
+    {% for entity in commun %}
+        <tr>
+            <td>{{ entity.item.code }}</td>
+            <td>{{ entity.item.designation1 }} </td>
+            <td>{{ entity.item.price }} €</td>
+            <td><input type="checkbox" name="vannes" value="{{entity.id}}" ></td>
+        </tr>
+    {% endfor %}
+    </table>
+        
+    <button class='btnpage' type="submit" value="Afficher" id="afficher">{{ 'Afficher'|trans }}</button>
+</form>
+{% endblock %}

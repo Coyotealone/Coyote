@@ -1,0 +1,20 @@
+Coyote\SiteBundle\Entity\InfoItem:
+    type: entity
+    table: infoitem
+    repositoryClass: Coyote\SiteBundle\Entity\InfoItemRepository
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        category:
+            type: string
+            lenght: 100
+        family:
+            type: string
+            lenght: 100
+    oneToMany:
+        items:
+            targetEntity: Item
+            mappedBy: infoitem
+            cascade: ["persist", "merge"]
