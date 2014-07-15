@@ -11,6 +11,13 @@ web/bundles/*
 # Configuration files
 app/config/parameters.ini
 app/config/parameters.yml
+app/config/config_dev.yml
+app/config/config_prod.yml
+app/config/config_test.yml
+app/config/config.yml
 
 # Composer
 composer.phar
+
+# Data
+src/Coyote/SiteBundle/DataFixtures/*
