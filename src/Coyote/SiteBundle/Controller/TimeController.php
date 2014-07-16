@@ -808,30 +808,16 @@ class TimeController extends Controller
         $doctrine = $this->getDoctrine();
         $em = $doctrine->getManager();
         
-        $request = Request::createFromGlobals();
-        $data = $request->request->all();
+        $uri = $_SERVER['REQUEST_URI'];
+        $annee = $_GET['annee'];
+        $mois = $_GET['mois'];
         
-        /*$week = $em->getRepository('CoyoteSiteBundle:Schedule')->findNoWeek('06/2014', 2);
-        $res = '';
-        $i = 0;
-        foreach($week as $data)
-        {
-            $test = $em->getRepository('CoyoteSiteBundle:Schedule')->findTimeWeek(2, $data, 2014);
-            $res[$i] = $test;
-            $i++;
-        }
-        //$test = $em->getRepository('CoyoteSiteBundle:Timetable')->findById(array('user' => 2, 'timetable' => 360));
-        
-        return $this->render('CoyoteSiteBundle:Time:test.html.twig', array('data' => $res, 'week' => $week));*/
-        
-        if($data == null )
+        if(empty($annee) && empty($mois))
         {
             return $this->render('CoyoteSiteBundle:Time:indexshow.html.twig');
         }
         else
         {
-            $mois = $data['mois'];
-            $annee = $data['annee'];
             $user = $em->getRepository('CoyoteSiteBundle:User')->find($session->get('userid'));
             
             $week = $em->getRepository('CoyoteSiteBundle:Schedule')->findNoWeek($mois.'/'.$annee, $user);
