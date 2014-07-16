@@ -288,8 +288,8 @@ class Item
         return $this->infoitem;
     }
     
-    public function __toString()
+    /*public function __toString()
     {
         return $this->code.' : '.$this->designation1;
-    }
+    }*/
 }

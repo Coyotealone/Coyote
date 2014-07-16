@@ -4,6 +4,7 @@ namespace Coyote\SiteBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
 
 use Coyote\SiteBundle\Entity\FormOrder;
 use Coyote\SiteBundle\Form\FormOrderType;
@@ -41,9 +42,12 @@ class FormOrderController extends Controller
         
         $em = $this->getDoctrine()->getManager();
 
-        $user = $em->getRepository('CoyoteSiteBundle:UserInfo')->findId(1);
-
-        if ($form->isValid()) {
+        $user = $em->getRepository('CoyoteSiteBundle:User')->findById(1);
+        $item = $em->getRepository('CoyoteSiteBundle:Item')->findAll();
+        
+        if ($form->isValid()) 
+        {
+            
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
@@ -51,9 +55,15 @@ class FormOrderController extends Controller
             return $this->redirect($this->generateUrl('formorder_show', array('id' => $entity->getId())));
         }
 
+        //$request = Request::createFromGlobals();
+        //$data = $request->request->all();
+        //if(count($data) > 0)
+        //    return new Response(count($data));
+        
         return $this->render('CoyoteSiteBundle:FormOrder:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
+            'item'   => $item,
             //'user'
         ));
     }
@@ -85,9 +95,12 @@ class FormOrderController extends Controller
     {
         $entity = new FormOrder();
         $form   = $this->createCreateForm($entity);
+        $em = $this->getDoctrine()->getManager();
+        $item = $em->getRepository('CoyoteSiteBundle:Item')->findAll();
 
         return $this->render('CoyoteSiteBundle:FormOrder:new.html.twig', array(
             'entity' => $entity,
+            'item'   => $item,
             'form'   => $form->createView(),
         ));
     }

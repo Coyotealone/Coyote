@@ -49,3 +49,7 @@ fos_user_resetting:
 CoyoteSiteBundle_formorder:
     resource: "@CoyoteSiteBundle/Resources/config/routing/formorder.yml"
     prefix:   /formorder
+    
+CoyoteSiteBundle_item:
+        resource: "@CoyoteSiteBundle/Resources/config/routing/item.yml"
+        prefix:   /item

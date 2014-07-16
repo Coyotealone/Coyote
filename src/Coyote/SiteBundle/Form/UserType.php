@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class UserInfoType extends AbstractType
+class UserType extends AbstractType
 {
         /**
      * @param FormBuilderInterface $builder
@@ -17,16 +17,16 @@ class UserInfoType extends AbstractType
         $builder
             ->add('name')/*, 'entity', array('class' => 'CoyoteSiteBundle:UserInfo', 'property' => 'name',))*/
             ->add('adress1')
-            ->add('adress2')
+            ->add('adress2', 'text', array('required'  => false,))
             ->add('zip_code')
-            ->add('postal_box')
+            ->add('postal_box', 'text', array('required'  => false,))
             ->add('city')
             ->add('country')
-            ->add('phone')
-            ->add('cell')
-            ->add('fax')
+            ->add('phone', 'text', array('required'  => false,))
+            ->add('cell', 'text', array('required'  => false,))
+            ->add('fax', 'text', array('required'  => false,))
             ->add('email')
-            ->add('website')
+            ->add('website','text', array('required'  => false,))
         ;
     }
     
@@ -36,7 +36,7 @@ class UserInfoType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Coyote\SiteBundle\Entity\UserInfo'
+            'data_class' => 'Coyote\SiteBundle\Entity\User'
         ));
     }
 
@@ -45,6 +45,6 @@ class UserInfoType extends AbstractType
      */
     public function getName()
     {
-        return 'coyote_sitebundle_userinfo';
+        return 'coyote_sitebundle_user';
     }
 }

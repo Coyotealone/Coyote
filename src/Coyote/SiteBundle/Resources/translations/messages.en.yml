@@ -1,42 +1,37 @@
-Bonjour: Hello
-Identifiant: Login
-Mot de passe: Password
-Connexion: Sign In
-Bienvenue sur le site PICHON.: Welcome to the website PICHON.
-Accueil: Home
-Contact: Contact
-En cas de problème de mot de passe, merci de contacter votre administrateur ou d'envoyer un mail dans l'onglet Contact.: Thanks to contact your administrator, if you have a problem with password. Or send an email from Contact tab.
+# En-tête #
 Choisissez votre pays: Choose your country
-Liste des utilisateurs: Account list
-Statut: Status
-Etat: State
-actif: enabled
-Création de compte: Account creation
-Retour à la liste: Back to the list
-Editer: Edit
-Création d'un nouveau compte: Create a new entry
-voir: show
-éditer: edit
-Compte: Account
-Modifier compte: Account edit
-Bienvenue sur le site Pichon: Welcome to Pichon website
-Erreur d'identifiant ou de mot de passe: Error login or password
-Gestion des utilisateurs: User management
-Enregistrer: Save
-Lundi: Monday
-Mardi: Tuesday
-Mercredi: Wednesday
-Jeudi: Thursday
-Vendredi: Friday
-Samedi: Saturday
-Dimanche: Sunday
-Copyright ©2014 PICHON - Tous droits réservés: Copyright ©2014 PICHON - All rights reserved
-Présence: Attendance
+Contact: Contact
 Site Pichon: Pichon Website
-Note de Frais: Expense
 Bienvenue: Welcome
+
+# Pied de page #
+"Copyright ©2014 PICHON - Tous droits réservés": Copyright ©2014 PICHON - All rights reserved
+
+# Navbar #
+Accueil: Home
+Présence: Attendance
+Consultation: Consultation
+Saisie: Recording
+Note de Frais: Expense
+Profil: Profile
+Configurateur: Configurator
+Formulaire: Form
+Index: Index
+Information Profil: Profil information
+Changement de mot de passe: Change password
+"Création d'une config": Creating a configuration
+Formulaire Bon de commande: Form order
+
+# Page Login #
+Mot de passe oublié: Forgot password
+Connexion: Login
+
+# Page Menu #
+Bienvenue sur le site PICHON: Welcome to the website PICHON
+
+# Page présence #
 Voici la semaine: Display Week
-d'affichée de l'année: of
+"d'affichée de l'année": of
 Temps de travail: Working time
 Jour de la semaine: Weekday
 Début: Start
@@ -53,20 +48,20 @@ Saisie automatique des heures (Cochez les jours que vous souhaitez remplir et sa
 Saisie Automatique: AutoFill
 Semaine Précédente: Previous Week
 Semaine Suivante: Next Week
-Mot de passe oublié: Forgot password
-Profil: Profile
-Configurateur: Configurator
-Formulaire: Form
-Saisie: Recording
-Consultation: Consultation
-Information profil: Profil information
-Changement de mot de passe: Change password
+Lundi: Monday
+Mardi: Tuesday
+Mercredi: Wednesday
+Jeudi: Thursday
+Vendredi: Friday
+Samedi: Saturday
+Dimanche: Sunday
 Mois: Month
 Année: Year
 Janvier: January
 Février: February
 Mars: March
 Avril: April
+Mai: May
 Juin: June
 Juillet: July
 Août: August
@@ -91,5 +86,29 @@ jeudi: thursday
 vendredi: friday
 samedi: saturday
 dimanche: sunday
-Création d'une config: Creating a configuration
-Formulaire Bon de commande: Form order
+Enregistrer: Save
+
+# Page Profil #
+"En cas de problème de mot de passe, merci de contacter votre administrateur ou d'envoyer un mail dans l'onglet Contact": Thanks to contact your administrator, if you have a problem with password. Or send an email from Contact tab
+'Le mot de passe doit faire': The password must be 
+'caractères': characters
+
+# Page Note de frais #
+Bienvenue dans la partie des Notes de frais: Welcome to the part of the Expense
+Saisie des notes de frais: Entering expense
+Visualiser les notes de frais: Warning fees
+Site: Site
+Date: Date
+Code Article: Item code
+Devise: Currency
+Quantité: Amount
+Montant réel: Actual amount
+Montant TTC: Tax amount
+Montant TVA: TVA amount
+Affaire: Business
+Commentaire: Comment
+Editer: Edit
+Edité: Edit
+Mise à jour: Update
+Edition de la note de frais: Editing the expense
+

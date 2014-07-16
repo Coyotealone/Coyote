@@ -15,17 +15,17 @@ class DeliveryAddressType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('corporate_name')
+            ->add('corporate_name', 'text', array('required'  => false,))
             ->add('name')
             ->add('adress1')
-            ->add('adress2')
+            ->add('adress2', 'text', array('required'  => false,))
             ->add('zip_code')
-            ->add('postal_box')
+            ->add('postal_box', 'text', array('required'  => false,))
             ->add('city')
-            ->add('country')
-            ->add('phone')
-            ->add('cell')
-            ->add('fax')
+            ->add('country', 'text', array('required'  => false,))
+            ->add('phone', 'text', array('required'  => false,))
+            ->add('cell', 'text', array('required'  => false,))
+            ->add('fax', 'text', array('required'  => false,))
             ->add('email')
         ;
     }

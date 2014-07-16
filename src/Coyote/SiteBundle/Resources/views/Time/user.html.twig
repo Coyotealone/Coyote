@@ -16,7 +16,7 @@
 
 <form role="form" action="{{ path('coyote_time_savetime') }}" method='post'>
 <div id="contenu">
-    <p>Voici la semaine {{ app.session.get('no_week') }} d'affichée de l'année {{ app.session.get('year') }}</p>
+    <p id="titreconfig">Voici la semaine {{ app.session.get('no_week') }} d'affichée de l'année {{ app.session.get('year') }}</p>
     <div class='table-responsive'>
     	<table id='table_temps' class='table'>
     		<h2>Temps de travail</h2>

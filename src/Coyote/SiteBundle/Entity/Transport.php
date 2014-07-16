@@ -97,4 +97,9 @@ class Transport
     {
         return $this->formorders;
     }
+    
+    public function __toString()
+    {
+        return $this->type;
+    }
 }

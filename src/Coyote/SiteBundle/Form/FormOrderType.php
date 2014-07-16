@@ -22,10 +22,14 @@ class FormOrderType extends AbstractType
                 'format' => 'd/M/y',              
                 ))
             ->add('transport')
-            ->add('userinfo', new UserInfoType())
+            ->add('user', new UserType())
             ->add('deliveryaddress', new DeliveryAddressType())
-            ->add('item', new ItemType())
-            ->add('amount')
+            //->add('item', new ItemType())
+            /*->add('item', 'collection', array('type' => new ItemType(),
+                                              'allow_add' => true,
+                                              'allow_delete' => true,
+                                              ))*/
+            //->add('amount')
         ;
     }
     
