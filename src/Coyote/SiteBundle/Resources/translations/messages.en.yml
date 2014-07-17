@@ -87,6 +87,7 @@ vendredi: friday
 samedi: saturday
 dimanche: sunday
 Enregistrer: Save
+Consultation des temps de présence: Consultation of time in work
 
 # Page Profil #
 "En cas de problème de mot de passe, merci de contacter votre administrateur ou d'envoyer un mail dans l'onglet Contact": Thanks to contact your administrator, if you have a problem with password. Or send an email from Contact tab
@@ -112,3 +113,5 @@ Edité: Edit
 Mise à jour: Update
 Edition de la note de frais: Editing the expense
 Retour à la liste: Back to the list
+Consultation des notes de frais: Consultation expense
+Ajout de notes de frais: Adding expense
