@@ -37,3 +37,7 @@ coyote_time_index:
 coyote_time_show:
     pattern:    /show
     defaults:   { _controller: "CoyoteSiteBundle:Time:show"}
+
+coyote_time_indexshow:
+    pattern:    /indexshow
+    defaults:   { _controller: "CoyoteSiteBundle:Time:indexshow"}

@@ -34,7 +34,7 @@
 {% endblock %}
 
 {% block content %}
-<form role="form" action="{{ path('coyote_expense_indexshow') }}" method='post'>
+<form role="form" action="{{ path('coyote_expense_show') }}" method='get'>
     <table class='table' id='tab_expense'>
     	<tr>
     	    <th>{{'Mois'|trans}}</th>
@@ -42,7 +42,7 @@
     	</tr>
         <tr>
             <td>
-                <select name='mois' id='mois' >
+                <select name='month' id='month' >
 					<option value='vide'></option>
 					<option value='01'>{{'Janvier'|trans}}</option>
 					<option value='02'>{{'Février'|trans}}</option>
@@ -59,7 +59,7 @@
 				</select>
             </td>
             <td>
-                <select name='annee' id='annee' >
+                <select name='year' id='year' >
 					<option value='14'>2014</option>
 					<option value='15'>2015</option>
 					<option value='16'>2016</option>

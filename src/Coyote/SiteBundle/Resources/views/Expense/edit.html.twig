@@ -38,6 +38,8 @@
         <button type="submit" class="btn btn-success">{{ 'Mise à jour'|trans }}</button>
     </p>
 </form>
-
+    <a class='btnpage' href="{{ path('coyote_expense_showparameters', {'year': app.session.get('year_expense'), 'month': app.session.get('month_expense')} ) }}">
+        {{ 'Retour à la liste'|trans }}
+    </a>
 
 {% endblock %}

@@ -802,22 +802,29 @@ class TimeController extends Controller
         }
     }
     
+    public function indexshowAction()
+    {
+        return $this->render('CoyoteSiteBundle:Time:indexshow.html.twig');
+    }
+    
     public function showAction()
     {
         $session = new Session();
         $doctrine = $this->getDoctrine();
         $em = $doctrine->getManager();
+        $request = Request::createFromGlobals();
         
-        $uri = $_SERVER['REQUEST_URI'];
-        $annee = $_GET['annee'];
-        $mois = $_GET['mois'];
+        $annee = $_GET['year'];
+        $mois = $_GET['month'];
         
         if(empty($annee) && empty($mois))
         {
-            return $this->render('CoyoteSiteBundle:Time:indexshow.html.twig');
+            return $this->redirect($this->generateUrl('coyote_time_indexshow'));
         }
         else
         {
+            if(empty($annee) && empty($mois))
+                return $this->render('CoyoteSiteBundle:Time:indexshow.html.twig');
             $user = $em->getRepository('CoyoteSiteBundle:User')->find($session->get('userid'));
             
             $week = $em->getRepository('CoyoteSiteBundle:Schedule')->findNoWeek($mois.'/'.$annee, $user);

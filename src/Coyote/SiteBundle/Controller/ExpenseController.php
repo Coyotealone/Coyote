@@ -37,7 +37,7 @@ class ExpenseController extends Controller
         if($session->get('userfeesid') != null)
             return $this->render('CoyoteSiteBundle:Expense:index.html.twig');
         else
-            return $this->redirect($this->generateUrl('coyote_main_language'));
+            return $this->redirect($this->generateUrl('accueil'));
     }
     
     public function createAction()
@@ -49,7 +49,7 @@ class ExpenseController extends Controller
         if($user == "anon.")
             return $this->redirect($this->generateUrl('fos_user_security_login'));
         if($session->get('userfeesid') == null)
-            return $this->redirect($this->generateUrl('coyote_main_language'));
+            return $this->redirect($this->generateUrl('accueil'));
         else
         {
             $currency = $em->getRepository('CoyoteSiteBundle:Currency')->findAll();
@@ -62,42 +62,73 @@ class ExpenseController extends Controller
         }
     }
 
-    public function showindexAction()
+    public function indexshowAction()
     {
         $session = new Session();
         $doctrine = $this->getDoctrine();
         $em = $doctrine->getManager();
         if($session->get('userfeesid') == null)
-            return $this->redirect($this->generateUrl('coyote_main_language'));
-        $request = Request::createFromGlobals();
-        $data = $request->request->all();
-        if($data == null)
-            return $this->render('CoyoteSiteBundle:Expense:indexshow.html.twig');
+            return $this->redirect($this->generateUrl('accueil'));
         else
-        {
-            $date = $data['mois'].'/'.$data['annee'];
-            $entity = $em->getRepository('CoyoteSiteBundle:Expense')->findExpense($date, $session->get('userfeesid'));
-            return $this->render('CoyoteSiteBundle:Expense:show.html.twig', array('data' => $entity));
-        }
+            return $this->render('CoyoteSiteBundle:Expense:indexshow.html.twig');
     }
 
     public function showAction()
     {
         $session = new Session();
         $user = $this->get('security.context')->getToken()->getUser();
+        //$year_expense = $session->get('year_expense');
+        //$month_expense = $session->get('month_expense');
         if($user == "anon.")
             return $this->redirect($this->generateUrl('fos_user_security_login'));
         if($session->get('userfeesid') == null)
-            return $this->redirect($this->generateUrl('coyote_main_language'));
+            return $this->redirect($this->generateUrl('accueil'));
+        /*if(!empty($session->get('year_expense')) && !empty($session->get('month_expense')))
+            return $this->redirect($this->generateUrl('coyote_expense_showparameters', array('year' => $year_expense, 'month' => $month_expense)));*/
+        $annee = $_GET['year'];
+        $mois = $_GET['month'];
+        if(empty($annee) && empty($mois))
+            return $this->redirect($this->generateUrl('coyote_expense_indexshow')); 
+        else
+        {
+            $session->set('year_expense', $annee);
+            $session->set('month_expense', $mois);
+            return $this->redirect($this->generateUrl('coyote_expense_showparameters', array('year' => $annee, 'month' => $mois)));
+            /*$iduser = $this->get('security.context')->getToken()->getUser()->getId();
+            $em = $this->getDoctrine()->getManager();
+            $date = $mois.'/'.$annee;
+            $entity = $em->getRepository('CoyoteSiteBundle:Expense')->findExpense($date, $session->get('userfeesid'));
+            return $this->render('CoyoteSiteBundle:Expense:show.html.twig', array('data' => $entity));*/
+        }
+    }
+    
+    public function showparametersAction($year, $month)
+    {
+        $session = new Session();
+        $user = $this->get('security.context')->getToken()->getUser();
+        if($user == "anon.")
+            return $this->redirect($this->generateUrl('fos_user_security_login'));
+        if($session->get('userfeesid') == null)
+            return $this->redirect($this->generateUrl('accueil'));
+        $annee = $year;
+        $mois = $month;
+        if(empty($annee) && empty($mois))
+            return $this->redirect($this->generateUrl('coyote_expense_indexshow')); 
         else
         {
             $iduser = $this->get('security.context')->getToken()->getUser()->getId();
             $em = $this->getDoctrine()->getManager();
-            $data = $em->getRepository('CoyoteSiteBundle:Expense')->findByUserfees($session->get('userfeesid'));
-            return $this->render('CoyoteSiteBundle:Expense:show.html.twig', array('data' => $data));
+            $date = $mois.'/'.$annee;
+            $entity = $em->getRepository('CoyoteSiteBundle:Expense')->findExpense($date, $session->get('userfeesid'));
+            //$uri = $_SERVER['REQUEST_URI'];
+            //$session->set('uri_expense', $uri);
+            
+            //$uri = $router->generate('coyote_expense_indexshow', array('slug' => 'my-blog-post'));
+            //return new Response($uri);
+            //$data = $em->getRepository('CoyoteSiteBundle:Expense')->findByUserfees($session->get('userfeesid'));
+            return $this->render('CoyoteSiteBundle:Expense:show.html.twig', array('data' => $entity));
         }
     }
-    
     
     public function saveAction()
     {
@@ -106,7 +137,7 @@ class ExpenseController extends Controller
         if($user == "anon.")
             return $this->redirect($this->generateUrl('fos_user_security_login'));
         if($session->get('userfeesid') == null)
-            return $this->redirect($this->generateUrl('coyote_main_language'));
+            return $this->redirect($this->generateUrl('accueil'));
         else
         {
             $doctrine = $this->getDoctrine();
@@ -236,7 +267,7 @@ class ExpenseController extends Controller
     {
         $session = new Session();
         if($session->get('userfeesid') == null)
-            return $this->redirect($this->generateUrl('coyote_main_language'));
+            return $this->redirect($this->generateUrl('accueil'));
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('CoyoteSiteBundle:Expense')->find($id);
@@ -281,7 +312,7 @@ class ExpenseController extends Controller
     {
         $session = new Session();
         if($session->get('userfeesid') == null)
-            return $this->redirect($this->generateUrl('coyote_main_language'));
+            return $this->redirect($this->generateUrl('accueil'));
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('CoyoteSiteBundle:Expense')->find($id);
@@ -329,7 +360,7 @@ class ExpenseController extends Controller
     {
         $session = new Session();
         if($session->get('userfeesid') == null)
-            return $this->redirect($this->generateUrl('coyote_main_language'));
+            return $this->redirect($this->generateUrl('accueil'));
         $form = $this->createDeleteForm($id);
         $form->handleRequest($request);
 

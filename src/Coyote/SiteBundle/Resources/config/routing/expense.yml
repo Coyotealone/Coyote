@@ -15,6 +15,12 @@ coyote_expense_save:
 coyote_expense_show:
     pattern:    /show
     defaults:   { _controller: "CoyoteSiteBundle:Expense:show"}
+    requirements: { _method: get }
+
+coyote_expense_showparameters:
+    pattern:    /show/{year}/{month}
+    defaults:   { _controller: "CoyoteSiteBundle:Expense:showparameters"}
+    requirements: { _method: get }
 
 coyote_expense_print:
     pattern:    /print
@@ -22,7 +28,7 @@ coyote_expense_print:
 
 coyote_expense_indexshow:
     pattern:    /indexshow
-    defaults:   { _controller: "CoyoteSiteBundle:Expense:showindex"}
+    defaults:   { _controller: "CoyoteSiteBundle:Expense:indexshow"}
     
 coyote_expense_edit:
     pattern:  /{id}/edit
@@ -36,4 +42,4 @@ coyote_expense_update:
 coyote_expense_delete:
     pattern:  /{id}/delete
     defaults: { _controller: "CoyoteSiteBundle:Expense:delete" }
-    requirements: { _method: post|delete|get }
+    requirements: { _method: post|delete }
