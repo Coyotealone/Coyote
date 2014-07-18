@@ -23,9 +23,10 @@ class ConfiguratorController extends Controller
 {
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();        
-        $dataconfig = $em->getRepository('CoyoteSiteBundle:ConfiguringTankers')->findByLink('U00',array('id' => 'asc'));
-        return $this->render('CoyoteSiteBundle:Config:pageun.html.twig', array('data' => $dataconfig));
+        return $this->render('CoyoteSiteBundle:Config:newpage.html.twig');
+        //$em = $this->getDoctrine()->getManager();        
+        //$dataconfig = $em->getRepository('CoyoteSiteBundle:ConfiguringTankers')->findByLink('U00',array('id' => 'asc'));
+        //return $this->render('CoyoteSiteBundle:Config:pageun.html.twig', array('data' => $dataconfig));
     }
 
     public function pagedeuxAction()
