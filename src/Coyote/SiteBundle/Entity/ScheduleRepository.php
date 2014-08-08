@@ -170,13 +170,13 @@ class ScheduleRepository extends EntityRepository
         
         for($i = 0; $i<count($res); $i++)
         {
-            if($res[$i]['absence'] == "aucune")
+            if($res[$i]['absence'] == "Aucune")
                 $aucune++;
-            if($res[$i]['absence'] == "rtt")
+            if($res[$i]['absence'] == "RTT")
                 $rtt++;
-            if($res[$i]['absence'] == "ca")
+            if($res[$i]['absence'] == "CA")
                 $ca++;
-            if($res[$i]['absence'] == "cp")
+            if($res[$i]['absence'] == "CP")
                 $cp++;
         }
         $absence = $aucune.';'.$rtt.';'.$ca.';'.$cp;
@@ -335,29 +335,3 @@ class ScheduleRepository extends EntityRepository
         return $result;
     }
 }
-
-/*$nbweek = count($timetable_noweek);
-        for($i=0;$i<$nbweek;$i++)
-        {
-            $j = 0;
-            foreach($timetable as $data)
-            {
-                if($timetable_noweek[$i] == $data->getNoweek())
-                {    
-                    $timetable_id[$j] = $data->getId();
-                    $j++;
-                }
-            }
-            
-            
-        }*/
-        /*$qb = $this->_em->createQueryBuilder();
-        $qb->select('t')
-           ->from('CoyoteSiteBundle:Timetable', 't')
-           ->where('t.date LIKE :date')
-           ->setParameters(array('date' => '%'.$date.'%'));
-        
-        $timetable =  $qb->getQuery()
-                         ->getResult();*/
-        
-        //return $nbweek;

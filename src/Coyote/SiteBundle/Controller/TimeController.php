@@ -911,9 +911,9 @@ class TimeController extends Controller
             $data = $em->getRepository('CoyoteSiteBundle:Schedule')->findTime($mois.'/'.$annee, $user);
             $timemonth = $em->getRepository('CoyoteSiteBundle:Schedule')->findTimeMonth($mois.'/'.$annee, $user);
             $absence = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsenceMonth($mois.'/'.$annee, $user);
-            $absencerttyear = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsenceYear($mois, $annee, $user, "rtt");
-            $absencecayear = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsenceYear($mois, $annee, $user, "ca");
-            $absencecpyear = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsenceYear($mois, $annee, $user, "cp");
+            $absencerttyear = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsenceYear($mois, $annee, $user, "RTT");
+            $absencecayear = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsenceYear($mois, $annee, $user, "CA");
+            $absencecpyear = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsenceYear($mois, $annee, $user, "CP");
             $absence = explode(';', $absence);
             if($this->get('security.context')->isGranted('ROLE_CADRE'))
             {
