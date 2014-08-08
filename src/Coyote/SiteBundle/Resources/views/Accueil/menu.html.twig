@@ -1,0 +1,29 @@
+{% extends 'CoyoteSiteBundle::base.html.twig' %}
+
+{% block userinfo %}
+
+{{ 'Bienvenue'|trans }} {{ app.session.get('username') }} |
+<a href="{{ path('fos_user_security_logout') }}">
+    {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+</a>
+
+{% endblock %}
+
+{% block link %}
+
+    {{ include('CoyoteSiteBundle::navigation.html.twig') }}
+	
+{% endblock %}
+
+{% block content %}
+
+    <div class="jumbotron">
+        
+        <p class="lead">{{ 'Bienvenue sur le site PICHON'|trans }}
+            <br><br>
+                       
+        </p>
+        
+    </div>
+
+{% endblock %}
