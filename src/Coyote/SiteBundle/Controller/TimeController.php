@@ -869,5 +869,88 @@ class TimeController extends Controller
                     ));
         }
     }
+    
+    public function indexprintAction()
+    {
+        return $this->render('CoyoteSiteBundle:Time:indexprint.html.twig');
+    }
+    
+    public function printAction()
+    {
+        $session = new Session();
+        $doctrine = $this->getDoctrine();
+        $em = $doctrine->getManager();
+        $request = Request::createFromGlobals();
+        
+        $annee = $_GET['year'];
+        $mois = $_GET['month'];
+        //$annee = 2014;
+        //$mois = 06;
+        
+        if(empty($annee) && empty($mois))
+        {
+            return $this->redirect($this->generateUrl('coyote_time_indexprint'));
+        }
+        else
+        {
+            if(empty($annee) && empty($mois))
+                return $this->render('CoyoteSiteBundle:Time:indexprint.html.twig');
+            $user = $em->getRepository('CoyoteSiteBundle:User')->find($session->get('userid'));
+            
+            $week = $em->getRepository('CoyoteSiteBundle:Schedule')->findNoWeek($mois.'/'.$annee, $user);
+            $timeweek = '';
+            $i = 0;
+            foreach($week as $data)
+            {
+                $timeoneweek = $em->getRepository('CoyoteSiteBundle:Schedule')->findTimeWeek($user, $data, $annee);
+                $timeweek[$i] = $timeoneweek;
+                $i++;
+            }
+            
+            
+            $data = $em->getRepository('CoyoteSiteBundle:Schedule')->findTime($mois.'/'.$annee, $user);
+            $timemonth = $em->getRepository('CoyoteSiteBundle:Schedule')->findTimeMonth($mois.'/'.$annee, $user);
+            $absence = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsenceMonth($mois.'/'.$annee, $user);
+            $absencerttyear = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsenceYear($mois, $annee, $user, "rtt");
+            $absencecayear = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsenceYear($mois, $annee, $user, "ca");
+            $absencecpyear = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsenceYear($mois, $annee, $user, "cp");
+            $absence = explode(';', $absence);
+            if($this->get('security.context')->isGranted('ROLE_CADRE'))
+            {
+                $page = $this->render('CoyoteSiteBundle:Time:showfm.html.twig', array(
+                    'data' => $data,
+                    'rtt' => $absence[1],
+                    'ca' => $absence[2],
+                    'cp' => $absence[3],
+                    'rttyear' => $absencerttyear,
+                    'cpyear' => $absencecpyear,
+                    'cayear' => $absencecayear,
+                    ));
+            }
+            else
+            {
+                 $page = $this->render('CoyoteSiteBundle:Time:print.html.twig', array(
+                    'data' => $data, 
+                    'time' => $timemonth, 
+                    'rtt' => $absence[1], 
+                    'ca' => $absence[2], 
+                    'cp' => $absence[3], 
+                    'rttyear' => $absencerttyear,
+                    'cpyear' => $absencecpyear,
+                    'cayear' => $absencecayear,
+                    'timeweek' => $timeweek,
+                    ));
+            }
+            
+            $html = $page->getContent();
+                    
+            $html2pdf = new \Html2Pdf_Html2Pdf('P', 'A4', 'fr');
+            $html2pdf->pdf->SetDisplayMode('real');
+            $html2pdf->writeHTML($html);
+            $html2pdf->Output('Presence.pdf', 'D');
+            
+            return new Response('PDF réalisé');
+        }
+    }
 }
 

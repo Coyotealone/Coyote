@@ -10,10 +10,6 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 
-use Coyote\SiteBundle\Entity\User;
-use Coyote\SiteBundle\Entity\UserInfo;
-use Coyote\SiteBundle\Form\UserType;
-
 use Doctrine\ORM\EntityRepository;
 
 

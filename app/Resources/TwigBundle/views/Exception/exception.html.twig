@@ -1,5 +1,3 @@
-{% extends 'CoyoteSiteBundle::base.html.twig' %}
-
 {% block userinfo %}
 
 {{ 'Bienvenue'|trans }} {{ app.session.get('username') }} |
@@ -7,6 +5,13 @@
     {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
 </a>
 
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/style.css') }}" type="text/css" media="all" />
+    <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/bootstrap.css') }}" type="text/css" media="all" />
+    <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/justified-nav.css') }}" type="text/css" media="all" />
+    <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/signin.css') }}" type="text/css" media="all" />
 {% endblock %}
 
 {% block link %}
@@ -18,7 +23,7 @@
           <a href="{{ path('coyote_time_index') }}" class="dropdown-toggle" data-toggle="dropdown">{{'Présence'|trans}}<b class="caret"></b></a>
           <ul class="dropdown-menu">
             <li><a href="{{ path('coyote_time_index') }}">{{'Saisie'|trans}}</a></li>
-            <li><a href="{{ path('coyote_time_indexshow') }}">{{'Consultation'|trans}}</a></li>
+            <li><a href="{{ path('coyote_time_show') }}">{{'Consultation'|trans}}</a></li>
           </ul>
         </li>
         <li id="frais" class="dropdown">
@@ -41,7 +46,6 @@
           <a href="{{ path('coyote_configurator') }}" class="dropdown-toggle" data-toggle="dropdown">{{'Configurateur'|trans}}<b class="caret"></b></a>
           <ul class="dropdown-menu">
             <li><a href="{{ path('coyote_configurator') }}">{{"Création d'une config"|trans}}</a></li>
-            <li><a href="{{ path('contact_index') }}">{{"Contact"|trans}}</a></li>
           </ul>
         </li>
         <li id="config" class="dropdown">
@@ -50,7 +54,6 @@
             <li><a href="{{ path('formorder_new') }}">{{'Formulaire Bon de commande'|trans}}</a></li>
           </ul>
         </li>
-        <li><a href="{{ path('coyote_time_indexprint') }}">{{'Impression PDF'|trans}}</a></li>
         {% endif %}
 	</ul>
   </div>
@@ -62,10 +65,7 @@
 
     <div class="jumbotron">
         
-        <p class="lead">{{ 'Bienvenue sur le site PICHON'|trans }}
-            <br><br>
-                       
-        </p>
+        <p class="lead">{{ 'Page introuvable'|trans }}</p>
         
     </div>
 
