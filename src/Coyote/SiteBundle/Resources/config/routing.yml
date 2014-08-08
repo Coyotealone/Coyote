@@ -2,6 +2,12 @@ accueil:
     path:     /
     defaults: { _controller: CoyoteSiteBundle:Main:index }
     
+CoyoteSiteBundle_contact:
+    resource: "@CoyoteSiteBundle/Resources/config/routing/contact.yml"
+    prefix:   /{_locale}
+    requirements:
+        _locale: fr|en
+    
 CoyoteSiteBundle_coyote_main:
     resource: "@CoyoteSiteBundle/Resources/config/routing/main.yml"
     prefix:   /{_locale}

@@ -251,109 +251,109 @@ $(document).ready(function()
     if(commentdimanche == 'null' | commentdimanche == '')
         document.getElementById("commentairedimanche").value = "";
 
-	if(abslundi == "aucune")
+	if(abslundi == "Aucune")
 		document.getElementById("absencelundi").selectedIndex = 0;
-	if(abslundi == "rtt")
+	if(abslundi == "RTT")
 		document.getElementById("absencelundi").selectedIndex = 1;
-	if(abslundi == 	"cp")
+	if(abslundi == 	"Congés payés")
 		document.getElementById("absencelundi").selectedIndex = 2;
-	if(abslundi == 	"ca")
+	if(abslundi == 	"CA")
 		document.getElementById("absencelundi").selectedIndex = 3;
-	if(abslundi == 	"cef")
+	if(abslundi == 	"CEF")
 		document.getElementById("absencelundi").selectedIndex = 4;
-	if(abslundi == "css")
+	if(abslundi == "Congés sans solde")
 		document.getElementById("absencelundi").selectedIndex = 5;
-	if(abslundi == 	"mal")
+	if(abslundi == 	"Maladie/At/Pat")
 		document.getElementById("absencelundi").selectedIndex = 6;
 	
-	if(absmardi == "aucune")
+	if(absmardi == "Aucune")
 		document.getElementById("absencemardi").selectedIndex = 0;
-	if(absmardi == "rtt")
+	if(absmardi == "RTT")
 		document.getElementById("absencemardi").selectedIndex = 1;
-	if(absmardi == 	"cp")
+	if(absmardi == 	"Congés payés")
 		document.getElementById("absencemardi").selectedIndex = 2;
-	if(absmardi == 	"ca")
+	if(absmardi == 	"CA")
 		document.getElementById("absencemardi").selectedIndex = 3;
-	if(absmardi == 	"cef")
+	if(absmardi == 	"CEF")
 		document.getElementById("absencemardi").selectedIndex = 4;
-	if(absmardi == "css")
+	if(absmardi == "Congés sans solde")
 		document.getElementById("absencemardi").selectedIndex = 5;
-	if(absmardi == 	"mal")
+	if(absmardi == 	"Maladie/At/Pat")
 		document.getElementById("absencemardi").selectedIndex = 6;
 		
-	if(absmercredi == "aucune")
+	if(absmercredi == "Aucune")
 		document.getElementById("absencemercredi").selectedIndex = 0;
-	if(absmercredi == "rtt")
+	if(absmercredi == "RTT")
 		document.getElementById("absencemercredi").selectedIndex = 1;
-	if(absmercredi == "cp")
+	if(absmercredi == "Congés payés")
 		document.getElementById("absencemercredi").selectedIndex = 2;
-	if(absmercredi == "ca")
+	if(absmercredi == "CA")
 		document.getElementById("absencemercredi").selectedIndex = 3;
-	if(absmercredi == "cef")
+	if(absmercredi == "CEF")
 		document.getElementById("absencemercredi").selectedIndex = 4;
-	if(absmercredi == "css")
+	if(absmercredi == "Congés sans solde")
 		document.getElementById("absencemercredi").selectedIndex = 5;
-	if(absmercredi == "mal")
+	if(absmercredi == "Maladie/At/Pat")
 		document.getElementById("absencemercredi").selectedIndex = 6;
 	
-	if(absjeudi == "aucune")
+	if(absjeudi == "Aucune")
 		document.getElementById("absencejeudi").selectedIndex = 0;
-	if(absjeudi == "rtt")
+	if(absjeudi == "RTT")
 		document.getElementById("absencejeudi").selectedIndex = 1;
-	if(absjeudi == "cp")
+	if(absjeudi == "Congés payés")
 		document.getElementById("absencejeudi").selectedIndex = 2;
-	if(absjeudi == "ca")
+	if(absjeudi == "CA")
 		document.getElementById("absencejeudi").selectedIndex = 3;
-	if(absjeudi == "cef")
+	if(absjeudi == "CEF")
 		document.getElementById("absencejeudi").selectedIndex = 4;
-	if(absjeudi == "css")
+	if(absjeudi == "Congés sans solde")
 		document.getElementById("absencejeudi").selectedIndex = 5;
-	if(absjeudi == "mal")
+	if(absjeudi == "Maladie/At/Pat")
 		document.getElementById("absencejeudi").selectedIndex = 6;
 	
-	if(absvendredi == "aucune")
+	if(absvendredi == "Aucune")
 		document.getElementById("absencevendredi").selectedIndex = 0;
-	if(absvendredi == "rtt")
+	if(absvendredi == "RTT")
 		document.getElementById("absencevendredi").selectedIndex = 1;
-	if(absvendredi == "cp")
+	if(absvendredi == "Congés payés")
 		document.getElementById("absencevendredi").selectedIndex = 2;
-	if(absvendredi == "ca")
+	if(absvendredi == "CA")
 		document.getElementById("absencevendredi").selectedIndex = 3;
-	if(absvendredi == "cef")
+	if(absvendredi == "CEF")
 		document.getElementById("absencevendredi").selectedIndex = 4;
-	if(absvendredi == "css")
+	if(absvendredi == "Congés sans solde")
 		document.getElementById("absencevendredi").selectedIndex = 5;
-	if(absvendredi == "mal")
+	if(absvendredi == "Maladie/At/Pat")
 		document.getElementById("absencevendredi").selectedIndex = 6;
 	
-	if(abssamedi == "aucune")
+	if(abssamedi == "Aucune")
 		document.getElementById("absencesamedi").selectedIndex = 0;
-	if(abssamedi == "rtt")
+	if(abssamedi == "RTT")
 		document.getElementById("absencesamedi").selectedIndex = 1;
-	if(abssamedi == "cp")
+	if(abssamedi == "Congés payés")
 		document.getElementById("absencesamedi").selectedIndex = 2;
-	if(abssamedi == "ca")
+	if(abssamedi == "CA")
 		document.getElementById("absencesamedi").selectedIndex = 3;
-	if(abssamedi == "cef")
+	if(abssamedi == "CEF")
 		document.getElementById("absencesamedi").selectedIndex = 4;
-	if(abssamedi == "css")
+	if(abssamedi == "Congés sans solde")
 		document.getElementById("absencesamedi").selectedIndex = 5;
-	if(abssamedi == "mal")
+	if(abssamedi == "Maladie/At/Pat")
 		document.getElementById("absencesamedi").selectedIndex = 6;
 		
-	if(absdimanche == "aucune")
+	if(absdimanche == "Aucune")
 		document.getElementById("absencedimanche").selectedIndex = 0;
-	if(absdimanche == "rtt")
+	if(absdimanche == "RTT")
 		document.getElementById("absencedimanche").selectedIndex = 1;
-	if(absdimanche == "cp")
+	if(absdimanche == "Congés payés")
 		document.getElementById("absencedimanche").selectedIndex = 2;
-	if(absdimanche == "ca")
+	if(absdimanche == "CA")
 		document.getElementById("absencedimanche").selectedIndex = 3;
-	if(absdimanche == "cef")
+	if(absdimanche == "CEF")
 		document.getElementById("absencedimanche").selectedIndex = 4;
-	if(absdimanche == "css")
+	if(absdimanche == "Congés sans solde")
 		document.getElementById("absencedimanche").selectedIndex = 5;
-	if(absdimanche == "mal")
+	if(absdimanche == "Maladie/At/Pat")
 		document.getElementById("absencedimanche").selectedIndex = 6;
 	
 	if(deplundi == 0 | deplundi == "")
@@ -412,11 +412,14 @@ function timeweek(timemonday, timetuesday, timewednesday, timethursday, timefrid
 
 function timeinminutes(time)
 {
-    var timeend = time.split(':');
-    var hours = new Number(timeend[0]);
-    var minutes = new Number(timeend[1]);
-    var timeminutes = hours * 60 + minutes;
-    return timeminutes;
+    if(typeof(time) != 'undefined')
+    {
+        var timeend = time.split(':');
+        var hours = new Number(timeend[0]);
+        var minutes = new Number(timeend[1]);
+        var timeminutes = hours * 60 + minutes;
+        return timeminutes;
+    }
 }
 
 function timeinhours(time)

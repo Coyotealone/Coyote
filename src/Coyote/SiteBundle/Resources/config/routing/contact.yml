@@ -1,0 +1,3 @@
+contact_index:
+    pattern:    /contact
+    defaults:   { _controller: "CoyoteSiteBundle:Contact:index" }

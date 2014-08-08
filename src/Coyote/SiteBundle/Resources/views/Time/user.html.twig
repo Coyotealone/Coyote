@@ -1,9 +1,18 @@
 {% extends 'CoyoteSiteBundle:Time:index.html.twig' %}
 
 {% block javascripts %}
+    <!--[if IE]>
         <script src="{{ asset('bundles/coyotesite/js/jquery-min.js') }}"/></script>
+        <script src="{{ asset('bundles/coyotesite/js/jquery.js') }}"></script>
+        <script src="{{ asset('bundles/coyotesite/js/script_timeusers_ie.js') }}"></script>
+        <script src="{{ asset('bundles/coyotesite/js/script_timeusers_change.js') }}"/></script>
+    <![endif]-->
+    <!--[if !IE]><!-->
+        <script src="{{ asset('bundles/coyotesite/js/jquery-min.js') }}"/></script>
+        <script src="{{ asset('bundles/coyotesite/js/jquery.js') }}"></script>
         <script src="{{ asset('bundles/coyotesite/js/script_timeusers.js') }}"/></script>
         <script src="{{ asset('bundles/coyotesite/js/script_timeusers_change.js') }}"/></script>
+    <!--<![endif]-->
 {% endblock %}
 
 {% block content %}
@@ -37,7 +46,7 @@
     		<tbody> <!-- Corps du tableau -->
     			<tr>
     				<td id="{{ id.0.id }}" data-value={{ id.0.id }} data-id={{ timetable.0.id }} class='jour'>{{ 'Lundi'|trans }} :
-    				    <input class='input' type='text' disabled name='datelundi' id='datelundi' data-value={{ date.0.date }} value={{ date.0.date }} />
+    				    <input class='input' type='text' disabled name='datelundi' id='datelundi' data-value="{{ date.0.date }}" value={{ date.0.date }} />
     				</td>
     				<td>
     				    <input class='input' type='text' placeholder='9:00' maxlength='5' name='debutlundi' id='debutlundi' data-value={{ time.0.start }} value={{ time.0.start }} />
@@ -61,14 +70,14 @@
     					</select>
     				</td>
     				<td>
-    					<select name='absencelundi' id='absencelundi' data-value={{ time.0.absence }} >
-        					<option value='aucune'></option>
-        					<option value='rtt'>RTT</option>
-        					<option value='cp'>Congés payés</option>
-        					<option value='ca'>CA</option>
-        					<option value='cef'>CEF</option>
-        					<option value='css'>Congés sans solde</option>
-        					<option value='mal'>Maladie/At/Pat</option>
+    					<select name='absencelundi' id='absencelundi' data-value="{{ time.0.absence }}" >
+        					<option value='Aucune'></option>
+        					<option value='RTT'>RTT</option>
+        					<option value='Congés payés'>Congés payés</option>
+        					<option value='CA'>CA</option>
+        					<option value='CEF'>CEF</option>
+        					<option value='Congés sans solde'>Congés sans solde</option>
+        					<option value='Maladie/At/Pat'>Maladie/At/Pat</option>
     					</select>
     				</td>
     				<td>
@@ -94,21 +103,21 @@
     				<td>
     				    <input class='input' disabled type='text' name='jourmardi' id='jourmardi' data-value={{ time.1.workinghours }} value={{ time.1.workinghours }} />
     				</td>
-    				<td class='deplacement' data-value={{ time.1.travel }} >
-    					<select name='deplacementmardi' id='deplacementmardi'>
+    				<td class='deplacement' >
+    					<select name='deplacementmardi' id='deplacementmardi' data-value={{ time.1.travel }} >
         					<option value='0'>Non</option>
         					<option value='1'>Oui</option>
     					</select>
     				</td>
     				<td>
-    					<select name='absencemardi' id='absencemardi' data-value={{ time.1.absence }} >
-        					<option value='aucune'></option>
-        					<option value='rtt'>RTT</option>
-        					<option value='cp'>Congés payés</option>
-        					<option value='ca'>CA</option>
-        					<option value='cef'>CEF</option>
-        					<option value='css'>Congés sans solde</option>
-        					<option value='mal'>Maladie/At/Pat</option>
+    					<select name='absencemardi' id='absencemardi' data-value="{{ time.1.absence }}" >
+        					<option value='Aucune'></option>
+        					<option value='RTT'>RTT</option>
+        					<option value='Congés payés'>Congés payés</option>
+        					<option value='CA'>CA</option>
+        					<option value='CEF'>CEF</option>
+        					<option value='Congés sans solde'>Congés sans solde</option>
+        					<option value='Maladie/At/Pat'>Maladie/At/Pat</option>
     					</select>
     				</td>
     				<td>
@@ -141,14 +150,14 @@
     					</select>
     				</td>
     				<td>
-    					<select name='absencemercredi' id='absencemercredi' data-value={{ time.2.absence }} >
-        					<option value='aucune'></option>
-        					<option value='rtt'>RTT</option>
-        					<option value='cp'>Congés payés</option>
-        					<option value='ca'>CA</option>
-        					<option value='cef'>CEF</option>
-        					<option value='css'>Congés sans solde</option>
-        					<option value='mal'>Maladie/At/Pat</option>
+    					<select name='absencemercredi' id='absencemercredi' data-value="{{ time.2.absence }}" >
+        					<option value='Aucune'></option>
+        					<option value='RTT'>RTT</option>
+        					<option value='Congés payés'>Congés payés</option>
+        					<option value='CA'>CA</option>
+        					<option value='CEF'>CEF</option>
+        					<option value='Congés sans solde'>Congés sans solde</option>
+        					<option value='Maladie/At/Pat'>Maladie/At/Pat</option>
     					</select>
     				</td>
     				<td>
@@ -181,14 +190,14 @@
     					</select>
     				</td>
     				<td>
-    					<select name='absencejeudi' id='absencejeudi' data-value={{ time.3.absence }} >
-        					<option value='aucune'></option>
-        					<option value='rtt'>RTT</option>
-        					<option value='cp'>Congés payés</option>
-        					<option value='ca'>CA</option>
-        					<option value='cef'>CEF</option>
-        					<option value='css'>Congés sans solde</option>
-        					<option value='mal'>Maladie/At/Pat</option>
+    					<select name='absencejeudi' id='absencejeudi' data-value="{{ time.3.absence }}" >
+        					<option value='Aucune'></option>
+        					<option value='RTT'>RTT</option>
+        					<option value='Congés payés'>Congés payés</option>
+        					<option value='CA'>CA</option>
+        					<option value='CEF'>CEF</option>
+        					<option value='Congés sans solde'>Congés sans solde</option>
+        					<option value='Maladie/At/Pat'>Maladie/At/Pat</option>
     					</select>
     				</td>
     				<td>
@@ -221,14 +230,14 @@
     					</select>
     				</td>
     				<td>
-    					<select name='absencevendredi' id='absencevendredi' data-value={{ time.4.absence }} >
-        					<option value='aucune'></option>
-        					<option value='rtt'>RTT</option>
-        					<option value='cp'>Congés payés</option>
-        					<option value='ca'>CA</option>
-        					<option value='cef'>CEF</option>
-        					<option value='css'>Congés sans solde</option>
-        					<option value='mal'>Maladie/At/Pat</option>
+    					<select name='absencevendredi' id='absencevendredi' data-value="{{ time.4.absence }}" >
+        					<option value='Aucune'></option>
+        					<option value='RTT'>RTT</option>
+        					<option value='Congés payés'>Congés payés</option>
+        					<option value='CA'>CA</option>
+        					<option value='CEF'>CEF</option>
+        					<option value='Congés sans solde'>Congés sans solde</option>
+        					<option value='Maladie/At/Pat'>Maladie/At/Pat</option>
     					</select>
     				</td>
     				<td>
@@ -261,14 +270,14 @@
     					</select>
     				</td>
     				<td>
-    					<select name='absencesamedi' id='absencesamedi' data-value={{ time.5.absence }} >
-        					<option value='aucune'></option>
-        					<option value='rtt'>RTT</option>
-        					<option value='cp'>Congés payés</option>
-        					<option value='ca'>CA</option>
-        					<option value='cef'>CEF</option>
-        					<option value='css'>Congés sans solde</option>
-        					<option value='mal'>Maladie/At/Pat</option>
+    					<select name='absencesamedi' id='absencesamedi' data-value="{{ time.5.absence }}" >
+        					<option value='Aucune'></option>
+        					<option value='RTT'>RTT</option>
+        					<option value='Congés payés'>Congés payés</option>
+        					<option value='CA'>CA</option>
+        					<option value='CEF'>CEF</option>
+        					<option value='Congés sans solde'>Congés sans solde</option>
+        					<option value='Maladie/At/Pat'>Maladie/At/Pat</option>
     					</select>
     				</td>
     				<td>
@@ -301,14 +310,14 @@
     					</select>
     				</td>
     				<td>
-    					<select name='absencedimanche' id='absencedimanche' data-value={{ time.6.absence }} >
-        					<option value='aucune'></option>
-        					<option value='rtt'>RTT</option>
-        					<option value='cp'>Congés payés</option>
-        					<option value='ca'>CA</option>
-        					<option value='cef'>CEF</option>
-        					<option value='css'>Congés sans solde</option>
-        					<option value='mal'>Maladie/At/Pat</option>
+    					<select name='absencedimanche' id='absencedimanche' data-value="{{ time.6.absence }}" >
+        					<option value='Aucune'></option>
+        					<option value='RTT'>RTT</option>
+        					<option value='Congés payés'>Congés payés</option>
+        					<option value='CA'>CA</option>
+        					<option value='CEF'>CEF</option>
+        					<option value='Congés sans solde'>Congés sans solde</option>
+        					<option value='Maladie/At/Pat'>Maladie/At/Pat</option>
     					</select>
     				</td>
     				<td>

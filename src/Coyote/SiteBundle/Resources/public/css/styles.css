@@ -1,0 +1,657 @@
+@font-face {
+  font-family: "Coda";
+  src: url(/bundles/coyotesite/font/Coda-Regular.ttf) format('truetype'), url(/bundles/coyotesite/font/Coda-Regular.woff) format('woff');
+}
+
+header, footer, section, hgroup, aside, nav, article, figure, figcaption, time, dialog {
+ display: block;
+ }
+
+/* Configurateur */
+/* line 7, ../scss/styles.sass */
+#bloc_page {
+  width: 1000px;
+  margin: auto;
+}
+
+/* line 11, ../scss/styles.sass */
+#catalogue, #panier {
+  display: inline-block;
+  vertical-align: top;
+  text-align: justify;
+}
+
+/* line 16, ../scss/styles.sass */
+#catalogue {
+  width: 625px;
+  margin-right: 15px;
+  background-color: blue;
+  color: white;
+  height: 300px;
+}
+
+/* line 23, ../scss/styles.sass */
+#panier {
+  position: relative;
+  width: 350px;
+  background-color: #706b64;
+  box-shadow: 0px 2px 5px #1c1a19;
+  border-radius: 5px;
+  padding: 10px;
+  color: white;
+  font-size: 0.9em;
+  height: 300px;
+}
+
+/* Fin du configurateur */
+/* line 37, ../scss/styles.sass */
+#titreconfig {
+  font-family: "Coda";
+  font-size: large;
+}
+
+/* line 41, ../scss/styles.sass */
+#flashmessage {
+  font-family: "Coda";
+  font-size: large;
+  color: white;
+  background-color: black;
+}
+
+/* line 47, ../scss/styles.sass */
+#gauchetoute {
+  text-align: left;
+}
+
+/* line 50, ../scss/styles.sass */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* line 55, ../scss/styles.sass */
+#page {
+  min-height: 100%;
+  position: relative;
+}
+
+/* line 59, ../scss/styles.sass */
+#bloc {
+  padding-bottom: 50px;
+}
+
+/* line 62, ../scss/styles.sass */
+header {
+  width: 1000px;
+  margin: 0 auto;
+  position: relative;
+  font-style: inherit;
+}
+
+/* line 68, ../scss/styles.sass */
+#lien .lien {
+  float: right;
+  text-align: right;
+  margin-top: 35px;
+  margin-right: 30px;
+  text-transform: uppercase;
+}
+
+/* line 75, ../scss/styles.sass */
+#welcome {
+  text-align: center;
+}
+
+/* line 78, ../scss/styles.sass */
+section {
+  width: 1000px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* line 83, ../scss/styles.sass */
+footer {
+  height: 20px;
+  bottom: 0;
+  color: #f0f0f0;
+  position: absolute;
+  width: 100%;
+}
+
+/* line 90, ../scss/styles.sass */
+footer p {
+  text-align: center;
+  margin: auto;
+  width: 1000px;
+  background-color: #515151;
+}
+
+/* Contenu */
+/* line 99, ../scss/styles.sass */
+#contenu {
+  text-align: center;
+}
+
+/* line 102, ../scss/styles.sass */
+#menu_article, #change_password_article, #update_user_article, #work_time_article {
+  margin-top: 50px;
+}
+
+/* index.php */
+/* line 106, ../scss/styles.sass */
+#table_connexion {
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  width: 280px;
+  border: 0px;
+}
+
+/* line 113, ../scss/styles.sass */
+#login {
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+/* Fin de Contenu */
+/* Fin du Bloc principal */
+/* Fin CSS Page */
+/* Saisi des temps  Augmentation des cellules des heures */
+/* line 130, ../scss/styles.sass */
+input#txt_timemonth {
+  width: 160px;
+}
+
+/* line 133, ../scss/styles.sass */
+input#txt_timemonth2 {
+  width: 160px;
+}
+
+/* Mise en forme User_account */
+/* Champ Nom en majuscule */
+/* line 140, ../scss/styles.sass */
+.input_nom {
+  text-transform: uppercase;
+}
+
+/* Champ Prenom en majuscule pour la premiere lettre */
+/* line 145, ../scss/styles.sass */
+.input_prenom {
+  text-transform: capitalize;
+}
+
+/* Mise en forme des boutons Site_Cadre */
+/* line 152, ../scss/styles.sass */
+#save {
+  text-align: center;
+}
+
+/* line 155, ../scss/styles.sass */
+#table_temps_cadre {
+  min-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Tableau Saisie des temps */
+/* line 162, ../scss/styles.sass */
+.jour {
+  width: 200px;
+  text-align: right;
+}
+
+/* line 166, ../scss/styles.sass */
+.jour .input {
+  width: 80px;
+  text-align: center;
+}
+
+/* line 170, ../scss/styles.sass */
+thead {
+  text-align: center;
+  width: 120px;
+}
+
+/* line 174, ../scss/styles.sass */
+tbody {
+  text-align: center;
+}
+
+/* line 177, ../scss/styles.sass */
+.input {
+  width: 50px;
+}
+
+/* line 180, ../scss/styles.sass */
+#resultat {
+  width: 100%;
+}
+
+/* line 183, ../scss/styles.sass */
+#table_temps {
+  min-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Bouton Page Index Time */
+/* line 190, ../scss/styles.sass */
+.btntime {
+  -moz-box-shadow: inset 0px 1px 0px 0px white;
+  -webkit-box-shadow: inset 0px 1px 0px 0px white;
+  box-shadow: inset 0px 1px 0px 0px white;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #f9f9f9), color-stop(1, #e9e9e9));
+  background: -moz-linear-gradient(top, #f9f9f9 5%, #e9e9e9 100%);
+  background: -webkit-linear-gradient(top, #f9f9f9 5%, #e9e9e9 100%);
+  background: -o-linear-gradient(top, #f9f9f9 5%, #e9e9e9 100%);
+  background: -ms-linear-gradient(top, #f9f9f9 5%, #e9e9e9 100%);
+  background: linear-gradient(to bottom, #f9f9f9 5%, #e9e9e9 100%);
+  background-color: #f9f9f9;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  border: 1px solid gainsboro;
+  display: inline-block;
+  cursor: pointer;
+  color: #666666;
+  font-family: arial;
+  font-size: 15px;
+  font-weight: bold;
+  padding: 6px 24px;
+  text-decoration: none;
+  text-shadow: 0px 1px 0px white;
+}
+
+/* line 214, ../scss/styles.sass */
+.btntime:hover {
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #e9e9e9), color-stop(1, #f9f9f9));
+  background: -moz-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
+  background: -webkit-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
+  background: -o-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
+  background: -ms-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
+  background: linear-gradient(to bottom, #e9e9e9 5%, #f9f9f9 100%);
+  background-color: #e9e9e9;
+}
+
+/* line 222, ../scss/styles.sass */
+.btntime:active {
+  position: relative;
+  top: 1px;
+}
+
+/* Bouton Semaine Suivante et Précédente de la gestion des temps */
+/* line 229, ../scss/styles.sass */
+.btnpage {
+  -moz-box-shadow: inset 0px 1px 0px 0px white;
+  -webkit-box-shadow: inset 0px 1px 0px 0px white;
+  box-shadow: inset 0px 1px 0px 0px white;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, white), color-stop(1, #f6f6f6));
+  background: -moz-linear-gradient(top, white 5%, #f6f6f6 100%);
+  background: -webkit-linear-gradient(top, white 5%, #f6f6f6 100%);
+  background: -o-linear-gradient(top, white 5%, #f6f6f6 100%);
+  background: -ms-linear-gradient(top, white 5%, #f6f6f6 100%);
+  background: linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
+  background-color: white;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  border: 1px solid gainsboro;
+  display: inline-block;
+  cursor: pointer;
+  color: #666666;
+  font-family: arial;
+  font-size: 15px;
+  font-weight: bold;
+  padding: 6px 24px;
+  text-decoration: none;
+  text-shadow: 0px 1px 0px white;
+}
+
+/* line 253, ../scss/styles.sass */
+.btnpage:hover {
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #f6f6f6), color-stop(1, white));
+  background: -moz-linear-gradient(top, #f6f6f6 5%, white 100%);
+  background: -webkit-linear-gradient(top, #f6f6f6 5%, white 100%);
+  background: -o-linear-gradient(top, #f6f6f6 5%, white 100%);
+  background: -ms-linear-gradient(top, #f6f6f6 5%, white 100%);
+  background: linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
+  background-color: #f6f6f6;
+}
+
+/* line 261, ../scss/styles.sass */
+.btnpage:active {
+  position: relative;
+  top: 1px;
+}
+
+/* Bouton Enregistrer de la gestion des temps */
+/* line 267, ../scss/styles.sass */
+.btnsave {
+  -moz-box-shadow: inset 0px 1px 0px 0px #f5978e;
+  -webkit-box-shadow: inset 0px 1px 0px 0px #f5978e;
+  box-shadow: inset 0px 1px 0px 0px #f5978e;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #f24537), color-stop(1, #c62d1f));
+  background: -moz-linear-gradient(top, #f24537 5%, #c62d1f 100%);
+  background: -webkit-linear-gradient(top, #f24537 5%, #c62d1f 100%);
+  background: -o-linear-gradient(top, #f24537 5%, #c62d1f 100%);
+  background: -ms-linear-gradient(top, #f24537 5%, #c62d1f 100%);
+  background: linear-gradient(to bottom, #f24537 5%, #c62d1f 100%);
+  background-color: #f24537;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  border: 1px solid #d02718;
+  display: inline-block;
+  cursor: pointer;
+  color: white;
+  font-family: arial;
+  font-size: 15px;
+  font-weight: bold;
+  padding: 6px 24px;
+  text-decoration: none;
+  text-shadow: 0px 1px 0px #810e05;
+}
+
+/* line 291, ../scss/styles.sass */
+.btnsave:hover {
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #c62d1f), color-stop(1, #f24537));
+  background: -moz-linear-gradient(top, #c62d1f 5%, #f24537 100%);
+  background: -webkit-linear-gradient(top, #c62d1f 5%, #f24537 100%);
+  background: -o-linear-gradient(top, #c62d1f 5%, #f24537 100%);
+  background: -ms-linear-gradient(top, #c62d1f 5%, #f24537 100%);
+  background: linear-gradient(to bottom, #c62d1f 5%, #f24537 100%);
+  background-color: #c62d1f;
+}
+
+/* line 299, ../scss/styles.sass */
+.btnsave:active {
+  position: relative;
+  top: 1px;
+}
+
+/* Bouton Saisie Automatique de la gestion des temps */
+/* Bouton Réinitialiser Création de compte */
+/* line 306, ../scss/styles.sass */
+.btnauto {
+  -moz-box-shadow: inset 0px 1px 0px 0px white;
+  -webkit-box-shadow: inset 0px 1px 0px 0px white;
+  box-shadow: inset 0px 1px 0px 0px white;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf));
+  background: -moz-linear-gradient(top, #ededed 5%, #dfdfdf 100%);
+  background: -webkit-linear-gradient(top, #ededed 5%, #dfdfdf 100%);
+  background: -o-linear-gradient(top, #ededed 5%, #dfdfdf 100%);
+  background: -ms-linear-gradient(top, #ededed 5%, #dfdfdf 100%);
+  background: linear-gradient(to bottom, #ededed 5%, #dfdfdf 100%);
+  background-color: #ededed;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  border: 1px solid gainsboro;
+  display: inline-block;
+  cursor: pointer;
+  color: #777777;
+  font-family: arial;
+  font-size: 15px;
+  font-weight: bold;
+  padding: 6px 24px;
+  text-decoration: none;
+  text-shadow: 0px 1px 0px white;
+}
+
+/* line 330, ../scss/styles.sass */
+.btnauto:hover {
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #dfdfdf), color-stop(1, #ededed));
+  background: -moz-linear-gradient(top, #dfdfdf 5%, #ededed 100%);
+  background: -webkit-linear-gradient(top, #dfdfdf 5%, #ededed 100%);
+  background: -o-linear-gradient(top, #dfdfdf 5%, #ededed 100%);
+  background: -ms-linear-gradient(top, #dfdfdf 5%, #ededed 100%);
+  background: linear-gradient(to bottom, #dfdfdf 5%, #ededed 100%);
+  background-color: #dfdfdf;
+}
+
+/* line 338, ../scss/styles.sass */
+.btnauto:active {
+  position: relative;
+  top: 1px;
+}
+
+/* Tableau de la page User Account */
+/* line 344, ../scss/styles.sass */
+.table_user_account {
+  margin: auto;
+}
+
+/* line 347, ../scss/styles.sass */
+.table_user_account input {
+  width: 190px;
+}
+
+/* Tableau de la page Change Password */
+/* line 350, ../scss/styles.sass */
+.table_change_password {
+  margin: auto;
+}
+
+/* Tableau de la page User List */
+/* line 354, ../scss/styles.sass */
+.table_user_list {
+  margin-left: auto;
+  margin-right: auto;
+  min-width: 900px;
+  border: medium solid cornflowerblue;
+  border-collapse: collapse;
+}
+
+/* line 361, ../scss/styles.sass */
+.table_user_list th {
+  font-family: monospace;
+  border: thin solid cornflowerblue;
+  width: 50%;
+  padding: 5px;
+  background-color: #d0e3fa;
+  background-image: url(sky.jpg);
+  text-align: center;
+}
+
+/* line 370, ../scss/styles.sass */
+.table_user_list td {
+  font-family: sans-serif;
+  border: thin solid cornflowerblue;
+  width: 50%;
+  padding: 5px;
+  text-align: center;
+  background-color: white;
+}
+
+/* Tableau de la page Work Time */
+/* line 379, ../scss/styles.sass */
+.table_work_time {
+  margin: auto;
+  width: 50%;
+  border: medium solid cornflowerblue;
+  border-collapse: collapse;
+}
+
+/* line 385, ../scss/styles.sass */
+.table_work_time th {
+  font-family: monospace;
+  border: thin solid cornflowerblue;
+  width: 50%;
+  padding: 5px;
+  background-color: #d0e3fa;
+  background-image: url(sky.jpg);
+  text-align: center;
+}
+
+/* line 394, ../scss/styles.sass */
+.table_work_time td {
+  font-family: sans-serif;
+  border: thin solid cornflowerblue;
+  width: 50%;
+  padding: 5px;
+  text-align: center;
+  background-color: white;
+}
+
+/* Tableau de la page Update User */
+/* line 403, ../scss/styles.sass */
+.table_update_user {
+  margin: auto;
+}
+
+/* line 406, ../scss/styles.sass */
+.table_update_user input {
+  width: 190px;
+}
+
+/* Tableau de la page Expense Frais */
+/* line 410, ../scss/styles.sass */
+.tabexpensealert {
+  color: red;
+}
+
+/* line 413, ../scss/styles.sass */
+.tabexpenseinfo {
+  color: blue;
+}
+
+/* Tableau de la page Expense Frais */
+/* line 417, ../scss/styles.sass */
+.table_display_expense {
+  margin-left: auto;
+  margin-right: auto;
+  min-width: 900px;
+  border: medium solid cornflowerblue;
+  border-collapse: collapse;
+}
+
+/* line 424, ../scss/styles.sass */
+.table_display_expense th {
+  font-family: monospace;
+  border: thin solid cornflowerblue;
+  width: 50%;
+  padding: 5px;
+  background-color: #d0e3fa;
+  background-image: url(sky.jpg);
+  text-align: center;
+}
+
+/* line 433, ../scss/styles.sass */
+.table_display_expense td {
+  font-family: sans-serif;
+  border: thin solid cornflowerblue;
+  width: 50%;
+  padding: 5px;
+  text-align: center;
+  background-color: white;
+}
+
+/* line 441, ../scss/styles.sass */
+#tab_expense {
+  min-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* line 446, ../scss/styles.sass */
+#tab_expense_date input {
+  min-width: 85px;
+  max-width: 85px;
+}
+
+/* line 450, ../scss/styles.sass */
+#tab_expense_item select {
+  max-width: 100px;
+}
+
+/* line 453, ../scss/styles.sass */
+#tab_expense_qte input {
+  text-align: center;
+  max-width: 50px;
+}
+
+/* line 457, ../scss/styles.sass */
+#tab_expense_amount input {
+  text-align: center;
+  max-width: 50px;
+}
+
+/* line 461, ../scss/styles.sass */
+#tab_expense_amountttc input {
+  text-align: center;
+  max-width: 50px;
+}
+
+/* line 465, ../scss/styles.sass */
+#tab_expense_amounttva input {
+  text-align: center;
+  max-width: 50px;
+}
+
+/* line 469, ../scss/styles.sass */
+#tab_expense_business select {
+  max-width: 75px;
+}
+
+/* line 472, ../scss/styles.sass */
+#tab_expense_comment input {
+  max-width: 200px;
+}
+
+/* line 475, ../scss/styles.sass */
+.lienconfig li {
+  display: inline;
+}
+
+/* line 478, ../scss/styles.sass */
+.sidebar-nav {
+  padding: 9px 0;
+}
+
+/* line 481, ../scss/styles.sass */
+.dropdown-menu .sub-menu {
+  left: 100%;
+  position: absolute;
+  top: 0;
+  visibility: hidden;
+  margin-top: -1px;
+}
+
+/* line 488, ../scss/styles.sass */
+.dropdown-menu li:hover .sub-menu {
+  visibility: visible;
+}
+
+/* line 491, ../scss/styles.sass */
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+/* line 494, ../scss/styles.sass */
+.nav-tabs .dropdown-menu, .nav-pills .dropdown-menu, .navbar .dropdown-menu {
+  margin-top: 0;
+}
+
+/* line 497, ../scss/styles.sass */
+.navbar .sub-menu:before {
+  border-bottom: 7px solid transparent;
+  border-left: none;
+  border-right: 7px solid rgba(0, 0, 0, 0.2);
+  border-top: 7px solid transparent;
+  left: -7px;
+  top: 10px;
+}
+
+/* line 504, ../scss/styles.sass */
+.navbar .sub-menu:after {
+  border-top: 6px solid transparent;
+  border-left: none;
+  border-right: 6px solid white;
+  border-bottom: 6px solid transparent;
+  left: 10px;
+  top: 11px;
+  left: -6px;
+}

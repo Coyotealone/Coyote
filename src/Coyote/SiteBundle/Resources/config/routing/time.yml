@@ -41,11 +41,3 @@ coyote_time_show:
 coyote_time_indexshow:
     pattern:    /indexshow
     defaults:   { _controller: "CoyoteSiteBundle:Time:indexshow"}
-
-coyote_time_print:
-    pattern:    /print
-    defaults:   { _controller: "CoyoteSiteBundle:Time:print"}
-
-coyote_time_indexprint:
-    pattern:    /indexprint
-    defaults:   { _controller: "CoyoteSiteBundle:Time:indexprint"}

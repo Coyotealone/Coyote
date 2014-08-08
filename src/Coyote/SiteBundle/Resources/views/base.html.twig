@@ -9,10 +9,14 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         
         {% block stylesheets %}
-            <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/style.css') }}" type="text/css" media="all" />
+            <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/styles.css') }}" type="text/css" media="all" />
             <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/bootstrap.css') }}" type="text/css" media="all" />
             <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/justified-nav.css') }}" type="text/css" media="all" />
             <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/signin.css') }}" type="text/css" media="all" />
+            <!--[if lt IE 9]>
+              <script src="{{ asset('bundles/coyotesite/js/html5shiv.min.js') }}"></script>
+              <script src="{{ asset('bundles/coyotesite/js/respond.min.js') }}"></script>
+            <![endif]-->
         {% endblock %}
         
         {% block javascripts %}
@@ -47,8 +51,6 @@
                         {% block link %}
                         {% endblock %}
                 </header>
-                {% block config %}
-                {% endblock %}
                 <section>
                     <article>
                         {% block content %}

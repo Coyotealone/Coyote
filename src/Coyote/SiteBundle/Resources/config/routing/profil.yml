@@ -1,6 +1,6 @@
 coyote_changepassword:
     pattern:    /changepassword
-    defaults:   { _controller: "CoyoteSiteBundle:Admin:changePassword" }
+    defaults:   { _controller: "CoyoteSiteBundle:ChangePassword:changePassword" }
     
 coyote_profile:
     pattern:    /

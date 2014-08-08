@@ -12,7 +12,7 @@ class FosUserAdmin extends Admin
     // setup the default sort column and order
     protected $datagridValues = array(
         '_sort_order' => 'ASC',
-        '_sort_by' => 'name'
+        '_sort_by' => 'id'
     );
 
     // Fields to be shown on create/edit forms
@@ -22,6 +22,7 @@ class FosUserAdmin extends Admin
         //$user->setConfirmationToken($tokenGenerator->generateToken());
         $salt = base_convert(sha1(uniqid(mt_rand(), true)), 16, 36);
         $formMapper
+            ->add('id')
             ->add('username')
             ->add('password')
             ->add('name')
@@ -47,6 +48,7 @@ class FosUserAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
+            ->add('id')
             ->add('username')
             ->add('email')
             ->add('enabled')
@@ -61,7 +63,8 @@ class FosUserAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->addIdentifier('username')
+            ->addIdentifier('id')
+            ->add('username')
             ->add('email')
             ->add('enabled')
             #->add('password')
