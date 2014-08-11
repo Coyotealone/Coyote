@@ -1,10 +1,16 @@
 {% extends 'CoyoteSiteBundle:Time:index.html.twig' %}
 
 {% block link %}
-
-{{ include('CoyoteSiteBundle::navigation.html.twig') }}
+    
+    <!--[if lt IE 9]>
+        {{ include('CoyoteSiteBundle::navigation_ie.html.twig') }}
+    <![endif]-->
+    <!--[if !IE]><!-->
+        {{ include('CoyoteSiteBundle::navigation.html.twig') }}
+	<!--<![endif]-->
 	
 {% endblock %}
+
 
 {% block content %}
 <p id="titreconfig">{{'Consultation des temps de présence'|trans}} </p>

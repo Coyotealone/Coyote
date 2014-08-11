@@ -82,12 +82,17 @@ class MainController extends Controller
         $session = $request->getSession();
 
         // get the error if any (works with forward and redirect -- see below)
-        if ($request->attributes->has(SecurityContextInterface::AUTHENTICATION_ERROR)) {
+        if ($request->attributes->has(SecurityContextInterface::AUTHENTICATION_ERROR)) 
+        {
             $error = $request->attributes->get(SecurityContextInterface::AUTHENTICATION_ERROR);
-        } elseif (null !== $session && $session->has(SecurityContextInterface::AUTHENTICATION_ERROR)) {
+        } 
+        elseif (null !== $session && $session->has(SecurityContextInterface::AUTHENTICATION_ERROR)) 
+        {
             $error = $session->get(SecurityContextInterface::AUTHENTICATION_ERROR);
             $session->remove(SecurityContextInterface::AUTHENTICATION_ERROR);
-        } else {
+        } 
+        else 
+        {
             $error = '';
         }
 
@@ -111,7 +116,7 @@ class MainController extends Controller
     
     protected function renderLogin(array $data)
     {
-        $template = sprintf('FOSUserBundle:Security:login.html.%s', $this->container->getParameter('fos_user.template.engine'));
+        $template = sprintf('CoyoteSiteBundle:Security:login.html.%s', $this->container->getParameter('fos_user.template.engine'));
 
         return $this->container->get('templating')->renderResponse($template, $data);
     }
@@ -147,59 +152,19 @@ class MainController extends Controller
         
         $locale = $request->getLocale();
         $lang = $this->get('request')->request->get('langue');
-        //$_locale = $lang;
         
         $session = new Session();
         $session->set('lang', null);
-        $session->set('lang', $_locale);
-        //return new Response($_locale);
-        /*if($lang == 'fr')
-        {
-            $request->setLocale('fr_FR');
-            $_locale = 'fr';
-            $session->set('lang', 'fr');
-        }
-        if($lang == 'en')
-        {
-            $request->setLocale('en_GB');
-            $_locale = 'en';
-            $session->set('lang', 'en');
-        }*/
-        
+        $session->set('lang', $_locale);        
         
         if($user == "anon.")
         {   
             return $this->redirect($this->generateUrl('coyote_main_login'));
-            //return $this->redirect($this->generateUrl('fos_user_security_login'));
         }
         else
         {
             return $this->redirect($this->generateUrl('coyote_main_menu', array('_locale' => $session->get('lang'))));
         }
     }
-
-    public function testAction()
-    {
-        $name = 'toto';
-        $facade = $this->get('ps_pdf.facade');
-        $response = new Response();
-        $this->render('CoyoteSiteBundle:Accueil:helloAction.pdf.twig', array("name" => $name), $response);
-    
-        $xml = $response->getContent();
-    
-        $content = $facade->render($xml);
-    
-        return new Response($content, 200, array('content-type' => 'application/pdf'));
-    
-        
-        $format = $this->get('request')->get('_format');
-        $format = 'pdf';
-        $name = 'toto';
-        return $this->render(sprintf('CoyoteSiteBundle:Accueil:helloAction.%s.twig', $format), array(
-            'name' => $name,
-        ));
-
-    }
-
 }
 

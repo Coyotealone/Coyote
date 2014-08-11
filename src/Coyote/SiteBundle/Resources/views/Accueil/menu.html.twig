@@ -9,9 +9,18 @@
 
 {% endblock %}
 
-{% block link %}
+{% block stylesheets %}
+   {{ include('CoyoteSiteBundle::css.html.twig') }}
+{% endblock %}
 
-    {{ include('CoyoteSiteBundle::navigation.html.twig') }}
+{% block link %}
+    
+    <!--[if lt IE 9]>
+        {{ include('CoyoteSiteBundle::navigation_ie.html.twig') }}
+    <![endif]-->
+    <!--[if !IE]><!-->
+        {{ include('CoyoteSiteBundle::navigation.html.twig') }}
+	<!--<![endif]-->
 	
 {% endblock %}
 
@@ -21,7 +30,7 @@
         
         <p class="lead">{{ 'Bienvenue sur le site PICHON'|trans }}
             <br><br>
-                       
+            Ajout d'une page pour exporter ses temps de présence par mois au format PDF.
         </p>
         
     </div>

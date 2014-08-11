@@ -6,43 +6,43 @@ CoyoteSiteBundle_contact:
     resource: "@CoyoteSiteBundle/Resources/config/routing/contact.yml"
     prefix:   /{_locale}
     requirements:
-        _locale: fr|en
+        _locale: fr|en|pl
     
 CoyoteSiteBundle_coyote_main:
     resource: "@CoyoteSiteBundle/Resources/config/routing/main.yml"
     prefix:   /{_locale}
     requirements:
-        _locale: fr|en
+        _locale: fr|en|pl
 
 CoyoteSiteBundle_coyote_time:
     resource: "@CoyoteSiteBundle/Resources/config/routing/time.yml"
     prefix:   /{_locale}/time
     requirements:
-        _locale: fr|en
+        _locale: fr|en|pl
 
 CoyoteSiteBundle_expense:
     resource: "@CoyoteSiteBundle/Resources/config/routing/expense.yml"
     prefix:   /{_locale}/expense
     requirements:
-        _locale: fr|en
+        _locale: fr|en|pl
 
 CoyoteSiteBundle_admin:
     resource: "@CoyoteSiteBundle/Resources/config/routing/admin.yml"
     prefix:   /{_locale}/admin
     requirements:
-        _locale: fr|en
+        _locale: fr|en|pl
         
 CoyoteSiteBundle_profil:
     resource: "@CoyoteSiteBundle/Resources/config/routing/profil.yml"
     prefix:   /{_locale}/profile
     requirements:
-        _locale: fr|en
+        _locale: fr|en|pl
 
 CoyoteSiteBundle_configurator:
     resource: "@CoyoteSiteBundle/Resources/config/routing/configurator.yml"
     prefix:   /{_locale}/configurator
     requirements:
-        _locale: fr|en
+        _locale: fr|en|pl
 
 CoyoteSiteBundle_schedule:
     resource: "@CoyoteSiteBundle/Resources/config/routing/schedule.yml"

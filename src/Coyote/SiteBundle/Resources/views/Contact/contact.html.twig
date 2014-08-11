@@ -1,14 +1,12 @@
 {% extends 'CoyoteSiteBundle:Time:index.html.twig' %}
 
 {% block javascripts %}
-        <script src="{{ asset('bundles/coyotesite/js/jquery-min.js') }}"/></script>
-        {% endblock %}
+    <script src="{{ asset('bundles/coyotesite/js/jquery-min.js') }}"/></script>
+{% endblock %}
 
 {% block content %}
-
     
     <form action="{{ path('contact_index') }}" method="post" {{ form_enctype(form) }}>
-
         
         {{ form_errors(form.email) }}
         {{ form_widget(form.email, { 'attr':{'placeholder': 'Email' }}) }}
@@ -27,8 +25,6 @@
         <input type="submit" value="Envoyez"/>
 
     </form>
-
-
 
     {#<form action="{{ path('contact_index') }}" method="post" >
         {{form(form)}}

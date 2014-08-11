@@ -1,4 +1,4 @@
-{% extends 'CoyoteSiteBundle::base.html.twig' %}
+{% extends 'CoyoteSiteBundle::base_mobile.html.twig' %}
 
 {% block language %}
     <div id="choisir_langue">{{ 'Choisissez votre pays'|trans}} :
@@ -18,21 +18,19 @@
    {{ include('CoyoteSiteBundle::css.html.twig') }}
 {% endblock %}
 
-
 {% block content %}
         
-        {% for type, messages in app.session.flashbag.all() %}
-            {% for message in messages %}
-                <div class="flash-{{ type }}">
-                    {{ message }}
-                </div>
-            {% endfor %}
+    {% for type, messages in app.session.flashbag.all() %}
+        {% for message in messages %}
+            <div class="flash-{{ type }}">
+                {{ message }}
+            </div>
         {% endfor %}
+    {% endfor %}
 
-        <div>
-            {% block fos_user_content %}
-            {% endblock fos_user_content %}
-        </div>
-        
+    <div>
+        {% block fos_user_content %}
+        {% endblock fos_user_content %}
+    </div>
         
 {% endblock %}

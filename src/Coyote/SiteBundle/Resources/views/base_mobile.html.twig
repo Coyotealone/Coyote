@@ -3,11 +3,10 @@
     <head>
         <title>
             {% block title %}
-                Pichon - WebSite
+                Pichon - WebSite - Mobile
             {% endblock %}
         </title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        
         {% block stylesheets %}
             <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/styles.css') }}" type="text/css" media="all" />
             <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/bootstrap.css') }}" type="text/css" media="all" />
@@ -30,8 +29,7 @@
                 <header>
                     <div id="lien">
                         <a href="{{ path('accueil') }}"><img src="{{ asset('bundles/coyotesite/images/logo1.png') }}" alt="PICHON" id="logo"/></a>
-                        {#<a href="http://www.pichonindustries.fr" class="lien">{{'Site Pichon'|trans}}</a>
-                        <a href="{{ path('accueil') }}" class="lien">{{'Contact'|trans}}</a>#}
+                        
                     </div>
                     <nav>
                         {% block language %}

@@ -1,11 +1,6 @@
-{% extends "CoyoteSiteBundle::layout.html.twig" %}
+{% extends "CoyoteSiteBundle::layout_mobile.html.twig" %}
 
-{% block link %}
-    
-    
-        {{ include('CoyoteSiteBundle::navigation_login.html.twig') }}
-	
-{% endblock %}
+
 
 {% block fos_user_content %}
 {% if error %}
@@ -15,26 +10,25 @@
 <form action="{{ path("fos_user_security_check") }}" method="post" role="form">
     <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
 
-    <div class="table-responsive">
-    <table class="table" style="max-width:500px; margin:auto">
+    <table class="table">
         <tr>
-            <th><label for="username">{{ 'Identifiant'|trans }} :</label></th>
+            <th><label for="username">{{ 'Identifiant :'|trans }}</label></th>
             <td><input type="text" id="username" name="_username" value="{{ last_username }}" required="required" /></td>
         </tr>
         <tr>
-            <th><label for="password">{{ 'Mot de passe'|trans }} :</label></th>
+            <th><label for="password">{{ 'Mot de passe :'|trans }}</label></th>
             <td><input type="password" id="password" name="_password" required="required" /></td>
         </tr>
         
     </table>
-    </div>
 
     <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
     <label for="remember_me">{{ 'Se souvenir de moi'|trans }}</label><br>
     
-    <button class="btn btn-danger btn-default" type="submit" id="_submit" name="_submit">{{ 'Connexion'|trans }}</button>
+    <button class="btn btn-danger btn-default btn-block" type="submit" id="_submit" name="_submit">{{ 'Connexion'|trans }}</button>
 </form>
 
-
-    <a class="btn btn-primary btn-default" href="{{ path('fos_user_resetting_request') }}">{{"Mot de passe oublié"|trans}} ?</a>
+<div>
+    <a class="btn btn-primary btn-default btn-block" href="{{ path('fos_user_resetting_request') }}">{{"Mot de passe oublié"|trans}} ?</a>
+</div>
 {% endblock fos_user_content %}

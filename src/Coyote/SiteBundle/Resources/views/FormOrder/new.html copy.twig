@@ -10,8 +10,13 @@
 {% endblock %}
 
 {% block link %}
-
-{{ include('CoyoteSiteBundle::navigation.html.twig') }}
+    
+    <!--[if lt IE 9]>
+        {{ include('CoyoteSiteBundle::navigation_ie.html.twig') }}
+    <![endif]-->
+    <!--[if !IE]><!-->
+        {{ include('CoyoteSiteBundle::navigation.html.twig') }}
+	<!--<![endif]-->
 	
 {% endblock %}
 
