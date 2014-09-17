@@ -915,13 +915,15 @@ class TimeController extends Controller
             $data = $em->getRepository('CoyoteSiteBundle:Schedule')->findTime($mois.'/'.$annee, $user);
             $timemonth = $em->getRepository('CoyoteSiteBundle:Schedule')->findTimeMonth($mois.'/'.$annee, $user);
             $absence = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsenceMonth($mois.'/'.$annee, $user);
+            $daymonth = $em->getRepository('CoyoteSiteBundle:Schedule')->findDayMonth($mois.'/'.$annee, $user);
             $absencerttyear = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsenceYear($mois, $annee, $user, "RTT");
             $absencecayear = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsenceYear($mois, $annee, $user, "CA");
             $absencecpyear = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsenceYear($mois, $annee, $user, "CP");
+            $dayyear = $em->getRepository('CoyoteSiteBundle:Schedule')->findDayYear($mois, $annee, $user);
             $absence = explode(';', $absence);
             if($this->get('security.context')->isGranted('ROLE_CADRE'))
             {
-                $page = $this->render('CoyoteSiteBundle:Time:showfm.html.twig', array(
+                $page = $this->render('CoyoteSiteBundle:Time:printfm.html.twig', array(
                     'data' => $data,
                     'rtt' => $absence[1],
                     'ca' => $absence[2],
@@ -929,6 +931,8 @@ class TimeController extends Controller
                     'rttyear' => $absencerttyear,
                     'cpyear' => $absencecpyear,
                     'cayear' => $absencecayear,
+                    'dayyear' => $dayyear,
+                    'daymonth' => $daymonth,
                     ));
             }
             else
