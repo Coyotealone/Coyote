@@ -28,8 +28,9 @@ class RegistrationController extends Controller
 {
     public function registerAction()
     {
-        if($this->get('security.context')->isGranted('ROLE_SUPER_ADMIN'))
-        {
+        //if($this->get('security.context')->isGranted('ROLE_SUPER_ADMIN'))
+        //{
+
             $form = $this->container->get('fos_user.registration.form');
             $formHandler = $this->container->get('fos_user.registration.form.handler');
             $confirmationEnabled = $this->container->getParameter('fos_user.registration.confirmation.enabled');
@@ -63,9 +64,9 @@ class RegistrationController extends Controller
                 'form' => $form->createView(),
                 'theme' => $this->container->getParameter('fos_user.template.theme'),
             ));
-        }
+        //}
         
-        else
-            return $this->redirect($this->generateUrl('accueil'));
+        //else
+        //    return $this->redirect($this->generateUrl('accueil'));
     }
 }

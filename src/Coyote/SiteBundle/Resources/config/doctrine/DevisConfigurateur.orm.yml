@@ -1,0 +1,20 @@
+Coyote\SiteBundle\Entity\DevisConfigurateur:
+    type: entity
+    table: devis_configurateur
+    repositoryClass: Coyote\SiteBundle\Entity\DevisConfigurateurRepository
+    id:
+        id:
+            type: integer
+            unique: true
+            generator: { strategy: AUTO }
+    fields:
+        code:
+            type: integer
+            lenght: 11
+        qte:
+            type: integer
+            lenght: 11
+        no_devis:
+            type: integer(11)
+        table:
+            type: string(255)

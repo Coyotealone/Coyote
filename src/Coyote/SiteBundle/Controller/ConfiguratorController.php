@@ -14,6 +14,7 @@ use Coyote\SiteBundle\Entity\Schedule;
 use Coyote\SiteBundle\Entity\Timetable;
 use Coyote\SiteBundle\Entity\UserInfo;
 use Coyote\SiteBundle\Entity\User;
+use Coyote\SiteBundle\Entity\DevisConfigurateur;
 
 /**
  * Configurator controller.
@@ -24,7 +25,12 @@ class ConfiguratorController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();        
-        $dataconfig = $em->getRepository('CoyoteSiteBundle:ConfiguringTankers')->findByLink('U00',array('id' => 'asc'));
+        //$dataconfig = $em->getRepository('CoyoteSiteBundle:ConfiguringTankers')->findByLink('U00',array('id' => 'asc'));
+        
+        //$dataconfig = $em->getRepository('CoyoteSiteBundle:Cuves')->findAll();
+        //$suppcuves = $em->getRepository('CoyoteSiteBundle:Articles')->findByType('Supplements Cuves');
+        
+        $dataconfig = $em->getRepository('CoyoteSiteBundle:AllItems')->findAll();
         return $this->render('CoyoteSiteBundle:Config:pageun.html.twig', array('data' => $dataconfig));
     }
 
@@ -36,14 +42,91 @@ class ConfiguratorController extends Controller
         $request = Request::createFromGlobals();
         $data = $request->request->all();
         
-        $id = $data['cuve'];
-        $session->set('configtonne', $id);
-        $id0 = $id.'0';
+        $code_cuve = $data['cuve'];
+        if(isset($data['supp_cuves']))
+            $code_supp_cuve = $data['supp_cuves'];
         
-        $config = $em->getRepository('CoyoteSiteBundle:ConfiguringTankers')->findLink($id0);
-        $commun = $em->getRepository('CoyoteSiteBundle:ConfiguringTankers')->findLinkCommun($id0);
-        $configcommun = $em->getRepository('CoyoteSiteBundle:ConfiguringTankers')->findLink($commun[0]['comment']);
-        return $this->render('CoyoteSiteBundle:Config:pagedeux.html.twig', array('data' => $config, 'commun' => $configcommun));
+        //$res_no_devis = $em->getRepository('CoyoteSiteBundle:DevisConfigurateur')->findNoDevis();
+        
+        //$no_devis = $res_no_devis['no_devis'] + 1;
+        
+        //$session->set('no_devis', $no_devis);
+        
+        //$this->devissave($code_cuve, 1);
+        
+        //$id0 = $id.'0';
+        
+        //$config = $em->getRepository('CoyoteSiteBundle:ConfiguringTankers')->findLink($id0);
+        //$commun = $em->getRepository('CoyoteSiteBundle:ConfiguringTankers')->findLinkCommun($id0);
+        //$configcommun = $em->getRepository('CoyoteSiteBundle:ConfiguringTankers')->findLink($commun[0]['comment']);
+        
+        //$portes = $em->getRepository('CoyoteSiteBundle:Articles')->findByType('Portes montées sur charnières');
+        //$indicateurs = $em->getRepository('CoyoteSiteBundle:Articles')->findByType('Indicateurs - Voyants');
+        //$tuyaux = $em->getRepository('CoyoteSiteBundle:Articles')->findByType('Supports Tuyaux');
+        //$eclairage = $em->getRepository('CoyoteSiteBundle:Articles')->findByType('Eclairage - Signalisation');
+        
+        $portes = $em->getRepository('CoyoteSiteBundle:AllItems')->findByType('Portes montées sur charnières');
+        $indicateurs = $em->getRepository('CoyoteSiteBundle:AllItems')->findByType('Indicateurs - Voyants');
+        $tuyaux = $em->getRepository('CoyoteSiteBundle:AllItems')->findByType('Supports Tuyaux');
+        $eclairage = $em->getRepository('CoyoteSiteBundle:AllItems')->findByType('Eclairage - Signalisation');
+        
+        return $this->render('CoyoteSiteBundle:Config:pagedeux.html.twig', array('porte' => $portes, 'indic' => $indicateurs, 'tuyaux' => $tuyaux, 'eclairage' => $eclairage));
+    
+        //return $this->render('CoyoteSiteBundle:Config:pagedeux.html.twig', array('data' => $config, 'commun' => $configcommun));
+    }
+    
+    public function devissave($code, $qte)
+    {
+        $doctrine = $this->getDoctrine();
+        $em = $doctrine->getManager();
+        $session = new Session();
+        $devis = new DevisConfigurateur();
+        $devis->setCode($code);
+        $devis->setQte($qte);
+        $devis->setNoDevis($session->get('no_devis'));
+        $em->persist($devis);
+        $em->flush();
+    }
+    
+    public function pageneufAction()
+    {
+        $doctrine = $this->getDoctrine();
+        $em = $doctrine->getManager();
+        $session = new Session();
+        $request = Request::createFromGlobals();
+        $data = $request->request->all();
+        
+        /*if(isset($data['porte']))
+        {
+            $porte = $data['porte'];
+            $this->devissave($porte, 1);
+        }
+        
+        if(isset($data['indic']))
+        {
+            $indic = $data['indic'];
+            $this->devissave($indic, 1);
+        }
+        
+        if(isset($data['tuyaux']))
+        {
+            $tuyaux = $data['tuyaux'];
+            $this->devissave($tuyaux, 1);
+        }
+            
+        if(isset($data['eclairage']))
+        {
+            $eclairage = $data['eclairage'];
+            $this->devissave($eclairage, 1);
+        }*/
+        
+        //$data = $em->getRepository('CoyoteSiteBundle:DevisConfigurateur')->findByNoDevis(2);
+        
+        $cuves = $em->getRepository('CoyoteSiteBundle:Cuves')->findByCode(500119);
+        $articles = $em->getRepository('CoyoteSiteBundle:Articles')->findByCode(array(2842130,500122,500047,500018));
+        
+        return $this->render('CoyoteSiteBundle:Config:pageneuf.html.twig', array('cuves' => $cuves, 'articles' => $articles)); 
+
     }
 
     public function pagetroisAction()
@@ -197,17 +280,7 @@ class ConfiguratorController extends Controller
             return $this->render('CoyoteSiteBundle:Config:pagehuit.html.twig', array('data' => $config, 'commun0' => $configcommun[0], 'commun1' => $configcommun[1]));
     }
     
-    public function pageneufAction()
-    {
-        $doctrine = $this->getDoctrine();
-        $em = $doctrine->getManager();
-        $session = new Session();
-        $request = Request::createFromGlobals();
-        $data = $request->request->all();
-        
-        return $this->render('CoyoteSiteBundle:Config:pageneuf.html.twig'); 
-
-    }
+    
 
 
 

@@ -1,0 +1,25 @@
+Coyote\SiteBundle\Entity\Enfouisseurs:
+    type: entity
+    table: enfouisseurs
+    repositoryClass: Coyote\SiteBundle\Entity\EnfouisseursRepository
+    id:
+        id:
+            type: integer
+            unique: true
+            generator: { strategy: AUTO }
+    fields:
+        code:
+            type: string(11)
+        designation:
+            type: string
+            lenght: 255
+        largeur_travail:
+            type: string(255)
+        dents:
+            type: string(255)
+        prix_ht:
+            type: integer(11)
+        type:
+            type: string(255)
+        categorie:
+            type: string(255)

@@ -1,0 +1,22 @@
+Coyote\SiteBundle\Entity\Articles:
+    type: entity
+    table: articles
+    repositoryClass: Coyote\SiteBundle\Entity\ArticlesRepository
+    id:
+        id:
+            type: integer
+            unique: true
+            generator: { strategy: AUTO }
+    fields:
+        code:
+            type: integer
+            lenght: 11
+        designation:
+            type: string
+            lenght: 255
+        prix_ht:
+            type: string(255)
+        type:
+            type: string(255)
+        categorie:
+            type: string(255)

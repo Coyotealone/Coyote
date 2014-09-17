@@ -47,7 +47,7 @@ CoyoteSiteBundle_configurator:
 CoyoteSiteBundle_schedule:
     resource: "@CoyoteSiteBundle/Resources/config/routing/schedule.yml"
     prefix:   /schedule
-        
+
 fos_user_resetting:
     resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
     prefix: /resetting

@@ -1,0 +1,31 @@
+Coyote\SiteBundle\Entity\Essieux:
+    type: entity
+    table: essieux
+    repositoryClass: Coyote\SiteBundle\Entity\EssieuxRepository
+    id:
+        id:
+            type: integer
+            unique: true
+            generator: { strategy: AUTO }
+    fields:
+        code:
+            type: integer
+            lenght: 11
+        designation:
+            type: string
+            lenght: 255
+        roues:
+            type: string(255)
+        largeur_hors_tout:
+            type: string
+            lenght: 255
+        prix_ht:
+            type: integer(11)
+        taille_frein:
+            type: string(255)
+        modele:
+            type: string(255)
+        type:
+            type: string(255)
+        categorie:
+            type: string(255)

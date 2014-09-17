@@ -2,6 +2,11 @@ parameters:
 #    coyote_site.example.class: Coyote\SiteBundle\Example
 
 services:
+    coyote_site.registration.form.type:
+        class: Coyote\SiteBundle\Form\RegistrationFormType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: coyote_site_registration }
 #     coyote.site.admin.userinfo:
 #         class: Coyote\SiteBundle\Admin\UserInfoAdmin
 #         tags:

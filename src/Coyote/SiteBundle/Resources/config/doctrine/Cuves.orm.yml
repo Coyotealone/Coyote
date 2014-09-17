@@ -1,0 +1,32 @@
+Coyote\SiteBundle\Entity\Cuves:
+    type: entity
+    table: cuves
+    repositoryClass: Coyote\SiteBundle\Entity\CuvesRepository
+    id:
+        id:
+            type: integer
+            unique: true
+            generator: { strategy: AUTO }
+    fields:
+        code:
+            type: integer
+            lenght: 11
+        designation:
+            type: string
+            lenght: 255
+        dia_cuve:
+            type: integer
+            lenght: 11
+        ep_cuve:
+            type: string
+            lenght: 255
+        ep_chassis:
+            type: string(255)
+        long_cuve:
+            type: string(255)
+        prix_ht:
+            type: integer(11)
+        type:
+            type: string(255)
+        categorie:
+            type: string(255)

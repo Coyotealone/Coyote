@@ -1,0 +1,43 @@
+Coyote\SiteBundle\Entity\Roues:
+    type: entity
+    table: roues
+    repositoryClass: Coyote\SiteBundle\Entity\RouesRepository
+    id:
+        id:
+            type: integer
+            unique: true
+            generator: { strategy: AUTO }
+    fields:
+        code:
+            type: integer
+            lenght: 11
+        designation:
+            type: string
+            lenght: 255
+        indice_charge:
+            type: string
+            lenght: 255
+        percage_roue:
+            type: integer
+            lenght: 11
+        deport_jante:
+            type: integer(11)
+        diametre:
+            type: integer(11)
+        largeur:
+            type: integer
+            lenght: 11
+        pression:
+            type: float
+        charge_max_25:
+            type: integer
+            lenght: 11
+        charge_max_40:
+            type: integer
+            lenght: 11
+        prix_ht:
+            type: integer(11)
+        type:
+            type: string(255)
+        categorie:
+            type: string(255)

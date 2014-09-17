@@ -2,4 +2,31 @@
 
 {% block content %}
     <p id="titreconfig">Fin de la configuration</p>
+    
+    <table class='table' id='tab_expense'>
+            <tr>
+                <th>Code</th>
+                <th>Désignation</th>
+                <th>Quantité</th>
+                <th>Tarif HT</th>
+            </tr>
+        {% for entity in cuves %}
+            <tr>
+                <td>{{ entity.code }}</td>
+                <td>{{ entity.designation }} </td>
+                <td></td>
+                <td>{{ entity.prixht }} €</td>
+            </tr>
+        {% endfor %}
+        {% for entity in articles %}
+            <tr>
+                <td>{{ entity.code }}</td>
+                <td>{{ entity.designation }} </td>
+                <td></td>
+                <td>{{ entity.prixht }} €</td>
+            </tr>
+        {% endfor %}
+        
+        </table>
+    
 {% endblock %}

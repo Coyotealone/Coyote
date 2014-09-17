@@ -334,4 +334,76 @@ class ScheduleRepository extends EntityRepository
             $result .= "Temps de travail de la semaine : ".$this->formatTime($timeres).";\r\n";
         return $result;
     }
+    
+    public function findDayMonth($date, $user)
+    {
+        $qb = $this->_em->createQueryBuilder();
+        $qb->select('t.id')
+           ->from('CoyoteSiteBundle:Timetable', 't')
+           ->where('t.date LIKE :date')
+           ->setParameters(array('date' => '%'.$date.'%'));
+        
+        $timetable_id =  $qb->getQuery()
+                            ->getResult();
+        $nbjour = count($timetable_id);
+                
+        $qb = $this->_em->createQueryBuilder();
+        $qb->select('s.working_hours')
+           ->from('CoyoteSiteBundle:Schedule', 's')
+           ->where('s.user = :user and s.working_hours = 1 and s.timetable BETWEEN :time1 and :time2')
+           ->setParameters(array(
+                'time1' => $timetable_id[0]['id'], 
+                'time2' => $timetable_id[$nbjour-1]['id'], 
+                'user' => $user,
+                ));
+        
+        $res =  $qb->getQuery()
+                   ->getResult();
+
+        return count($res);
+    }
+    
+    public function findDayYear($mois, $annee, $user)
+    {
+        if($mois >= "01" && $mois <= "05")
+        {   
+            $annee--;
+            $datedeb = '01/06/'.$annee;
+            $annee ++;
+            $datefin = '31/05/'.$annee;
+        }
+        if($mois >= "06" && $mois <= "12")
+        {
+            $datedeb = '01/06/'.$annee;
+            $annee++;
+            $datefin = '31/05/'.$annee;
+        }
+        
+        $qb = $this->_em->createQueryBuilder();
+        $qb->select('t')
+           ->from('CoyoteSiteBundle:Timetable', 't')
+           ->where('t.date = :date')
+           ->setParameters(array('date' => $datedeb));        
+        $firstiddate =  $qb->getQuery()
+                           ->getResult(); //Id de tous les jours des mois
+        
+        $qb = $this->_em->createQueryBuilder();
+        $qb->select('t')
+           ->from('CoyoteSiteBundle:Timetable', 't')
+           ->where('t.date = :date')
+           ->setParameters(array('date' => $datefin));        
+        $lastiddate =  $qb->getQuery()
+                          ->getResult(); //Id de tous les jours des mois
+        
+        $qb = $this->_em->createQueryBuilder();
+        $qb->select('s.id')
+           ->from('CoyoteSiteBundle:Schedule', 's')
+           ->where('s.working_hours = :value and s.user = :user and s.timetable BETWEEN :datedeb and :datefin')
+           ->setParameters(array('datedeb' => $firstiddate, 'datefin' => $lastiddate, 'value' => 1, 'user' => $user));        
+        $res = $qb->getQuery()
+                  ->getResult(); //Id de tous les jours des mois
+        
+        return count($res);
+    }
+
 }

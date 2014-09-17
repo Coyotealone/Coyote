@@ -1,0 +1,21 @@
+Coyote\SiteBundle\Entity\SupplementVitesse:
+    type: entity
+    table: supplement_vitesse
+    repositoryClass: Coyote\SiteBundle\Entity\SupplementVitesseRepository
+    id:
+        id:
+            type: integer
+            unique: true
+            generator: { strategy: AUTO }
+    fields:
+        code:
+            type: integer
+            lenght: 11
+        designation:
+            type: string
+            lenght: 255
+        PTAC:
+            type: string
+            lenght: 255
+        prix_ht:
+            type: integer(11)

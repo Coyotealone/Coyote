@@ -13,3 +13,7 @@ coyote_resetting:
 coyote_profile_edit:
     pattern:    /edit
     defaults:   { _controller: "CoyoteSiteBundle:Admin:profiledit"}
+
+coyote_register:
+    pattern:    /register
+    defaults:   { _controller: "CoyoteSiteBundle:Registration:register"}
