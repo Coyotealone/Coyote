@@ -75,7 +75,7 @@ Récapitulatif du mois: Podsumowanie miesiąca
 "Nombre d'heure travaillé dans la semaine": Liczba godzin przepracowanych w tygodniu
 Temps total travaillé dans le mois: Łączny czas pracy w ciągu miesiąca
 Nombre de RTT utilisé dans le mois / année: Ilość RTT wykorzystanego w miesiącu/ roku
-Nombre de congés payés (CP) utilisé dans le mois /année: Ilość płatnego urlopu (CP) wykorzystanego w miesiącu / roku
+'Nombre de congés payés (CP) utilisé dans le mois / année': Ilość płatnego urlopu (CP) wykorzystanego w miesiącu / roku
 "Nombre de congés d'anciennetés (CA) utilisé dans le mois / année": Ilość urlopu stażowego (CA ) wykorzystanego w miesiącu / roku
 Jour férié: Święto
 Weekend: Weekend
@@ -89,6 +89,7 @@ samedi: sobota
 dimanche: niedziela
 Enregistrer: Zapisz
 Consultation des temps de présence: Konsultacje w czasie pracy
+Jour travaillé dans le mois / année: Dzień pracy w miesiącu / roku
 
 # Page Profil #
 "En cas de problème de mot de passe, merci de contacter votre administrateur ou d'envoyer un mail dans l'onglet Contact": Dziękujemy za kontakt z administratorem. Jeśli masz problem z hasłem, wyślij e-mail z zakładki Kontakt.
