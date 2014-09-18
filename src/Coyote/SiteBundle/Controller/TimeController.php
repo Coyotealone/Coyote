@@ -26,7 +26,9 @@ class TimeController extends Controller
 {   
     public function indexAction()
     {
-        $session = new Session();
+        //$session = new Session();
+        $request = $this->getRequest();
+        $session = $request->getSession();
         $user = $this->get('security.context')->getToken()->getUser();
         if($this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED') == false) 
         {
@@ -47,7 +49,9 @@ class TimeController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->get('security.context')->getToken()->getUser();
-        $session = new Session();
+        $request = $this->getRequest();
+        $session = $request->getSession();
+        //$session = new Session();
         if($user == "anon.")
             return $this->redirect($this->generateUrl('fos_user_security_login'));
         else
@@ -97,7 +101,9 @@ class TimeController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->get('security.context')->getToken()->getUser();
-        $session = new Session();
+        $request = $this->getRequest();
+        $session = $request->getSession();
+        //$session = new Session();
         if($user == "anon.")
             return $this->redirect($this->generateUrl('fos_user_security_login'));
         else
@@ -150,7 +156,9 @@ class TimeController extends Controller
     public function worklessAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $session = new Session();
+        $request = $this->getRequest();
+        $session = $request->getSession();
+        //$session = new Session();
         //$session->start();
         $no_week = $session->get('no_week');
         $year = $session->get('year');
@@ -169,7 +177,9 @@ class TimeController extends Controller
     public function workmoreAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $session = new Session();
+        $request = $this->getRequest();
+        $session = $request->getSession();
+        //$session = new Session();
         //$session->start();
         $no_week = $session->get('no_week');
         $year = $session->get('year');
@@ -192,7 +202,10 @@ class TimeController extends Controller
     public function worklessfmAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $session = new Session();
+        $request = $this->getRequest();
+        $session = $request->getSession();
+        
+        //$session = new Session();
         //$session->start();
         $no_week = $session->get('no_week');
         $year = $session->get('year');
@@ -211,7 +224,9 @@ class TimeController extends Controller
     public function workmorefmAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $session = new Session();
+        $request = $this->getRequest();
+        $session = $request->getSession();
+        //$session = new Session();
         //$session->start();
         $no_week = $session->get('no_week');
         $year = $session->get('year');
@@ -237,7 +252,9 @@ class TimeController extends Controller
             return $this->redirect($this->generateUrl('fos_user_security_login'));
         else
         {
-            $session = new Session();
+            $request = $this->getRequest();
+            $session = $request->getSession();
+            //$session = new Session();
             
             $doctrine = $this->getDoctrine();
             $em = $doctrine->getManager();
@@ -590,7 +607,9 @@ class TimeController extends Controller
             return $this->redirect($this->generateUrl('fos_user_security_login'));
         else
         {
-            $session = new Session();
+            $request = $this->getRequest();
+            $session = $request->getSession();
+            //$session = new Session();
             
             $doctrine = $this->getDoctrine();
             $em = $doctrine->getManager();
@@ -809,7 +828,9 @@ class TimeController extends Controller
     
     public function showAction()
     {
-        $session = new Session();
+        $request = $this->getRequest();
+        $session = $request->getSession();
+        //$session = new Session();
         $doctrine = $this->getDoctrine();
         $em = $doctrine->getManager();
         $request = Request::createFromGlobals();
@@ -841,10 +862,10 @@ class TimeController extends Controller
             $data = $em->getRepository('CoyoteSiteBundle:Schedule')->findTime($mois.'/'.$annee, $user);
             $timemonth = $em->getRepository('CoyoteSiteBundle:Schedule')->findTimeMonth($mois.'/'.$annee, $user);
             $absence = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsenceMonth($mois.'/'.$annee, $user);
+            $absencerttyear = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsenceYear($mois, $annee, $user, "RTT");
+            $absencecayear = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsenceYear($mois, $annee, $user, "CA");
+            $absencecpyear = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsenceYear($mois, $annee, $user, "Congés payés");
             $daymonth = $em->getRepository('CoyoteSiteBundle:Schedule')->findDayMonth($mois.'/'.$annee, $user);
-            $absencerttyear = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsenceYear($mois, $annee, $user, "rtt");
-            $absencecayear = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsenceYear($mois, $annee, $user, "ca");
-            $absencecpyear = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsenceYear($mois, $annee, $user, "cp");
             $dayyear = $em->getRepository('CoyoteSiteBundle:Schedule')->findDayYear($mois, $annee, $user);
             $absence = explode(';', $absence);
             if($this->get('security.context')->isGranted('ROLE_CADRE'))
@@ -856,8 +877,8 @@ class TimeController extends Controller
                     'rttyear' => $absencerttyear,
                     'cpyear' => $absencecpyear,
                     'cayear' => $absencecayear,
-                    'daymonth' => $daymonth,
                     'dayyear' => $dayyear,
+                    'daymonth' => $daymonth,
                     ));
             else
                 return $this->render('CoyoteSiteBundle:Time:show.html.twig', array(
@@ -881,7 +902,9 @@ class TimeController extends Controller
     
     public function printAction()
     {
-        $session = new Session();
+        $request = $this->getRequest();
+        $session = $request->getSession();
+        //$session = new Session();
         $doctrine = $this->getDoctrine();
         $em = $doctrine->getManager();
         $request = Request::createFromGlobals();
@@ -915,10 +938,10 @@ class TimeController extends Controller
             $data = $em->getRepository('CoyoteSiteBundle:Schedule')->findTime($mois.'/'.$annee, $user);
             $timemonth = $em->getRepository('CoyoteSiteBundle:Schedule')->findTimeMonth($mois.'/'.$annee, $user);
             $absence = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsenceMonth($mois.'/'.$annee, $user);
-            $daymonth = $em->getRepository('CoyoteSiteBundle:Schedule')->findDayMonth($mois.'/'.$annee, $user);
             $absencerttyear = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsenceYear($mois, $annee, $user, "RTT");
             $absencecayear = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsenceYear($mois, $annee, $user, "CA");
-            $absencecpyear = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsenceYear($mois, $annee, $user, "CP");
+            $absencecpyear = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsenceYear($mois, $annee, $user, "Congés payés");
+            $daymonth = $em->getRepository('CoyoteSiteBundle:Schedule')->findDayMonth($mois.'/'.$annee, $user);
             $dayyear = $em->getRepository('CoyoteSiteBundle:Schedule')->findDayYear($mois, $annee, $user);
             $absence = explode(';', $absence);
             if($this->get('security.context')->isGranted('ROLE_CADRE'))
