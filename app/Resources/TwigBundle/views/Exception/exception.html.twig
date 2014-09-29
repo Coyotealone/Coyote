@@ -8,56 +8,17 @@
 {% endblock %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/style.css') }}" type="text/css" media="all" />
-    <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/bootstrap.css') }}" type="text/css" media="all" />
-    <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/justified-nav.css') }}" type="text/css" media="all" />
-    <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/signin.css') }}" type="text/css" media="all" />
+   {{ include('CoyoteSiteBundle::css.html.twig') }}
 {% endblock %}
 
 {% block link %}
-<nav class="navbar navbar-default" role="navigation">
-  <div class="container-fluid">
-	<ul class="nav navbar-nav">
-		<li class="active"><a href="{{ path('accueil') }}">{{'Accueil'|trans}}</a></li>
-		<li id="frais" class="dropdown">
-          <a href="{{ path('coyote_time_index') }}" class="dropdown-toggle" data-toggle="dropdown">{{'Présence'|trans}}<b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            <li><a href="{{ path('coyote_time_index') }}">{{'Saisie'|trans}}</a></li>
-            <li><a href="{{ path('coyote_time_show') }}">{{'Consultation'|trans}}</a></li>
-          </ul>
-        </li>
-        <li id="frais" class="dropdown">
-          <a href="{{ path('coyote_expense_index') }}" class="dropdown-toggle" data-toggle="dropdown">{{'Note de Frais'|trans}}<b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            <li><a href="{{ path('coyote_expense_index') }}">{{'Index'|trans}}</a></li>
-            <li><a href="{{ path('coyote_expense_create') }}">{{'Saisie'|trans}}</a></li>
-            <li><a href="{{ path('coyote_expense_indexshow') }}">{{'Consultation'|trans}}</a></li>
-          </ul>
-        </li>
-        <li id="profil" class="dropdown">
-          <a href="{{ path('fos_user_profile_show') }}" class="dropdown-toggle" data-toggle="dropdown">{{'Profil'|trans}}<b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            <li><a href="{{ path('fos_user_profile_show') }}">{{'Information Profil'|trans}}</a></li>
-            <li><a href="{{ path('coyote_changepassword') }}">{{'Changement de mot de passe'|trans}}</a></li>
-          </ul>
-        {% if app.session.get('username') == "PROVINI Anthony" %}
-        </li>
-        <li id="config" class="dropdown">
-          <a href="{{ path('coyote_configurator') }}" class="dropdown-toggle" data-toggle="dropdown">{{'Configurateur'|trans}}<b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            <li><a href="{{ path('coyote_configurator') }}">{{"Création d'une config"|trans}}</a></li>
-          </ul>
-        </li>
-        <li id="config" class="dropdown">
-          <a href="{{ path('formorder_new') }}" class="dropdown-toggle" data-toggle="dropdown">{{'Formulaire'|trans}}<b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            <li><a href="{{ path('formorder_new') }}">{{'Formulaire Bon de commande'|trans}}</a></li>
-          </ul>
-        </li>
-        {% endif %}
-	</ul>
-  </div>
-</nav>
+    
+    <!--[if lt IE 9]>
+        {{ include('CoyoteSiteBundle::navigation_ie.html.twig') }}
+    <![endif]-->
+    <!--[if !IE]><!-->
+        {{ include('CoyoteSiteBundle::navigation.html.twig') }}
+	<!--<![endif]-->
 	
 {% endblock %}
 
