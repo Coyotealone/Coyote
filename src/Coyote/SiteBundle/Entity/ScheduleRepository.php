@@ -240,14 +240,15 @@ class ScheduleRepository extends EntityRepository
     
     public function formatTime($time)
     {
-    	$h = number_format($time / 60);
-    	$m = $time % 60;
-    	if($m == "0")
-    	    $m = "00";
-        if(strlen($m) < 2)
-            $m = '0'.$m;
-    	$restime = $h.'h'.$m;
-    	return $restime;
+        date_default_timezone_set('UTC');
+        $time = $time * 60;
+        
+        $heures=intval($time / 3600);
+        $minutes=intval(($time % 3600) / 60);
+        if(strlen($minutes) < 2)
+            $minutes = '0'.$minutes;
+        
+        return $heures.'h'.$minutes;
     }
     
     public function findDataBE($mois, $annee, $user)
