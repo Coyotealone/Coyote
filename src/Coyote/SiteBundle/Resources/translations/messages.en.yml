@@ -215,6 +215,18 @@ form:
     password_confirmation: "Verification:"
     new_password: "New password:"
     new_password_confirmation: "Verification:"
+    name: "Name :"
+    adress1: "Adress :"
+    adress2: "Adress(suite) :"
+    zip_code: "Zip Code :"
+    postal_box: "Postal Box :"
+    city: "City :"
+    country: "Country :"
+    phone: "Phone :"
+    cell: "Cell :"
+    fax: "Fax :"
+    website: "Website :"
+    roles: "Role :"
 
 #Ajout personnel    
 Mot de passe oublié: Forget password
@@ -228,3 +240,10 @@ Changement de votre mot de passe: Change your password
 Se souvenir de moi: Remember me
 Identifiant: Login
 Mot de passe: Password
+
+"Création d'un compte utilisateur": Create user account
+
+#Messages d'erreur
+
+Une erreur est survenue: An Error Occurred
+Le serveur a renvoyé une: The server returned a

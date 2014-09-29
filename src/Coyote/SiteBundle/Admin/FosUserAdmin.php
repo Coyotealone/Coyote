@@ -22,7 +22,7 @@ class FosUserAdmin extends Admin
         //$user->setConfirmationToken($tokenGenerator->generateToken());
         $salt = base_convert(sha1(uniqid(mt_rand(), true)), 16, 36);
         $formMapper
-            ->add('id')
+            //->add('id')
             ->add('username')
             ->add('password')
             ->add('name')

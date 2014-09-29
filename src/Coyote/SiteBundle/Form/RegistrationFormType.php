@@ -9,23 +9,64 @@
  * file that was distributed with this source code.
  */
 
-namespace Coyote\SiteBundle\Form\Type;
+namespace FOS\UserBundle\Form\Type;
 
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use FOS\UserBundle\Form\Type\RegistrationFormType as BaseType;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class RegistrationFormType extends BaseType
+class RegistrationFormType extends AbstractType
 {
+    private $class;
+
+    /**
+     * @param string $class The User class name
+     */
+    public function __construct($class)
+    {
+        $this->class = $class;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        parent::buildForm($builder, $options);
+        $builder
+            ->add('email', 'email', array('label' => 'form.email', 'translation_domain' => 'messages'))
+            ->add('username', null, array('label' => 'form.username', 'translation_domain' => 'messages'))
+            ->add('plainPassword', 'repeated', array(
+                'type' => 'password',
+                'options' => array('translation_domain' => 'messages'),
+                'first_options' => array('label' => 'form.password'),
+                'second_options' => array('label' => 'form.password_confirmation'),
+                'invalid_message' => 'fos_user.password.mismatch',
+            ))
+            ->add('name', null, array('label' => 'form.name',  'translation_domain' => 'messages'))
+            ->add('adress1', null, array('label' => 'form.adress1',  'translation_domain' => 'messages'))
+            ->add('adress2', null, array('label' => 'form.adress2',  'translation_domain' => 'messages'))
+            ->add('zip_code', null, array('label' => 'form.zip_code',  'translation_domain' => 'messages'))
+            ->add('postal_box', null, array('label' => 'form.postal_box',  'translation_domain' => 'messages'))
+            ->add('city', null, array('label' => 'form.city',  'translation_domain' => 'messages'))
+            ->add('country', null, array('label' => 'form.country',  'translation_domain' => 'messages'))
+            ->add('phone', null, array('label' => 'form.phone',  'translation_domain' => 'messages'))
+            ->add('cell', null, array('label' => 'form.cell',  'translation_domain' => 'messages'))
+            ->add('fax', null, array('label' => 'form.fax',  'translation_domain' => 'messages'))
+            ->add('website', null, array('label' => 'form.website',  'translation_domain' => 'messages'))
+            ->add('roles', 'collection', array('label' => 'form.roles', 'translation_domain' => 'messages', 'type' => 'choice',  'options' => array('choices' => array(
+                           'ROLE_USER' => 'User',
+                           'ROLE_TECH' => 'Tech',
+                           'ROLE_CADRE' => 'Cadre' ))))
+        ;
+    }
 
-        // add your custom field
-        $builder->add('name');
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $resolver->setDefaults(array(
+            'data_class' => $this->class,
+            'intention'  => 'registration',
+        ));
     }
 
     public function getName()
     {
-        return 'acme_user_registration';
+        return 'fos_user_registration';
     }
 }

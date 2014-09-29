@@ -1,12 +1,15 @@
 {% extends "CoyoteSiteBundle::layout.html.twig" %}
 
+{% trans_default_domain 'FOSUserBundle' %}
+
 {% block link %}
     
     {{ include('CoyoteSiteBundle::navigation_login.html.twig') }}
 	
 {% endblock %}
 
-
 {% block content %}
-    {% include "CoyoteSiteBundle:Resetting:reset_content.html.twig" %}
-{% endblock content %}
+<p>
+{{ 'resetting.check_email'|trans({'%email%': email}) }}
+</p>
+{% endblock %}

@@ -1,6 +1,12 @@
 accueil:
     path:     /
     defaults: { _controller: CoyoteSiteBundle:Main:index }
+
+CoyoteSiteBundle_register:
+    resource: "@CoyoteSiteBundle/Resources/config/routing/register.yml"
+    prefix:    /{_locale}/register
+    requirements:
+        _locale: fr|en|pl
     
 CoyoteSiteBundle_contact:
     resource: "@CoyoteSiteBundle/Resources/config/routing/contact.yml"
@@ -48,9 +54,15 @@ CoyoteSiteBundle_schedule:
     resource: "@CoyoteSiteBundle/Resources/config/routing/schedule.yml"
     prefix:   /schedule
 
-fos_user_resetting:
-    resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
-    prefix: /resetting
+CoyoteSiteBundle_resetting:
+    resource: "@CoyoteSiteBundle/Resources/config/routing/resetting.yml"
+    prefix:   /{_locale}/resetting
+    requirements:
+        _locale: fr|en|pl
+
+# fos_user_resetting:
+#     resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
+#     prefix: /resetting
     
 CoyoteSiteBundle_formorder:
     resource: "@CoyoteSiteBundle/Resources/config/routing/formorder.yml"

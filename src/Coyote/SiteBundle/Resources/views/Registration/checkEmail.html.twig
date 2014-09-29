@@ -1,0 +1,29 @@
+{% extends "CoyoteSiteBundle::base.html.twig" %}
+
+{% block userinfo %}
+
+{{ 'Bienvenue'|trans }} {{ app.session.get('username') }} |
+<a href="{{ path('fos_user_security_logout') }}">
+    {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+</a>
+
+{% endblock %}
+
+{% block stylesheets %}
+   {{ include('CoyoteSiteBundle::css.html.twig') }}
+{% endblock %}
+
+{% block link %}
+    
+    <!--[if lt IE 9]>
+        {{ include('CoyoteSiteBundle::navigation_ie.html.twig') }}
+    <![endif]-->
+    <!--[if !IE]><!-->
+        {{ include('CoyoteSiteBundle::navigation.html.twig') }}
+	<!--<![endif]-->
+	
+{% endblock %}
+
+{% block content %}
+    <p>{{ 'registration.check_email'|trans({'%email%': user.email}) }}</p>
+{% endblock content %}

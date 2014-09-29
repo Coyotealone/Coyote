@@ -98,5 +98,15 @@ form:
     password_confirmation: "Vérification :"
     new_password: "Nouveau mot de passe :"
     new_password_confirmation: "Vérification :"
-    
-
+    name: "Nom :"
+    adress1: "Adresse :"
+    adress2: "Adresse(suite) :"
+    zip_code: "Code Postal :"
+    postal_box: "Boite Postal :"
+    city: "Ville :"
+    country: "Pays :"
+    phone: "Téléphone :"
+    cell: "Portable :"
+    fax: "Fax :"
+    website: "Site web :"
+    roles: "Rôle :"
