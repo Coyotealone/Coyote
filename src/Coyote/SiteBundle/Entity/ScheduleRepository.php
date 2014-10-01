@@ -14,50 +14,69 @@ class ScheduleRepository extends EntityRepository
 {
     public function findNoWeek($date, $user)
     {
-        $qb = $this->_em->createQueryBuilder();
-        $qb->select('t')
-           ->from('CoyoteSiteBundle:Timetable', 't')
-           ->where('t.date LIKE :date')
-           ->setParameters(array('date' => '%'.$date.'%'));
+        $query = $this->getEntityManager()
+                      ->createQuery("
+                        select distinct(t.no_week) from CoyoteSiteBundle:Timetable t 
+                        where t.date like :date ");
+        $query->setParameters(array('date' => '%'.$date.'%'));
+                        
+        $timetable_noweek = $query->getResult();
         
-        $timetable = $qb->getQuery()
-                        ->getResult();
-        
-        $i = 0;
-        $timetable_noweek = '';
-        foreach($timetable as $data)
-        {
-            $data_noweek = $data->getNoweek();
-            if($i == 0)
-            {
-                $timetable_noweek[$i] = $data_noweek;
-                $i++;
-            }
-            
-            if($timetable_noweek[$i-1] != $data_noweek)
-            {
-                $timetable_noweek[$i] = $data_noweek;
-                $i++;
-            } 
-        }             
         return $timetable_noweek;
     }
     
-    public function findTimeWeek($user, $week, $year)
-    {    
-        $qb = $this->_em->createQueryBuilder();
-        $qb->select('t.id')
-           ->from('CoyoteSiteBundle:Timetable', 't')
-           ->where('t.no_week = :week and t.year = :year')
-           ->setParameters(array('week' => $week, 'year' => $year));
-        
-        $timetable_id =  $qb->getQuery()
-                            ->getResult();
+    public function findNoWeekId($week, $year, $user)
+    {
+        $query = $this->getEntityManager()
+                      ->createQuery("
+                        select t.id from CoyoteSiteBundle:Timetable t 
+                        where t.no_week = :week and t.year = :year ");
+        $query->setParameters(array('week' => $week, 'year' => $year));
+                        
+        $timetable_id = $query->getResult();               
+    
         $nbjour = count($timetable_id);
         
         $timetable_idstart = $timetable_id[0]['id'];
         $timetable_idend = $timetable_id[$nbjour-1]['id'];
     
+        $query = $this->getEntityManager()
+                      ->createQuery("
+                        select s.id from CoyoteSiteBundle:Schedule s 
+                        where s.user = :user and s.timetable between :timestart and :timeend ");
+        $query->setParameters(array('timestart' => $timetable_idstart, 'timeend' => $timetable_idend, 'user' => $user));
+                        
+        $timetable_id = $query->getResult();
+        
+        if(count($timetable_id) == 0)
+            return 0;
+        else
+            return $week;
+    }
+    
+    public function findTimeWeek($user, $week, $year)
+    {   
+        /*$qb = $this->_em->createQueryBuilder();
+        $qb->select('t.id')
+           ->from('CoyoteSiteBundle:Timetable', 't')
+           ->where('t.no_week = :week and t.year = :year')
+           ->setParameters(array('week' => $week, 'year' => $year));*/
+           
+        $query = $this->getEntityManager()
+                      ->createQuery("
+                        select t.id from CoyoteSiteBundle:Timetable t 
+                        where t.no_week = :week and t.year = :year ");
+        $query->setParameters(array('week' => $week, 'year' => $year));
+                        
+        $timetable_id = $query->getResult();
+        
+        
+        $nbjour = count($timetable_id);
+        
+        $timetable_idstart = $timetable_id[0]['id'];
+        $timetable_idend = $timetable_id[$nbjour-1]['id'];
+    
+        //return $timetable_idstart;
         $query = $this->getEntityManager()
                       ->createQuery("
                         SELECT s FROM CoyoteSiteBundle:Schedule s
@@ -69,12 +88,14 @@ class ScheduleRepository extends EntityRepository
             'user' => $user
             ));
         $res = $query->getResult();
+        //return count($res);
         $timeres = 0;
         foreach($res as $data)
         {
             $time = $data->getWorkingtime();
             $timeres += $this->calculTime($time);
-        } 
+        }
+        //return $timeres;
         return $this->formatTime($timeres);
     }
 

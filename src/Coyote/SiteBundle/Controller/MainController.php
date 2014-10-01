@@ -116,7 +116,7 @@ class MainController extends Controller
     
     protected function renderLogin(array $data)
     {
-        $template = sprintf('CoyoteSiteBundle:Security:login.html.%s', $this->container->getParameter('fos_user.template.engine'));
+        $template = sprintf('CoyoteSiteBundle:Security:login.html.twig');
 
         return $this->container->get('templating')->renderResponse($template, $data);
     }

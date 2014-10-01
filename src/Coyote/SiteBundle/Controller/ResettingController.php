@@ -34,7 +34,7 @@ class ResettingController extends ContainerAware
 */
     public function requestAction()
     {
-        return $this->container->get('templating')->renderResponse('CoyoteSiteBundle:Resetting:request.html.'.$this->getEngine());
+        return $this->container->get('templating')->renderResponse('CoyoteSiteBundle:Resetting:request.html.twig');
     }
 
     /**

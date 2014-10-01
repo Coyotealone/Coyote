@@ -94,12 +94,13 @@
     <button class='btnsave' type="submit" value="Enregistrer" id="enregistrer">{{ 'Enregistrer'|trans }}</button>
 </form>#}
 
-    {#{% for entity in week %}
+    {#{{ countheure }}#}
+    {% for entity in countheure %}
         
         {{ entity }} <br>
         
     {% endfor %}
-    
+    {#
     {% for entity in data %}
         
         {{ entity }} <br>
@@ -107,5 +108,4 @@
     {% endfor %}
     #}
     {#{{form(form)}}#}
-    {{date.0.date}}
 {% endblock %}

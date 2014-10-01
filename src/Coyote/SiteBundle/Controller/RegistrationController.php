@@ -73,7 +73,7 @@ class RegistrationController extends ContainerAware
             }
         }
 
-        return $this->container->get('templating')->renderResponse('CoyoteSiteBundle:Registration:register.html.'.$this->getEngine(), array(
+        return $this->container->get('templating')->renderResponse('CoyoteSiteBundle:Registration:register.html.twig', array(
             'form' => $form->createView(),
         ));
     }

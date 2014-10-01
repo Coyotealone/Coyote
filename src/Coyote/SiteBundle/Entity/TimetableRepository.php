@@ -12,6 +12,80 @@ use Doctrine\ORM\EntityRepository;
  */
 class TimetableRepository extends EntityRepository
 {
+    public function calcul()
+    {
+        $query = $this->getEntityManager()
+                      ->createQuery("
+                        select s.id, s.working_time from CoyoteSiteBundle:Schedule s, CoyoteSiteBundle:Timetable t 
+                        where s.timetable = t.id and s.user = 2 and t.day != 'samedi' and t.day != 'dimanche' 
+                        and s.comment != 'IMIE' and s.absence != 'RTT' and t.holiday != 1"
+                        );
+        $res = $query->getResult();
+        
+        /* SELECT distinct(timetable.no_week) FROM `schedule`, timetable 
+        WHERE user_id = 2 and comment != "IMIE" and timetable.day != "samedi" and timetable.day != "dimanche"*/
+        
+        /*select schedule.id, schedule.working_time from schedule, timetable 
+        where schedule.timetable_id = timetable.id and schedule.user_id = 2 
+        and timetable.day != 'samedi' and timetable.day != 'dimanche' and schedule.comment != 'IMIE'*/
+        
+        //return $nbres;
+        $data = 0;
+        
+        for($i=0;$i<count($res);$i++)
+        {
+            $data += $this->calculTime($res[$i]['working_time']);
+        }
+        
+        $nbsem = count($res) ;
+        $data = $this->differenceTime($data, $nbsem);
+        
+        $resfinal = 0;
+        
+        if($data<0)
+        {
+            $data = $data * -1;
+            $resfinal = 'Tu dois faire : ';
+        }
+        else
+            $resfinal = 'Tu as fait en trop :';
+        $heure = $this->formatTime($data);
+        
+        $resfinal = $resfinal.$heure;
+        
+        return $resfinal;
+    }
+    
+    public function differenceTime($time, $nbsemaine)
+    {
+        $timesemaine = 420;
+        $timesemaine = $timesemaine*$nbsemaine;
+        $time = $time - $timesemaine;
+        return $time;
+    }
+    
+    public function calculTime($time)
+    {
+        $time = explode(":", $time);
+        $minute = $time[1];
+        $heure = $time[0];
+        $timefinal = $heure * 60 + $minute;
+        return $timefinal;
+    }
+    
+    public function formatTime($time)
+    {
+        date_default_timezone_set('UTC');
+        $time = $time * 60;
+        
+        $heures=intval($time / 3600);
+        $minutes=intval(($time % 3600) / 60);
+        if(strlen($minutes) < 2)
+            $minutes = '0'.$minutes;
+        
+        return $heures.'h'.$minutes;
+    }
+
     public function myFindDate($no_week, $year)
     {
         $qb = $this->_em->createQueryBuilder();

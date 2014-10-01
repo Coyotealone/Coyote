@@ -18,7 +18,6 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Coyote\SiteBundle\CoyoteSiteBundle(),
             new FOS\UserBundle\FOSUserBundle(),
-            new Spraed\PDFGeneratorBundle\SpraedPDFGeneratorBundle(),
             // Add your dependencies Sonata
             new Sonata\CoreBundle\SonataCoreBundle(),
             new Sonata\BlockBundle\SonataBlockBundle(),

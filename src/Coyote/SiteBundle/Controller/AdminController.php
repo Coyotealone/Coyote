@@ -154,7 +154,7 @@ class AdminController extends Controller
             }
         }
 
-        return $this->container->get('templating')->renderResponse('FOSUserBundle:Registration:register.html.'.$this->getEngine(), array(
+        return $this->container->get('templating')->renderResponse('FOSUserBundle:Registration:register.html.', array(
             'form' => $form->createView(),
         ));
     }

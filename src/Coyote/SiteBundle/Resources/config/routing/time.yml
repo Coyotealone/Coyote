@@ -49,3 +49,7 @@ coyote_time_print:
 coyote_time_indexprint:
     pattern:    /indexprint
     defaults:   { _controller: "CoyoteSiteBundle:Time:indexprint"}
+
+coyote_time_calcul:
+    pattern:    /calcul
+    defaults:   { _controller: "CoyoteSiteBundle:Time:calcul"}

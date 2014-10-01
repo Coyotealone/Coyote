@@ -81,13 +81,13 @@
                     <td>{{ entity.travel }}</td>
                     <td>{{ entity.absence }}</td>
                     <td>{{ entity.comment }}</td>
-                    {% if loop.last %}
+                {% endif %}
+            </tr>
+            {% if loop.last %}
                     </tr>
             <tr>
                     <td style="background:#99CCCC; color:white" colspan = 10>{{"Nombre d'heure travaillé dans la semaine"|trans}} : {{timeweek[counter]}}</td>
                     {% endif %}
-                {% endif %}
-            </tr>
         {% endfor %}
         
     </table>

@@ -830,7 +830,6 @@ class TimeController extends Controller
     {
         $request = $this->getRequest();
         $session = $request->getSession();
-        //$session = new Session();
         $doctrine = $this->getDoctrine();
         $em = $doctrine->getManager();
         $request = Request::createFromGlobals();
@@ -848,29 +847,22 @@ class TimeController extends Controller
                 return $this->render('CoyoteSiteBundle:Time:indexshow.html.twig');
             $user = $em->getRepository('CoyoteSiteBundle:User')->find($session->get('userid'));
             
-            $week = $em->getRepository('CoyoteSiteBundle:Schedule')->findNoWeek($mois.'/'.$annee, $user);
-            $timeweek = '';
-            $i = 0;
-            foreach($week as $data)
-            {
-                $timeoneweek = $em->getRepository('CoyoteSiteBundle:Schedule')->findTimeWeek($user, $data, $annee);
-                $timeweek[$i] = $timeoneweek;
-                $i++;
-            }
             
             
-            $data = $em->getRepository('CoyoteSiteBundle:Schedule')->findTime($mois.'/'.$annee, $user);
-            $timemonth = $em->getRepository('CoyoteSiteBundle:Schedule')->findTimeMonth($mois.'/'.$annee, $user);
+            $datajour = $em->getRepository('CoyoteSiteBundle:Schedule')->findTime($mois.'/'.$annee, $user);
             $absence = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsenceMonth($mois.'/'.$annee, $user);
             $absencerttyear = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsenceYear($mois, $annee, $user, "RTT");
             $absencecayear = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsenceYear($mois, $annee, $user, "CA");
             $absencecpyear = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsenceYear($mois, $annee, $user, "Congés payés");
-            $daymonth = $em->getRepository('CoyoteSiteBundle:Schedule')->findDayMonth($mois.'/'.$annee, $user);
-            $dayyear = $em->getRepository('CoyoteSiteBundle:Schedule')->findDayYear($mois, $annee, $user);
             $absence = explode(';', $absence);
+            
             if($this->get('security.context')->isGranted('ROLE_CADRE'))
+            {
+                $daymonth = $em->getRepository('CoyoteSiteBundle:Schedule')->findDayMonth($mois.'/'.$annee, $user);
+                $dayyear = $em->getRepository('CoyoteSiteBundle:Schedule')->findDayYear($mois, $annee, $user);
+            
                 return $this->render('CoyoteSiteBundle:Time:showfm.html.twig', array(
-                    'data' => $data,
+                    'data' => $datajour,
                     'rtt' => $absence[1],
                     'ca' => $absence[2],
                     'cp' => $absence[3],
@@ -880,9 +872,33 @@ class TimeController extends Controller
                     'dayyear' => $dayyear,
                     'daymonth' => $daymonth,
                     ));
+            }
             else
+            {
+                $indextab = 0;
+                $week = $em->getRepository('CoyoteSiteBundle:Schedule')->findNoWeek($mois.'/'.$annee, $user);
+                foreach($week as $data)
+                {   
+                    $findno_week = $em->getRepository('CoyoteSiteBundle:Schedule')->findNoWeekId($data, $annee, $user);
+                    if($findno_week != 0)
+                    {
+                        $tabnoweek[$indextab] = $findno_week;
+                        $indextab++;
+                    }
+                }
+                     
+                $timeweek = '';
+                $index = 0;
+                foreach($tabnoweek as $data)
+                {
+                    $timeoneweek = $em->getRepository('CoyoteSiteBundle:Schedule')->findTimeWeek($user, $data, $annee);
+                    $timeweek[$index] = $timeoneweek;
+                    $index++;
+                }
+                $timemonth = $em->getRepository('CoyoteSiteBundle:Schedule')->findTimeMonth($mois.'/'.$annee, $user);
+            
                 return $this->render('CoyoteSiteBundle:Time:show.html.twig', array(
-                    'data' => $data, 
+                    'data' => $datajour, 
                     'time' => $timemonth, 
                     'rtt' => $absence[1], 
                     'ca' => $absence[2], 
@@ -892,6 +908,7 @@ class TimeController extends Controller
                     'cayear' => $absencecayear,
                     'timeweek' => $timeweek,
                     ));
+            }
         }
     }
     
@@ -904,15 +921,12 @@ class TimeController extends Controller
     {
         $request = $this->getRequest();
         $session = $request->getSession();
-        //$session = new Session();
         $doctrine = $this->getDoctrine();
         $em = $doctrine->getManager();
         $request = Request::createFromGlobals();
         
         $annee = $_GET['year'];
         $mois = $_GET['month'];
-        //$annee = 2014;
-        //$mois = 06;
         
         if(empty($annee) && empty($mois))
         {
@@ -982,6 +996,17 @@ class TimeController extends Controller
             
             return new Response('PDF réalisé');
         }
+    }
+    
+    public function calculAction()
+    {   
+        $doctrine = $this->getDoctrine();
+        $em = $doctrine->getManager();
+        $heuresupp = $em->getRepository('CoyoteSiteBundle:Timetable')->calcul();
+        return $this->render('CoyoteSiteBundle:Time:test.html.twig', array(
+                    
+                    'countheure' => $heuresupp,
+                    ));
     }
 }
 
