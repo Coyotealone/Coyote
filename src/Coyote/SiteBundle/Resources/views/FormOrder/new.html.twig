@@ -1,4 +1,4 @@
-{% extends 'CoyoteSiteBundle::base.html.twig' %}
+{% extends 'CoyoteSiteBundle:Base:base.html.twig' %}
 
 {% block user %}
 
@@ -17,10 +17,10 @@
 {% block link %}
     
     <!--[if lt IE 9]>
-        {{ include('CoyoteSiteBundle::navigation_ie.html.twig') }}
+        {{ include('CoyoteSiteBundle:Base:navigation_ie.html.twig') }}
     <![endif]-->
     <!--[if !IE]><!-->
-        {{ include('CoyoteSiteBundle::navigation.html.twig') }}
+        {{ include('CoyoteSiteBundle:Base:navigation.html.twig') }}
 	<!--<![endif]-->
 	
 {% endblock %}

@@ -28,16 +28,19 @@ class ContactController extends Controller
             $request = Request::createFromGlobals();
             $data = $request->request->all();
             //$data['subject'] $data['content']
-            return new Response($data);
+            //return new Response($data['contact']['email']);
+            
             $message = \Swift_Message::newInstance()
                 ->setContentType('text/html')
-                ->setSubject($data['subject'])
-                ->setFrom($data['email'])
-                ->setTo('xxxxx@gmail.com')
-                ->setBody($data['content']);
-            //$this->get('mailer')->send($message);
+                ->setSubject($data['contact']['subject'])
+                ->setFrom($data['contact']['email'])
+                ->setTo('si@pichonindustries.com')
+                ->setBody($data['contact']['content']);
+            $this->get('mailer')->send($message);
+            
+            $this->get('session')->getFlashBag()->set('sendmessage', 'Merci de nous avoir contacté, nous répondrons à vos questions dans les plus brefs délais.');
             // Launch the message flash
-            $this->get('session')->setFlash('notice', 'Merci de nous avoir contacté, nous répondrons à vos questions dans les plus brefs délais.');
+            //$this->get('session')->setFlash('notice', 'Merci de nous avoir contacté, nous répondrons à vos questions dans les plus brefs délais.');
         }
         
         return $this->render('CoyoteSiteBundle:Contact:contact.html.twig',

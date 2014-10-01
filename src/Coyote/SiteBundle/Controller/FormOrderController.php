@@ -18,7 +18,7 @@ class FormOrderController extends Controller
 
     /**
      * Lists all FormOrder entities.
-     *
+     * Id	N° Ligne	Article	Qté	Taux
      */
     public function indexAction()
     {

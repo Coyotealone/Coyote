@@ -1,40 +1,39 @@
 {% extends 'CoyoteSiteBundle:Admin:index.html.twig' %}
 
-
 {% block content %}
-<form role="form" action="{{ path('coyote_exportdatauser') }}" method='post'>
-    <table class='table' id='tab_expense'>
-    	<tr>
-    	    <th>{{'Mois'|trans}}</th>
-    		<th>{{'Année'|trans}}</th>
-    	</tr>
-        <tr>
-            <td>
-                <select name='mois' id='mois' >
-					<option value='vide'></option>
-					<option value='01'>{{'Janvier'|trans}}</option>
-					<option value='02'>{{'Février'|trans}}</option>
-					<option value='03'>{{'Mars'|trans}}</option>
-					<option value='04'>{{'Avril'|trans}}</option>
-					<option value='05'>{{'Mai'|trans}}</option>
-					<option value='06'>{{'Juin'|trans}}</option>
-					<option value='07' selected>{{'Juillet'|trans}}</option>
-					<option value='08'>{{'Août'|trans}}</option>
-					<option value='09'>{{'Septembre'|trans}}</option>
-					<option value='10'>{{'Octobre'|trans}}</option>
-					<option value='11'>{{'Novembre'|trans}}</option>
-					<option value='12'>{{'Décembre'|trans}}</option>
-				</select>
-            </td>
-            <td>
-                <select name='annee' id='annee' >
-					<option value='2014'>2014</option>
-					<option value='2015'>2015</option>
-					<option value='2016'>2016</option>
-				</select>
-            </td>
-        </tr>
-    </table>
-    <button class='btnsave' type="submit" value="Telecharger" id="telecharger">{{ 'Télécharger'|trans }}</button>
-</form>
+    <form role="form" action="{{ path('coyote_exportdatauser') }}" method='post'>
+        <table class='table' id='tab_expense'>
+        	<tr>
+        	    <th>{{'Mois'|trans}}</th>
+        		<th>{{'Année'|trans}}</th>
+        	</tr>
+            <tr>
+                <td>
+                    <select name='mois' id='mois' >
+    					<option value='vide'></option>
+    					<option value='01'>{{'Janvier'|trans}}</option>
+    					<option value='02'>{{'Février'|trans}}</option>
+    					<option value='03'>{{'Mars'|trans}}</option>
+    					<option value='04'>{{'Avril'|trans}}</option>
+    					<option value='05'>{{'Mai'|trans}}</option>
+    					<option value='06'>{{'Juin'|trans}}</option>
+    					<option value='07' selected>{{'Juillet'|trans}}</option>
+    					<option value='08'>{{'Août'|trans}}</option>
+    					<option value='09'>{{'Septembre'|trans}}</option>
+    					<option value='10'>{{'Octobre'|trans}}</option>
+    					<option value='11'>{{'Novembre'|trans}}</option>
+    					<option value='12'>{{'Décembre'|trans}}</option>
+    				</select>
+                </td>
+                <td>
+                    <select name='annee' id='annee' >
+    					<option value='2014'>2014</option>
+    					<option value='2015'>2015</option>
+    					<option value='2016'>2016</option>
+    				</select>
+                </td>
+            </tr>
+        </table>
+        <button class='btnsave' type="submit" value="Telecharger" id="telecharger">{{ 'Télécharger'|trans }}</button>
+    </form>
 {% endblock %}

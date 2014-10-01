@@ -3,16 +3,16 @@
 {% block link %}
     
     <!--[if lt IE 9]>
-        {{ include('CoyoteSiteBundle::navigation_ie.html.twig') }}
+        {{ include('CoyoteSiteBundle:Base:navigation_ie.html.twig') }}
     <![endif]-->
     <!--[if !IE]><!-->
-        {{ include('CoyoteSiteBundle::navigation.html.twig') }}
+        {{ include('CoyoteSiteBundle:Base:navigation.html.twig') }}
 	<!--<![endif]-->
 	
 {% endblock %}
 
 {% block stylesheets %}
-   {{ include('CoyoteSiteBundle::css.html.twig') }}
+   {{ include('CoyoteSiteBundle:Base:css.html.twig') }}
 {% endblock %}
 
 {% block content %}

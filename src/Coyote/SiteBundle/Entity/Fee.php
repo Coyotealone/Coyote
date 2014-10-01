@@ -33,6 +33,11 @@ class Fee
      * @var string
      */
     private $code_rate;
+    
+    /**
+     * @var integer
+     */
+    private $rank;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -149,6 +154,30 @@ class Fee
         return $this->code_rate;
     }
 
+    /**
+     * Set rank
+     *
+     * @param integer $rank
+     * @return Fee
+     */
+    public function setRank($rank)
+    {
+        $this->rank = $rank;
+
+        return $this;
+    }
+
+    /**
+     * Get rank
+     *
+     * @return integer 
+     */
+    public function getRank()
+    {
+        return $this->rank;
+    }
+    
+    
     /**
      * Add expenses
      *

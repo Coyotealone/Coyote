@@ -1,32 +1,26 @@
-{% extends 'CoyoteSiteBundle::base.html.twig' %}
+{% extends 'CoyoteSiteBundle:Base:base.html.twig' %}
 
 {% block userinfo %}
-
-<a href="{{ path('fos_user_security_logout') }}">
-    {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
-</a>
-
+    <a href="{{ path('fos_user_security_logout') }}">
+        {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+    </a>
 {% endblock %}
 
 {% block link %}
-    
     <!--[if lt IE 9]>
-        {{ include('CoyoteSiteBundle::navigation_ie.html.twig') }}
+        {{ include('CoyoteSiteBundle:Base:navigation_ie.html.twig') }}
     <![endif]-->
     <!--[if !IE]><!-->
-        {{ include('CoyoteSiteBundle::navigation_admin.html.twig') }}
+        {{ include('CoyoteSiteBundle:Base:navigation_admin.html.twig') }}
 	<!--<![endif]-->
-	
 {% endblock %}
 
 {% block stylesheets %}
-   {{ include('CoyoteSiteBundle::css.html.twig') }}
+   {{ include('CoyoteSiteBundle:Base:css.html.twig') }}
 {% endblock %}
 
 {% block content %}
-
     <div class="jumbotron">
-        
         <p class="lead">{{ 'Bienvenue sur le site Pichon'|trans }}
             <br><br>
             Partie Administration
@@ -34,5 +28,4 @@
         </p>
 
     </div>
-
 {% endblock %}

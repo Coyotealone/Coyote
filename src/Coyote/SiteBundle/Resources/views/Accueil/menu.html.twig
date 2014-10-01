@@ -1,38 +1,30 @@
-{% extends 'CoyoteSiteBundle::base.html.twig' %}
+{% extends 'CoyoteSiteBundle:Base:base.html.twig' %}
 
 {% block userinfo %}
-
-{{ 'Bienvenue'|trans }} {{ app.session.get('username') }} |
-<a href="{{ path('fos_user_security_logout') }}">
-    {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
-</a>
-
+    {{ 'Bienvenue'|trans }} {{ app.session.get('username') }} |
+    <a href="{{ path('fos_user_security_logout') }}">
+        {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+    </a>
 {% endblock %}
 
 {% block stylesheets %}
-   {{ include('CoyoteSiteBundle::css.html.twig') }}
+   {{ include('CoyoteSiteBundle:Base:css.html.twig') }}
 {% endblock %}
 
 {% block link %}
-    
     <!--[if lt IE 9]>
-        {{ include('CoyoteSiteBundle::navigation_ie.html.twig') }}
+        {{ include('CoyoteSiteBundle:Base:navigation_ie.html.twig') }}
     <![endif]-->
     <!--[if !IE]><!-->
-        {{ include('CoyoteSiteBundle::navigation.html.twig') }}
+        {{ include('CoyoteSiteBundle:Base:navigation.html.twig') }}
 	<!--<![endif]-->
-	
 {% endblock %}
 
 {% block content %}
-
     <div class="jumbotron">
-        
         <p class="lead">{{ 'Bienvenue sur le site PICHON'|trans }}
             <br><br>
-            Ajout d'une page pour exporter ses temps de présence par mois au format PDF.
+            c'est la fin de l'été.
         </p>
-        
     </div>
-
 {% endblock %}

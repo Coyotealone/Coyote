@@ -55,7 +55,7 @@ class ExpenseController extends Controller
             $currency = $em->getRepository('CoyoteSiteBundle:Currency')->findAll();
             $site = $em->getRepository('CoyoteSiteBundle:Site')->findAll();
             $business = $em->getRepository('CoyoteSiteBundle:Business')->findAll();
-            $fee = $em->getRepository('CoyoteSiteBundle:Fee')->findAll();
+            $fee = $em->getRepository('CoyoteSiteBundle:Fee')->findBy(array(), array('rank' => 'asc'));
 
             return $this->render('CoyoteSiteBundle:Expense:create.html.twig', 
                 array('currency' => $currency, 'site' => $site, 'business' => $business, 'fee' => $fee));

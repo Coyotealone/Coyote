@@ -1,12 +1,13 @@
 {% trans_default_domain 'FOSUserBundle' %}
 {% block subject %}
-{% autoescape false %}
-Mail test
-{% endautoescape %}
+    {% autoescape false %}
+        Mail test
+    {% endautoescape %}
 {% endblock %}
 {% block body_text %}
-{% autoescape false %}
-Mail test
-{% endautoescape %}
+    {% autoescape false %}
+        Mail test
+    {% endautoescape %}
 {% endblock %}
-{% block body_html %}{% endblock %}
+{% block body_html %}
+{% endblock %}

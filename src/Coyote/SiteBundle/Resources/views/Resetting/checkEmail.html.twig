@@ -1,10 +1,10 @@
-{% extends "CoyoteSiteBundle::layout.html.twig" %}
+{% extends "CoyoteSiteBundle:Base:layout.html.twig" %}
 
 {% trans_default_domain 'FOSUserBundle' %}
 
 {% block link %}
     
-    {{ include('CoyoteSiteBundle::navigation_login.html.twig') }}
+    {{ include('CoyoteSiteBundle:Base:navigation_login.html.twig') }}
 	
 {% endblock %}
 
