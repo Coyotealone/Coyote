@@ -6,6 +6,7 @@ Bienvenue: Witamy
 
 # Pied de page #
 "Copyright ©2014 PICHON - Tous droits réservés": Copyright ©2014 PICHON - Wszystkie prawa zastrzeżone
+Version: wersja
 
 # Navbar #
 Accueil: Strona główna
@@ -94,8 +95,8 @@ Jour travaillé dans le mois / année: Dzień pracy w miesiącu / roku
 "Nombre de RTT utilisé dans l'année": Ilość RTT wykorzystanego w roku
 "Nombre de congés payés (CP) utilisé dans l'année" : Ilość płatnego urlopu (CP) wykorzystanego w roku
 "Nombre de congés d'anciennetés (CA) utilisé dans l'année": Ilość urlopu stażowego (CA ) wykorzystanego w roku
-"Téléchargement des temps de présence de l'année au format PDF":
-"Période":
+"Téléchargement des temps de présence de l'année au format PDF": Czas pobierania i stawiennictwa roku w formacie PDF
+"Période": okres
 
 
 # Page Profil #
