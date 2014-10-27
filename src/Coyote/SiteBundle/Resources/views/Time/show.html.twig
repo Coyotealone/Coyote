@@ -30,64 +30,59 @@
     	</tr>
     	{% set counter = 0 %}
     	{% for entity in data %}
-            <tr>
-                {% if entity.timetable.holiday == "1" %}
-                    <td style="background:#7FC6BC; color:white">{{ entity.timetable.day|capitalize|trans}}</td>
-                    <td style="background:#7FC6BC; color:white">{{ entity.timetable.date}}</td>
-                    <td style="background:#7FC6BC; color:white">{{ entity.start }}</td>
-                    <td style="background:#7FC6BC; color:white">{{ entity.end }}</td>
-                    <td style="background:#7FC6BC; color:white">{{ entity.break }}</td>
-                    <td style="background:#7FC6BC; color:white">{{ entity.workingtime }}</td>
-                    <td style="background:#7FC6BC; color:white">{{ entity.workinghours }}</td>
-                    <td style="background:#7FC6BC; color:white">{{ entity.travel }}</td>
-                    <td style="background:#7FC6BC; color:white">{{ entity.absence }}</td>
-                    <td style="background:#7FC6BC; color:white">{{ entity.comment }}</td>
-                {% elseif entity.timetable.day == "samedi" %}
-                    <td style="background:#01B0F0; color:white">{{ entity.timetable.day|capitalize|trans}}</td>
-                    <td style="background:#01B0F0; color:white">{{ entity.timetable.date}}</td>
-                    <td style="background:#01B0F0; color:white">{{ entity.start }}</td>
-                    <td style="background:#01B0F0; color:white">{{ entity.end }}</td>
-                    <td style="background:#01B0F0; color:white">{{ entity.break }}</td>
-                    <td style="background:#01B0F0; color:white">{{ entity.workingtime }}</td>
-                    <td style="background:#01B0F0; color:white">{{ entity.workinghours }}</td>
-                    <td style="background:#01B0F0; color:white">{{ entity.travel }}</td>
-                    <td style="background:#01B0F0; color:white">{{ entity.absence }}</td>
-                    <td style="background:#01B0F0; color:white">{{ entity.comment }}</td>
-                {% elseif entity.timetable.day == "dimanche" %}
-                    <td style="background:#01B0F0; color:white">{{ entity.timetable.day|capitalize|trans}}</td>
-                    <td style="background:#01B0F0; color:white">{{ entity.timetable.date}}</td>
-                    <td style="background:#01B0F0; color:white">{{ entity.start }}</td>
-                    <td style="background:#01B0F0; color:white">{{ entity.end }}</td>
-                    <td style="background:#01B0F0; color:white">{{ entity.break }}</td>
-                    <td style="background:#01B0F0; color:white">{{ entity.workingtime }}</td>
-                    <td style="background:#01B0F0; color:white">{{ entity.workinghours }}</td>
-                    <td style="background:#01B0F0; color:white">{{ entity.travel }}</td>
-                    <td style="background:#01B0F0; color:white">{{ entity.absence }}</td>
-                    <td style="background:#01B0F0; color:white">{{ entity.comment }}</td>
-            </tr>
-            <tr>
-                    <td style="background:#99CCCC; color:white" colspan = 10>{{"Nombre d'heure travaillé dans la semaine"|trans}} : {{timeweek[counter]}}</td>
-                    {% set counter = counter + 1 %}
-            </tr>
-            <tr>
-                {% else %}
-                    <td>{{ entity.timetable.day|capitalize|trans}}</td>
-                    <td>{{ entity.timetable.date}}</td>
-                    <td>{{ entity.start }}</td>
-                    <td>{{ entity.end }}</td>
-                    <td>{{ entity.break }}</td>
-                    <td>{{ entity.workingtime }}</td>
-                    <td>{{ entity.workinghours }}</td>
-                    <td>{{ entity.travel }}</td>
-                    <td>{{ entity.absence }}</td>
-                    <td>{{ entity.comment }}</td>
-                {% endif %}
-            </tr>
-            {% if loop.last %}
-                    </tr>
-            <tr>
-                    <td style="background:#99CCCC; color:white" colspan = 10>{{"Nombre d'heure travaillé dans la semaine"|trans}} : {{timeweek[counter]}}</td>
-                    {% endif %}
+        <tr>
+            {% if entity.timetable.holiday == "1" %}
+                <td style="background:#7FC6BC; color:white">{{ entity.timetable.day|capitalize|trans}}</td>
+                <td style="background:#7FC6BC; color:white">{{ entity.timetable.date}}</td>
+                <td style="background:#7FC6BC; color:white">{{ entity.start }}</td>
+                <td style="background:#7FC6BC; color:white">{{ entity.end }}</td>
+                <td style="background:#7FC6BC; color:white">{{ entity.break }}</td>
+                <td style="background:#7FC6BC; color:white">{{ entity.workingtime }}</td>
+                <td style="background:#7FC6BC; color:white">{{ entity.workinghours }}</td>
+                <td style="background:#7FC6BC; color:white">{{ entity.travel }}</td>
+                <td style="background:#7FC6BC; color:white">{{ entity.absence }}</td>
+                <td style="background:#7FC6BC; color:white">{{ entity.comment }}</td>
+            {% elseif entity.timetable.day == "samedi" %}
+                <td style="background:#01B0F0; color:white">{{ entity.timetable.day|capitalize|trans}}</td>
+                <td style="background:#01B0F0; color:white">{{ entity.timetable.date}}</td>
+                <td style="background:#01B0F0; color:white">{{ entity.start }}</td>
+                <td style="background:#01B0F0; color:white">{{ entity.end }}</td>
+                <td style="background:#01B0F0; color:white">{{ entity.break }}</td>
+                <td style="background:#01B0F0; color:white">{{ entity.workingtime }}</td>
+                <td style="background:#01B0F0; color:white">{{ entity.workinghours }}</td>
+                <td style="background:#01B0F0; color:white">{{ entity.travel }}</td>
+                <td style="background:#01B0F0; color:white">{{ entity.absence }}</td>
+                <td style="background:#01B0F0; color:white">{{ entity.comment }}</td>
+            {% elseif entity.timetable.day == "dimanche" %}
+                <td style="background:#01B0F0; color:white">{{ entity.timetable.day|capitalize|trans}}</td>
+                <td style="background:#01B0F0; color:white">{{ entity.timetable.date}}</td>
+                <td style="background:#01B0F0; color:white">{{ entity.start }}</td>
+                <td style="background:#01B0F0; color:white">{{ entity.end }}</td>
+                <td style="background:#01B0F0; color:white">{{ entity.break }}</td>
+                <td style="background:#01B0F0; color:white">{{ entity.workingtime }}</td>
+                <td style="background:#01B0F0; color:white">{{ entity.workinghours }}</td>
+                <td style="background:#01B0F0; color:white">{{ entity.travel }}</td>
+                <td style="background:#01B0F0; color:white">{{ entity.absence }}</td>
+                <td style="background:#01B0F0; color:white">{{ entity.comment }}</td>
+        </tr>
+        <tr>
+                <td style="background:#99CCCC; color:white" colspan = 10>{{"Nombre d'heure travaillé dans la semaine"|trans}} : {{timeweek[counter]}}</td>
+                {% set counter = counter + 1 %}
+        </tr>
+        <tr>
+            {% else %}
+                <td>{{ entity.timetable.day|capitalize|trans}}</td>
+                <td>{{ entity.timetable.date}}</td>
+                <td>{{ entity.start }}</td>
+                <td>{{ entity.end }}</td>
+                <td>{{ entity.break }}</td>
+                <td>{{ entity.workingtime }}</td>
+                <td>{{ entity.workinghours }}</td>
+                <td>{{ entity.travel }}</td>
+                <td>{{ entity.absence }}</td>
+                <td>{{ entity.comment }}</td>
+            {% endif %}
+        </tr>
         {% endfor %}
         
     </table>

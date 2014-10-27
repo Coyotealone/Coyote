@@ -90,10 +90,17 @@ dimanche: niedziela
 Enregistrer: Zapisz
 Consultation des temps de présence: Konsultacje w czasie pracy
 Jour travaillé dans le mois / année: Dzień pracy w miesiącu / roku
+"Récapitulatif de l'année": Podsumowanie roku
+"Nombre de RTT utilisé dans l'année": Ilość RTT wykorzystanego w roku
+"Nombre de congés payés (CP) utilisé dans l'année" : Ilość płatnego urlopu (CP) wykorzystanego w roku
+"Nombre de congés d'anciennetés (CA) utilisé dans l'année": Ilość urlopu stażowego (CA ) wykorzystanego w roku
+"Téléchargement des temps de présence de l'année au format PDF":
+"Période":
+
 
 # Page Profil #
 "En cas de problème de mot de passe, merci de contacter votre administrateur ou d'envoyer un mail dans l'onglet Contact": Dziękujemy za kontakt z administratorem. Jeśli masz problem z hasłem, wyślij e-mail z zakładki Kontakt.
-'Le mot de passe doit faire': Hasło musi mieć 
+'Le mot de passe doit faire': Hasło musi mieć
 'caractères': znaków
 
 # Page Note de frais #
@@ -215,8 +222,8 @@ form:
     password_confirmation: "Powtórz hasło:"
     new_password: "Nowe hasło:"
     new_password_confirmation: "Powtórz hasło:"
-    
-#Ajout personnel    
+
+#Ajout personnel
 Mot de passe oublié: Zapomniałem hasła
 Nom prénom: imię
 N° Téléphone: numer telefonu

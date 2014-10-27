@@ -1,4 +1,8 @@
-{% extends 'CoyoteSiteBundle:Time:index.html.twig' %}
+{% extends "CoyoteSiteBundle:Base:layout.html.twig" %}
+
+{% block link %}
+    {{ include('CoyoteSiteBundle:Base:navigation_login.html.twig') }}
+{% endblock %}
 
 {% block javascripts %}
     <script src="{{ asset('bundles/coyotesite/js/jquery-min.js') }}"/></script>
@@ -32,9 +36,4 @@
 
     </form>
 
-    {#<form action="{{ path('contact_index') }}" method="post" >
-        {{form(form)}}
-        
-    </form>
-    #}
 {% endblock %}

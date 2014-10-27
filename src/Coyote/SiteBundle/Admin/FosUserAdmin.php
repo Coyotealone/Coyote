@@ -69,9 +69,9 @@ class FosUserAdmin extends Admin
             ->add('enabled')
             #->add('password')
             ->add('locked')
-            ->add('expired')
-            ->add('roles')
-            //->add('last_login')
+            #->add('expired')
+            #->add('roles')
+            #->add('last_login')
         ;
     }
 }

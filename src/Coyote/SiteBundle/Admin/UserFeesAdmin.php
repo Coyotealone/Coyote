@@ -22,6 +22,7 @@ class UserFeesAdmin extends Admin
             ->add('login')
             ->add('code')
             ->add('service')
+            ->add('user')
         ;
     }
 
@@ -39,9 +40,11 @@ class UserFeesAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
+            ->addIdentifier('id')
             ->addIdentifier('login')
             ->addIdentifier('code')
             ->addIdentifier('service')
+            ->add('user')
         ;
     }
 }

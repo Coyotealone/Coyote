@@ -1,0 +1,33 @@
+{% extends 'CoyoteSiteBundle:Time:index.html.twig' %}
+
+{% block link %}
+
+    <!--[if lt IE 9]>
+        {{ include('CoyoteSiteBundle:Base:navigation_ie.html.twig') }}
+    <![endif]-->
+    <!--[if !IE]><!-->
+        {{ include('CoyoteSiteBundle:Base:navigation.html.twig') }}
+	<!--<![endif]-->
+
+{% endblock %}
+
+{% block content %}
+<p id="titreconfig">{{"Téléchargement des temps de présence de l'année au format PDF"|trans}} </p>
+<form role="form" action="{{ path('coyote_time_printyear') }}" method='get'>
+    <table class='table'>
+    	<tr>
+    		<th>{{'Période'|trans}}</th>
+    	</tr>
+    	<tr>
+            <td>
+                <select name='pay_period' id='pay_period' >
+					<option value="2014/2015" selected>2014/2015</option>
+					<option value="2015/2016">2015/2016</option>
+					<option value="2016/2017">2016/2017</option>
+				</select>
+            </td>
+        </tr>
+    </table>
+    <button class='btnsave' type="submit" value="Afficher" id="afficher">{{'Afficher'|trans }}</button>
+</form>
+{% endblock %}

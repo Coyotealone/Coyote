@@ -1,45 +1,52 @@
+<ul style="padding:0; margin: 0; list-style-type:none;">
+    
+    <li style="margin-left:2px; float:left; /*pour IE*/" class="active"><a href="{{ path('accueil') }}">{{'Accueil'|trans}}</a></li>
+		
+	<li id="frais" class="dropdown" style="margin: 0px 10px; float:left; /*pour IE*/">
+      <a href="{{ path('coyote_time_index') }}" class="dropdown-toggle" data-toggle="dropdown">{{'Présence'|trans}}<b class="caret"></b></a>
+      <ul class="dropdown-menu">
+        <li><a href="{{ path('coyote_time_index') }}">{{'Saisie'|trans}}</a></li>
+        <li><a href="{{ path('coyote_time_indexshow') }}">{{'Consultation'|trans}}</a></li>
+        <li><a href="{{ path('coyote_time_indexprint') }}">{{'Impression PDF'|trans}}</a></li>
+      </ul>
+    </li>
+    
+    {% if is_granted('ROLE_BUSINESS') %}
+    <li id="frais" class="dropdown" style="margin: 0px 10px; float:left; /*pour IE*/">
+      <a href="{{ path('coyote_expense_index') }}" class="dropdown-toggle" data-toggle="dropdown">{{'Note de Frais'|trans}}<b class="caret"></b></a>
+      <ul class="dropdown-menu">
+        <li><a href="{{ path('coyote_expense_index') }}">{{'Index'|trans}}</a></li>
+        <li><a href="{{ path('coyote_expense_create') }}">{{'Saisie'|trans}}</a></li>
+        <li><a href="{{ path('coyote_expense_indexshow') }}">{{'Consultation'|trans}}</a></li>
+      </ul>
+    </li>
+    {% endif %}
+    
+    <li id="profil" class="dropdown" style="margin: 0px 10px; float:left; /*pour IE*/">
+      <a href="{{ path('coyote_profile') }}" class="dropdown-toggle" data-toggle="dropdown">{{'Profil'|trans}}<b class="caret"></b></a>
+      <ul class="dropdown-menu">
+        <li><a href="{{ path('coyote_profile') }}">{{'Information Profil'|trans}}</a></li>
+        <li><a href="{{ path('coyote_changepassword') }}">{{'Changement de mot de passe'|trans}}</a></li>
+      </ul>
+    </li>
+    
+    {% if is_granted('ROLE_CHEF_BE') %}
+	<li id="frais" class="dropdown" style="margin: 0px 10px; float:left; /*pour IE*/">
+      <a href=# class="dropdown-toggle" data-toggle="dropdown">{{'Export Présence'|trans}}<b class="caret"></b></a>
+      <ul class="dropdown-menu">
+        <li><a href="{{ path('coyote_export_index')}}">{{'Export données BE'|trans}}</a></li>
+      </ul>
+    </li>
+    {% endif %}
+    
+    {% if is_granted('ROLE_COMPTA') %}
+    <li id="frais" class="dropdown" style="margin: 0px 10px; float:left; /*pour IE*/">
+      <a href=# class="dropdown-toggle" data-toggle="dropdown">{{'Export Note de Frais'|trans}}<b class="caret"></b></a>
+      <ul class="dropdown-menu">
+        <li><a href="{{ path('coyote_export') }}">{{'Export données note de frais'|trans}}</a></li>
+      </ul>
+    </li>
+    {% endif %}
 
-	<ul style="padding:0; margin: 0; list-style-type:none;">
-		<li style="margin-left:2px; float:left; /*pour IE*/">
-		  <a href="{{ path('accueil') }}">{{'Accueil'|trans}}</a>
-        </li>
-		<li id="frais" class="dropdown" style="margin: 0px 10px; float:left; /*pour IE*/">
-          <a href="{{ path('coyote_time_index') }}" class="dropdown-toggle" data-toggle="dropdown">{{'Présence'|trans}}<b class="caret"></b></a>
-          <ul>
-            <li><a href="{{ path('coyote_time_index') }}">{{'Saisie'|trans}}</a></li>
-            <li><a href="{{ path('coyote_time_indexshow') }}">{{'Consultation'|trans}}</a></li>
-            <li><a href="{{ path('coyote_time_indexprint') }}">{{'Impression PDF'|trans}}</a></li>
-          </ul>
-        </li>
-        <li id="frais" class="dropdown" style="margin: 0px 10px; float:left; /*pour IE*/">
-          <a href="{{ path('coyote_expense_index') }}" class="dropdown-toggle" data-toggle="dropdown">{{'Note de Frais'|trans}}<b class="caret"></b></a>
-          <ul style="padding:0; margin:0; list-style-type:none;">
-            <li><a href="{{ path('coyote_expense_index') }}">{{'Index'|trans}}</a></li>
-            <li><a href="{{ path('coyote_expense_create') }}">{{'Saisie'|trans}}</a></li>
-            <li><a href="{{ path('coyote_expense_indexshow') }}">{{'Consultation'|trans}}</a></li>
-          </ul>
-        </li>
-        <li id="profil" class="dropdown" style="margin: 0px 10px; float:left; /*pour IE*/">
-          <a href="{{ path('fos_user_profile_show') }}" class="dropdown-toggle" data-toggle="dropdown">{{'Profil'|trans}}<b class="caret"></b></a>
-          <ul style="padding:0; margin:0; list-style-type:none;">
-            <li><a href="{{ path('fos_user_profile_show') }}">{{'Information Profil'|trans}}</a></li>
-            <li><a href="{{ path('coyote_changepassword') }}">{{'Changement de mot de passe'|trans}}</a></li>
-          </ul>
-        {% if app.session.get('username') == "PROVINI Anthony" %}
-        </li>
-        <li id="config" class="dropdown" style="margin: 0px 10px; float:left; /*pour IE*/">
-          <a href="{{ path('coyote_configurator') }}" class="dropdown-toggle" data-toggle="dropdown">{{'Configurateur'|trans}}<b class="caret"></b></a>
-          <ul style="padding:0; margin:0; list-style-type:none;">
-            <li><a href="{{ path('coyote_configurator') }}">{{"Création d'une config"|trans}}</a></li>
-            <li><a href="{{ path('contact_index') }}">{{"Contact"|trans}}</a></li>
-          </ul>
-        </li>
-        <li id="config" class="dropdown" style="margin: 0px 10px; float:left; /*pour IE*/">
-          <a href="{{ path('formorder_new') }}" class="dropdown-toggle" data-toggle="dropdown">{{'Formulaire'|trans}}<b class="caret"></b></a>
-          <ul style="padding:0; margin:0; list-style-type:none;">
-            <li><a href="{{ path('formorder_new') }}">{{'Formulaire Bon de commande'|trans}}</a></li>
-          </ul>
-        </li>
-        {% endif %}
-	</ul>
-	<br><br><br><br>
+</ul>
+<br><br><br><br>

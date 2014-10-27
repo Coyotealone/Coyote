@@ -12,135 +12,20 @@ use Doctrine\ORM\EntityRepository;
  */
 class TimetableRepository extends EntityRepository
 {
-    public function calcul()
-    {
-        $query = $this->getEntityManager()
-                      ->createQuery("
-                        select s.id, s.working_time from CoyoteSiteBundle:Schedule s, CoyoteSiteBundle:Timetable t 
-                        where s.timetable = t.id and s.user = 2 and t.day != 'samedi' and t.day != 'dimanche' 
-                        and s.comment != 'IMIE' and s.absence != 'RTT' and t.holiday != 1"
-                        );
-        $res = $query->getResult();
-        
-        /* SELECT distinct(timetable.no_week) FROM `schedule`, timetable 
-        WHERE user_id = 2 and comment != "IMIE" and timetable.day != "samedi" and timetable.day != "dimanche"*/
-        
-        /*select schedule.id, schedule.working_time from schedule, timetable 
-        where schedule.timetable_id = timetable.id and schedule.user_id = 2 
-        and timetable.day != 'samedi' and timetable.day != 'dimanche' and schedule.comment != 'IMIE'*/
-        
-        //return $nbres;
-        $data = 0;
-        
-        for($i=0;$i<count($res);$i++)
-        {
-            $data += $this->calculTime($res[$i]['working_time']);
-        }
-        
-        $nbsem = count($res) ;
-        $data = $this->differenceTime($data, $nbsem);
-        
-        $resfinal = 0;
-        
-        if($data<0)
-        {
-            $data = $data * -1;
-            $resfinal = 'Tu dois faire : ';
-        }
-        else
-            $resfinal = 'Tu as fait en trop :';
-        $heure = $this->formatTime($data);
-        
-        $resfinal = $resfinal.$heure;
-        
-        return $resfinal;
-    }
-    
-    public function differenceTime($time, $nbsemaine)
-    {
-        $timesemaine = 420;
-        $timesemaine = $timesemaine*$nbsemaine;
-        $time = $time - $timesemaine;
-        return $time;
-    }
-    
-    public function calculTime($time)
-    {
-        $time = explode(":", $time);
-        $minute = $time[1];
-        $heure = $time[0];
-        $timefinal = $heure * 60 + $minute;
-        return $timefinal;
-    }
-    
-    public function formatTime($time)
-    {
-        date_default_timezone_set('UTC');
-        $time = $time * 60;
-        
-        $heures=intval($time / 3600);
-        $minutes=intval(($time % 3600) / 60);
-        if(strlen($minutes) < 2)
-            $minutes = '0'.$minutes;
-        
-        return $heures.'h'.$minutes;
-    }
-
-    public function myFindDate($no_week, $year)
-    {
-        $qb = $this->_em->createQueryBuilder();
-        $qb->select('t.date')
-           ->from('CoyoteSiteBundle:Timetable', 't')
-           ->where('t.no_week = :no_week and t.year = :year')
-           ->setParameters(array('no_week' => $no_week, 'year' => $year));
-        
-        $date =  $qb->getQuery()
-                    ->getResult();
-        return $date;
-    }
-    
-    public function myFindTime($no_week, $year, $user_id)
-    {
-        $qb = $this->_em->createQueryBuilder();
-        $qb->select('t.id')
-           ->from('CoyoteSiteBundle:Timetable', 't')
-           ->where('t.no_week = :no_week and t.year = :year')
-           ->setParameters(array('no_week' => $no_week, 'year' => $year));
-        
-        $timetable_id =  $qb->getQuery()
-                            ->getResult();
-        $qb = $this->_em->createQueryBuilder();
-        $qb->select('s.start, s.end, s.break, s.working_time, s.working_hours, s.travel, s.absence, s.comment')
-           ->from('CoyoteSiteBundle:Schedule', 's')
-           ->where('s.user = :user_id and s.timetable BETWEEN :timetable_id and :timetable_id2')
-           ->setParameters(array('timetable_id' => $timetable_id[0]['id'], 'user_id'=> $user_id, 'timetable_id2' => $timetable_id[6]['id']));
-        
-        $time =  $qb->getQuery()
-                    ->getResult();
-        return $time;
-    }
-
     public function myFindScheduleId($no_week, $year, $user_id)
     {
         $qb = $this->_em->createQueryBuilder();
-        $qb->select('t.id')
-           ->from('CoyoteSiteBundle:Timetable', 't')
-           ->where('t.no_week = :no_week and t.year = :year')
-           ->setParameters(array('no_week' => $no_week, 'year' => $year));
-        $timetable_id =  $qb->getQuery()
-                            ->getResult();
-        
-        $qb = $this->_em->createQueryBuilder();
         $qb->select('s.id')
            ->from('CoyoteSiteBundle:Schedule', 's')
-           ->where('s.user = :user_id and s.timetable BETWEEN :timetable_id and :timetable_id2')
-           ->setParameters(array('timetable_id' => $timetable_id[0]['id'], 'user_id'=> $user_id, 'timetable_id2' => $timetable_id[6]['id']));
-        
-        $id =  $qb->getQuery()
-                  ->getResult();
-        return $id;
+           ->innerJoin('CoyoteSiteBundle:Timetable', 't', 'WITH', 't.id = s.timetable')
+           ->where('s.user = :user and t.year = :year and t.no_week = :no_week')
+           ->setParameters(array('user' => $user_id, 'year' => $year, 'no_week' => $no_week));
+        $id_schedule =  $qb->getQuery()
+                           ->getResult();
+
+        return $id_schedule;
     }
-    
+
     public function myFindTimetableId($no_week, $year)
     {
         $qb = $this->_em->createQueryBuilder();
@@ -150,28 +35,7 @@ class TimetableRepository extends EntityRepository
            ->setParameters(array('no_week' => $no_week, 'year' => $year));
         $timetable_id =  $qb->getQuery()
                             ->getResult();
-        
+
         return $timetable_id;
     }
-    
-    public function myFindTravel($no_week, $year, $user_id)
-    {
-        $qb = $this->_em->createQueryBuilder();
-        $qb->select('t.id')
-           ->from('CoyoteSiteBundle:Timetable', 't')
-           ->where('t.no_week = :no_week and t.year = :year')
-           ->setParameters(array('no_week' => $no_week, 'year' => $year));
-        $timetable_id =  $qb->getQuery()
-                            ->getResult();
-        $qb = $this->_em->createQueryBuilder();
-        $qb->select('s.travel')
-           ->from('CoyoteSiteBundle:Schedule', 's')
-           ->where('s.user = :user_id and s.timetable BETWEEN :timetable_id and :timetable_id2')
-           ->setParameters(array('timetable_id' => $timetable_id[0]['id'], 'user_id'=> $user_id, 'timetable_id2' => $timetable_id[6]['id']));
-        
-        $travel =  $qb->getQuery()
-                  ->getResult();
-        return $travel;
-    }
-    
 }

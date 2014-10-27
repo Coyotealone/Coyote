@@ -24,8 +24,6 @@ Coyote\SiteBundle\Entity\Fee:
             type: string
             lenght: 4
             notnull: true
-        rank:
-            type: integer
     oneToMany:
         expenses:
             targetEntity: Expense
