@@ -22,29 +22,15 @@ use Doctrine\ORM\EntityRepository;
  *
  */
 class MainController extends Controller
-{   
+{
     public function indexAction()
     {
         $user = $this->get('security.context')->getToken()->getUser();
         $session = new Session();
         if($user == "anon.")
             return $this->redirect($this->generateUrl('coyote_main_login'));
-            //return $this->redirect($this->generateUrl('fos_user_security_login'));
         if($this->get('security.context')->isGranted('ROLE_SUPER_ADMIN'))
         {
-            return $this->redirect($this->generateUrl('sonata_admin_dashboard'));
-        }
-        if($this->get('security.context')->isGranted('ROLE_COMPTA'))
-        {
-            return $this->render('CoyoteSiteBundle:Admin:index.html.twig');
-        }
-        if($this->get('security.context')->isGranted('ROLE_CHEF_BE'))
-        {
-            return $this->render('CoyoteSiteBundle:Admin:index.html.twig');
-        }
-        if($this->get('security.context')->isGranted('ROLE_ADMIN'))
-        {
-            //return $this->render('CoyoteSiteBundle:Admin:index.html.twig');
             return $this->redirect($this->generateUrl('sonata_admin_dashboard'));
         }
         if($this->get('security.context')->isGranted('ROLE_CONFIG'))
@@ -53,21 +39,25 @@ class MainController extends Controller
         }
         else
         {
-            //return $this->render('CoyoteSiteBundle:Accueil:maintenance.html.twig');
             $em = $this->getDoctrine()->getManager();
-            
+
             $iduser = $this->get('security.context')->getToken()->getUser()->getId();
             $session->set('userid', $iduser);
-            
+
             $datauser = $em->getRepository('CoyoteSiteBundle:User')->findOneById($iduser);
-            $userfees_data = $em->getRepository('CoyoteSiteBundle:UserFees')->findOneByUser($session->get('userid'));
-            
+
+
             $session->set('year', date('Y'));
             $session->set('no_week', date('W'));
             $session->set('username', $datauser->getName());
             $session->set('status', $datauser->getRoles());
-            if($userfees_data != null)
-                $session->set('userfeesid', $userfees_data->getId());
+            if($this->get('security.context')->isGranted('ROLE_BUSINESS'))
+            {
+                $userfees_data = $em->getRepository('CoyoteSiteBundle:UserFees')->findOneByUser($session->get('userid'));
+                if($userfees_data != null)
+                    $session->set('userfeesid', $userfees_data->getId());
+            }
+
             $lang = $session->get('lang');
             if(empty($lang))
                 $lang = 'fr';
@@ -82,16 +72,16 @@ class MainController extends Controller
         $session = $request->getSession();
 
         // get the error if any (works with forward and redirect -- see below)
-        if ($request->attributes->has(SecurityContextInterface::AUTHENTICATION_ERROR)) 
+        if ($request->attributes->has(SecurityContextInterface::AUTHENTICATION_ERROR))
         {
             $error = $request->attributes->get(SecurityContextInterface::AUTHENTICATION_ERROR);
-        } 
-        elseif (null !== $session && $session->has(SecurityContextInterface::AUTHENTICATION_ERROR)) 
+        }
+        elseif (null !== $session && $session->has(SecurityContextInterface::AUTHENTICATION_ERROR))
         {
             $error = $session->get(SecurityContextInterface::AUTHENTICATION_ERROR);
             $session->remove(SecurityContextInterface::AUTHENTICATION_ERROR);
-        } 
-        else 
+        }
+        else
         {
             $error = '';
         }
@@ -113,7 +103,7 @@ class MainController extends Controller
             'csrf_token' => $csrfToken,
         ));
     }
-    
+
     protected function renderLogin(array $data)
     {
         $template = sprintf('CoyoteSiteBundle:Security:login.html.twig');
@@ -144,21 +134,21 @@ class MainController extends Controller
         //$context->setHost('example.com');
         //$context->setScheme('https');
         //$context->setBaseUrl('my/path');
-    
+
         //return new Response($url);
         $user = $this->get('security.context')->getToken()->getUser();
-        
+
         $request = $this->getRequest();
-        
+
         $locale = $request->getLocale();
         $lang = $this->get('request')->request->get('langue');
-        
+
         $session = new Session();
         $session->set('lang', null);
-        $session->set('lang', $_locale);        
-        
+        $session->set('lang', $_locale);
+
         if($user == "anon.")
-        {   
+        {
             return $this->redirect($this->generateUrl('coyote_main_login'));
         }
         else

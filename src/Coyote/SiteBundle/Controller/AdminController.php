@@ -81,7 +81,7 @@ class AdminController extends Controller
         {
             $doctrine = $this->getDoctrine();
             $em = $doctrine->getManager();
-            $tabuserid = array(14, 17, 41, 42, 44, 45, 46, 49, 50, 52, 54, 62);
+            $tabuserid = array(14, 17, 41, 44, 45, 46, 49, 50, 52, 54, 62, 70);
             
             $request = Request::createFromGlobals();
             $data = $request->request->all();

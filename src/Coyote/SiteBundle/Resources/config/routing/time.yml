@@ -13,22 +13,6 @@ coyote_time_workmore:
 coyote_time_workless:
     pattern:    /timeusers/workless
     defaults:   { _controller: "CoyoteSiteBundle:Time:workless"}
-    
-coyote_time_workmorefm:
-    pattern:    /timeframes/workmore
-    defaults:   { _controller: "CoyoteSiteBundle:Time:workmorefm"}
-
-coyote_time_worklessfm:
-    pattern:    /timeframes/workless
-    defaults:   { _controller: "CoyoteSiteBundle:Time:worklessfm"}
-
-coyote_time_user:
-    pattern:    /timeusers
-    defaults:   { _controller: "CoyoteSiteBundle:Time:user"}
-
-coyote_time_framework:
-    pattern:    /timeframes
-    defaults:   { _controller: "CoyoteSiteBundle:Time:framework"}
 
 coyote_time_index:
     pattern:    /
@@ -50,6 +34,18 @@ coyote_time_indexprint:
     pattern:    /indexprint
     defaults:   { _controller: "CoyoteSiteBundle:Time:indexprint"}
 
-coyote_time_calcul:
-    pattern:    /calcul
-    defaults:   { _controller: "CoyoteSiteBundle:Time:calcul"}
+coyote_time_create:
+    pattern:    /timecreate
+    defaults:   { _controller: "CoyoteSiteBundle:Time:create"}
+
+coyote_time_edit:
+    pattern:    /timeedit
+    defaults:   { _controller: "CoyoteSiteBundle:Time:edit"}
+
+coyote_time_indexprintyear:
+    pattern:    /indexprintyear
+    defaults:   { _controller: "CoyoteSiteBundle:Time:indexprintyear"}
+
+coyote_time_printyear:
+    pattern:    /timeyear
+    defaults:   { _controller: "CoyoteSiteBundle:Time:printyear"}

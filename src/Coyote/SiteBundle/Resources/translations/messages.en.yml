@@ -6,6 +6,7 @@ Bienvenue: Welcome
 
 # Pied de page #
 "Copyright ©2014 PICHON - Tous droits réservés": Copyright ©2014 PICHON - All rights reserved
+Version: Version
 
 # Navbar #
 Accueil: Home
@@ -90,10 +91,16 @@ dimanche: sunday
 Enregistrer: Save
 Consultation des temps de présence: Consultation of time in work
 Jour travaillé dans le mois / année: Working day in the month / year
+"Récapitulatif de l'année": Summury of the year
+"Nombre de RTT utilisé dans l'année": Number of RTT user in the year
+"Nombre de congés payés (CP) utilisé dans l'année" : Number of paid leave (CP) used in the year
+"Nombre de congés d'anciennetés (CA) utilisé dans l'année": Number of seniority leave (CA) used in the year
+"Téléchargement des temps de présence de l'année au format PDF": Download to PDF working time in the year
+"Période": Period
 
 # Page Profil #
 "En cas de problème de mot de passe, merci de contacter votre administrateur ou d'envoyer un mail dans l'onglet Contact": Thanks to contact your administrator, if you have a problem with password. Or send an email from Contact tab
-'Le mot de passe doit faire': The password must be 
+'Le mot de passe doit faire': The password must be
 'caractères': characters
 
 # Page Note de frais #
@@ -228,7 +235,7 @@ form:
     website: "Website :"
     roles: "Role :"
 
-#Ajout personnel    
+#Ajout personnel
 Mot de passe oublié: Forget password
 Nom prénom: Name
 N° Téléphone: Phone number

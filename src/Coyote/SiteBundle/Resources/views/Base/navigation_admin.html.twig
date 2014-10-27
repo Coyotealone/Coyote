@@ -1,26 +1,26 @@
 <nav class="navbar navbar-default" role="navigation">
   <div class="container-fluid">
 	<ul class="nav navbar-nav">
-		<li class="active"><a href="{{ path('accueil') }}">{{'Accueil'|trans}}</a></li>
-		<li id="frais" class="dropdown">
-          <a href=# class="dropdown-toggle" data-toggle="dropdown">{{'Export Présence'|trans}}<b class="caret"></b></a>
+		
+        
+        
+        {#{% if app.session.get('username') == "PROVINI Anthony" %}
+        <li id="config" class="dropdown">
+          <a href="{{ path('coyote_configurator') }}" class="dropdown-toggle" data-toggle="dropdown">{{'Configurateur'|trans}}<b class="caret"></b></a>
           <ul class="dropdown-menu">
-            <li><a href="{{ path('coyote_export_index')}}">{{'Export données BE'|trans}}</a></li>
+            <li><a href="{{ path('coyote_configurator') }}">{{"Création d'une config"|trans}}</a></li>
+            <li><a href="{{ path('contact_index') }}">{{"Contact"|trans}}</a></li>
           </ul>
         </li>
-        <li id="frais" class="dropdown">
-          <a href=# class="dropdown-toggle" data-toggle="dropdown">{{'Note de Frais'|trans}}<b class="caret"></b></a>
+        <li id="config" class="dropdown">
+          <a href="{{ path('formorder_new') }}" class="dropdown-toggle" data-toggle="dropdown">{{'Formulaire'|trans}}<b class="caret"></b></a>
           <ul class="dropdown-menu">
-            <li><a href="{{ path('coyote_export') }}">{{'Export données note de frais'|trans}}</a></li>
+            <li><a href="{{ path('formorder_new') }}">{{'Formulaire Bon de commande'|trans}}</a></li>
           </ul>
         </li>
-        <li id="profil" class="dropdown">
-          <a href="{{ path('coyote_profile') }}" class="dropdown-toggle" data-toggle="dropdown">{{'Profil'|trans}}<b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            <li><a href="{{ path('coyote_profile') }}">{{'Information Profil'|trans}}</a></li>
-            <li><a href="{{ path('coyote_changepassword') }}">{{'Changement de mot de passe'|trans}}</a></li>
-          </ul>
-        </li>
+        <li><a href="{{ path('coyote_registration_register') }}">{{"Création d'un utilisateur"|trans}}</a></li>
+        <li><a href="{{ path('coyote_time_calcul') }}">{{"Calcul heure supp par semaine"|trans}}</a></li>
+        {% endif %}#}
 	</ul>
   </div>
 </nav>

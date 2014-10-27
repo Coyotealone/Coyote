@@ -1,23 +1,29 @@
 <nav class="navbar navbar-default" role="navigation">
   <div class="container-fluid">
 	<ul class="nav navbar-nav">
+
 		<li class="active"><a href="{{ path('accueil') }}">{{'Accueil'|trans}}</a></li>
+
 		<li id="frais" class="dropdown">
           <a href="{{ path('coyote_time_index') }}" class="dropdown-toggle" data-toggle="dropdown">{{'Présence'|trans}}<b class="caret"></b></a>
           <ul class="dropdown-menu">
             <li><a href="{{ path('coyote_time_index') }}">{{'Saisie'|trans}}</a></li>
             <li><a href="{{ path('coyote_time_indexshow') }}">{{'Consultation'|trans}}</a></li>
             <li><a href="{{ path('coyote_time_indexprint') }}">{{'Impression PDF'|trans}}</a></li>
+            <li><a href="{{ path('coyote_time_indexprintyear') }}">{{"Impression de l'année PDF"|trans}}</a></li>
           </ul>
         </li>
+
+        {% if is_granted('ROLE_BUSINESS') %}
         <li id="frais" class="dropdown">
-          <a href="{{ path('coyote_expense_index') }}" class="dropdown-toggle" data-toggle="dropdown">{{'Note de Frais'|trans}}<b class="caret"></b></a>
+          <a href="{{ path('coyote_expense_create') }}" class="dropdown-toggle" data-toggle="dropdown">{{'Note de Frais'|trans}}<b class="caret"></b></a>
           <ul class="dropdown-menu">
-            <li><a href="{{ path('coyote_expense_index') }}">{{'Index'|trans}}</a></li>
             <li><a href="{{ path('coyote_expense_create') }}">{{'Saisie'|trans}}</a></li>
             <li><a href="{{ path('coyote_expense_indexshow') }}">{{'Consultation'|trans}}</a></li>
           </ul>
         </li>
+        {% endif %}
+
         <li id="profil" class="dropdown">
           <a href="{{ path('coyote_profile') }}" class="dropdown-toggle" data-toggle="dropdown">{{'Profil'|trans}}<b class="caret"></b></a>
           <ul class="dropdown-menu">
@@ -25,23 +31,25 @@
             <li><a href="{{ path('coyote_changepassword') }}">{{'Changement de mot de passe'|trans}}</a></li>
           </ul>
         </li>
-        {#{% if app.session.get('username') == "PROVINI Anthony" %}
-        <li id="config" class="dropdown">
-          <a href="{{ path('coyote_configurator') }}" class="dropdown-toggle" data-toggle="dropdown">{{'Configurateur'|trans}}<b class="caret"></b></a>
+
+        {% if is_granted('ROLE_CHEF_BE') %}
+		<li id="frais" class="dropdown">
+          <a href=# class="dropdown-toggle" data-toggle="dropdown">{{'Export Présence'|trans}}<b class="caret"></b></a>
           <ul class="dropdown-menu">
-            <li><a href="{{ path('coyote_configurator') }}">{{"Création d'une config"|trans}}</a></li>
-            <li><a href="{{ path('contact_index') }}">{{"Contact"|trans}}</a></li>
+            <li><a href="{{ path('coyote_export_index')}}">{{'Export données BE'|trans}}</a></li>
           </ul>
         </li>
-        <li id="config" class="dropdown">
-          <a href="{{ path('formorder_new') }}" class="dropdown-toggle" data-toggle="dropdown">{{'Formulaire'|trans}}<b class="caret"></b></a>
+        {% endif %}
+
+        {% if is_granted('ROLE_COMPTA') %}
+        <li id="frais" class="dropdown">
+          <a href=# class="dropdown-toggle" data-toggle="dropdown">{{'Export Note de Frais'|trans}}<b class="caret"></b></a>
           <ul class="dropdown-menu">
-            <li><a href="{{ path('formorder_new') }}">{{'Formulaire Bon de commande'|trans}}</a></li>
+            <li><a href="{{ path('coyote_export') }}">{{'Export données note de frais'|trans}}</a></li>
           </ul>
         </li>
-        <li><a href="{{ path('coyote_registration_register') }}">{{"Création d'un utilisateur"|trans}}</a></li>
-        <li><a href="{{ path('coyote_time_calcul') }}">{{"Calcul heure supp par semaine"|trans}}</a></li>
-        {% endif %}#}
+        {% endif %}
+
 	</ul>
   </div>
 </nav>

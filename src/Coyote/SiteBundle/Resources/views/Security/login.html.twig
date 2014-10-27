@@ -1,13 +1,12 @@
 {% extends "CoyoteSiteBundle:Base:layout.html.twig" %}
 
 {% block link %}
+    
     {{ include('CoyoteSiteBundle:Base:navigation_login.html.twig') }}
+	
 {% endblock %}
 
 {% block fos_user_content %}
-{% if error %}
-    <div>{{ error|trans }}</div>
-{% endif %}
 
 <form action="{{ path("fos_user_security_check") }}" method="post" role="form">
     <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
@@ -31,7 +30,6 @@
     
     <button class="btn btn-danger btn-default" type="submit" id="_submit" name="_submit">{{ 'Connexion'|trans }}</button>
 </form>
+<a class="btn btn-primary btn-default" href="{{ path('coyote_resetting_request') }}">{{"Mot de passe oublié"|trans}} ?</a>
 
-
-    <a class="btn btn-primary btn-default" href="{{ path('coyote_resetting_request') }}">{{"Mot de passe oublié"|trans}} ?</a>
 {% endblock fos_user_content %}
