@@ -1,8 +1,8 @@
 # coyote_index:
 #     pattern:    /
 #     defaults:   { _controller: "CoyoteSiteBundle:Main:index" }
-# 
-# 
+#
+#
 # coyote_main:
 #     pattern:    /
 #     defaults:   { _controller: "CoyoteSiteBundle:Main:index" }
@@ -11,7 +11,7 @@
 
 coyote_main_login:
     pattern:    /login
-    defaults:   { _controller: "CoyoteSiteBundle:Main:login" }
+    defaults:   { _controller: "CoyoteSiteBundle:Main:login", _locale: fr }
 
 coyote_main_menu:
     pattern:    /menu

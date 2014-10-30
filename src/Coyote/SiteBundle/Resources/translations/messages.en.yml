@@ -22,7 +22,8 @@ Information Profil: Profil information
 Changement de mot de passe: Change password
 "Création d'une config": Creating a configuration
 Formulaire Bon de commande: Form order
-Impression PDF: PDF printing
+Impression PDF: PDF print
+"Impression de l'année en PDF": PDF print of the year
 
 # Page Login #
 Mot de passe oublié: Forgot password
@@ -35,7 +36,7 @@ Bienvenue sur le site PICHON: Welcome to the website PICHON
 Voici la semaine: Display Week
 "d'affichée de l'année": of
 Temps de travail: Working time
-Jour de la semaine: Weekday
+"Jour de la semaine": Weekday
 Début: Start
 Fin: End
 Pause: Break
@@ -97,6 +98,8 @@ Jour travaillé dans le mois / année: Working day in the month / year
 "Nombre de congés d'anciennetés (CA) utilisé dans l'année": Number of seniority leave (CA) used in the year
 "Téléchargement des temps de présence de l'année au format PDF": Download to PDF working time in the year
 "Période": Period
+"Temps travaillé dans la semaine": Time worked in a week
+Téléchargement des temps de présence au format PDF: Download the working time in PDF
 
 # Page Profil #
 "En cas de problème de mot de passe, merci de contacter votre administrateur ou d'envoyer un mail dans l'onglet Contact": Thanks to contact your administrator, if you have a problem with password. Or send an email from Contact tab

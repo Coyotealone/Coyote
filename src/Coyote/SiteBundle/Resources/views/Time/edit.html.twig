@@ -36,15 +36,15 @@
     	<table id='table_temps' class='table'>
     		<thead>
     			<tr>
-    				<td>Jour de la semaine</td>
-    				<td>Début</td>
-    				<td>Fin</td>
-    				<td>Pause</td>
-    				<td>Temps de travail</td>
-    				<td>Journée travaillée</td>
-    				<td>Déplacement</td>
-    				<td>Absence</td>
-    				<td>Commentaire</td>
+    				<td>{{'Jour de la semaine'|trans}}</td>
+    				<td>{{'Début'|trans}}</td>
+    				<td>{{'Fin'|trans}}</td>
+    				<td>{{'Pause'|trans}}</td>
+    				<td>{{'Temps de travail'|trans}}</td>
+    				<td>{{'Journée travaillée'|trans}}</td>
+    				<td>{{'Déplacement'|trans}}</td>
+    				<td>{{'Absence'|trans}}</td>
+    				<td>{{'Commentaire'|trans}}</td>
 
     			</tr>
     		</thead>
@@ -70,23 +70,23 @@
     				</td>
     				<td class='deplacement'>
     					<select name='deplacementlundi' id='deplacementlundi' data-value={{ time.0.travel }} >
-    					    <option value='0'>Non</option>
-                            <option value='1'>Oui</option>
+    					    <option value='0'>{{'Non'|trans}}</option>
+                            <option value='1'>{{'Oui'|trans}}</option>
     					</select>
     				</td>
     				<td>
     					<select name='absencelundi' id='absencelundi' data-value="{{ time.0.absence }}" >
         					<option value='Aucune'></option>
-        					<option value='RTT'>RTT</option>
-        					<option value='Congés payés'>Congés payés</option>
-        					<option value='CA'>CA</option>
-        					<option value='CEF'>CEF</option>
-        					<option value='Congés sans solde'>Congés sans solde</option>
-        					<option value='Maladie/At/Pat'>Maladie/At/Pat</option>
+        					<option value='RTT'>{{'RTT'|trans}}</option>
+        					<option value='Congés payés'>{{'Congés payés'|trans}}</option>
+        					<option value='CA'>{{'CA'|trans}}</option>
+        					<option value='CEF'>{{'CEF'|trans}}</option>
+        					<option value='Congés sans solde'>{{'Congés sans solde'|trans}}</option>
+        					<option value='Maladie/At/Pat'>{{'Maladie/At/Pat'|trans}}</option>
     					</select>
     				</td>
     				<td>
-    				    <input type='text' name='commentairelundi' id='commentairelundi' placeholder='Saisir un commentaire' data-value={{ time.0.comment }} value="{{ time.0.comment }}" />
+    				    <input type='text' name='commentairelundi' id='commentairelundi' placeholder="{{'Saisir un commentaire'|trans}}" data-value={{ time.0.comment }} value="{{ time.0.comment }}" />
     				</td>
     			</tr>
     			<tr>
@@ -110,23 +110,23 @@
     				</td>
     				<td class='deplacement' >
     					<select name='deplacementmardi' id='deplacementmardi' data-value={{ time.1.travel }} >
-        					<option value='0'>Non</option>
-        					<option value='1'>Oui</option>
+        					<option value='0'>{{'Non'|trans}}</option>
+        					<option value='1'>{{'Oui'|trans}}</option>
     					</select>
     				</td>
     				<td>
     					<select name='absencemardi' id='absencemardi' data-value="{{ time.1.absence }}" >
         					<option value='Aucune'></option>
-        					<option value='RTT'>RTT</option>
-        					<option value='Congés payés'>Congés payés</option>
-        					<option value='CA'>CA</option>
-        					<option value='CEF'>CEF</option>
-        					<option value='Congés sans solde'>Congés sans solde</option>
-        					<option value='Maladie/At/Pat'>Maladie/At/Pat</option>
+        					<option value='RTT'>{{'RTT'|trans}}</option>
+        					<option value='Congés payés'>{{'Congés payés'|trans}}</option>
+        					<option value='CA'>{{'CA'|trans}}</option>
+        					<option value='CEF'>{{'CEF'|trans}}</option>
+        					<option value='Congés sans solde'>{{'Congés sans solde'|trans}}</option>
+        					<option value='Maladie/At/Pat'>{{'Maladie/At/Pat'|trans}}</option>
     					</select>
     				</td>
     				<td>
-    				    <input type='text' name='commentairemardi' id='commentairemardi' placeholder='Saisir un commentaire' data-value={{ time.1.comment }} value="{{ time.1.comment }}" />
+    				    <input type='text' name='commentairemardi' id='commentairemardi' placeholder="{{'Saisir un commentaire'|trans}}" data-value={{ time.1.comment }} value="{{ time.1.comment }}" />
     				</td>
     			</tr>
     			<tr>
@@ -150,23 +150,23 @@
     				</td>
     				<td class='deplacement'>
     					<select name='deplacementmercredi' id='deplacementmercredi' data-value={{ time.2.travel }} >
-        					<option value='0'>Non</option>
-        					<option value='1'>Oui</option>
+        					<option value='0'>{{'Non'|trans}}</option>
+        					<option value='1'>{{'Oui'|trans}}</option>
     					</select>
     				</td>
     				<td>
     					<select name='absencemercredi' id='absencemercredi' data-value="{{ time.2.absence }}" >
         					<option value='Aucune'></option>
-        					<option value='RTT'>RTT</option>
-        					<option value='Congés payés'>Congés payés</option>
-        					<option value='CA'>CA</option>
-        					<option value='CEF'>CEF</option>
-        					<option value='Congés sans solde'>Congés sans solde</option>
-        					<option value='Maladie/At/Pat'>Maladie/At/Pat</option>
+        					<option value='RTT'>{{'RTT'|trans}}</option>
+        					<option value='Congés payés'>{{'Congés payés'|trans}}</option>
+        					<option value='CA'>{{'CA'|trans}}</option>
+        					<option value='CEF'>{{'CEF'|trans}}</option>
+        					<option value='Congés sans solde'>{{'Congés sans solde'|trans}}</option>
+        					<option value='Maladie/At/Pat'>{{'Maladie/At/Pat'|trans}}</option>
     					</select>
     				</td>
     				<td>
-    				    <input type='text' name='commentairemercredi' id='commentairemercredi' placeholder='Saisir un commentaire' data-value={{ time.2.comment }} value="{{ time.2.comment }}" />
+    				    <input type='text' name='commentairemercredi' id='commentairemercredi' placeholder="{{'Saisir un commentaire'|trans}}" data-value={{ time.2.comment }} value="{{ time.2.comment }}" />
     				</td>
     			</tr>
     			<tr>
@@ -190,23 +190,23 @@
     				</td>
     				<td class='deplacement'>
     					<select name='deplacementjeudi' id='deplacementjeudi' data-value={{ time.3.travel }} >
-        					<option value='0'>Non</option>
-        					<option value='1'>Oui</option>
+        					<option value='0'>{{'Non'|trans}}</option>
+        					<option value='1'>{{'Oui'|trans}}</option>
     					</select>
     				</td>
     				<td>
     					<select name='absencejeudi' id='absencejeudi' data-value="{{ time.3.absence }}" >
         					<option value='Aucune'></option>
-        					<option value='RTT'>RTT</option>
-        					<option value='Congés payés'>Congés payés</option>
-        					<option value='CA'>CA</option>
-        					<option value='CEF'>CEF</option>
-        					<option value='Congés sans solde'>Congés sans solde</option>
-        					<option value='Maladie/At/Pat'>Maladie/At/Pat</option>
+        					<option value='RTT'>{{'RTT'|trans}}</option>
+        					<option value='Congés payés'>{{'Congés payés'|trans}}</option>
+        					<option value='CA'>{{'CA'|trans}}</option>
+        					<option value='CEF'>{{'CEF'|trans}}</option>
+        					<option value='Congés sans solde'>{{'Congés sans solde'|trans}}</option>
+        					<option value='Maladie/At/Pat'>{{'Maladie/At/Pat'|trans}}</option>
     					</select>
     				</td>
     				<td>
-    				    <input type='text' name='commentairejeudi' id='commentairejeudi' placeholder='Saisir un commentaire' data-value={{ time.3.comment }} value="{{ time.3.comment }}" />
+    				    <input type='text' name='commentairejeudi' id='commentairejeudi' placeholder="{{'Saisir un commentaire'|trans}}" data-value={{ time.3.comment }} value="{{ time.3.comment }}" />
     				</td>
     			</tr>
     			<tr>
@@ -230,23 +230,23 @@
     				</td>
     				<td class='deplacement'>
     					<select name='deplacementvendredi' id='deplacementvendredi' data-value={{ time.4.travel }} >
-    					    <option value='0'>Non</option>
-                            <option value='1'>Oui</option>
+    					    <option value='0'>{{'Non'|trans}}</option>
+                            <option value='1'>{{'Oui'|trans}}</option>
     					</select>
     				</td>
     				<td>
     					<select name='absencevendredi' id='absencevendredi' data-value="{{ time.4.absence }}" >
         					<option value='Aucune'></option>
-        					<option value='RTT'>RTT</option>
-        					<option value='Congés payés'>Congés payés</option>
-        					<option value='CA'>CA</option>
-        					<option value='CEF'>CEF</option>
-        					<option value='Congés sans solde'>Congés sans solde</option>
-        					<option value='Maladie/At/Pat'>Maladie/At/Pat</option>
+        					<option value='RTT'>{{'RTT'|trans}}</option>
+        					<option value='Congés payés'>{{'Congés payés'|trans}}</option>
+        					<option value='CA'>{{'CA'|trans}}</option>
+        					<option value='CEF'>{{'CEF'|trans}}</option>
+        					<option value='Congés sans solde'>{{'Congés sans solde'|trans}}</option>
+        					<option value='Maladie/At/Pat'>{{'Maladie/At/Pat'|trans}}</option>
     					</select>
     				</td>
     				<td>
-    				    <input type='text' name='commentairevendredi' id='commentairevendredi' placeholder='Saisir un commentaire' data-value={{ time.4.comment }} value="{{ time.4.comment }}" />
+    				    <input type='text' name='commentairevendredi' id='commentairevendredi' placeholder="{{'Saisir un commentaire'|trans}}" data-value={{ time.4.comment }} value="{{ time.4.comment }}" />
     				</td>
     			</tr>
     			<tr>
@@ -270,23 +270,23 @@
     				</td>
     				<td class='deplacement'>
     					<select name='deplacementsamedi' id='deplacementsamedi' data-value={{ time.5.travel }} >
-        					<option value='0'>Non</option>
-        					<option value='1'>Oui</option>
+        					<option value='0'>{{'Non'|trans}}</option>
+        					<option value='1'>{{'Oui'|trans}}</option>
     					</select>
     				</td>
     				<td>
     					<select name='absencesamedi' id='absencesamedi' data-value="{{ time.5.absence }}" >
         					<option value='Aucune'></option>
-        					<option value='RTT'>RTT</option>
-        					<option value='Congés payés'>Congés payés</option>
-        					<option value='CA'>CA</option>
-        					<option value='CEF'>CEF</option>
-        					<option value='Congés sans solde'>Congés sans solde</option>
-        					<option value='Maladie/At/Pat'>Maladie/At/Pat</option>
+        					<option value='RTT'>{{'RTT'|trans}}</option>
+        					<option value='Congés payés'>{{'Congés payés'|trans}}</option>
+        					<option value='CA'>{{'CA'|trans}}</option>
+        					<option value='CEF'>{{'CEF'|trans}}</option>
+        					<option value='Congés sans solde'>{{'Congés sans solde'|trans}}</option>
+        					<option value='Maladie/At/Pat'>{{'Maladie/At/Pat'|trans}}</option>
     					</select>
     				</td>
     				<td>
-    				    <input type='text' name='commentairesamedi' id='commentairesamedi' placeholder='Saisir un commentaire' data-value={{ time.5.comment }} value="{{ time.5.comment }}" />
+    				    <input type='text' name='commentairesamedi' id='commentairesamedi' placeholder="{{'Saisir un commentaire'|trans}}" data-value={{ time.5.comment }} value="{{ time.5.comment }}" />
     				</td>
     			</tr>
     			<tr>
@@ -310,30 +310,30 @@
     				</td>
     				<td class='deplacement'>
     					<select name='deplacementdimanche' id='deplacementdimanche' data-value={{ time.6.travel }} >
-        					<option value='0'>Non</option>
-        					<option value='1'>Oui</option>
+        					<option value='0'>{{'Non'|trans}}</option>
+        					<option value='1'>{{'Oui'|trans}}</option>
     					</select>
     				</td>
     				<td>
     					<select name='absencedimanche' id='absencedimanche' data-value="{{ time.6.absence }}" >
         					<option value='Aucune'></option>
-        					<option value='RTT'>RTT</option>
-        					<option value='Congés payés'>Congés payés</option>
-        					<option value='CA'>CA</option>
-        					<option value='CEF'>CEF</option>
-        					<option value='Congés sans solde'>Congés sans solde</option>
-        					<option value='Maladie/At/Pat'>Maladie/At/Pat</option>
+        					<option value='RTT'>{{'RTT'|trans}}</option>
+        					<option value='Congés payés'>{{'Congés payés'|trans}}</option>
+        					<option value='CA'>{{'CA'|trans}}</option>
+        					<option value='CEF'>{{'CEF'|trans}}</option>
+        					<option value='Congés sans solde'>{{'Congés sans solde'|trans}}</option>
+        					<option value='Maladie/At/Pat'>{{'Maladie/At/Pat'|trans}}</option>
     					</select>
     				</td>
     				<td>
-    				    <input type='text' name='commentairedimanche' id='commentairedimanche' placeholder='Saisir un commentaire' data-value={{ time.6.comment }} value="{{ time.6.comment }}" />
+    				    <input type='text' name='commentairedimanche' id='commentairedimanche' placeholder="{{'Saisir un commentaire'|trans}}" data-value={{ time.6.comment }} value="{{ time.6.comment }}" />
     				</td>
     			</tr>
     		</tbody>
     	</table>
 	</div>
 	<div>
-        Saisie automatique des heures (Cochez les jours que vous souhaitez remplir et saisissez les valeurs dans les champs début fin pause ci-dessous)
+        {{'Saisie automatique des heures (Cochez les jours que vous souhaitez remplir et saisissez les valeurs dans les champs début fin pause ci-dessous)'|trans}}
 		<br>
 		<input type='checkbox' name='lundi' id='check_lundi'>{{ 'Lundi'|trans }}
 		<input type='checkbox' name='mardi' id='check_mardi'> {{ 'Mardi'|trans }}
@@ -346,9 +346,9 @@
 		{{ 'Fin'|trans }}<input class='input' type='text' id='finauto'>
 		{{ 'Pause'|trans }}<input class='input' type='text' id='pauseauto'>
 	</div><br>
-    <a id='saisie_auto' class='btnauto' onclick='saisie_auto()'>Saisie Automatique</a><br><br>
-    <a id='work_less' class='btnpage' href="{{ path('coyote_time_workless')}}" >Semaine Précédente</a>
-    <a id='work_more' class='btnpage' href="{{ path('coyote_time_workmore')}}" >Semaine Suivante</a><br><br>
+    <a id='saisie_auto' class='btnauto' onclick='saisie_auto()'>{{'Saisie Automatique'|trans}}</a><br><br>
+    <a id='work_less' class='btnpage' href="{{ path('coyote_time_workless')}}" >{{'Semaine Précédente'|trans}}</a>
+    <a id='work_more' class='btnpage' href="{{ path('coyote_time_workmore')}}" >{{'Semaine Suivante'|trans}}</a><br><br>
 
     <button class='btnsave' type="submit" value="Enregistrer" id="enregistrer">{{ 'Enregistrer'|trans }}</button>
 </form>
@@ -367,11 +367,11 @@
 	        <table id='table_temps' class='table'>
                 <thead>
             		<tr>
-            			<td>Jour de la semaine</td>
-            			<td>Journée travaillée</td>
-            			<td>Déplacement</td>
-            			<td>Absence</td>
-            			<td>Commentaire</td>
+            			<td>{{'Jour de la semaine'|trans}}</td>
+            			<td>{{'Journée travaillée'|trans}}</td>
+            			<td>{{'Déplacement'|trans}}</td>
+            			<td>{{'Absence'|trans}}</td>
+            			<td>{{'Commentaire'|trans}}</td>
             		</tr>
             	</thead>
         		<tbody>
@@ -388,23 +388,23 @@
         				</td>
         				<td class='deplacement'>
         					<select name='deplacementlundi' id='deplacementlundi' data-value="{{ time.0.travel }}" >
-        					    <option value='0'>Non</option>
-        				    	<option value='1'>Oui</option>
+        					    <option value='0'>{{'Non'|trans}}</option>
+        				    	<option value='1'>{{'Oui'|trans}}</option>
         					</select>
         				</td>
                         <td>
         					<select name='absencelundi' id='absencelundi' data-value="{{ time.0.absence }}" >
             					<option value='Aucune'></option>
-            					<option value='RTT'>RTT</option>
-            					<option value='Congés payés'>Congés payés</option>
-            					<option value='CA'>CA</option>
-            					<option value='CEF'>CEF</option>
-            					<option value='Congés sans solde'>Congés sans solde</option>
-            					<option value='Maladie/At/Pat'>Maladie/At/Pat</option>
+            					<option value='RTT'>{{'RTT'|trans}}</option>
+            					<option value='Congés payés'>{{'Congés payés'|trans}}</option>
+            					<option value='CA'>{{'CA'|trans}}</option>
+            					<option value='CEF'>{{'CEF'|trans}}</option>
+            					<option value='Congés sans solde'>{{'Congés sans solde'|trans}}</option>
+            					<option value='Maladie/At/Pat'>{{'Maladie/At/Pat'|trans}}</option>
         					</select>
         				</td>
         				<td>
-        				    <input type='text' name='commentairelundi' id='commentairelundi' placeholder='Saisir un commentaire' data-value="{{ time.0.comment }}" value={{ time.0.comment }} />
+        				    <input type='text' name='commentairelundi' id='commentairelundi' placeholder="{{'Saisir un commentaire'|trans}}" data-value="{{ time.0.comment }}" value={{ time.0.comment }} />
         				</td>
         			</tr>
         			<tr>
@@ -420,23 +420,23 @@
         				</td>
         				<td class='deplacement'>
         					<select name='deplacementmardi' id='deplacementmardi' data-value="{{ time.1.travel }}" >
-            					<option value='0'>Non</option>
-            					<option value='1'>Oui</option>
+            					<option value='0'>{{'Non'|trans}}</option>
+            					<option value='1'>{{'Oui'|trans}}</option>
         					</select>
         				</td>
         				<td>
         					<select name='absencemardi' id='absencemardi' value='' data-value="{{ time.1.absence }}" >
             					<option value='Aucune'></option>
-            					<option value='RTT'>RTT</option>
-            					<option value='Congés payés'>Congés payés</option>
-            					<option value='CA'>CA</option>
-            					<option value='CEF'>CEF</option>
-            					<option value='Congés sans solde'>Congés sans solde</option>
-            					<option value='Maladie/At/Pat'>Maladie/At/Pat</option>
+            					<option value='RTT'>{{'RTT'|trans}}</option>
+            					<option value='Congés payés'>{{'Congés payés'|trans}}</option>
+            					<option value='CA'>{{'CA'|trans}}</option>
+            					<option value='CEF'>{{'CEF'|trans}}</option>
+            					<option value='Congés sans solde'>{{'Congés sans solde'|trans}}</option>
+            					<option value='Maladie/At/Pat'>{{'Maladie/At/Pat'|trans}}</option>
         					</select>
         				</td>
         				<td>
-        				    <input type='text' name='commentairemardi' id='commentairemardi' placeholder='Saisir un commentaire' data-value="{{ time.1.comment }}" value={{ time.1.comment }} />
+        				    <input type='text' name='commentairemardi' id='commentairemardi' placeholder="{{'Saisir un commentaire'|trans}}" data-value="{{ time.1.comment }}" value={{ time.1.comment }} />
         				</td>
         			</tr>
         			<tr>
@@ -452,23 +452,23 @@
         				</td>
         				<td class='deplacement'>
         					<select name='deplacementmercredi' id='deplacementmercredi' data-value="{{ time.2.travel }}" >
-            					<option value='0'>Non</option>
-            					<option value='1'>Oui</option>
+            					<option value='0'>{{'Non'|trans}}</option>
+            					<option value='1'>{{'Oui'|trans}}</option>
         					</select>
         				</td>
         				<td>
         					<select name='absencemercredi' id='absencemercredi' data-value="{{ time.2.absence }}" >
             					<option value='Aucune'></option>
-            					<option value='RTT'>RTT</option>
-            					<option value='Congés payés'>Congés payés</option>
-            					<option value='CA'>CA</option>
-            					<option value='CEF'>CEF</option>
-            					<option value='Congés sans solde'>Congés sans solde</option>
-            					<option value='Maladie/At/Pat'>Maladie/At/Pat</option>
+            					<option value='RTT'>{{'RTT'|trans}}</option>
+            					<option value='Congés payés'>{{'Congés payés'|trans}}</option>
+            					<option value='CA'>{{'CA'|trans}}</option>
+            					<option value='CEF'>{{'CEF'|trans}}</option>
+            					<option value='Congés sans solde'>{{'Congés sans solde'|trans}}</option>
+            					<option value='Maladie/At/Pat'>{{'Maladie/At/Pat'|trans}}</option>
         					</select>
         				</td>
         				<td>
-        				    <input type='text' name='commentairemercredi' id='commentairemercredi' placeholder='Saisir un commentaire' data-value="{{ time.2.comment }}" value={{ time.2.comment }} />
+        				    <input type='text' name='commentairemercredi' id='commentairemercredi' placeholder="{{'Saisir un commentaire'|trans}}" data-value="{{ time.2.comment }}" value={{ time.2.comment }} />
         				</td>
         			</tr>
         			<tr>
@@ -484,23 +484,23 @@
         				</td>
         				<td class='deplacement'>
         					<select name='deplacementjeudi' id='deplacementjeudi' data-value="{{ time.3.travel }}" >
-            					<option value='0'>Non</option>
-            					<option value='1'>Oui</option>
+            					<option value='0'>{{'Non'|trans}}</option>
+            					<option value='1'>{{'Oui'|trans}}</option>
         					</select>
         				</td>
         				<td>
         					<select name='absencejeudi' id='absencejeudi' data-value="{{ time.3.absence }}" >
             					<option value='Aucune'></option>
-            					<option value='RTT'>RTT</option>
-            					<option value='Congés payés'>Congés payés</option>
-            					<option value='CA'>CA</option>
-            					<option value='CEF'>CEF</option>
-            					<option value='Congés sans solde'>Congés sans solde</option>
-            					<option value='Maladie/At/Pat'>Maladie/At/Pat</option>
+            					<option value='RTT'>{{'RTT'|trans}}</option>
+            					<option value='Congés payés'>{{'Congés payés'|trans}}</option>
+            					<option value='CA'>{{'CA'|trans}}</option>
+            					<option value='CEF'>{{'CEF'|trans}}</option>
+            					<option value='Congés sans solde'>{{'Congés sans solde'|trans}}</option>
+            					<option value='Maladie/At/Pat'>{{'Maladie/At/Pat'|trans}}</option>
         					</select>
         				</td>
         				<td>
-        				    <input type='text' name='commentairejeudi' id='commentairejeudi' placeholder='Saisir un commentaire' data-value="{{ time.3.comment }}" value={{ time.3.comment }} />
+        				    <input type='text' name='commentairejeudi' id='commentairejeudi' placeholder="{{'Saisir un commentaire'|trans}}" data-value="{{ time.3.comment }}" value={{ time.3.comment }} />
         				</td>
         			</tr>
         			<tr>
@@ -516,23 +516,23 @@
         				</td>
         				<td class='deplacement'>
         					<select name='deplacementvendredi' id='deplacementvendredi' data-value="{{ time.4.travel }}" >
-            					<option value='0'>Non</option>
-            					<option value='1'>Oui</option>
+            					<option value='0'>{{'Non'|trans}}</option>
+            					<option value='1'>{{'Oui'|trans}}</option>
         					</select>
         				</td>
         				<td>
         					<select name='absencevendredi' id='absencevendredi' data-value="{{ time.4.absence }}" >
             					<option value='Aucune'></option>
-            					<option value='RTT'>RTT</option>
-            					<option value='Congés payés'>Congés payés</option>
-            					<option value='CA'>CA</option>
-            					<option value='CEF'>CEF</option>
-            					<option value='Congés sans solde'>Congés sans solde</option>
-            					<option value='Maladie/At/Pat'>Maladie/At/Pat</option>
+            					<option value='RTT'>{{'RTT'|trans}}</option>
+            					<option value='Congés payés'>{{'Congés payés'|trans}}</option>
+            					<option value='CA'>{{'CA'|trans}}</option>
+            					<option value='CEF'>{{'CEF'|trans}}</option>
+            					<option value='Congés sans solde'>{{'Congés sans solde'|trans}}</option>
+            					<option value='Maladie/At/Pat'>{{'Maladie/At/Pat'|trans}}</option>
         					</select>
         				</td>
         				<td>
-        				    <input type='text' name='commentairevendredi' id='commentairevendredi' placeholder='Saisir un commentaire' data-value="{{ time.4.comment }}" value={{ time.4.comment }} />
+        				    <input type='text' name='commentairevendredi' id='commentairevendredi' placeholder="{{'Saisir un commentaire'|trans}}" data-value="{{ time.4.comment }}" value={{ time.4.comment }} />
         				</td>
         			</tr>
         			<tr>
@@ -548,23 +548,23 @@
         				</td>
         				<td class='deplacement'>
         					<select name='deplacementsamedi' id='deplacementsamedi' data-value="{{ time.5.travel }}" >
-            					<option value='0'>Non</option>
-            					<option value='1'>Oui</option>
+            					<option value='0'>{{'Non'|trans}}</option>
+            					<option value='1'>{{'Oui'|trans}}</option>
         					</select>
         				</td>
         				<td>
         					<select name='absencesamedi' id='absencesamedi' data-value="{{ time.5.absence }}" >
             					<option value='Aucune'></option>
-            					<option value='RTT'>RTT</option>
-            					<option value='Congés payés'>Congés payés</option>
-            					<option value='CA'>CA</option>
-            					<option value='CEF'>CEF</option>
-            					<option value='Congés sans solde'>Congés sans solde</option>
-            					<option value='Maladie/At/Pat'>Maladie/At/Pat</option>
+            					<option value='RTT'>{{'RTT'|trans}}</option>
+            					<option value='Congés payés'>{{'Congés payés'|trans}}</option>
+            					<option value='CA'>{{'CA'|trans}}</option>
+            					<option value='CEF'>{{'CEF'|trans}}</option>
+            					<option value='Congés sans solde'>{{'Congés sans solde'|trans}}</option>
+            					<option value='Maladie/At/Pat'>{{'Maladie/At/Pat'|trans}}</option>
         					</select>
         				</td>
         				<td>
-        				    <input type='text' name='commentairesamedi' id='commentairesamedi' placeholder='Saisir un commentaire' data-value="{{ time.5.comment }}" value={{ time.5.comment }} />
+        				    <input type='text' name='commentairesamedi' id='commentairesamedi' placeholder="{{'Saisir un commentaire'|trans}}" data-value="{{ time.5.comment }}" value={{ time.5.comment }} />
         				</td>
         			</tr>
         			<tr>
@@ -580,23 +580,23 @@
         				</td>
         				<td class='deplacement'>
         					<select name='deplacementdimanche' id='deplacementdimanche' data-value="{{ time.6.travel }}" >
-            					<option value='0'>Non</option>
-            					<option value='1'>Oui</option>
+            					<option value='0'>{{'Non'|trans}}</option>
+            					<option value='1'>{{'Oui'|trans}}</option>
         					</select>
         				</td>
         				<td>
         					<select name='absencedimanche' id='absencedimanche' data-value="{{ time.6.absence }}" >
             					<option value='Aucune'></option>
-            					<option value='RTT'>RTT</option>
-            					<option value='Congés payés'>Congés payés</option>
-            					<option value='CA'>CA</option>
-            					<option value='CEF'>CEF</option>
-            					<option value='Congés sans solde'>Congés sans solde</option>
-            					<option value='Maladie/At/Pat'>Maladie/At/Pat</option>
+            					<option value='RTT'>{{'RTT'|trans}}</option>
+            					<option value='Congés payés'>{{'Congés payés'|trans}}</option>
+            					<option value='CA'>{{'CA'|trans}}</option>
+            					<option value='CEF'>{{'CEF'|trans}}</option>
+            					<option value='Congés sans solde'>{{'Congés sans solde'|trans}}</option>
+            					<option value='Maladie/At/Pat'>{{'Maladie/At/Pat'|trans}}</option>
         					</select>
         				</td>
         				<td>
-        				    <input type='text' name='commentairedimanche' id='commentairedimanche' placeholder='Saisir un commentaire' data-value="{{ time.6.comment }}" value={{ time.6.comment }} />
+        				    <input type='text' name='commentairedimanche' id='commentairedimanche' placeholder="{{'Saisir un commentaire'|trans}}" data-value="{{ time.6.comment }}" value={{ time.6.comment }} />
         				</td>
         			</tr>
                 </tbody>

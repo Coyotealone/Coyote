@@ -56,6 +56,7 @@ class MainController extends Controller
                 if($userfees_data != null)
                     $session->set('userfeesid', $userfees_data->getId());
             }
+
             $lang = $session->get('lang');
             if(empty($lang))
                 $lang = 'fr';
@@ -68,6 +69,9 @@ class MainController extends Controller
     {
         $request = $this->getRequest();
         $session = $request->getSession();
+
+        $locale = $request->getLocale();
+        $session->set('lang', $locale);
 
         // get the error if any (works with forward and redirect -- see below)
         if ($request->attributes->has(SecurityContextInterface::AUTHENTICATION_ERROR))
@@ -126,21 +130,6 @@ class MainController extends Controller
 
     public function languageAction($_locale)
     {
-        $url = $this->container->get('router')->getContext()->getBaseUrl(); // /Coyote/web/app_dev.php
-        $host = $this->container->get('router')->getContext()->getHost(); //localhost
-        $scheme = $this->container->get('router')->getContext()->getScheme(); //http
-        //$context->setHost('example.com');
-        //$context->setScheme('https');
-        //$context->setBaseUrl('my/path');
-
-        //return new Response($url);
-        $user = $this->get('security.context')->getToken()->getUser();
-
-        $request = $this->getRequest();
-
-        $locale = $request->getLocale();
-        $lang = $this->get('request')->request->get('langue');
-
         $session = new Session();
         $session->set('lang', null);
         $session->set('lang', $_locale);
