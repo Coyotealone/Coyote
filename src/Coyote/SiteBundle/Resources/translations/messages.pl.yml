@@ -23,6 +23,7 @@ Changement de mot de passe: Zmień hasło
 "Création d'une config": Konfiguruj
 Formulaire Bon de commande: Formularz zamówienia
 Impression PDF: drukowania w formacie PDF
+"Impression de l'année en PDF": Drukuj pdf roku
 
 # Page Login #
 Mot de passe oublié: Zapomniałem hasła
@@ -97,7 +98,8 @@ Jour travaillé dans le mois / année: Dzień pracy w miesiącu / roku
 "Nombre de congés d'anciennetés (CA) utilisé dans l'année": Ilość urlopu stażowego (CA ) wykorzystanego w roku
 "Téléchargement des temps de présence de l'année au format PDF": Czas pobierania i stawiennictwa roku w formacie PDF
 "Période": okres
-
+"Temps travaillé dans la semaine": Czas pracy w tygodniu
+Téléchargement des temps de présence au format PDF: Pobierz czasu pracy w formacie PDF
 
 # Page Profil #
 "En cas de problème de mot de passe, merci de contacter votre administrateur ou d'envoyer un mail dans l'onglet Contact": Dziękujemy za kontakt z administratorem. Jeśli masz problem z hasłem, wyślij e-mail z zakładki Kontakt.
@@ -125,6 +127,7 @@ Edition de la note de frais: Edytować koszty
 Retour à la liste: Powrót do listy
 Consultation des notes de frais: Konsultować koszty
 Ajout de notes de frais: Dodać koszty
+"Merci d'écrire la date qu'avec des chiffres. Exemple pour la date du 7 juin 2014, il faut écrire : 070614": Dziękuję napisać datę z numerami. Na przykład data 07 czerwca 2014, napisz: 070614
 
 # Group
 group:

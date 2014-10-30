@@ -6,14 +6,14 @@
 {% endblock %}
 
 {% block link %}
-    
+
     <!--[if lt IE 9]>
         {{ include('CoyoteSiteBundle:Base:navigation_ie.html.twig') }}
     <![endif]-->
     <!--[if !IE]><!-->
         {{ include('CoyoteSiteBundle:Base:navigation.html.twig') }}
 	<!--<![endif]-->
-	
+
 {% endblock %}
 
 {% block content %}
@@ -24,6 +24,8 @@
 
 {% endfor %}
 <p id="titreconfig">{{'Ajout de notes de frais'|trans}} </p>
+
+<p>{{"Merci d'écrire la date qu'avec des chiffres. Exemple pour la date du 7 juin 2014, il faut écrire : 070614" | trans }}</p>
 
 <form role="form" action="{{ path('coyote_expense_save') }}" method='post'>
 <div class='table-responsive'>
@@ -47,7 +49,7 @@
                     <option value='9'>USI</option>
     			</select>
     		</th>
-    		<th id='tab_expense_date'><input type='text' name='date{{i}}' id='date{{i}}' placeholder='01/01/14' ></th>
+    		<th id='tab_expense_date'><input type='text' name='date{{i}}' id='date{{i}}' maxlength="6" ></th>
     		<th id='tab_expense_item'>
     		    <select name='article{{i}}' id='article{{i}}' class='itemfrais'>
     		        <option></option>
@@ -88,7 +90,7 @@
     		<th id='tab_expense_qte'><input type='text' name='qte{{i}}' id='qte{{i}}' ></th>
     		<th id='tab_expense_amount'><input type='text' name='reel{{i}}' id='reel{{i}}' ></th>
     		<th id='tab_expense_amountttc'><input type='text' name='ttc{{i}}' id='ttc{{i}}' ></th>
-    		<th id='tab_expense_amounttva'><input type='text' name='tva{{i}}' id='tva{{i}}' ></th>
+    		<th id='tab_expense_amounttva'><input type='text' name='tva{{i}}' id='tva{{i}}' readonly></th>
     		<th id='tab_expense_business'>
     			<select name='affaire{{i}}' id='affaire{{i}}'>
     			    {% for databusiness in business %}
@@ -96,7 +98,7 @@
     			    {% endfor %}
     			</select>
     		</th>
-    		<th id='tab_expense_comment'><input type='text' name='com{{i}}' id='com{{i}}' ></th>    		
+    		<th id='tab_expense_comment'><input type='text' name='com{{i}}' id='com{{i}}' ></th>
     	</tr>
     	{% endfor %}
     </table>
