@@ -60,7 +60,7 @@ class Timetable
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -83,7 +83,7 @@ class Timetable
     /**
      * Get no_week
      *
-     * @return integer 
+     * @return integer
      */
     public function getNoWeek()
     {
@@ -106,7 +106,7 @@ class Timetable
     /**
      * Get year
      *
-     * @return integer 
+     * @return integer
      */
     public function getYear()
     {
@@ -129,7 +129,7 @@ class Timetable
     /**
      * Get day
      *
-     * @return string 
+     * @return string
      */
     public function getDay()
     {
@@ -152,7 +152,7 @@ class Timetable
     /**
      * Get date
      *
-     * @return string 
+     * @return string
      */
     public function getDate()
     {
@@ -175,7 +175,7 @@ class Timetable
     /**
      * Get holiday
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getHoliday()
     {
@@ -198,7 +198,7 @@ class Timetable
     /**
      * Get pay_period
      *
-     * @return string 
+     * @return string
      */
     public function getPayPeriod()
     {
@@ -231,13 +231,13 @@ class Timetable
     /**
      * Get schedules
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getSchedules()
     {
         return $this->schedules;
     }
-    
+
     public function second_to_hour($time)// Transformation d'un temps en seconde en H:M
     {
         if($time == '0')
@@ -258,7 +258,7 @@ class Timetable
             return $restime;
     	}
     }
-    
+
     public function hour_to_second($time)// Transformation d'un temps en H:M en seconde
     {
     	$timesec = explode(':', $time);
@@ -275,11 +275,11 @@ class Timetable
 
     public function working_time_day($start, $end, $break)// Calcul du temps de travail
     {
-    	if(empty($start) and empty($end) and empty($break))
+        if(empty($start) and empty($end) and empty($break))
     		return "0:00";
-    	if($start== "00:00" and $end == "00:00" and $break == "00:00")
+    	if($start == "00:00" and $end == "00:00" and $break == "00:00")
     		return "0:00";
-    	if($start== "0:00" and $end == "0:00" and $break == "0:00")
+    	if($start == "0:00" and $end == "0:00" and $break == "0:00")
     		return "0:00";
     	else
     	{
@@ -292,7 +292,7 @@ class Timetable
     		$timestart = $this->hour_to_second($start);
     		$timeend = $this->hour_to_second($end);
     		$timebreak = $this->hour_to_second($break);
-    		
+
     		$worktime = $timeend-$timestart;
     		$worktime = $worktime-$timebreak;
     		if($worktime == "0")
@@ -309,7 +309,7 @@ class Timetable
     		return 0;
 
     	$worktime = $this->hour_to_second($worktime);
-    	
+
     	$timeday = $worktime;
     	if($timeday <= 0)
     		$timeday = 0;
@@ -332,7 +332,7 @@ class Timetable
     	$restime = $hh.':'.$mm;
     	return $restime;
     }
-    
+
     public function __toString()
     {
         return $this->date;

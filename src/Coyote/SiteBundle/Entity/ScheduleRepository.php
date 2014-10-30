@@ -468,21 +468,21 @@ class ScheduleRepository extends EntityRepository
         $schedule->setUser($user);
         $schedule->setTimetable($timetable_id);
 
-        if($time_start == '')
+        if(empty($time_start))
             $time_start = '0:00';
         $schedule->setStart($time_start);
 
-        if($time_end == '')
+        if(empty($time_end))
             $time_end = '0:00';
         $schedule->setEnd($time_end);
 
-        if($time_break == '')
+        if(empty($time_break))
             $time_break = '0:00';
         $schedule->setBreak($time_break);
 
         $timetable = new timetable();
 
-        $working_time_day = $timetable->working_time_day($time_start, $time_end, $time_absence);
+        $working_time_day = $timetable->working_time_day($time_start, $time_end, $time_break);
 
         $schedule->setWorkingTime($working_time_day);
         $working_hours_day = $timetable->working_hours_day($working_time_day);
