@@ -6,14 +6,14 @@
 {% endblock %}
 
 {% block link %}
-    
+
     <!--[if lt IE 9]>
         {{ include('CoyoteSiteBundle:Base:navigation_ie.html.twig') }}
     <![endif]-->
     <!--[if !IE]><!-->
         {{ include('CoyoteSiteBundle:Base:navigation.html.twig') }}
 	<!--<![endif]-->
-	
+
 {% endblock %}
 
 {% block content %}
@@ -88,7 +88,7 @@
     		<th id='tab_expense_qte'><input type='text' name='qte{{i}}' id='qte{{i}}' ></th>
     		<th id='tab_expense_amount'><input type='text' name='reel{{i}}' id='reel{{i}}' ></th>
     		<th id='tab_expense_amountttc'><input type='text' name='ttc{{i}}' id='ttc{{i}}' ></th>
-    		<th id='tab_expense_amounttva'><input type='text' name='tva{{i}}' id='tva{{i}}' ></th>
+    		<th id='tab_expense_amounttva'><input type='text' name='tva{{i}}' id='tva{{i}}' readonly></th>
     		<th id='tab_expense_business'>
     			<select name='affaire{{i}}' id='affaire{{i}}'>
     			    {% for databusiness in business %}
@@ -96,7 +96,7 @@
     			    {% endfor %}
     			</select>
     		</th>
-    		<th id='tab_expense_comment'><input type='text' name='com{{i}}' id='com{{i}}' ></th>    		
+    		<th id='tab_expense_comment'><input type='text' name='com{{i}}' id='com{{i}}' ></th>
     	</tr>
     	{% endfor %}
     </table>
