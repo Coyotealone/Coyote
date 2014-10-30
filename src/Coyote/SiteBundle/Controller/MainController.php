@@ -46,7 +46,6 @@ class MainController extends Controller
 
             $datauser = $em->getRepository('CoyoteSiteBundle:User')->findOneById($iduser);
 
-
             $session->set('year', date('Y'));
             $session->set('no_week', date('W'));
             $session->set('username', $datauser->getName());
@@ -57,7 +56,6 @@ class MainController extends Controller
                 if($userfees_data != null)
                     $session->set('userfeesid', $userfees_data->getId());
             }
-
             $lang = $session->get('lang');
             if(empty($lang))
                 $lang = 'fr';
