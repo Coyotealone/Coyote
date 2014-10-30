@@ -25,6 +25,8 @@
 {% endfor %}
 <p id="titreconfig">{{'Ajout de notes de frais'|trans}} </p>
 
+<p>{{"Merci d'écrire la date qu'avec des chiffres. Exemple pour la date du 7 juin 2014, il faut écrire : 070614" | trans }}</p>
+
 <form role="form" action="{{ path('coyote_expense_save') }}" method='post'>
 <div class='table-responsive'>
     <table class='table' id='tab_expense'>
@@ -47,7 +49,7 @@
                     <option value='9'>USI</option>
     			</select>
     		</th>
-    		<th id='tab_expense_date'><input type='text' name='date{{i}}' id='date{{i}}' placeholder='01/01/14' ></th>
+    		<th id='tab_expense_date'><input type='text' name='date{{i}}' id='date{{i}}' maxlength="6" ></th>
     		<th id='tab_expense_item'>
     		    <select name='article{{i}}' id='article{{i}}' class='itemfrais'>
     		        <option></option>
