@@ -28,7 +28,7 @@ services:
             - Coyote\SiteBundle\Entity\Business
             - ~
         calls:
-            - [ setTranslationDomain, [CoyoteSiteBundle]]        
+            - [ setTranslationDomain, [CoyoteSiteBundle]]
     sonata.admin.configuringtankers:
         class: Coyote\SiteBundle\Admin\ConfiguringTankersAdmin
         tags:
@@ -66,6 +66,7 @@ services:
         arguments:
             - ~
             - Coyote\SiteBundle\Entity\Expense
+            - Coyote\SiteBundle\Entity\UserFees
             - ~
         calls:
             - [ setTranslationDomain, [CoyoteSiteBundle]]
@@ -129,4 +130,3 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [CoyoteSiteBundle]]
-    
