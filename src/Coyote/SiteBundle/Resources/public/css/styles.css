@@ -655,3 +655,10 @@ tbody {
   top: 11px;
   left: -6px;
 }
+
+#contenu-contact {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  width: 40%;
+}

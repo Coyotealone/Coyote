@@ -10,8 +10,14 @@
     <!--[if !IE]><!-->
         <script src="{{ asset('bundles/coyotesite/js/jquery-min.js') }}"/></script>
         <script src="{{ asset('bundles/coyotesite/js/jquery.js') }}"></script>
+        {% if is_granted('ROLE_TECH') %}
         <script src="{{ asset('bundles/coyotesite/js/script_timeusers.js') }}"/></script>
         <script src="{{ asset('bundles/coyotesite/js/script_timeusers_change.js') }}"/></script>
+        {% endif %}
+        {% if is_granted('ROLE_CADRE') %}
+        <script src="{{ asset('bundles/coyotesite/js/script_timeframework.js') }}"/></script>
+        <script src="{{ asset('bundles/coyotesite/js/script_timeframework_change.js') }}"/></script>
+        {% endif %}
     <!--<![endif]-->
 {% endblock %}
 

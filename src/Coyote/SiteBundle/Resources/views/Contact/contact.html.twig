@@ -5,7 +5,18 @@
 {% endblock %}
 
 {% block javascripts %}
-    <script src="{{ asset('bundles/coyotesite/js/jquery-min.js') }}"/></script>
+    <!--[if IE]>
+        <script src="{{ asset('bundles/coyotesite/js/jquery-min.js') }}"/></script>
+        <script src="{{ asset('bundles/coyotesite/js/jquery.js') }}"></script>
+    <![endif]-->
+    <!--[if !IE]><!-->
+        <script src="{{ asset('bundles/coyotesite/js/jquery-min.js') }}"/></script>
+        <script src="{{ asset('bundles/coyotesite/js/jquery.js') }}"></script>
+    <!--<![endif]-->
+{% endblock %}
+
+{% block stylesheets %}
+   {{ include('CoyoteSiteBundle:Base:css.html.twig') }}
 {% endblock %}
 
 {% block content %}
@@ -13,27 +24,18 @@
     {% for flashMessage in app.session.flashbag.get('sendmessage') %}
 
         <p id="flashmessage">{{ flashMessage }}</p>
-    
+
     {% endfor %}
-    
-    <form action="{{ path('contact_index') }}" method="post" {{ form_enctype(form) }}>
-        
-        {{ form_errors(form.email) }}
-        {{ form_widget(form.email, { 'attr':{'placeholder': 'Email' }}) }}
-        <br>
+    <div id="contenu-contact">
+        <p id="titreconfig"><b>{{'Contactez-nous'|trans}}</b></p>
 
-        {{ form_errors(form.subject) }}
-        {{ form_widget(form.subject, { 'attr':{'placeholder': 'Sujet' }}) }}
+        <form action="{{ path('contact_index') }}" method="post" {{ form_enctype(form) }}>
 
-        <br>
-        {{ form_errors(form.content) }}
-        {{ form_widget(form.content, { 'attr':{'placeholder': 'Contenu'}}) }}
-        
-        <br>
-        {{ form_rest(form) }}
+                    <input id="contact_email" type="email" required="required" name="contact[email]" class="form-control" placeholder="{{"Email"|trans}}" >
+                    <input id="contact_subject" type="text" class="form-control" placeholder="{{"Sujet"|trans}}" required="required" name="contact[subject]">
+                    <textarea class="form-control" rows="5" placeholder="{{"Contenu"|trans}}" id="contact_content" required="required" name="contact[content]"></textarea>
 
-        <input type="submit" value="Envoyez"/>
-
-    </form>
-
+                    </br><button class="btn btn-danger btn-default" type="submit" id="_submit" name="_submit">{{ 'Envoyez'|trans }}</button>
+        </form>
+    </div>
 {% endblock %}
