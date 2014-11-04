@@ -50,11 +50,10 @@ class FosUserAdmin extends Admin
         $datagridMapper
             ->add('id')
             ->add('username')
+            ->add('name')
             ->add('email')
             ->add('enabled')
-            ->add('password')
             ->add('locked')
-            ->add('expired')
             ->add('roles')
         ;
     }
@@ -69,6 +68,7 @@ class FosUserAdmin extends Admin
             ->add('enabled')
             #->add('password')
             ->add('locked')
+            ->add('name')
             #->add('expired')
             #->add('roles')
             #->add('last_login')

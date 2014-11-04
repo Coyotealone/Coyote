@@ -11,7 +11,7 @@ class ExpenseAdmin extends Admin
 {
     // setup the default sort column and order
     protected $datagridValues = array(
-        '_sort_order' => 'ASC',
+        '_sort_order' => 'DESC',
         '_sort_by' => 'id'
     );
 
@@ -31,6 +31,7 @@ class ExpenseAdmin extends Admin
             ->add('amount_TTC')
             ->add('amount_TVA')
             ->add('comment', 'text', array('required' => false))
+            ->add('userfees.login')
         ;
     }
 
@@ -39,18 +40,9 @@ class ExpenseAdmin extends Admin
     {
         $datagridMapper
             ->add('id')
-            ->add('site')
-            ->add('currency')
-            ->add('business')
-            ->add('fee')
-            ->add('userfees')
             ->add('date')
             ->add('status')
-            ->add('amount')
-            ->add('actual_amount')
-            ->add('amount_TTC')
-            ->add('amount_TVA')
-            ->add('comment')
+            ->add('userfees.login')
         ;
     }
 
@@ -59,18 +51,9 @@ class ExpenseAdmin extends Admin
     {
         $listMapper
             ->addIdentifier('id')
-            ->add('site')
-            ->add('currency')
-            ->add('business')
-            ->add('fee')
-            ->add('userfees')
             ->add('date')
             ->add('status')
-            ->add('amount')
-            ->add('actual_amount')
-            ->add('amount_TTC')
-            ->add('amount_TVA')
-            ->add('comment')
+            ->add('userfees.login')
         ;
     }
 }
