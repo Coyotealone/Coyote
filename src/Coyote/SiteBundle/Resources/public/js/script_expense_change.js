@@ -125,22 +125,22 @@ $(document).ready(function()
     $("#article0").change(function()
     {
         var rate = $("#article0 option:selected").data("value");
-        var reel = document.getElementById("reel0").value;
-        if(reel != null || reel != "")
+        var ttc = document.getElementById("ttc0").value;
+        if(ttc != null || ttc != "")
         {
-            var montant = calculTVA(reel, rate);
+            var montant = calculTVA(ttc, rate);
             document.getElementById('tva0').value = montant;
         }
     })
 
-    $("#reel0").change(function()
+    $("#ttc0").change(function()
     {
-        var reel = document.getElementById("reel0").value;
+        var ttc = document.getElementById("ttc0").value;
         var rate = $("#article0 option:selected").data("value");
-        document.getElementById("ttc0").value = reel;
+        document.getElementById("ttc0").value = ttc;
         if(rate != null)
         {
-            var montant = calculTVA(reel, rate);
+            var montant = calculTVA(ttc, rate);
             document.getElementById('tva0').value = montant;
         }
     })
@@ -148,22 +148,22 @@ $(document).ready(function()
     $("#article1").change(function()
     {
         var rate = $("#article1 option:selected").data("value");
-        var reel = document.getElementById("reel1").value;
-        if(reel != null || reel != "")
+        var ttc = document.getElementById("ttc1").value;
+        if(ttc != null || ttc != "")
         {
-            var montant = calculTVA(reel, rate);
+            var montant = calculTVA(ttc, rate);
             document.getElementById('tva1').value = montant;
         }
     })
 
-    $("#reel1").change(function()
+    $("#ttc1").change(function()
     {
-        var reel = document.getElementById("reel1").value;
+        var ttc = document.getElementById("ttc1").value;
         var rate = $("#article1 option:selected").data("value");
-        document.getElementById("ttc1").value = reel;
+        document.getElementById("ttc1").value = ttc;
         if(rate != null)
         {
-            var montant = calculTVA(reel, rate);
+            var montant = calculTVA(ttc, rate);
             document.getElementById('tva1').value = montant;
         }
     })
@@ -171,22 +171,22 @@ $(document).ready(function()
     $("#article2").change(function()
     {
         var rate = $("#article2 option:selected").data("value");
-        var reel = document.getElementById("reel2").value;
-        if(reel != null || reel != "")
+        var ttc = document.getElementById("ttc2").value;
+        if(ttc != null || ttc != "")
         {
-            var montant = calculTVA(reel, rate);
+            var montant = calculTVA(ttc, rate);
             document.getElementById('tva2').value = montant;
         }
     })
 
-    $("#reel2").change(function()
+    $("#ttc2").change(function()
     {
-        var reel = document.getElementById("reel2").value;
+        var ttc = document.getElementById("ttc2").value;
         var rate = $("#article2 option:selected").data("value");
-        document.getElementById("ttc2").value = reel;
+        document.getElementById("ttc2").value = ttc;
         if(rate != null)
         {
-            var montant = calculTVA(reel, rate);
+            var montant = calculTVA(ttc, rate);
             document.getElementById('tva2').value = montant;
         }
     })
@@ -194,22 +194,22 @@ $(document).ready(function()
     $("#article3").change(function()
     {
         var rate = $("#article3 option:selected").data("value");
-        var reel = document.getElementById("reel3").value;
-        if(reel != null || reel != "")
+        var ttc = document.getElementById("ttc3").value;
+        if(ttc != null || ttc != "")
         {
-            var montant = calculTVA(reel, rate);
+            var montant = calculTVA(ttc, rate);
             document.getElementById('tva3').value = montant;
         }
     })
 
-    $("#reel3").change(function()
+    $("#ttc3").change(function()
     {
-        var reel = document.getElementById("reel3").value;
+        var ttc = document.getElementById("ttc3").value;
         var rate = $("#article3 option:selected").data("value");
-        document.getElementById("ttc3").value = reel;
+        document.getElementById("ttc3").value = ttc;
         if(rate != null)
         {
-            var montant = calculTVA(reel, rate);
+            var montant = calculTVA(ttc, rate);
             document.getElementById('tva3').value = montant;
         }
     })
@@ -217,22 +217,22 @@ $(document).ready(function()
     $("#article4").change(function()
     {
         var rate = $("#article4 option:selected").data("value");
-        var reel = document.getElementById("reel4").value;
-        if(reel != null || reel != "")
+        var ttc = document.getElementById("ttc4").value;
+        if(ttc != null || ttc != "")
         {
-            var montant = calculTVA(reel, rate);
+            var montant = calculTVA(ttc, rate);
             document.getElementById('tva4').value = montant;
         }
     })
 
-    $("#reel4").change(function()
+    $("#ttc4").change(function()
     {
-        var reel = document.getElementById("reel4").value;
+        var ttc = document.getElementById("ttc4").value;
         var rate = $("#article4 option:selected").data("value");
-        document.getElementById("ttc4").value = reel;
+        document.getElementById("ttc4").value = ttc;
         if(rate != null)
         {
-            var montant = calculTVA(reel, rate);
+            var montant = calculTVA(ttc, rate);
             document.getElementById('tva4').value = montant;
         }
     })
@@ -240,22 +240,22 @@ $(document).ready(function()
     $("#article5").change(function()
     {
         var rate = $("#article5 option:selected").data("value");
-        var reel = document.getElementById("reel5").value;
-        if(reel != null || reel != "")
+        var ttc = document.getElementById("ttc5").value;
+        if(ttc != null || ttc != "")
         {
-            var montant = calculTVA(reel, rate);
+            var montant = calculTVA(ttc, rate);
             document.getElementById('tva5').value = montant;
         }
     })
 
-    $("#reel5").change(function()
+    $("#ttc5").change(function()
     {
-        var reel = document.getElementById("reel5").value;
+        var ttc = document.getElementById("ttc5").value;
         var rate = $("#article5 option:selected").data("value");
-        document.getElementById("ttc5").value = reel;
+        document.getElementById("ttc5").value = ttc;
         if(rate != null)
         {
-            var montant = calculTVA(reel, rate);
+            var montant = calculTVA(ttc, rate);
             document.getElementById('tva5').value = montant;
         }
     })
