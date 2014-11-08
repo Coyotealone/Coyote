@@ -43,9 +43,9 @@
 
         {% if is_granted('ROLE_COMPTA') %}
         <li id="frais" class="dropdown">
-          <a href=# class="dropdown-toggle" data-toggle="dropdown">{{'Export Note de Frais'|trans}}<b class="caret"></b></a>
+          <a href=# class="dropdown-toggle" data-toggle="dropdown">{{'Export Notes de Frais'|trans}}<b class="caret"></b></a>
           <ul class="dropdown-menu">
-            <li><a href="{{ path('coyote_export') }}">{{'Export données note de frais'|trans}}</a></li>
+            <li><a href="{{ path('coyote_export') }}">{{'Export données notes de frais'|trans}}</a></li>
           </ul>
         </li>
         {% endif %}

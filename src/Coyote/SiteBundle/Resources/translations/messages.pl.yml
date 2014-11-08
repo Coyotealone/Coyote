@@ -24,6 +24,10 @@ Changement de mot de passe: Zmień hasło
 Formulaire Bon de commande: Formularz zamówienia
 Impression PDF: drukowania w formacie PDF
 "Impression de l'année en PDF": Drukuj pdf roku
+Export Présence: Czas eksportu i frekwencja
+Export données BE: Eksport danych
+Export Notes de Frais: Koszty Export
+Export données notes de frais: Eksport danych wydatków
 
 # Page Login #
 Mot de passe oublié: Zapomniałem hasła
@@ -100,6 +104,13 @@ Jour travaillé dans le mois / année: Dzień pracy w miesiącu / roku
 "Période": okres
 "Temps travaillé dans la semaine": Czas pracy w tygodniu
 Téléchargement des temps de présence au format PDF: Pobierz czasu pracy w formacie PDF
+Aucune: żaden
+RTT: Redukcja czasu pracy
+Congés payés: Płatny urlop
+Congés ancienneté: Zostaw staż
+Congés sans solde: Urlopu bezpłatnego
+Autres: więcej
+Maladie/Accident travail/Paternité: Choroba/wypadek przy pracy/ojcostwa
 
 # Page Profil #
 "En cas de problème de mot de passe, merci de contacter votre administrateur ou d'envoyer un mail dans l'onglet Contact": Dziękujemy za kontakt z administratorem. Jeśli masz problem z hasłem, wyślij e-mail z zakładki Kontakt.
