@@ -130,6 +130,8 @@ class MainController extends Controller
 
     public function languageAction($_locale)
     {
+        $user = $this->get('security.context')->getToken()->getUser();
+
         $session = new Session();
         $session->set('lang', null);
         $session->set('lang', $_locale);
