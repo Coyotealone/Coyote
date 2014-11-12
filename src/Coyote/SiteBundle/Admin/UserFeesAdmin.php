@@ -22,6 +22,7 @@ class UserFeesAdmin extends Admin
             ->add('login')
             ->add('code')
             ->add('service')
+            ->add('user.username')
         ;
     }
 
@@ -43,6 +44,7 @@ class UserFeesAdmin extends Admin
             ->addIdentifier('login')
             ->addIdentifier('code')
             ->addIdentifier('service')
+            ->add('user.username')
         ;
     }
 }

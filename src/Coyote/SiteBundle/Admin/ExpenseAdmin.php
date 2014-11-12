@@ -7,8 +7,6 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 
-use Coyote\SiteBundle\Entity\UserFees;
-
 class ExpenseAdmin extends Admin
 {
     // setup the default sort column and order
