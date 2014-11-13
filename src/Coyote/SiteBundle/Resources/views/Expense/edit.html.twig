@@ -1,5 +1,10 @@
 {% extends 'CoyoteSiteBundle:Expense:index.html.twig' %}
 
+{% block javascripts %}
+    <script src="{{ asset('bundles/coyotesite/js/jquery-min.js') }}"/></script>
+    <script src="{{ asset('bundles/coyotesite/js/script_expense_edit.js') }}"/></script>
+{% endblock %}
+
 {% block content %}
 <h3>{{'Edition de la note de frais'|trans}}</h3>
 <form action="{{ path('coyote_expense_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
@@ -8,11 +13,11 @@
     <table class='table' id='tab_expense'>
     	<tr>
     		<th id='tab_expense_site'>{{ form_label(edit_form.site, 'Site') }}</th>
-    		<th id='tab_expense_date'>{{ form_label(edit_form.date, 'Date') }}</th>
+    		<th id='tab_expense_date' maxlength="6">{{ form_label(edit_form.date, 'Date') }}</th>
     		<th id='tab_expense_item'>{{ form_label(edit_form.fee, 'Code Article') }}</th>
     		<th id='tab_expense_devise'>{{ form_label(edit_form.currency, 'Devise') }}</th>
     		<th id='tab_expense_qte'>{{ form_label(edit_form.amount, 'Quantité') }}</th>
-    		<th id='tab_expense_amount'>{{ form_label(edit_form.actual_amount) }}</th>
+    		<th id='tab_expense_amount'>{{ form_label(edit_form.actual_amount, 'Montant réel') }}</th>
     		<th id='tab_expense_amountttc'>{{ form_label(edit_form.amount_TTC, 'Montant TTC') }}</th>
     		<th id='tab_expense_amounttva'>{{ form_label(edit_form.amount_TVA, 'Montant TVA') }}</th>
     		<th id='tab_expense_business'>{{ form_label(edit_form.business, 'Affaire') }}</th>

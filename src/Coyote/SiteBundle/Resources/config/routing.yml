@@ -44,15 +44,15 @@ CoyoteSiteBundle_profil:
     requirements:
         _locale: fr|en|pl
 
-CoyoteSiteBundle_configurator:
-    resource: "@CoyoteSiteBundle/Resources/config/routing/configurator.yml"
-    prefix:   /{_locale}/configurator
-    requirements:
-        _locale: fr|en|pl
+#CoyoteSiteBundle_configurator:
+#    resource: "@CoyoteSiteBundle/Resources/config/routing/configurator.yml"
+#    prefix:   /{_locale}/configurator
+#    requirements:
+#        _locale: fr|en|pl
 
-CoyoteSiteBundle_schedule:
-    resource: "@CoyoteSiteBundle/Resources/config/routing/schedule.yml"
-    prefix:   /schedule
+#CoyoteSiteBundle_schedule:
+#    resource: "@CoyoteSiteBundle/Resources/config/routing/schedule.yml"
+#    prefix:   /schedule
 
 CoyoteSiteBundle_resetting:
     resource: "@CoyoteSiteBundle/Resources/config/routing/resetting.yml"
@@ -64,10 +64,10 @@ CoyoteSiteBundle_resetting:
 #     resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
 #     prefix: /resetting
 
-CoyoteSiteBundle_formorder:
-    resource: "@CoyoteSiteBundle/Resources/config/routing/formorder.yml"
-    prefix:   /formorder
+#CoyoteSiteBundle_formorder:
+#    resource: "@CoyoteSiteBundle/Resources/config/routing/formorder.yml"
+#    prefix:   /formorder
 
-CoyoteSiteBundle_item:
-        resource: "@CoyoteSiteBundle/Resources/config/routing/item.yml"
-        prefix:   /item
+#CoyoteSiteBundle_item:
+#        resource: "@CoyoteSiteBundle/Resources/config/routing/item.yml"
+#        prefix:   /item

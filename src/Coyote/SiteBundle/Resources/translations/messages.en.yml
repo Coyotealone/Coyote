@@ -24,6 +24,10 @@ Changement de mot de passe: Change password
 Formulaire Bon de commande: Form order
 Impression PDF: PDF print
 "Impression de l'année en PDF": PDF print of the year
+Export Présence: Export time and attendance
+Export données BE: Export BE data
+Export Notes de Frais: Export Expense
+Export données notes de frais: Export expense data
 
 # Page Login #
 Mot de passe oublié: Forgot password
@@ -100,6 +104,13 @@ Jour travaillé dans le mois / année: Working day in the month / year
 "Période": Period
 "Temps travaillé dans la semaine": Time worked in a week
 Téléchargement des temps de présence au format PDF: Download the working time in PDF
+Aucune: None
+RTT: Reduction of working time
+Congés payés: Paid leave
+Congés ancienneté: Leave seniority
+Congés sans solde: Unpaid leave
+Autres: Anything else
+Maladie/Accident travail/Paternité: Illness/Work accident/Paternity
 
 # Page Profil #
 "En cas de problème de mot de passe, merci de contacter votre administrateur ou d'envoyer un mail dans l'onglet Contact": Thanks to contact your administrator, if you have a problem with password. Or send an email from Contact tab

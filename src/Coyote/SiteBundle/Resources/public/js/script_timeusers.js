@@ -276,12 +276,10 @@ $(document).ready(function()
 		document.getElementById("absencelundi").selectedIndex = 2;
 	if(abslundi == 	"CA")
 		document.getElementById("absencelundi").selectedIndex = 3;
-	if(abslundi == 	"CEF")
-		document.getElementById("absencelundi").selectedIndex = 4;
 	if(abslundi == "Congés sans solde")
-		document.getElementById("absencelundi").selectedIndex = 5;
+		document.getElementById("absencelundi").selectedIndex = 4;
 	if(abslundi == 	"Maladie/At/Pat")
-		document.getElementById("absencelundi").selectedIndex = 6;
+		document.getElementById("absencelundi").selectedIndex = 5;
 
 	if(absmardi == "Aucune")
 		document.getElementById("absencemardi").selectedIndex = 0;
@@ -291,12 +289,10 @@ $(document).ready(function()
 		document.getElementById("absencemardi").selectedIndex = 2;
 	if(absmardi == 	"CA")
 		document.getElementById("absencemardi").selectedIndex = 3;
-	if(absmardi == 	"CEF")
-		document.getElementById("absencemardi").selectedIndex = 4;
 	if(absmardi == "Congés sans solde")
-		document.getElementById("absencemardi").selectedIndex = 5;
+		document.getElementById("absencemardi").selectedIndex = 4;
 	if(absmardi == 	"Maladie/At/Pat")
-		document.getElementById("absencemardi").selectedIndex = 6;
+		document.getElementById("absencemardi").selectedIndex = 5;
 
 	if(absmercredi == "Aucune")
 		document.getElementById("absencemercredi").selectedIndex = 0;
@@ -306,12 +302,10 @@ $(document).ready(function()
 		document.getElementById("absencemercredi").selectedIndex = 2;
 	if(absmercredi == "CA")
 		document.getElementById("absencemercredi").selectedIndex = 3;
-	if(absmercredi == "CEF")
-		document.getElementById("absencemercredi").selectedIndex = 4;
 	if(absmercredi == "Congés sans solde")
-		document.getElementById("absencemercredi").selectedIndex = 5;
+		document.getElementById("absencemercredi").selectedIndex = 4;
 	if(absmercredi == "Maladie/At/Pat")
-		document.getElementById("absencemercredi").selectedIndex = 6;
+		document.getElementById("absencemercredi").selectedIndex = 5;
 
 	if(absjeudi == "Aucune")
 		document.getElementById("absencejeudi").selectedIndex = 0;
@@ -321,12 +315,10 @@ $(document).ready(function()
 		document.getElementById("absencejeudi").selectedIndex = 2;
 	if(absjeudi == "CA")
 		document.getElementById("absencejeudi").selectedIndex = 3;
-	if(absjeudi == "CEF")
-		document.getElementById("absencejeudi").selectedIndex = 4;
 	if(absjeudi == "Congés sans solde")
-		document.getElementById("absencejeudi").selectedIndex = 5;
+		document.getElementById("absencejeudi").selectedIndex = 4;
 	if(absjeudi == "Maladie/At/Pat")
-		document.getElementById("absencejeudi").selectedIndex = 6;
+		document.getElementById("absencejeudi").selectedIndex = 5;
 
 	if(absvendredi == "Aucune")
 		document.getElementById("absencevendredi").selectedIndex = 0;
@@ -336,12 +328,10 @@ $(document).ready(function()
 		document.getElementById("absencevendredi").selectedIndex = 2;
 	if(absvendredi == "CA")
 		document.getElementById("absencevendredi").selectedIndex = 3;
-	if(absvendredi == "CEF")
-		document.getElementById("absencevendredi").selectedIndex = 4;
 	if(absvendredi == "Congés sans solde")
-		document.getElementById("absencevendredi").selectedIndex = 5;
+		document.getElementById("absencevendredi").selectedIndex = 4;
 	if(absvendredi == "Maladie/At/Pat")
-		document.getElementById("absencevendredi").selectedIndex = 6;
+		document.getElementById("absencevendredi").selectedIndex = 5;
 
 	if(abssamedi == "Aucune")
 		document.getElementById("absencesamedi").selectedIndex = 0;
@@ -351,12 +341,10 @@ $(document).ready(function()
 		document.getElementById("absencesamedi").selectedIndex = 2;
 	if(abssamedi == "CA")
 		document.getElementById("absencesamedi").selectedIndex = 3;
-	if(abssamedi == "CEF")
-		document.getElementById("absencesamedi").selectedIndex = 4;
 	if(abssamedi == "Congés sans solde")
-		document.getElementById("absencesamedi").selectedIndex = 5;
+		document.getElementById("absencesamedi").selectedIndex = 4;
 	if(abssamedi == "Maladie/At/Pat")
-		document.getElementById("absencesamedi").selectedIndex = 6;
+		document.getElementById("absencesamedi").selectedIndex = 5;
 
 	if(absdimanche == "Aucune")
 		document.getElementById("absencedimanche").selectedIndex = 0;
@@ -366,12 +354,10 @@ $(document).ready(function()
 		document.getElementById("absencedimanche").selectedIndex = 2;
 	if(absdimanche == "CA")
 		document.getElementById("absencedimanche").selectedIndex = 3;
-	if(absdimanche == "CEF")
-		document.getElementById("absencedimanche").selectedIndex = 4;
 	if(absdimanche == "Congés sans solde")
-		document.getElementById("absencedimanche").selectedIndex = 5;
+		document.getElementById("absencedimanche").selectedIndex = 4;
 	if(absdimanche == "Maladie/At/Pat")
-		document.getElementById("absencedimanche").selectedIndex = 6;
+		document.getElementById("absencedimanche").selectedIndex = 5;
 
 	if(deplundi == 0 | deplundi == "")
 		document.getElementById('deplacementlundi').selectedIndex=0;

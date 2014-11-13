@@ -91,7 +91,7 @@ class RegistrationController extends ContainerAware
             throw new NotFoundHttpException(sprintf('The user with email "%s" does not exist', $email));
         }
 
-        return $this->container->get('templating')->renderResponse('CoyoteSiteBundle:Registration:checkEmail.html.'.$this->getEngine(), array(
+        return $this->container->get('templating')->renderResponse('CoyoteSiteBundle:Registration:checkEmail.html.twig', array(
             'user' => $user,
         ));
     }
@@ -141,7 +141,7 @@ class RegistrationController extends ContainerAware
             throw new AccessDeniedException('This user does not have access to this section.');
         }
 
-        return $this->container->get('templating')->renderResponse('CoyoteSiteBundle:Registration:confirmed.html.'.$this->getEngine(), array(
+        return $this->container->get('templating')->renderResponse('CoyoteSiteBundle:Registration:confirmed.html.twig', array(
             'user' => $user,
         ));
     }

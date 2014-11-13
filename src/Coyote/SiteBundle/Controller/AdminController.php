@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Compenent\Form\FormBuilder;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\Console\Helper\ProgressBar;
 
 use Doctrine\ORM\EntityRepository;
 
@@ -25,23 +26,26 @@ class AdminController extends Controller
     {
         if($this->get('security.context')->isGranted('ROLE_COMPTA'))
         {
+            $date = date("Ymd");
+            $heure = date("His");
+            $filename = "export".$date."-".$heure.".csv";
             $em = $this->getDoctrine()->getManager();
             $dataexpense = $em->getRepository('CoyoteSiteBundle:Expense')->findforCompta();
             $em->getRepository('CoyoteSiteBundle:Expense')->updateStatus($em);
             return new Response($dataexpense, 200, array(
                 'Content-Type' => 'application/force-download',
-                'Content-Disposition' => 'attachment; filename="export.csv"'
+                'Content-Disposition' => 'attachment; filename="'.$filename.'"'
             ));
         }
         else
             return $this->redirect($this->generateUrl('accueil'));
     }
-    
+
     public function changePasswordAction()
     {
         return $this->redirect($this->generateUrl('fos_user_change_password'));
     }
-    
+
     public function resettingAction()
     {
         //$message = \Swift_Message::newInstance()
@@ -53,18 +57,18 @@ class AdminController extends Controller
         //return new Response('mail envoyé');
         return $this->redirect($this->generateUrl('fos_user_resetting_request'));
     }
-    
+
     public function profilAction()
     {
         $user = $this->container->get('security.context')->getToken()->getUser();
         return $this->render('CoyoteSiteBundle:Profile:show.html.twig', array('user' => $user));
     }
-    
+
     public function profileditAction()
     {
         return $this->redirect($this->generateUrl('accueil'));
     }
-    
+
     public function showexportAction()
     {
         if($this->get('security.context')->isGranted('ROLE_CHEF_BE'))
@@ -74,7 +78,7 @@ class AdminController extends Controller
         else
             return $this->redirect($this->generateUrl('accueil'));
     }
-    
+
     public function exportDataUserAction()
     {
         if($this->get('security.context')->isGranted('ROLE_CHEF_BE'))
@@ -82,7 +86,7 @@ class AdminController extends Controller
             $doctrine = $this->getDoctrine();
             $em = $doctrine->getManager();
             $tabuserid = array(14, 17, 41, 44, 45, 46, 49, 50, 52, 54, 62, 70);
-            
+
             $request = Request::createFromGlobals();
             $data = $request->request->all();
             if($data == null)
@@ -91,7 +95,7 @@ class AdminController extends Controller
             {
                 $date = $data['mois'].'/'.$data['annee'];
                 $year = $data['annee'];
-            
+
                 $result = '';
                 for($i=0;$i<count($tabuserid);$i++)
                 {
@@ -101,17 +105,19 @@ class AdminController extends Controller
                     $res_temp = $em->getRepository('CoyoteSiteBundle:Schedule')->findforBE($user, $date, $year, $user_name);
                     $result .= $res_temp;
                 }
+                $filename = 'datauser'.$date.'.csv';
+
                 return new Response($result, 200, array(
                     'Content-Type' => 'application/force-download',
-                    'Content-Disposition' => 'attachment; filename="datauser.csv"'
+                    'Content-Disposition' => 'attachment; filename="'.$filename.'"'
                 ));
             }
         }
         else
             return $this->redirect($this->generateUrl('accueil'));
-            
+
     }
-    
+
     public function registerAction(Request $request)
     {
         /** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */
@@ -158,5 +164,5 @@ class AdminController extends Controller
             'form' => $form->createView(),
         ));
     }
-    
+
 }

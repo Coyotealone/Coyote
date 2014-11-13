@@ -25,7 +25,7 @@ class ExpenseType extends AbstractType
                     'placeholder' => '01/01/14',
                     'title' => 'Date',
                     'data-toggle' => 'tooltip',
-                    'data-placement' => 'right'
+                    'data-placement' => 'right',
                 )
             ))
             ->add('amount', 'number', array('label' => 'Quantité'))
@@ -39,15 +39,8 @@ class ExpenseType extends AbstractType
             ->add('comment', 'text', array('required' => false,))
             ->add('amount_TVA', 'number', array('disabled' => true,))
             ->add('save', 'submit');
-            
-            /*$builder->add('article', 'entity', array(
-  'class'        => 'SdzBlogBundle:Article',
-  'property'     => 'titre',
-  'querybuilder' => function(\Sdz\BlogBundle\Entity\ArticleRepository $r) {
-    return $r->getSelectList();
-  }*/
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */

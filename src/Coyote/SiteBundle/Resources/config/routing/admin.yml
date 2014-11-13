@@ -1,11 +1,11 @@
-coyote_export:
-    pattern:    /export
+coyote_exportexpense:
+    pattern:    /exportexpense
     defaults:   { _controller: "CoyoteSiteBundle:Admin:exportExpense" }
 
 coyote_export_index:
     pattern:    /index
     defaults:   { _controller: "CoyoteSiteBundle:Admin:showexport" }
-    
+
 coyote_exportdatauser:
     pattern:    /exportdatauser
     defaults:   { _controller: "CoyoteSiteBundle:Admin:exportDataUser" }

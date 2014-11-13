@@ -2,6 +2,12 @@
 
 namespace Coyote\SiteBundle\Entity;
 
+use Coyote\SiteBundle\Entity\Site;
+use Coyote\SiteBundle\Entity\Currency;
+use Coyote\SiteBundle\Entity\Business;
+use Coyote\SiteBundle\Entity\Fee;
+use Coyote\SiteBundle\Entity\UserFees;
+
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -20,12 +26,11 @@ class ExpenseRepository extends EntityRepository
 	            WHERE e.date LIKE :key and e.userfees = :id"
                         );
         $query->setParameters(array('key' => '%'.$date.'%', 'id' => $id));
-        //$query->setParameter('key', '%'.$date.'%');
         return $query->getResult();
     }
-    
+
     public function updateStatus($em)
-    {        
+    {
         $expense = $em->getRepository('CoyoteSiteBundle:Expense')->findAll();
         foreach($expense as $data)
         {
@@ -35,7 +40,7 @@ class ExpenseRepository extends EntityRepository
         $em->flush();
         return "OK";
     }
-    
+
     public function findforCompta()
     {
         $query = $this->getEntityManager()
@@ -44,7 +49,7 @@ class ExpenseRepository extends EntityRepository
                         WHERE e.status = 1 ORDER BY e.userfees "
                         );
         $res = $query->getResult();
-        
+
         $result = '';
         $userfees = '';
         foreach($res as $data)
@@ -74,9 +79,55 @@ class ExpenseRepository extends EntityRepository
             $result .= "\"".$data->getBusiness()->getCode()."\";";
             $result .= "\"".$data->getUserFees()->getService()."\";";
             $result .= "\"".$data->getComment()."\";"."\r"."\n";
-            
+
         }
-        
+
         return $result;
+    }
+
+    public function calculTVA($rate, $price)
+    {
+        $vat_amount = $price - (($price * 100) / ($rate +100));
+        return round($vat_amount, 2);
+    }
+
+    public function formDate($date)
+    {
+        if(is_numeric($date))
+        {
+            $jour = substr($date, 0, 2);
+            $mois = substr($date, 2, 2);
+            $annee = substr($date, 4, 3);
+            $date = $jour."/".$mois."/".$annee;
+        }
+        return $date;
+    }
+
+    public function saveExpense($user_fee_id, $data, $increment)
+    {
+        $site = $this->_em->getRepository('CoyoteSiteBundle:Site')->find($data['site'.$increment]);
+        $currency = $this->_em->getRepository('CoyoteSiteBundle:Currency')->find($data['devise'.$increment]);
+        $business = $this->_em->getRepository('CoyoteSiteBundle:Business')->find($data['affaire'.$increment]);
+        $fee = $this->_em->getRepository('CoyoteSiteBundle:Fee')->find($data['article'.$increment]);
+        $user_fee = $this->_em->getRepository('CoyoteSiteBundle:UserFees')->find($user_fee_id);
+
+        $expense = new expense();
+        $expense->setUserFees($user_fee);
+        $expense->setFee($fee);
+        $expense->setBusiness($business);
+        $expense->setCurrency($currency);
+        $expense->setSite($site);
+        $expense->setComment($data['com'.$increment]);
+        $rate = $fee->getRate();
+        $price = $data['ttc'.$increment];
+        $tva = $this->calculTVA($rate, $price);
+        $expense->setAmountTVA($tva);
+        $expense->setAmountTTC($price);
+        $expense->setActualAmount($price);
+        $expense->setAmount($data['qte'.$increment]);
+        $expense->setStatus(1);
+        $date = $this->formDate($data['date'.$increment]);
+        $expense->setDate($date);
+        return $expense;
     }
 }

@@ -31,28 +31,28 @@
                     <td style="background:#7FC6BC; color:white">{{ entity.timetable.date}}</td>
                     <td style="background:#7FC6BC; color:white">{{ entity.workinghours }}</td>
                     <td style="background:#7FC6BC; color:white">{{ entity.travel }}</td>
-                    <td style="background:#7FC6BC; color:white">{{ entity.absence }}</td>
+                    <td style="background:#7FC6BC; color:white">{{ entity.absence|trans }}</td>
                     <td style="background:#7FC6BC; color:white">{{ entity.comment }}</td>
                 {% elseif entity.timetable.day == "samedi" %}
                     <td style="background:#01B0F0; color:white">{{ entity.timetable.day|capitalize|trans}}</td>
                     <td style="background:#01B0F0; color:white">{{ entity.timetable.date}}</td>
                     <td style="background:#01B0F0; color:white">{{ entity.workinghours }}</td>
                     <td style="background:#01B0F0; color:white">{{ entity.travel }}</td>
-                    <td style="background:#01B0F0; color:white">{{ entity.absence }}</td>
+                    <td style="background:#01B0F0; color:white">{{ entity.absence|trans }}</td>
                     <td style="background:#01B0F0; color:white">{{ entity.comment }}</td>
                 {% elseif entity.timetable.day == "dimanche" %}
                     <td style="background:#01B0F0; color:white">{{ entity.timetable.day|capitalize|trans}}</td>
                     <td style="background:#01B0F0; color:white">{{ entity.timetable.date}}</td>
                     <td style="background:#01B0F0; color:white">{{ entity.workinghours }}</td>
                     <td style="background:#01B0F0; color:white">{{ entity.travel }}</td>
-                    <td style="background:#01B0F0; color:white">{{ entity.absence }}</td>
+                    <td style="background:#01B0F0; color:white">{{ entity.absence|trans }}</td>
                     <td style="background:#01B0F0; color:white">{{ entity.comment }}</td>
                 {% else %}
                     <td>{{ entity.timetable.day|capitalize|trans}}</td>
                     <td>{{ entity.timetable.date}}</td>
                     <td>{{ entity.workinghours }}</td>
                     <td>{{ entity.travel }}</td>
-                    <td>{{ entity.absence }}</td>
+                    <td>{{ entity.absence|trans }}</td>
                     <td>{{ entity.comment }}</td>
                 {% endif %}
             </tr>
