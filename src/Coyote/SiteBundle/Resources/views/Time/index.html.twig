@@ -10,14 +10,14 @@
 {% endblock %}
 
 {% block link %}
-    
+
     <!--[if lt IE 9]>
         {{ include('CoyoteSiteBundle:Base:navigation_ie.html.twig') }}
     <![endif]-->
     <!--[if !IE]><!-->
         {{ include('CoyoteSiteBundle:Base:navigation.html.twig') }}
 	<!--<![endif]-->
-	
+
 {% endblock %}
 
 {% block stylesheets %}
@@ -25,13 +25,11 @@
 {% endblock %}
 
 {% block content %}
-
     <div class="jumbotron">
-	        <p class="lead">{{'Choisissez votre méthode de saisie des temps.'|trans}}</p>
-	        <p>
-	        	<a href={{ path('coyote_time_user')}} class="btntime">{{'Saisie par heure'|trans}}</a>
-	        	<a href={{ path('coyote_time_framework')}} class="btntime">{{'Saisie par jour'|trans}}</a>
-		  	</p>
+        <p class="lead">{{'Choisissez votre méthode de saisie des temps.'|trans}}</p>
+        <p>
+        	<a href={{ path('coyote_time_user')}} class="btntime">{{'Saisie par heure'|trans}}</a>
+        	<a href={{ path('coyote_time_framework')}} class="btntime">{{'Saisie par jour'|trans}}</a>
+	  	</p>
     </div>
-
 {% endblock %}

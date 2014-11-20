@@ -28,7 +28,7 @@ class AdminController extends Controller
         {
             $date = date("Ymd");
             $heure = date("His");
-            $filename = "export".$date."-".$heure.".csv";
+            $filename = "export".$date."-".$heure.".txt";
             $em = $this->getDoctrine()->getManager();
             $dataexpense = $em->getRepository('CoyoteSiteBundle:Expense')->findforCompta();
             $em->getRepository('CoyoteSiteBundle:Expense')->updateStatus($em);

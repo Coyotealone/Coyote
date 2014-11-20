@@ -290,17 +290,6 @@ class ScheduleRepository extends EntityRepository
 
     public function findTimePayPeriod($pay_period, $user)
     {
-        /*$qb = $this->_em->createQueryBuilder();
-        $qb->select('s')
-           ->from('CoyoteSiteBundle:Schedule', 's')
-           ->innerJoin('CoyoteSiteBundle:Timetable', 't', 'WITH', 't.id = s.timetable')
-           ->where('s.user = :user and t.pay_period = :pay_period ')
-           ->setParameters(array('user' => $user, 'pay_period' => $pay_period));
-        $schedule =  $qb->getQuery()
-                        ->getResult();
-
-        return $schedule;
-        */
         $qb = $this->_em->createQueryBuilder();
         $qb->select('t.id')
            ->from('CoyoteSiteBundle:Timetable', 't')
@@ -350,9 +339,6 @@ class ScheduleRepository extends EntityRepository
         $lastiddate =  $qb->getQuery()
                           ->getResult(); //Id de tous les jours des mois
 
-
-
-
         $qb = $this->_em->createQueryBuilder();
         $qb->select('s.id')
            ->from('CoyoteSiteBundle:Schedule', 's')
@@ -362,12 +348,10 @@ class ScheduleRepository extends EntityRepository
                   ->getResult(); //Id de tous les jours des mois
 
         return count($res);
-
     }
 
     public function findNoWeekPayPeriod($pay_period, $user)
     {
-
         $qb = $this->_em->createQueryBuilder();
         $qb->select('distinct(t.no_week) as no_week, t.year')
            ->from('CoyoteSiteBundle:Timetable', 't')
@@ -377,7 +361,6 @@ class ScheduleRepository extends EntityRepository
            ->setParameters(array('pay_period' => $pay_period, 'user' => $user));
         $time =  $qb->getQuery()
                     ->getResult();
-
         return $time;
     }
 
@@ -415,14 +398,12 @@ class ScheduleRepository extends EntityRepository
             'user' => $user
             ));
         $res = $query->getResult();
-        //return count($res);
         $timeres = 0;
         foreach($res as $data)
         {
             $time = $data->getWorkingtime();
             $timeres += $this->calculTime($time);
         }
-        //return $timeres;
         return $this->formatTime($timeres);
     }
 

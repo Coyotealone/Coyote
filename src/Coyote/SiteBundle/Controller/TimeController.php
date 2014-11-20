@@ -58,7 +58,7 @@ class TimeController extends Controller
         $session->set('id_vendredi', '');
         $session->set('id_samedi', '');
         $session->set('id_dimanche', '');
-        return $this->render('CoyoteSiteBundle:Time:create.html.twig', array('date' => $date));
+        return $this->render('CoyoteSiteBundle:Schedule:new.html.twig', array('date' => $date));
     }
 
     public function editAction()
@@ -78,7 +78,7 @@ class TimeController extends Controller
         $session->set('id_vendredi', $id[4]['id']);
         $session->set('id_samedi', $id[5]['id']);
         $session->set('id_dimanche', $id[6]['id']);
-        return $this->render('CoyoteSiteBundle:Time:edit.html.twig', array('date' => $date, 'time' => $time, 'id' => $id, 'timetable' => $timetable_id));
+        return $this->render('CoyoteSiteBundle:Schedule:edit.html.twig', array('date' => $date, 'time' => $time, 'id' => $id, 'timetable' => $timetable_id));
     }
 
     public function worklessAction()
