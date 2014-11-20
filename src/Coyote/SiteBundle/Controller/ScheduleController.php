@@ -564,11 +564,14 @@ class ScheduleController extends Controller
                     'timeweek' => $timeweek,
                     ));
             }
+            $date = date("Ymd");
+            $heure = date("His");
+            $filename = $user->getName()."_presence".$date."-".$heure.".pdf";
             $html = $page->getContent();
             $html2pdf = new \Html2Pdf_Html2Pdf('P', 'A4', 'fr');
             $html2pdf->pdf->SetDisplayMode('real');
             $html2pdf->writeHTML($html);
-            $html2pdf->Output('Presence.pdf', 'D');
+            $html2pdf->Output($filename, 'D');
             return new Response('PDF réalisé');
         }
     }
@@ -656,11 +659,14 @@ class ScheduleController extends Controller
                     'timeweek' => $timeweek,
                     ));
             }
+            $date = date("Ymd");
+            $heure = date("His");
+            $filename = $user->getName()."_presence".$date."-".$heure.".pdf";
             $html = $page->getContent();
             $html2pdf = new \Html2Pdf_Html2Pdf('P', 'A4', 'fr');
             $html2pdf->pdf->SetDisplayMode('real');
             $html2pdf->writeHTML($html);
-            $html2pdf->Output('Presence.pdf', 'D');
+            $html2pdf->Output($filename, 'D');
             return new Response('PDF réalisé');
         }
     }
