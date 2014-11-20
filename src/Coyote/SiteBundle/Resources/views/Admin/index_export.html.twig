@@ -1,7 +1,7 @@
 {% extends 'CoyoteSiteBundle:Admin:index.html.twig' %}
 
 {% block content %}
-    <form role="form" action="{{ path('coyote_exportdatauser') }}" method='post'>
+    <form role="form" action="{{ path('admin_exportdatauser') }}" method='post'>
         <table class='table' id='tab_expense'>
         	<tr>
         	    <th>{{'Mois'|trans}}</th>

@@ -83,12 +83,12 @@ class ExpenseController extends Controller
         $annee = $_GET['year'];
         $mois = $_GET['month'];
         if(empty($annee) && empty($mois))
-            return $this->redirect($this->generateUrl('coyote_expense_indexshow'));
+            return $this->redirect($this->generateUrl('expense_indexshow'));
         else
         {
             $session->set('year_expense', $annee);
             $session->set('month_expense', $mois);
-            return $this->redirect($this->generateUrl('coyote_expense_showparameters', array('year' => $annee, 'month' => $mois)));
+            return $this->redirect($this->generateUrl('expense_showparameters', array('year' => $annee, 'month' => $mois)));
         }
     }
 
@@ -103,7 +103,7 @@ class ExpenseController extends Controller
         $annee = $year;
         $mois = $month;
         if(empty($annee) && empty($mois))
-            return $this->redirect($this->generateUrl('coyote_expense_indexshow'));
+            return $this->redirect($this->generateUrl('expense_indexshow'));
         else
         {
             $iduser = $this->get('security.context')->getToken()->getUser()->getId();
@@ -167,7 +167,7 @@ class ExpenseController extends Controller
                 $message = 'Aucun enregistrement effectué';
             $this->get('session')->getFlashBag()->set('saveexpense', $message);
 
-            return $this->redirect($this->generateUrl('coyote_expense_create'));
+            return $this->redirect($this->generateUrl('expense_create'));
         }
     }
 
@@ -213,7 +213,7 @@ class ExpenseController extends Controller
     private function createEditForm(Expense $entity)
     {
         $form = $this->createForm(new ExpenseType(), $entity, array(
-            'action' => $this->generateUrl('coyote_expense_update', array('id' => $entity->getId())),
+            'action' => $this->generateUrl('expense_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -225,7 +225,7 @@ class ExpenseController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('coyote_expense_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('expense_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()
@@ -270,7 +270,7 @@ class ExpenseController extends Controller
 
             $em->flush();
 
-            return $this->redirect($this->generateUrl('coyote_expense_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('expense_edit', array('id' => $id)));
         }
 
         return $this->render('CoyoteSiteBundle:Expense:edit.html.twig', array(
@@ -300,7 +300,7 @@ class ExpenseController extends Controller
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('coyote_expense_index'));
+        return $this->redirect($this->generateUrl('expense_index'));
     }
 }
 

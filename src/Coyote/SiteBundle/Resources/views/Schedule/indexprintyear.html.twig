@@ -1,4 +1,4 @@
-{% extends 'CoyoteSiteBundle:Time:index.html.twig' %}
+{% extends 'CoyoteSiteBundle:Schedule:index.html.twig' %}
 
 {% block link %}
 
@@ -13,7 +13,7 @@
 
 {% block content %}
 <p id="titreconfig">{{"Téléchargement des temps de présence de l'année au format PDF"|trans}} </p>
-<form role="form" action="{{ path('coyote_time_printyear') }}" method='get'>
+<form role="form" action="{{ path('schedule_printyear') }}" method='get'>
     <table class='table'>
     	<tr>
     		<th>{{'Période'|trans}}</th>

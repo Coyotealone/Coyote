@@ -1,4 +1,4 @@
-{% extends 'CoyoteSiteBundle:Time:index.html.twig' %}
+{% extends 'CoyoteSiteBundle:Schedule:index.html.twig' %}
 
 {% block javascripts %}
     <!--[if IE]>
@@ -30,7 +30,7 @@
 {% endfor %}
 
 {% if is_granted('ROLE_TECH') %}
-<form role="form" action="{{ path('coyote_time_savetime') }}" method='post'>
+<form role="form" action="{{ path('schedule_savetime') }}" method='post'>
 <div id="contenu">
     <p id="titreconfig">
         <b>{{'Temps de travail'|trans}}</b>
@@ -344,8 +344,8 @@
 		{{ 'Pause'|trans }}<input class='input' type='text' id='pauseauto'>
 	</div><br>
     <a id='saisie_auto' class='btnauto' onclick='saisie_auto()'>{{'Saisie Automatique'|trans}}</a><br><br>
-    <a id='work_less' class='btnpage' href="{{ path('coyote_time_workless')}}" >{{'Semaine Précédente'|trans}}</a>
-    <a id='work_more' class='btnpage' href="{{ path('coyote_time_workmore')}}" >{{'Semaine Suivante'|trans}}</a><br><br>
+    <a id='work_less' class='btnpage' href="{{ path('schedule_workless')}}" >{{'Semaine Précédente'|trans}}</a>
+    <a id='work_more' class='btnpage' href="{{ path('schedule_workmore')}}" >{{'Semaine Suivante'|trans}}</a><br><br>
 
     <button class='btnsave' type="submit" value="Enregistrer" id="enregistrer">{{ 'Enregistrer'|trans }}</button>
 </form>
@@ -354,7 +354,7 @@
 {% endif %}
 
 {% if is_granted('ROLE_CADRE') %}
-<form role="form" action="{{ path('coyote_time_savetimefm') }}" method='post'>
+<form role="form" action="{{ path('schedule_savetimefm') }}" method='post'>
     <div id="contenu">
         <p id="titreconfig">
             <b>{{'Temps de travail'|trans}}</b>
@@ -593,8 +593,8 @@
             </table>
         </div>
         <br>
-	    <a id='work_less' class='btnpage' href="{{ path('coyote_time_workless')}}" >{{'Semaine Précédente'|trans}}</a>
-        <a id='work_more' class='btnpage' href="{{ path('coyote_time_workmore')}}" >{{'Semaine Suivante'|trans}}</a>
+	    <a id='work_less' class='btnpage' href="{{ path('schedule_workless')}}" >{{'Semaine Précédente'|trans}}</a>
+        <a id='work_more' class='btnpage' href="{{ path('schedule_workmore')}}" >{{'Semaine Suivante'|trans}}</a>
         <br><br>
         <button class='btnsave' type="submit" value="Enregistrer" id="enregistrer">{{ 'Enregistrer'|trans }}</button>
     </div>

@@ -1,14 +1,14 @@
 {% extends 'CoyoteSiteBundle:Expense:index.html.twig' %}
 
 {% block link %}
-    
+
     <!--[if lt IE 9]>
         {{ include('CoyoteSiteBundle:Base:navigation_ie.html.twig') }}
     <![endif]-->
     <!--[if !IE]><!-->
         {{ include('CoyoteSiteBundle:Base:navigation.html.twig') }}
 	<!--<![endif]-->
-	
+
 {% endblock %}
 
 {% block stylesheets %}
@@ -18,7 +18,7 @@
 {% block content %}
 <p id="titreconfig">{{'Consultation des notes de frais'|trans}} </p>
 
-<form role="form" action="{{ path('coyote_expense_show') }}" method='get'>
+<form role="form" action="{{ path('expense_show') }}" method='get'>
     <table class='table' id='tab_expense'>
     	<tr>
     	    <th>{{'Mois'|trans}}</th>

@@ -28,14 +28,14 @@ class MainController extends Controller
         $user = $this->get('security.context')->getToken()->getUser();
         $session = new Session();
         if($user == "anon.")
-            return $this->redirect($this->generateUrl('coyote_main_login'));
+            return $this->redirect($this->generateUrl('main_login'));
         if($this->get('security.context')->isGranted('ROLE_SUPER_ADMIN'))
         {
             return $this->redirect($this->generateUrl('sonata_admin_dashboard'));
         }
         if($this->get('security.context')->isGranted('ROLE_CONFIG'))
         {
-            return $this->redirect($this->generateUrl('coyote_configurator'));
+            return $this->redirect($this->generateUrl('configurator'));
         }
         else
         {
@@ -60,7 +60,7 @@ class MainController extends Controller
             $lang = $session->get('lang');
             if(empty($lang))
                 $lang = 'fr';
-            return $this->redirect($this->generateUrl('coyote_main_menu', array('_locale' => $lang)));
+            return $this->redirect($this->generateUrl('main_menu', array('_locale' => $lang)));
             return $this->render('CoyoteSiteBundle:Accueil:menu.html.twig');
         }
     }
@@ -138,11 +138,11 @@ class MainController extends Controller
 
         if($user == "anon.")
         {
-            return $this->redirect($this->generateUrl('coyote_main_login'));
+            return $this->redirect($this->generateUrl('main_login'));
         }
         else
         {
-            return $this->redirect($this->generateUrl('coyote_main_menu', array('_locale' => $session->get('lang'))));
+            return $this->redirect($this->generateUrl('main_menu', array('_locale' => $session->get('lang'))));
         }
     }
 }

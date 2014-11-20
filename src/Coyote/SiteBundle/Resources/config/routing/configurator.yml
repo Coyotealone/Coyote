@@ -1,47 +1,47 @@
-coyote_configurator:
+configurator:
     pattern:    /
     defaults:   { _controller: "CoyoteSiteBundle:Configurator:index" }
 
-coyote_configurator_pagedeux:
+configurator_pagedeux:
     pattern:    /page2
     defaults:   { _controller: "CoyoteSiteBundle:Configurator:pagedeux"}
 
-coyote_configurator_pagetrois:
+configurator_pagetrois:
     pattern:    /page3
     defaults:   { _controller: "CoyoteSiteBundle:Configurator:pagetrois"}
 
-coyote_configurator_pagequatre:
+configurator_pagequatre:
     pattern:    /page4
     defaults:   { _controller: "CoyoteSiteBundle:Configurator:pagequatre"}
-    
-coyote_configurator_pagecinq:
+
+configurator_pagecinq:
     pattern:    /page5
     defaults:   { _controller: "CoyoteSiteBundle:Configurator:pagecinq"}
 
-coyote_configurator_pagesix:
+configurator_pagesix:
     pattern:    /page6
     defaults:   { _controller: "CoyoteSiteBundle:Configurator:pagesix"}
 
-coyote_configurator_pagesept:
+configurator_pagesept:
     pattern:    /page7
     defaults:   { _controller: "CoyoteSiteBundle:Configurator:pagesept"}
-    
-coyote_configurator_pagehuit:
+
+configurator_pagehuit:
     pattern:    /page8
     defaults:   { _controller: "CoyoteSiteBundle:Configurator:pagehuit"}
 
-coyote_configurator_pageneuf:
+configurator_pageneuf:
     pattern:    /page9
     defaults:   { _controller: "CoyoteSiteBundle:Configurator:pageneuf"}
 
-coyote_configurator_next:
+configurator_next:
     pattern:    /next
     defaults:   { _controller: "CoyoteSiteBundle:Configurator:addconfig" }
 
-coyote_configurator_show:
+configurator_show:
     pattern:    /show
     defaults:   { _controller: "CoyoteSiteBundle:Configurator:show" }
 
-coyote_configurator_code:
+configurator_code:
     pattern:    /code
     defaults:   { _controller: "CoyoteSiteBundle:Configurator:code" }

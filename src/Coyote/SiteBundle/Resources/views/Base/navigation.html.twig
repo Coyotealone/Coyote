@@ -5,30 +5,30 @@
 		<li class="active"><a href="{{ path('accueil') }}">{{'Accueil'|trans}}</a></li>
 
 		<li id="frais" class="dropdown">
-          <a href="{{ path('coyote_time_index') }}" class="dropdown-toggle" data-toggle="dropdown">{{'Présence'|trans}}<b class="caret"></b></a>
+          <a href="{{ path('schedule_index') }}" class="dropdown-toggle" data-toggle="dropdown">{{'Présence'|trans}}<b class="caret"></b></a>
           <ul class="dropdown-menu">
-            <li><a href="{{ path('coyote_time_index') }}">{{'Saisie'|trans}}</a></li>
-            <li><a href="{{ path('coyote_time_indexshow') }}">{{'Consultation'|trans}}</a></li>
-            <li><a href="{{ path('coyote_time_indexprint') }}">{{'Impression PDF'|trans}}</a></li>
-            <li><a href="{{ path('coyote_time_indexprintyear') }}">{{"Impression de l'année en PDF"|trans}}</a></li>
+            <li><a href="{{ path('schedule_index') }}">{{'Saisie'|trans}}</a></li>
+            <li><a href="{{ path('schedule_indexshow') }}">{{'Consultation'|trans}}</a></li>
+            <li><a href="{{ path('schedule_indexprint') }}">{{'Impression PDF'|trans}}</a></li>
+            <li><a href="{{ path('schedule_indexprintyear') }}">{{"Impression de l'année en PDF"|trans}}</a></li>
           </ul>
         </li>
 
         {% if is_granted('ROLE_BUSINESS') %}
         <li id="frais" class="dropdown">
-          <a href="{{ path('coyote_expense_create') }}" class="dropdown-toggle" data-toggle="dropdown">{{'Note de Frais'|trans}}<b class="caret"></b></a>
+          <a href="{{ path('expense_create') }}" class="dropdown-toggle" data-toggle="dropdown">{{'Note de Frais'|trans}}<b class="caret"></b></a>
           <ul class="dropdown-menu">
-            <li><a href="{{ path('coyote_expense_create') }}">{{'Saisie'|trans}}</a></li>
-            <li><a href="{{ path('coyote_expense_indexshow') }}">{{'Consultation'|trans}}</a></li>
+            <li><a href="{{ path('expense_create') }}">{{'Saisie'|trans}}</a></li>
+            <li><a href="{{ path('expense_indexshow') }}">{{'Consultation'|trans}}</a></li>
           </ul>
         </li>
         {% endif %}
 
         <li id="profil" class="dropdown">
-          <a href="{{ path('coyote_profile') }}" class="dropdown-toggle" data-toggle="dropdown">{{'Profil'|trans}}<b class="caret"></b></a>
+          <a href="{{ path('profil_profile') }}" class="dropdown-toggle" data-toggle="dropdown">{{'Profil'|trans}}<b class="caret"></b></a>
           <ul class="dropdown-menu">
-            <li><a href="{{ path('coyote_profile') }}">{{'Information Profil'|trans}}</a></li>
-            <li><a href="{{ path('coyote_changepassword') }}">{{'Changement de mot de passe'|trans}}</a></li>
+            <li><a href="{{ path('profil_profile') }}">{{'Information Profil'|trans}}</a></li>
+            <li><a href="{{ path('profil_changepassword') }}">{{'Changement de mot de passe'|trans}}</a></li>
           </ul>
         </li>
 
@@ -36,16 +36,16 @@
 		<li id="frais" class="dropdown">
           <a href=# class="dropdown-toggle" data-toggle="dropdown">{{'Export Présence'|trans}}<b class="caret"></b></a>
           <ul class="dropdown-menu">
-            <li><a href="{{ path('coyote_export_index')}}">{{'Export données BE'|trans}}</a></li>
+            <li><a href="{{ path('admin_export_index')}}">{{'Export données BE'|trans}}</a></li>
           </ul>
         </li>
         {% endif %}
 
         {% if is_granted('ROLE_COMPTA') %}
         <li id="frais" class="dropdown">
-          <a href="{{ path('coyote_exportexpense') }}" class="dropdown-toggle" data-toggle="dropdown">{{'Export Notes de Frais'|trans}}<b class="caret"></b></a>
+          <a href="{{ path('admin_exportexpense') }}" class="dropdown-toggle" data-toggle="dropdown">{{'Export Notes de Frais'|trans}}<b class="caret"></b></a>
           <ul class="dropdown-menu">
-            <li><a href="{{ path('coyote_exportexpense') }}">{{'Export données notes de frais'|trans}}</a></li>
+            <li><a href="{{ path('admin_exportexpense') }}">{{'Export données notes de frais'|trans}}</a></li>
           </ul>
         </li>
         {% endif %}

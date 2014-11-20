@@ -1,9 +1,9 @@
 {% extends "CoyoteSiteBundle:Base:layout.html.twig" %}
 
 {% block link %}
-    
+
     {{ include('CoyoteSiteBundle:Base:navigation_login.html.twig') }}
-	
+
 {% endblock %}
 
 {% block fos_user_content %}
@@ -21,15 +21,15 @@
             <th><label for="password">{{ 'Mot de passe'|trans }} :</label></th>
             <td><input type="password" id="password" name="_password" required="required" /></td>
         </tr>
-        
+
     </table>
     </div>
 
     <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
     <label for="remember_me">{{ 'Se souvenir de moi'|trans }}</label><br>
-    
+
     <button class="btn btn-danger btn-default" type="submit" id="_submit" name="_submit">{{ 'Connexion'|trans }}</button>
 </form>
-<a class="btn btn-primary btn-default" href="{{ path('coyote_resetting_request') }}">{{"Mot de passe oublié"|trans}} ?</a>
+<a class="btn btn-primary btn-default" href="{{ path('resetting_request') }}">{{"Mot de passe oublié"|trans}} ?</a>
 
 {% endblock fos_user_content %}
