@@ -111,6 +111,7 @@ Congés ancienneté: Leave seniority
 Congés sans solde: Unpaid leave
 Autres: Anything else
 Maladie/Accident travail/Paternité: Illness/Work accident/Paternity
+Aucune donnée trouvée: No data found
 
 # Page Profil #
 "En cas de problème de mot de passe, merci de contacter votre administrateur ou d'envoyer un mail dans l'onglet Contact": Thanks to contact your administrator, if you have a problem with password. Or send an email from Contact tab
@@ -139,6 +140,10 @@ Retour à la liste: Back to the list
 Consultation des notes de frais: Consultation expense
 Ajout de notes de frais: Adding expense
 "Merci d'écrire la date qu'avec des chiffres. Exemple pour la date du 7 juin 2014, il faut écrire : 070614": Thank you write the date with numbers. For example the date of June 7, 2014, write: 070614
+Aucune donnée trouvée: No data found
+Téléchargement des notes de frais au format PDF: Download expense PDF
+Impression Notes de frais: Print expense
+Artcle: Item
 
 # Group
 group:

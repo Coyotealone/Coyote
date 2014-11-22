@@ -13,6 +13,7 @@
 {% endfor %}
 <p id="titreconfig">{{'Récapitulatif du mois'|trans}}</p>
 
+{% if data %}
 <div class='table-responsive'>
     <table class='table' id='tab_expense'>
     	<tr>
@@ -47,5 +48,8 @@
         {% endfor %}
     </table>
 </div><br>
+{% else %}
+<p id="titreconfig">{{'Aucune donnée trouvée'|trans}}</p>
+{% endif %}
 
 {% endblock %}

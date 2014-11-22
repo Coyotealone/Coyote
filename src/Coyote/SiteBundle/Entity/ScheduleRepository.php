@@ -490,6 +490,14 @@ class ScheduleRepository extends EntityRepository
 ORDER BY `schedule`.`timetable_id` ASC*/
     }
 
+    /**
+     * dataScheduleFM function.
+     *
+     * @access public
+     * @param mixed $user
+     * @param mixed $date
+     * @return void
+     */
     public function dataScheduleFM($user, $date)
     {
         $qb = $this->_em->createQueryBuilder();
@@ -506,6 +514,15 @@ ORDER BY `schedule`.`timetable_id` ASC*/
 ORDER BY `schedule`.`timetable_id` ASC*/
     }
 
+    /**
+     * absenceMonth function.
+     *
+     * @access public
+     * @param mixed $date
+     * @param mixed $user
+     * @param mixed $absence
+     * @return void
+     */
     public function absenceMonth($date, $user, $absence)
     {
         $qb = $this->_em->createQueryBuilder();
@@ -518,6 +535,14 @@ ORDER BY `schedule`.`timetable_id` ASC*/
         return $absence_schedule;
     }
 
+    /**
+     * findDayMonth function.
+     *
+     * @access public
+     * @param mixed $date
+     * @param mixed $user
+     * @return void
+     */
     public function findDayMonth($date, $user)
     {
         $qb = $this->_em->createQueryBuilder();
@@ -537,6 +562,14 @@ ORDER BY `schedule`.`timetable_id` ASC*/
         //
     }
 
+    /**
+     * findDayYear function.
+     *
+     * @access public
+     * @param mixed $period
+     * @param mixed $user
+     * @return void
+     */
     public function findDayYear($period, $user)
     {
         $qb = $this->_em->createQueryBuilder();
@@ -555,6 +588,15 @@ ORDER BY `schedule`.`timetable_id` ASC*/
         return $working_day;
     }
 
+
+    /**
+     * dataScheduleYear function.
+     *
+     * @access public
+     * @param mixed $user
+     * @param mixed $period
+     * @return void
+     */
     public function dataScheduleYear($user, $period)
     {
         $qb = $this->_em->createQueryBuilder();
@@ -569,6 +611,16 @@ ORDER BY `schedule`.`timetable_id` ASC*/
         return $dataschedule;
     }
 
+
+    /**
+     * dataScheduleFMYear function.
+     * data schedule framework user
+     *
+     * @access public
+     * @param mixed $user
+     * @param mixed $period
+     * @return void
+     */
     public function dataScheduleFMYear($user, $period)
     {
         $qb = $this->_em->createQueryBuilder();

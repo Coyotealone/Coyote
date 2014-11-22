@@ -22,6 +22,10 @@ expense_showparameters:
     defaults:   { _controller: "CoyoteSiteBundle:Expense:showparameters"}
     requirements: { _method: get }
 
+expense_indexprint:
+    pattern:    /indexprint
+    defaults:   { _controller: "CoyoteSiteBundle:Expense:indexprint"}
+
 expense_print:
     pattern:    /print
     defaults:   { _controller: "CoyoteSiteBundle:Expense:print"}

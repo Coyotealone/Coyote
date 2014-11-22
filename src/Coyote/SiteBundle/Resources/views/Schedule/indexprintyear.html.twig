@@ -21,10 +21,14 @@
     	<tr>
             <td>
                 <select name='pay_period' id='pay_period' >
-					<option value="2014/2015" selected>2014/2015</option>
-					<option value="2015/2016">2015/2016</option>
-					<option value="2016/2017">2016/2017</option>
-				</select>
+                {% for pay_period in tab_period %}
+                    {% if pay_period == period %}
+                    <option value={{pay_period}} selected>{{pay_period}}</option>
+                    {% else %}
+                    <option value={{pay_period}}>{{pay_period}}</option>
+                    {% endif %}
+                {% endfor %}
+                </select>
             </td>
         </tr>
     </table>

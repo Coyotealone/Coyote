@@ -1,43 +1,35 @@
-<html>
-<head>
-    <title>Impression Notes de frais</title>
-    <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/main.css') }}" type="text/css" media="all" />
-    <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/bootstrap.css') }}" type="text/css" media="all" />
-    <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/justified-nav.css') }}" type="text/css" media="all" />
-    <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/signin.css') }}" type="text/css" media="all" />
-</head>
-<body>
-    <div class='table-responsive'>
-    <table class='table' id='tab_expense'>
-    	<tr>
-    	    <th>Id</th>
-    		<th id='tab_expense_site'>Site</th>
-    		<th id='tab_expense_date'>Date</th>
-    		<th id='tab_expense_item'>Article</th>
-    		<th id='tab_expense_devise'>Devise</th>
-    		<th id='tab_expense_qte'>Quantité</th>
-    		<th id='tab_expense_amount'>Montant réel</th>
-    		<th id='tab_expense_amounttc'>Montant TTC</th>
-    		<th id='tab_expense_amounttva'>Montant TVA</th>
-    		<th id='tab_expense_business'>Affaire</th>
-    		<th id='tab_expense_comment'>Commentaire</th>
+<page>
+<div id="lien">
+    <img src="./bundles/coyotesite/images/logo1.jpg" alt="PICHON" id="logo"/>
+</div>
+<p style="text-align:center">{{'Impression Notes de frais'|trans}}</p>
+
+{% if data %}
+    <table class='table' id='tab_expense' style="width:900px;">
+    	<tr style="width:900px;">
+    		<th style="width: 60px; text-align:center">{{'Date'|trans}}</th>
+    		<th style="width: 80px; text-align:center">{{'Article'|trans}}</th>
+    		<th style="width: 60px; text-align:center">{{'Devise'|trans}}</th>
+    		<th style="width: 60px; text-align:center">{{'Quantité'|trans}}</th>
+    		<th style="width: 70px; text-align:center">{{'Montant TTC'|trans}}</th>
+    		<th style="width: 70px; text-align:center">{{'Montant TVA'|trans}}</th>
+    		<th style="width: 120px; text-align:center">{{'Affaire'|trans}}</th>
+    		<th style="width: 20%; text-align:center" id='tab_time_comment'>{{'Commentaire'|trans}}</th>
     	</tr>
-    	{% for entity in data %}
+        {% for entity in data %}
             <tr>
-                <th>{{ entity.id }}</a></th>
-                <th>{{ entity.site }}</th>
-                <th>{{ entity.date }}</th>
-                <th>{{ entity.fee }}</th>
-                <th>{{ entity.currency }}</th>
-                <th>{{ entity.amount }}</th>
-                <th>{{ entity.actualamount }}</th>
-                <th>{{ entity.amountttc }}</th>
-                <th>{{ entity.amounttva }}</th>
-                <th id='tab_expense_business'>{{ entity.business }}</th>
-                <th id='tab_expense_comment'>{{ entity.comment }}</th>
+                <th style="width: 60px; text-align:center">{{ entity.date }}</th>
+                <th style="width: 80px; text-align:center">{{ entity.fee }}</th>
+                <th style="width: 60px; text-align:center">{{ entity.currency }}</th>
+                <th style="width: 60px; text-align:center">{{ entity.amount }}</th>
+                <th style="width: 70px; text-align:center">{{ entity.amountttc }}</th>
+                <th style="width: 70px; text-align:center">{{ entity.amounttva }}</th>
+                <th style="width: 120px; text-align:center">{{ entity.business }}</th>
+                <th style="width: 20%; text-align:center" id='tab_time_comment'>{{ entity.comment }}</th>
             </tr>
         {% endfor %}
     </table>
-</div><br>
-</body>
-</html>
+{% else %}
+<p style="text-align:center">{{'Aucune donnée trouvée'|trans}}</p>
+{% endif %}
+</page>

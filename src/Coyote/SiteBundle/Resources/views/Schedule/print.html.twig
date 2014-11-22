@@ -5,6 +5,7 @@
 
 <p style="text-align:center">{{'Récapitulatif du mois'|trans}}</p>
 
+{% if dataschedule %}
 <table>
     <tr>
         <td style="background:#7FC6BC; color:white">{{'Jour férié'|trans}}</td>
@@ -12,7 +13,6 @@
         <td style="background:#99CCCC; color:white">{{'Temps de la semaine'|trans}}</td>
     </tr>
 </table>
-
 <table class='table' id='tab_expense' style="width:900px;">
 	<tr style="width:900px;">
 	    <th style="width: 80px; text-align:center">{{'Jour de la semaine'|trans}}</th>
@@ -95,5 +95,8 @@
     {{'Nombre de congés payés (CP) utilisé dans le mois /année' | trans }} : {{absencecp}} / {{cpyear}} <br>
     {{"Nombre de congés d'anciennetés (CA) utilisé dans le mois / année" | trans }} : {{absenceca}} / {{cayear}}
 </p>
+{% else %}
+<p style="text-align:center">{{'Aucune donnée trouvée'|trans}}</p>
+{% endif %}
 
 </page>

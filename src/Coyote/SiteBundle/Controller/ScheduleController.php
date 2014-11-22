@@ -34,7 +34,6 @@ class ScheduleController extends Controller
         {
             return $this->redirect($this->generateUrl('fos_user_security_login'));
         }
-
         $date = $em->getRepository('CoyoteSiteBundle:Timetable')->findBy(array('no_week' => $session->get('no_week'),'year' => $session->get('year'),));
         $time = $em->getRepository('CoyoteSiteBundle:Schedule')->findBy(array('timetable' => $date, 'user' => $session->get('userid')));
 
@@ -69,8 +68,11 @@ class ScheduleController extends Controller
         $session = $request->getSession();
         $date = $em->getRepository('CoyoteSiteBundle:Timetable')->findBy(array('no_week' => $session->get('no_week'),'year' => $session->get('year'),));
         $time = $em->getRepository('CoyoteSiteBundle:Schedule')->findBy(array('timetable' => $date, 'user' => $session->get('userid')));
+
         $id = $em->getRepository('CoyoteSiteBundle:Timetable')->myFindScheduleId($session->get('no_week'), $session->get('year'), $session->get('userid'));
+
         $timetable_id = $em->getRepository('CoyoteSiteBundle:Timetable')->myFindTimetableId($session->get('no_week'), $session->get('year'));
+
         $session->set('id_lundi', $id[0]['id']);
         $session->set('id_mardi', $id[1]['id']);
         $session->set('id_mercredi', $id[2]['id']);
@@ -384,11 +386,29 @@ class ScheduleController extends Controller
         }
     }
 
+    /**
+     * indexshowAction function.
+     *
+     * @access public
+     * @return void
+     */
     public function indexshowAction()
     {
-        return $this->render('CoyoteSiteBundle:Schedule:indexshow.html.twig');
+        $month = date('n');
+        $year = date('Y');
+        $tab_mois = array( 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre' );
+        $tab_num_mois = array( '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12' );
+        $tab_annee = array( '2013', '2014', '2015');
+
+        return $this->render('CoyoteSiteBundle:Schedule:indexshow.html.twig', array('month' => $month, 'year' => $year, 'tab_mois' => $tab_mois, 'tab_num_mois' => $tab_num_mois, 'tab_annee' => $tab_annee));
     }
 
+    /**
+     * showAction function.
+     *
+     * @access public
+     * @return void
+     */
     public function showAction()
     {
         $request = $this->getRequest();
@@ -475,11 +495,29 @@ class ScheduleController extends Controller
         }
     }
 
+    /**
+     * indexprintAction function.
+     *
+     * @access public
+     * @return void
+     */
     public function indexprintAction()
     {
-        return $this->render('CoyoteSiteBundle:Schedule:indexprint.html.twig');
+        $month = date('n');
+        $year = date('Y');
+        $tab_mois = array( 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre' );
+        $tab_num_mois = array( '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12' );
+        $tab_annee = array( '2013', '2014', '2015');
+
+        return $this->render('CoyoteSiteBundle:Schedule:indexprint.html.twig', array('month' => $month, 'year' => $year, 'tab_mois' => $tab_mois, 'tab_num_mois' => $tab_num_mois, 'tab_annee' => $tab_annee));
     }
 
+    /**
+     * printAction function.
+     *
+     * @access public
+     * @return void
+     */
     public function printAction()
     {
         $request = $this->getRequest();
@@ -587,11 +625,30 @@ class ScheduleController extends Controller
                     ));
     }
 
+    /**
+     * affichage de la page avant d'obtenir un fichier pdf de l'année.
+     *
+     * @access public
+     * @return void
+     */
     public function indexprintyearAction()
     {
-        return $this->render('CoyoteSiteBundle:Schedule:indexprintyear.html.twig');
+        $date = date('d').'/'.date('m').'/'.date('Y');
+        $doctrine = $this->getDoctrine();
+        $em = $doctrine->getManager();
+        $period = $em->getRepository('CoyoteSiteBundle:Timetable')->findPeriodByDate($date);
+        $tab_period = array('2014/2015', '2015/2016', '2016/2017');
+
+        return $this->render('CoyoteSiteBundle:Schedule:indexprintyear.html.twig', array('period' => $period, 'tab_period' => $tab_period));
     }
 
+
+    /**
+     * génération d'un fichier pdf de l'année de l'user.
+     *
+     * @access public
+     * @return void
+     */
     public function printyearAction()
     {
         $request = $this->getRequest();

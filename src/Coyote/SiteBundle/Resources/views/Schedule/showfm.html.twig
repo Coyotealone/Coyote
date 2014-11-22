@@ -14,6 +14,7 @@
 </tr>
 </table>
 
+{% if dataschedule %}
 <div class='table-responsive'>
     <table class='table' id='tab_expense'>
     	<tr>
@@ -64,7 +65,9 @@
 {{'Nombre de RTT utilisé dans le mois / année'|trans}} : {{absencertt}} / {{rttyear}}<br>
 {{"Nombre de congés payés (CP) utilisé dans le mois / année" | trans }} : {{absencecp}} / {{cpyear}} <br>
 {{"Nombre de congés d'anciennetés (CA) utilisé dans le mois / année" | trans }} : {{absenceca}} / {{cayear}} <br>
-
+{% else %}
+<p style="text-align:center">{{'Aucune donnée trouvée'|trans}}</p>
+{% endif %}
 
 
 {% endblock %}

@@ -23,9 +23,9 @@ class ExpenseRepository extends EntityRepository
         $query = $this->getEntityManager()
                         ->createQuery("
 	            SELECT e FROM CoyoteSiteBundle:Expense e
-	            WHERE e.date LIKE :key and e.userfees = :id"
+	            WHERE e.date LIKE :date and e.userfees = :id"
                         );
-        $query->setParameters(array('key' => '%'.$date.'%', 'id' => $id));
+        $query->setParameters(array('date' => '%'.$date.'%', 'id' => $id));
         return $query->getResult();
     }
 

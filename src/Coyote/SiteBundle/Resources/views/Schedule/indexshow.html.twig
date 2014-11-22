@@ -22,28 +22,28 @@
     	</tr>
         <tr>
             <td>
+                {% set counter = 0 %}
                 <select name='month' id='month' >
-					<option value='01'>{{'Janvier'|trans}}</option>
-					<option value='02'>{{'Février'|trans}}</option>
-					<option value='03'>{{'Mars'|trans}}</option>
-					<option value='04'>{{'Avril'|trans}}</option>
-					<option value='05'>{{'Mai'|trans}}</option>
-					<option value='06'>{{'Juin'|trans}}</option>
-					<option value='07'>{{'Juillet'|trans}}</option>
-					<option value='08'>{{'Août'|trans}}</option>
-					<option value='09'>{{'Septembre'|trans}}</option>
-					<option value='10'>{{'Octobre'|trans}}</option>
-					<option value='11'>{{'Novembre'|trans}}</option>
-					<option value='12'>{{'Décembre'|trans}}</option>
-				</select>
+                {% for mois in tab_num_mois %}
+                    {% if mois == month %}
+                    <option value={{mois}} selected>{{tab_mois[counter]|trans}}</option>
+                    {% else %}
+                    <option value={{mois}}>{{tab_mois[counter]|trans}}</option>
+                    {% endif %}
+                    {% set counter = counter + 1 %}
+                {% endfor %}
+                </select>
             </td>
             <td>
                 <select name='year' id='year' >
-                    <option value='2013'>2013</option>
-					<option value='2014' selected>2014</option>
-					<option value='2015'>2015</option>
-					<option value='2016'>2016</option>
-				</select>
+                {% for annee in tab_annee %}
+                    {% if annee == year %}
+                    <option value={{annee}} selected>{{annee|trans}}</option>
+                    {% else %}
+                    <option value={{annee}}>{{annee|trans}}</option>
+                    {% endif %}
+                {% endfor %}
+                </select>
             </td>
         </tr>
     </table>

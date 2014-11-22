@@ -1,4 +1,4 @@
-{% extends 'CoyoteSiteBundle:Schedule:index.html.twig' %}
+{% extends 'CoyoteSiteBundle:Expense:index.html.twig' %}
 
 {% block link %}
 
@@ -12,9 +12,9 @@
 {% endblock %}
 
 {% block content %}
-<p id="titreconfig">{{'Téléchargement des temps de présence au format PDF'|trans}} </p>
+<p id="titreconfig">{{'Téléchargement des notes de frais au format PDF'|trans}} </p>
 
-<form role="form" action="{{ path('schedule_print') }}" method='get'>
+<form role="form" action="{{ path('expense_print') }}" method='get'>
     <table class='table'>
     	<tr>
     	    <th>{{'Mois'|trans}}</th>
@@ -35,13 +35,15 @@
                 </select>
             </td>
             <td>
+                {% set counter = 0 %}
                 <select name='year' id='year' >
                 {% for annee in tab_annee %}
                     {% if annee == year %}
-                    <option value={{annee}} selected>{{annee|trans}}</option>
+                    <option value={{tab_num_annee[counter]}} selected>{{annee|trans}}</option>
                     {% else %}
-                    <option value={{annee}}>{{annee|trans}}</option>
+                    <option value={{tab_num_annee[counter]}}>{{annee|trans}}</option>
                     {% endif %}
+                    {% set counter = counter + 1 %}
                 {% endfor %}
                 </select>
             </td>

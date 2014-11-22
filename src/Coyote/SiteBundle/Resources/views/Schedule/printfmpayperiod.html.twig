@@ -5,6 +5,8 @@
 
 <p style="text-align:center">{{"Récapitulatif de l'année"|trans}}</p>
 
+{% if dataschedule %}
+
 <table>
     <tr>
         <td style="background:#7FC6BC; color:white">{{'Jour férié'|trans}}</td>
@@ -62,5 +64,9 @@
     {{"Nombre de congés payés (CP) utilisé dans l'année" | trans }} : {{cpyear}} <br>
     {{"Nombre de congés d'anciennetés (CA) utilisé dans l'année" | trans }} : {{cayear}}
 </p>
+
+{% else %}
+<p style="text-align:center">{{'Aucune donnée trouvée'|trans}}</p>
+{% endif %}
 
 </page>

@@ -22,6 +22,13 @@ use Coyote\SiteBundle\Entity\User;
  */
 class AdminController extends Controller
 {
+
+    /**
+     * exportExpenseAction function.
+     *
+     * @access public
+     * @return void
+     */
     public function exportExpenseAction()
     {
         if($this->get('security.context')->isGranted('ROLE_COMPTA'))
