@@ -94,7 +94,7 @@ class AdminController extends Controller
     }
 
     /**
-     * show index to choose month and year to extract data user.
+     * show index to choose month and year to extract data design office users.
      *
      * @access public
      * @return void
@@ -103,19 +103,31 @@ class AdminController extends Controller
     {
         if($this->get('security.context')->isGranted('ROLE_CHEF_BE'))
         {
-            return $this->render('CoyoteSiteBundle:Admin:index_export.html.twig');
+            $month = date('n');
+            $year = date('Y');
+            $tab_mois = array( 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre' );
+            $tab_num_mois = array( '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12' );
+            $tab_annee = array( '2013', '2014', '2015');
+
+            return $this->render('CoyoteSiteBundle:Admin:index_export.html.twig', array('month' => $month, 'year' => $year, 'tab_mois' => $tab_mois, 'tab_num_mois' => $tab_num_mois, 'tab_annee' => $tab_annee));
         }
         else
             return $this->redirect($this->generateUrl('accueil'));
     }
 
+    /**
+     * export data design office users.
+     *
+     * @access public
+     * @return void
+     */
     public function exportDataUserAction()
     {
         if($this->get('security.context')->isGranted('ROLE_CHEF_BE'))
         {
             $doctrine = $this->getDoctrine();
             $em = $doctrine->getManager();
-            $tabuserid = array(14, 17, 41, 44, 45, 46, 49, 50, 52, 54, 62, 70);
+            $tabuserid = array(14, 17, 41, 44, 45, 46, 49, 50, 52, 54, 62, 70); /* design office users id*/
 
             $request = Request::createFromGlobals();
             $data = $request->request->all();
@@ -129,7 +141,7 @@ class AdminController extends Controller
                 $result = '';
                 for($i=0;$i<count($tabuserid);$i++)
                 {
-                    $user = $tabuserid[$i]; //$date = '06/2014'; $year = 2014;
+                    $user = $tabuserid[$i];
                     $datauser = $em->getRepository('CoyoteSiteBundle:User')->find($user);
                     $user_name = $datauser->getName();
                     $res_temp = $em->getRepository('CoyoteSiteBundle:Schedule')->findforBE($user, $date, $year, $user_name);
@@ -148,6 +160,13 @@ class AdminController extends Controller
 
     }
 
+    /**
+     * function registrer user.
+     *
+     * @access public
+     * @param Request $request
+     * @return void
+     */
     public function registerAction(Request $request)
     {
         /** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */
