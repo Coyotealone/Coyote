@@ -727,4 +727,111 @@ class ScheduleController extends Controller
             return new Response('PDF réalisé');
         }
     }
+
+    public function indexexportprintyearAction()
+    {
+        $date = date('d').'/'.date('m').'/'.date('Y');
+        $doctrine = $this->getDoctrine();
+        $em = $doctrine->getManager();
+        $period = $em->getRepository('CoyoteSiteBundle:Timetable')->findPeriodByDate($date);
+        $tab_period = array('2014/2015', '2015/2016', '2016/2017');
+
+        return $this->render('CoyoteSiteBundle:Schedule:indexexportprintyear.html.twig', array('period' => $period, 'tab_period' => $tab_period));
+    }
+
+    public function exportprintyearAction()
+    {
+        $request = $this->getRequest();
+        $session = $request->getSession();
+        $doctrine = $this->getDoctrine();
+        $em = $doctrine->getManager();
+        $request = Request::createFromGlobals();
+
+        $pay_period = $_GET['pay_period'];
+
+        define("pay_period", $pay_period, true);
+
+        if(empty($pay_period))
+        {
+            return $this->redirect($this->generateUrl('schedule_indexexportprintyear'));
+        }
+        else
+        {
+            if(empty($pay_period))
+                return $this->render('CoyoteSiteBundle:Schedule:indexexportprintyear.html.twig');
+
+            $user_id = $em->getRepository('CoyoteSiteBundle:User')->findAllId();
+
+            foreach($user_id as $datauser)
+            {
+
+                $user = $em->getRepository('CoyoteSiteBundle:User')->find($datauser);
+
+                $roles = $user->getRoles();
+                $check_role = '';
+                $role = '';
+                foreach($roles as $datarole)
+                {
+                    $check_role = $datarole;
+                    if($check_role == "ROLE_CADRE")
+                        $role = 'ROLE_CADRE';
+                    if($check_role == "ROLE_TECH")
+                        $role = 'ROLE_TECH';
+                }
+
+                if($role == 'ROLE_CADRE' || $role == 'ROLE_TECH')
+                {
+                    $week = $em->getRepository('CoyoteSiteBundle:Schedule')->findNoWeekPayPeriod(constant('pay_period'), $user);
+                    $timeweek = '';
+                    $i = 0;
+                    foreach($week as $data)
+                    {
+                        $timeoneweek = $em->getRepository('CoyoteSiteBundle:Schedule')->findTimeWeekPayPeriod($user, $data['year'], $data['no_week'], constant('pay_period'));
+                        $timeweek[$i] = $timeoneweek;
+                        $i++;
+                    }
+
+                    $dataschedule = $em->getRepository('CoyoteSiteBundle:Schedule')->dataScheduleYear($user, constant('pay_period'));
+                    //$data = $em->getRepository('CoyoteSiteBundle:Schedule')->findTimePayPeriod(constant('pay_period'), $user);
+                    $absencerttyear = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsencePayPeriod(constant('pay_period'), $user, "RTT");
+                    $absencecayear = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsencePayPeriod(constant('pay_period'), $user, "CA");
+                    $absencecpyear = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsencePayPeriod(constant('pay_period'), $user, "Congés payés");
+                    $dayyear = $em->getRepository('CoyoteSiteBundle:Schedule')->findDayPayPeriod(constant('pay_period'), $user);
+                    if($role == 'ROLE_CADRE')
+                    {
+                        $page = $this->render('CoyoteSiteBundle:Schedule:printfmpayperiod.html.twig', array(
+                            'dataschedule' => $dataschedule,
+                            'rttyear' => $absencerttyear,
+                            'cpyear' => $absencecpyear,
+                            'cayear' => $absencecayear,
+                            'dayyear' => $dayyear,
+                            ));
+                    }
+                    if($role == 'ROLE_TECH')
+                    {
+                        $page = $this->render('CoyoteSiteBundle:Schedule:printpayperiod.html.twig', array(
+                            'dataschedule' => $dataschedule,
+                            'rttyear' => $absencerttyear,
+                            'cpyear' => $absencecpyear,
+                            'cayear' => $absencecayear,
+                            'timeweek' => $timeweek,
+                            ));
+                    }
+
+                    $html = $page->getContent();
+
+                    $html2pdf = new \Html2Pdf_Html2Pdf('P', 'A4', 'fr');
+                    $html2pdf->pdf->SetDisplayMode('real');
+                    $html2pdf->writeHTML($html);
+                    $pay_period = explode("/", constant('pay_period'));
+                    $pay_period = $pay_period[0].'-'.$pay_period[1];
+                    $file_name = $pay_period.'_'.$user->getName().'.pdf';
+                    $html2pdf->pdf->Output('./presence/'.$file_name,"F");
+
+                }
+            }
+
+            return $this->redirect($this->generateUrl('schedule_indexexportprintyear'));
+        }
+    }
 }

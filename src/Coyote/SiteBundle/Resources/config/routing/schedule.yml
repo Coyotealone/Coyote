@@ -49,3 +49,11 @@ schedule_indexprintyear:
 schedule_printyear:
     pattern:    /scheduleyear
     defaults:   { _controller: "CoyoteSiteBundle:Schedule:printyear"}
+
+schedule_indexexportprintyear:
+    pattern:    /indexexportprintyear
+    defaults:   { _controller: "CoyoteSiteBundle:Schedule:indexexportprintyear"}
+
+schedule_exportprintyear:
+    pattern:    /exportscheduleyear
+    defaults:   { _controller: "CoyoteSiteBundle:Schedule:exportprintyear"}
