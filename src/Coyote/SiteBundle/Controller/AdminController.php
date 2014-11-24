@@ -24,7 +24,7 @@ class AdminController extends Controller
 {
 
     /**
-     * exportExpenseAction function.
+     * export expense for X3 in text file
      *
      * @access public
      * @return void
@@ -48,34 +48,57 @@ class AdminController extends Controller
             return $this->redirect($this->generateUrl('accueil'));
     }
 
+    /**
+     * redirect to function fos_user_change_password.
+     *
+     * @access public
+     * @return void
+     */
     public function changePasswordAction()
     {
         return $this->redirect($this->generateUrl('fos_user_change_password'));
     }
 
+    /**
+     * redirect to function fos_user_resetting_request.
+     *
+     * @access public
+     * @return void
+     */
     public function resettingAction()
     {
-        //$message = \Swift_Message::newInstance()
-        //->setSubject('Hello Email')
-        //->setFrom('provinianthony@gmail.com')
-        //->setTo('si@pichonindustries.com')
-        //->setBody($this->renderView('CoyoteSiteBundle:Admin:email.txt.twig', array('name' => 'Anthony')));
-        //$this->get('mailer')->send($message);
-        //return new Response('mail envoyé');
         return $this->redirect($this->generateUrl('fos_user_resetting_request'));
     }
 
+    /**
+     * show profil user connected.
+     *
+     * @access public
+     * @return void
+     */
     public function profilAction()
     {
         $user = $this->container->get('security.context')->getToken()->getUser();
         return $this->render('CoyoteSiteBundle:Profile:show.html.twig', array('user' => $user));
     }
 
+    /**
+     * redirect to accueil if user want edit.
+     *
+     * @access public
+     * @return void
+     */
     public function profileditAction()
     {
         return $this->redirect($this->generateUrl('accueil'));
     }
 
+    /**
+     * show index to choose month and year to extract data user.
+     *
+     * @access public
+     * @return void
+     */
     public function showexportAction()
     {
         if($this->get('security.context')->isGranted('ROLE_CHEF_BE'))
