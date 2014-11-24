@@ -14,16 +14,29 @@ use Doctrine\ORM\EntityRepository;
 
 
 /**
- * Main controller.
+ * Controller managing page menu
  *
  */
 class MenuController extends Controller
 {
+
+    /**
+     * show view menu.
+     *
+     * @access public
+     * @return void
+     */
     public function indexAction()
     {
         return $this->render('CoyoteSiteBundle:Accueil:menu.html.twig');
     }
-    
+
+    /**
+     * show view menu.
+     *
+     * @access public
+     * @return void
+     */
     public function menuAction()
     {
         return $this->render('CoyoteSiteBundle:Accueil:menu.html.twig');

@@ -1,9 +1,9 @@
 <nav class="navbar navbar-default" role="navigation">
   <div class="container-fluid">
 	<ul class="nav navbar-nav">
-		
-        
-        
+
+
+
         {#{% if app.session.get('username') == "PROVINI Anthony" %}
         <li id="config" class="dropdown">
           <a href="{{ path('coyote_configurator') }}" class="dropdown-toggle" data-toggle="dropdown">{{'Configurateur'|trans}}<b class="caret"></b></a>
@@ -19,7 +19,7 @@
           </ul>
         </li>
         <li><a href="{{ path('coyote_registration_register') }}">{{"Création d'un utilisateur"|trans}}</a></li>
-        <li><a href="{{ path('coyote_time_calcul') }}">{{"Calcul heure supp par semaine"|trans}}</a></li>
+        <li><a href="{{ path('schedule_calcul') }}">{{"Calcul heure supp par semaine"|trans}}</a></li>
         {% endif %}#}
 	</ul>
   </div>

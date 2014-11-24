@@ -69,7 +69,16 @@ class ExpenseController extends Controller
         if($session->get('userfeesid') == null)
             return $this->redirect($this->generateUrl('accueil'));
         else
-            return $this->render('CoyoteSiteBundle:Expense:indexshow.html.twig');
+        {
+            $month = date('n');
+            $year = date('Y');
+            $tab_mois = array( 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre' );
+            $tab_num_mois = array( '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12' );
+            $tab_annee = array('2014', '2015');
+            $tab_num_annee = array('14', '15');
+
+            return $this->render('CoyoteSiteBundle:Expense:indexshow.html.twig', array('month' => $month, 'year' => $year, 'tab_mois' => $tab_mois, 'tab_num_mois' => $tab_num_mois, 'tab_annee' => $tab_annee, 'tab_num_annee' => $tab_num_annee));
+        }
     }
 
     public function showAction()
@@ -83,12 +92,12 @@ class ExpenseController extends Controller
         $annee = $_GET['year'];
         $mois = $_GET['month'];
         if(empty($annee) && empty($mois))
-            return $this->redirect($this->generateUrl('coyote_expense_indexshow'));
+            return $this->redirect($this->generateUrl('expense_indexshow'));
         else
         {
             $session->set('year_expense', $annee);
             $session->set('month_expense', $mois);
-            return $this->redirect($this->generateUrl('coyote_expense_showparameters', array('year' => $annee, 'month' => $mois)));
+            return $this->redirect($this->generateUrl('expense_showparameters', array('year' => $annee, 'month' => $mois)));
         }
     }
 
@@ -103,7 +112,7 @@ class ExpenseController extends Controller
         $annee = $year;
         $mois = $month;
         if(empty($annee) && empty($mois))
-            return $this->redirect($this->generateUrl('coyote_expense_indexshow'));
+            return $this->redirect($this->generateUrl('expense_indexshow'));
         else
         {
             $iduser = $this->get('security.context')->getToken()->getUser()->getId();
@@ -167,24 +176,8 @@ class ExpenseController extends Controller
                 $message = 'Aucun enregistrement effectué';
             $this->get('session')->getFlashBag()->set('saveexpense', $message);
 
-            return $this->redirect($this->generateUrl('coyote_expense_create'));
+            return $this->redirect($this->generateUrl('expense_create'));
         }
-    }
-
-    public function printAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-        $data = $em->getRepository('CoyoteSiteBundle:Expense')->findByUserfees('1');
-        $html = $this->renderView('CoyoteSiteBundle:Expense:print.html.twig', array('data' => $data));
-        $pdfGenerator = $this->get('spraed.pdf.generator');
-
-        return new Response($pdfGenerator->generatePDF($html),
-                    200,
-                    array(
-                        'Content-Type' => 'application/pdf',
-                        'Content-Disposition' => 'inline; filename="out.pdf"'
-                    )
-                );
     }
 
     public function editAction($id)
@@ -213,7 +206,7 @@ class ExpenseController extends Controller
     private function createEditForm(Expense $entity)
     {
         $form = $this->createForm(new ExpenseType(), $entity, array(
-            'action' => $this->generateUrl('coyote_expense_update', array('id' => $entity->getId())),
+            'action' => $this->generateUrl('expense_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -225,7 +218,7 @@ class ExpenseController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('coyote_expense_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('expense_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()
@@ -254,23 +247,17 @@ class ExpenseController extends Controller
             $date = $entity->getDate();
             if(is_numeric($date))
             {
-                $jour = substr($date, 0, 2);
-                $mois = substr($date, 2, 2);
-                $annee = substr($date, 4, 3);
-                $date = $jour."/".$mois."/".$annee;
+                $date = $em->getRepository('CoyoteSiteBundle:Expense')->formDate($date);
                 $expense->setDate($date);
             }
             $taux = $entity->getFee()->getRate();
             $ttc = $entity->getAmountTTC();
-            $taux += 100;
-            $price = $ttc * 100 / $taux;
-            $tva = $ttc - $price;
-            $tva = round($tva, 2);
+            $tva = $em->getRepository('CoyoteSiteBundle:Expense')->calculTVA($taux, $ttc);
             $entity->setAmountTVA($tva);
 
             $em->flush();
 
-            return $this->redirect($this->generateUrl('coyote_expense_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('expense_edit', array('id' => $id)));
         }
 
         return $this->render('CoyoteSiteBundle:Expense:edit.html.twig', array(
@@ -300,7 +287,62 @@ class ExpenseController extends Controller
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('coyote_expense_index'));
+        return $this->redirect($this->generateUrl('expense_index'));
+    }
+
+    public function indexprintAction()
+    {
+        $month = date('n');
+        $year = date('Y');
+        $tab_mois = array( 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre' );
+        $tab_num_mois = array( '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12' );
+        $tab_annee = array( '2014', '2015');
+        $tab_num_annee = array( '14', '15');
+
+        return $this->render('CoyoteSiteBundle:Expense:indexprint.html.twig', array('month' => $month, 'year' => $year, 'tab_mois' => $tab_mois, 'tab_num_mois' => $tab_num_mois, 'tab_annee' => $tab_annee, 'tab_num_annee' => $tab_num_annee));
+    }
+
+    /**
+     * printAction function.
+     *
+     * @access public
+     * @return void
+     */
+    public function printAction()
+    {
+        $request = $this->getRequest();
+        $session = $request->getSession();
+        $doctrine = $this->getDoctrine();
+        $em = $doctrine->getManager();
+        $request = Request::createFromGlobals();
+
+        $annee = $_GET['year'];
+        $mois = $_GET['month'];
+
+        if(empty($annee) && empty($mois))
+        {
+            return $this->redirect($this->generateUrl('expense_indexprint'));
+        }
+        else
+        {
+            if(empty($annee) && empty($mois))
+                return $this->render('CoyoteSiteBundle:Expense:indexprint.html.twig');
+
+            $date = $mois.'/'.$annee;
+            $data = $em->getRepository('CoyoteSiteBundle:Expense')->findExpense($date, $session->get('userfeesid'));
+            $user = $em->getRepository('CoyoteSiteBundle:User')->find($session->get('userid'));
+            $page = $this->render('CoyoteSiteBundle:Expense:print.html.twig', array(
+                    'data' => $data));
+            $date = date("Ymd");
+            $heure = date("His");
+            $filename = $user->getName()."_expense".$date."-".$heure.".pdf";
+            $html = $page->getContent();
+            $html2pdf = new \Html2Pdf_Html2Pdf('P', 'A4', 'fr');
+            $html2pdf->pdf->SetDisplayMode('real');
+            $html2pdf->writeHTML($html);
+            $html2pdf->Output($filename, 'D');
+            return new Response('PDF réalisé');
+        }
     }
 }
 

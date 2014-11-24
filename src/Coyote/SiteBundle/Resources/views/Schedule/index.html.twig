@@ -1,55 +1,35 @@
-{% extends ':Base:base.html.twig' %}
+{% extends 'CoyoteSiteBundle:Base:base.html.twig' %}
 
-{% block body -%}
-    <h1>Schedule list</h1>
+{% block userinfo %}
 
-    <table class="records_list">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Start</th>
-                <th>End</th>
-                <th>Break</th>
-                <th>Working_time</th>
-                <th>Working_hours</th>
-                <th>Travel</th>
-                <th>Absence</th>
-                <th>Comment</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for entity in entities %}
-            <tr>
-                <td><a href="{{ path('schedule_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{% if entity.start %}{{ entity.start|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if entity.end %}{{ entity.end|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if entity.break %}{{ entity.break|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if entity.workingtime %}{{ entity.workingtime|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ entity.workinghours }}</td>
-                <td>{{ entity.travel }}</td>
-                <td>{{ entity.absence }}</td>
-                <td>{{ entity.comment }}</td>
-                <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('schedule_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('schedule_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+{{ 'Bienvenue'|trans }} {{ app.session.get('username') }} |
+<a href="{{ path('fos_user_security_logout') }}">
+    {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+</a>
 
-        <ul>
-        <li>
-            <a href="{{ path('schedule_new') }}">
-                Create a new entry
-            </a>
-        </li>
-    </ul>
-    {% endblock %}
+{% endblock %}
+
+{% block link %}
+
+    <!--[if lt IE 9]>
+        {{ include('CoyoteSiteBundle:Base:navigation_ie.html.twig') }}
+    <![endif]-->
+    <!--[if !IE]><!-->
+        {{ include('CoyoteSiteBundle:Base:navigation.html.twig') }}
+	<!--<![endif]-->
+
+{% endblock %}
+
+{% block stylesheets %}
+   {{ include('CoyoteSiteBundle:Base:css.html.twig') }}
+{% endblock %}
+
+{% block content %}
+    <div class="jumbotron">
+        <p class="lead">{{'Choisissez votre méthode de saisie des temps.'|trans}}</p>
+        <p>
+        	<a href={{ path('schedule_user')}} class="btntime">{{'Saisie par heure'|trans}}</a>
+        	<a href={{ path('schedule_framework')}} class="btntime">{{'Saisie par jour'|trans}}</a>
+	  	</p>
+    </div>
+{% endblock %}

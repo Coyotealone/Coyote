@@ -246,61 +246,8 @@ class ScheduleRepository extends EntityRepository
         return $result;
     }
 
-    public function findDayMonth($date, $user)
-    {
-        $qb = $this->_em->createQueryBuilder();
-        $qb->select('t.id')
-           ->from('CoyoteSiteBundle:Timetable', 't')
-           ->where('t.date LIKE :date')
-           ->setParameters(array('date' => '%'.$date.'%'));
-
-        $timetable_id =  $qb->getQuery()
-                            ->getResult();
-        $nbjour = count($timetable_id);
-
-        $qb = $this->_em->createQueryBuilder();
-        $qb->select('s.working_hours')
-           ->from('CoyoteSiteBundle:Schedule', 's')
-           ->where('s.user = :user and s.working_hours = 1 and s.timetable BETWEEN :time1 and :time2')
-           ->setParameters(array(
-                'time1' => $timetable_id[0]['id'],
-                'time2' => $timetable_id[$nbjour-1]['id'],
-                'user' => $user,
-                ));
-
-        $res =  $qb->getQuery()
-                   ->getResult();
-
-        return count($res);
-    }
-
-    public function findDayYear($period, $user)
-    {
-        $qb = $this->_em->createQueryBuilder();
-        $qb->select('s.id')
-           ->from('CoyoteSiteBundle:Schedule', 's')
-           ->innerJoin('CoyoteSiteBundle:Timetable', 't', 'WITH', 't.id = s.timetable')
-           ->where('s.user = :user and s.working_hours = :working_hours and t.pay_period = :pay_period')
-           ->setParameters(array('user' => $user, 'working_hours' => 1, 'pay_period' => $pay_period));
-        $id_schedule =  $qb->getQuery()
-                           ->getResult();
-
-        return count($id_schedule);
-    }
-
     public function findTimePayPeriod($pay_period, $user)
     {
-        /*$qb = $this->_em->createQueryBuilder();
-        $qb->select('s')
-           ->from('CoyoteSiteBundle:Schedule', 's')
-           ->innerJoin('CoyoteSiteBundle:Timetable', 't', 'WITH', 't.id = s.timetable')
-           ->where('s.user = :user and t.pay_period = :pay_period ')
-           ->setParameters(array('user' => $user, 'pay_period' => $pay_period));
-        $schedule =  $qb->getQuery()
-                        ->getResult();
-
-        return $schedule;
-        */
         $qb = $this->_em->createQueryBuilder();
         $qb->select('t.id')
            ->from('CoyoteSiteBundle:Timetable', 't')
@@ -350,9 +297,6 @@ class ScheduleRepository extends EntityRepository
         $lastiddate =  $qb->getQuery()
                           ->getResult(); //Id de tous les jours des mois
 
-
-
-
         $qb = $this->_em->createQueryBuilder();
         $qb->select('s.id')
            ->from('CoyoteSiteBundle:Schedule', 's')
@@ -362,12 +306,10 @@ class ScheduleRepository extends EntityRepository
                   ->getResult(); //Id de tous les jours des mois
 
         return count($res);
-
     }
 
     public function findNoWeekPayPeriod($pay_period, $user)
     {
-
         $qb = $this->_em->createQueryBuilder();
         $qb->select('distinct(t.no_week) as no_week, t.year')
            ->from('CoyoteSiteBundle:Timetable', 't')
@@ -377,7 +319,6 @@ class ScheduleRepository extends EntityRepository
            ->setParameters(array('pay_period' => $pay_period, 'user' => $user));
         $time =  $qb->getQuery()
                     ->getResult();
-
         return $time;
     }
 
@@ -415,14 +356,12 @@ class ScheduleRepository extends EntityRepository
             'user' => $user
             ));
         $res = $query->getResult();
-        //return count($res);
         $timeres = 0;
         foreach($res as $data)
         {
             $time = $data->getWorkingtime();
             $timeres += $this->calculTime($time);
         }
-        //return $timeres;
         return $this->formatTime($timeres);
     }
 
@@ -534,4 +473,166 @@ class ScheduleRepository extends EntityRepository
         $schedule->setComment($time_comment);
         return $schedule;
     }
+
+    public function dataSchedule($user, $date)
+    {
+        $qb = $this->_em->createQueryBuilder();
+        $qb->select('t.day, t.date, s.start, s.end, s.break, s.working_time, s.working_hours, s.travel, s.absence, s.comment , t.holiday')
+           ->from('CoyoteSiteBundle:Timetable', 't')
+           ->innerJoin('CoyoteSiteBundle:Schedule', 's', 'WITH', 't.id = s.timetable')
+           ->where('t.date LIKE :date and s.user = :user')
+           ->orderBy('s.timetable')
+           ->setParameters(array('date' => $date, 'user' => $user));
+        $dataschedule =  $qb->getQuery()
+                            ->getResult();
+        return $dataschedule;
+        /*SELECT timetable.day, timetable.date, schedule.start, schedule.end, schedule.break, schedule.working_time, schedule.working_hours, schedule.travel, schedule.absence, schedule.comment , timetable.holiday FROM schedule inner join timetable on timetable.id = schedule.timetable_id where timetable.date like "%/01/2014%" and schedule.user_id = 2
+ORDER BY `schedule`.`timetable_id` ASC*/
+    }
+
+    /**
+     * dataScheduleFM function.
+     *
+     * @access public
+     * @param mixed $user
+     * @param mixed $date
+     * @return void
+     */
+    public function dataScheduleFM($user, $date)
+    {
+        $qb = $this->_em->createQueryBuilder();
+        $qb->select('t.day, t.date, s.working_hours, s.travel, s.absence, s.comment , t.holiday')
+           ->from('CoyoteSiteBundle:Timetable', 't')
+           ->innerJoin('CoyoteSiteBundle:Schedule', 's', 'WITH', 't.id = s.timetable')
+           ->where('t.date LIKE :date and s.user = :user')
+           ->orderBy('s.timetable')
+           ->setParameters(array('date' => $date, 'user' => $user));
+        $dataschedule =  $qb->getQuery()
+                            ->getResult();
+        return $dataschedule;
+        /*SELECT timetable.day, timetable.date, schedule.start, schedule.end, schedule.break, schedule.working_time, schedule.working_hours, schedule.travel, schedule.absence, schedule.comment , timetable.holiday FROM schedule inner join timetable on timetable.id = schedule.timetable_id where timetable.date like "%/01/2014%" and schedule.user_id = 2
+ORDER BY `schedule`.`timetable_id` ASC*/
+    }
+
+    /**
+     * absenceMonth function.
+     *
+     * @access public
+     * @param mixed $date
+     * @param mixed $user
+     * @param mixed $absence
+     * @return void
+     */
+    public function absenceMonth($date, $user, $absence)
+    {
+        $qb = $this->_em->createQueryBuilder();
+        $qb->select('COUNT(s.absence)')
+           ->from('CoyoteSiteBundle:Schedule', 's')
+           ->innerJoin('CoyoteSiteBundle:Timetable', 't', 'WITH', 't.id = s.timetable')
+           ->where('s.user = :user and t.date LIKE :date and s.absence = :absence')
+           ->setParameters(array('user' => $user, 'date' => $date, 'absence' => $absence));
+        $absence_schedule =  $qb->getQuery()->getSingleScalarResult();
+        return $absence_schedule;
+    }
+
+    /**
+     * findDayMonth function.
+     *
+     * @access public
+     * @param mixed $date
+     * @param mixed $user
+     * @return void
+     */
+    public function findDayMonth($date, $user)
+    {
+        $qb = $this->_em->createQueryBuilder();
+        $qb->select('s.working_hours')
+           ->from('CoyoteSiteBundle:Timetable', 't')
+           ->innerJoin('CoyoteSiteBundle:Schedule', 's', 'WITH', 't.id = s.timetable')
+           ->where('t.date LIKE :date and s.user = :user')
+           ->setParameters(array('date' => $date, 'user' => $user));
+        $data_working_hours = $qb->getQuery()
+                                 ->getResult();
+        $working_day = 0.0;
+        foreach($data_working_hours as $value)
+        {
+            $working_day = $working_day + $value['working_hours'];
+        }
+        return $working_day;
+        //
+    }
+
+    /**
+     * findDayYear function.
+     *
+     * @access public
+     * @param mixed $period
+     * @param mixed $user
+     * @return void
+     */
+    public function findDayYear($period, $user)
+    {
+        $qb = $this->_em->createQueryBuilder();
+        $qb->select('s.working_hours')
+           ->from('CoyoteSiteBundle:Timetable', 't')
+           ->innerJoin('CoyoteSiteBundle:Schedule', 's', 'WITH', 't.id = s.timetable')
+           ->where('t.pay_period = :pay_period and s.user = :user')
+           ->setParameters(array('pay_period' => $period, 'user' => $user));
+        $data_working_hours = $qb->getQuery()
+                                 ->getResult();
+        $working_day = 0.0;
+        foreach($data_working_hours as $value)
+        {
+            $working_day = $working_day + $value['working_hours'];
+        }
+        return $working_day;
+    }
+
+
+    /**
+     * dataScheduleYear function.
+     *
+     * @access public
+     * @param mixed $user
+     * @param mixed $period
+     * @return void
+     */
+    public function dataScheduleYear($user, $period)
+    {
+        $qb = $this->_em->createQueryBuilder();
+        $qb->select('t.day, t.date, s.start, s.end, s.break, s.working_time, s.working_hours, s.travel, s.absence, s.comment , t.holiday')
+           ->from('CoyoteSiteBundle:Timetable', 't')
+           ->innerJoin('CoyoteSiteBundle:Schedule', 's', 'WITH', 't.id = s.timetable')
+           ->where('t.pay_period = :pay_period and s.user = :user')
+           ->orderBy('s.timetable')
+           ->setParameters(array('pay_period' => $period, 'user' => $user));
+        $dataschedule =  $qb->getQuery()
+                            ->getResult();
+        return $dataschedule;
+    }
+
+
+    /**
+     * dataScheduleFMYear function.
+     * data schedule framework user
+     *
+     * @access public
+     * @param mixed $user
+     * @param mixed $period
+     * @return void
+     */
+    public function dataScheduleFMYear($user, $period)
+    {
+        $qb = $this->_em->createQueryBuilder();
+        $qb->select('t.day, t.date, s.working_hours, s.travel, s.absence, s.comment , t.holiday')
+           ->from('CoyoteSiteBundle:Timetable', 't')
+           ->innerJoin('CoyoteSiteBundle:Schedule', 's', 'WITH', 't.id = s.timetable')
+           ->where('t.pay_period = :pay_period and s.user = :user')
+           ->orderBy('s.timetable')
+           ->setParameters(array('pay_period' => $period, 'user' => $user));
+        $dataschedule =  $qb->getQuery()
+                            ->getResult();
+        return $dataschedule;
+    }
+
 }

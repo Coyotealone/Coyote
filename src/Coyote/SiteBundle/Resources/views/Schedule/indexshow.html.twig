@@ -1,4 +1,4 @@
-{% extends 'CoyoteSiteBundle:Expense:index.html.twig' %}
+{% extends 'CoyoteSiteBundle:Schedule:index.html.twig' %}
 
 {% block link %}
 
@@ -11,15 +11,11 @@
 
 {% endblock %}
 
-{% block stylesheets %}
-   {{ include('CoyoteSiteBundle:Base:css.html.twig') }}
-{% endblock %}
 
 {% block content %}
-<p id="titreconfig">{{'Consultation des notes de frais'|trans}} </p>
-
-<form role="form" action="{{ path('expense_show') }}" method='get'>
-    <table class='table' id='tab_expense'>
+<p id="titreconfig">{{'Consultation des temps de présence'|trans}} </p>
+<form role="form" action="{{ path('schedule_show') }}" method='get'>
+    <table class='table'>
     	<tr>
     	    <th>{{'Mois'|trans}}</th>
     		<th>{{'Année'|trans}}</th>
@@ -39,20 +35,18 @@
                 </select>
             </td>
             <td>
-                {% set counter = 0 %}
                 <select name='year' id='year' >
                 {% for annee in tab_annee %}
                     {% if annee == year %}
-                    <option value={{tab_num_annee[counter]}} selected>{{annee|trans}}</option>
+                    <option value={{annee}} selected>{{annee|trans}}</option>
                     {% else %}
-                    <option value={{tab_num_annee[counter]}}>{{annee|trans}}</option>
+                    <option value={{annee}}>{{annee|trans}}</option>
                     {% endif %}
-                    {% set counter = counter + 1 %}
                 {% endfor %}
                 </select>
             </td>
         </tr>
     </table>
-    <button class='btnsave' type="submit" value="Afficher" id="afficher">{{ 'Afficher'|trans }}</button>
+    <button class='btnsave' type="submit" value="Afficher" id="afficher">{{'Afficher'|trans }}</button>
 </form>
 {% endblock %}

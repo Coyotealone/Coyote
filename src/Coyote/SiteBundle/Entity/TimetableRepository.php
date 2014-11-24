@@ -38,4 +38,14 @@ class TimetableRepository extends EntityRepository
 
         return $timetable_id;
     }
+
+    public function findPeriodByDate($date)
+    {
+        $qb = $this->_em->createQueryBuilder();
+        $qb->select('t.pay_period')
+           ->from('CoyoteSiteBundle:Timetable', 't')
+           ->where('t.date = :date')
+           ->setParameters(array('date' => $date));
+        return $qb->getQuery()->getSingleScalarResult();
+    }
 }

@@ -1,18 +1,18 @@
-coyote_registration_register:
+registration_register:
     pattern:  /
     defaults: { _controller: "CoyoteSiteBundle:Registration:register" }
 
-coyote_registration_check_email:
+registration_check_email:
     pattern: /check-email
     defaults: { _controller: "CoyoteSiteBundle:Registration:check_email" }
     requirements: { _method: get }
 
-coyote_registration_confirm:
+registration_confirm:
     pattern:    /confirm/{token}
     defaults: { _controller: "CoyoteSiteBundle:Registration:confirm" }
     requirements: { _method: get }
 
-coyote_registration_confirmed:
+registration_confirmed:
     pattern: /confirmed
     defaults: { _controller: "CoyoteSiteBundle:Registration:confirmed" }
     requirements: { _method: get }

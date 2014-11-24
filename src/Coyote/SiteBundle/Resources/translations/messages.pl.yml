@@ -111,6 +111,7 @@ Congés ancienneté: Zostaw staż
 Congés sans solde: Urlopu bezpłatnego
 Autres: więcej
 Maladie/Accident travail/Paternité: Choroba/wypadek przy pracy/ojcostwa
+Aucune donnée trouvée: Nie znaleziono danych
 
 # Page Profil #
 "En cas de problème de mot de passe, merci de contacter votre administrateur ou d'envoyer un mail dans l'onglet Contact": Dziękujemy za kontakt z administratorem. Jeśli masz problem z hasłem, wyślij e-mail z zakładki Kontakt.
@@ -139,6 +140,10 @@ Retour à la liste: Powrót do listy
 Consultation des notes de frais: Konsultować koszty
 Ajout de notes de frais: Dodać koszty
 "Merci d'écrire la date qu'avec des chiffres. Exemple pour la date du 7 juin 2014, il faut écrire : 070614": Dziękuję napisać datę z numerami. Na przykład data 07 czerwca 2014, napisz: 070614
+Aucune donnée trouvée: Nie znaleziono danych
+Téléchargement des notes de frais au format PDF: Pobierz PDF wydatek
+Impression Notes de frais: Koszty druku
+Article: Pozycja
 
 # Group
 group:

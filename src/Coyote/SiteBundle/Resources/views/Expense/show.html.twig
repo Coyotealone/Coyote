@@ -13,6 +13,7 @@
 {% endfor %}
 <p id="titreconfig">{{'Récapitulatif du mois'|trans}}</p>
 
+{% if data %}
 <div class='table-responsive'>
     <table class='table' id='tab_expense'>
     	<tr>
@@ -30,7 +31,7 @@
     	</tr>
     	{% for entity in data %}
             <tr>
-                <td><a href="{{ path('coyote_expense_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td><a href="{{ path('expense_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
                 <td>{{ entity.site.code }}</td>
                 <td>{{ entity.date }}</td>
                 <td>{{ entity.fee.code }}</td>
@@ -41,11 +42,14 @@
                 <td id='tab_expense_business'>{{ entity.business.name }}</td>
                 <td id='tab_expense_comment'>{{ entity.comment }}</td>
                 <td>
-                    <a href="{{ path('coyote_expense_edit', { 'id': entity.id }) }}">{{'Edité'|trans}}</a>
+                    <a href="{{ path('expense_edit', { 'id': entity.id }) }}">{{'Edité'|trans}}</a>
                 </td>
             </tr>
         {% endfor %}
     </table>
 </div><br>
+{% else %}
+<p id="titreconfig">{{'Aucune donnée trouvée'|trans}}</p>
+{% endif %}
 
 {% endblock %}

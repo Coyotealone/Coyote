@@ -20,9 +20,9 @@ CoyoteSiteBundle_coyote_main:
     requirements:
         _locale: fr|en|pl
 
-CoyoteSiteBundle_coyote_time:
-    resource: "@CoyoteSiteBundle/Resources/config/routing/time.yml"
-    prefix:   /{_locale}/time
+CoyoteSiteBundle_coyote_schedule:
+    resource: "@CoyoteSiteBundle/Resources/config/routing/schedule.yml"
+    prefix:   /{_locale}/schedule
     requirements:
         _locale: fr|en|pl
 
