@@ -18,6 +18,14 @@ use Doctrine\ORM\EntityRepository;
  */
 class ExpenseRepository extends EntityRepository
 {
+    /**
+     * find expense user by date.
+     *
+     * @access public
+     * @param mixed $date
+     * @param mixed $id
+     * @return array expense
+     */
     public function findExpense($date, $id)
     {
         $query = $this->getEntityManager()
@@ -29,6 +37,13 @@ class ExpenseRepository extends EntityRepository
         return $query->getResult();
     }
 
+    /**
+     * update all status expense.
+     *
+     * @access public
+     * @param mixed $em
+     * @return "OK"
+     */
     public function updateStatus($em)
     {
         $expense = $em->getRepository('CoyoteSiteBundle:Expense')->findAll();
@@ -41,6 +56,12 @@ class ExpenseRepository extends EntityRepository
         return "OK";
     }
 
+    /**
+     * export expense to import in ERP.
+     *
+     * @access public
+     * @return string
+     */
     public function findforCompta()
     {
         $query = $this->getEntityManager()
@@ -85,12 +106,27 @@ class ExpenseRepository extends EntityRepository
         return $result;
     }
 
+    /**
+     * computing VAT with price and rate .
+     *
+     * @access public
+     * @param mixed $rate
+     * @param mixed $price
+     * @return float
+     */
     public function calculTVA($rate, $price)
     {
         $vat_amount = $price - (($price * 100) / ($rate +100));
         return round($vat_amount, 2);
     }
 
+    /**
+     * generate date.
+     *
+     * @access public
+     * @param mixed $date
+     * @return string
+     */
     public function formDate($date)
     {
         if(is_numeric($date))
@@ -103,6 +139,15 @@ class ExpenseRepository extends EntityRepository
         return $date;
     }
 
+    /**
+     * prepare save expense user fees.
+     *
+     * @access public
+     * @param mixed $user_fee_id
+     * @param mixed $data
+     * @param mixed $increment
+     * @return array expense
+     */
     public function saveExpense($user_fee_id, $data, $increment)
     {
         $site = $this->_em->getRepository('CoyoteSiteBundle:Site')->find($data['site'.$increment]);

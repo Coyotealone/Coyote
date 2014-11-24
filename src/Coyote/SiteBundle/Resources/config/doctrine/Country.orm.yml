@@ -26,8 +26,3 @@ Coyote\SiteBundle\Entity\Country:
         entitledgb:
             type: string
             lenght: 45
-    oneToMany:
-        configuring_tankerss:
-            targetEntity: ConfiguringTankers
-            mappedBy: country
-            cascade: ["persist", "merge"]

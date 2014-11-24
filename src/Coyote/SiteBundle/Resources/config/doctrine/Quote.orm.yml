@@ -1,0 +1,22 @@
+Coyote\SiteBundle\Entity\Quote:
+    type:   entity
+    table:  quote
+    repositoryClass: Coyote\SiteBundle\Entity\QuoteRepository
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        citation:
+            type: string
+            lenght: 255
+        author:
+            type: string
+            lenght: 45
+        week:
+            type: integer
+            lenght: 2
+        year:
+            type: integer
+            lenght: 4

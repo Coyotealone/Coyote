@@ -28,6 +28,12 @@ use Coyote\SiteBundle\Form\ExpenseType;
  */
 class ExpenseController extends Controller
 {
+    /**
+     * redirect to new expense.
+     *
+     * @access public
+     * @return view index
+     */
     public function indexAction()
     {
         $user = $this->get('security.context')->getToken()->getUser();
@@ -40,6 +46,12 @@ class ExpenseController extends Controller
             return $this->redirect($this->generateUrl('accueil'));
     }
 
+    /**
+     * new expense.
+     *
+     * @access public
+     * @return view create
+     */
     public function createAction()
     {
 
@@ -61,6 +73,12 @@ class ExpenseController extends Controller
         }
     }
 
+    /**
+     * index to show expense save.
+     *
+     * @access public
+     * @return index show
+     */
     public function indexshowAction()
     {
         $session = new Session();
@@ -81,6 +99,12 @@ class ExpenseController extends Controller
         }
     }
 
+    /**
+     * show expense save.
+     *
+     * @access public
+     * @return showparameters
+     */
     public function showAction()
     {
         $session = new Session();
@@ -101,6 +125,14 @@ class ExpenseController extends Controller
         }
     }
 
+    /**
+     * show expense save.
+     *
+     * @access public
+     * @param mixed $year
+     * @param mixed $month
+     * @return view show
+     */
     public function showparametersAction($year, $month)
     {
         $session = new Session();
@@ -123,6 +155,12 @@ class ExpenseController extends Controller
         }
     }
 
+    /**
+     * save expense.
+     *
+     * @access public
+     * @return createAction
+     */
     public function saveAction()
     {
         $session = new Session();
@@ -180,6 +218,13 @@ class ExpenseController extends Controller
         }
     }
 
+    /**
+     * edit expense.
+     *
+     * @access public
+     * @param mixed $id
+     * @return view edit
+     */
     public function editAction($id)
     {
         $session = new Session();
@@ -203,6 +248,13 @@ class ExpenseController extends Controller
         ));
     }
 
+    /**
+     * generate view to edit expense.
+     *
+     * @access private
+     * @param Expense $entity
+     * @return Form
+     */
     private function createEditForm(Expense $entity)
     {
         $form = $this->createForm(new ExpenseType(), $entity, array(
@@ -215,6 +267,13 @@ class ExpenseController extends Controller
         return $form;
     }
 
+    /**
+     * generate view to delete expense.
+     *
+     * @access private
+     * @param mixed $id
+     * @return Form
+     */
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
@@ -225,6 +284,14 @@ class ExpenseController extends Controller
         ;
     }
 
+    /**
+     * update expense.
+     *
+     * @access public
+     * @param Request $request
+     * @param mixed $id
+     * @return editAction
+     */
     public function updateAction(Request $request, $id)
     {
         $session = new Session();
@@ -267,6 +334,14 @@ class ExpenseController extends Controller
         ));
     }
 
+    /**
+     * delete expense.
+     *
+     * @access public
+     * @param Request $request
+     * @param mixed $id
+     * @return indexAction
+     */
     public function deleteAction(Request $request, $id)
     {
         $session = new Session();
@@ -290,6 +365,12 @@ class ExpenseController extends Controller
         return $this->redirect($this->generateUrl('expense_index'));
     }
 
+    /**
+     * index to print expense.
+     *
+     * @access public
+     * @return printAction
+     */
     public function indexprintAction()
     {
         $month = date('n');
@@ -303,10 +384,10 @@ class ExpenseController extends Controller
     }
 
     /**
-     * printAction function.
+     * print expense PDF
      *
      * @access public
-     * @return void
+     * @return PDF
      */
     public function printAction()
     {
