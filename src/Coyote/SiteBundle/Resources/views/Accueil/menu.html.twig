@@ -23,9 +23,11 @@
 {% block content %}
     <div class="jumbotron">
         <p class="lead">{{ 'Bienvenue sur le site PICHON'|trans }}
+            {% if app.request.locale == "fr" %}
             <br><br>
-            «Méfie-toi de tes pensées, elles sont le début de tes actions… » <br>
-            Proverbe chinois
+            "{{quote.0.citation}}"<br>
+            {{quote.0.author}}
+            {% endif %}
         </p>
     </div>
 {% endblock %}

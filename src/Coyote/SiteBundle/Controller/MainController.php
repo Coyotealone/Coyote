@@ -60,8 +60,8 @@ class MainController extends Controller
             $lang = $session->get('lang');
             if(empty($lang))
                 $lang = 'fr';
-            return $this->redirect($this->generateUrl('main_menu', array('_locale' => $lang)));
-            return $this->render('CoyoteSiteBundle:Accueil:menu.html.twig');
+
+            return $response = $this->forward('CoyoteSiteBundle:Main:menu', array('_locale' => $lang));
         }
     }
 
@@ -123,9 +123,15 @@ class MainController extends Controller
         throw new \RuntimeException('You must activate the logout in your security firewall configuration.');
     }
 
-    public function menuAction()
+    public function menuAction($_locale)
     {
-        return $this->render('CoyoteSiteBundle:Accueil:menu.html.twig');
+        $week = date('W');
+        $year = date('Y');
+        $doctrine = $this->getDoctrine();
+        $em = $doctrine->getManager();
+        $quote = $em->getRepository('CoyoteSiteBundle:Quote')->findby(array('week' => $week, 'year' => $year));
+
+        return $this->render('CoyoteSiteBundle:Accueil:menu.html.twig', array('quote' => $quote, '_locale' => $_locale));
     }
 
     public function languageAction($_locale)

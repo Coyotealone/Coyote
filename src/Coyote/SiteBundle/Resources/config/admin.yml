@@ -99,3 +99,13 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [CoyoteSiteBundle]]
+    sonata.admin.quote:
+        class: Coyote\SiteBundle\Admin\QuoteAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Citations", label: "Citations" }
+        arguments:
+            - ~
+            - Coyote\SiteBundle\Entity\Quote
+            - ~
+        calls:
+            - [ setTranslationDomain, [CoyoteSiteBundle]]
