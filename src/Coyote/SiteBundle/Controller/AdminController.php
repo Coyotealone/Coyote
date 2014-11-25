@@ -135,8 +135,8 @@ class AdminController extends Controller
                 return $this->render('CoyoteSiteBundle:Admin:index_export.html.twig');
             else
             {
-                $date = $data['mois'].'/'.$data['annee'];
-                $year = $data['annee'];
+                $date = $data['month'].'/'.$data['year'];
+                $year = $data['year'];
 
                 $result = '';
                 for($i=0;$i<count($tabuserid);$i++)

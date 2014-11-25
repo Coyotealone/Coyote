@@ -455,42 +455,6 @@ class ScheduleRepository extends EntityRepository
         return $timetable_noweek;
     }
 
-    public function findAbsencePayPeriod($pay_period, $user, $absence)
-    {
-        $year = explode("/", $pay_period);
-        $yearend = $year[1];
-        $yearstart = $year[0];
-
-        $datedeb = '01/06/'.$yearstart;
-        $datefin = '31/05/'.$yearend;
-
-        $qb = $this->_em->createQueryBuilder();
-        $qb->select('t')
-           ->from('CoyoteSiteBundle:Timetable', 't')
-           ->where('t.date = :date and t.year = :year')
-           ->setParameters(array('date' => $datedeb, 'year' => $yearstart));
-        $firstiddate =  $qb->getQuery()
-                           ->getResult(); //Id de tous les jours des mois
-
-        $qb = $this->_em->createQueryBuilder();
-        $qb->select('t')
-           ->from('CoyoteSiteBundle:Timetable', 't')
-           ->where('t.date = :date and t.year = :year')
-           ->setParameters(array('date' => $datefin, 'year' => $yearend));
-        $lastiddate =  $qb->getQuery()
-                          ->getResult(); //Id de tous les jours des mois
-
-        $qb = $this->_em->createQueryBuilder();
-        $qb->select('s.id')
-           ->from('CoyoteSiteBundle:Schedule', 's')
-           ->where('s.absence = :value and s.user = :user and s.timetable BETWEEN :datedeb and :datefin')
-           ->setParameters(array('datedeb' => $firstiddate, 'datefin' => $lastiddate, 'value' => $absence, 'user' => $user));
-        $res = $qb->getQuery()
-                  ->getResult(); //Id de tous les jours des mois
-
-        return count($res);
-    }
-
     public function findTimeWeekPayPeriod($user, $year, $week, $pay_period)
     {
         $query = $this->getEntityManager()
@@ -608,7 +572,7 @@ class ScheduleRepository extends EntityRepository
             $timeres += $this->calculTime($time);
         }
         if($timeres > 0)
-            $result .= "Temps de travail de la semaine : ".$this->formatTime($timeres).";\r\n";
+            $result .= "Temps de travail de la semaine : ".$this->formatTime($timeres).";\r\n\r\n";
         return $result;
     }
 
