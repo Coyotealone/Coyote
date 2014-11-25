@@ -125,7 +125,7 @@ class MainController extends Controller
 
     public function menuAction($_locale)
     {
-        $week = date('W');
+        $week = 49;//date('W');
         $year = date('Y');
         $doctrine = $this->getDoctrine();
         $em = $doctrine->getManager();
