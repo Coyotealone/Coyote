@@ -120,7 +120,6 @@ class AdminController extends Controller
             $tab_num_mois = array( '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12' );
             /** @var array tab_annee */
             $tab_annee = array( '2013', '2014', '2015');
-
             return $this->render('CoyoteSiteBundle:Admin:index_export.html.twig',
                 array('month' => $month, 'year' => $year, 'tab_mois' => $tab_mois, 'tab_num_mois' => $tab_num_mois, 'tab_annee' => $tab_annee));
         }
@@ -146,6 +145,7 @@ class AdminController extends Controller
             $request = Request::createFromGlobals();
             /** @var array data request */
             $data = $request->request->all();
+            /** check @var data */
             if($data == null)
                 return $this->render('CoyoteSiteBundle:Admin:index_export.html.twig');
             else
@@ -156,6 +156,7 @@ class AdminController extends Controller
                 $year = $data['year'];
                 /** @var string result */
                 $result = '';
+                /** file in the text file */
                 for($i=0;$i<count($tabuserid);$i++)
                 {
                     $user = $tabuserid[$i];
