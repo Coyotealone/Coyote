@@ -33,12 +33,18 @@ class AdminController extends Controller
     {
         if($this->get('security.context')->isGranted('ROLE_COMPTA'))
         {
+            /** @var string date yyyymmdd */
             $date = date("Ymd");
+            /** @var string heure hhmmss */
             $heure = date("His");
+            /** @var string filename txt */
             $filename = "export".$date."-".$heure.".txt";
+            /** @var object em doctrine request */
             $em = $this->getDoctrine()->getManager();
+            /** @var string dataexpense data file */
             $dataexpense = $em->getRepository('CoyoteSiteBundle:Expense')->findforCompta();
             $em->getRepository('CoyoteSiteBundle:Expense')->updateStatus($em);
+            /** @return file txt downloaded with data expense */
             return new Response($dataexpense, 200, array(
                 'Content-Type' => 'application/force-download',
                 'Content-Disposition' => 'attachment; filename="'.$filename.'"'
@@ -78,6 +84,7 @@ class AdminController extends Controller
      */
     public function profilAction()
     {
+        /** @var object user */
         $user = $this->container->get('security.context')->getToken()->getUser();
         return $this->render('CoyoteSiteBundle:Profile:show.html.twig', array('user' => $user));
     }
@@ -103,13 +110,19 @@ class AdminController extends Controller
     {
         if($this->get('security.context')->isGranted('ROLE_CHEF_BE'))
         {
+            /** @var string month mm */
             $month = date('n');
+            /** @var string year yyyy */
             $year = date('Y');
+            /** @var array tab_mois */
             $tab_mois = array( 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre' );
+            /** @var array tab_num_mois */
             $tab_num_mois = array( '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12' );
+            /** @var array tab_annee */
             $tab_annee = array( '2013', '2014', '2015');
 
-            return $this->render('CoyoteSiteBundle:Admin:index_export.html.twig', array('month' => $month, 'year' => $year, 'tab_mois' => $tab_mois, 'tab_num_mois' => $tab_num_mois, 'tab_annee' => $tab_annee));
+            return $this->render('CoyoteSiteBundle:Admin:index_export.html.twig',
+                array('month' => $month, 'year' => $year, 'tab_mois' => $tab_mois, 'tab_num_mois' => $tab_num_mois, 'tab_annee' => $tab_annee));
         }
         else
             return $this->redirect($this->generateUrl('accueil'));
@@ -125,19 +138,23 @@ class AdminController extends Controller
     {
         if($this->get('security.context')->isGranted('ROLE_CHEF_BE'))
         {
-            $doctrine = $this->getDoctrine();
-            $em = $doctrine->getManager();
-            $tabuserid = array(14, 17, 41, 44, 45, 46, 49, 50, 52, 54, 62, 70); /* design office users id*/
-
+            /** @var object em doctrine request */
+            $em = $this->getDoctrine()->getManager();
+            /** @var array tabuserid design office users id*/
+            $tabuserid = array(14, 17, 41, 44, 45, 46, 49, 50, 52, 54, 62, 70);
+            /** @var object request */
             $request = Request::createFromGlobals();
+            /** @var array data request */
             $data = $request->request->all();
             if($data == null)
                 return $this->render('CoyoteSiteBundle:Admin:index_export.html.twig');
             else
             {
+                /** @var string date mm/yyyy */
                 $date = $data['month'].'/'.$data['year'];
+                /** @var string year yyyy */
                 $year = $data['year'];
-
+                /** @var string result */
                 $result = '';
                 for($i=0;$i<count($tabuserid);$i++)
                 {
@@ -146,9 +163,10 @@ class AdminController extends Controller
                     $user_name = $datauser->getName();
                     $res_temp = $em->getRepository('CoyoteSiteBundle:Schedule')->findforBE($user, $date, $year, $user_name);
                     $result .= $res_temp;
-                }
+                }/** end for */
+                /** @var string filename file name CSV */
                 $filename = 'datauser'.$date.'.csv';
-
+                /** @return file csv downloaded with data user schedule */
                 return new Response($result, 200, array(
                     'Content-Type' => 'application/force-download',
                     'Content-Disposition' => 'attachment; filename="'.$filename.'"'
