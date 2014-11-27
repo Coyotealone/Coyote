@@ -54,15 +54,15 @@ class MainController extends Controller
             /** set userid */
             $session->set('userid', $user_id);
             /** @var $data_user entity User */
-            $data_user = $em->getRepository('CoyoteSiteBundle:User')->findOneById($iduser);
+            $data_user = $em->getRepository('CoyoteSiteBundle:User')->findOneById($user_id);
             /** set year */
             $session->set('year', date('Y'));
             /** set no_week */
             $session->set('no_week', date('W'));
             /** set username */
-            $session->set('username', $datauser->getName());
+            $session->set('username', $data_user->getName());
             /** set status */
-            $session->set('status', $datauser->getRoles());
+            $session->set('status', $data_user->getRoles());
             /** check role */
             if($this->get('security.context')->isGranted('ROLE_BUSINESS'))
             {

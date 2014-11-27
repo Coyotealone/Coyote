@@ -44,7 +44,7 @@ class ExpenseController extends Controller
         if($user == "anon.")
             return $this->redirect($this->generateUrl('fos_user_security_login'));
         /** check object session userfeesid */
-        if($session->get('userfeesid') != null)
+        if($this->get('security.context')->isGranted('ROLE_TRADE'))
             /** show view */
             return $this->render('CoyoteSiteBundle:Expense:index.html.twig');
         else
