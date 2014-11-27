@@ -23,11 +23,13 @@
 {% block content %}
     <div class="jumbotron">
         <p class="lead">{{ 'Bienvenue sur le site PICHON'|trans }}
-            {% if app.request.locale == "fr" and quote %}
-            <br><br>
-            "{{quote.0.citation}}"<br>
-            {{quote.0.author}}
+        {% if quote %}
+            {% if app.request.locale == "fr" %}
+                <br><br>
+                "{{quote.0.citation}}"<br>
+                {{quote.0.author}}
             {% endif %}
+        {% endif %}
         </p>
     </div>
 {% endblock %}

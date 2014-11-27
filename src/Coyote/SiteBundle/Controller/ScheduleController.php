@@ -49,7 +49,7 @@ class ScheduleController extends Controller
         $user = $this->get('security.context')->getToken()->getUser();
         $request = $this->getRequest();
         $session = $request->getSession();
-        $date = $em->getRepository('CoyoteSiteBundle:Timetable')->findBy(array('no_week' => $session->get('no_week'),'year' => $session->get('year'),));
+        $data_timetable = $em->getRepository('CoyoteSiteBundle:Timetable')->findBy(array('no_week' => $session->get('no_week'),'year' => $session->get('year'),));
         $session->set('id_lundi', '');
         $session->set('id_mardi', '');
         $session->set('id_mercredi', '');
@@ -57,7 +57,7 @@ class ScheduleController extends Controller
         $session->set('id_vendredi', '');
         $session->set('id_samedi', '');
         $session->set('id_dimanche', '');
-        return $this->render('CoyoteSiteBundle:Schedule:new.html.twig', array('date' => $date));
+        return $this->render('CoyoteSiteBundle:Schedule:new.html.twig', array('date' => $data_timetable));
     }
 
     public function editAction()
@@ -238,7 +238,7 @@ class ScheduleController extends Controller
             $schedulesamedi_id = $schedulesamedi->getId();
             $scheduledimanche_id = $scheduledimanche->getId();
 
-            if(empty($schedulelundi_id) && empty($schedulemerdi_id) && empty($schedulemercredi_id) && empty($schedulejeudi_id) && empty($schedulevendredi_id)
+            if(empty($schedulelundi_id) && empty($schedulemardi_id) && empty($schedulemercredi_id) && empty($schedulejeudi_id) && empty($schedulevendredi_id)
                 && empty($schedulesamedi_id) && empty($scheduledimanche_id))
                 $message = "Une erreur s'est produite !";
             else
@@ -374,8 +374,8 @@ class ScheduleController extends Controller
             $schedulesamedi_id = $schedulesamedi->getId();
             $scheduledimanche_id = $scheduledimanche->getId();
 
-            if(empty($schedulelundi_id) || empty($schedulemerdi_id) || empty($schedulemercredi_id) || empty($schedulejeudi_id) || empty($schedulevendredi_id)
-                || empty($schedulesamedi_id) || empty($scheduledimanche_id))
+            if(empty($schedulelundi_id) && empty($schedulemardi_id) && empty($schedulemercredi_id) && empty($schedulejeudi_id) && empty($schedulevendredi_id)
+                && empty($schedulesamedi_id) && empty($scheduledimanche_id))
                 $message = "Une erreur s'est produite !";
             else
                 $message = "Enregistrement terminé";

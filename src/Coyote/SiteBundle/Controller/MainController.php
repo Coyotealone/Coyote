@@ -23,54 +23,79 @@ use Doctrine\ORM\EntityRepository;
  */
 class MainController extends Controller
 {
+    /**
+     * indexAction function.
+     *
+     * @access public
+     * @return void
+     */
     public function indexAction()
     {
+        /** @var $user role User */
         $user = $this->get('security.context')->getToken()->getUser();
+        /** @var $session new object Session */
         $session = new Session();
+        /** check $user role */
         if($user == "anon.")
+            /** redirect MainController:loginAction */
             return $this->redirect($this->generateUrl('main_login'));
+        /** check role */
         if($this->get('security.context')->isGranted('ROLE_SUPER_ADMIN'))
         {
+            /** redirect SonataAdminController */
             return $this->redirect($this->generateUrl('sonata_admin_dashboard'));
-        }
-        if($this->get('security.context')->isGranted('ROLE_CONFIG'))
-        {
-            return $this->redirect($this->generateUrl('configurator'));
         }
         else
         {
+            /** @var $em object doctrine request */
             $em = $this->getDoctrine()->getManager();
-
-            $iduser = $this->get('security.context')->getToken()->getUser()->getId();
-            $session->set('userid', $iduser);
-
-            $datauser = $em->getRepository('CoyoteSiteBundle:User')->findOneById($iduser);
-
+            /** @var $user_id int user id */
+            $user_id = $this->get('security.context')->getToken()->getUser()->getId();
+            /** set userid */
+            $session->set('userid', $user_id);
+            /** @var $data_user entity User */
+            $data_user = $em->getRepository('CoyoteSiteBundle:User')->findOneById($iduser);
+            /** set year */
             $session->set('year', date('Y'));
+            /** set no_week */
             $session->set('no_week', date('W'));
+            /** set username */
             $session->set('username', $datauser->getName());
+            /** set status */
             $session->set('status', $datauser->getRoles());
+            /** check role */
             if($this->get('security.context')->isGranted('ROLE_BUSINESS'))
             {
-                $userfees_data = $em->getRepository('CoyoteSiteBundle:UserFees')->findOneByUser($session->get('userid'));
-                if($userfees_data != null)
-                    $session->set('userfeesid', $userfees_data->getId());
+                /** @var $data_userfees entity UserFees */
+                $data_userfees = $em->getRepository('CoyoteSiteBundle:UserFees')->findOneByUser($session->get('userid'));
+                /** check $data_userfees */
+                if($data_userfees != null)
+                    /** set userfeesid */
+                    $session->set('userfeesid', $data_userfees->getId());
             }
-
+            /** @var $lang string _locale */
             $lang = $session->get('lang');
+            /** check $lang */
             if(empty($lang))
                 $lang = 'fr';
-
+            /** show view */
             return $response = $this->forward('CoyoteSiteBundle:Main:menu', array('_locale' => $lang));
         }
     }
 
+    /**
+     * loginAction function.
+     *
+     * @access public
+     * @return void
+     */
     public function loginAction()
     {
         $request = $this->getRequest();
         $session = $request->getSession();
-
+        /** @var $locale string _locale */
         $locale = $request->getLocale();
+        /** set lang */
         $session->set('lang', $locale);
 
         // get the error if any (works with forward and redirect -- see below)
@@ -125,31 +150,34 @@ class MainController extends Controller
 
     public function menuAction($_locale)
     {
-        $week = 49;//date('W');
+        /** @var $week string mm */
+        $week = date('W');
+        /** @var $year string yyyy */
         $year = date('Y');
-        $doctrine = $this->getDoctrine();
-        $em = $doctrine->getManager();
-        $quote = $em->getRepository('CoyoteSiteBundle:Quote')->findby(array('week' => $week, 'year' => $year));
-
-        return $this->render('CoyoteSiteBundle:Accueil:menu.html.twig', array('quote' => $quote, '_locale' => $_locale));
+        /** @var $em object doctrine request */
+        $em = $this->getDoctrine()->getManager();
+        /** @var $data_quote entity Quote */
+        $data_quote = $em->getRepository('CoyoteSiteBundle:Quote')->findby(array('week' => $week, 'year' => $year));
+        /** show view */
+        return $this->render('CoyoteSiteBundle:Accueil:menu.html.twig', array('quote' => $data_quote, '_locale' => $_locale));
     }
 
     public function languageAction($_locale)
     {
+        /** @var $user role */
         $user = $this->get('security.context')->getToken()->getUser();
-
+        /** @var $session new object Session */
         $session = new Session();
+        /** set lang */
         $session->set('lang', null);
+        /** set lang */
         $session->set('lang', $_locale);
-
+        /** check $user */
         if($user == "anon.")
-        {
+            /** redirect MainController:loginAction */
             return $this->redirect($this->generateUrl('main_login'));
-        }
         else
-        {
-            return $this->redirect($this->generateUrl('main_menu', array('_locale' => $session->get('lang'))));
-        }
+            /** redirect MainController:MenuAction */
+            return $this->redirect($this->generateUrl('main_menu'));
     }
 }
-

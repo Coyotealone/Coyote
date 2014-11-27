@@ -1,12 +1,13 @@
 security:
     encoders:
-        # Coyote\SiteBundle\Entity\User: sha512
         FOS\UserBundle\Model\UserInterface: sha512
+    access_denied_url:                      accueil
 
     role_hierarchy:
         ROLE_USER:          ROLE_USER
         ROLE_TECH:          ROLE_TECH
         ROLE_CADRE:         ROLE_CADRE
+        ROLE_TRADE:         ROLE_TRADE
         ROLE_PROVIDER:      ROLE_PROVIDER
         ROLE_PICHON:        [ROLE_TECH, ROLE_CADRE, ROLE_ADMIN]
         ROLE_ADMIN:         [ROLE_ADMIN, ROLE_CHEF_BE, ROLE_COMPTA]
@@ -20,15 +21,50 @@ security:
                 users:
                     user:  { password: userpass, roles: [ 'ROLE_USER' ] }
                     admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
-
     firewalls:
         main:
+            form_login:
+                # l'utilisateur est redirigé ici quand il/elle a besoin de se connecter
+                login_path:                     fos_user_security_login
+
+                # si défini à true, « forward » l'utilisateur vers le formulaire de
+                # login au lieu de le rediriger
+                use_forward:                    false
+
+                # soumet le formulaire de login vers cette URL
+                check_path:                     fos_user_security_check
+
+                # par défaut, le formulaire de login *doit* être un POST,
+                # et pas un GET
+                post_only:                      true
+
+                # options de redirection lorsque le login a réussi (vous
+                # pouvez en lire plus ci-dessous)
+                always_use_default_target_path: false
+                default_target_path:            /
+                target_path_parameter:          _target_path
+                use_referer:                    false
+
+                # options de redirection lorsque le login échoue (vous
+                # pouvez en lire plus ci-dessous)
+                failure_path:                   null
+                failure_forward:                false
+
+                # noms des champs pour le nom d'utilisateur et le mot
+                # de passe
+                username_parameter:             _username
+                password_parameter:             _password
+
+                # options du token csrf
+                csrf_parameter:                 _csrf_token
+                intention:                      authenticate
+
             pattern: ^/
             anonymous: true
             provider: main
-            form_login:
-                login_path: fos_user_security_login
-                check_path: fos_user_security_check
+        #    form_login:
+        #        login_path: fos_user_security_login
+        #        check_path: fos_user_security_check
             logout:
                 path:   fos_user_security_logout
                 target: /
@@ -43,18 +79,19 @@ security:
         secured_area:
             pattern:    /logout
             form_login:
-                check_path: _security_check
-                login_path: _demo_login
+                check_path: fos_user_security_check
+                login_path: fos_user_security_login
             logout:
                 path:   /logout
                 target: /
-            #anonymous: ~
-            #http_basic:
-            #    realm: "Secured Demo Area"
 
     access_control:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/admin/, role: ROLE_SUPER_ADMIN }
-        # - { path: ^/register, role: ROLE_SUPER_ADMIN }
-        #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
+        - { path: ^/contact/, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register/, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: .*/expense/.*, role: ROLE_TRADE }
+        - { path: .*/menu, role: [ROLE_TECH, ROLE_CADRE] }
+        - { path: .*/schedule/.*, role: [ROLE_TECH, ROLE_CADRE] }
+        - { path: .*/profile/.*, role: [ROLE_TECH, ROLE_CADRE] }
+        - { path: .*/admin/.*, role: ROLE_ADMIN }

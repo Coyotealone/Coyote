@@ -10,7 +10,7 @@ CoyoteSiteBundle_register:
 
 CoyoteSiteBundle_contact:
     resource: "@CoyoteSiteBundle/Resources/config/routing/contact.yml"
-    prefix:   /{_locale}
+    prefix:   /{_locale}/contact
     requirements:
         _locale: fr|en|pl
 
