@@ -28,6 +28,7 @@ Export Présence: Export time and attendance
 Export données BE: Export BE data
 Export Notes de Frais: Export Expense
 Export données notes de frais: Export expense data
+"Export de l'année en PDF": Export PDF print of the year
 
 # Page Login #
 Mot de passe oublié: Forgot password
@@ -112,6 +113,7 @@ Congés sans solde: Unpaid leave
 Autres: Anything else
 Maladie/Accident travail/Paternité: Illness/Work accident/Paternity
 Aucune donnée trouvée: No data found
+"Export des temps de présence de l'année au format PDF": Export attendance time of the year to PDF
 
 # Page Profil #
 "En cas de problème de mot de passe, merci de contacter votre administrateur ou d'envoyer un mail dans l'onglet Contact": Thanks to contact your administrator, if you have a problem with password. Or send an email from Contact tab

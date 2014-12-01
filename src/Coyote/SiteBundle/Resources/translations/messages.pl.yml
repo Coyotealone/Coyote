@@ -28,6 +28,7 @@ Export Présence: Czas eksportu i frekwencja
 Export données BE: Eksport danych
 Export Notes de Frais: Koszty Export
 Export données notes de frais: Eksport danych wydatków
+"Export de l'année en PDF": Drukuj Eksport PDF roku
 
 # Page Login #
 Mot de passe oublié: Zapomniałem hasła
@@ -112,6 +113,7 @@ Congés sans solde: Urlopu bezpłatnego
 Autres: więcej
 Maladie/Accident travail/Paternité: Choroba/wypadek przy pracy/ojcostwa
 Aucune donnée trouvée: Nie znaleziono danych
+"Export des temps de présence de l'année au format PDF": Udział eksportu w czasie roku do PDF
 
 # Page Profil #
 "En cas de problème de mot de passe, merci de contacter votre administrateur ou d'envoyer un mail dans l'onglet Contact": Dziękujemy za kontakt z administratorem. Jeśli masz problem z hasłem, wyślij e-mail z zakładki Kontakt.
