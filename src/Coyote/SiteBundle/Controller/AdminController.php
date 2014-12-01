@@ -167,7 +167,7 @@ class AdminController extends Controller
                 /** @var $result string */
                 $result = '';
                 /** file in the text file */
-                for($i=0;$i<count($tabuserid);$i++)
+                for($i=0;$i<count($tab_user_id);$i++)
                 {
                     /** @var $datauser object user */
                     $datauser = $em->getRepository('CoyoteSiteBundle:User')->find($tab_user_id[$i]);

@@ -78,28 +78,31 @@ class ExpenseRepository extends EntityRepository
             if($data->getUserFees()->getLogin() != $userfees)
             {
                 $userfees = $data->getUserFees()->getLogin();
-                $result .= "\"H\";\"".$data->getUserFees()->getLogin()."\"\r\n";
+                $result .= "H;".$data->getUserFees()->getLogin()."\r\n";
             }
-            $result .= "\"D\";";
-            $result .= "\"".$data->getUserFees()->getLogin()."\";";//En majuscule
-            $result .= "\"".$data->getSite()->getCode()."\";";
+            $result .= "D;";
+            $result .= $data->getUserFees()->getLogin().";";//En majuscule
+            $result .= $data->getSite()->getCode().";";
             $date = $data->getDate();
             $date = explode('/', $date);
             $result .= $date[0].$date[1].$date[2].";";// Enlever les /
-            $result .= "\"".$data->getFee()->getCode()."\";";
-            $result .= "\"".$data->getCurrency()->getCode()."\";";
+            $result .= $data->getFee()->getCode().";";
+            $result .= $data->getCurrency()->getCode().";";
             $result .= $data->getAmount().";";
             $result .= $data->getActualAmount().";";
             $result .= $data->getAmountTTC().";";
             $feeid = $data->getFee()->getCodeRate();
-            $result .= "\"".$feeid."\";";
+            $result .= $feeid.";";
             $result .= $data->getAmountTVA().";";
             $result .= $data->getAmountTVA().";";
-            $result .= "\"".$data->getUserFees()->getCode()."\";";
-            $result .= "\"\";";
-            $result .= "\"".$data->getBusiness()->getCode()."\";";
-            $result .= "\"".$data->getUserFees()->getService()."\";";
-            $result .= "\"".$data->getComment()."\";"."\r"."\n";
+            $result .= $data->getUserFees()->getCode().";";
+            $result .= ";";
+            $result .= $data->getBusiness()->getCode().";";
+            if($data->getFee()->getCode() == "ENTRE1")
+                $result .= ";";
+            else
+                $result .= $data->getUserFees()->getService().";";
+            $result .= $data->getComment().";\r\n";
 
         }
 

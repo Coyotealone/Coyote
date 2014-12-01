@@ -146,16 +146,16 @@ class ExpenseController extends Controller
         $year = $_GET['year'];
         /** @var $month string month */
         $month = $_GET['month'];
-        /** check @var $annee and $mois */
-        if(empty($year) && empty($mois))
+        /** check @var $year and $month */
+        if(empty($year) && empty($month))
             return $this->redirect($this->generateUrl('expense_indexshow'));
         else
         {
             /** set @var $session 'year_expense' */
-            $session->set('year_expense', $annee);
+            $session->set('year_expense', $year);
             /** set @var $session 'month_expense' */
-            $session->set('month_expense', $mois);
-            return $this->redirect($this->generateUrl('expense_showparameters', array('year' => $annee, 'month' => $mois)));
+            $session->set('month_expense', $month);
+            return $this->redirect($this->generateUrl('expense_showparameters', array('year' => $year, 'month' => $month)));
         }
     }
 
@@ -179,7 +179,7 @@ class ExpenseController extends Controller
         /** check @var $session 'userfeesid' */
         if($session->get('userfeesid') == null)
             return $this->redirect($this->generateUrl('accueil'));
-        if(empty($annee) && empty($mois))
+        if(empty($year) && empty($month))
             /** show view */
             return $this->redirect($this->generateUrl('expense_indexshow'));
         else
@@ -233,7 +233,7 @@ class ExpenseController extends Controller
                     /** @var $user_fee_id string $session 'userfeessid' */
                     $user_fee_id = $session->get('userfeesid');
                     /** @var $expense object expense */
-                    $expense = $em->getRepository('CoyoteSiteBundle:Expense')->saveExpense($user_fee_id, $data_request, $increment);
+                    $expense = $em->getRepository('CoyoteSiteBundle:Expense')->saveExpense($user_fee_id, $data_request, $i);
                     /** persist $expense */
                     $em->persist($expense);
                     /** add data in db */
