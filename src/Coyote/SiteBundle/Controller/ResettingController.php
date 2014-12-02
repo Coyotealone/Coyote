@@ -125,7 +125,7 @@ class ResettingController extends ContainerAware
                 $userManager->updateUser($user);
 
                 if (null === $response = $event->getResponse()) {
-                    $url = $this->container->get('router')->generate('accueil');
+                    $url = $this->container->get('router')->generate('main_accueil');
                     $response = new RedirectResponse($url);
                 }
 

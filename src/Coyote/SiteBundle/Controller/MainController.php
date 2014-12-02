@@ -33,12 +33,20 @@ class MainController extends Controller
     {
         /** @var $user role User */
         $user = $this->get('security.context')->getToken()->getUser();
+
+        $request = $this->getRequest();
+        $session = $request->getSession();
+        /** @var $locale string _locale */
+        $locale = $request->getLocale();
+        /** set lang */
+        //$session->set('lang', $_locale);
+
         /** @var $session new object Session */
-        $session = new Session();
+        //$session = new Session();
         /** check $user role */
         if($user == "anon.")
             /** redirect MainController:loginAction */
-            return $this->redirect($this->generateUrl('main_login'));
+            return $this->redirect($this->generateUrl('main_login', array('_locale' => $locale)));
         /** check role */
         if($this->get('security.context')->isGranted('ROLE_SUPER_ADMIN'))
         {
@@ -93,10 +101,10 @@ class MainController extends Controller
     {
         $request = $this->getRequest();
         $session = $request->getSession();
-        /** @var $locale string _locale */
-        $locale = $request->getLocale();
+
+        $_locale = $session->get('lang');
         /** set lang */
-        $session->set('lang', $locale);
+        //$session->set('lang', $locale);
 
         // get the error if any (works with forward and redirect -- see below)
         if ($request->attributes->has(SecurityContextInterface::AUTHENTICATION_ERROR))
@@ -105,6 +113,8 @@ class MainController extends Controller
         }
         elseif (null !== $session && $session->has(SecurityContextInterface::AUTHENTICATION_ERROR))
         {
+            $session->set('lang', $_locale);
+            $this->container->get('request')->setLocale($session->get('lang'));
             $error = $session->get(SecurityContextInterface::AUTHENTICATION_ERROR);
             $session->remove(SecurityContextInterface::AUTHENTICATION_ERROR);
         }
@@ -148,8 +158,13 @@ class MainController extends Controller
         throw new \RuntimeException('You must activate the logout in your security firewall configuration.');
     }
 
-    public function menuAction($_locale)
+    public function menuAction()
     {
+        $request = $this->getRequest();
+        $session = $request->getSession();
+        /** @var $locale string _locale */
+        $locale = $request->getLocale();
+
         /** @var $week string mm */
         $week = date('W');
         /** @var $year string yyyy */
@@ -159,25 +174,37 @@ class MainController extends Controller
         /** @var $data_quote entity Quote */
         $data_quote = $em->getRepository('CoyoteSiteBundle:Quote')->findby(array('week' => $week, 'year' => $year));
         /** show view */
-        return $this->render('CoyoteSiteBundle:Accueil:menu.html.twig', array('quote' => $data_quote, '_locale' => $_locale));
+        return $this->render('CoyoteSiteBundle:Accueil:menu.html.twig', array('quote' => $data_quote, '_locale' => $locale));
     }
 
     public function languageAction($_locale)
     {
-        /** @var $user role */
-        $user = $this->get('security.context')->getToken()->getUser();
-        /** @var $session new object Session */
-        $session = new Session();
-        /** set lang */
-        $session->set('lang', null);
+        $request = $this->getRequest();
+        $session = $request->getSession();
+        /** @var $locale string _locale */
+        $locale = $request->getLocale();
         /** set lang */
         $session->set('lang', $_locale);
+
+
+        /** @var $user role */
+        $user = $this->get('security.context')->getToken()->getUser();
         /** check $user */
         if($user == "anon.")
             /** redirect MainController:loginAction */
-            return $this->redirect($this->generateUrl('main_login'));
+            return $this->redirect($this->generateUrl('main_login', array('_locale' => $session->get('lang'))));
         else
             /** redirect MainController:MenuAction */
-            return $this->redirect($this->generateUrl('main_menu'));
+            return $this->redirect($this->generateUrl('main_menu', array('_locale' => $session->get('lang'))));
+    }
+
+    public function redirectAction()
+    {
+
+        $request = $this->getRequest();
+        $session = $request->getSession();
+        //return new Response($session->get('lang'));
+        return $response = $this->forward('CoyoteSiteBundle:Main:index', array('_locale' => $request->getLocale()));
+        return $this->redirect($this->generateUrl('main_login', array('_locale' => 'fr')));
     }
 }

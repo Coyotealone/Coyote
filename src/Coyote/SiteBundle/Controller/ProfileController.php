@@ -38,7 +38,7 @@ class ProfileController extends Controller
     public function showAction()
     {
         /** redirect MainController:indexAction */
-        return $this->redirect($this->generateUrl('accueil'));
+        return $this->redirect($this->generateUrl('main_accueil'));
     }
 
     /**
@@ -47,6 +47,6 @@ class ProfileController extends Controller
     public function editAction()
     {
         /** redirect MainController:indexAction */
-        return $this->redirect($this->generateUrl('accueil'));
+        return $this->redirect($this->generateUrl('main_accueil'));
     }
 }

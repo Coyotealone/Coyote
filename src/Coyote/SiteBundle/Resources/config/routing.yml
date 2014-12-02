@@ -1,6 +1,6 @@
-accueil:
+CoyoteSiteBundle_accueil:
     path:     /
-    defaults: { _controller: CoyoteSiteBundle:Main:index }
+    defaults: { _controller: CoyoteSiteBundle:Main:redirect }
 
 CoyoteSiteBundle_register:
     resource: "@CoyoteSiteBundle/Resources/config/routing/register.yml"
@@ -16,7 +16,7 @@ CoyoteSiteBundle_contact:
 
 CoyoteSiteBundle_main:
     resource: "@CoyoteSiteBundle/Resources/config/routing/main.yml"
-    prefix:   /{_locale}
+    prefix:   /{_locale}/
     requirements:
         _locale: fr|en|pl
 

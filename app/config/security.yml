@@ -1,7 +1,7 @@
 security:
     encoders:
         FOS\UserBundle\Model\UserInterface: sha512
-    access_denied_url:                      accueil
+    access_denied_url:                      CoyoteSiteBundle_accueil
 
     role_hierarchy:
         ROLE_USER:          ROLE_USER
@@ -47,7 +47,7 @@ security:
 
                 # options de redirection lorsque le login échoue (vous
                 # pouvez en lire plus ci-dessous)
-                failure_path:                   null
+                failure_path:                   main_index
                 failure_forward:                false
 
                 # noms des champs pour le nom d'utilisateur et le mot
@@ -94,5 +94,5 @@ security:
         - { path: .*/menu, role: [ROLE_TECH, ROLE_CADRE] }
         - { path: .*/schedule/.*, role: [ROLE_TECH, ROLE_CADRE, ROLE_SUPER_ADMIN, ROLE_ADMIN] }
         - { path: .*/profile/.*, role: [ROLE_TECH, ROLE_CADRE, ROLE_SUPER_ADMIN, ROLE_ADMIN] }
-        - { path: .*/admin/.*, role: ROLE_ADMIN }
+        - { path: .*/admin/.*, role: [ROLE_ADMIN, ROLE_CHEF_BE] }
 

@@ -17,10 +17,10 @@
               <script src="{{ asset('bundles/coyotesite/js/respond.min.js') }}"></script>
             <![endif]-->
         {% endblock %}
-        
+
         {% block javascripts %}
         {% endblock %}
-        
+
         <link rel="shortcut icon" href="{{ asset('bundles/coyotesite/images/pichonicon.ico') }}" />
     </head>
     <div id="page">
@@ -28,8 +28,8 @@
             <div id="bloc">
                 <header>
                     <div id="lien">
-                        <a href="{{ path('accueil') }}"><img src="{{ asset('bundles/coyotesite/images/logo1.png') }}" alt="PICHON" id="logo"/></a>
-                        
+                        <a href="{{ path('main_accueil') }}"><img src="{{ asset('bundles/coyotesite/images/logo1.png') }}" alt="PICHON" id="logo"/></a>
+
                     </div>
                     <nav>
                         {% block language %}
@@ -55,7 +55,7 @@
                         {% endblock %}
                     </article>
                 </section>
-            </div>  
+            </div>
             <footer>
                 <p>{{'Copyright ©2014 PICHON - Tous droits réservés'|trans}}</p>
             </footer>

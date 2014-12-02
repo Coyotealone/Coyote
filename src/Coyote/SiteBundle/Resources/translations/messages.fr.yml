@@ -18,6 +18,7 @@ group:
 "User account has expired.": Le compte de l'utilisateur a expiré.
 "User credentials have expired.": Les informations d'identification ont expiré.
 
+
 security:
     login:
         username: "Nom d'utilisateur :"
