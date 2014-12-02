@@ -12,6 +12,15 @@ use Doctrine\ORM\EntityRepository;
  */
 class TimetableRepository extends EntityRepository
 {
+    /**
+     * find shedule id
+     *
+     * @access public
+     * @param mixed $no_week
+     * @param mixed $year
+     * @param mixed $user_id
+     * @return array schedule id
+     */
     public function myFindScheduleId($no_week, $year, $user_id)
     {
         $qb = $this->_em->createQueryBuilder();
@@ -26,6 +35,14 @@ class TimetableRepository extends EntityRepository
         return $id_schedule;
     }
 
+    /**
+     * find timetable id.
+     *
+     * @access public
+     * @param mixed $no_week
+     * @param mixed $year
+     * @return array timetable id
+     */
     public function myFindTimetableId($no_week, $year)
     {
         $qb = $this->_em->createQueryBuilder();
@@ -37,5 +54,22 @@ class TimetableRepository extends EntityRepository
                             ->getResult();
 
         return $timetable_id;
+    }
+
+    /**
+     * find period respect to date function.
+     *
+     * @access public
+     * @param mixed $date
+     * @return timetable pay_period
+     */
+    public function findPeriodByDate($date)
+    {
+        $qb = $this->_em->createQueryBuilder();
+        $qb->select('t.pay_period')
+           ->from('CoyoteSiteBundle:Timetable', 't')
+           ->where('t.date = :date')
+           ->setParameters(array('date' => $date));
+        return $qb->getQuery()->getSingleScalarResult();
     }
 }

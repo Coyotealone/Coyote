@@ -1,0 +1,71 @@
+<page>
+<div id="lien">
+    <img src="./bundles/coyotesite/images/logo1.jpg" alt="PICHON" id="logo"/>
+</div>
+
+<p style="text-align:center">{{'Récapitulatif du mois'|trans}}</p>
+
+{%if dataschedule %}
+
+<table>
+    <tr>
+        <td style="background:#7FC6BC; color:white">{{'Jour férié'|trans}}</td>
+        <td style="background:#01B0F0; color:white">{{'Weekend'|trans}}</td>
+    </tr>
+</table>
+
+<table class='table' id='tab_expense' style="width:900px;">
+    <tr style="width:900px;">
+	    <th style="width: 80px; text-align:center">{{'Jour de la semaine'|trans}}</th>
+	    <th style="width: 85px; text-align:center" id='tab_time_date'>{{'Date'|trans}}</th>
+		<th style="width: 60px; text-align:center" id='tab_time_workinghours'>{{'Journée travaillée'|trans}}</th>
+		<th style="text-align:center" id='tab_time_travel'>{{'Déplacement'|trans}}</th>
+		<th style="text-align:center" id='tab_time_absence'>{{'Absence'|trans}}</th>
+		<th style="width: 20%; text-align:center" id='tab_time_comment'>{{'Commentaire'|trans}}</th>
+	</tr>
+	{% for entity in dataschedule %}
+        <tr>
+            {% if entity.holiday == "1" %}
+                <td style="background:#7FC6BC; color:white; text-align:center">{{ entity.day|capitalize|trans}}</td>
+                <td style="background:#7FC6BC; color:white; text-align:center">{{ entity.date}}</td>
+                <td style="background:#7FC6BC; color:white; text-align:center">{{ entity.working_hours }}</td>
+                <td style="background:#7FC6BC; color:white; text-align:center">{{ entity.travel }}</td>
+                <td style="background:#7FC6BC; color:white; text-align:center">{{ entity.absence|trans }}</td>
+                <td style="width: 20%; background:#7FC6BC; color:white; text-align:center">{{ entity.comment }}</td>
+            {% elseif entity.day == "samedi" %}
+                <td style="background:#01B0F0; color:white; text-align:center">{{ entity.day|capitalize|trans}}</td>
+                <td style="background:#01B0F0; color:white; text-align:center">{{ entity.date}}</td>
+                <td style="background:#01B0F0; color:white; text-align:center">{{ entity.working_hours }}</td>
+                <td style="background:#01B0F0; color:white; text-align:center">{{ entity.travel }}</td>
+                <td style="background:#01B0F0; color:white; text-align:center">{{ entity.absence|trans }}</td>
+                <td style="width: 20%; background:#01B0F0; color:white; text-align:center">{{ entity.comment }}</td>
+            {% elseif entity.day == "dimanche" %}
+                <td style="background:#01B0F0; color:white; text-align:center">{{ entity.day|capitalize|trans}}</td>
+                <td style="background:#01B0F0; color:white; text-align:center">{{ entity.date}}</td>
+                <td style="background:#01B0F0; color:white; text-align:center">{{ entity.working_hours }}</td>
+                <td style="background:#01B0F0; color:white; text-align:center">{{ entity.travel }}</td>
+                <td style="background:#01B0F0; color:white; text-align:center">{{ entity.absence|trans }}</td>
+                <td style="width: 20%; background:#01B0F0; color:white; text-align:center">{{ entity.comment }}</td>
+            {% else %}
+                <td style="text-align:center">{{ entity.day|capitalize|trans}}</td>
+                <td style="text-align:center">{{ entity.date}}</td>
+                <td style="text-align:center">{{ entity.working_hours }}</td>
+                <td style="text-align:center">{{ entity.travel }}</td>
+                <td style="text-align:center">{{ entity.absence|trans }}</td>
+                <td style="width: 20%;">{{ entity.comment }}</td>
+            {% endif %}
+        </tr>
+    {% endfor %}
+</table>
+
+<p style="text-align:center">
+    {{'Jour travaillé dans le mois / année'|trans }} : {{daymonth}} / {{dayyear}}<br>
+    {{'Nombre de RTT utilisé dans le mois / année'|trans}} : {{absencertt}} / {{rttyear}}<br>
+    {{'Nombre de congés payés (CP) utilisé dans le mois /année' | trans }} : {{absencecp}} / {{cpyear}} <br>
+    {{"Nombre de congés d'anciennetés (CA) utilisé dans le mois / année" | trans }} : {{absenceca}} / {{cayear}}
+</p>
+{% else %}
+<p style="text-align:center">{{'Aucune donnée trouvée'|trans}}</p>
+{% endif %}
+
+</page>

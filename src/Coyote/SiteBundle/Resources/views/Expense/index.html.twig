@@ -10,14 +10,14 @@
 {% endblock %}
 
 {% block link %}
-    
+
     <!--[if lt IE 9]>
         {{ include('CoyoteSiteBundle:Base:navigation_ie.html.twig') }}
     <![endif]-->
     <!--[if !IE]><!-->
         {{ include('CoyoteSiteBundle:Base:navigation.html.twig') }}
 	<!--<![endif]-->
-	
+
 {% endblock %}
 
 {% block stylesheets %}
@@ -29,8 +29,8 @@
     <div class="jumbotron">
 	        <p class="lead">{{ 'Bienvenue dans la partie des Notes de frais'|trans}}.</p>
 	        <p>
-	        	<a href={{ path('coyote_expense_create')}} name="frais" id="frais" class='btntime'>{{ 'Saisie des notes de frais'|trans}}</a><br>
-	        	<a href={{ path('coyote_expense_indexshow')}} name="diplay_frais" id="display_frais" class='btntime'>{{ 'Visualiser les notes de frais'|trans}}</a><br>
+	        	<a href={{ path('expense_create')}} name="frais" id="frais" class='btntime'>{{ 'Saisie des notes de frais'|trans}}</a><br>
+	        	<a href={{ path('expense_indexshow')}} name="diplay_frais" id="display_frais" class='btntime'>{{ 'Visualiser les notes de frais'|trans}}</a><br>
                 {#<a href={{ path('coyote_expense_print')}} name="print" id="print" class='btntime'>Impression des notes de frais</a><br>#}
 			    {#<a href={{ path('coyote_time_user')}} name="export" id="export" class='btntime'>Exportation des notes de frais</a>
 #}

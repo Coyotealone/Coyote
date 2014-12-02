@@ -1,7 +1,7 @@
 {% extends 'CoyoteSiteBundle:Admin:index.html.twig' %}
 
 {% block content %}
-    <form role="form" action="{{ path('coyote_exportdatauser') }}" method='post'>
+    <form role="form" action="{{ path('admin_exportdatauser') }}" method='post'>
         <table class='table' id='tab_expense'>
         	<tr>
         	    <th>{{'Mois'|trans}}</th>
@@ -9,28 +9,28 @@
         	</tr>
             <tr>
                 <td>
-                    <select name='mois' id='mois' >
-    					<option value='vide'></option>
-    					<option value='01'>{{'Janvier'|trans}}</option>
-    					<option value='02'>{{'Février'|trans}}</option>
-    					<option value='03'>{{'Mars'|trans}}</option>
-    					<option value='04'>{{'Avril'|trans}}</option>
-    					<option value='05'>{{'Mai'|trans}}</option>
-    					<option value='06'>{{'Juin'|trans}}</option>
-    					<option value='07' selected>{{'Juillet'|trans}}</option>
-    					<option value='08'>{{'Août'|trans}}</option>
-    					<option value='09'>{{'Septembre'|trans}}</option>
-    					<option value='10'>{{'Octobre'|trans}}</option>
-    					<option value='11'>{{'Novembre'|trans}}</option>
-    					<option value='12'>{{'Décembre'|trans}}</option>
-    				</select>
+                    {% set counter = 0 %}
+                    <select name='month' id='month' >
+                    {% for mois in tab_num_mois %}
+                        {% if mois == month %}
+                        <option value={{mois}} selected>{{tab_mois[counter]|trans}}</option>
+                        {% else %}
+                        <option value={{mois}}>{{tab_mois[counter]|trans}}</option>
+                        {% endif %}
+                        {% set counter = counter + 1 %}
+                    {% endfor %}
+                    </select>
                 </td>
                 <td>
-                    <select name='annee' id='annee' >
-    					<option value='2014'>2014</option>
-    					<option value='2015'>2015</option>
-    					<option value='2016'>2016</option>
-    				</select>
+                    <select name='year' id='year' >
+                    {% for annee in tab_annee %}
+                        {% if annee == year %}
+                        <option value={{annee}} selected>{{annee|trans}}</option>
+                        {% else %}
+                        <option value={{annee}}>{{annee|trans}}</option>
+                        {% endif %}
+                    {% endfor %}
+                    </select>
                 </td>
             </tr>
         </table>

@@ -1,0 +1,104 @@
+<page>
+<div id="lien">
+    <img src="./bundles/coyotesite/images/logo1.jpg" alt="PICHON" id="logo"/>
+</div>
+
+<p style="text-align:center">{{"Récapitulatif de l'année"|trans}}</p>
+
+{% if dataschedule %}
+<table>
+    <tr>
+        <td style="background:#7FC6BC; color:white">{{'Jour férié'|trans}}</td>
+        <td style="background:#01B0F0; color:white">{{'Weekend'|trans}}</td>
+        <td style="background:#99CCCC; color:white">{{'Temps de la semaine'|trans}}</td>
+    </tr>
+</table>
+
+<table class='table' id='tab_expense' style="width:900px;">
+	<tr style="width:900px;">
+	    <th style="width: 80px; text-align:center">{{'Jour de la semaine'|trans}}</th>
+	    <th style="width: 85px; text-align:center" id='tab_time_date'>{{'Date'|trans}}</th>
+		<th style="text-align:center" id='tab_time_debut'>{{'Début'|trans}}</th>
+		<th style="text-align:center" id='tab_time_fin'>{{'Fin'|trans}}</th>
+		<th style="text-align:center" id='tab_time_pause'>{{'Pause'|trans}}</th>
+		<th style="width: 60px; text-align:center" id='tab_time_working_time'>{{'Temps de travail'|trans}}</th>
+		<th style="width: 60px; text-align:center" id='tab_time_working_hours'>{{'Journée travaillée'|trans}}</th>
+		<th style="text-align:center" id='tab_time_travel'>{{'Déplacement'|trans}}</th>
+		<th style="text-align:center" id='tab_time_absence'>{{'Absence'|trans}}</th>
+		<th style="width: 20%; text-align:center" id='tab_time_comment'>{{'Commentaire'|trans}}</th>
+	</tr>
+	{% set counter = 0 %}
+	{% for entity in dataschedule %}
+        <tr style="width:900px;">
+            {% if entity.holiday == "1" %}
+                <td style="background:#7FC6BC; color:white; text-align:center">{{ entity.day|capitalize|trans}}</td>
+                <td style="background:#7FC6BC; color:white; text-align:center">{{ entity.date}}</td>
+                <td style="background:#7FC6BC; color:white; text-align:center">{{ entity.start }}</td>
+                <td style="background:#7FC6BC; color:white; text-align:center">{{ entity.end }}</td>
+                <td style="background:#7FC6BC; color:white; text-align:center">{{ entity.break }}</td>
+                <td style="background:#7FC6BC; color:white; text-align:center">{{ entity.working_time }}</td>
+                <td style="background:#7FC6BC; color:white; text-align:center">{{ entity.working_hours }}</td>
+                <td style="background:#7FC6BC; color:white; text-align:center">{{ entity.travel }}</td>
+                <td style="background:#7FC6BC; color:white; text-align:center">{{ entity.absence|trans }}</td>
+                <td style="width: 20%; background:#7FC6BC; color:white;">{{ entity.comment }}</td>
+            {% elseif entity.day == "samedi" %}
+                <td style="background:#01B0F0; color:white; text-align:center">{{ entity.day|capitalize|trans}}</td>
+                <td style="background:#01B0F0; color:white; text-align:center">{{ entity.date}}</td>
+                <td style="background:#01B0F0; color:white; text-align:center">{{ entity.start }}</td>
+                <td style="background:#01B0F0; color:white; text-align:center">{{ entity.end }}</td>
+                <td style="background:#01B0F0; color:white; text-align:center">{{ entity.break }}</td>
+                <td style="background:#01B0F0; color:white; text-align:center">{{ entity.working_time }}</td>
+                <td style="background:#01B0F0; color:white; text-align:center">{{ entity.working_hours }}</td>
+                <td style="background:#01B0F0; color:white; text-align:center">{{ entity.travel }}</td>
+                <td style="background:#01B0F0; color:white; text-align:center">{{ entity.absence|trans }}</td>
+                <td style="width: 20%; background:#01B0F0; color:white;">{{ entity.comment }}</td>
+            {% elseif entity.day == "dimanche" %}
+                <td style="background:#01B0F0; color:white; text-align:center">{{ entity.day|capitalize|trans}}</td>
+                <td style="background:#01B0F0; color:white; text-align:center">{{ entity.date}}</td>
+                <td style="background:#01B0F0; color:white; text-align:center">{{ entity.start }}</td>
+                <td style="background:#01B0F0; color:white; text-align:center">{{ entity.end }}</td>
+                <td style="background:#01B0F0; color:white; text-align:center">{{ entity.break }}</td>
+                <td style="background:#01B0F0; color:white; text-align:center">{{ entity.working_time }}</td>
+                <td style="background:#01B0F0; color:white; text-align:center">{{ entity.working_hours }}</td>
+                <td style="background:#01B0F0; color:white; text-align:center">{{ entity.travel }}</td>
+                <td style="background:#01B0F0; color:white; text-align:center">{{ entity.absence|trans }}</td>
+                <td style="width: 20%; background:#01B0F0; color:white;">{{ entity.comment }}</td>
+        </tr>
+        <tr>
+                <td colspan=10 style="width: 30%; background:#99CCCC; color:white; text-align:center">{{"Nombre d'heure travaillé dans la semaine"|trans}} : {{timeweek[counter]}}</td>
+                {% set counter = counter + 1 %}
+        </tr>
+        <tr>
+            {% else %}
+                <td style="text-align:center" >{{ entity.day|capitalize|trans}}</td>
+                <td style="text-align:center" >{{ entity.date}}</td>
+                <td style="text-align:center" >{{ entity.start }}</td>
+                <td style="text-align:center" >{{ entity.end }}</td>
+                <td style="text-align:center" >{{ entity.break }}</td>
+                <td style="text-align:center" >{{ entity.working_time }}</td>
+                <td style="text-align:center" >{{ entity.working_hours }}</td>
+                <td style="text-align:center" >{{ entity.travel }}</td>
+                <td style="text-align:center" >{{ entity.absence|trans }}</td>
+                <td style="width: 20%;">{{ entity.comment }}</td>
+                {% if loop.last %}
+        </tr>
+        <tr>
+                <td colspan=10 style="width: 30%; background:#99CCCC; color:white; text-align:center">{{"Nombre d'heure travaillé dans la semaine"|trans}} : {{timeweek[counter]}}</td>
+                {% endif %}
+            {% endif %}
+        </tr>
+    {% endfor %}
+
+</table>
+<p style="text-align:center">
+
+    {{"Nombre de RTT utilisé dans l'année"|trans}} : {{rttyear}}<br>
+    {{"Nombre de congés payés (CP) utilisé dans l'année" | trans }} : {{cpyear}} <br>
+    {{"Nombre de congés d'anciennetés (CA) utilisé dans l'année" | trans }} : {{cayear}}
+</p>
+
+{% else %}
+<p style="text-align:center">{{'Aucune donnée trouvée'|trans}}</p>
+{% endif %}
+
+</page>

@@ -18,17 +18,32 @@ use Doctrine\ORM\EntityRepository;
  */
 class ExpenseRepository extends EntityRepository
 {
+    /**
+     * find expense user by date.
+     *
+     * @access public
+     * @param mixed $date
+     * @param mixed $id
+     * @return array expense
+     */
     public function findExpense($date, $id)
     {
         $query = $this->getEntityManager()
                         ->createQuery("
 	            SELECT e FROM CoyoteSiteBundle:Expense e
-	            WHERE e.date LIKE :key and e.userfees = :id"
+	            WHERE e.date LIKE :date and e.userfees = :id"
                         );
-        $query->setParameters(array('key' => '%'.$date.'%', 'id' => $id));
+        $query->setParameters(array('date' => '%'.$date.'%', 'id' => $id));
         return $query->getResult();
     }
 
+    /**
+     * update all status expense.
+     *
+     * @access public
+     * @param mixed $em
+     * @return "OK"
+     */
     public function updateStatus($em)
     {
         $expense = $em->getRepository('CoyoteSiteBundle:Expense')->findAll();
@@ -41,6 +56,12 @@ class ExpenseRepository extends EntityRepository
         return "OK";
     }
 
+    /**
+     * export expense to import in ERP.
+     *
+     * @access public
+     * @return string
+     */
     public function findforCompta()
     {
         $query = $this->getEntityManager()
@@ -57,40 +78,58 @@ class ExpenseRepository extends EntityRepository
             if($data->getUserFees()->getLogin() != $userfees)
             {
                 $userfees = $data->getUserFees()->getLogin();
-                $result .= "\"H\";\"".$data->getUserFees()->getLogin()."\"\r\n";
+                $result .= "H;".$data->getUserFees()->getLogin()."\r\n";
             }
-            $result .= "\"D\";";
-            $result .= "\"".$data->getUserFees()->getLogin()."\";";//En majuscule
-            $result .= "\"".$data->getSite()->getCode()."\";";
+            $result .= "D;";
+            $result .= $data->getUserFees()->getLogin().";";//En majuscule
+            $result .= $data->getSite()->getCode().";";
             $date = $data->getDate();
             $date = explode('/', $date);
             $result .= $date[0].$date[1].$date[2].";";// Enlever les /
-            $result .= "\"".$data->getFee()->getCode()."\";";
-            $result .= "\"".$data->getCurrency()->getCode()."\";";
+            $result .= $data->getFee()->getCode().";";
+            $result .= $data->getCurrency()->getCode().";";
             $result .= $data->getAmount().";";
             $result .= $data->getActualAmount().";";
             $result .= $data->getAmountTTC().";";
             $feeid = $data->getFee()->getCodeRate();
-            $result .= "\"".$feeid."\";";
+            $result .= $feeid.";";
             $result .= $data->getAmountTVA().";";
             $result .= $data->getAmountTVA().";";
-            $result .= "\"".$data->getUserFees()->getCode()."\";";
-            $result .= "\"\";";
-            $result .= "\"".$data->getBusiness()->getCode()."\";";
-            $result .= "\"".$data->getUserFees()->getService()."\";";
-            $result .= "\"".$data->getComment()."\";"."\r"."\n";
+            $result .= $data->getUserFees()->getCode().";";
+            $result .= ";";
+            $result .= $data->getBusiness()->getCode().";";
+            if($data->getFee()->getCode() == "ENTRE1")
+                $result .= ";";
+            else
+                $result .= $data->getUserFees()->getService().";";
+            $result .= $data->getComment().";\r\n";
 
         }
 
         return $result;
     }
 
+    /**
+     * computing VAT with price and rate .
+     *
+     * @access public
+     * @param mixed $rate
+     * @param mixed $price
+     * @return float
+     */
     public function calculTVA($rate, $price)
     {
         $vat_amount = $price - (($price * 100) / ($rate +100));
         return round($vat_amount, 2);
     }
 
+    /**
+     * generate date.
+     *
+     * @access public
+     * @param mixed $date
+     * @return string
+     */
     public function formDate($date)
     {
         if(is_numeric($date))
@@ -103,6 +142,15 @@ class ExpenseRepository extends EntityRepository
         return $date;
     }
 
+    /**
+     * prepare save expense user fees.
+     *
+     * @access public
+     * @param mixed $user_fee_id
+     * @param mixed $data
+     * @param mixed $increment
+     * @return array expense
+     */
     public function saveExpense($user_fee_id, $data, $increment)
     {
         $site = $this->_em->getRepository('CoyoteSiteBundle:Site')->find($data['site'.$increment]);

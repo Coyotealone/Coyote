@@ -22,91 +22,163 @@ use Coyote\SiteBundle\Entity\User;
  */
 class AdminController extends Controller
 {
+
+    /**
+     * export expense for X3 in text file
+     *
+     * @access public
+     * @return void
+     */
     public function exportExpenseAction()
     {
         if($this->get('security.context')->isGranted('ROLE_COMPTA'))
         {
+            /** @var $date string yyyymmdd */
             $date = date("Ymd");
+            /** @var $heure string hhmmss */
             $heure = date("His");
-            $filename = "export".$date."-".$heure.".csv";
+            /** @var $filename string */
+            $filename = "export".$date."-".$heure.".txt";
+            /** @var $em object doctrine request */
             $em = $this->getDoctrine()->getManager();
+            /** @var $dataexpense string data file */
             $dataexpense = $em->getRepository('CoyoteSiteBundle:Expense')->findforCompta();
+            /** update status from Expense */
             $em->getRepository('CoyoteSiteBundle:Expense')->updateStatus($em);
+            /** @return file txt downloaded with data expense */
             return new Response($dataexpense, 200, array(
                 'Content-Type' => 'application/force-download',
                 'Content-Disposition' => 'attachment; filename="'.$filename.'"'
             ));
         }
         else
+            /** redirect MainController:indexAction */
             return $this->redirect($this->generateUrl('accueil'));
     }
 
+    /**
+     * redirect to function fos_user_change_password.
+     *
+     * @access public
+     * @return void
+     */
     public function changePasswordAction()
     {
+        /** redirect \FOS\UserBundle\Controller\ChangePasswordController */
         return $this->redirect($this->generateUrl('fos_user_change_password'));
     }
 
+    /**
+     * redirect to function fos_user_resetting_request.
+     *
+     * @access public
+     * @return void
+     */
     public function resettingAction()
     {
-        //$message = \Swift_Message::newInstance()
-        //->setSubject('Hello Email')
-        //->setFrom('provinianthony@gmail.com')
-        //->setTo('si@pichonindustries.com')
-        //->setBody($this->renderView('CoyoteSiteBundle:Admin:email.txt.twig', array('name' => 'Anthony')));
-        //$this->get('mailer')->send($message);
-        //return new Response('mail envoyé');
+        /** redirect \FOS\UserBundle\Controller\ResettingController */
         return $this->redirect($this->generateUrl('fos_user_resetting_request'));
     }
 
+    /**
+     * show profil user connected.
+     *
+     * @access public
+     * @return void
+     */
     public function profilAction()
     {
+        /** @var object user */
         $user = $this->container->get('security.context')->getToken()->getUser();
+        /** show view */
         return $this->render('CoyoteSiteBundle:Profile:show.html.twig', array('user' => $user));
     }
 
+    /**
+     * redirect to accueil if user want edit.
+     *
+     * @access public
+     * @return void
+     */
     public function profileditAction()
     {
+        /** redirect MainController:indexAction */
         return $this->redirect($this->generateUrl('accueil'));
     }
 
+    /**
+     * show index to choose month and year to extract data design office users.
+     *
+     * @access public
+     * @return void
+     */
     public function showexportAction()
     {
         if($this->get('security.context')->isGranted('ROLE_CHEF_BE'))
         {
-            return $this->render('CoyoteSiteBundle:Admin:index_export.html.twig');
+            /** @var $month string mm */
+            $month = date('n');
+            /** @var $year string yyyy */
+            $year = date('Y');
+            /** @var $tab_month array */
+            $tab_month = array( 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre' );
+            /** @var $tab_num_month array */
+            $tab_num_month = array( '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12' );
+            /** @var $tab_year array */
+            $tab_year = array( '2013', '2014', '2015');
+            /** show view */
+            return $this->render('CoyoteSiteBundle:Admin:index_export.html.twig',
+                array('month' => $month, 'year' => $year, 'tab_mois' => $tab_month, 'tab_num_mois' => $tab_num_month, 'tab_annee' => $tab_year));
         }
         else
+        /** redirect MainController:IndexAction */
             return $this->redirect($this->generateUrl('accueil'));
     }
 
+    /**
+     * export data design office users.
+     *
+     * @access public
+     * @return void
+     */
     public function exportDataUserAction()
     {
+        /** check role */
         if($this->get('security.context')->isGranted('ROLE_CHEF_BE'))
         {
-            $doctrine = $this->getDoctrine();
-            $em = $doctrine->getManager();
-            $tabuserid = array(14, 17, 41, 44, 45, 46, 49, 50, 52, 54, 62, 70);
-
+            /** @var $em object doctrine request */
+            $em = $this->getDoctrine()->getManager();
+            /** @var $tabuserid array design office users id*/
+            $tab_user_id = array(14, 17, 41, 44, 45, 46, 49, 50, 52, 54, 62, 70);
+            /** @var $request object request */
             $request = Request::createFromGlobals();
+            /** @var $data array data request */
             $data = $request->request->all();
+            /** check @var data */
             if($data == null)
+                /** show view */
                 return $this->render('CoyoteSiteBundle:Admin:index_export.html.twig');
             else
             {
-                $date = $data['mois'].'/'.$data['annee'];
-                $year = $data['annee'];
-
+                /** @var $date string mm/yyyy */
+                $date = $data['month'].'/'.$data['year'];
+                /** @var $year string yyyy */
+                $year = $data['year'];
+                /** @var $result string */
                 $result = '';
-                for($i=0;$i<count($tabuserid);$i++)
+                /** file in the text file */
+                for($i=0;$i<count($tab_user_id);$i++)
                 {
-                    $user = $tabuserid[$i]; //$date = '06/2014'; $year = 2014;
-                    $datauser = $em->getRepository('CoyoteSiteBundle:User')->find($user);
-                    $user_name = $datauser->getName();
-                    $res_temp = $em->getRepository('CoyoteSiteBundle:Schedule')->findforBE($user, $date, $year, $user_name);
-                    $result .= $res_temp;
-                }
+                    /** @var $datauser object user */
+                    $datauser = $em->getRepository('CoyoteSiteBundle:User')->find($tab_user_id[$i]);
+                    /** @var $data_schedule string data schedule by user */
+                    $data_schedule = $em->getRepository('CoyoteSiteBundle:Schedule')->findforBE($tab_user_id[$i], $date, $year, $datauser->getName());
+                    /** add $data_schedule into $result */
+                    $result .= $data_schedule;
+                }/** end for */
+                /** @var $filename string file name CSV */
                 $filename = 'datauser'.$date.'.csv';
-
+                /** @return file csv downloaded with data user schedule */
                 return new Response($result, 200, array(
                     'Content-Type' => 'application/force-download',
                     'Content-Disposition' => 'attachment; filename="'.$filename.'"'
@@ -114,10 +186,18 @@ class AdminController extends Controller
             }
         }
         else
+            /** redirect MainController:indexAction */
             return $this->redirect($this->generateUrl('accueil'));
 
     }
 
+    /**
+     * function registrer user.
+     *
+     * @access public
+     * @param Request $request
+     * @return void
+     */
     public function registerAction(Request $request)
     {
         /** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */

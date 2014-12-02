@@ -2,13 +2,13 @@
 
 {% block language %}
     <div id="choisir_langue">{{ 'Choisissez votre pays'|trans}} :
-        <a href="{{ path('coyote_main_language', {'_locale' : 'fr'}) }}">
+        <a href="{{ path('main_language', {'_locale' : 'fr'}) }}">
             <img src="{{ asset('bundles/coyotesite/images/flag_francais.jpg') }}" alt="flag_french" id="flag_french"/>
         </a> |
-        <a href="{{ path('coyote_main_language', {'_locale' : 'en'}) }}">
+        <a href="{{ path('main_language', {'_locale' : 'en'}) }}">
             <img src="{{ asset('bundles/coyotesite/images/flag_grande_bretagne.jpg') }}" alt="flag_english" id="flag_english"/>
         </a> |
-        <a href="{{ path('coyote_main_language', {'_locale' : 'pl'}) }}">
+        <a href="{{ path('main_language', {'_locale' : 'pl'}) }}">
             <img src="{{ asset('bundles/coyotesite/images/flag_pologne.jpg') }}" alt="flag_pologne" id="flag_pologne"/>
         </a>
     </div>
@@ -20,7 +20,7 @@
 
 
 {% block content %}
-        
+
         {% for type, messages in app.session.flashbag.all() %}
             {% for message in messages %}
                 <div class="flash-{{ type }}">
@@ -33,6 +33,6 @@
             {% block fos_user_content %}
             {% endblock fos_user_content %}
         </div>
-        
-        
+
+
 {% endblock %}

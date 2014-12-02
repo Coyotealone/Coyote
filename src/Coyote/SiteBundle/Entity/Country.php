@@ -40,22 +40,9 @@ class Country
     private $entitledgb;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $configuring_tankerss;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->configuring_tankerss = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -78,7 +65,7 @@ class Country
     /**
      * Get code
      *
-     * @return integer 
+     * @return integer
      */
     public function getCode()
     {
@@ -101,7 +88,7 @@ class Country
     /**
      * Get alpha2
      *
-     * @return string 
+     * @return string
      */
     public function getAlpha2()
     {
@@ -124,7 +111,7 @@ class Country
     /**
      * Get alpha3
      *
-     * @return string 
+     * @return string
      */
     public function getAlpha3()
     {
@@ -147,7 +134,7 @@ class Country
     /**
      * Get entitledfr
      *
-     * @return string 
+     * @return string
      */
     public function getEntitledfr()
     {
@@ -170,46 +157,13 @@ class Country
     /**
      * Get entitledgb
      *
-     * @return string 
+     * @return string
      */
     public function getEntitledgb()
     {
         return $this->entitledgb;
     }
 
-    /**
-     * Add configuring_tankerss
-     *
-     * @param \Coyote\SiteBundle\Entity\ConfiguringTankers $configuringTankerss
-     * @return Country
-     */
-    public function addConfiguringTankerss(\Coyote\SiteBundle\Entity\ConfiguringTankers $configuringTankerss)
-    {
-        $this->configuring_tankerss[] = $configuringTankerss;
-
-        return $this;
-    }
-
-    /**
-     * Remove configuring_tankerss
-     *
-     * @param \Coyote\SiteBundle\Entity\ConfiguringTankers $configuringTankerss
-     */
-    public function removeConfiguringTankerss(\Coyote\SiteBundle\Entity\ConfiguringTankers $configuringTankerss)
-    {
-        $this->configuring_tankerss->removeElement($configuringTankerss);
-    }
-
-    /**
-     * Get configuring_tankerss
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getConfiguringTankerss()
-    {
-        return $this->configuring_tankerss;
-    }
-    
     public function __toString()
     {
         return $this->alpha2;

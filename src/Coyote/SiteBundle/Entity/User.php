@@ -79,17 +79,7 @@ class User extends BaseUser
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
-    private $offer_headers;
-
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
     private $userfeess;
-
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $formorders;
 
     /**
      * Constructor
@@ -98,15 +88,13 @@ class User extends BaseUser
     {
         parent::__construct();
         $this->schedules = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->offer_headers = new \Doctrine\Common\Collections\ArrayCollection();
         $this->userfeess = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->formorders = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -129,7 +117,7 @@ class User extends BaseUser
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -152,7 +140,7 @@ class User extends BaseUser
     /**
      * Get adress1
      *
-     * @return string 
+     * @return string
      */
     public function getAdress1()
     {
@@ -175,7 +163,7 @@ class User extends BaseUser
     /**
      * Get adress2
      *
-     * @return string 
+     * @return string
      */
     public function getAdress2()
     {
@@ -198,7 +186,7 @@ class User extends BaseUser
     /**
      * Get zip_code
      *
-     * @return string 
+     * @return string
      */
     public function getZipCode()
     {
@@ -221,7 +209,7 @@ class User extends BaseUser
     /**
      * Get postal_box
      *
-     * @return string 
+     * @return string
      */
     public function getPostalBox()
     {
@@ -244,7 +232,7 @@ class User extends BaseUser
     /**
      * Get city
      *
-     * @return string 
+     * @return string
      */
     public function getCity()
     {
@@ -267,7 +255,7 @@ class User extends BaseUser
     /**
      * Get country
      *
-     * @return string 
+     * @return string
      */
     public function getCountry()
     {
@@ -290,7 +278,7 @@ class User extends BaseUser
     /**
      * Get phone
      *
-     * @return string 
+     * @return string
      */
     public function getPhone()
     {
@@ -313,7 +301,7 @@ class User extends BaseUser
     /**
      * Get cell
      *
-     * @return string 
+     * @return string
      */
     public function getCell()
     {
@@ -336,7 +324,7 @@ class User extends BaseUser
     /**
      * Get fax
      *
-     * @return string 
+     * @return string
      */
     public function getFax()
     {
@@ -359,7 +347,7 @@ class User extends BaseUser
     /**
      * Get website
      *
-     * @return string 
+     * @return string
      */
     public function getWebsite()
     {
@@ -392,44 +380,11 @@ class User extends BaseUser
     /**
      * Get schedules
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getSchedules()
     {
         return $this->schedules;
-    }
-
-    /**
-     * Add offer_headers
-     *
-     * @param \Coyote\SiteBundle\Entity\OfferHeader $offerHeaders
-     * @return User
-     */
-    public function addOfferHeader(\Coyote\SiteBundle\Entity\OfferHeader $offerHeaders)
-    {
-        $this->offer_headers[] = $offerHeaders;
-
-        return $this;
-    }
-
-    /**
-     * Remove offer_headers
-     *
-     * @param \Coyote\SiteBundle\Entity\OfferHeader $offerHeaders
-     */
-    public function removeOfferHeader(\Coyote\SiteBundle\Entity\OfferHeader $offerHeaders)
-    {
-        $this->offer_headers->removeElement($offerHeaders);
-    }
-
-    /**
-     * Get offer_headers
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getOfferHeaders()
-    {
-        return $this->offer_headers;
     }
 
     /**
@@ -458,43 +413,10 @@ class User extends BaseUser
     /**
      * Get userfeess
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getUserfeess()
     {
         return $this->userfeess;
-    }
-
-    /**
-     * Add formorders
-     *
-     * @param \Coyote\SiteBundle\Entity\FormOrder $formorders
-     * @return User
-     */
-    public function addFormorder(\Coyote\SiteBundle\Entity\FormOrder $formorders)
-    {
-        $this->formorders[] = $formorders;
-
-        return $this;
-    }
-
-    /**
-     * Remove formorders
-     *
-     * @param \Coyote\SiteBundle\Entity\FormOrder $formorders
-     */
-    public function removeFormorder(\Coyote\SiteBundle\Entity\FormOrder $formorders)
-    {
-        $this->formorders->removeElement($formorders);
-    }
-
-    /**
-     * Get formorders
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getFormorders()
-    {
-        return $this->formorders;
     }
 }

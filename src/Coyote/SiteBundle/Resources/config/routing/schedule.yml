@@ -1,30 +1,59 @@
-schedule:
-    pattern:  /
-    defaults: { _controller: "CoyoteSiteBundle:Schedule:index" }
+schedule_savetime:
+    pattern:    /scheduleusers/save
+    defaults:   { _controller: "CoyoteSiteBundle:Schedule:savetime"}
+
+schedule_savetimefm:
+    pattern:    /scheduleframes/save
+    defaults:   { _controller: "CoyoteSiteBundle:Schedule:savetimefm"}
+
+schedule_workmore:
+    pattern:    /scheduleusers/workmore
+    defaults:   { _controller: "CoyoteSiteBundle:Schedule:workmore"}
+
+schedule_workless:
+    pattern:    /scheduleusers/workless
+    defaults:   { _controller: "CoyoteSiteBundle:Schedule:workless"}
+
+schedule_index:
+    pattern:    /
+    defaults:   { _controller: "CoyoteSiteBundle:Schedule:index"}
 
 schedule_show:
-    pattern:  /{id}/show
-    defaults: { _controller: "CoyoteSiteBundle:Schedule:show" }
+    pattern:    /show
+    defaults:   { _controller: "CoyoteSiteBundle:Schedule:show"}
+
+schedule_indexshow:
+    pattern:    /indexshow
+    defaults:   { _controller: "CoyoteSiteBundle:Schedule:indexshow"}
+
+schedule_print:
+    pattern:    /print
+    defaults:   { _controller: "CoyoteSiteBundle:Schedule:print"}
+
+schedule_indexprint:
+    pattern:    /indexprint
+    defaults:   { _controller: "CoyoteSiteBundle:Schedule:indexprint"}
 
 schedule_new:
-    pattern:  /new
-    defaults: { _controller: "CoyoteSiteBundle:Schedule:new" }
-
-schedule_create:
-    pattern:  /create
-    defaults: { _controller: "CoyoteSiteBundle:Schedule:create" }
-    requirements: { _method: post }
+    pattern:    /schedulecreate
+    defaults:   { _controller: "CoyoteSiteBundle:Schedule:new"}
 
 schedule_edit:
-    pattern:  /{id}/edit
-    defaults: { _controller: "CoyoteSiteBundle:Schedule:edit" }
+    pattern:    /scheduleedit
+    defaults:   { _controller: "CoyoteSiteBundle:Schedule:edit"}
 
-schedule_update:
-    pattern:  /{id}/update
-    defaults: { _controller: "CoyoteSiteBundle:Schedule:update" }
-    requirements: { _method: post|put }
+schedule_indexprintyear:
+    pattern:    /indexprintyear
+    defaults:   { _controller: "CoyoteSiteBundle:Schedule:indexprintyear"}
 
-schedule_delete:
-    pattern:  /{id}/delete
-    defaults: { _controller: "CoyoteSiteBundle:Schedule:delete" }
-    requirements: { _method: post|delete }
+schedule_printyear:
+    pattern:    /scheduleyear
+    defaults:   { _controller: "CoyoteSiteBundle:Schedule:printyear"}
+
+schedule_indexexportprintyear:
+    pattern:    /indexexportprintyear
+    defaults:   { _controller: "CoyoteSiteBundle:Schedule:indexexportprintyear"}
+
+schedule_exportprintyear:
+    pattern:    /exportscheduleyear
+    defaults:   { _controller: "CoyoteSiteBundle:Schedule:exportprintyear"}

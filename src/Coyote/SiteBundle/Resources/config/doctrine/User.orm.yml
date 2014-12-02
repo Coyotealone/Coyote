@@ -46,15 +46,7 @@ Coyote\SiteBundle\Entity\User:
             targetEntity: Schedule
             mappedBy: user
             cascade: ["persist", "merge"]
-        offer_headers:
-            targetEntity: OfferHeader
-            mappedBy: user
-            cascade: ["persist", "merge"]
         userfeess:
             targetEntity: UserFees
-            mappedBy: user
-            cascade: ["persist", "merge"]
-        formorders:
-            targetEntity: FormOrder
             mappedBy: user
             cascade: ["persist", "merge"]

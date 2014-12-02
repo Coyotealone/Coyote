@@ -32,11 +32,6 @@ class Currency
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
-    private $offer_headers;
-
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
     private $expenses;
 
     /**
@@ -44,14 +39,13 @@ class Currency
      */
     public function __construct()
     {
-        $this->offer_headers = new \Doctrine\Common\Collections\ArrayCollection();
         $this->expenses = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -74,7 +68,7 @@ class Currency
     /**
      * Get code
      *
-     * @return string 
+     * @return string
      */
     public function getCode()
     {
@@ -97,7 +91,7 @@ class Currency
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -120,44 +114,11 @@ class Currency
     /**
      * Get exchange_rate
      *
-     * @return float 
+     * @return float
      */
     public function getExchangeRate()
     {
         return $this->exchange_rate;
-    }
-
-    /**
-     * Add offer_headers
-     *
-     * @param \Coyote\SiteBundle\Entity\OfferHeader $offerHeaders
-     * @return Currency
-     */
-    public function addOfferHeader(\Coyote\SiteBundle\Entity\OfferHeader $offerHeaders)
-    {
-        $this->offer_headers[] = $offerHeaders;
-
-        return $this;
-    }
-
-    /**
-     * Remove offer_headers
-     *
-     * @param \Coyote\SiteBundle\Entity\OfferHeader $offerHeaders
-     */
-    public function removeOfferHeader(\Coyote\SiteBundle\Entity\OfferHeader $offerHeaders)
-    {
-        $this->offer_headers->removeElement($offerHeaders);
-    }
-
-    /**
-     * Get offer_headers
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getOfferHeaders()
-    {
-        return $this->offer_headers;
     }
 
     /**
@@ -186,13 +147,13 @@ class Currency
     /**
      * Get expenses
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getExpenses()
     {
         return $this->expenses;
     }
-    
+
     public function __toString()
     {
         return $this->code;

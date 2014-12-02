@@ -1,0 +1,73 @@
+{% extends 'CoyoteSiteBundle:Schedule:index.html.twig' %}
+
+{% block javascripts %}
+    <script src="{{ asset('bundles/coyotesite/js/jquery-min.js') }}"/></script>
+{% endblock %}
+
+{% block content %}
+<p>{{'Récapitulatif du mois'|trans}}</p>
+
+<table>
+<tr>
+    <td style="background:#7FC6BC; color:white">{{'Jour férié'|trans}}</td>
+    <td style="background:#01B0F0; color:white">{{'Weekend'|trans}}</td>
+</tr>
+</table>
+
+{% if dataschedule %}
+<div class='table-responsive'>
+    <table class='table' id='tab_expense'>
+    	<tr>
+    	    <th>{{'Jour de la semaine'|trans}}</th>
+    		<th id='tab_time_date'>{{'Date'|trans}}</th>
+    		<th id='tab_time_workinghours'>{{'Journée travaillée'|trans}}</th>
+    		<th id='tab_time_travel'>{{'Déplacement'|trans}}</th>
+    		<th id='tab_time_absence'>{{'Absence'|trans}}</th>
+    		<th id='tab_time_comment'>{{'Commentaire'|trans}}</th>
+    	</tr>
+    	{% for entity in dataschedule %}
+            <tr>
+                {% if entity.holiday == "1" %}
+                    <td style="background:#7FC6BC; color:white">{{ entity.day|capitalize|trans}}</td>
+                    <td style="background:#7FC6BC; color:white">{{ entity.date}}</td>
+                    <td style="background:#7FC6BC; color:white">{{ entity.working_hours }}</td>
+                    <td style="background:#7FC6BC; color:white">{{ entity.travel }}</td>
+                    <td style="background:#7FC6BC; color:white">{{ entity.absence|trans }}</td>
+                    <td style="background:#7FC6BC; color:white">{{ entity.comment }}</td>
+                {% elseif entity.day == "samedi" %}
+                    <td style="background:#01B0F0; color:white">{{ entity.day|capitalize|trans}}</td>
+                    <td style="background:#01B0F0; color:white">{{ entity.date}}</td>
+                    <td style="background:#01B0F0; color:white">{{ entity.working_hours }}</td>
+                    <td style="background:#01B0F0; color:white">{{ entity.travel }}</td>
+                    <td style="background:#01B0F0; color:white">{{ entity.absence|trans }}</td>
+                    <td style="background:#01B0F0; color:white">{{ entity.comment }}</td>
+                {% elseif entity.day == "dimanche" %}
+                    <td style="background:#01B0F0; color:white">{{ entity.day|capitalize|trans}}</td>
+                    <td style="background:#01B0F0; color:white">{{ entity.date}}</td>
+                    <td style="background:#01B0F0; color:white">{{ entity.working_hours }}</td>
+                    <td style="background:#01B0F0; color:white">{{ entity.travel }}</td>
+                    <td style="background:#01B0F0; color:white">{{ entity.absence|trans }}</td>
+                    <td style="background:#01B0F0; color:white">{{ entity.comment }}</td>
+                {% else %}
+                    <td>{{ entity.day|capitalize|trans}}</td>
+                    <td>{{ entity.date}}</td>
+                    <td>{{ entity.working_hours }}</td>
+                    <td>{{ entity.travel }}</td>
+                    <td>{{ entity.absence|trans }}</td>
+                    <td>{{ entity.comment }}</td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+
+{{'Jour travaillé dans le mois / année'|trans }} : {{daymonth}} / {{dayyear}}<br>
+{{'Nombre de RTT utilisé dans le mois / année'|trans}} : {{absencertt}} / {{rttyear}}<br>
+{{"Nombre de congés payés (CP) utilisé dans le mois / année" | trans }} : {{absencecp}} / {{cpyear}} <br>
+{{"Nombre de congés d'anciennetés (CA) utilisé dans le mois / année" | trans }} : {{absenceca}} / {{cayear}} <br>
+{% else %}
+<p style="text-align:center">{{'Aucune donnée trouvée'|trans}}</p>
+{% endif %}
+
+
+{% endblock %}

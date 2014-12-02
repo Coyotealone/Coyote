@@ -7,7 +7,7 @@
 
 {% block content %}
 <h3>{{'Edition de la note de frais'|trans}}</h3>
-<form action="{{ path('coyote_expense_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+<form action="{{ path('expense_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
     <input type="hidden" name="_method" value="PUT" />
     <div class='table-responsive'>
     <table class='table' id='tab_expense'>
@@ -43,7 +43,7 @@
         <button type="submit" class="btn btn-success">{{ 'Mise à jour'|trans }}</button>
     </p>
 </form>
-    <a class='btnpage' href="{{ path('coyote_expense_showparameters', {'year': app.session.get('year_expense'), 'month': app.session.get('month_expense')} ) }}">
+    <a class='btnpage' href="{{ path('expense_showparameters', {'year': app.session.get('year_expense'), 'month': app.session.get('month_expense')} ) }}">
         {{ 'Retour à la liste'|trans }}
     </a>
 

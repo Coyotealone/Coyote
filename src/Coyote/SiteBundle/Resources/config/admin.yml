@@ -29,16 +29,6 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [CoyoteSiteBundle]]
-    sonata.admin.configuringtankers:
-        class: Coyote\SiteBundle\Admin\ConfiguringTankersAdmin
-        tags:
-            - { name: sonata.admin, manager_type: orm, group: "Configurateur", label: "Configuration des tonnes" }
-        arguments:
-            - ~
-            - Coyote\SiteBundle\Entity\ConfiguringTankers
-            - ~
-        calls:
-            - [ setTranslationDomain, [CoyoteSiteBundle]]
     sonata.admin.country:
         class: Coyote\SiteBundle\Admin\CountryAdmin
         tags:
@@ -79,26 +69,6 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [CoyoteSiteBundle]]
-    sonata.admin.infoitem:
-        class: Coyote\SiteBundle\Admin\InfoItemAdmin
-        tags:
-            - { name: sonata.admin, manager_type: orm, group: "Configurateur", label: "Informations articles" }
-        arguments:
-            - ~
-            - Coyote\SiteBundle\Entity\InfoItem
-            - ~
-        calls:
-            - [ setTranslationDomain, [CoyoteSiteBundle]]
-    sonata.admin.item:
-        class: Coyote\SiteBundle\Admin\ItemAdmin
-        tags:
-            - { name: sonata.admin, manager_type: orm, group: "Configurateur", label: "Articles" }
-        arguments:
-            - ~
-            - Coyote\SiteBundle\Entity\Item
-            - ~
-        calls:
-            - [ setTranslationDomain, [CoyoteSiteBundle]]
     sonata.admin.schedule:
         class: Coyote\SiteBundle\Admin\ScheduleAdmin
         tags:
@@ -126,6 +96,16 @@ services:
         arguments:
             - ~
             - Coyote\SiteBundle\Entity\Timetable
+            - ~
+        calls:
+            - [ setTranslationDomain, [CoyoteSiteBundle]]
+    sonata.admin.quote:
+        class: Coyote\SiteBundle\Admin\QuoteAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Citations", label: "Citations" }
+        arguments:
+            - ~
+            - Coyote\SiteBundle\Entity\Quote
             - ~
         calls:
             - [ setTranslationDomain, [CoyoteSiteBundle]]

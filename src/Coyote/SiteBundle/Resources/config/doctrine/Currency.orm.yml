@@ -16,10 +16,6 @@ Coyote\SiteBundle\Entity\Currency:
         exchange_rate:
             type: float
     oneToMany:
-        offer_headers:
-            targetEntity: OfferHeader
-            mappedBy: currency
-            cascade: ["persist", "merge"]
         expenses:
             targetEntity: Expense
             mappedBy: currency
