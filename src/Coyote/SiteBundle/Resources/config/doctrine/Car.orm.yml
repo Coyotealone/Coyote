@@ -1,0 +1,25 @@
+Coyote\SiteBundle\Entity\Car:
+    type: entity
+    table: car
+    repositoryClass: Coyote\SiteBundle\Entity\CarRepository
+    id:
+        id:
+            type: integer
+            unique: true
+            generator: { strategy: AUTO }
+    fields:
+        code:
+            type: integer
+            lenght: 10
+            unique: true
+            notnull: true
+        registration:
+            type: string
+            lenght: 10
+            unique: true
+            notnull: true
+    oneToMany:
+        userfeess:
+            targetEntity: UserFees
+            mappedBy: car
+            cascade: ["persist", "merge"]
