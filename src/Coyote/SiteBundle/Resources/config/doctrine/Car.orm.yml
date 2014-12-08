@@ -9,7 +9,7 @@ Coyote\SiteBundle\Entity\Car:
             generator: { strategy: AUTO }
     fields:
         code:
-            type: integer
+            type: string
             lenght: 10
             unique: true
             notnull: true

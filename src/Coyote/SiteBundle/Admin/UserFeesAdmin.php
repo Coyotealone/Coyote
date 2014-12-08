@@ -23,6 +23,7 @@ class UserFeesAdmin extends Admin
             ->add('code')
             ->add('service')
             ->add('user.username')
+            ->add('car.code')
         ;
     }
 
@@ -33,6 +34,7 @@ class UserFeesAdmin extends Admin
             ->add('login')
             ->add('code')
             ->add('service')
+            ->add('car.code')
         ;
     }
 
@@ -45,6 +47,7 @@ class UserFeesAdmin extends Admin
             ->addIdentifier('code')
             ->addIdentifier('service')
             ->add('user.username')
+            ->add('car.code')
         ;
     }
 }
