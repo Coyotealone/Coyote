@@ -280,7 +280,7 @@ function calculTVA(montant, taux)
     if(taux == '10')
     {
     	taux = taux + 100;
-    	montantsansTVA = $montant * 100 / taux;
+    	montantsansTVA = montant * 100 / taux;
     	montantTVA = montant - montantsansTVA;
     	return montantTVA.toFixed(2);
     }

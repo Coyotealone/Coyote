@@ -109,3 +109,13 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [CoyoteSiteBundle]]
+    sonata.admin.car:
+        class: Coyote\SiteBundle\Admin\CarAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Notes de frais", label: "Voiture" }
+        arguments:
+            - ~
+            - Coyote\SiteBundle\Entity\Car
+            - ~
+        calls:
+            - [ setTranslationDomain, [CoyoteSiteBundle]]

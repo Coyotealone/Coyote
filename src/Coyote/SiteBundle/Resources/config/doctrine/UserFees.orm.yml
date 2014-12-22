@@ -33,3 +33,9 @@ Coyote\SiteBundle\Entity\UserFees:
             joinColumn:
                 name: user_id
                 referencedColumnName: id
+        car:
+            targetEntity: Car
+            inversedBy: userfeess
+            joinColumn:
+                name: car_id
+                referencedColumnName: id

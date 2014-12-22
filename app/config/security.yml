@@ -94,5 +94,4 @@ security:
         - { path: .*/menu, role: [ROLE_TECH, ROLE_CADRE] }
         - { path: .*/schedule/.*, role: [ROLE_TECH, ROLE_CADRE, ROLE_SUPER_ADMIN, ROLE_ADMIN] }
         - { path: .*/profile/.*, role: [ROLE_TECH, ROLE_CADRE, ROLE_SUPER_ADMIN, ROLE_ADMIN] }
-        - { path: .*/admin/.*, role: ROLE_ADMIN }
-
+        - { path: .*/admin/.*, role: [ROLE_ADMIN, ROLE_CHEF_BE, ROLE_COMPTA] }

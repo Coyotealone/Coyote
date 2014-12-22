@@ -17,6 +17,7 @@ Coyote\SiteBundle\Entity\User:
         adress2:
             type: string
             lenght: 45
+            notnull: true
         zip_code:
             type: string
             lenght: 10
@@ -35,6 +36,7 @@ Coyote\SiteBundle\Entity\User:
         cell:
             type: string
             lenght: 20
+            notnull: true
         fax:
             type: string
             length: 20

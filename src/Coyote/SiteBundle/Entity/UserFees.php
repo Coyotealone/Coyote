@@ -186,4 +186,32 @@ class UserFees
     {
         return $this->code;
     }
+    /**
+     * @var \Coyote\SiteBundle\Entity\Car
+     */
+    private $car;
+
+
+    /**
+     * Set car
+     *
+     * @param \Coyote\SiteBundle\Entity\Car $car
+     * @return UserFees
+     */
+    public function setCar(\Coyote\SiteBundle\Entity\Car $car = null)
+    {
+        $this->car = $car;
+
+        return $this;
+    }
+
+    /**
+     * Get car
+     *
+     * @return \Coyote\SiteBundle\Entity\Car 
+     */
+    public function getCar()
+    {
+        return $this->car;
+    }
 }

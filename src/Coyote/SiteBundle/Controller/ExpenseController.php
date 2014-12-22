@@ -49,7 +49,7 @@ class ExpenseController extends Controller
             return $this->render('CoyoteSiteBundle:Expense:index.html.twig');
         else
             /** redirect MainController:indexAction */
-            return $this->redirect($this->generateUrl('accueil'));
+            return $this->redirect($this->generateUrl('main_accueil'));
     }
 
     /**
@@ -73,7 +73,7 @@ class ExpenseController extends Controller
         /** check object session userfeesid */
         if($session->get('userfeesid') == null)
             /** redirect MainController:indexAction */
-            return $this->redirect($this->generateUrl('accueil'));
+            return $this->redirect($this->generateUrl('main_accueil'));
         else
         {
             /** @var $currency object currency all data from Currency */
@@ -103,7 +103,7 @@ class ExpenseController extends Controller
         /** check object session userfeesid */
         if($session->get('userfeesid') == null)
             /** redirect MainController:indexAction */
-            return $this->redirect($this->generateUrl('accueil'));
+            return $this->redirect($this->generateUrl('main_accueil'));
         else
         {
             /** @var $month int mm */
@@ -141,7 +141,7 @@ class ExpenseController extends Controller
             return $this->redirect($this->generateUrl('fos_user_security_login'));
         /** check @var $session 'userfeesid' */
         if($session->get('userfeesid') == null)
-            return $this->redirect($this->generateUrl('accueil'));
+            return $this->redirect($this->generateUrl('main_accueil'));
         /** @var $year string year */
         $year = $_GET['year'];
         /** @var $month string month */
@@ -178,7 +178,7 @@ class ExpenseController extends Controller
             return $this->redirect($this->generateUrl('fos_user_security_login'));
         /** check @var $session 'userfeesid' */
         if($session->get('userfeesid') == null)
-            return $this->redirect($this->generateUrl('accueil'));
+            return $this->redirect($this->generateUrl('main_accueil'));
         if(empty($year) && empty($month))
             /** show view */
             return $this->redirect($this->generateUrl('expense_indexshow'));
@@ -214,7 +214,7 @@ class ExpenseController extends Controller
         /** check $session 'userfeesid' */
         if($session->get('userfeesid') == null)
             /** redirect MainController:indexAction */
-            return $this->redirect($this->generateUrl('accueil'));
+            return $this->redirect($this->generateUrl('main_accueil'));
         else
         {
             /** @var $em object doctrine request */
@@ -284,7 +284,7 @@ class ExpenseController extends Controller
         /** check $session 'userfeesid' */
         if($session->get('userfeesid') == null)
             /** redirect MainController:indexAction */
-            return $this->redirect($this->generateUrl('accueil'));
+            return $this->redirect($this->generateUrl('main_accueil'));
         /** @var $em object doctrine request */
         $em = $this->getDoctrine()->getManager();
         /** @var $entity entity Expense */
@@ -353,7 +353,7 @@ class ExpenseController extends Controller
     {
         $session = new Session();
         if($session->get('userfeesid') == null)
-            return $this->redirect($this->generateUrl('accueil'));
+            return $this->redirect($this->generateUrl('main_accueil'));
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('CoyoteSiteBundle:Expense')->find($id);
@@ -403,7 +403,7 @@ class ExpenseController extends Controller
     {
         $session = new Session();
         if($session->get('userfeesid') == null)
-            return $this->redirect($this->generateUrl('accueil'));
+            return $this->redirect($this->generateUrl('main_accueil'));
         $form = $this->createDeleteForm($id);
         $form->handleRequest($request);
 

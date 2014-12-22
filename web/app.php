@@ -7,12 +7,7 @@ $loader = require_once __DIR__.'/../app/bootstrap.php.cache';
 
 // Use APC for autoloading to improve performance.
 // Change 'sf2' to a unique prefix in order to prevent cache key conflicts
-// with other applications also using APC.
-
-//$apcLoader = new ApcClassLoader('bim', $loader);
-//$loader->unregister();
-//$apcLoader->register(true);
-
+// with other applications also using AP
 
 require_once __DIR__.'/../app/AppKernel.php';
 //require_once __DIR__.'/../app/AppCache.php';

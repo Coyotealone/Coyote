@@ -80,6 +80,9 @@ class ExpenseRepository extends EntityRepository
                 $userfees = $data->getUserFees()->getLogin();
                 $result .= "H;".$data->getUserFees()->getLogin()."\r\n";
             }
+
+
+
             $result .= "D;";
             $result .= $data->getUserFees()->getLogin().";";//En majuscule
             $result .= $data->getSite()->getCode().";";
@@ -91,17 +94,15 @@ class ExpenseRepository extends EntityRepository
             $result .= $data->getAmount().";";
             $result .= $data->getActualAmount().";";
             $result .= $data->getAmountTTC().";";
-            $feeid = $data->getFee()->getCodeRate();
-            $result .= $feeid.";";
+            $result .= $data->getFee()->getCodeRate().";";
             $result .= $data->getAmountTVA().";";
             $result .= $data->getAmountTVA().";";
-            $result .= $data->getUserFees()->getCode().";";
-            $result .= ";";
-            $result .= $data->getBusiness()->getCode().";";
             if($data->getFee()->getCode() == "ENTRE1")
-                $result .= ";";
+                $result .= $data->getUserFees()->getCar()->getCode().";;";
             else
-                $result .= $data->getUserFees()->getService().";";
+                $result .= $data->getUserFees()->getCode().";;";
+            $result .= $data->getBusiness()->getCode().";";
+            $result .= $data->getUserFees()->getService().";";
             $result .= $data->getComment().";\r\n";
 
         }
