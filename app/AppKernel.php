@@ -18,6 +18,7 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Coyote\SiteBundle\CoyoteSiteBundle(),
             new FOS\UserBundle\FOSUserBundle(),
+            new Spraed\PDFGeneratorBundle\SpraedPDFGeneratorBundle(),
             // Add your dependencies Sonata
             new Sonata\CoreBundle\SonataCoreBundle(),
             new Sonata\BlockBundle\SonataBlockBundle(),
@@ -28,7 +29,8 @@ class AppKernel extends Kernel
             // it works the same with the alternatives
             new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
             // Then add SonataAdminBundle
-            new Sonata\AdminBundle\SonataAdminBundle(),            
+            new Sonata\AdminBundle\SonataAdminBundle(),
+            
             
             //new JMS\I18nRoutingBundle\JMSI18nRoutingBundle(),
 

@@ -22,8 +22,6 @@ class UserFeesAdmin extends Admin
             ->add('login')
             ->add('code')
             ->add('service')
-            ->add('user.username')
-            ->add('car.code')
         ;
     }
 

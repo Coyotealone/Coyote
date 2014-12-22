@@ -80,6 +80,9 @@ class ExpenseRepository extends EntityRepository
                 $userfees = $data->getUserFees()->getLogin();
                 $result .= "H;".$data->getUserFees()->getLogin()."\r\n";
             }
+
+
+
             $result .= "D;";
             $result .= $data->getUserFees()->getLogin().";";//En majuscule
             $result .= $data->getSite()->getCode().";";
@@ -95,9 +98,9 @@ class ExpenseRepository extends EntityRepository
             $result .= $data->getAmountTVA().";";
             $result .= $data->getAmountTVA().";";
             if($data->getFee()->getCode() == "ENTRE1")
-                $result .= $data->getUserFees()->getCar()->getCode().";";
+                $result .= $data->getUserFees()->getCar()->getCode().";;";
             else
-                $result .= $data->getUserFees()->getCode().";";
+                $result .= $data->getUserFees()->getCode().";;";
             $result .= $data->getBusiness()->getCode().";";
             $result .= $data->getUserFees()->getService().";";
             $result .= $data->getComment().";\r\n";
