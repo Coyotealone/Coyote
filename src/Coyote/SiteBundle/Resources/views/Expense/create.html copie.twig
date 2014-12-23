@@ -3,32 +3,18 @@
 {% block javascripts %}
     <script src="{{ asset('bundles/coyotesite/js/jquery-min.js') }}"/></script>
     <script src="{{ asset('bundles/coyotesite/js/script_expense_change.js') }}"/></script>
-    <script src="{{ asset('bundles/coyotesite/js/jquery-1.10.2.js') }}"/></script>
-    <script src="{{ asset('bundles/coyotesite/js/jquery-ui.js') }}"/></script>
-    <script src="{{ asset('bundles/coyotesite/js/script_expense.js') }}"/></script>
 {% endblock %}
 
 {% block link %}
+
     <!--[if lt IE 9]>
         {{ include('CoyoteSiteBundle:Base:navigation_ie.html.twig') }}
     <![endif]-->
     <!--[if !IE]><!-->
         {{ include('CoyoteSiteBundle:Base:navigation.html.twig') }}
 	<!--<![endif]-->
-{% endblock %}
 
-{% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/styles.css') }}" type="text/css" media="all" />
-    <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/jquery-ui.css') }}" type="text/css" media="all" />
-    <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/bootstrap.css') }}" type="text/css" media="all" />
-    <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/justified-nav.css') }}" type="text/css" media="all" />
-    <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/signin.css') }}" type="text/css" media="all" />
-    <!--[if lt IE 9]>
-      <script src="{{ asset('bundles/coyotesite/js/html5shiv.min.js') }}"></script>
-      <script src="{{ asset('bundles/coyotesite/js/respond.min.js') }}"></script>
-    <![endif]-->
 {% endblock %}
-
 
 {% block content %}
 
@@ -37,8 +23,9 @@
     <p id="flashmessage">{{ flashMessage }}</p>
 
 {% endfor %}
-
 <p id="titreconfig">{{'Ajout de notes de frais'|trans}} </p>
+
+<p>{{"Merci d'écrire la date qu'avec des chiffres. Exemple pour la date du 7 juin 2014, il faut écrire : 070614" | trans }}</p>
 
 <form role="form" action="{{ path('expense_save') }}" method='post'>
 <div class='table-responsive'>
@@ -61,9 +48,7 @@
                     <option value='9'>USI</option>
     			</select>
     		</th>
-    		<th id='tab_expense_date'>
-    		<input type='text' name='date{{i}}' id='date{{i}}' maxlength="6" >
-    		{#<input type="text" name='date{{i}}' id='date{{i}}' ></th>#}
+    		<th id='tab_expense_date'><input type='text' name='date{{i}}' id='date{{i}}' maxlength="6" ></th>
     		<th id='tab_expense_item'>
     		    <select name='article{{i}}' id='article{{i}}' class='itemfrais'>
     		        <option></option>
@@ -120,5 +105,7 @@
 
 <button class='btnsave' type="submit" value="Enregistrer" id="enregistrer">{{ 'Enregistrer'|trans }}</button>
 </form>
+
+
 
 {% endblock %}

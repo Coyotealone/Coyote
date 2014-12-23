@@ -80,9 +80,6 @@ class ExpenseRepository extends EntityRepository
                 $userfees = $data->getUserFees()->getLogin();
                 $result .= "H;".$data->getUserFees()->getLogin()."\r\n";
             }
-
-
-
             $result .= "D;";
             $result .= $data->getUserFees()->getLogin().";";//En majuscule
             $result .= $data->getSite()->getCode().";";
