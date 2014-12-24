@@ -134,7 +134,7 @@ class ExpenseRepository extends EntityRepository
         {
             $jour = substr($date, 0, 2);
             $mois = substr($date, 2, 2);
-            $annee = substr($date, 4, 3);
+            $annee = substr($date, 4, 2);
             $date = $jour."/".$mois."/".$annee;
         }
         return $date;
@@ -172,8 +172,7 @@ class ExpenseRepository extends EntityRepository
         $expense->setActualAmount($price);
         $expense->setAmount($data['qte'.$increment]);
         $expense->setStatus(1);
-        $date = $this->formDate($data['date'.$increment]);
-        $expense->setDate($date);
+        $expense->setDate($data['date'.$increment]);
         return $expense;
     }
 }
