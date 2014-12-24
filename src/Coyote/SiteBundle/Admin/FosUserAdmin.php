@@ -18,11 +18,10 @@ class FosUserAdmin extends Admin
     // Fields to be shown on create/edit forms
     protected function configureFormFields(FormMapper $formMapper)
     {
-        //$tokenGenerator = $this->container->('fos_user.util.token_generator');
-        //$user->setConfirmationToken($tokenGenerator->generateToken());
-        $salt = base_convert(sha1(uniqid(mt_rand(), true)), 16, 36);
-        $formMapper
-            //->add('id')
+        //EDIT
+        if ($this->id($this->getSubject()))
+        {
+            $formMapper
             ->add('username')
             ->add('password')
             ->add('name')
@@ -39,7 +38,35 @@ class FosUserAdmin extends Admin
             ->add('enabled', 'checkbox', array('required' => false))
             ->add('locked', 'checkbox', array('required' => false))
             ->add('expired', 'checkbox', array('required' => false))
-            ->add('salt', 'text', array('label' => $salt))
+            ->add('salt')
+            ->add('roles')
+        ;
+
+        }
+        //CREATE
+        else
+        {
+        }
+        $salt = base_convert(sha1(uniqid(mt_rand(), true)), 16, 36);
+        $formMapper
+            //->add('id')
+            ->add('username')
+            ->add('password')
+            ->add('name')
+            ->add('adress1', 'text', array('data' => 'ZI de Lavallot'))
+            ->add('adress2', 'text', array('required' => false))
+            ->add('zip_code', 'text', array('data' => '29490'))
+            ->add('postal_box', 'text', array('required' => false, 'data' => 'BP21'))
+            ->add('city', 'text', array('data' => 'Guipavas'))
+            ->add('country', 'text', array('data' => 'France'))
+            ->add('email', 'text', array('data' => '*@pichonindustries.com'))
+            ->add('phone', 'text', array('required' => false, 'data' => '(+33) 02 98 344 100'))
+            ->add('cell', 'text', array('required' => false))
+            ->add('fax', 'text', array('required' => false, 'data' => '(+33) 02 98 344 120'))
+            ->add('enabled', 'checkbox', array('required' => false))
+            ->add('locked', 'checkbox', array('required' => false))
+            ->add('expired', 'checkbox', array('required' => false))
+            ->add('salt', 'text', array('data' => $salt))
             ->add('roles')
         ;
     }
