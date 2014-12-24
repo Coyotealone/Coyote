@@ -40,7 +40,7 @@ class Car
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -63,7 +63,7 @@ class Car
     /**
      * Get code
      *
-     * @return integer 
+     * @return integer
      */
     public function getCode()
     {
@@ -86,7 +86,7 @@ class Car
     /**
      * Get registration
      *
-     * @return string 
+     * @return string
      */
     public function getRegistration()
     {
@@ -119,10 +119,15 @@ class Car
     /**
      * Get userfeess
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getUserfeess()
     {
         return $this->userfeess;
+    }
+
+    public function __toString()
+    {
+        return $this->code;
     }
 }

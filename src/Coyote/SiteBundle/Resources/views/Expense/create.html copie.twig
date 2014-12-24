@@ -1,0 +1,111 @@
+{% extends 'CoyoteSiteBundle:Expense:index.html.twig' %}
+
+{% block javascripts %}
+    <script src="{{ asset('bundles/coyotesite/js/jquery-min.js') }}"/></script>
+    <script src="{{ asset('bundles/coyotesite/js/script_expense_change.js') }}"/></script>
+{% endblock %}
+
+{% block link %}
+
+    <!--[if lt IE 9]>
+        {{ include('CoyoteSiteBundle:Base:navigation_ie.html.twig') }}
+    <![endif]-->
+    <!--[if !IE]><!-->
+        {{ include('CoyoteSiteBundle:Base:navigation.html.twig') }}
+	<!--<![endif]-->
+
+{% endblock %}
+
+{% block content %}
+
+{% for flashMessage in app.session.flashbag.get('saveexpense') %}
+
+    <p id="flashmessage">{{ flashMessage }}</p>
+
+{% endfor %}
+<p id="titreconfig">{{'Ajout de notes de frais'|trans}} </p>
+
+<p>{{"Merci d'écrire la date qu'avec des chiffres. Exemple pour la date du 7 juin 2014, il faut écrire : 070614" | trans }}</p>
+
+<form role="form" action="{{ path('expense_save') }}" method='post'>
+<div class='table-responsive'>
+    <table class='table' id='tab_expense'>
+    	<tr>
+    		<th id='tab_expense_site'>{{ 'Site'|trans }}</th>
+    		<th id='tab_expense_date'>{{ 'Date'|trans }}</th>
+    		<th id='tab_expense_item'>{{ 'Code Article'|trans }}</th>
+    		<th id='tab_expense_devise'>{{ 'Devise'|trans }}</th>
+    		<th id='tab_expense_qte'>{{ 'Quantité'|trans }}</th>
+    		<th id='tab_expense_amounttc'>{{ 'Montant TTC'|trans }}</th>
+    		<th id='tab_expense_amounttva'>{{ 'Montant TVA'|trans }}</th>
+    		<th id='tab_expense_business'>{{ 'Affaire'|trans }}</th>
+    		<th id='tab_expense_comment'>{{ 'Commentaire'|trans }}</th>
+    	</tr>
+    	{% for i in 0..5 %}
+    	<tr>
+    		<th id='tab_expense_site'>
+    			<select name='site{{i}}' id='site{{i}}'>
+                    <option value='9'>USI</option>
+    			</select>
+    		</th>
+    		<th id='tab_expense_date'><input type='text' name='date{{i}}' id='date{{i}}' maxlength="6" ></th>
+    		<th id='tab_expense_item'>
+    		    <select name='article{{i}}' id='article{{i}}' class='itemfrais'>
+    		        <option></option>
+    				{% for datafee in fee %}
+    				    <option id={{ datafee.id }} data-value={{ datafee.rate }} value={{ datafee.id }}>{{ datafee.code }} : {{ datafee.name }}</option>
+    				{% endfor %}
+    			</select>
+            </th>
+    		<th id='tab_expense_devise'>
+    			<select name='devise{{i}}' id='devise{{i}}'>
+    			    {% if app.session.get('lang') == "en" %}
+        			    {% for datacurrency in currency %}
+        			        {% if datacurrency == "GBP" %}
+        			            <option value={{ datacurrency.id }} selected>{{ datacurrency }}</option>
+        			        {% else %}
+                                <option value={{ datacurrency.id }} >{{ datacurrency }}</option>
+        			        {% endif %}
+    			        {% endfor %}
+    			    {% elseif app.session.get('lang') == "pl" %}
+        			    {% for datacurrency in currency %}
+        			        {% if datacurrency == "PLN" %}
+        			            <option value={{ datacurrency.id }} selected>{{ datacurrency }}</option>
+        			        {% else %}
+                                <option value={{ datacurrency.id }} >{{ datacurrency }}</option>
+        			        {% endif %}
+    			        {% endfor %}
+    			    {% else %}
+        			    {% for datacurrency in currency %}
+        			        {% if datacurrency == "EUR" %}
+        			            <option value={{ datacurrency.id }} selected>{{ datacurrency }}</option>
+        			        {% else %}
+                                <option value={{ datacurrency.id }} >{{ datacurrency }}</option>
+        			        {% endif %}
+    			        {% endfor %}
+    			    {% endif %}
+    			</select>
+    		</th>
+    		<th id='tab_expense_qte'><input type='text' name='qte{{i}}' id='qte{{i}}' ></th>
+    		<th id='tab_expense_amountttc'><input type='text' name='ttc{{i}}' id='ttc{{i}}' ></th>
+    		<th id='tab_expense_amounttva'><input type='text' name='tva{{i}}' id='tva{{i}}' readonly></th>
+    		<th id='tab_expense_business'>
+    			<select name='affaire{{i}}' id='affaire{{i}}'>
+    			    {% for databusiness in business %}
+    			        <option value={{ databusiness.id }}>{{ databusiness }}</option>
+    			    {% endfor %}
+    			</select>
+    		</th>
+    		<th id='tab_expense_comment'><input type='text' name='com{{i}}' id='com{{i}}' ></th>
+    	</tr>
+    	{% endfor %}
+    </table>
+</div><br>
+
+
+<button class='btnsave' type="submit" value="Enregistrer" id="enregistrer">{{ 'Enregistrer'|trans }}</button>
+</form>
+
+
+
+{% endblock %}
