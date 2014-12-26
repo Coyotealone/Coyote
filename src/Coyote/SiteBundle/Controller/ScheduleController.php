@@ -34,7 +34,7 @@ class ScheduleController extends Controller
         {
             return $this->redirect($this->generateUrl('fos_user_security_login'));
         }
-        $date = $em->getRepository('CoyoteSiteBundle:Timetable')->findBy(array('no_week' => $session->get('no_week'),'year' => $session->get('year'),));
+        $date = $em->getRepository('CoyoteSiteBundle:Timetable')->findBy(array('no_week' => $session->get('no_week'),'year' => $session->get('year')));
         $time = $em->getRepository('CoyoteSiteBundle:Schedule')->findBy(array('timetable' => $date, 'user' => $session->get('userid')));
 
         if(count($time) == 0)
@@ -49,7 +49,7 @@ class ScheduleController extends Controller
         $user = $this->get('security.context')->getToken()->getUser();
         $request = $this->getRequest();
         $session = $request->getSession();
-        $data_timetable = $em->getRepository('CoyoteSiteBundle:Timetable')->findBy(array('no_week' => $session->get('no_week'),'year' => $session->get('year'),));
+        $data_timetable = $em->getRepository('CoyoteSiteBundle:Timetable')->findBy(array('no_week' => $session->get('no_week'),'pay_period' => $session->get('pay_period')));
         $session->set('id_lundi', '');
         $session->set('id_mardi', '');
         $session->set('id_mercredi', '');
@@ -66,25 +66,21 @@ class ScheduleController extends Controller
         $user = $this->get('security.context')->getToken()->getUser();
         $request = $this->getRequest();
         $session = $request->getSession();
-        $date = $em->getRepository('CoyoteSiteBundle:Timetable')->findBy(array('no_week' => $session->get('no_week'),'year' => $session->get('year'),));
-        $time = $em->getRepository('CoyoteSiteBundle:Schedule')->findBy(array('timetable' => $date, 'user' => $session->get('userid')));
-
-        $id = $em->getRepository('CoyoteSiteBundle:Timetable')->myFindScheduleId($session->get('no_week'), $session->get('year'), $session->get('userid'));
-
-        $timetable_id = $em->getRepository('CoyoteSiteBundle:Timetable')->myFindTimetableId($session->get('no_week'), $session->get('year'));
-
-        $session->set('id_lundi', $id[0]['id']);
-        $session->set('id_mardi', $id[1]['id']);
-        $session->set('id_mercredi', $id[2]['id']);
-        $session->set('id_jeudi', $id[3]['id']);
-        $session->set('id_vendredi', $id[4]['id']);
-        $session->set('id_samedi', $id[5]['id']);
-        $session->set('id_dimanche', $id[6]['id']);
-        return $this->render('CoyoteSiteBundle:Schedule:edit.html.twig', array('date' => $date, 'time' => $time, 'id' => $id, 'timetable' => $timetable_id));
+        $data_timetable = $em->getRepository('CoyoteSiteBundle:Timetable')->findBy(array('no_week' => $session->get('no_week'),'pay_period' => $session->get('pay_period')));
+        $time = $em->getRepository('CoyoteSiteBundle:Schedule')->findBy(array('timetable' => $data_timetable, 'user' => $session->get('userid')));
+        $session->set('id_lundi', $data_timetable[0]->getId());
+        $session->set('id_mardi', $data_timetable[1]->getId());
+        $session->set('id_mercredi', $data_timetable[2]->getId());
+        $session->set('id_jeudi', $data_timetable[3]->getId());
+        $session->set('id_vendredi', $data_timetable[4]->getId());
+        $session->set('id_samedi', $data_timetable[5]->getId());
+        $session->set('id_dimanche', $data_timetable[6]->getId());
+        return $this->render('CoyoteSiteBundle:Schedule:edit.html.twig', array('date' => $data_timetable, 'time' => $time));
     }
 
     public function worklessAction()
     {
+        $em = $this->getDoctrine()->getManager();
         $request = $this->getRequest();
         $session = $request->getSession();
         $no_week = $session->get('no_week');
@@ -98,11 +94,14 @@ class ScheduleController extends Controller
             $no_week--;
         $session->set('no_week', $no_week);
         $session->set('year', $year);
+        $data_timetable = $em->getRepository('CoyoteSiteBundle:Timetable')->findBy(array('no_week' => $session->get('no_week'),'year' => $session->get('year')));
+        $session->set('pay_period', "2014/2015");//$data_timetable[0]['pay_period']);
         return $this->redirect($this->generateUrl('schedule_index'));
     }
 
     public function workmoreAction()
     {
+        $em = $this->getDoctrine()->getManager();
         $request = $this->getRequest();
         $session = $request->getSession();
         $no_week = $session->get('no_week');
@@ -116,6 +115,8 @@ class ScheduleController extends Controller
             $no_week++;
         $session->set('no_week', $no_week);
         $session->set('year', $year);
+        $data_timetable = $em->getRepository('CoyoteSiteBundle:Timetable')->findBy(array('no_week' => $session->get('no_week'),'year' => $session->get('year')));
+        $session->set('pay_period', "2014/2015");//$data_timetable[0]['pay_period']);
         return $this->redirect($this->generateUrl('schedule_index'));
     }
 
