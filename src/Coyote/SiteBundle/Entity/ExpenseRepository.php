@@ -140,6 +140,16 @@ class ExpenseRepository extends EntityRepository
         return $date;
     }
 
+    public function checkDate($date)
+    {
+        if(is_numeric($date))
+        {
+            return $this->formDate($date);
+        }
+        else
+            return $date;
+    }
+
     /**
      * prepare save expense user fees.
      *
@@ -172,7 +182,8 @@ class ExpenseRepository extends EntityRepository
         $expense->setActualAmount($price);
         $expense->setAmount($data['qte'.$increment]);
         $expense->setStatus(1);
-        $expense->setDate($data['date'.$increment]);
+        $date = $this->check($data['date'.$increment]);
+        $expense->setDate($date);
         return $expense;
     }
 }
