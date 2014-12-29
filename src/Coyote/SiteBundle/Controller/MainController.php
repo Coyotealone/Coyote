@@ -63,10 +63,17 @@ class MainController extends Controller
             $session->set('userid', $user_id);
             /** @var $data_user entity User */
             $data_user = $em->getRepository('CoyoteSiteBundle:User')->findOneById($user_id);
-            /** set year */
-            $session->set('year', date('Y'));
             /** set no_week */
             $session->set('no_week', date('W'));
+            /** set year */
+            $year = date('Y');
+            if($session->get('no_week') == 1)
+                $year = $year + 1;
+            $session->set('year', $year);
+            $date = date('d').'/'.date('m').'/'.date('Y');
+            $date = $em->getRepository('CoyoteSiteBundle:Timetable')->findOneBy(array('date' => $date));
+            /** set pay_period */
+            $session->set('pay_period', $date->getPayPeriod());
             /** set username */
             $session->set('username', $data_user->getName());
             /** set status */
@@ -169,6 +176,8 @@ class MainController extends Controller
         $week = date('W');
         /** @var $year string yyyy */
         $year = date('Y');
+        if($week == 1)
+            $year = $year + 1;
         /** @var $em object doctrine request */
         $em = $this->getDoctrine()->getManager();
         /** @var $data_quote entity Quote */

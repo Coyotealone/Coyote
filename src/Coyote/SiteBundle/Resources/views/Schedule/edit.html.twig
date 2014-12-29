@@ -54,7 +54,7 @@
     		</thead>
     		<tbody> <!-- Corps du tableau -->
     			<tr>
-    				<td id="daylundi" data-value={{ data_timetable.0.id }} data-id={{ timetable.0.id }} class='jour'>{{ 'Lundi'|trans }} :
+    				<td id="daylundi" data-value={{ data_timetable.0.id }} data-id={{ time.0.id }} class='jour'>{{ 'Lundi'|trans }} :
     				    <input class='input' type='text' disabled name='datelundi' id='datelundi' data-value="{{ data_timetable.0.date }}" value={{ data_timetable.0.date }} />
     				</td>
     				<td>
@@ -93,7 +93,7 @@
     				</td>
     			</tr>
     			<tr>
-    				<td id="{{ data_timetable.1.id }}" data-value={{ data_timetable.1.id }} data-id={{ timetable.1.id }} class='jour'>{{ 'Mardi'|trans }} :
+    				<td id="{{ data_timetable.1.id }}" data-value={{ data_timetable.1.id }} data-id={{ time.1.id }} class='jour'>{{ 'Mardi'|trans }} :
     				    <input class='input' type='text' disabled name='datemardi' id='datemardi' data-value={{ data_timetable.1.date }} value={{ data_timetable.1.date }} />
     				</td>
     				<td>
@@ -132,7 +132,7 @@
     				</td>
     			</tr>
     			<tr>
-    				<td id="{{ data_timetable.2.id }}" data-value={{ data_timetable.2.id }} data-id={{ timetable.2.id }} class='jour'>Mercredi :
+    				<td id="{{ data_timetable.2.id }}" data-value={{ data_timetable.2.id }} data-id={{ time.2.id }} class='jour'>Mercredi :
     				    <input class='input' type='text' disabled name='datemercredi' id='datemercredi' data-value={{ data_timetable.2.date }} value={{ data_timetable.2.date }} />
     				</td>
     				<td>
@@ -171,7 +171,7 @@
     				</td>
     			</tr>
     			<tr>
-    				<td id="{{ data_timetable.3.id }}" data-value={{ data_timetable.3.id }} data-id={{ timetable.3.id }} class='jour'>Jeudi :
+    				<td id="{{ data_timetable.3.id }}" data-value={{ data_timetable.3.id }} data-id={{ time.3.id }} class='jour'>Jeudi :
     				    <input class='input' type='text' disabled name='datejeudi' id='datejeudi' data-value={{ data_timetable.3.date }} value={{ data_timetable.3.date }} />
     				</td>
     				<td>
@@ -210,7 +210,7 @@
     				</td>
     			</tr>
     			<tr>
-    				<td id="{{ data_timetable.4.id }}" data-value={{ data_timetable.4.id }} data-id={{ timetable.4.id }} class='jour'>Vendredi :
+    				<td id="{{ data_timetable.4.id }}" data-value={{ data_timetable.4.id }} data-id={{ time.4.id }} class='jour'>Vendredi :
     				    <input class='input' type='text' disabled name='datevendredi' id='datevendredi' data-value={{ data_timetable.4.date }} value={{ data_timetable.4.date }} />
     				</td>
     				<td>
@@ -249,7 +249,7 @@
     				</td>
     			</tr>
     			<tr>
-    				<td id="{{ data_timetable.5.id }}" data-value={{ data_timetable.5.id }} data-id={{ timetable.5.id }} class='jour'>Samedi :
+    				<td id="{{ data_timetable.5.id }}" data-value={{ data_timetable.5.id }} data-id={{ time.5.id }} class='jour'>Samedi :
     				    <input class='input' type='text' disabled name='datesamedi' id='datesamedi' data-value={{ data_timetable.5.date }} value= {{ data_timetable.5.date }} />
     				</td>
     				<td>
@@ -288,7 +288,7 @@
     				</td>
     			</tr>
     			<tr>
-    				<td id="{{ data_timetable.6.id }}" data-value={{ data_timetable.6.id }} data-id={{ timetable.6.id }} class='jour'>Dimanche :
+    				<td id="{{ data_timetable.6.id }}" data-value={{ data_timetable.6.id }} data-id={{ time.6.id }} class='jour'>Dimanche :
     				    <input class='input' type='text' disabled name='datedimanche' id='datedimanche' data-value={{ data_timetable.6.date }} value= {{ data_timetable.6.date }} />
     				</td>
     				<td>
@@ -373,7 +373,7 @@
             	</thead>
         		<tbody>
         			<tr>
-        				<td id="{{ data_timetable.0.id }}" data-value="{{ data_timetable.0.id }}" data-id={{ timetable.0.id }} class='jour'>{{ 'Lundi'| trans }} :
+        				<td id="{{ data_timetable.0.id }}" data-value="{{ data_timetable.0.id }}" data-id={{ time.0.id }} class='jour'>{{ 'Lundi'| trans }} :
         				    <input class='input' type='text' disabled name='datelundi' id='datelundi' value={{ data_timetable.0.date }} />
         				</td>
         				<td class'jourlundi'>
@@ -404,7 +404,7 @@
         				</td>
         			</tr>
         			<tr>
-        				<td id="{{ data_timetable.1.id }}" data-value="{{ data_timetable.1.id }}" data-id={{ timetable.1.id }} class='jour'>{{ 'Mardi'| trans }} :
+        				<td id="{{ data_timetable.1.id }}" data-value="{{ data_timetable.1.id }}" data-id={{ time.1.id }} class='jour'>{{ 'Mardi'| trans }} :
         				    <input class='input' type='text' disabled name='datemardi' id='datemardi' value={{ data_timetable.1.date }} />
         				</td>
         				<td class='jourmardi'>
@@ -435,7 +435,7 @@
         				</td>
         			</tr>
         			<tr>
-        				<td id="{{ data_timetable.2.id }}" data-value="{{ data_timetable.2.id }}" data-id={{ timetable.2.id }} class='jour'>{{ 'Mercredi' | trans }} :
+        				<td id="{{ data_timetable.2.id }}" data-value="{{ data_timetable.2.id }}" data-id={{ time.2.id }} class='jour'>{{ 'Mercredi' | trans }} :
             				<input class='input' type='text' disabled name='datemercredi' id='datemercredi' value={{ data_timetable.2.date }} />
                         </td>
         				<td class'jourmercredi'>
@@ -466,7 +466,7 @@
         				</td>
         			</tr>
         			<tr>
-        				<td id="{{ data_timetable.3.id }}" data-value="{{ data_timetable.3.id }}" data-id={{ timetable.3.id }} class='jour'>{{ 'Jeudi' | trans }} :
+        				<td id="{{ data_timetable.3.id }}" data-value="{{ data_timetable.3.id }}" data-id={{ time.3.id }} class='jour'>{{ 'Jeudi' | trans }} :
             				<input class='input' type='text' disabled name='datejeudi' id='datejeudi' value={{ data_timetable.3.date }} />
                         </td>
         				<td class'jourjeudi'>
@@ -497,7 +497,7 @@
         				</td>
         			</tr>
         			<tr>
-        				<td id="{{ data_timetable.4.id }}" data-value="{{ data_timetable.4.id }}" data-id={{ timetable.4.id }} class='jour'>{{ 'Vendredi' | trans }} :
+        				<td id="{{ data_timetable.4.id }}" data-value="{{ data_timetable.4.id }}" data-id={{ time.4.id }} class='jour'>{{ 'Vendredi' | trans }} :
         				    <input class='input' type='text' disabled name='datevendredi' id='datevendredi' value={{ data_timetable.4.date }} />
         				</td>
         				<td class'jourvendredi'>
@@ -528,7 +528,7 @@
         				</td>
         			</tr>
         			<tr>
-        				<td id="{{ data_timetable.5.id }}" data-value="{{ data_timetable.5.id }}" data-id={{ timetable.5.id }} class='jour'>{{ 'Samedi' | trans }} :
+        				<td id="{{ data_timetable.5.id }}" data-value="{{ data_timetable.5.id }}" data-id={{ time.5.id }} class='jour'>{{ 'Samedi' | trans }} :
             				<input class='input' type='text' disabled name='datesamedi' id='datesamedi' value={{ data_timetable.5.date }} />
                         </td>
         				<td class'joursamedi'>
@@ -559,7 +559,7 @@
         				</td>
         			</tr>
         			<tr>
-        				<td id="{{ data_timetable.6.id }}" data-value="{{ data_timetable.6.id }}" data-id={{ timetable.6.id }} class='jour'>{{'Dimanche'|trans }} :
+        				<td id="{{ data_timetable.6.id }}" data-value="{{ data_timetable.6.id }}" data-id={{ time.6.id }} class='jour'>{{'Dimanche'|trans }} :
             				<input class='input' type='text' disabled name='datedimanche' id='datedimanche' value={{ data_timetable.6.date }} />
         				</td>
         				<td class'jourdimanche'>
