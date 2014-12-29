@@ -29,6 +29,11 @@ class ScheduleController extends Controller
         $request = $this->getRequest();
         $session = $request->getSession();
         $em = $this->getDoctrine()->getManager();
+
+        /*$data_schedule = $em->getRepository('CoyoteSiteBundle:Schedule')->DatasSchedule(2, 366, 579);
+        $time_year_schedule = $em->getRepository('CoyoteSiteBundle:Schedule')->AdditionalHours($data_schedule);
+        return new Response($time_year_schedule);*/
+
         $user = $this->get('security.context')->getToken()->getUser();
         if($this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED') == false)
         {
@@ -431,10 +436,10 @@ class ScheduleController extends Controller
                 return $this->render('CoyoteSiteBundle:Schedule:indexshow.html.twig');
             $user = $em->getRepository('CoyoteSiteBundle:User')->find($session->get('userid'));
             $period = $em->getRepository('CoyoteSiteBundle:Schedule')->findPeriod($mois, $annee);
-            $date = "%".$mois."/".$annee."%";
-            $absenceca = $em->getRepository('CoyoteSiteBundle:Schedule')->absenceMonth($user, $date, "CA");
-            $absencecp = $em->getRepository('CoyoteSiteBundle:Schedule')->absenceMonth($user, $date, "Congés payés");
-            $absencertt = $em->getRepository('CoyoteSiteBundle:Schedule')->absenceMonth($user, $date, "RTT");
+            $date = "%/".$mois."/".$annee."%";
+            $absenceca = $em->getRepository('CoyoteSiteBundle:Schedule')->absenceMonth($date, $user->getId(), "CA");
+            $absencecp = $em->getRepository('CoyoteSiteBundle:Schedule')->absenceMonth($date, $user->getId(), "Congés payés");
+            $absencertt = $em->getRepository('CoyoteSiteBundle:Schedule')->absenceMonth($date, $user->getId(), "RTT");
             $absencerttyear = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsenceYear($period, $user, "RTT");
             $absencecayear = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsenceYear($period, $user, "CA");
             $absencecpyear = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsenceYear($period, $user, "Congés payés");
@@ -542,9 +547,9 @@ class ScheduleController extends Controller
             $user = $em->getRepository('CoyoteSiteBundle:User')->find($session->get('userid'));
             $period = $em->getRepository('CoyoteSiteBundle:Schedule')->findPeriod($mois, $annee);
             $date = "%".$mois."/".$annee."%";
-            $absenceca = $em->getRepository('CoyoteSiteBundle:Schedule')->absenceMonth($user, $date, "CA");
-            $absencecp = $em->getRepository('CoyoteSiteBundle:Schedule')->absenceMonth($user, $date, "Congés payés");
-            $absencertt = $em->getRepository('CoyoteSiteBundle:Schedule')->absenceMonth($user, $date, "RTT");
+            $absenceca = $em->getRepository('CoyoteSiteBundle:Schedule')->absenceMonth($date, $user->getId(), "CA");
+            $absencecp = $em->getRepository('CoyoteSiteBundle:Schedule')->absenceMonth($date, $user->getId(), "Congés payés");
+            $absencertt = $em->getRepository('CoyoteSiteBundle:Schedule')->absenceMonth($date, $user->getId(), "RTT");
             $absencerttyear = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsenceYear($period, $user, "RTT");
             $absencecayear = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsenceYear($period, $user, "CA");
             $absencecpyear = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsenceYear($period, $user, "Congés payés");
