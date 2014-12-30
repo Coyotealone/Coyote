@@ -34,6 +34,8 @@ class MenuController extends Controller
         $week = date('W');
         /** @var $year string yy */
         $year = date('Y');
+        if($week == 1)
+            $year = $year + 1;
         /** @var $em object doctrine request */
         $em = $this->getDoctrine()->getManager();
         /** @var $lang string */

@@ -43,13 +43,13 @@ class TimetableRepository extends EntityRepository
      * @param mixed $year
      * @return array timetable id
      */
-    public function myFindTimetableId($no_week, $year)
+    public function myFindTimetableId($no_week, $pay_period)
     {
         $qb = $this->_em->createQueryBuilder();
         $qb->select('t.id')
            ->from('CoyoteSiteBundle:Timetable', 't')
-           ->where('t.no_week = :no_week and t.year = :year')
-           ->setParameters(array('no_week' => $no_week, 'year' => $year));
+           ->where('t.no_week = :no_week and t.pay_period = :pay_period')
+           ->setParameters(array('no_week' => $no_week, 'pay_period' => $pay_period));
         $timetable_id =  $qb->getQuery()
                             ->getResult();
 
