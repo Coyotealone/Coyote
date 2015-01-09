@@ -22,7 +22,8 @@
 
 {% block content %}
     <div class="jumbotron">
-        <p class="lead">{{ 'Bienvenue sur le site PICHON'|trans }}
+        <p class="lead">{{ 'Bienvenue sur le site PICHON'|trans }}<br>
+        <img src="{{ asset('bundles/coyotesite/images/0280000007844089-photo-je-suis-charlie.jpg') }}" alt="JESUISCHARLIE" id="logo"/>
         {% if quote %}
             {% if app.request.locale == "fr" %}
                 <br><br>

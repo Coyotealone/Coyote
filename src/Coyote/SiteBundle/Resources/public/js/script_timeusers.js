@@ -23,12 +23,13 @@ $(document).ready(function()
     	lundi = document.getElementById("absencelundi");
     	var abslundi = lundi.dataset.value;
 
-    	lundi = document.getElementById("jourlundi");
-    	var workinghourslundi = lundi.dataset.value;
+    	lundi = document.getElementById("absencedaylundi");
+    	var absdaylundi = lundi.dataset.value;
+
+    	timeAbsence("", absdaylundi, "lundi");
     }
 
     var mardi = document.getElementById("debutmardi");
-
 	if(mardi!= null)
 	{
     	var startmardi = mardi.dataset.value;
@@ -51,8 +52,10 @@ $(document).ready(function()
     	mardi = document.getElementById("absencemardi");
     	var absmardi = mardi.dataset.value;
 
-    	mardi = document.getElementById("jourmardi");
-    	var workinghoursmardi = mardi.dataset.value;
+    	mardi = document.getElementById("absencedaymardi");
+    	var absdaymardi = mardi.dataset.value;
+
+    	timeAbsence("", absdaymardi, "mardi");
 	}
 
 	var mercredi = document.getElementById("debutmercredi");
@@ -78,9 +81,11 @@ $(document).ready(function()
     	mercredi = document.getElementById("absencemercredi");
     	var absmercredi = mercredi.dataset.value;
 
-    	mercredi = document.getElementById("jourmercredi");
-    	var workinghoursmercredi = mercredi.dataset.value;
-	}
+    	mercredi = document.getElementById("absencedaymercredi");
+    	var absdaymercredi = mercredi.dataset.value;
+
+    	timeAbsence("", absdaymercredi, "mercredi");
+    }
 
     var jeudi = document.getElementById("debutjeudi");
 	if(jeudi != null)
@@ -105,8 +110,10 @@ $(document).ready(function()
     	jeudi = document.getElementById("absencejeudi");
     	var absjeudi = jeudi.dataset.value;
 
-    	jeudi = document.getElementById("jourjeudi");
-    	var workinghoursjeudi = jeudi.dataset.value;
+    	jeudi = document.getElementById("absencedayjeudi");
+    	var absdayjeudi = jeudi.dataset.value;
+
+    	timeAbsence("", absdayjeudi, "jeudi");
     }
 
 	var vendredi = document.getElementById("debutvendredi");
@@ -132,8 +139,10 @@ $(document).ready(function()
     	vendredi = document.getElementById("absencevendredi");
     	var absvendredi = vendredi.dataset.value;
 
-    	vendredi = document.getElementById("jourvendredi");
-    	var workinghoursvendredi = vendredi.dataset.value;
+    	vendredi = document.getElementById("absencedayvendredi");
+    	var absdayvendredi = vendredi.dataset.value;
+
+    	timeAbsence("", absdayvendredi, "vendredi");
 	}
 
 	var samedi = document.getElementById("debutsamedi");
@@ -159,8 +168,10 @@ $(document).ready(function()
     	samedi = document.getElementById("absencesamedi");
     	var abssamedi = samedi.dataset.value;
 
-    	samedi = document.getElementById("joursamedi");
-    	var workinghourssamedi = samedi.dataset.value;
+    	samedi = document.getElementById("absencedaysamedi");
+    	var absdaysamedi = samedi.dataset.value;
+
+    	timeAbsence("", absdaysamedi, "samedi");
     }
 
 
@@ -187,8 +198,10 @@ $(document).ready(function()
     	dimanche = document.getElementById("absencedimanche");
     	var absdimanche = dimanche.dataset.value;
 
-    	dimanche = document.getElementById("jourdimanche");
-    	var workinghoursdimanche = dimanche.dataset.value;
+    	dimanche = document.getElementById("absencedaydimanche");
+    	var absdaydimanche = dimanche.dataset.value;
+
+    	timeAbsence("", absdaydimanche, "dimanche");
     }
 
     if(startlundi == 'null' | startlundi == '')
@@ -197,8 +210,6 @@ $(document).ready(function()
         document.getElementById("pauselundi").value = "00:00";
     if(endlundi == 'null' | endlundi == '')
         document.getElementById("finlundi").value = "00:00";
-    if(workingtimelundi == 'null' | workingtimelundi == '')
-        document.getElementById("tpslundi").value = "00:00";
     if(commentlundi == 'null' | commentlundi == '')
         document.getElementById("commentairelundi").value = "";
 
@@ -208,8 +219,6 @@ $(document).ready(function()
         document.getElementById("pausemardi").value = "00:00";
     if(endmardi == 'null' | endmardi == '')
         document.getElementById("finmardi").value = "00:00";
-    if(workingtimemardi == 'null' | workingtimemardi == '')
-        document.getElementById("tpsmardi").value = "00:00";
     if(commentmardi == 'null' | commentmardi == '')
         document.getElementById("commentairemardi").value = "";
 
@@ -219,8 +228,6 @@ $(document).ready(function()
         document.getElementById("pausemercredi").value = "00:00";
     if(endmercredi == 'null' | endmercredi == '')
         document.getElementById("finmercredi").value = "00:00";
-    if(workingtimemercredi == 'null' | workingtimemercredi == '')
-        document.getElementById("tpsmercredi").value = "00:00";
     if(commentmercredi == 'null' | commentmercredi == '')
         document.getElementById("commentairemercredi").value = "";
 
@@ -230,8 +237,6 @@ $(document).ready(function()
         document.getElementById("pausejeudi").value = "00:00";
     if(endjeudi == 'null' | endjeudi == '')
         document.getElementById("finjeudi").value = "00:00";
-    if(workingtimejeudi == 'null' | workingtimejeudi == '')
-        document.getElementById("tpsjeudi").value = "00:00";
     if(commentjeudi == 'null' | commentjeudi == '')
         document.getElementById("commentairejeudi").value = "";
 
@@ -241,8 +246,6 @@ $(document).ready(function()
         document.getElementById("pausevendredi").value = "00:00";
     if(endvendredi == 'null' | endvendredi == '')
         document.getElementById("finvendredi").value = "00:00";
-    if(workingtimevendredi == 'null' | workingtimevendredi == '')
-        document.getElementById("tpsvendredi").value = "00:00";
     if(commentvendredi == 'null' | commentvendredi == '')
         document.getElementById("commentairevendredi").value = "";
 
@@ -252,8 +255,6 @@ $(document).ready(function()
         document.getElementById("pausesamedi").value = "00:00";
     if(endsamedi == 'null' | endsamedi == '')
         document.getElementById("finsamedi").value = "00:00";
-    if(workingtimesamedi == 'null' | workingtimesamedi == '')
-        document.getElementById("tpssamedi").value = "00:00";
     if(commentsamedi == 'null' | commentsamedi == '')
         document.getElementById("commentairesamedi").value = "";
 
@@ -263,141 +264,55 @@ $(document).ready(function()
         document.getElementById("pausedimanche").value = "00:00";
     if(enddimanche == 'null' | enddimanche == '')
         document.getElementById("findimanche").value = "00:00";
-    if(workingtimedimanche == 'null' | workingtimedimanche == '')
-        document.getElementById("tpsdimanche").value = "00:00";
     if(commentdimanche == 'null' | commentdimanche == '')
         document.getElementById("commentairedimanche").value = "";
 
-	if(abslundi == "Aucune")
-		document.getElementById("absencelundi").selectedIndex = 0;
-	if(abslundi == "RTT")
-		document.getElementById("absencelundi").selectedIndex = 1;
-	if(abslundi == 	"Congés payés")
-		document.getElementById("absencelundi").selectedIndex = 2;
-	if(abslundi == 	"CA")
-		document.getElementById("absencelundi").selectedIndex = 3;
-	if(abslundi == "Congés sans solde")
-		document.getElementById("absencelundi").selectedIndex = 4;
-	if(abslundi == 	"Maladie/At/Pat")
-		document.getElementById("absencelundi").selectedIndex = 5;
-
-	if(absmardi == "Aucune")
-		document.getElementById("absencemardi").selectedIndex = 0;
-	if(absmardi == "RTT")
-		document.getElementById("absencemardi").selectedIndex = 1;
-	if(absmardi == 	"Congés payés")
-		document.getElementById("absencemardi").selectedIndex = 2;
-	if(absmardi == 	"CA")
-		document.getElementById("absencemardi").selectedIndex = 3;
-	if(absmardi == "Congés sans solde")
-		document.getElementById("absencemardi").selectedIndex = 4;
-	if(absmardi == 	"Maladie/At/Pat")
-		document.getElementById("absencemardi").selectedIndex = 5;
-
-	if(absmercredi == "Aucune")
-		document.getElementById("absencemercredi").selectedIndex = 0;
-	if(absmercredi == "RTT")
-		document.getElementById("absencemercredi").selectedIndex = 1;
-	if(absmercredi == "Congés payés")
-		document.getElementById("absencemercredi").selectedIndex = 2;
-	if(absmercredi == "CA")
-		document.getElementById("absencemercredi").selectedIndex = 3;
-	if(absmercredi == "Congés sans solde")
-		document.getElementById("absencemercredi").selectedIndex = 4;
-	if(absmercredi == "Maladie/At/Pat")
-		document.getElementById("absencemercredi").selectedIndex = 5;
-
-	if(absjeudi == "Aucune")
-		document.getElementById("absencejeudi").selectedIndex = 0;
-	if(absjeudi == "RTT")
-		document.getElementById("absencejeudi").selectedIndex = 1;
-	if(absjeudi == "Congés payés")
-		document.getElementById("absencejeudi").selectedIndex = 2;
-	if(absjeudi == "CA")
-		document.getElementById("absencejeudi").selectedIndex = 3;
-	if(absjeudi == "Congés sans solde")
-		document.getElementById("absencejeudi").selectedIndex = 4;
-	if(absjeudi == "Maladie/At/Pat")
-		document.getElementById("absencejeudi").selectedIndex = 5;
-
-	if(absvendredi == "Aucune")
-		document.getElementById("absencevendredi").selectedIndex = 0;
-	if(absvendredi == "RTT")
-		document.getElementById("absencevendredi").selectedIndex = 1;
-	if(absvendredi == "Congés payés")
-		document.getElementById("absencevendredi").selectedIndex = 2;
-	if(absvendredi == "CA")
-		document.getElementById("absencevendredi").selectedIndex = 3;
-	if(absvendredi == "Congés sans solde")
-		document.getElementById("absencevendredi").selectedIndex = 4;
-	if(absvendredi == "Maladie/At/Pat")
-		document.getElementById("absencevendredi").selectedIndex = 5;
-
-	if(abssamedi == "Aucune")
-		document.getElementById("absencesamedi").selectedIndex = 0;
-	if(abssamedi == "RTT")
-		document.getElementById("absencesamedi").selectedIndex = 1;
-	if(abssamedi == "Congés payés")
-		document.getElementById("absencesamedi").selectedIndex = 2;
-	if(abssamedi == "CA")
-		document.getElementById("absencesamedi").selectedIndex = 3;
-	if(abssamedi == "Congés sans solde")
-		document.getElementById("absencesamedi").selectedIndex = 4;
-	if(abssamedi == "Maladie/At/Pat")
-		document.getElementById("absencesamedi").selectedIndex = 5;
-
-	if(absdimanche == "Aucune")
-		document.getElementById("absencedimanche").selectedIndex = 0;
-	if(absdimanche == "RTT")
-		document.getElementById("absencedimanche").selectedIndex = 1;
-	if(absdimanche == "Congés payés")
-		document.getElementById("absencedimanche").selectedIndex = 2;
-	if(absdimanche == "CA")
-		document.getElementById("absencedimanche").selectedIndex = 3;
-	if(absdimanche == "Congés sans solde")
-		document.getElementById("absencedimanche").selectedIndex = 4;
-	if(absdimanche == "Maladie/At/Pat")
-		document.getElementById("absencedimanche").selectedIndex = 5;
+    visibilityAbsenceTime(abslundi, "lundi", absdaylundi);
+    visibilityAbsenceTime(absmardi, "mardi", absdaymardi);
+    visibilityAbsenceTime(absmercredi, "mercredi", absdaymercredi);
+    visibilityAbsenceTime(absjeudi, "jeudi", absdayjeudi);
+    visibilityAbsenceTime(absvendredi, "vendredi", absdayvendredi);
+    visibilityAbsenceTime(abssamedi, "samedi", absdaysamedi);
+    visibilityAbsenceTime(absdimanche, "dimanche", absdaydimanche);
 
 	if(deplundi == 0 | deplundi == "")
-		document.getElementById('deplacementlundi').selectedIndex=0;
+		document.getElementById('deplacementlundi').checked = false;
 	if(deplundi == 1)
-		document.getElementById('deplacementlundi').selectedIndex=1;
+		document.getElementById('deplacementlundi').checked = true;
 
-	if(depmardi == 0 | depmardi == "")
-		document.getElementById('deplacementmardi').selectedIndex=0;
-	if(depmardi == 1)
-		document.getElementById('deplacementmardi').selectedIndex=1;
+    if(depmardi == 0 | depmardi == "")
+    	document.getElementById('deplacementmardi').checked = false;
+    if(depmardi == 1)
+    	document.getElementById('deplacementmardi').checked = true;
 
-	if(depmercredi == 0 | depmercredi == "")
-		document.getElementById('deplacementmercredi').selectedIndex=0;
-	if(depmercredi == 1)
-		document.getElementById('deplacementmercredi').selectedIndex=1;
+    if(depmercredi == 0 | depmercredi == "")
+    	document.getElementById('deplacementmercredi').checked = false;
+    if(depmercredi == 1)
+    	document.getElementById('deplacementmercredi').checked = true;
 
-	if(depjeudi == 0 | depjeudi == "")
-		document.getElementById('deplacementjeudi').selectedIndex=0;
-	if(depjeudi == 1)
-		document.getElementById('deplacementjeudi').selectedIndex=1;
+    if(depjeudi == 0 | depjeudi == "")
+    	document.getElementById('deplacementjeudi').checked = false;
+    if(depjeudi == 1)
+    	document.getElementById('deplacementjeudi').checked = true;
 
-	if(depvendredi == 0 | depvendredi == "")
-		document.getElementById('deplacementvendredi').selectedIndex=0;
-	if(depvendredi == 1)
-		document.getElementById('deplacementvendredi').selectedIndex=1;
+    if(depvendredi == 0 | depvendredi == "")
+    	document.getElementById('deplacementvendredi').checked = false;
+    if(depvendredi == 1)
+    	document.getElementById('deplacementvendredi').checked = true;
 
-	if(depsamedi == 0 | depsamedi == "")
-		document.getElementById('deplacementsamedi').selectedIndex=0;
-	if(depsamedi == 1)
-		document.getElementById('deplacementsamedi').selectedIndex=1;
-	if(depdimanche == 0 | depdimanche == "")
-		document.getElementById('deplacementdimanche').selectedIndex=0;
-	if(depdimanche == 1)
-		document.getElementById('deplacementdimanche').selectedIndex=1;
+    if(depsamedi == 0 | depsamedi == "")
+    	document.getElementById('deplacementsamedi').checked = false;
+    if(depsamedi == 1)
+    	document.getElementById('deplacementsamedi').checked = true;
+
+    if(depdimanche == 0 | depdimanche == "")
+    	document.getElementById('deplacementdimanche').checked = false;
+    if(depdimanche == 1)
+    	document.getElementById('deplacementdimanche').checked = true;
 
     var res = timeweek(workingtimelundi, workingtimemardi, workingtimemercredi, workingtimejeudi, workingtimevendredi, workingtimesamedi, workingtimedimanche);
     if(document.getElementById('timeweek') != null)
         document.getElementById('timeweek').value = res;
-
-
 });
 
 function timeweek(timemonday, timetuesday, timewednesday, timethursday, timefriday, timesunday, timesaturday)
@@ -434,4 +349,90 @@ function timeinhours(time)
     if(minutes < 10)
         minutes = '0'+ minutes;
     return hour +'h'+minutes;
+}
+
+function visibilityAbsenceTime(absence, jour, absenceday)
+{
+    if(absence == "Aucune" || absence == "")
+	{
+		document.getElementById("absence"+jour).selectedIndex = 0;
+		document.getElementById("absenceday"+jour).style.visibility = "hidden";
+		document.getElementById("absencetime"+jour).style.visibility = "hidden";
+    }
+	if(absence == "RTT")
+	{
+		document.getElementById("absence"+jour).selectedIndex = 1;
+		document.getElementById("absenceday"+jour).style.visibility = "visible";
+		document.getElementById("absencetime"+jour).style.visibility = "hidden";
+
+		timeAbsence(0, absenceday, jour);
+    }
+	if(absence == "CP")
+	{
+		document.getElementById("absence"+jour).selectedIndex = 2;
+		document.getElementById("absenceday"+jour).style.visibility = "visible";
+		document.getElementById("absencetime"+jour).style.visibility = "hidden";
+		timeAbsence(0, absenceday, jour);
+	}
+	if(absence == "CA")
+	{
+		document.getElementById("absence"+jour).selectedIndex = 3;
+		document.getElementById("absenceday"+jour).style.visibility = "visible";
+		document.getElementById("absencetime"+jour).style.visibility = "hidden";
+		timeAbsence(0, absenceday, jour);
+	}
+	if(absence == "CSS")
+	{
+		document.getElementById("absence"+jour).selectedIndex = 4;
+		document.getElementById("absenceday"+jour).style.visibility = "visible";
+		document.getElementById("absencetime"+jour).style.visibility = "hidden";
+		timeAbsence(0, absenceday, jour);
+    }
+	if(absence == "Maladie")
+	{
+    	document.getElementById("absence"+jour).selectedIndex = 5;
+    	document.getElementById("absenceday"+jour).style.visibility = "visible";
+		document.getElementById("absencetime"+jour).style.visibility = "hidden";
+		timeAbsence(0, absenceday, jour);
+    }
+    if(absence == "AT")
+	{
+    	document.getElementById("absence"+jour).selectedIndex = 6;
+    	document.getElementById("absenceday"+jour).style.visibility = "visible";
+		document.getElementById("absencetime"+jour).style.visibility = "hidden";
+		timeAbsence(0, absenceday, jour);
+	}
+	if(absence == "MP")
+	{
+    	document.getElementById("absence"+jour).selectedIndex = 7;
+    	document.getElementById("absenceday"+jour).style.visibility = "visible";
+		document.getElementById("absencetime"+jour).style.visibility = "hidden";
+		timeAbsence(0, absenceday, jour);
+	}
+	if(absence == "Recup")
+	{
+    	document.getElementById("absence"+jour).selectedIndex = 8;
+    	document.getElementById("absenceday"+jour).style.visibility = "hidden";
+		document.getElementById("absencetime"+jour).style.visibility = "visible";
+		timeAbsence(2, absenceday, jour);
+    }
+}
+
+function timeAbsence(absence, absenceday, jour)
+{
+    //if(absence == 0)
+    //{
+        if(absenceday == "0.5")
+        {
+        	document.getElementById("absenceday"+jour).selectedIndex = 1;
+        }
+        if(absenceday == "1")
+        {
+        	document.getElementById("absenceday"+jour).selectedIndex = 2;
+        }
+	//}
+	else
+	{
+    	document.getElementById("absencetime"+jour).value = absenceday;
+	}
 }

@@ -160,9 +160,10 @@ class ScheduleRepository extends EntityRepository
      * @param mixed $time_comment
      * @return object schedule
      */
-    public function saveSchedule($user, $timetable_id, $time_start, $time_end, $time_break, $time_travel, $time_absence, $time_comment)
+    public function saveSchedule($user, $timetable_id, $time_start, $time_end, $time_break, $time_travel, $time_absence, $time_absenceday, $time_absencetime, $time_comment)
     {
         $schedule = new schedule();
+
         $schedule->setUser($user);
         $schedule->setTimetable($timetable_id);
 
@@ -185,9 +186,16 @@ class ScheduleRepository extends EntityRepository
         $schedule->setWorkingTime($working_time_day);
         $working_hours_day = $timetable->working_hours_day($working_time_day);
         $schedule->setWorkingHours($working_hours_day);
-
+        if($time_travel == "on")
+            $time_travel = 1;
+        else
+            $time_travel = 0;
         $schedule->setTravel($time_travel);
-        $schedule->setAbsence($time_absence);
+        $schedule->setAbsenceName($time_absence);
+        if($time_absenceday == "0.5" || $time_absenceday == "1")
+            $schedule->setAbsenceDuration($time_absenceday);
+        if($time_absenceday == "empty")
+            $schedule->setAbsenceDuration($time_absencetime);
         $schedule->setComment($time_comment);
         return $schedule;
     }
@@ -205,7 +213,8 @@ class ScheduleRepository extends EntityRepository
      * @param mixed $time_comment
      * @return object schedule
      */
-    public function updateSchedule($schedule, $time_start, $time_end, $time_break, $time_travel, $time_absence, $time_comment)
+    public function updateSchedule($schedule, $time_start, $time_end, $time_break, $time_travel, $time_absence, $time_absenceday, $time_absencetime, $time_comment)
+
     {
         $timetable = new timetable();
         $schedule->setStart($time_start);
@@ -215,8 +224,16 @@ class ScheduleRepository extends EntityRepository
         $schedule->setWorkingTime($working_time_day);
         $working_hours_day = $timetable->working_hours_day($working_time_day);
         $schedule->setWorkingHours($working_hours_day);
+        if($time_travel == "on")
+            $time_travel = 1;
+        else
+            $time_travel = 0;
         $schedule->setTravel($time_travel);
-        $schedule->setAbsence($time_absence);
+        $schedule->setAbsenceName($time_absence);
+        if($time_absenceday == "0.5" || $time_absenceday == "1")
+            $schedule->setAbsenceDuration($time_absenceday);
+        if($time_absenceday == "empty")
+            $schedule->setAbsenceDuration($time_absencetime);
         $schedule->setComment($time_comment);
         return $schedule;
     }
@@ -233,7 +250,7 @@ class ScheduleRepository extends EntityRepository
      * @param mixed $day
      * @return object shcedule
      */
-    public function saveSchedulefm($user, $timetable_id, $time_travel, $time_absence, $time_comment, $day)
+    public function saveSchedulefm($user, $timetable_id, $time_travel, $time_absence, $time_absenceday, $time_absencetime, $time_comment, $day)
     {
         $schedule = new schedule();
         $schedule->setUser($user);
@@ -243,8 +260,16 @@ class ScheduleRepository extends EntityRepository
         $schedule->setBreak("0:00");
         $schedule->setWorkingTime("0:00");
         $schedule->setWorkingHours($day);
+        if($time_travel == "on")
+            $time_travel = 1;
+        else
+            $time_travel = 0;
         $schedule->setTravel($time_travel);
-        $schedule->setAbsence($time_absence);
+        $schedule->setAbsenceName($time_absence);
+        if($time_absenceday == "0.5" || $time_absenceday == "1")
+            $schedule->setAbsenceDuration($time_absenceday);
+        if($time_absenceday == "empty")
+            $schedule->setAbsenceDuration($time_absencetime);
         $schedule->setComment($time_comment);
         return $schedule;
     }
@@ -260,12 +285,19 @@ class ScheduleRepository extends EntityRepository
      * @param mixed $day
      * @return entity schedule
      */
-    public function updateSchedulefm($schedule, $time_travel, $time_absence, $time_comment, $day)
+    public function updateSchedulefm($schedule, $time_travel, $time_absence, $time_absenceday, $time_absencetime, $time_comment, $day)
     {
         $schedule->setWorkingHours($day);
+        if($time_travel == "on")
+            $time_travel = 1;
+        else
+            $time_travel = 0;
         $schedule->setTravel($time_travel);
-        $schedule->setAbsence($time_absence);
-        $schedule->setComment($time_comment);
+        $schedule->setAbsenceName($time_absence);
+        if($time_absenceday == "0.5" || $time_absenceday == "1")
+            $schedule->setAbsenceDuration($time_absenceday);
+        if($time_absenceday == "empty")
+            $schedule->setAbsenceDuration($time_absencetime);$schedule->setComment($time_comment);
         return $schedule;
     }
 

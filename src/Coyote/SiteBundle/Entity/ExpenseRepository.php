@@ -182,7 +182,7 @@ class ExpenseRepository extends EntityRepository
         $expense->setActualAmount($price);
         $expense->setAmount($data['qte'.$increment]);
         $expense->setStatus(1);
-        $date = $this->check($data['date'.$increment]);
+        $date = $this->checkDate($data['date'.$increment]);
         $expense->setDate($date);
         return $expense;
     }

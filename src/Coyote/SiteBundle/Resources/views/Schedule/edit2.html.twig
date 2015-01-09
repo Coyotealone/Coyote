@@ -1,0 +1,46 @@
+{% extends 'CoyoteSiteBundle:Schedule:index.html.twig' %}
+
+{% block javascripts %}
+    <!--[if IE]>
+        <script src="{{ asset('bundles/coyotesite/js/jquery-min.js') }}"/></script>
+        <script src="{{ asset('bundles/coyotesite/js/jquery.js') }}"></script>
+        <script src="{{ asset('bundles/coyotesite/js/script_timeusers_ie.js') }}"></script>
+        <script src="{{ asset('bundles/coyotesite/js/script_timeusers_change.js') }}"/></script>
+    <![endif]-->
+    <!--[if !IE]><!-->
+        <script src="{{ asset('bundles/coyotesite/js/jquery-min.js') }}"/></script>
+        <script src="{{ asset('bundles/coyotesite/js/jquery.js') }}"></script>
+        {% if is_granted('ROLE_TECH') %}
+        <script src="{{ asset('bundles/coyotesite/js/script_timeusers.js') }}"/></script>
+        <script src="{{ asset('bundles/coyotesite/js/script_timeusers_change.js') }}"/></script>
+        {% endif %}
+        {% if is_granted('ROLE_CADRE') %}
+        <script src="{{ asset('bundles/coyotesite/js/script_timeframework.js') }}"/></script>
+        <script src="{{ asset('bundles/coyotesite/js/script_timeframework_change.js') }}"/></script>
+        {% endif %}
+    <!--<![endif]-->
+{% endblock %}
+
+{% block content %}
+
+{% for flashMessage in app.session.flashbag.get('save') %}
+
+    {{ flashMessage }}
+
+{% endfor %}
+
+{% if is_granted('ROLE_TECH') %}
+<form role="form" action="{{ path('schedule_savetime') }}" method='post'>
+    <div id="contenu">
+        <p id="titreconfig">
+            <b>{{'Temps de travail'|trans}} - </b>
+            {{"Voici la semaine"|trans}} {{ app.session.get('no_week') }} {{"affichée de l'année"|trans}} {{ app.session.get('year') }}
+        </p>
+        {% for key in time|keys %}
+        <li>{{ key }}</li>
+    {% endfor %}
+    </div>
+</form>
+
+{% endif %}
+{% endblock content %}

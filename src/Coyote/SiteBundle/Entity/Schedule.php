@@ -304,4 +304,60 @@ class Schedule
     {
         return $this->timetable;
     }
+    /**
+     * @var string
+     */
+    private $absence_name;
+
+    /**
+     * @var string
+     */
+    private $absence_duration;
+
+
+    /**
+     * Set absence_name
+     *
+     * @param string $absenceName
+     * @return Schedule
+     */
+    public function setAbsenceName($absenceName)
+    {
+        $this->absence_name = $absenceName;
+
+        return $this;
+    }
+
+    /**
+     * Get absence_name
+     *
+     * @return string 
+     */
+    public function getAbsenceName()
+    {
+        return $this->absence_name;
+    }
+
+    /**
+     * Set absence_duration
+     *
+     * @param string $absenceDuration
+     * @return Schedule
+     */
+    public function setAbsenceDuration($absenceDuration)
+    {
+        $this->absence_duration = $absenceDuration;
+
+        return $this;
+    }
+
+    /**
+     * Get absence_duration
+     *
+     * @return string 
+     */
+    public function getAbsenceDuration()
+    {
+        return $this->absence_duration;
+    }
 }

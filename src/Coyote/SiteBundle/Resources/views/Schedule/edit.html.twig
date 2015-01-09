@@ -33,8 +33,8 @@
 <form role="form" action="{{ path('schedule_savetime') }}" method='post'>
 <div id="contenu">
     <p id="titreconfig">
-        <b>{{'Temps de travail'|trans}}</b>
-        {{"Voici la semaine"|trans}} {{ app.session.get('no_week') }} {{"d'affichée de l'année"|trans}} {{ app.session.get('year') }}
+        <b>{{'Temps de travail'|trans}} - </b>
+        {{"Voici la semaine"|trans}} {{ app.session.get('no_week') }} {{"affichée de l'année"|trans}} {{ app.session.get('year') }}
     </p>
     <div class='table-responsive'>
     	<table id='table_temps' class='table'>
@@ -44,10 +44,11 @@
     				<td>{{'Début'|trans}}</td>
     				<td>{{'Fin'|trans}}</td>
     				<td>{{'Pause'|trans}}</td>
-    				<td>{{'Temps de travail'|trans}}</td>
-    				<td>{{'Journée travaillée'|trans}}</td>
+    				<td>{{'Heures travaillées'|trans}}</td>
+    				<!--<td>{{'Journée travaillée'|trans}}</td>-->
     				<td>{{'Déplacement'|trans}}</td>
     				<td>{{'Absence'|trans}}</td>
+    				<td>{{'Temps Absence'|trans}}</td>
     				<td>{{'Commentaire'|trans}}</td>
 
     			</tr>
@@ -55,7 +56,7 @@
     		<tbody> <!-- Corps du tableau -->
     			<tr>
     				<td id="daylundi" data-value={{ data_timetable.0.id }} data-id={{ time.0.id }} class='jour'>{{ 'Lundi'|trans }} :
-    				    <input class='input' type='text' disabled name='datelundi' id='datelundi' data-value="{{ data_timetable.0.date }}" value={{ data_timetable.0.date }} />
+    				    <input class='input' type='text' disabled name='datelundi' id='datelundi' data-value="{{ data_timetable.0.date|date("d/m/Y") }}" value={{ data_timetable.0.date|date("d/m/Y") }} />
     				</td>
     				<td>
     				    <input class='input' type='time' name='debutlundi' id='debutlundi' maxlength='5' data-value={{ time.0.start }} value={{ time.0.start }} />
@@ -69,24 +70,29 @@
     				<td>
     				    <input class='input' type='text' name='tpslundi' id='tpslundi' disabled data-value={{ time.0.workingtime }} value={{ time.0.workingtime }} />
     				</td>
-    				<td>
-    				    <input class='input' type='text' name='jourlundi' id='jourlundi' disabled data-value={{ time.0.workinghours }} value={{ time.0.workinghours }} />
+    				<td class='deplacement' >
+    					<input type="checkbox" name='deplacementlundi' id='deplacementlundi' data-value={{ time.0.travel }} >
     				</td>
-    				<td class='deplacement'>
-    					<select name='deplacementlundi' id='deplacementlundi' data-value={{ time.0.travel }} >
-    					    <option value='0'>{{'Non'|trans}}</option>
-                            <option value='1'>{{'Oui'|trans}}</option>
-    					</select>
-    				</td>
-    				<td>
-    					<select name='absencelundi' id='absencelundi' data-value="{{ time.0.absence }}" >
+    				<td class="selectabsence">
+    					<select name='absencelundi' id='absencelundi' data-value={{ time.0.absencename }} >
         					<option value='Aucune'></option>
         					<option value='RTT'>{{"RTT"|trans}}</option>
-        					<option value='Congés payés'>{{"Congés payés"|trans}}</option>
+        					<option value='CP'>{{"Congés payés"|trans}}</option>
         					<option value='CA'>{{"Congés ancienneté"|trans}}</option>
-        					<option value='Congés sans solde'>{{"Congés sans solde"|trans}}</option>
-        					<option value='Maladie/At/Pat'>{{"Autres"|trans}}</option>
+        					<option value='CSS'>{{"Congés sans solde"|trans}}</option>
+        					<option value='Maladie'>{{"Maladie"|trans}}</option>
+        					<option value="AT">{{"Arrêt de travail"|trans}}</option>
+        					<option value="MP">{{"Maternité/Paternité"|trans}}</option>
+        					<option value="Recup">{{"Récup/Heures supp"|trans}}</option>
     					</select>
+    				</td>
+    				<td class='absenceday' >
+    					<select name='absencedaylundi' id='absencedaylundi' data-value={{time.0.absenceduration}} >
+    					    <option value="empty"></option>
+    					    <option value='0.5'>{{'0,5'|trans}}</option>
+                            <option value='1'>{{'1'|trans}}</option>
+    					</select>
+    				    <input class='input' type='time' name='absencetimelundi' id='absencetimelundi' maxlength='5' />
     				</td>
     				<td>
     				    <input type='text' name='commentairelundi' id='commentairelundi' placeholder="{{'Saisir un commentaire'|trans}}" data-value={{ time.0.comment }} value="{{ time.0.comment }}" />
@@ -94,7 +100,7 @@
     			</tr>
     			<tr>
     				<td id="{{ data_timetable.1.id }}" data-value={{ data_timetable.1.id }} data-id={{ time.1.id }} class='jour'>{{ 'Mardi'|trans }} :
-    				    <input class='input' type='text' disabled name='datemardi' id='datemardi' data-value={{ data_timetable.1.date }} value={{ data_timetable.1.date }} />
+    				    <input class='input' type='text' disabled name='datemardi' id='datemardi' data-value={{ data_timetable.1.date|date("d/m/Y") }} value={{ data_timetable.1.date|date("d/m/Y") }} />
     				</td>
     				<td>
     				    <input class='input' type='time' name='debutmardi' id='debutmardi' maxlength='5' data-value={{ time.1.start }} value={{ time.1.start }} />
@@ -108,24 +114,29 @@
     				<td>
     				    <input class='input' type='text' name='tpsmardi' id='tpsmardi' disabled data-value={{ time.1.workingtime }} value={{ time.1.workingtime }} />
     				</td>
-    				<td>
-    				    <input class='input' type='text' name='jourmardi' id='jourmardi' disabled data-value={{ time.1.workinghours }} value={{ time.1.workinghours }} />
-    				</td>
     				<td class='deplacement' >
-    					<select name='deplacementmardi' id='deplacementmardi' data-value={{ time.1.travel }} >
-        					<option value='0'>{{'Non'|trans}}</option>
-        					<option value='1'>{{'Oui'|trans}}</option>
-    					</select>
+    					<input type="checkbox" name='deplacementmardi' id='deplacementmardi' data-value={{ time.1.travel }} >
     				</td>
-    				<td>
-    					<select name='absencemardi' id='absencemardi' data-value="{{ time.1.absence }}" >
+    				<td class="selectabsence">
+    					<select name='absencemardi' id='absencemardi' data-value="{{ time.1.absencename }}" >
         					<option value='Aucune'></option>
         					<option value='RTT'>{{"RTT"|trans}}</option>
-        					<option value='Congés payés'>{{"Congés payés"|trans}}</option>
+        					<option value='CP'>{{"Congés payés"|trans}}</option>
         					<option value='CA'>{{"Congés ancienneté"|trans}}</option>
-        					<option value='Congés sans solde'>{{"Congés sans solde"|trans}}</option>
-        					<option value='Maladie/At/Pat'>{{"Autres"|trans}}</option>
+        					<option value='CSS'>{{"Congés sans solde"|trans}}</option>
+        					<option value='Maladie'>{{"Maladie"|trans}}</option>
+        					<option value="AT">{{"Arrêt de travail"|trans}}</option>
+        					<option value="MP">{{"Maternité/Paternité"|trans}}</option>
+        					<option value="Recup">{{"Récup/Heures supp"|trans}}</option>
     					</select>
+    				</td>
+    				<td class='absenceday' >
+    					<select name='absencedaymardi' id='absencedaymardi' data-value={{time.1.absenceduration}} >
+    					    <option value="empty"></option>
+    					    <option value='0.5'>{{'0,5'|trans}}</option>
+                            <option value='1'>{{'1'|trans}}</option>
+    					</select>
+    				    <input class='input' type='time' name='absencetimemardi' id='absencetimemardi' maxlength='5'/>
     				</td>
     				<td>
     				    <input type='text' name='commentairemardi' id='commentairemardi' placeholder="{{'Saisir un commentaire'|trans}}" data-value={{ time.1.comment }} value="{{ time.1.comment }}" />
@@ -133,7 +144,7 @@
     			</tr>
     			<tr>
     				<td id="{{ data_timetable.2.id }}" data-value={{ data_timetable.2.id }} data-id={{ time.2.id }} class='jour'>Mercredi :
-    				    <input class='input' type='text' disabled name='datemercredi' id='datemercredi' data-value={{ data_timetable.2.date }} value={{ data_timetable.2.date }} />
+    				    <input class='input' type='text' disabled name='datemercredi' id='datemercredi' data-value={{ data_timetable.2.date|date("d/m/Y") }} value={{ data_timetable.2.date|date("d/m/Y") }} />
     				</td>
     				<td>
     				    <input class='input' type='time' name='debutmercredi' id='debutmercredi' maxlength='5' data-value={{ time.2.start }} value={{ time.2.start }} />
@@ -147,32 +158,37 @@
     				<td>
     				    <input class='input' type='text' name='tpsmercredi' id='tpsmercredi' disabled data-value={{ time.2.workingtime }} value={{ time.2.workingtime }} />
     				</td>
-    				<td>
-    				    <input class='input' type='text' name='jourmercredi' id='jourmercredi' disabled data-value={{ time.2.workinghours }} value={{ time.2.workinghours }} />
+    				<td class='deplacement' >
+    					<input type="checkbox" name='deplacementmercredi' id='deplacementmercredi' data-value={{ time.2.travel }} >
     				</td>
-    				<td class='deplacement'>
-    					<select name='deplacementmercredi' id='deplacementmercredi' data-value={{ time.2.travel }} >
-        					<option value='0'>{{'Non'|trans}}</option>
-        					<option value='1'>{{'Oui'|trans}}</option>
-    					</select>
-    				</td>
-    				<td>
-    					<select name='absencemercredi' id='absencemercredi' data-value="{{ time.2.absence }}" >
+    				<td class="selectabsence">
+    					<select name='absencemercredi' id='absencemercredi' data-value="{{ time.2.absencename }}" >
         					<option value='Aucune'></option>
         					<option value='RTT'>{{"RTT"|trans}}</option>
-        					<option value='Congés payés'>{{"Congés payés"|trans}}</option>
+        					<option value='CP'>{{"Congés payés"|trans}}</option>
         					<option value='CA'>{{"Congés ancienneté"|trans}}</option>
-        					<option value='Congés sans solde'>{{"Congés sans solde"|trans}}</option>
-        					<option value='Maladie/At/Pat'>{{"Autres"|trans}}</option>
+        					<option value='CSS'>{{"Congés sans solde"|trans}}</option>
+        					<option value='Maladie'>{{"Maladie"|trans}}</option>
+        					<option value="AT">{{"Arrêt de travail"|trans}}</option>
+        					<option value="MP">{{"Maternité/Paternité"|trans}}</option>
+        					<option value="Recup">{{"Récup/Heures supp"|trans}}</option>
     					</select>
     				</td>
-    				<td>
+    				<td class='absenceday' >
+    					<select name='absencedaymercredi' id='absencedaymercredi' data-value={{time.2.absenceduration}} >
+    					    <option value="empty"></option>
+    					    <option value='0.5'>{{'0,5'|trans}}</option>
+                            <option value='1'>{{'1'|trans}}</option>
+    					</select>
+    				    <input class='input' type='time' name='absencetimemercredi' id='absencetimemercredi' maxlength='5'/>
+    				</td>
+                    <td>
     				    <input type='text' name='commentairemercredi' id='commentairemercredi' placeholder="{{'Saisir un commentaire'|trans}}" data-value={{ time.2.comment }} value="{{ time.2.comment }}" />
     				</td>
     			</tr>
     			<tr>
     				<td id="{{ data_timetable.3.id }}" data-value={{ data_timetable.3.id }} data-id={{ time.3.id }} class='jour'>Jeudi :
-    				    <input class='input' type='text' disabled name='datejeudi' id='datejeudi' data-value={{ data_timetable.3.date }} value={{ data_timetable.3.date }} />
+    				    <input class='input' type='text' disabled name='datejeudi' id='datejeudi' data-value={{ data_timetable.3.date|date("d/m/Y") }} value={{ data_timetable.3.date|date("d/m/Y") }} />
     				</td>
     				<td>
     				    <input class='input' type='time' name='debutjeudi' id='debutjeudi' maxlength='5' data-value={{ time.3.start }} value={{ time.3.start }} />
@@ -186,24 +202,29 @@
     				<td>
     				    <input class='input' type='text' name='tpsjeudi' id='tpsjeudi' disabled data-value={{ time.3.workingtime }} value={{ time.3.workingtime }} />
     				</td>
-    				<td>
-    				    <input class='input' type='text' name='jourjeudi' id='jourjeudi' disabled data-value={{ time.3.workinghours }} value={{ time.3.workinghours }} />
+    				<td class='deplacement' >
+    					<input type="checkbox" name='deplacementjeudi' id='deplacementjeudi' data-value={{ time.3.travel }} >
     				</td>
-    				<td class='deplacement'>
-    					<select name='deplacementjeudi' id='deplacementjeudi' data-value={{ time.3.travel }} >
-        					<option value='0'>{{'Non'|trans}}</option>
-        					<option value='1'>{{'Oui'|trans}}</option>
-    					</select>
-    				</td>
-    				<td>
-    					<select name='absencejeudi' id='absencejeudi' data-value="{{ time.3.absence }}" >
+    				<td class="selectabsence">
+    					<select name='absencejeudi' id='absencejeudi' data-value="{{ time.3.absencename }}" >
         					<option value='Aucune'></option>
         					<option value='RTT'>{{"RTT"|trans}}</option>
-        					<option value='Congés payés'>{{"Congés payés"|trans}}</option>
+        					<option value='CP'>{{"Congés payés"|trans}}</option>
         					<option value='CA'>{{"Congés ancienneté"|trans}}</option>
-        					<option value='Congés sans solde'>{{"Congés sans solde"|trans}}</option>
-        					<option value='Maladie/At/Pat'>{{"Autres"|trans}}</option>
+        					<option value='CSS'>{{"Congés sans solde"|trans}}</option>
+        					<option value='Maladie'>{{"Maladie"|trans}}</option>
+        					<option value="AT">{{"Arrêt de travail"|trans}}</option>
+        					<option value="MP">{{"Maternité/Paternité"|trans}}</option>
+        					<option value="Recup">{{"Récup/Heures supp"|trans}}</option>
     					</select>
+    				</td>
+    				<td class='absenceday' >
+    					<select name='absencedayjeudi' id='absencedayjeudi' data-value={{time.3.absenceduration}} >
+    					    <option value="empty"></option>
+    					    <option value='0.5'>{{'0,5'|trans}}</option>
+                            <option value='1'>{{'1'|trans}}</option>
+    					</select>
+    				    <input class='input' type='time' name='absencetimejeudi' id='absencetimejeudi' maxlength='5'/>
     				</td>
     				<td>
     				    <input type='text' name='commentairejeudi' id='commentairejeudi' placeholder="{{'Saisir un commentaire'|trans}}" data-value={{ time.3.comment }} value="{{ time.3.comment }}" />
@@ -211,7 +232,7 @@
     			</tr>
     			<tr>
     				<td id="{{ data_timetable.4.id }}" data-value={{ data_timetable.4.id }} data-id={{ time.4.id }} class='jour'>Vendredi :
-    				    <input class='input' type='text' disabled name='datevendredi' id='datevendredi' data-value={{ data_timetable.4.date }} value={{ data_timetable.4.date }} />
+    				    <input class='input' type='text' disabled name='datevendredi' id='datevendredi' data-value={{ data_timetable.4.date|date("d/m/Y") }} value={{ data_timetable.4.date|date("d/m/Y") }} />
     				</td>
     				<td>
     				    <input class='input' type='time' name='debutvendredi' id='debutvendredi' maxlength='5' data-value={{ time.4.start }} value={{ time.4.start }} />
@@ -225,24 +246,29 @@
     				<td>
     				    <input class='input' type='text' name='tpsvendredi' id='tpsvendredi' disabled data-value={{ time.4.workingtime }} value={{ time.4.workingtime }} />
     				</td>
-    				<td>
-    				    <input class='input' type='text' name='jourvendredi' id='jourvendredi' disabled data-value={{ time.4.workinghours }} value={{ time.4.workinghours }} />
-    				</td>
     				<td class='deplacement'>
-    					<select name='deplacementvendredi' id='deplacementvendredi' data-value={{ time.4.travel }} >
-    					    <option value='0'>{{'Non'|trans}}</option>
-                            <option value='1'>{{'Oui'|trans}}</option>
-    					</select>
+    					<input type="checkbox" name='deplacementvendredi' id='deplacementvendredi' data-value={{ time.4.travel }} >
     				</td>
-    				<td>
-    					<select name='absencevendredi' id='absencevendredi' data-value="{{ time.4.absence }}" >
+    				<td class="selectabsence">
+    					<select name='absencevendredi' id='absencevendredi' data-value="{{ time.4.absencename }}" >
         					<option value='Aucune'></option>
         					<option value='RTT'>{{"RTT"|trans}}</option>
-        					<option value='Congés payés'>{{"Congés payés"|trans}}</option>
+        					<option value='CP'>{{"Congés payés"|trans}}</option>
         					<option value='CA'>{{"Congés ancienneté"|trans}}</option>
-        					<option value='Congés sans solde'>{{"Congés sans solde"|trans}}</option>
-        					<option value='Maladie/At/Pat'>{{"Autres"|trans}}</option>
+        					<option value='CSS'>{{"Congés sans solde"|trans}}</option>
+        					<option value='Maladie'>{{"Maladie"|trans}}</option>
+        					<option value="AT">{{"Arrêt de travail"|trans}}</option>
+        					<option value="MP">{{"Maternité/Paternité"|trans}}</option>
+        					<option value="Recup">{{"Récup/Heures supp"|trans}}</option>
     					</select>
+    				</td>
+    				<td class='absenceday' >
+    					<select name='absencedayvendredi' id='absencedayvendredi' data-value={{time.4.absenceduration}} >
+    					    <option value="empty"></option>
+    					    <option value='0.5'>{{'0,5'|trans}}</option>
+                            <option value='1'>{{'1'|trans}}</option>
+    					</select>
+    				    <input class='input' type='time' name='absencetimevendredi' id='absencetimevendredi' maxlength='5'/>
     				</td>
     				<td>
     				    <input type='text' name='commentairevendredi' id='commentairevendredi' placeholder="{{'Saisir un commentaire'|trans}}" data-value={{ time.4.comment }} value="{{ time.4.comment }}" />
@@ -250,7 +276,7 @@
     			</tr>
     			<tr>
     				<td id="{{ data_timetable.5.id }}" data-value={{ data_timetable.5.id }} data-id={{ time.5.id }} class='jour'>Samedi :
-    				    <input class='input' type='text' disabled name='datesamedi' id='datesamedi' data-value={{ data_timetable.5.date }} value= {{ data_timetable.5.date }} />
+    				    <input class='input' type='text' disabled name='datesamedi' id='datesamedi' data-value={{ data_timetable.5.date|date("d/m/Y") }} value= {{ data_timetable.5.date|date("d/m/Y") }} />
     				</td>
     				<td>
     				    <input class='input' type='time' name='debutsamedi' id='debutsamedi' maxlength='5' data-value={{ time.5.start }} value={{ time.5.start }} />
@@ -264,24 +290,29 @@
     				<td>
     				    <input class='input' type='text' name='tpssamedi' id='tpssamedi' disabled data-value={{ time.5.workingtime }} value={{ time.5.workingtime }} />
     				</td>
-    				<td>
-    				    <input class='input' type='text' name='joursamedi' id='joursamedi' disabled data-value={{ time.5.workinghours }} value={{ time.5.workinghours }} />
-    				</td>
     				<td class='deplacement'>
-    					<select name='deplacementsamedi' id='deplacementsamedi' data-value={{ time.5.travel }} >
-        					<option value='0'>{{'Non'|trans}}</option>
-        					<option value='1'>{{'Oui'|trans}}</option>
-    					</select>
+    					<input type="checkbox" name='deplacementsamedi' id='deplacementsamedi' data-value={{ time.5.travel }} >
     				</td>
-    				<td>
-    					<select name='absencesamedi' id='absencesamedi' data-value="{{ time.5.absence }}" >
+    				<td class="selectabsence">
+    					<select name='absencesamedi' id='absencesamedi' data-value="{{ time.5.absencename }}" >
         					<option value='Aucune'></option>
         					<option value='RTT'>{{"RTT"|trans}}</option>
-        					<option value='Congés payés'>{{"Congés payés"|trans}}</option>
+        					<option value='CP'>{{"Congés payés"|trans}}</option>
         					<option value='CA'>{{"Congés ancienneté"|trans}}</option>
-        					<option value='Congés sans solde'>{{"Congés sans solde"|trans}}</option>
-        					<option value='Maladie/At/Pat'>{{"Autres"|trans}}</option>
+        					<option value='CSS'>{{"Congés sans solde"|trans}}</option>
+        					<option value='Maladie'>{{"Maladie"|trans}}</option>
+        					<option value="AT">{{"Arrêt de travail"|trans}}</option>
+        					<option value="MP">{{"Maternité/Paternité"|trans}}</option>
+        					<option value="Recup">{{"Récup/Heures supp"|trans}}</option>
     					</select>
+    				</td>
+    				<td class='absenceday'>
+    					<select name='absencedaysamedi' id='absencedaysamedi' data-value={{time.5.absenceduration}} >
+    					    <option value="empty"></option>
+    					    <option value='0.5'>{{'0,5'|trans}}</option>
+                            <option value='1'>{{'1'|trans}}</option>
+    					</select>
+    				    <input class='input' type='time' name='absencetimesamedi' id='absencetimesamedi' maxlength='5'/>
     				</td>
     				<td>
     				    <input type='text' name='commentairesamedi' id='commentairesamedi' placeholder="{{'Saisir un commentaire'|trans}}" data-value={{ time.5.comment }} value="{{ time.5.comment }}" />
@@ -289,7 +320,7 @@
     			</tr>
     			<tr>
     				<td id="{{ data_timetable.6.id }}" data-value={{ data_timetable.6.id }} data-id={{ time.6.id }} class='jour'>Dimanche :
-    				    <input class='input' type='text' disabled name='datedimanche' id='datedimanche' data-value={{ data_timetable.6.date }} value= {{ data_timetable.6.date }} />
+    				    <input class='input' type='text' disabled name='datedimanche' id='datedimanche' data-value={{ data_timetable.6.date|date("d/m/Y") }} value= {{ data_timetable.6.date|date("d/m/Y") }} />
     				</td>
     				<td>
     				    <input class='input' type='time' name='debutdimanche' id='debutdimanche' maxlength='5' data-value={{ time.6.start }} value={{ time.6.start }} />
@@ -303,24 +334,29 @@
     				<td>
     				    <input class='input' type='text' name='tpsdimanche' id='tpsdimanche' disabled data-value={{ time.6.workingtime }} value={{ time.6.workingtime }} />
     				</td>
-    				<td>
-    				    <input class='input' type='text' name='jourdimanche' id='jourdimanche' disabled data-value={{ time.6.workinghours }} value={{ time.6.workinghours }} />
-    				</td>
     				<td class='deplacement'>
-    					<select name='deplacementdimanche' id='deplacementdimanche' data-value={{ time.6.travel }} >
-        					<option value='0'>{{'Non'|trans}}</option>
-        					<option value='1'>{{'Oui'|trans}}</option>
-    					</select>
+    					<input type="checkbox" name='deplacementdimanche' id='deplacementdimanche' data-value={{ time.6.travel }} >
     				</td>
-    				<td>
-    					<select name='absencedimanche' id='absencedimanche' data-value="{{ time.6.absence }}" >
+    				<td class="selectabsence">
+    					<select name='absencedimanche' id='absencedimanche' data-value="{{ time.6.absencename }}" >
         					<option value='Aucune'></option>
         					<option value='RTT'>{{"RTT"|trans}}</option>
-        					<option value='Congés payés'>{{"Congés payés"|trans}}</option>
+        					<option value='CP'>{{"Congés payés"|trans}}</option>
         					<option value='CA'>{{"Congés ancienneté"|trans}}</option>
-        					<option value='Congés sans solde'>{{"Congés sans solde"|trans}}</option>
-        					<option value='Maladie/At/Pat'>{{"Autres"|trans}}</option>
+        					<option value='CSS'>{{"Congés sans solde"|trans}}</option>
+        					<option value='Maladie'>{{"Maladie"|trans}}</option>
+        					<option value="AT">{{"Arrêt de travail"|trans}}</option>
+        					<option value="MP">{{"Maternité/Paternité"|trans}}</option>
+        					<option value="Recup">{{"Récup/Heures supp"|trans}}</option>
     					</select>
+    				</td>
+    				<td class='absenceday' >
+    					<select name='absencedaydimanche' id='absencedaydimanche' data-value={{time.6.absenceduration}} >
+    					    <option value="empty"></option>
+    					    <option value='0.5'>{{'0,5'|trans}}</option>
+                            <option value='1'>{{'1'|trans}}</option>
+    					</select>
+    				    <input class='input' type='time' name='absencetimedimanche' id='absencetimedimanche' maxlength='5'/>
     				</td>
     				<td>
     				    <input type='text' name='commentairedimanche' id='commentairedimanche' placeholder="{{'Saisir un commentaire'|trans}}" data-value={{ time.6.comment }} value="{{ time.6.comment }}" />
@@ -368,13 +404,14 @@
             			<td>{{'Journée travaillée'|trans}}</td>
             			<td>{{'Déplacement'|trans}}</td>
             			<td>{{'Absence'|trans}}</td>
+            			<td>{{'Temps Absence'|trans}}</td>
             			<td>{{'Commentaire'|trans}}</td>
             		</tr>
             	</thead>
         		<tbody>
         			<tr>
         				<td id="{{ data_timetable.0.id }}" data-value="{{ data_timetable.0.id }}" data-id={{ time.0.id }} class='jour'>{{ 'Lundi'| trans }} :
-        				    <input class='input' type='text' disabled name='datelundi' id='datelundi' value={{ data_timetable.0.date }} />
+        				    <input class='input' type='text' disabled name='datelundi' id='datelundi' value={{ data_timetable.0.date|date("d/m/Y") }} />
         				</td>
         				<td class'jourlundi'>
         					<select name='jourlundi' id='jourlundi' data-value="{{ time.0.workinghours }}" >
@@ -383,21 +420,29 @@
         						<option value='1'>1</option>
         					</select>
         				</td>
-        				<td class='deplacement'>
-        					<select name='deplacementlundi' id='deplacementlundi' data-value="{{ time.0.travel }}" >
-        					    <option value='0'>{{'Non'|trans}}</option>
-        				    	<option value='1'>{{'Oui'|trans}}</option>
+        				<td class='deplacement' >
+        					<input type="checkbox" name='deplacementlundi' id='deplacementlundi' data-value={{ time.0.travel }} >
+        				</td>
+        				<td class="selectabsence">
+        					<select name='absencelundi' id='absencelundi' data-value="{{ time.0.absencename }}" >
+            					<option value='Aucune'></option>
+            					<option value='RTT'>{{"RTT"|trans}}</option>
+            					<option value='CP'>{{"Congés payés"|trans}}</option>
+            					<option value='CA'>{{"Congés ancienneté"|trans}}</option>
+            					<option value='CSS'>{{"Congés sans solde"|trans}}</option>
+            					<option value='Maladie'>{{"Maladie"|trans}}</option>
+            					<option value="AT">{{"Arrêt de travail"|trans}}</option>
+            					<option value="MP">{{"Maternité/Paternité"|trans}}</option>
+            					<option value="Recup">{{"Récup/Heures supp"|trans}}</option>
         					</select>
         				</td>
-                        <td>
-        					<select name='absencelundi' id='absencelundi' data-value="{{ time.0.absence }}" >
-            					<option value='Aucune'></option>
-                                <option value='RTT'>{{"RTT"|trans}}</option>
-            					<option value='Congés payés'>{{"Congés payés"|trans}}</option>
-            					<option value='CA'>{{"Congés ancienneté"|trans}}</option>
-            					<option value='Congés sans solde'>{{"Congés sans solde"|trans}}</option>
-            					<option value='Maladie/At/Pat'>{{"Autres"|trans}}</option>
+        				<td class='absenceday' >
+        					<select name='absencedaylundi' id='absencedaylundi' data-value={{time.0.absenceduration}} >
+        					    <option value="empty"></option>
+        					    <option value='0.5'>{{'0,5'|trans}}</option>
+                                <option value='1'>{{'1'|trans}}</option>
         					</select>
+        				    <input class='input' type='time' name='absencetimelundi' id='absencetimelundi' maxlength='5'/>
         				</td>
         				<td>
         				    <input type='text' name='commentairelundi' id='commentairelundi' placeholder="{{'Saisir un commentaire'|trans}}" data-value="{{ time.0.comment }}" value={{ time.0.comment }} />
@@ -405,7 +450,7 @@
         			</tr>
         			<tr>
         				<td id="{{ data_timetable.1.id }}" data-value="{{ data_timetable.1.id }}" data-id={{ time.1.id }} class='jour'>{{ 'Mardi'| trans }} :
-        				    <input class='input' type='text' disabled name='datemardi' id='datemardi' value={{ data_timetable.1.date }} />
+        				    <input class='input' type='text' disabled name='datemardi' id='datemardi' value={{ data_timetable.1.date|date("d/m/Y") }} />
         				</td>
         				<td class='jourmardi'>
         					<select name='jourmardi' id='jourmardi' data-value="{{ time.1.workinghours }}" >
@@ -414,21 +459,29 @@
         						<option value='1'>1</option>
         					</select>
         				</td>
-        				<td class='deplacement'>
-        					<select name='deplacementmardi' id='deplacementmardi' data-value="{{ time.1.travel }}" >
-            					<option value='0'>{{'Non'|trans}}</option>
-            					<option value='1'>{{'Oui'|trans}}</option>
+        				<td class='deplacement' >
+        					<input type="checkbox" name='deplacementmardi' id='deplacementmardi' data-value={{ time.1.travel }} >
+        				</td>
+        				<td class="selectabsence">
+        					<select name='absencemardi' id='absencemardi' data-value="{{ time.1.absencename }}" >
+            					<option value='Aucune'></option>
+            					<option value='RTT'>{{"RTT"|trans}}</option>
+            					<option value='CP'>{{"Congés payés"|trans}}</option>
+            					<option value='CA'>{{"Congés ancienneté"|trans}}</option>
+            					<option value='CSS'>{{"Congés sans solde"|trans}}</option>
+            					<option value='Maladie'>{{"Maladie"|trans}}</option>
+            					<option value="AT">{{"Arrêt de travail"|trans}}</option>
+            					<option value="MP">{{"Maternité/Paternité"|trans}}</option>
+            					<option value="Recup">{{"Récup/Heures supp"|trans}}</option>
         					</select>
         				</td>
-        				<td>
-        					<select name='absencemardi' id='absencemardi' value='' data-value="{{ time.1.absence }}" >
-            					<option value='Aucune'></option>
-                                <option value='RTT'>{{"RTT"|trans}}</option>
-            					<option value='Congés payés'>{{"Congés payés"|trans}}</option>
-            					<option value='CA'>{{"Congés ancienneté"|trans}}</option>
-            					<option value='Congés sans solde'>{{"Congés sans solde"|trans}}</option>
-            					<option value='Maladie/At/Pat'>{{"Autres"|trans}}</option>
+        				<td class='absenceday' >
+        					<select name='absencedaymardi' id='absencedaymardi' data-value={{time.1.absenceduration}} >
+        					    <option value="empty"></option>
+        					    <option value='0.5'>{{'0,5'|trans}}</option>
+                                <option value='1'>{{'1'|trans}}</option>
         					</select>
+        				    <input class='input' type='time' name='absencetimemardi' id='absencetimemardi' maxlength='5'/>
         				</td>
         				<td>
         				    <input type='text' name='commentairemardi' id='commentairemardi' placeholder="{{'Saisir un commentaire'|trans}}" data-value="{{ time.1.comment }}" value={{ time.1.comment }} />
@@ -436,7 +489,7 @@
         			</tr>
         			<tr>
         				<td id="{{ data_timetable.2.id }}" data-value="{{ data_timetable.2.id }}" data-id={{ time.2.id }} class='jour'>{{ 'Mercredi' | trans }} :
-            				<input class='input' type='text' disabled name='datemercredi' id='datemercredi' value={{ data_timetable.2.date }} />
+            				<input class='input' type='text' disabled name='datemercredi' id='datemercredi' value={{ data_timetable.2.date|date("d/m/Y") }} />
                         </td>
         				<td class'jourmercredi'>
         					<select name='jourmercredi' id='jourmercredi' data-value="{{ time.2.workinghours }}" >
@@ -445,21 +498,29 @@
         						<option value='1'>1</option>
         					</select>
         				</td>
-        				<td class='deplacement'>
-        					<select name='deplacementmercredi' id='deplacementmercredi' data-value="{{ time.2.travel }}" >
-            					<option value='0'>{{'Non'|trans}}</option>
-            					<option value='1'>{{'Oui'|trans}}</option>
+        				<td class='deplacement' >
+        					<input type="checkbox" name='deplacementmercredi' id='deplacementmercredi' data-value={{ time.2.travel }} >
+        				</td>
+        				<td class="selectabsence">
+        					<select name='absencemercredi' id='absencemercredi' data-value="{{ time.2.absencename }}" >
+            					<option value='Aucune'></option>
+            					<option value='RTT'>{{"RTT"|trans}}</option>
+            					<option value='CP'>{{"Congés payés"|trans}}</option>
+            					<option value='CA'>{{"Congés ancienneté"|trans}}</option>
+            					<option value='CSS'>{{"Congés sans solde"|trans}}</option>
+            					<option value='Maladie'>{{"Maladie"|trans}}</option>
+            					<option value="AT">{{"Arrêt de travail"|trans}}</option>
+            					<option value="MP">{{"Maternité/Paternité"|trans}}</option>
+            					<option value="Recup">{{"Récup/Heures supp"|trans}}</option>
         					</select>
         				</td>
-        				<td>
-        					<select name='absencemercredi' id='absencemercredi' data-value="{{ time.2.absence }}" >
-            					<option value='Aucune'></option>
-                                <option value='RTT'>{{"RTT"|trans}}</option>
-            					<option value='Congés payés'>{{"Congés payés"|trans}}</option>
-            					<option value='CA'>{{"Congés ancienneté"|trans}}</option>
-            					<option value='Congés sans solde'>{{"Congés sans solde"|trans}}</option>
-            					<option value='Maladie/At/Pat'>{{"Autres"|trans}}</option>
+        				<td class='absenceday' >
+        					<select name='absencedaymercredi' id='absencedaymercredi' data-value={{time.2.absenceduration}} >
+        					    <option value="empty"></option>
+        					    <option value='0.5'>{{'0,5'|trans}}</option>
+                                <option value='1'>{{'1'|trans}}</option>
         					</select>
+        				    <input class='input' type='time' name='absencetimemercredi' id='absencetimemercredi' maxlength='5'/>
         				</td>
         				<td>
         				    <input type='text' name='commentairemercredi' id='commentairemercredi' placeholder="{{'Saisir un commentaire'|trans}}" data-value="{{ time.2.comment }}" value={{ time.2.comment }} />
@@ -467,7 +528,7 @@
         			</tr>
         			<tr>
         				<td id="{{ data_timetable.3.id }}" data-value="{{ data_timetable.3.id }}" data-id={{ time.3.id }} class='jour'>{{ 'Jeudi' | trans }} :
-            				<input class='input' type='text' disabled name='datejeudi' id='datejeudi' value={{ data_timetable.3.date }} />
+            				<input class='input' type='text' disabled name='datejeudi' id='datejeudi' value={{ data_timetable.3.date|date("d/m/Y") }} />
                         </td>
         				<td class'jourjeudi'>
         					<select name='jourjeudi' id='jourjeudi' data-value="{{ time.3.workinghours }}" >
@@ -476,21 +537,29 @@
         						<option value='1'>1</option>
         					</select>
         				</td>
-        				<td class='deplacement'>
-        					<select name='deplacementjeudi' id='deplacementjeudi' data-value="{{ time.3.travel }}" >
-            					<option value='0'>{{'Non'|trans}}</option>
-            					<option value='1'>{{'Oui'|trans}}</option>
+        				<td class='deplacement' >
+        					<input type="checkbox" name='deplacementjeudi' id='deplacementjeudi' data-value={{ time.3.travel }} >
+        				</td>
+        				<td class="selectabsence">
+        					<select name='absencejeudi' id='absencejeudi' data-value="{{ time.3.absencename }}" >
+            					<option value='Aucune'></option>
+            					<option value='RTT'>{{"RTT"|trans}}</option>
+            					<option value='CP'>{{"Congés payés"|trans}}</option>
+            					<option value='CA'>{{"Congés ancienneté"|trans}}</option>
+            					<option value='CSS'>{{"Congés sans solde"|trans}}</option>
+            					<option value='Maladie'>{{"Maladie"|trans}}</option>
+            					<option value="AT">{{"Arrêt de travail"|trans}}</option>
+            					<option value="MP">{{"Maternité/Paternité"|trans}}</option>
+            					<option value="Recup">{{"Récup/Heures supp"|trans}}</option>
         					</select>
         				</td>
-        				<td>
-        					<select name='absencejeudi' id='absencejeudi' data-value="{{ time.3.absence }}" >
-            					<option value='Aucune'></option>
-                                <option value='RTT'>{{"RTT"|trans}}</option>
-            					<option value='Congés payés'>{{"Congés payés"|trans}}</option>
-            					<option value='CA'>{{"Congés ancienneté"|trans}}</option>
-            					<option value='Congés sans solde'>{{"Congés sans solde"|trans}}</option>
-            					<option value='Maladie/At/Pat'>{{"Autres"|trans}}</option>
+        				<td class='absenceday' >
+        					<select name='absencedayjeudi' id='absencedayjeudi' data-value={{time.3.absenceduration}} >
+        					    <option value="empty"></option>
+        					    <option value='0.5'>{{'0,5'|trans}}</option>
+                                <option value='1'>{{'1'|trans}}</option>
         					</select>
+        				    <input class='input' type='time' name='absencetimejeudi' id='absencetimejeudi' maxlength='5'/>
         				</td>
         				<td>
         				    <input type='text' name='commentairejeudi' id='commentairejeudi' placeholder="{{'Saisir un commentaire'|trans}}" data-value="{{ time.3.comment }}" value={{ time.3.comment }} />
@@ -498,7 +567,7 @@
         			</tr>
         			<tr>
         				<td id="{{ data_timetable.4.id }}" data-value="{{ data_timetable.4.id }}" data-id={{ time.4.id }} class='jour'>{{ 'Vendredi' | trans }} :
-        				    <input class='input' type='text' disabled name='datevendredi' id='datevendredi' value={{ data_timetable.4.date }} />
+        				    <input class='input' type='text' disabled name='datevendredi' id='datevendredi' value={{ data_timetable.4.date|date("d/m/Y") }} />
         				</td>
         				<td class'jourvendredi'>
         					<select name='jourvendredi' id='jourvendredi' data-value="{{ time.4.workinghours }}" >
@@ -507,21 +576,29 @@
         						<option value='1'>1</option>
         					</select>
         				</td>
-        				<td class='deplacement'>
-        					<select name='deplacementvendredi' id='deplacementvendredi' data-value="{{ time.4.travel }}" >
-            					<option value='0'>{{'Non'|trans}}</option>
-            					<option value='1'>{{'Oui'|trans}}</option>
+        				<td class='deplacement' >
+        					<input type="checkbox" name='deplacementvendredi' id='deplacementvendredi' data-value={{ time.4.travel }} >
+        				</td>
+        				<td class="selectabsence">
+        					<select name='absencevendredi' id='absencevendredi' data-value="{{ time.4.absencename }}" >
+            					<option value='Aucune'></option>
+            					<option value='RTT'>{{"RTT"|trans}}</option>
+            					<option value='CP'>{{"Congés payés"|trans}}</option>
+            					<option value='CA'>{{"Congés ancienneté"|trans}}</option>
+            					<option value='CSS'>{{"Congés sans solde"|trans}}</option>
+            					<option value='Maladie'>{{"Maladie"|trans}}</option>
+            					<option value="AT">{{"Arrêt de travail"|trans}}</option>
+            					<option value="MP">{{"Maternité/Paternité"|trans}}</option>
+            					<option value="Recup">{{"Récup/Heures supp"|trans}}</option>
         					</select>
         				</td>
-        				<td>
-        					<select name='absencevendredi' id='absencevendredi' data-value="{{ time.4.absence }}" >
-            					<option value='Aucune'></option>
-                                <option value='RTT'>{{"RTT"|trans}}</option>
-            					<option value='Congés payés'>{{"Congés payés"|trans}}</option>
-            					<option value='CA'>{{"Congés ancienneté"|trans}}</option>
-            					<option value='Congés sans solde'>{{"Congés sans solde"|trans}}</option>
-            					<option value='Maladie/At/Pat'>{{"Autres"|trans}}</option>
+        				<td class='absenceday' >
+        					<select name='absencedayvendredi' id='absencedayvendredi' data-value={{time.4.absenceduration}} >
+        					    <option value="empty"></option>
+        					    <option value='0.5'>{{'0,5'|trans}}</option>
+                                <option value='1'>{{'1'|trans}}</option>
         					</select>
+        				    <input class='input' type='time' name='absencetimevendredi' id='absencetimevendredi' maxlength='5'/>
         				</td>
         				<td>
         				    <input type='text' name='commentairevendredi' id='commentairevendredi' placeholder="{{'Saisir un commentaire'|trans}}" data-value="{{ time.4.comment }}" value={{ time.4.comment }} />
@@ -529,7 +606,7 @@
         			</tr>
         			<tr>
         				<td id="{{ data_timetable.5.id }}" data-value="{{ data_timetable.5.id }}" data-id={{ time.5.id }} class='jour'>{{ 'Samedi' | trans }} :
-            				<input class='input' type='text' disabled name='datesamedi' id='datesamedi' value={{ data_timetable.5.date }} />
+            				<input class='input' type='text' disabled name='datesamedi' id='datesamedi' value={{ data_timetable.5.date|date("d/m/Y") }} />
                         </td>
         				<td class'joursamedi'>
         					<select name='joursamedi' id='joursamedi' data-value="{{ time.5.workinghours }}" >
@@ -538,21 +615,29 @@
         						<option value='1'>1</option>
         					</select>
         				</td>
-        				<td class='deplacement'>
-        					<select name='deplacementsamedi' id='deplacementsamedi' data-value="{{ time.5.travel }}" >
-            					<option value='0'>{{'Non'|trans}}</option>
-            					<option value='1'>{{'Oui'|trans}}</option>
+        				<td class='deplacement' >
+        					<input type="checkbox" name='deplacementsamedi' id='deplacementsamedi' data-value={{ time.5.travel }} >
+        				</td>
+        				<td class="selectabsence">
+        					<select name='absencesamedi' id='absencesamedi' data-value="{{ time.5.absencename }}" >
+            					<option value='Aucune'></option>
+            					<option value='RTT'>{{"RTT"|trans}}</option>
+            					<option value='CP'>{{"Congés payés"|trans}}</option>
+            					<option value='CA'>{{"Congés ancienneté"|trans}}</option>
+            					<option value='CSS'>{{"Congés sans solde"|trans}}</option>
+            					<option value='Maladie'>{{"Maladie"|trans}}</option>
+            					<option value="AT">{{"Arrêt de travail"|trans}}</option>
+            					<option value="MP">{{"Maternité/Paternité"|trans}}</option>
+            					<option value="Recup">{{"Récup/Heures supp"|trans}}</option>
         					</select>
         				</td>
-        				<td>
-        					<select name='absencesamedi' id='absencesamedi' data-value="{{ time.5.absence }}" >
-            					<option value='Aucune'></option>
-                                <option value='RTT'>{{"RTT"|trans}}</option>
-            					<option value='Congés payés'>{{"Congés payés"|trans}}</option>
-            					<option value='CA'>{{"Congés ancienneté"|trans}}</option>
-            					<option value='Congés sans solde'>{{"Congés sans solde"|trans}}</option>
-            					<option value='Maladie/At/Pat'>{{"Autres"|trans}}</option>
+        				<td class='absenceday' >
+        					<select name='absencedaysamedi' id='absencedaysamedi' data-value={{time.5.absenceduration}} >
+        					    <option value="empty"></option>
+        					    <option value='0.5'>{{'0,5'|trans}}</option>
+                                <option value='1'>{{'1'|trans}}</option>
         					</select>
+        				    <input class='input' type='time' name='absencetimesamedi' id='absencetimesamedi' maxlength='5'/>
         				</td>
         				<td>
         				    <input type='text' name='commentairesamedi' id='commentairesamedi' placeholder="{{'Saisir un commentaire'|trans}}" data-value="{{ time.5.comment }}" value={{ time.5.comment }} />
@@ -560,7 +645,7 @@
         			</tr>
         			<tr>
         				<td id="{{ data_timetable.6.id }}" data-value="{{ data_timetable.6.id }}" data-id={{ time.6.id }} class='jour'>{{'Dimanche'|trans }} :
-            				<input class='input' type='text' disabled name='datedimanche' id='datedimanche' value={{ data_timetable.6.date }} />
+            				<input class='input' type='text' disabled name='datedimanche' id='datedimanche' value={{ data_timetable.6.date|date("d/m/Y") }} />
         				</td>
         				<td class'jourdimanche'>
         					<select name='jourdimanche' id='jourdimanche' data-value="{{ time.6.workinghours }}" >
@@ -569,21 +654,29 @@
         						<option value='1'>1</option>
         					</select>
         				</td>
-        				<td class='deplacement'>
-        					<select name='deplacementdimanche' id='deplacementdimanche' data-value="{{ time.6.travel }}" >
-            					<option value='0'>{{'Non'|trans}}</option>
-            					<option value='1'>{{'Oui'|trans}}</option>
+        				<td class='deplacement' >
+        					<input type="checkbox" name='deplacementdimanche' id='deplacementdimanche' data-value={{ time.6.travel }} >
+        				</td>
+        				<td class="selectabsence">
+        					<select name='absencedimanche' id='absencedimanche' data-value="{{ time.6.absencename }}" >
+            					<option value='Aucune'></option>
+            					<option value='RTT'>{{"RTT"|trans}}</option>
+            					<option value='CP'>{{"Congés payés"|trans}}</option>
+            					<option value='CA'>{{"Congés ancienneté"|trans}}</option>
+            					<option value='CSS'>{{"Congés sans solde"|trans}}</option>
+            					<option value='Maladie'>{{"Maladie"|trans}}</option>
+            					<option value="AT">{{"Arrêt de travail"|trans}}</option>
+            					<option value="MP">{{"Maternité/Paternité"|trans}}</option>
+            					<option value="Recup">{{"Récup/Heures supp"|trans}}</option>
         					</select>
         				</td>
-        				<td>
-        					<select name='absencedimanche' id='absencedimanche' data-value="{{ time.6.absence }}" >
-            					<option value='Aucune'></option>
-                                <option value='RTT'>{{"RTT"|trans}}</option>
-            					<option value='Congés payés'>{{"Congés payés"|trans}}</option>
-            					<option value='CA'>{{"Congés ancienneté"|trans}}</option>
-            					<option value='Congés sans solde'>{{"Congés sans solde"|trans}}</option>
-            					<option value='Maladie/At/Pat'>{{"Autres"|trans}}</option>
+        				<td class='absenceday' >
+        					<select name='absencedaydimanche' id='absencedaydimanche' data-value={{time.6.absenceduration}} >
+        					    <option value="empty"></option>
+        					    <option value='0.5'>{{'0,5'|trans}}</option>
+                                <option value='1'>{{'1'|trans}}</option>
         					</select>
+        				    <input class='input' type='time' name='absencetimedimanche' id='absencetimedimanche' maxlength='5'/>
         				</td>
         				<td>
         				    <input type='text' name='commentairedimanche' id='commentairedimanche' placeholder="{{'Saisir un commentaire'|trans}}" data-value="{{ time.6.comment }}" value={{ time.6.comment }} />

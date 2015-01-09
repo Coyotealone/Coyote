@@ -19,8 +19,7 @@ Coyote\SiteBundle\Entity\Timetable:
             lenght: 8
             notnull: true
         date:
-            type: string
-            lenght: 10
+            type: date
             notnull: true
         holiday:
             type: boolean
