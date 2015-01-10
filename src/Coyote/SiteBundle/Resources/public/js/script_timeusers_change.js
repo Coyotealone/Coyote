@@ -44,6 +44,63 @@ $(document).ready(function()
         visibilityAbsenceTime(absencedimanche, "dimanche");
     })
 
+    $("#absencetimelundi").change(function()
+    {
+        var absencetimelundi = document.getElementById("absencetimelundi").value;
+        absencetimelundi = splitformatTime(absencetimelundi);
+        absencetimelundi = formatTime(absencetimelundi);
+        document.getElementById("absencetimelundi").value = absencetimelundi;
+        visibilityAbsenceTime(absencetimelundi, "lundi");
+    })
+
+    $("#absencetimemardi").change(function()
+    {
+        var absencetimemardi = document.getElementById("absencetimemardi").value;
+        absencetimemardi = splitformatTime(absencetimemardi);
+        absencetimemardi = formatTime(absencetimemardi);
+        visibilityAbsenceTime(absencetimemardi, "mardi");
+    })
+
+    $("#absencetimemercredi").change(function()
+    {
+        var absencetimemercredi = document.getElementById("absencetimemercredi").value;
+        absencetimemercredi = splitformatTime(absencetimemercredi);
+        absencetimemercredi = formatTime(absencetimemercredi);
+        visibilityAbsenceTime(absencetimemercredi, "mercredi");
+    })
+
+    $("#absencetimejeudi").change(function()
+    {
+        var absencetimejeudi = document.getElementById("absencetimejeudi").value;
+        absencetimejeudi = splitformatTime(absencetimejeudi);
+        absencetimejeudi = formatTime(absencetimejeudi);
+        visibilityAbsenceTime(absencetimejeudi, "jeudi");
+    })
+
+    $("#absencetimevendredi").change(function()
+    {
+        var absencetimevendredi = document.getElementById("absencetimevendredi").value;
+        absencetimevendredi = splitformatTime(absencetimevendredi);
+        absencetimevendredi = formatTime(absencetimevendredi);
+        visibilityAbsenceTime(absencetimevendredi, "vendredi");
+    })
+
+    $("#absencetimesamedi").change(function()
+    {
+        var absencetimesamedi = document.getElementById("absencetimesamedi").value;
+        absencetimesamedi = splitformatTime(absencetimesamedi);
+        absencetimesamedi = formatTime(absencetimesamedi);
+        visibilityAbsenceTime(absencetimesamedi, "samedi");
+    })
+
+    $("#absencetimedimanche").change(function()
+    {
+        var absencetimedimanche = document.getElementById("absencetimedimanche").value;
+        absencetimedimanche = splitformatTime(absencetimedimanche);
+        absencetimedimanche = formatTime(absencetimedimanche);
+        visibilityAbsenceTime(absencetimedimanche, "dimanche");
+    })
+
     $("#debutlundi").change(function()
     {
         var startlundi = document.getElementById("debutlundi").value;
