@@ -83,9 +83,11 @@ class ExpenseRepository extends EntityRepository
             $result .= "D;";
             $result .= $data->getUserFees()->getLogin().";";//En majuscule
             $result .= $data->getSite()->getCode().";";
-            $date = $data->getDate();
-            $date = explode('/', $date);
-            $result .= $date[0].$date[1].$date[2].";";// Enlever les /
+            //$date = $data->getDate();
+            //$date = explode('/', $date);
+            //$date->getDate()->format('Y-m-d');
+            $result .= $data->getDate()->format('dmy').";";
+            //$result .= $date[0].$date[1].$date[2].";";// Enlever les /
             $result .= $data->getFee()->getCode().";";
             $result .= $data->getCurrency()->getCode().";";
             $result .= $data->getAmount().";";
@@ -189,5 +191,27 @@ class ExpenseRepository extends EntityRepository
         $datetime = \DateTime::createFromFormat($format, $date.' 00:00:00');
         $expense->setDate($datetime);
         return $expense;
+    }
+
+    public function findExpenseById($id_start, $id_end)
+    {
+        $query = $this->getEntityManager()
+                      ->createQuery("
+        	            SELECT e FROM CoyoteSiteBundle:Expense e
+        	            WHERE e.id = :idstart "
+                        );
+        $query->setParameters(array('idstart' => $id_start, 'idend' => $id_end));
+        return $query->getResult();
+    }
+
+    public function updateStatusExense($em, $expense)
+    {
+        foreach($expense as $data)
+        {
+            $data->setStatus(1);
+            $em->persist($data);
+        }
+        $em->flush();
+        return "OK";
     }
 }

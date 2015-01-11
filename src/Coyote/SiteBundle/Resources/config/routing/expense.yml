@@ -1,3 +1,11 @@
+expense_updatestatus:
+    pattern:    /updatestatus
+    defaults:   { _controller: "CoyoteSiteBundle:Expense:updatestatus"}
+
+expense_indexupdatestatus:
+    pattern:    /indexupdatestatus
+    defaults:   { _controller: "CoyoteSiteBundle:Expense:indexupdatestatus"}
+
 expense_index:
     pattern:    /
     defaults:   { _controller: "CoyoteSiteBundle:Expense:index"}

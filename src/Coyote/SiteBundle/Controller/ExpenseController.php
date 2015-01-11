@@ -506,5 +506,78 @@ class ExpenseController extends Controller
             return new Response('PDF réalisé');
         }
     }
+
+    public function indexupdatestatusAction()
+    {
+        return $this->render('CoyoteSiteBundle:Expense:updatestatus.html.twig');
+    }
+
+    public function updatestatusAction()
+    {
+        $request = $this->getRequest();
+        $session = $request->getSession();
+        /** @var $em object doctrine request */
+        $em = $this->getDoctrine()->getManager();
+        $request = Request::createFromGlobals();
+        //if (array_key_exists('id_start', $_GET['id_start']))
+        {
+            $id_start = $_GET['id_start'];
+        }
+
+        //if (array_key_exists('id_end', $_GET['id_end']))
+        {
+            $id_end = $_GET['id_end'];
+        }
+
+        //else
+        //    return $this->redirect($this->generateUrl('expense_indexupdatestatus'));
+        /** @var $year string yyyy */
+
+        /** @var $month string mm */
+
+        /** check $year and $month */
+        if(empty($id_start) && empty($id_end))
+        {
+            /** redirect ExpenseController:indexprintAction */
+            return $this->redirect($this->generateUrl('expense_indexupdatestatus'));
+        }
+        else
+        {
+            if($id_end>$id_start)
+            {
+                for($i = $id_start; $i<=$id_end; $i++)
+                {
+                    $data_expense = $em->getRepository('CoyoteSiteBundle:Expense')->find($i);
+                    $data_expense->setStatus(1);
+                    /** persist $expense */
+                    $em->persist($data_expense);
+                    /** add data in db */
+                    $em->flush();
+                }
+                $message = "Mise à jour effectuée";
+                $this->get('session')->getFlashBag()->set('updatestatus', $message);
+            }
+            if($id_start>$id_end)
+            {
+                for($i = $id_end; $i<=$id_start; $i++)
+                {
+                    $data_expense = $em->getRepository('CoyoteSiteBundle:Expense')->find($i);
+                    $data_expense->setStatus(1);
+                    /** persist $expense */
+                    $em->persist($data_expense);
+                    /** add data in db */
+                    $em->flush();
+                }
+                $message = "Mise à jour effectuée";
+                $this->get('session')->getFlashBag()->set('updatestatus', $message);
+            }
+            else
+            {
+                $message = "Aucune donnée mise à jour";
+                $this->get('session')->getFlashBag()->set('updatestatus', $message);
+            }
+        }
+        return $this->redirect($this->generateUrl('expense_indexupdatestatus'));
+    }
 }
 
