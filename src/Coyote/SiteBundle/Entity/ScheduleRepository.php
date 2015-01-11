@@ -80,7 +80,7 @@ class ScheduleRepository extends EntityRepository
         $qb->select('s.id')
            ->from('CoyoteSiteBundle:Schedule', 's')
            ->innerJoin('CoyoteSiteBundle:Timetable', 't', 'WITH', 't.id = s.timetable')
-           ->where('s.user = :user and s.absence = :absence and t.pay_period = :pay_period')
+           ->where('s.user = :user and s.absence_name = :absence and t.pay_period = :pay_period')
            ->setParameters(array('user' => $user, 'absence' => $absence, 'pay_period' => $pay_period));
         $id_schedule =  $qb->getQuery()
                            ->getResult();
@@ -312,7 +312,7 @@ class ScheduleRepository extends EntityRepository
     public function dataSchedule($user, $date)
     {
         $qb = $this->_em->createQueryBuilder();
-        $qb->select('t.day, t.date, s.start, s.end, s.break, s.working_time, s.working_hours, s.travel, s.absence, s.comment , t.holiday')
+        $qb->select('t.day, t.date, s.start, s.end, s.break, s.working_time, s.working_hours, s.travel, s.absence_name, s.absence_duration, s.comment , t.holiday')
            ->from('CoyoteSiteBundle:Timetable', 't')
            ->innerJoin('CoyoteSiteBundle:Schedule', 's', 'WITH', 't.id = s.timetable')
            ->where('t.date LIKE :date and s.user = :user')
@@ -334,7 +334,7 @@ class ScheduleRepository extends EntityRepository
     public function dataScheduleFM($user, $date)
     {
         $qb = $this->_em->createQueryBuilder();
-        $qb->select('t.day, t.date, s.working_hours, s.travel, s.absence, s.comment , t.holiday')
+        $qb->select('t.day, t.date, s.working_hours, s.travel, s.absence_name, s.absence_duration, s.comment , t.holiday')
            ->from('CoyoteSiteBundle:Timetable', 't')
            ->innerJoin('CoyoteSiteBundle:Schedule', 's', 'WITH', 't.id = s.timetable')
            ->where('t.date LIKE :date and s.user = :user')
@@ -357,13 +357,22 @@ class ScheduleRepository extends EntityRepository
     public function absenceMonth($date, $user, $absence)
     {
         $qb = $this->_em->createQueryBuilder();
-        $qb->select('COUNT(s.absence)')
+        $qb->select('s.absence_duration')
            ->from('CoyoteSiteBundle:Schedule', 's')
            ->innerJoin('CoyoteSiteBundle:Timetable', 't', 'WITH', 't.id = s.timetable')
-           ->where('s.user = :user and t.date LIKE :date and s.absence = :absence')
+           ->where('s.user = :user and t.date LIKE :date and s.absence_name = :absence')
            ->setParameters(array('user' => $user, 'date' => $date, 'absence' => $absence));
-        $absence_schedule =  $qb->getQuery()->getSingleScalarResult();
-        return $absence_schedule;
+        $data_absence_duration = $qb->getQuery()
+                                    ->getResult();
+
+        $count_absence = 0.0;
+
+        for($i = 0; $i<count($data_absence_duration);$i++)
+        {
+            $count_absence += $data_absence_duration[$i]['absence_duration'];
+        }
+
+        return $count_absence;
     }
 
     /**
@@ -431,7 +440,7 @@ class ScheduleRepository extends EntityRepository
     public function dataScheduleYear($user, $period)
     {
         $qb = $this->_em->createQueryBuilder();
-        $qb->select('t.day, t.date, s.start, s.end, s.break, s.working_time, s.working_hours, s.travel, s.absence, s.comment , t.holiday')
+        $qb->select('t.day, t.date, s.start, s.end, s.break, s.working_time, s.working_hours, s.travel, s.absence_name, s.absence_duration, s.comment , t.holiday')
            ->from('CoyoteSiteBundle:Timetable', 't')
            ->innerJoin('CoyoteSiteBundle:Schedule', 's', 'WITH', 't.id = s.timetable')
            ->where('t.pay_period = :pay_period and s.user = :user')
@@ -455,7 +464,7 @@ class ScheduleRepository extends EntityRepository
     public function dataScheduleFMYear($user, $period)
     {
         $qb = $this->_em->createQueryBuilder();
-        $qb->select('t.day, t.date, s.working_hours, s.travel, s.absence, s.comment , t.holiday')
+        $qb->select('t.day, t.date, s.working_hours, s.travel, s.absence_name, s.absence_duration, s.comment , t.holiday')
            ->from('CoyoteSiteBundle:Timetable', 't')
            ->innerJoin('CoyoteSiteBundle:Schedule', 's', 'WITH', 't.id = s.timetable')
            ->where('t.pay_period = :pay_period and s.user = :user')
