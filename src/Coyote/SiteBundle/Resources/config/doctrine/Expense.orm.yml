@@ -8,8 +8,7 @@ Coyote\SiteBundle\Entity\Expense:
             generator: { strategy: AUTO }
     fields:
         date:
-            type: string
-            lenght: 8
+            type: datetime
         status:
             type: boolean
         amount:
