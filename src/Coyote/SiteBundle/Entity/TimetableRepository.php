@@ -72,4 +72,18 @@ class TimetableRepository extends EntityRepository
            ->setParameters(array('date' => $date));
         return $qb->getQuery()->getSingleScalarResult();
     }
+
+    public function findworkingday($date, $user)
+    {
+        $datefin = date("Y-m-d H:i:s", mktime(23,59,59,date("m"),0,date("Y")));
+        $qb = $this->_em->createQueryBuilder();
+        $qb->select('t')
+           ->from('CoyoteSiteBundle:Timetable', 't')
+           ->where('t.date > :date and t.date < :datefin and t.holiday = :holiday and t.day != :day1 and t.day != :day2')
+           ->setParameters(array('date' => $date, 'datefin' => $datefin, 'holiday' => '0', 'day1' => 'samedi', 'day2' => 'dimanche'));
+        $timetable =  $qb->getQuery()
+                         ->getResult();
+
+        return count($timetable);
+    }
 }

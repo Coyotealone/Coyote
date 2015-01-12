@@ -30,10 +30,6 @@ class ScheduleController extends Controller
         $session = $request->getSession();
         $em = $this->getDoctrine()->getManager();
 
-        /*$data_schedule = $em->getRepository('CoyoteSiteBundle:Schedule')->DatasSchedule(2, 366, 579);
-        $time_year_schedule = $em->getRepository('CoyoteSiteBundle:Schedule')->AdditionalHours($data_schedule);
-        return new Response($time_year_schedule);*/
-
         $user = $this->get('security.context')->getToken()->getUser();
         if($this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED') == false)
         {
@@ -707,7 +703,6 @@ class ScheduleController extends Controller
         $em = $doctrine->getManager();
         $heuresupp = $em->getRepository('CoyoteSiteBundle:Timetable')->calcul();
         return $this->render('CoyoteSiteBundle:Schedule:test.html.twig', array(
-
                     'countheure' => $heuresupp,
                     ));
     }
@@ -725,7 +720,6 @@ class ScheduleController extends Controller
         $em = $doctrine->getManager();
         $period = $em->getRepository('CoyoteSiteBundle:Timetable')->findPeriodByDate($date);
         $tab_period = array('2014/2015', '2015/2016', '2016/2017');
-
         return $this->render('CoyoteSiteBundle:Schedule:indexprintyear.html.twig', array('period' => $period, 'tab_period' => $tab_period));
     }
 
@@ -833,9 +827,7 @@ class ScheduleController extends Controller
         $doctrine = $this->getDoctrine();
         $em = $doctrine->getManager();
         $request = Request::createFromGlobals();
-
         $pay_period = $_GET['pay_period'];
-
         define("pay_period", $pay_period, true);
         $tab_user_id = array('2', '4', '6', '9', '10', '13', '14', '15', '16', '17', '18', '40', '41', '43', '44', '45', '46', '47', '48', '49', '50', '51', '52', '53', '54', '55', '58', '61', '62', '70', '71');
 
@@ -923,5 +915,22 @@ class ScheduleController extends Controller
             }
             return $this->redirect($this->generateUrl('schedule_indexexportprintyear'));
         }
+    }
+
+    public function showovertimeAction()
+    {
+        $request = $this->getRequest();
+        $session = $request->getSession();
+        $doctrine = $this->getDoctrine();
+        $em = $doctrine->getManager();
+        $request = Request::createFromGlobals();
+        $user_id = $session->get('userid');
+        $date = "2014-06-%";
+        $date_count_absence = "2014-06-0%";
+        $working_day = $em->getRepository('CoyoteSiteBundle:Timetable')->findworkingday($date, $user_id);
+        $sum_working_time = $em->getRepository('CoyoteSiteBundle:Schedule')->sumWorkingTimeMonth($date, $user_id);
+        $count_absence = $em->getRepository('CoyoteSiteBundle:Schedule')->countAbsence($date_count_absence, $user_id);
+        $overtime = $em->getRepository('CoyoteSiteBundle:Schedule')->calculOvertime($working_day, $sum_working_time, $count_absence);
+        return $this->render('CoyoteSiteBundle:Schedule:showovertime.html.twig', array('overtime' => $overtime));
     }
 }
