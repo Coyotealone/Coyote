@@ -31,9 +31,9 @@ class ExpenseRepository extends EntityRepository
         $query = $this->getEntityManager()
                         ->createQuery("
 	            SELECT e FROM CoyoteSiteBundle:Expense e
-	            WHERE e.date LIKE :date and e.userfees = :id"
+	            WHERE e.userfees = :id and e.date LIKE :date"
                         );
-        $query->setParameters(array('date' => '%'.$date.'%', 'id' => $id));
+        $query->setParameters(array('date' => $date, 'id' => $id));
         return $query->getResult();
     }
 
@@ -83,9 +83,7 @@ class ExpenseRepository extends EntityRepository
             $result .= "D;";
             $result .= $data->getUserFees()->getLogin().";";//En majuscule
             $result .= $data->getSite()->getCode().";";
-            $date = $data->getDate();
-            $date = explode('/', $date);
-            $result .= $date[0].$date[1].$date[2].";";// Enlever les /
+            $result .= $data->getDate()->format('dmy').";";
             $result .= $data->getFee()->getCode().";";
             $result .= $data->getCurrency()->getCode().";";
             $result .= $data->getAmount().";";
@@ -136,8 +134,10 @@ class ExpenseRepository extends EntityRepository
             $mois = substr($date, 2, 2);
             $annee = substr($date, 4, 2);
             $date = $jour."/".$mois."/".$annee;
+            $datetime = new \DateTime();
+            $datetime->createFromFormat('d/m/y', $date);
         }
-        return $date;
+        return $datetime;
     }
 
     public function checkDate($date)
@@ -183,7 +183,31 @@ class ExpenseRepository extends EntityRepository
         $expense->setAmount($data['qte'.$increment]);
         $expense->setStatus(1);
         $date = $this->checkDate($data['date'.$increment]);
-        $expense->setDate($date);
+        $format = 'd/m/y H:i:s';
+        $datetime = \DateTime::createFromFormat($format, $date.' 00:00:00');
+        $expense->setDate($datetime);
         return $expense;
+    }
+
+    public function findExpenseById($id_start, $id_end)
+    {
+        $query = $this->getEntityManager()
+                      ->createQuery("
+        	            SELECT e FROM CoyoteSiteBundle:Expense e
+        	            WHERE e.id = :idstart "
+                        );
+        $query->setParameters(array('idstart' => $id_start, 'idend' => $id_end));
+        return $query->getResult();
+    }
+
+    public function updateStatusExense($em, $expense)
+    {
+        foreach($expense as $data)
+        {
+            $data->setStatus(1);
+            $em->persist($data);
+        }
+        $em->flush();
+        return "OK";
     }
 }

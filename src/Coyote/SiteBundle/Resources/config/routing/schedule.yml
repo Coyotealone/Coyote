@@ -1,3 +1,7 @@
+schedule_overtime:
+    pattern:    /overtime
+    defaults:   { _controller: "CoyoteSiteBundle:Schedule:showovertime"}
+
 schedule_savetime:
     pattern:    /scheduleusers/save
     defaults:   { _controller: "CoyoteSiteBundle:Schedule:savetime"}

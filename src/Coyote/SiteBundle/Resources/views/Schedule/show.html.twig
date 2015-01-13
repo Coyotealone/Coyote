@@ -27,6 +27,7 @@
     		<th id='tab_time_workinghours'>{{'Journée travaillée'|trans}}</th>
     		<th id='tab_time_travel'>{{'Déplacement'|trans}}</th>
     		<th id='tab_time_absence'>{{'Absence'|trans}}</th>
+    		<th id='tab_time_absence'>{{'Temps Absence'|trans}}</th>
     		<th id='tab_time_comment'>{{'Commentaire'|trans}}</th>
     	</tr>
     	{% set counter = 0 %}
@@ -34,57 +35,61 @@
         <tr>
             {% if data.holiday == "1" %}
                 <td style="background:#7FC6BC; color:white">{{ data.day|capitalize|trans}}</td>
-                <td style="background:#7FC6BC; color:white">{{ data.date}}</td>
+                <td style="background:#7FC6BC; color:white">{{ data.date|date("d/m/Y")}}</td>
                 <td style="background:#7FC6BC; color:white">{{ data.start }}</td>
                 <td style="background:#7FC6BC; color:white">{{ data.end }}</td>
                 <td style="background:#7FC6BC; color:white">{{ data.break }}</td>
                 <td style="background:#7FC6BC; color:white">{{ data.working_time }}</td>
                 <td style="background:#7FC6BC; color:white">{{ data.working_hours }}</td>
                 <td style="background:#7FC6BC; color:white">{{ data.travel }}</td>
-                <td style="background:#7FC6BC; color:white">{{ data.absence|trans }}</td>
+                <td style="background:#7FC6BC; color:white">{{ data.absence_name|trans }}</td>
+                <td style="background:#7FC6BC; color:white">{{ data.absence_duration }}</td>
                 <td style="background:#7FC6BC; color:white">{{ data.comment }}</td>
             {% elseif data.day == "samedi" %}
                 <td style="background:#01B0F0; color:white">{{ data.day|capitalize|trans}}</td>
-                <td style="background:#01B0F0; color:white">{{ data.date}}</td>
+                <td style="background:#01B0F0; color:white">{{ data.date|date("d/m/Y")}}</td>
                 <td style="background:#01B0F0; color:white">{{ data.start }}</td>
                 <td style="background:#01B0F0; color:white">{{ data.end }}</td>
                 <td style="background:#01B0F0; color:white">{{ data.break }}</td>
                 <td style="background:#01B0F0; color:white">{{ data.working_time }}</td>
                 <td style="background:#01B0F0; color:white">{{ data.working_hours }}</td>
                 <td style="background:#01B0F0; color:white">{{ data.travel }}</td>
-                <td style="background:#01B0F0; color:white">{{ data.absence|trans }}</td>
+                <td style="background:#01B0F0; color:white">{{ data.absence_name|trans }}</td>
+                <td style="background:#01B0F0; color:white">{{ data.absence_duration }}</td>
                 <td style="background:#01B0F0; color:white">{{ data.comment }}</td>
             {% elseif data.day == "dimanche" %}
                 <td style="background:#01B0F0; color:white">{{ data.day|capitalize|trans}}</td>
-                <td style="background:#01B0F0; color:white">{{ data.date}}</td>
+                <td style="background:#01B0F0; color:white">{{ data.date|date("d/m/Y")}}</td>
                 <td style="background:#01B0F0; color:white">{{ data.start }}</td>
                 <td style="background:#01B0F0; color:white">{{ data.end }}</td>
                 <td style="background:#01B0F0; color:white">{{ data.break }}</td>
                 <td style="background:#01B0F0; color:white">{{ data.working_time }}</td>
                 <td style="background:#01B0F0; color:white">{{ data.working_hours }}</td>
                 <td style="background:#01B0F0; color:white">{{ data.travel }}</td>
-                <td style="background:#01B0F0; color:white">{{ data.absence|trans }}</td>
+                <td style="background:#01B0F0; color:white">{{ data.absence_name|trans }}</td>
+                <td style="background:#01B0F0; color:white">{{ data.absence_duration }}</td>
                 <td style="background:#01B0F0; color:white">{{ data.comment }}</td>
         </tr>
         <tr>
-                <td style="background:#99CCCC; color:white" colspan = 10>{{"Nombre d'heure travaillé dans la semaine"|trans}} : {{timeweek[counter]}}</td>
+                <td style="background:#99CCCC; color:white" colspan = 11>{{"Nombre d'heure travaillé dans la semaine"|trans}} : {{timeweek[counter]}}</td>
                 {% set counter = counter + 1 %}
         </tr>
         <tr>
             {% else %}
                 <td>{{ data.day|capitalize|trans}}</td>
-                <td>{{ data.date}}</td>
+                <td>{{ data.date|date("d/m/Y")}}</td>
                 <td>{{ data.start }}</td>
                 <td>{{ data.end }}</td>
                 <td>{{ data.break }}</td>
                 <td>{{ data.working_time }}</td>
                 <td>{{ data.working_hours }}</td>
                 <td>{{ data.travel }}</td>
-                <td>{{ data.absence|trans }}</td>
+                <td>{{ data.absence_name|trans }}</td>
+                <td>{{ data.absence_name_duration }}</td>
                 <td>{{ data.comment }}</td>
                 {% if loop.last %}
                 <tr>
-                    <td style="background:#99CCCC; color:white" colspan = 10>{{"Nombre d'heure travaillé dans la semaine"|trans}} : {{timeweek[counter]}}</td>
+                    <td style="background:#99CCCC; color:white" colspan = 11>{{"Nombre d'heure travaillé dans la semaine"|trans}} : {{timeweek[counter]}}</td>
                 </tr>
                 {% endif %}
             {% endif %}
