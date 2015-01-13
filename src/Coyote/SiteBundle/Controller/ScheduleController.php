@@ -513,7 +513,7 @@ class ScheduleController extends Controller
                 return $this->render('CoyoteSiteBundle:Schedule:indexshow.html.twig');
             $user = $em->getRepository('CoyoteSiteBundle:User')->find($session->get('userid'));
             $period = $em->getRepository('CoyoteSiteBundle:Schedule')->findPeriod($mois, $annee);
-            $date = $annee."-".$mois."%";
+            $date = $annee."-".$mois."-%";
             $absenceca = $em->getRepository('CoyoteSiteBundle:Schedule')->absenceMonth($date, $user->getId(), "CA");
             $absencecp = $em->getRepository('CoyoteSiteBundle:Schedule')->absenceMonth($date, $user->getId(), "CP");
             $absencertt = $em->getRepository('CoyoteSiteBundle:Schedule')->absenceMonth($date, $user->getId(), "RTT");
@@ -623,7 +623,7 @@ class ScheduleController extends Controller
 
             $user = $em->getRepository('CoyoteSiteBundle:User')->find($session->get('userid'));
             $period = $em->getRepository('CoyoteSiteBundle:Schedule')->findPeriod($mois, $annee);
-            $date = $annee."-".$mois."%";
+            $date = $annee."-".$mois."-%";
             $absenceca = $em->getRepository('CoyoteSiteBundle:Schedule')->absenceMonth($date, $user->getId(), "CA");
             $absencecp = $em->getRepository('CoyoteSiteBundle:Schedule')->absenceMonth($date, $user->getId(), "CP");
             $absencertt = $em->getRepository('CoyoteSiteBundle:Schedule')->absenceMonth($date, $user->getId(), "RTT");
@@ -695,16 +695,6 @@ class ScheduleController extends Controller
             $html2pdf->Output($filename, 'D');
             return new Response('PDF réalisé');
         }
-    }
-
-    public function calculAction()
-    {
-        $doctrine = $this->getDoctrine();
-        $em = $doctrine->getManager();
-        $heuresupp = $em->getRepository('CoyoteSiteBundle:Timetable')->calcul();
-        return $this->render('CoyoteSiteBundle:Schedule:test.html.twig', array(
-                    'countheure' => $heuresupp,
-                    ));
     }
 
     /**

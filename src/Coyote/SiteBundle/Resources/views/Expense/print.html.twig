@@ -8,23 +8,23 @@
     <table class='table' id='tab_expense' style="width:900px;">
     	<tr style="width:900px;">
     		<th style="width: 60px; text-align:center">{{'Date'|trans}}</th>
-    		<th style="width: 80px; text-align:center">{{'Article'|trans}}</th>
-    		<th style="width: 60px; text-align:center">{{'Devise'|trans}}</th>
-    		<th style="width: 60px; text-align:center">{{'Quantité'|trans}}</th>
-    		<th style="width: 70px; text-align:center">{{'Montant TTC'|trans}}</th>
-    		<th style="width: 70px; text-align:center">{{'Montant TVA'|trans}}</th>
-    		<th style="width: 120px; text-align:center">{{'Affaire'|trans}}</th>
+    		<th style="width: 160px; text-align:center">{{'Article'|trans}}</th>
+    		<th style="width: 50px; text-align:center">{{'Devise'|trans}}</th>
+    		<th style="width: 50px; text-align:center">{{'Quantité'|trans}}</th>
+    		<th style="width: 60px; text-align:center">{{'Montant TTC'|trans}}</th>
+    		<th style="width: 60px; text-align:center">{{'Montant TVA'|trans}}</th>
+    		<th style="width: 60px; text-align:center">{{'Affaire'|trans}}</th>
     		<th style="width: 20%; text-align:center" id='tab_time_comment'>{{'Commentaire'|trans}}</th>
     	</tr>
         {% for entity in data %}
             <tr>
-                <th style="width: 60px; text-align:center">{{ entity.date }}</th>
-                <th style="width: 80px; text-align:center">{{ entity.fee }}</th>
-                <th style="width: 60px; text-align:center">{{ entity.currency }}</th>
-                <th style="width: 60px; text-align:center">{{ entity.amount }}</th>
-                <th style="width: 70px; text-align:center">{{ entity.amountttc }}</th>
-                <th style="width: 70px; text-align:center">{{ entity.amounttva }}</th>
-                <th style="width: 120px; text-align:center">{{ entity.business }}</th>
+                <th style="width: 60px; text-align:center">{{ entity.date|date("d/m/Y") }}</th>
+                <th style="width: 160px; text-align:center">{{ entity.fee }}</th>
+                <th style="width: 50px; text-align:center">{{ entity.currency }}</th>
+                <th style="width: 50px; text-align:center">{{ entity.amount }}</th>
+                <th style="width: 60px; text-align:center">{{ entity.amountttc }}</th>
+                <th style="width: 60px; text-align:center">{{ entity.amounttva }}</th>
+                <th style="width: 60px; text-align:center">{{ entity.business }}</th>
                 <th style="width: 20%; text-align:center" id='tab_time_comment'>{{ entity.comment }}</th>
             </tr>
         {% endfor %}

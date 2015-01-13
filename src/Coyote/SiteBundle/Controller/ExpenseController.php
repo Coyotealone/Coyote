@@ -495,7 +495,7 @@ class ExpenseController extends Controller
             /** @var $hour string hhmmss */
             $hour = date("His");
             /** @var $filename string filename PDF */
-            $filename = $user->getName()."_expense".$date."-".$hour.".pdf";
+            $filename = $data_user->getName()."_expense".$date."-".$hour.".pdf";
             /** prepare pdf */
             $html = $page->getContent();
             $html2pdf = new \Html2Pdf_Html2Pdf('P', 'A4', 'fr');
