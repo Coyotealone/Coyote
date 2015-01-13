@@ -70,7 +70,9 @@ class MainController extends Controller
             if($session->get('no_week') == 1)
                 $year = $year + 1;
             $session->set('year', $year);
-            $date = date('d').'/'.date('m').'/'.date('Y');
+
+            $date = date('Y').'-'.date('m').'-'.date('d');
+            $date = (new \DateTime($date));
             $date = $em->getRepository('CoyoteSiteBundle:Timetable')->findOneBy(array('date' => $date));
             /** set pay_period */
             $session->set('pay_period', $date->getPayPeriod());

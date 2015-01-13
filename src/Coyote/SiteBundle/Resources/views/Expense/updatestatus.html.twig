@@ -1,0 +1,43 @@
+{% extends 'CoyoteSiteBundle:Expense:index.html.twig' %}
+
+{% block link %}
+
+    <!--[if lt IE 9]>
+        {{ include('CoyoteSiteBundle:Base:navigation_ie.html.twig') }}
+    <![endif]-->
+    <!--[if !IE]><!-->
+        {{ include('CoyoteSiteBundle:Base:navigation.html.twig') }}
+	<!--<![endif]-->
+
+{% endblock %}
+
+{% block stylesheets %}
+   {{ include('CoyoteSiteBundle:Base:css.html.twig') }}
+{% endblock %}
+
+{% block content %}
+{% for flashMessage in app.session.flashbag.get('updatestatus') %}
+
+    <p id="flashmessage">{{ flashMessage }}</p>
+
+{% endfor %}
+<p id="titreconfig">{{'Mise à jour status Notes de frais'|trans}} </p>
+
+<form role="form" action="{{ path('expense_updatestatus') }}" method='get'>
+    <table class='table' id='tab_expense'>
+    	<tr>
+    	    <th>{{'Id_start'|trans}}</th>
+    		<th>{{'Id_end'|trans}}</th>
+    	</tr>
+        <tr>
+            <td>
+                <input class='input' type='time' name='id_start' id='id_start' maxlength='5' />
+            </td>
+            <td>
+                <input class='input' type='time' name='id_end' id='id_end' maxlength='5' />
+            </td>
+        </tr>
+    </table>
+    <button class='btnsave' type="submit" value="Afficher" id="afficher">{{ 'Mise à jour'|trans }}</button>
+</form>
+{% endblock %}

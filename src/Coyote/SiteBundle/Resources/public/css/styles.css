@@ -203,6 +203,14 @@ input#txt_timemonth2 {
   text-align: right;
 }
 
+.selectabsence > select {
+    width: 100px;
+}
+
+.absenceday {
+    width: 130px;
+}
+
 /* line 166, ../scss/styles.sass */
 .jour .input {
   width: 80px;

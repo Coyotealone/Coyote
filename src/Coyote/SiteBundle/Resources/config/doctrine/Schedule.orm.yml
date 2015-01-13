@@ -29,10 +29,14 @@ Coyote\SiteBundle\Entity\Schedule:
         travel:
             type: boolean
             notnull: true
-        absence:
+        absence_name:
+            type: string
+            notnull: true
+            lenght: 50
+        absence_duration:
+            null: true
             type: string
             lenght: 10
-            notnull: true
         comment:
             type: string
             lenght: 255

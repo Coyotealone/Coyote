@@ -117,7 +117,7 @@ class ExpenseController extends Controller
             /** @var $tab_year array year */
             $tab_year = array('2014', '2015');
             /** @var $tab_num_year array yy */
-            $tab_num_year = array('14', '15');
+            $tab_num_year = array('2014', '2015');
             /** show view */
             return $this->render('CoyoteSiteBundle:Expense:indexshow.html.twig', array('month' => $month, 'year' => $year, 'tab_mois' => $tab_month, 'tab_num_mois' =>
                 $tab_num_month, 'tab_annee' => $tab_year, 'tab_num_annee' => $tab_num_year));
@@ -142,10 +142,18 @@ class ExpenseController extends Controller
         /** check @var $session 'userfeesid' */
         if($session->get('userfeesid') == null)
             return $this->redirect($this->generateUrl('main_accueil'));
+
+        if (array_key_exists('year', $_GET)) {
+                $year = $_GET['year'];
+            }
+        if (array_key_exists('month', $_GET)) {
+                $month = $_GET['month'];
+            }
+
         /** @var $year string year */
-        $year = $_GET['year'];
+        //$year = $_GET['year'];
         /** @var $month string month */
-        $month = $_GET['month'];
+        //$month = $_GET['month'];
         /** check @var $year and $month */
         if(empty($year) && empty($month))
             return $this->redirect($this->generateUrl('expense_indexshow'));
@@ -187,10 +195,12 @@ class ExpenseController extends Controller
             /** @var $em object doctrine request */
             $em = $this->getDoctrine()->getManager();
             /** @var $date string mm/yyyy */
-            $date = $month.'/'.$year;
+            $date = $year.'-'.$month.'%';
             /** @var $data_expense object Expense*/
+            //return new Response($date);
             $data_expense = $em->getRepository('CoyoteSiteBundle:Expense')->findExpense($date, $session->get('userfeesid'));
             /** show view */
+            //return new Response($data_expense[0]->getStatus()->getString());
             return $this->render('CoyoteSiteBundle:Expense:show.html.twig', array('data' => $data_expense));
         }
     }
@@ -441,7 +451,7 @@ class ExpenseController extends Controller
         /** @var $tab_year array year */
         $tab_year = array( '2014', '2015');
         /** @var $tab_num_year array num year */
-        $tab_num_year = array( '14', '15');
+        $tab_num_year = array( '2014', '2015');
         /** show view */
         return $this->render('CoyoteSiteBundle:Expense:indexprint.html.twig', array('month' => $month, 'year' => $year, 'tab_mois' => $tab_month, 'tab_num_mois' =>
             $tab_num_month, 'tab_annee' => $tab_year, 'tab_num_annee' => $tab_num_year));
@@ -473,7 +483,7 @@ class ExpenseController extends Controller
         else
         {
             /** @var $date string mm/yyyy */
-            $date = $month.'/'.$year;
+            $date = $year.'-'.$month.'%';
             /** @var $data_expense entity Expense */
             $data_expense = $em->getRepository('CoyoteSiteBundle:Expense')->findExpense($date, $session->get('userfeesid'));
             /** @var $data_user entity User */
@@ -485,7 +495,7 @@ class ExpenseController extends Controller
             /** @var $hour string hhmmss */
             $hour = date("His");
             /** @var $filename string filename PDF */
-            $filename = $user->getName()."_expense".$date."-".$hour.".pdf";
+            $filename = $data_user->getName()."_expense".$date."-".$hour.".pdf";
             /** prepare pdf */
             $html = $page->getContent();
             $html2pdf = new \Html2Pdf_Html2Pdf('P', 'A4', 'fr');
@@ -495,6 +505,79 @@ class ExpenseController extends Controller
             $html2pdf->Output($filename, 'D');
             return new Response('PDF réalisé');
         }
+    }
+
+    public function indexupdatestatusAction()
+    {
+        return $this->render('CoyoteSiteBundle:Expense:updatestatus.html.twig');
+    }
+
+    public function updatestatusAction()
+    {
+        $request = $this->getRequest();
+        $session = $request->getSession();
+        /** @var $em object doctrine request */
+        $em = $this->getDoctrine()->getManager();
+        $request = Request::createFromGlobals();
+        //if (array_key_exists('id_start', $_GET['id_start']))
+        {
+            $id_start = $_GET['id_start'];
+        }
+
+        //if (array_key_exists('id_end', $_GET['id_end']))
+        {
+            $id_end = $_GET['id_end'];
+        }
+
+        //else
+        //    return $this->redirect($this->generateUrl('expense_indexupdatestatus'));
+        /** @var $year string yyyy */
+
+        /** @var $month string mm */
+
+        /** check $year and $month */
+        if(empty($id_start) && empty($id_end))
+        {
+            /** redirect ExpenseController:indexprintAction */
+            return $this->redirect($this->generateUrl('expense_indexupdatestatus'));
+        }
+        else
+        {
+            if($id_end>$id_start)
+            {
+                for($i = $id_start; $i<=$id_end; $i++)
+                {
+                    $data_expense = $em->getRepository('CoyoteSiteBundle:Expense')->find($i);
+                    $data_expense->setStatus(1);
+                    /** persist $expense */
+                    $em->persist($data_expense);
+                    /** add data in db */
+                    $em->flush();
+                }
+                $message = "Mise à jour effectuée";
+                $this->get('session')->getFlashBag()->set('updatestatus', $message);
+            }
+            if($id_start>$id_end)
+            {
+                for($i = $id_end; $i<=$id_start; $i++)
+                {
+                    $data_expense = $em->getRepository('CoyoteSiteBundle:Expense')->find($i);
+                    $data_expense->setStatus(1);
+                    /** persist $expense */
+                    $em->persist($data_expense);
+                    /** add data in db */
+                    $em->flush();
+                }
+                $message = "Mise à jour effectuée";
+                $this->get('session')->getFlashBag()->set('updatestatus', $message);
+            }
+            else
+            {
+                $message = "Aucune donnée mise à jour";
+                $this->get('session')->getFlashBag()->set('updatestatus', $message);
+            }
+        }
+        return $this->redirect($this->generateUrl('expense_indexupdatestatus'));
     }
 }
 

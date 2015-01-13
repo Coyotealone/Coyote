@@ -31,9 +31,9 @@
     	</tr>
     	{% for entity in data %}
             <tr>
-                <td><a href="{{ path('expense_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{#<a href="{{ path('expense_show', { 'id': entity.id }) }}">#}{{ entity.id }}</a></td>
                 <td>{{ entity.site.code }}</td>
-                <td>{{ entity.date }}</td>
+                <td>{{ entity.date|date("d/m/y") }}</td>
                 <td>{{ entity.fee.code }}</td>
                 <td>{{ entity.currency.code }}</td>
                 <td>{{ entity.amount }}</td>

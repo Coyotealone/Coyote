@@ -12,7 +12,6 @@
     <div class='table-responsive'>
     <table class='table' id='tab_expense'>
     	<tr>
-    		<th id='tab_expense_site'>{{ form_label(edit_form.site, 'Site') }}</th>
     		<th id='tab_expense_date' maxlength="6">{{ form_label(edit_form.date, 'Date') }}</th>
     		<th id='tab_expense_item'>{{ form_label(edit_form.fee, 'Code Article') }}</th>
     		<th id='tab_expense_devise'>{{ form_label(edit_form.currency, 'Devise') }}</th>
@@ -24,7 +23,6 @@
     		<th id='tab_expense_comment'>{{ form_label(edit_form.comment) }}</th>
     	</tr>
         <tr>
-            <td id='tab_expense_site'>{{ form_widget(edit_form.site) }}</td>
             <td id='tab_expense_date'>{{ form_widget(edit_form.date) }}</td>
             <td id='tab_expense_item'>{{ form_widget(edit_form.fee) }}</td>
             <td id='tab_expense_devise'>{{ form_widget(edit_form.currency) }}</td>

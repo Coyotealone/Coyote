@@ -15,7 +15,7 @@ class ExpenseType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('date', 'text', array(
+            /*->add('date', 'text', array(
                 'label' => 'Date',
                 'label_attr' => array(
                     'class' => 'control-label'
@@ -27,6 +27,10 @@ class ExpenseType extends AbstractType
                     'data-toggle' => 'tooltip',
                     'data-placement' => 'right',
                 )
+            ))*/
+            ->add('date', 'datetime', array(
+                'widget' => 'single_text',
+                'format' => 'dd/MM/yy',
             ))
             ->add('amount', 'number', array('label' => 'Quantité'))
             ->add('amount_TTC', 'number',   array('required' => true,))

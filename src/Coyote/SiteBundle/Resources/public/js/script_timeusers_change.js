@@ -1,5 +1,106 @@
 $(document).ready(function()
 {
+    //document.getElementById("absencedayselectlundi").style.visibility = "hidden";
+    //document.getElementById("absencedayinputlundi").style.visibility = "hidden";
+    $("#absencelundi").change(function()
+    {
+        var absencelundi = document.getElementById("absencelundi").value;
+        visibilityAbsenceTime(absencelundi, "lundi");
+    })
+
+    $("#absencemardi").change(function()
+    {
+        var absencemardi = document.getElementById("absencemardi").value;
+        visibilityAbsenceTime(absencemardi, "mardi");
+    })
+
+    $("#absencemercredi").change(function()
+    {
+        var absencemercredi = document.getElementById("absencemercredi").value;
+        visibilityAbsenceTime(absencemercredi, "mercredi");
+    })
+
+    $("#absencejeudi").change(function()
+    {
+        var absencejeudi = document.getElementById("absencejeudi").value;
+        visibilityAbsenceTime(absencejeudi, "jeudi");
+    })
+
+    $("#absencevendredi").change(function()
+    {
+        var absencevendredi = document.getElementById("absencevendredi").value;
+        visibilityAbsenceTime(absencevendredi, "vendredi");
+    })
+
+    $("#absencesamedi").change(function()
+    {
+        var absencesamedi = document.getElementById("absencesamedi").value;
+        visibilityAbsenceTime(absencesamedi, "samedi");
+    })
+
+    $("#absencedimanche").change(function()
+    {
+        var absencedimanche = document.getElementById("absencedimanche").value;
+        visibilityAbsenceTime(absencedimanche, "dimanche");
+    })
+
+    $("#absencetimelundi").change(function()
+    {
+        var absencetimelundi = document.getElementById("absencetimelundi").value;
+        absencetimelundi = splitformatTime(absencetimelundi);
+        absencetimelundi = formatTime(absencetimelundi);
+        document.getElementById("absencetimelundi").value = absencetimelundi;
+        visibilityAbsenceTime(absencetimelundi, "lundi");
+    })
+
+    $("#absencetimemardi").change(function()
+    {
+        var absencetimemardi = document.getElementById("absencetimemardi").value;
+        absencetimemardi = splitformatTime(absencetimemardi);
+        absencetimemardi = formatTime(absencetimemardi);
+        visibilityAbsenceTime(absencetimemardi, "mardi");
+    })
+
+    $("#absencetimemercredi").change(function()
+    {
+        var absencetimemercredi = document.getElementById("absencetimemercredi").value;
+        absencetimemercredi = splitformatTime(absencetimemercredi);
+        absencetimemercredi = formatTime(absencetimemercredi);
+        visibilityAbsenceTime(absencetimemercredi, "mercredi");
+    })
+
+    $("#absencetimejeudi").change(function()
+    {
+        var absencetimejeudi = document.getElementById("absencetimejeudi").value;
+        absencetimejeudi = splitformatTime(absencetimejeudi);
+        absencetimejeudi = formatTime(absencetimejeudi);
+        visibilityAbsenceTime(absencetimejeudi, "jeudi");
+    })
+
+    $("#absencetimevendredi").change(function()
+    {
+        var absencetimevendredi = document.getElementById("absencetimevendredi").value;
+        absencetimevendredi = splitformatTime(absencetimevendredi);
+        absencetimevendredi = formatTime(absencetimevendredi);
+        visibilityAbsenceTime(absencetimevendredi, "vendredi");
+    })
+
+    $("#absencetimesamedi").change(function()
+    {
+        var absencetimesamedi = document.getElementById("absencetimesamedi").value;
+        absencetimesamedi = splitformatTime(absencetimesamedi);
+        absencetimesamedi = formatTime(absencetimesamedi);
+        visibilityAbsenceTime(absencetimesamedi, "samedi");
+    })
+
+    $("#absencetimedimanche").change(function()
+    {
+        var absencetimedimanche = document.getElementById("absencetimedimanche").value;
+        absencetimedimanche = splitformatTime(absencetimedimanche);
+        absencetimedimanche = formatTime(absencetimedimanche);
+        visibilityAbsenceTime(absencetimedimanche, "dimanche");
+    })
+
     $("#debutlundi").change(function()
     {
         var startlundi = document.getElementById("debutlundi").value;
@@ -65,8 +166,6 @@ $(document).ready(function()
         var daymardi = calculWorkingDay(timemardi);
         if(timemardi != null)
             document.getElementById("tpsmardi").value = timemardi;
-        if(daymardi != null)
-            document.getElementById("jourmardi").value = daymardi;
     })
 
     $("#pausemardi").change(function()
@@ -82,8 +181,6 @@ $(document).ready(function()
         var daymardi = calculWorkingDay(timemardi);
         if(timemardi != null)
             document.getElementById("tpsmardi").value = timemardi;
-        if(daymardi != null)
-            document.getElementById("jourmardi").value = daymardi;
     })
 
     $("#finmardi").change(function()
@@ -99,8 +196,6 @@ $(document).ready(function()
         var daymardi = calculWorkingDay(timemardi);
         if(timemardi != null)
             document.getElementById("tpsmardi").value = timemardi;
-        if(daymardi != null)
-            document.getElementById("jourmardi").value = daymardi;
     })
 
 
@@ -117,8 +212,6 @@ $(document).ready(function()
         var daymercredi = calculWorkingDay(timemercredi);
         if(timemercredi != null)
             document.getElementById("tpsmercredi").value = timemercredi;
-        if(daymercredi != null)
-            document.getElementById("jourmercredi").value = daymercredi;
     })
 
     $("#pausemercredi").change(function()
@@ -134,8 +227,6 @@ $(document).ready(function()
         var daymercredi = calculWorkingDay(timemercredi);
         if(timemercredi != null)
             document.getElementById("tpsmercredi").value = timemercredi;
-        if(daymercredi != null)
-            document.getElementById("jourmercredi").value = daymercredi;
     })
 
     $("#finmercredi").change(function()
@@ -151,8 +242,6 @@ $(document).ready(function()
         var daymercredi = calculWorkingDay(timemercredi);
         if(timemercredi != null)
             document.getElementById("tpsmercredi").value = timemercredi;
-        if(daymercredi != null)
-            document.getElementById("jourmercredi").value = daymercredi;
     })
 
 
@@ -169,8 +258,6 @@ $(document).ready(function()
         var dayjeudi = calculWorkingDay(timejeudi);
         if(timejeudi != null)
             document.getElementById("tpsjeudi").value = timejeudi;
-        if(dayjeudi != null)
-            document.getElementById("jourjeudi").value = dayjeudi;
     })
 
     $("#pausejeudi").change(function()
@@ -186,8 +273,6 @@ $(document).ready(function()
         var dayjeudi = calculWorkingDay(timejeudi);
         if(timejeudi != null)
             document.getElementById("tpsjeudi").value = timejeudi;
-        if(dayjeudi != null)
-            document.getElementById("jourjeudi").value = dayjeudi;
     })
 
     $("#finjeudi").change(function()
@@ -203,8 +288,6 @@ $(document).ready(function()
         var dayjeudi = calculWorkingDay(timejeudi);
         if(timejeudi != null)
             document.getElementById("tpsjeudi").value = timejeudi;
-        if(dayjeudi != null)
-            document.getElementById("jourjeudi").value = dayjeudi;
     })
 
 
@@ -221,8 +304,6 @@ $(document).ready(function()
         var dayvendredi = calculWorkingDay(timevendredi);
         if(timevendredi != null)
             document.getElementById("tpsvendredi").value = timevendredi;
-        if(dayvendredi != null)
-            document.getElementById("jourvendredi").value = dayvendredi;
     })
 
     $("#pausevendredi").change(function()
@@ -238,8 +319,6 @@ $(document).ready(function()
         var dayvendredi = calculWorkingDay(timevendredi);
         if(timevendredi != null)
             document.getElementById("tpsvendredi").value = timevendredi;
-        if(dayvendredi != null)
-            document.getElementById("jourvendredi").value = dayvendredi;
     })
 
     $("#finvendredi").change(function()
@@ -255,8 +334,6 @@ $(document).ready(function()
         var dayvendredi = calculWorkingDay(timevendredi);
         if(timevendredi != null)
             document.getElementById("tpsvendredi").value = timevendredi;
-        if(dayvendredi != null)
-            document.getElementById("jourvendredi").value = dayvendredi;
     })
 
 
@@ -273,8 +350,6 @@ $(document).ready(function()
         var daysamedi = calculWorkingDay(timesamedi);
         if(timesamedi != null)
             document.getElementById("tpssamedi").value = timesamedi;
-        if(daysamedi != null)
-            document.getElementById("joursamedi").value = daysamedi;
     })
 
     $("#pausesamedi").change(function()
@@ -290,8 +365,6 @@ $(document).ready(function()
         var daysamedi = calculWorkingDay(timesamedi);
         if(timesamedi != null)
             document.getElementById("tpssamedi").value = timesamedi;
-        if(daysamedi != null)
-            document.getElementById("joursamedi").value = daysamedi;
     })
 
     $("#finsamedi").change(function()
@@ -307,8 +380,6 @@ $(document).ready(function()
         var daysamedi = calculWorkingDay(timesamedi);
         if(timesamedi != null)
             document.getElementById("tpssamedi").value = timesamedi;
-        if(daysamedi != null)
-            document.getElementById("joursamedi").value = daysamedi;
     })
 
 
@@ -325,8 +396,6 @@ $(document).ready(function()
         var daydimanche = calculWorkingDay(timedimanche);
         if(timedimanche != null)
             document.getElementById("tpsdimanche").value = timedimanche;
-        if(daydimanche != null)
-            document.getElementById("jourdimanche").value = daydimanche;
     })
 
     $("#pausedimanche").change(function()
@@ -342,8 +411,6 @@ $(document).ready(function()
         var daydimanche = calculWorkingDay(timedimanche);
         if(timedimanche != null)
             document.getElementById("tpsdimanche").value = timedimanche;
-        if(daydimanche != null)
-            document.getElementById("jourdimanche").value = daydimanche;
     })
 
     $("#findimanche").change(function()
@@ -359,8 +426,6 @@ $(document).ready(function()
         var daydimanche = calculWorkingDay(timedimanche);
         if(timedimanche != null)
             document.getElementById("tpsdimanche").value = timedimanche;
-        if(daydimanche != null)
-            document.getElementById("jourdimanche").value = daydimanche;
     })
 
     $("#debutauto").change(function()
@@ -527,4 +592,63 @@ function splitformatTime(time)
     }
     else
         return time;
+}
+
+function visibilityAbsenceTime(absence, jour)
+{
+    if(absence == "Aucune" || absence == "")
+	{
+		document.getElementById("absence"+jour).selectedIndex = 0;
+		document.getElementById("absenceday"+jour).style.visibility = "hidden";
+		document.getElementById("absencetime"+jour).style.visibility = "hidden";
+    }
+	if(absence == "RTT")
+	{
+		document.getElementById("absence"+jour).selectedIndex = 1;
+		document.getElementById("absenceday"+jour).style.visibility = "visible";
+		document.getElementById("absencetime"+jour).style.visibility = "hidden";
+    }
+	if(absence == "CP")
+	{
+		document.getElementById("absence"+jour).selectedIndex = 2;
+		document.getElementById("absenceday"+jour).style.visibility = "visible";
+		document.getElementById("absencetime"+jour).style.visibility = "hidden";
+	}
+	if(absence == "CA")
+	{
+		document.getElementById("absence"+jour).selectedIndex = 3;
+		document.getElementById("absenceday"+jour).style.visibility = "visible";
+		document.getElementById("absencetime"+jour).style.visibility = "hidden";
+	}
+	if(absence == "CSS")
+	{
+		document.getElementById("absence"+jour).selectedIndex = 4;
+		document.getElementById("absenceday"+jour).style.visibility = "visible";
+		document.getElementById("absencetime"+jour).style.visibility = "hidden";
+    }
+	if(absence == "Maladie")
+	{
+    	document.getElementById("absence"+jour).selectedIndex = 5;
+    	document.getElementById("absenceday"+jour).style.visibility = "visible";
+		document.getElementById("absencetime"+jour).style.visibility = "hidden";
+    }
+    if(absence == "AT")
+	{
+    	document.getElementById("absence"+jour).selectedIndex = 6;
+    	document.getElementById("absenceday"+jour).style.visibility = "visible";
+		document.getElementById("absencetime"+jour).style.visibility = "hidden";
+	}
+	if(absence == "MP")
+	{
+    	document.getElementById("absence"+jour).selectedIndex = 7;
+    	document.getElementById("absenceday"+jour).style.visibility = "visible";
+		document.getElementById("absencetime"+jour).style.visibility = "hidden";
+	}
+	if(absence == "Recup")
+	{
+    	document.getElementById("absence"+jour).selectedIndex = 8;
+    	document.getElementById("absenceday"+jour).style.visibility = "hidden";
+		document.getElementById("absencetime"+jour).style.visibility = "visible";
+		//document.getElementById("absencetime"+jour).value = "";
+    }
 }

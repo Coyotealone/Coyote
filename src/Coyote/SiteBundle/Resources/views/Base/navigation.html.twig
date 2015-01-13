@@ -10,8 +10,9 @@
             <li><a href="{{ path('schedule_index') }}">{{'Saisie'|trans}}</a></li>
             <li><a href="{{ path('schedule_indexshow') }}">{{'Consultation'|trans}}</a></li>
             <li><a href="{{ path('schedule_indexprint') }}">{{'Impression PDF'|trans}}</a></li>
-            <li><a href="{{ path('schedule_indexprintyear') }}">{{"Impression de l'année en PDF"|trans}}</a></li>
+            {#<li><a href="{{ path('schedule_indexprintyear') }}">{{"Impression de l'année en PDF"|trans}}</a></li>#}
             {% if is_granted('ROLE_ADMIN') %}
+                <li><a href="{{ path('schedule_overtime') }}">{{"Heures supplémentaires"|trans}}</a></li>
                 <li><a href="{{ path('schedule_indexexportprintyear') }}">{{"Export de l'année en PDF"|trans}}</a></li>
             {% endif %}
           </ul>
@@ -24,6 +25,9 @@
             <li><a href="{{ path('expense_create') }}">{{'Saisie'|trans}}</a></li>
             <li><a href="{{ path('expense_indexshow') }}">{{'Consultation'|trans}}</a></li>
             <li><a href="{{ path('expense_indexprint') }}">{{'Impression PDF'|trans}}</a></li>
+            {% if is_granted('ROLE_ADMIN') %}
+                <li><a href="{{ path('expense_indexupdatestatus') }}">{{"Mise à jour du status Notes de frais"|trans}}</a></li>
+            {% endif %}
           </ul>
         </li>
         {% endif %}
