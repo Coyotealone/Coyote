@@ -15,6 +15,7 @@ use Coyote\SiteBundle\Entity\Schedule;
 use Coyote\SiteBundle\Entity\Timetable;
 use Coyote\SiteBundle\Entity\UserInfo;
 use Coyote\SiteBundle\Entity\User;
+use Coyote\SiteBundle\Entity\Data;
 
 /**
  * Admin controller.
@@ -33,12 +34,8 @@ class AdminController extends Controller
     {
         if($this->get('security.context')->isGranted('ROLE_COMPTA'))
         {
-            /** @var $date string yyyymmdd */
-            $date = date("Ymd");
-            /** @var $heure string hhmmss */
-            $heure = date("His");
             /** @var $filename string */
-            $filename = "export".$date."-".$heure.".txt";
+            $filename = "export".date("Ymd")."-".date("His").".txt";
             /** @var $em object doctrine request */
             $em = $this->getDoctrine()->getManager();
             /** @var $dataexpense string data file */
@@ -116,19 +113,12 @@ class AdminController extends Controller
     {
         if($this->get('security.context')->isGranted('ROLE_CHEF_BE'))
         {
-            /** @var $month string mm */
-            $month = date('n');
-            /** @var $year string yyyy */
-            $year = date('Y');
-            /** @var $tab_month array */
-            $tab_month = array( 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre' );
-            /** @var $tab_num_month array */
-            $tab_num_month = array( '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12' );
-            /** @var $tab_year array */
-            $tab_year = array( '2013', '2014', '2015');
+            /** @var $data object Data */
+            $data = new Data();
             /** show view */
-            return $this->render('CoyoteSiteBundle:Admin:index_export.html.twig',
-                array('month' => $month, 'year' => $year, 'tab_mois' => $tab_month, 'tab_num_mois' => $tab_num_month, 'tab_annee' => $tab_year));
+            return $this->render('CoyoteSiteBundle:Admin:index_export.html.twig', array('month' => date('n'),
+                'year' => date('Y'), 'tab_mois' => $data->getTabMonth(), 'tab_num_mois' => $data->getTabNumMonth(),
+                'tab_annee' => $data->getTabYear()));
         }
         else
         /** redirect MainController:IndexAction */
@@ -148,38 +138,24 @@ class AdminController extends Controller
         {
             /** @var $em object doctrine request */
             $em = $this->getDoctrine()->getManager();
-            /** @var $tabuserid array design office users id*/
-            $tab_user_id = array(14, 17, 41, 44, 45, 46, 49, 50, 52, 54, 62, 70);
             /** @var $request object request */
             $request = Request::createFromGlobals();
             /** @var $data array data request */
-            $data = $request->request->all();
+            $data_request = $request->request->all();
             /** check @var data */
-            if($data == null)
+            if($data_request == null)
                 /** show view */
                 return $this->render('CoyoteSiteBundle:Admin:index_export.html.twig');
             else
             {
-                /** @var $date string mm/yyyy */
-                $date = $data['month'].'/'.$data['year'];
-                /** @var $year string yyyy */
-                $year = $data['year'];
-                /** @var $result string */
-                $result = '';
-                /** file in the text file */
-                for($i=0;$i<count($tab_user_id);$i++)
-                {
-                    /** @var $datauser object user */
-                    $datauser = $em->getRepository('CoyoteSiteBundle:User')->find($tab_user_id[$i]);
-                    /** @var $data_schedule string data schedule by user */
-                    $data_schedule = $em->getRepository('CoyoteSiteBundle:Schedule')->findforBE($tab_user_id[$i], $date, $year, $datauser->getName());
-                    /** add $data_schedule into $result */
-                    $result .= $data_schedule;
-                }/** end for */
+                /** @var $data object Entity Data */
+                $data = new Data();
+                $filecsv = $em->getRepository('CoyoteSiteBundle:Schedule')->fileDataUserBE($data->getTabUserIdBE(),
+                    $data_request['month'], $data_request['year']);
                 /** @var $filename string file name CSV */
-                $filename = 'datauser'.$date.'.csv';
+                $filename = 'datauser'.$data_request['month'].'/'.$data_request['year'].'.csv';
                 /** @return file csv downloaded with data user schedule */
-                return new Response($result, 200, array(
+                return new Response($filecsv, 200, array(
                     'Content-Type' => 'application/force-download',
                     'Content-Disposition' => 'attachment; filename="'.$filename.'"'
                 ));
@@ -234,7 +210,8 @@ class AdminController extends Controller
                     $response = new RedirectResponse($url);
                 }
 
-                $dispatcher->dispatch(FOSUserEvents::REGISTRATION_COMPLETED, new FilterUserResponseEvent($user, $request, $response));
+                $dispatcher->dispatch(FOSUserEvents::REGISTRATION_COMPLETED, new FilterUserResponseEvent($user,
+                    $request, $response));
 
                 return $response;
             }
