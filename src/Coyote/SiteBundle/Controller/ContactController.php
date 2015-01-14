@@ -38,7 +38,8 @@ class ContactController extends Controller
             /** send mail */
             $this->get('mailer')->send($message);
             /** Lauch the message flash*/
-            $this->get('session')->getFlashBag()->set('sendmessage', 'Merci de nous avoir contacté, nous répondrons à vos questions dans les plus brefs délais.');
+            $this->get('session')->getFlashBag()->set('sendmessage',
+                'Merci de nous avoir contacté, nous répondrons à vos questions dans les plus brefs délais.');
         }
         /** show view */
         return $this->render('CoyoteSiteBundle:Contact:contact.html.twig',

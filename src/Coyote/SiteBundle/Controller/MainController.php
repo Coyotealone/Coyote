@@ -84,7 +84,8 @@ class MainController extends Controller
             if($this->get('security.context')->isGranted('ROLE_BUSINESS'))
             {
                 /** @var $data_userfees entity UserFees */
-                $data_userfees = $em->getRepository('CoyoteSiteBundle:UserFees')->findOneByUser($session->get('userid'));
+                $data_userfees = $em->getRepository('CoyoteSiteBundle:UserFees')->findOneByUser(
+                    $session->get('userid'));
                 /** check $data_userfees */
                 if($data_userfees != null)
                     /** set userfeesid */
@@ -159,7 +160,8 @@ class MainController extends Controller
 
     public function checkAction()
     {
-        throw new \RuntimeException('You must configure the check path to be handled by the firewall using form_login in your security firewall configuration.');
+        throw new \RuntimeException('You must configure the check path to be handled by the firewall
+            using form_login in your security firewall configuration.');
     }
 
     public function logoutAction()
@@ -185,7 +187,8 @@ class MainController extends Controller
         /** @var $data_quote entity Quote */
         $data_quote = $em->getRepository('CoyoteSiteBundle:Quote')->findby(array('week' => $week, 'year' => $year));
         /** show view */
-        return $this->render('CoyoteSiteBundle:Accueil:menu.html.twig', array('quote' => $data_quote, '_locale' => $locale));
+        return $this->render('CoyoteSiteBundle:Accueil:menu.html.twig', array('quote' => $data_quote,
+            '_locale' => $locale));
     }
 
     public function languageAction($_locale)

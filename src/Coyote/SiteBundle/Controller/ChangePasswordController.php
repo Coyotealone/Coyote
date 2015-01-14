@@ -61,10 +61,11 @@ class ChangePasswordController extends Controller
                 $url = $this->container->get('router')->generate('fos_user_profile_show');
                 $response = new RedirectResponse($url);
             }
-            $dispatcher->dispatch(FOSUserEvents::CHANGE_PASSWORD_COMPLETED, new FilterUserResponseEvent($user, $request, $response));
+            $dispatcher->dispatch(FOSUserEvents::CHANGE_PASSWORD_COMPLETED, new FilterUserResponseEvent(
+                $user, $request, $response));
             return $response;
         }
-        return $this->container->get('templating')->renderResponse('CoyoteSiteBundle:ChangePassword:changepassword.html.twig',
-            array('form' => $form->createView()));
+        return $this->container->get('templating')->renderResponse(
+            'CoyoteSiteBundle:ChangePassword:changepassword.html.twig', array('form' => $form->createView()));
     }
 }

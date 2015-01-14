@@ -67,14 +67,15 @@ class RegistrationController extends ContainerAware
                     $response = new RedirectResponse($url);
                 }
 
-                $dispatcher->dispatch(FOSUserEvents::REGISTRATION_COMPLETED, new FilterUserResponseEvent($user, $request, $response));
+                $dispatcher->dispatch(FOSUserEvents::REGISTRATION_COMPLETED, new FilterUserResponseEvent($user,
+                    $request, $response));
 
                 return $response;
             }
         }
 
-        return $this->container->get('templating')->renderResponse('CoyoteSiteBundle:Registration:register.html.twig', array(
-            'form' => $form->createView(),
+        return $this->container->get('templating')->renderResponse('CoyoteSiteBundle:Registration:register.html.twig',
+            array( 'form' => $form->createView(),
         ));
     }
 
@@ -91,9 +92,8 @@ class RegistrationController extends ContainerAware
             throw new NotFoundHttpException(sprintf('The user with email "%s" does not exist', $email));
         }
 
-        return $this->container->get('templating')->renderResponse('CoyoteSiteBundle:Registration:checkEmail.html.twig', array(
-            'user' => $user,
-        ));
+        return $this->container->get('templating')->renderResponse('CoyoteSiteBundle:Registration:checkEmail.html.twig',
+            array('user' => $user,));
     }
 
     /**
@@ -126,7 +126,8 @@ class RegistrationController extends ContainerAware
             $response = new RedirectResponse($url);
         }
 
-        $dispatcher->dispatch(FOSUserEvents::REGISTRATION_CONFIRMED, new FilterUserResponseEvent($user, $request, $response));
+        $dispatcher->dispatch(FOSUserEvents::REGISTRATION_CONFIRMED, new FilterUserResponseEvent($user, $request,
+            $response));
 
         return $response;
     }
@@ -141,9 +142,8 @@ class RegistrationController extends ContainerAware
             throw new AccessDeniedException('This user does not have access to this section.');
         }
 
-        return $this->container->get('templating')->renderResponse('CoyoteSiteBundle:Registration:confirmed.html.twig', array(
-            'user' => $user,
-        ));
+        return $this->container->get('templating')->renderResponse('CoyoteSiteBundle:Registration:confirmed.html.twig',
+            array('user' => $user,));
     }
 
     protected function getEngine()

@@ -15,6 +15,7 @@ $(document).ready(function()
     {
         var ttc = document.getElementById("ttc0").value;
         var rate = $("#article0 option:selected").data("value");
+        ttc = replaceMontant(ttc);
         document.getElementById("ttc0").value = ttc;
         if(rate != null)
         {
@@ -38,6 +39,7 @@ $(document).ready(function()
     {
         var ttc = document.getElementById("ttc1").value;
         var rate = $("#article1 option:selected").data("value");
+        ttc = replaceMontant(ttc);
         document.getElementById("ttc1").value = ttc;
         if(rate != null)
         {
@@ -61,6 +63,7 @@ $(document).ready(function()
     {
         var ttc = document.getElementById("ttc2").value;
         var rate = $("#article2 option:selected").data("value");
+        ttc = replaceMontant(ttc);
         document.getElementById("ttc2").value = ttc;
         if(rate != null)
         {
@@ -84,6 +87,7 @@ $(document).ready(function()
     {
         var ttc = document.getElementById("ttc3").value;
         var rate = $("#article3 option:selected").data("value");
+        ttc = replaceMontant(ttc);
         document.getElementById("ttc3").value = ttc;
         if(rate != null)
         {
@@ -107,6 +111,7 @@ $(document).ready(function()
     {
         var ttc = document.getElementById("ttc4").value;
         var rate = $("#article4 option:selected").data("value");
+        ttc = replaceMontant(ttc);
         document.getElementById("ttc4").value = ttc;
         if(rate != null)
         {
@@ -130,6 +135,7 @@ $(document).ready(function()
     {
         var ttc = document.getElementById("ttc5").value;
         var rate = $("#article5 option:selected").data("value");
+        ttc = replaceMontant(ttc);
         document.getElementById("ttc5").value = ttc;
         if(rate != null)
         {
@@ -169,4 +175,10 @@ function calculTVA(montant, taux)
     	montantTVA = montant - montantsansTVA;
     	return montantTVA.toFixed(2);
     }
+}
+
+function replaceMontant(montant)
+{
+    var montant = montant.replace(",", ".");
+    return montant;
 }
