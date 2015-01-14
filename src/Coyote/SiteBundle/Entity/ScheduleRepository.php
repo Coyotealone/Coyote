@@ -708,7 +708,7 @@ class ScheduleRepository extends EntityRepository
 
             foreach($timetableschedule as $data)
             {
-                if($no_week != 0 && $data['no_week'] > $no_week)
+                if($no_week != 0 && $data['no_week'] != $no_week)
                 {
                     $result .= "Temps de travail de la semaine : ".$this->formatTime($timeres).";\r\n\r\n";
                     $timeres = 0;
@@ -718,7 +718,11 @@ class ScheduleRepository extends EntityRepository
                 $result .= $data['start'].";".$data['end'].";".$data['break'].";".$data['working_time'].";".$data['working_hours'].";";
                 $result .= $data['travel'].";".$data['absence_name'].";".$data['comment'].";\r\n";
                 $timeres += $this->calculTime($data['working_time']).";\r\n";
-
+                if ($data === end($timetableschedule))
+                {
+                    $result .= "Temps de travail de la semaine : ".$this->formatTime($timeres).";\r\n\r\n";
+                    $timeres = 0;
+                }
             }
         }
         return $result;
