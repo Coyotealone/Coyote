@@ -111,7 +111,8 @@ class ExpenseController extends Controller
             /** @var $year int yyyy */
             $year = date('Y');
             /** @var $tab_month array month */
-            $tab_month = array( 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre' );
+            $tab_month = array( 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre',
+                'Octobre', 'Novembre', 'Décembre' );
             /** @var $tab_num_month array num month */
             $tab_num_month = array( '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12' );
             /** @var $tab_year array year */
@@ -119,8 +120,9 @@ class ExpenseController extends Controller
             /** @var $tab_num_year array yy */
             $tab_num_year = array('2014', '2015');
             /** show view */
-            return $this->render('CoyoteSiteBundle:Expense:indexshow.html.twig', array('month' => $month, 'year' => $year, 'tab_mois' => $tab_month, 'tab_num_mois' =>
-                $tab_num_month, 'tab_annee' => $tab_year, 'tab_num_annee' => $tab_num_year));
+            return $this->render('CoyoteSiteBundle:Expense:indexshow.html.twig', array('month' => $month,
+                'year' => $year, 'tab_mois' => $tab_month, 'tab_num_mois' => $tab_num_month, 'tab_annee' => $tab_year,
+                'tab_num_annee' => $tab_num_year));
         }
     }
 
@@ -163,7 +165,8 @@ class ExpenseController extends Controller
             $session->set('year_expense', $year);
             /** set @var $session 'month_expense' */
             $session->set('month_expense', $month);
-            return $this->redirect($this->generateUrl('expense_showparameters', array('year' => $year, 'month' => $month)));
+            return $this->redirect($this->generateUrl('expense_showparameters', array('year' => $year,
+                'month' => $month)));
         }
     }
 
@@ -198,7 +201,8 @@ class ExpenseController extends Controller
             $date = $year.'-'.$month.'%';
             /** @var $data_expense object Expense*/
             //return new Response($date);
-            $data_expense = $em->getRepository('CoyoteSiteBundle:Expense')->findExpense($date, $session->get('userfeesid'));
+            $data_expense = $em->getRepository('CoyoteSiteBundle:Expense')->findExpense($date,
+                $session->get('userfeesid'));
             /** show view */
             //return new Response($data_expense[0]->getStatus()->getString());
             return $this->render('CoyoteSiteBundle:Expense:show.html.twig', array('data' => $data_expense));
@@ -237,13 +241,15 @@ class ExpenseController extends Controller
             for($i=0;$i<6;$i++)
             {
                 /** check $data_request */
-                if(!empty($data_request['article'.$i]) && !empty($data_request['date'.$i]) && !empty($data_request['devise'.$i]) && !empty($data_request['qte'.$i])
+                if(!empty($data_request['article'.$i]) && !empty($data_request['date'.$i])
+                    && !empty($data_request['devise'.$i]) && !empty($data_request['qte'.$i])
                 && !empty($data_request['site'.$i]) && !empty($data_request['ttc'.$i]))
                 {
                     /** @var $user_fee_id string $session 'userfeessid' */
                     $user_fee_id = $session->get('userfeesid');
                     /** @var $expense object expense */
-                    $expense = $em->getRepository('CoyoteSiteBundle:Expense')->saveExpense($user_fee_id, $data_request, $i);
+                    $expense = $em->getRepository('CoyoteSiteBundle:Expense')->saveExpense($user_fee_id,
+                        $data_request, $i);
                     /** persist $expense */
                     $em->persist($expense);
                     /** add data in db */
@@ -445,7 +451,8 @@ class ExpenseController extends Controller
         /** @var $year string yyyy */
         $year = date('Y');
         /** @var $tab_month array month */
-        $tab_month = array( 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre' );
+        $tab_month = array( 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre',
+            'Octobre', 'Novembre', 'Décembre' );
         /** @var $tab_num_month array num month */
         $tab_num_month = array( '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12' );
         /** @var $tab_year array year */
@@ -453,7 +460,8 @@ class ExpenseController extends Controller
         /** @var $tab_num_year array num year */
         $tab_num_year = array( '2014', '2015');
         /** show view */
-        return $this->render('CoyoteSiteBundle:Expense:indexprint.html.twig', array('month' => $month, 'year' => $year, 'tab_mois' => $tab_month, 'tab_num_mois' =>
+        return $this->render('CoyoteSiteBundle:Expense:indexprint.html.twig', array('month' => $month, 'year' => $year,
+            'tab_mois' => $tab_month, 'tab_num_mois' =>
             $tab_num_month, 'tab_annee' => $tab_year, 'tab_num_annee' => $tab_num_year));
     }
 
@@ -485,7 +493,8 @@ class ExpenseController extends Controller
             /** @var $date string mm/yyyy */
             $date = $year.'-'.$month.'%';
             /** @var $data_expense entity Expense */
-            $data_expense = $em->getRepository('CoyoteSiteBundle:Expense')->findExpense($date, $session->get('userfeesid'));
+            $data_expense = $em->getRepository('CoyoteSiteBundle:Expense')->findExpense($date,
+                $session->get('userfeesid'));
             /** @var $data_user entity User */
             $data_user = $em->getRepository('CoyoteSiteBundle:User')->find($session->get('userid'));
             /** @var $page view Expense:print */

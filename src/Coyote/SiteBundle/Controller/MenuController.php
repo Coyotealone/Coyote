@@ -46,7 +46,8 @@ class MenuController extends Controller
         /** @var $data_quote entity Quote */
         $data_quote = $em->getRepository('CoyoteSiteBundle:Quote')->findby(array('week' => $week, 'year' => $year));
         /** show view */
-        return $this->render('CoyoteSiteBundle:Accueil:menu.html.twig', array('quote' => $data_quote, '_locale' => $lang));
+        return $this->render('CoyoteSiteBundle:Accueil:menu.html.twig', array('quote' => $data_quote,
+            '_locale' => $lang));
     }
 
     /**
@@ -73,7 +74,8 @@ class MenuController extends Controller
         /** @var $data_quote entity Quote */
         $data_quote = $em->getRepository('CoyoteSiteBundle:Quote')->findby(array('week' => $week, 'year' => $year));
         /** show view */
-        return $this->render('CoyoteSiteBundle:Accueil:menu.html.twig', array('quote' => $data_quote, '_locale' => $lang));
+        return $this->render('CoyoteSiteBundle:Accueil:menu.html.twig', array('quote' => $data_quote,
+            '_locale' => $lang));
     }
 }
 

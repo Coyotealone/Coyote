@@ -48,11 +48,13 @@ class ResettingController extends ContainerAware
         $user = $this->container->get('fos_user.user_manager')->findUserByUsernameOrEmail($username);
 
         if (null === $user) {
-            return $this->container->get('templating')->renderResponse('CoyoteSiteBundle:Resetting:request.html.twig', array('invalid_username' => $username));
+            return $this->container->get('templating')->renderResponse('CoyoteSiteBundle:Resetting:request.html.twig',
+                array('invalid_username' => $username));
         }
 
         if ($user->isPasswordRequestNonExpired($this->container->getParameter('fos_user.resetting.token_ttl'))) {
-            return $this->container->get('templating')->renderResponse('FOSUserBundle:Resetting:passwordAlreadyRequested.html.twig');
+            return $this->container->get('templating')->renderResponse(
+                'FOSUserBundle:Resetting:passwordAlreadyRequested.html.twig');
         }
 
         if (null === $user->getConfirmationToken()) {
@@ -82,9 +84,8 @@ class ResettingController extends ContainerAware
             return new RedirectResponse($this->container->get('router')->generate('fos_user_resetting_request'));
         }
 
-        return $this->container->get('templating')->renderResponse('CoyoteSiteBundle:Resetting:checkEmail.html.twig', array(
-            'email' => $email,
-        ));
+        return $this->container->get('templating')->renderResponse('CoyoteSiteBundle:Resetting:checkEmail.html.twig',
+            array('email' => $email,));
     }
 
     /**
@@ -102,7 +103,8 @@ class ResettingController extends ContainerAware
         $user = $userManager->findUserByConfirmationToken($token);
 
         if (null === $user) {
-            throw new NotFoundHttpException(sprintf('The user with "confirmation token" does not exist for value "%s"', $token));
+            throw new NotFoundHttpException(sprintf('The user with "confirmation token" does not exist for value "%s"',
+                $token));
         }
 
         $event = new GetResponseUserEvent($user, $request);
@@ -129,16 +131,15 @@ class ResettingController extends ContainerAware
                     $response = new RedirectResponse($url);
                 }
 
-                $dispatcher->dispatch(FOSUserEvents::RESETTING_RESET_COMPLETED, new FilterUserResponseEvent($user, $request, $response));
+                $dispatcher->dispatch(FOSUserEvents::RESETTING_RESET_COMPLETED, new FilterUserResponseEvent($user,
+                    $request, $response));
 
                 return $response;
             }
         }
 
         return $this->container->get('templating')->renderResponse('CoyoteSiteBundle:Resetting:reset.html.twig', array(
-            'token' => $token,
-            'form' => $form->createView(),
-        ));
+            'token' => $token, 'form' => $form->createView(),));
     }
 
     /**
