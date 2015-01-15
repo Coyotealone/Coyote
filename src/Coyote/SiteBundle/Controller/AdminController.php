@@ -39,7 +39,7 @@ class AdminController extends Controller
             /** @var $em object doctrine request */
             $em = $this->getDoctrine()->getManager();
             /** @var $dataexpense string data file */
-            $dataexpense = $em->getRepository('CoyoteSiteBundle:Expense')->findforCompta();
+            $dataexpense = $em->getRepository('CoyoteSiteBundle:Expense')->fileDataExpenseCompta();
             /** update status from Expense */
             $em->getRepository('CoyoteSiteBundle:Expense')->updateStatus($em);
             /** @return file txt downloaded with data expense */

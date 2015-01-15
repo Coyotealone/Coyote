@@ -715,7 +715,8 @@ class ScheduleRepository extends EntityRepository
                 }
                 $no_week = $data['no_week'];
                 $result .= $data['day'].';'.$data['date']->format('Y-m-d').';';
-                $result .= $data['start'].";".$data['end'].";".$data['break'].";".$data['working_time'].";".$data['working_hours'].";";
+                $result .= $data['start'].";".$data['end'].";".$data['break'].";".$data['working_time'].";";
+                $result .= $data['working_hours'].";";
                 $result .= $data['travel'].";".$data['absence_name'].";".$data['comment'].";\r\n";
                 $timeres += $this->calculTime($data['working_time']).";\r\n";
                 if ($data === end($timetableschedule))

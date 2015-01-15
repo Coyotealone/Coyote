@@ -17,6 +17,14 @@ use Coyote\SiteBundle\Form\ContactType;
  */
 class ContactController extends Controller
 {
+
+    /**
+     * indexAction function.
+     * function to show form contact and send message
+     *
+     * @access public
+     * @return void
+     */
     public function indexAction()
     {
         /** @var $form form Contact */

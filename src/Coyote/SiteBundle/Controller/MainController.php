@@ -25,6 +25,7 @@ class MainController extends Controller
 {
     /**
      * indexAction function.
+     * function to show view menu and save data in session
      *
      * @access public
      * @return void
@@ -38,11 +39,6 @@ class MainController extends Controller
         $session = $request->getSession();
         /** @var $locale string _locale */
         $locale = $request->getLocale();
-        /** set lang */
-        //$session->set('lang', $_locale);
-
-        /** @var $session new object Session */
-        //$session = new Session();
         /** check $user role */
         if($user == "anon.")
             /** redirect MainController:loginAction */
@@ -103,6 +99,7 @@ class MainController extends Controller
 
     /**
      * loginAction function.
+     * function show view login
      *
      * @access public
      * @return void
@@ -169,6 +166,14 @@ class MainController extends Controller
         throw new \RuntimeException('You must activate the logout in your security firewall configuration.');
     }
 
+
+    /**
+     * menuAction function.
+     * function show view menu
+     *
+     * @access public
+     * @return void
+     */
     public function menuAction()
     {
         $request = $this->getRequest();
@@ -191,6 +196,15 @@ class MainController extends Controller
             '_locale' => $locale));
     }
 
+
+    /**
+     * languageAction function.
+     * function change language website
+     *
+     * @access public
+     * @param mixed $_locale
+     * @return void
+     */
     public function languageAction($_locale)
     {
         $request = $this->getRequest();
@@ -212,13 +226,19 @@ class MainController extends Controller
             return $this->redirect($this->generateUrl('main_menu', array('_locale' => $session->get('lang'))));
     }
 
+
+    /**
+     * redirectAction function.
+     * function redirect to index
+     *
+     * @access public
+     * @return void
+     */
     public function redirectAction()
     {
 
         $request = $this->getRequest();
         $session = $request->getSession();
-        //return new Response($session->get('lang'));
         return $response = $this->forward('CoyoteSiteBundle:Main:index', array('_locale' => $request->getLocale()));
-        return $this->redirect($this->generateUrl('main_login', array('_locale' => 'fr')));
     }
 }

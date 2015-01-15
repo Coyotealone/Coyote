@@ -56,6 +56,7 @@ $(document).ready(function()
         var absencetimemardi = document.getElementById("absencetimemardi").value;
         absencetimemardi = splitformatTime(absencetimemardi);
         absencetimemardi = formatTime(absencetimemardi);
+        document.getElementById("absencetimelundi").value = absencetimelundi;
         visibilityAbsenceTime(absencetimemardi, "mardi");
     })
 
@@ -64,6 +65,7 @@ $(document).ready(function()
         var absencetimemercredi = document.getElementById("absencetimemercredi").value;
         absencetimemercredi = splitformatTime(absencetimemercredi);
         absencetimemercredi = formatTime(absencetimemercredi);
+        document.getElementById("absencetimemercredi").value = absencetimemercredi;
         visibilityAbsenceTime(absencetimemercredi, "mercredi");
     })
 
@@ -72,6 +74,7 @@ $(document).ready(function()
         var absencetimejeudi = document.getElementById("absencetimejeudi").value;
         absencetimejeudi = splitformatTime(absencetimejeudi);
         absencetimejeudi = formatTime(absencetimejeudi);
+        document.getElementById("absencetimejeudi").value = absencetimejeudi;
         visibilityAbsenceTime(absencetimejeudi, "jeudi");
     })
 
@@ -80,6 +83,7 @@ $(document).ready(function()
         var absencetimevendredi = document.getElementById("absencetimevendredi").value;
         absencetimevendredi = splitformatTime(absencetimevendredi);
         absencetimevendredi = formatTime(absencetimevendredi);
+        document.getElementById("absencetimevendredi").value = absencetimevendredi;
         visibilityAbsenceTime(absencetimevendredi, "vendredi");
     })
 
@@ -88,6 +92,7 @@ $(document).ready(function()
         var absencetimesamedi = document.getElementById("absencetimesamedi").value;
         absencetimesamedi = splitformatTime(absencetimesamedi);
         absencetimesamedi = formatTime(absencetimesamedi);
+        document.getElementById("absencetimesamedi").value = absencetimesamedi;
         visibilityAbsenceTime(absencetimesamedi, "samedi");
     })
 
@@ -96,6 +101,7 @@ $(document).ready(function()
         var absencetimedimanche = document.getElementById("absencetimedimanche").value;
         absencetimedimanche = splitformatTime(absencetimedimanche);
         absencetimedimanche = formatTime(absencetimedimanche);
+        document.getElementById("absencetimedimanche").value = absencetimedimanche;
         visibilityAbsenceTime(absencetimedimanche, "dimanche");
     })
 

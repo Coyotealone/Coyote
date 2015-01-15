@@ -44,9 +44,9 @@ class ExpenseRepository extends EntityRepository
      * @param mixed $em
      * @return "OK"
      */
-    public function updateStatus($em)
+    public function updateStatus()
     {
-        $expense = $em->getRepository('CoyoteSiteBundle:Expense')->findAll();
+        $expense = $this->_$em->getRepository('CoyoteSiteBundle:Expense')->findAll();
         foreach($expense as $data)
         {
             $data->setStatus(0);
@@ -62,7 +62,7 @@ class ExpenseRepository extends EntityRepository
      * @access public
      * @return string
      */
-    public function findforCompta()
+    public function fileDataExpenseCompta()
     {
         $query = $this->getEntityManager()
                       ->createQuery("
