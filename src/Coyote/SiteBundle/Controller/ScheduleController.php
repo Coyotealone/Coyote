@@ -15,6 +15,7 @@ use Coyote\SiteBundle\Form\ScheduleType;
 use Coyote\SiteBundle\Entity\Schedule;
 use Coyote\SiteBundle\Entity\Timetable;
 use Coyote\SiteBundle\Entity\User;
+use Coyote\SiteBundle\Entity\Data;
 
 use Doctrine\ORM\EntityRepository;
 
@@ -524,24 +525,22 @@ class ScheduleController extends Controller
 
     /**
      * indexshowAction function.
+     * show page selection month and year to show time attendance
      *
      * @access public
      * @return void
      */
     public function indexshowAction()
     {
-        $month = date('n');
-        $year = date('Y');
-        $tab_mois = array( 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre',
-            'Octobre', 'Novembre', 'Décembre' );
-        $tab_num_mois = array( '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12' );
-        $tab_annee = array( '2013', '2014', '2015');
-        return $this->render('CoyoteSiteBundle:Schedule:indexshow.html.twig', array('month' => $month,
-            'year' => $year, 'tab_mois' => $tab_mois, 'tab_num_mois' => $tab_num_mois, 'tab_annee' => $tab_annee));
+        $data = new Data();
+        return $this->render('CoyoteSiteBundle:Schedule:indexshow.html.twig', array('month' => date('n'),
+            'year' => date('Y'), 'tab_mois' => $data->getTabMonth(), 'tab_num_mois' => $data->getTabNumMonth(),
+            'tab_annee' => $data->getTabYear()));
     }
 
     /**
      * showAction function.
+     * show time attendance by month and year
      *
      * @access public
      * @return void
@@ -554,20 +553,20 @@ class ScheduleController extends Controller
         $em = $doctrine->getManager();
         $request = Request::createFromGlobals();
 
-        $annee = $_GET['year'];
-        $mois = $_GET['month'];
+        $year = $_GET['year'];
+        $month = $_GET['month'];
 
-        if(empty($annee) && empty($mois))
+        if(empty($year) && empty($month))
         {
             return $this->redirect($this->generateUrl('schedule_indexshow'));
         }
         else
         {
-            if(empty($annee) && empty($mois))
+            if(empty($year) && empty($month))
                 return $this->render('CoyoteSiteBundle:Schedule:indexshow.html.twig');
             $user = $em->getRepository('CoyoteSiteBundle:User')->find($session->get('userid'));
-            $period = $em->getRepository('CoyoteSiteBundle:Schedule')->findPeriod($mois, $annee);
-            $date = $annee."-".$mois."-%";
+            $period = $em->getRepository('CoyoteSiteBundle:Schedule')->findPeriod($month, $year);
+            $date = $year."-".$month."-%";
             $absenceca = $em->getRepository('CoyoteSiteBundle:Schedule')->absenceMonth($date, $user->getId(), "CA");
             $absencecp = $em->getRepository('CoyoteSiteBundle:Schedule')->absenceMonth($date, $user->getId(), "CP");
             $absencertt = $em->getRepository('CoyoteSiteBundle:Schedule')->absenceMonth($date, $user->getId(), "RTT");
@@ -616,7 +615,7 @@ class ScheduleController extends Controller
                         $timeweek[$index] = $em->getRepository('CoyoteSiteBundle:Schedule')->formatTime($value);
                     }
                 }
-                $timemonth = $em->getRepository('CoyoteSiteBundle:Schedule')->findTimeMonth($mois.'/'.$annee, $user);
+                $timemonth = $em->getRepository('CoyoteSiteBundle:Schedule')->findTimeMonth($year.'-'.$month.'-%', $user);
 
                 return $this->render('CoyoteSiteBundle:Schedule:show.html.twig', array(
                     'dataschedule' => $dataschedule,
@@ -641,19 +640,15 @@ class ScheduleController extends Controller
      */
     public function indexprintAction()
     {
-        $month = date('n');
-        $year = date('Y');
-        $tab_mois = array( 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre',
-            'Octobre', 'Novembre', 'Décembre' );
-        $tab_num_mois = array( '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12' );
-        $tab_annee = array( '2013', '2014', '2015');
-
-        return $this->render('CoyoteSiteBundle:Schedule:indexprint.html.twig', array('month' => $month, 'year' => $year,
-            'tab_mois' => $tab_mois, 'tab_num_mois' => $tab_num_mois, 'tab_annee' => $tab_annee));
+        $data = new Data();
+        return $this->render('CoyoteSiteBundle:Schedule:indexprint.html.twig', array('month' => date('n'),
+            'year' => date('Y'), 'tab_mois' => $data->getTabMonth(), 'tab_num_mois' => $data->getTabNumMonth(),
+            'tab_annee' => $data->getTabYear()));
     }
 
     /**
      * printAction function.
+     * export data time attendance in PDF by month select
      *
      * @access public
      * @return void
@@ -666,21 +661,21 @@ class ScheduleController extends Controller
         $em = $doctrine->getManager();
         $request = Request::createFromGlobals();
 
-        $annee = $_GET['year'];
-        $mois = $_GET['month'];
+        $year = $_GET['year'];
+        $month = $_GET['month'];
 
-        if(empty($annee) && empty($mois))
+        if(empty($year) && empty($month))
         {
             return $this->redirect($this->generateUrl('schedule_indexprint'));
         }
         else
         {
-            if(empty($annee) && empty($mois))
+            if(empty($year) && empty($month))
                 return $this->render('CoyoteSiteBundle:Schedule:indexprint.html.twig');
 
             $user = $em->getRepository('CoyoteSiteBundle:User')->find($session->get('userid'));
-            $period = $em->getRepository('CoyoteSiteBundle:Schedule')->findPeriod($mois, $annee);
-            $date = $annee."-".$mois."-%";
+            $period = $em->getRepository('CoyoteSiteBundle:Schedule')->findPeriod($month, $year);
+            $date = $year."-".$month."-%";
             $absenceca = $em->getRepository('CoyoteSiteBundle:Schedule')->absenceMonth($date, $user->getId(), "CA");
             $absencecp = $em->getRepository('CoyoteSiteBundle:Schedule')->absenceMonth($date, $user->getId(), "CP");
             $absencertt = $em->getRepository('CoyoteSiteBundle:Schedule')->absenceMonth($date, $user->getId(), "RTT");
@@ -729,7 +724,7 @@ class ScheduleController extends Controller
                         $timeweek[$index] = $em->getRepository('CoyoteSiteBundle:Schedule')->formatTime($value);
                     }
                 }
-                $timemonth = $em->getRepository('CoyoteSiteBundle:Schedule')->findTimeMonth($mois.'/'.$annee, $user);
+                $timemonth = $em->getRepository('CoyoteSiteBundle:Schedule')->findTimeMonth($year.'-'.$month.'-%', $user);
 
                 $page = $this->render('CoyoteSiteBundle:Schedule:print.html.twig', array(
                     'dataschedule' => $dataschedule,
@@ -757,24 +752,26 @@ class ScheduleController extends Controller
 
     /**
      * affichage de la page avant d'obtenir un fichier pdf de l'année.
+     * show page selection period to print PDF
      *
      * @access public
      * @return void
      */
     public function indexprintyearAction()
     {
-        $date = date('d').'/'.date('m').'/'.date('Y');
+        $data = new Data();
+        $date = date('Y-m-d');
         $doctrine = $this->getDoctrine();
         $em = $doctrine->getManager();
         $period = $em->getRepository('CoyoteSiteBundle:Timetable')->findPeriodByDate($date);
-        $tab_period = array('2014/2015', '2015/2016', '2016/2017');
         return $this->render('CoyoteSiteBundle:Schedule:indexprintyear.html.twig', array(
-            'period' => $period, 'tab_period' => $tab_period));
+            'period' => $period, 'tab_period' => $data->getTabPeriod()));
     }
 
 
     /**
      * génération d'un fichier pdf de l'année de l'user.
+     * export data time attendance in PDF by working period
      *
      * @access public
      * @return void
@@ -863,22 +860,30 @@ class ScheduleController extends Controller
     /**
      * indexexportprintyearAction function.
      * Affichage des choix de période avant impression PDF
+     * show page selection period to print PDF
      *
      * @access public
      * @return void
      */
     public function indexexportprintyearAction()
     {
-        $date = date('d').'/'.date('m').'/'.date('Y');
+        $date = date('Y-m-d');
         $doctrine = $this->getDoctrine();
         $em = $doctrine->getManager();
         $period = $em->getRepository('CoyoteSiteBundle:Timetable')->findPeriodByDate($date);
-        $tab_period = array('2014/2015', '2015/2016', '2016/2017');
-
+        $data = new Data();
         return $this->render('CoyoteSiteBundle:Schedule:indexexportprintyear.html.twig', array(
-            'period' => $period, 'tab_period' => $tab_period));
+            'period' => $period, 'tab_period' => $data->getTabPeriod()));
     }
 
+
+    /**
+     * exportprintyearAction function.
+     * export all data time attendance in PDF by working period
+     *
+     * @access public
+     * @return void
+     */
     public function exportprintyearAction()
     {
         $request = $this->getRequest();
@@ -888,8 +893,8 @@ class ScheduleController extends Controller
         $request = Request::createFromGlobals();
         $pay_period = $_GET['pay_period'];
         define("pay_period", $pay_period, true);
-        $tab_user_id = array('2', '4', '6', '9', '10', '13', '14', '15', '16', '17', '18', '40', '41', '43', '44', '45',
-            '46', '47', '48', '49', '50', '51', '52', '53', '54', '55', '58', '61', '62', '70', '71');
+        $data = new Data();
+        $tab_user_id = $data->getTabUserIdSchedulePDF();
 
         if(empty($pay_period))
         {

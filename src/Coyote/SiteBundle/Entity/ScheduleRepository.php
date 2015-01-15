@@ -29,7 +29,7 @@ class ScheduleRepository extends EntityRepository
            ->from('CoyoteSiteBundle:Schedule', 's')
            ->innerJoin('CoyoteSiteBundle:Timetable', 't', 'WITH', 't.id = s.timetable')
            ->where('s.user = :user and t.date LIKE :date')
-           ->setParameters(array('user' => $user, 'date' => '%'.$date.'%'));
+           ->setParameters(array('user' => $user, 'date' => $date));
         $workingtime_schedule =  $qb->getQuery()
                                     ->getResult();
 

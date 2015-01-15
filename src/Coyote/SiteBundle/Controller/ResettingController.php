@@ -30,16 +30,20 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class ResettingController extends ContainerAware
 {
     /**
-* Request reset user password: show form
-*/
+     * requestAction function.
+     * Request reset user password: show form
+     *
+     * @access public
+     * @return void
+     */
     public function requestAction()
     {
         return $this->container->get('templating')->renderResponse('CoyoteSiteBundle:Resetting:request.html.twig');
     }
 
     /**
-* Request reset user password: submit form and send email
-*/
+     * Request reset user password: submit form and send email
+     */
     public function sendEmailAction(Request $request)
     {
         $username = $request->request->get('username');
@@ -73,8 +77,8 @@ class ResettingController extends ContainerAware
     }
 
     /**
-* Tell the user to check his email provider
-*/
+     * Tell the user to check his email provider
+     */
     public function checkEmailAction(Request $request)
     {
         $email = $request->query->get('email');
@@ -89,8 +93,8 @@ class ResettingController extends ContainerAware
     }
 
     /**
-* Reset user password
-*/
+     * Reset user password
+     */
     public function resetAction(Request $request, $token)
     {
         /** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */
@@ -143,14 +147,14 @@ class ResettingController extends ContainerAware
     }
 
     /**
-* Get the truncated email displayed when requesting the resetting.
-*
-* The default implementation only keeps the part following @ in the address.
-*
-* @param \FOS\UserBundle\Model\UserInterface $user
-*
-* @return string
-*/
+     * Get the truncated email displayed when requesting the resetting.
+     *
+     * The default implementation only keeps the part following @ in the address.
+     *
+     * @param \FOS\UserBundle\Model\UserInterface $user
+     *
+     * @return string
+     */
     protected function getObfuscatedEmail(UserInterface $user)
     {
         $email = $user->getEmail();

@@ -15,6 +15,7 @@ use Coyote\SiteBundle\Entity\UserInfo;
 use Coyote\SiteBundle\Entity\Expense;
 use Coyote\SiteBundle\Entity\Site;
 use Coyote\SiteBundle\Entity\Currency;
+use Coyote\SiteBundle\Entity\Data;
 
 use Doctrine\ORM\EntityRepository;
 
@@ -106,23 +107,11 @@ class ExpenseController extends Controller
             return $this->redirect($this->generateUrl('main_accueil'));
         else
         {
-            /** @var $month int mm */
-            $month = date('n');
-            /** @var $year int yyyy */
-            $year = date('Y');
-            /** @var $tab_month array month */
-            $tab_month = array( 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre',
-                'Octobre', 'Novembre', 'Décembre' );
-            /** @var $tab_num_month array num month */
-            $tab_num_month = array( '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12' );
-            /** @var $tab_year array year */
-            $tab_year = array('2014', '2015');
-            /** @var $tab_num_year array yy */
-            $tab_num_year = array('2014', '2015');
+            $data = new Data();
             /** show view */
-            return $this->render('CoyoteSiteBundle:Expense:indexshow.html.twig', array('month' => $month,
-                'year' => $year, 'tab_mois' => $tab_month, 'tab_num_mois' => $tab_num_month, 'tab_annee' => $tab_year,
-                'tab_num_annee' => $tab_num_year));
+            return $this->render('CoyoteSiteBundle:Expense:indexshow.html.twig', array('month' => date('n');,
+                'year' => date('Y'), 'tab_mois' => $data->getTabMonth(), 'tab_num_mois' => $data->getTabNumMonth(),
+                'tab_annee' => $data->getTabYear(), 'tab_num_annee' => $data->getTabNumYear()));
         }
     }
 
@@ -152,11 +141,6 @@ class ExpenseController extends Controller
                 $month = $_GET['month'];
             }
 
-        /** @var $year string year */
-        //$year = $_GET['year'];
-        /** @var $month string month */
-        //$month = $_GET['month'];
-        /** check @var $year and $month */
         if(empty($year) && empty($month))
             return $this->redirect($this->generateUrl('expense_indexshow'));
         else
@@ -446,23 +430,11 @@ class ExpenseController extends Controller
      */
     public function indexprintAction()
     {
-        /** @var $month string mm */
-        $month = date('n');
-        /** @var $year string yyyy */
-        $year = date('Y');
-        /** @var $tab_month array month */
-        $tab_month = array( 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre',
-            'Octobre', 'Novembre', 'Décembre' );
-        /** @var $tab_num_month array num month */
-        $tab_num_month = array( '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12' );
-        /** @var $tab_year array year */
-        $tab_year = array( '2014', '2015');
-        /** @var $tab_num_year array num year */
-        $tab_num_year = array( '2014', '2015');
+        $data = new Data();
         /** show view */
-        return $this->render('CoyoteSiteBundle:Expense:indexprint.html.twig', array('month' => $month, 'year' => $year,
-            'tab_mois' => $tab_month, 'tab_num_mois' =>
-            $tab_num_month, 'tab_annee' => $tab_year, 'tab_num_annee' => $tab_num_year));
+        return $this->render('CoyoteSiteBundle:Expense:indexprint.html.twig', array('month' => date('n'),
+            'year' => date('Y'), 'tab_mois' => $data->getTabMonth(), 'tab_num_mois' => $data->getTabNumMonth(),
+            'tab_annee' => $data->getTabYear(), 'tab_num_annee' => $data->getTabNumYear()));
     }
 
     /**
@@ -499,12 +471,8 @@ class ExpenseController extends Controller
             $data_user = $em->getRepository('CoyoteSiteBundle:User')->find($session->get('userid'));
             /** @var $page view Expense:print */
             $page = $this->render('CoyoteSiteBundle:Expense:print.html.twig', array('data' => $data_expense));
-            /** @var $date string yyyymmdd */
-            $date = date("Ymd");
-            /** @var $hour string hhmmss */
-            $hour = date("His");
             /** @var $filename string filename PDF */
-            $filename = $data_user->getName()."_expense".$date."-".$hour.".pdf";
+            $filename = $data_user->getName()."_expense".date("Ymd-His").".pdf";
             /** prepare pdf */
             $html = $page->getContent();
             $html2pdf = new \Html2Pdf_Html2Pdf('P', 'A4', 'fr');
