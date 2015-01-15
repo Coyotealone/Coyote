@@ -56,7 +56,7 @@ $(document).ready(function()
         var absencetimemardi = document.getElementById("absencetimemardi").value;
         absencetimemardi = splitformatTime(absencetimemardi);
         absencetimemardi = formatTime(absencetimemardi);
-        document.getElementById("absencetimelundi").value = absencetimelundi;
+        document.getElementById("absencetimemardi").value = absencetimemardi;
         visibilityAbsenceTime(absencetimemardi, "mardi");
     })
 

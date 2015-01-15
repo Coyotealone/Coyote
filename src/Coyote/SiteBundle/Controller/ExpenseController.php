@@ -109,7 +109,7 @@ class ExpenseController extends Controller
         {
             $data = new Data();
             /** show view */
-            return $this->render('CoyoteSiteBundle:Expense:indexshow.html.twig', array('month' => date('n');,
+            return $this->render('CoyoteSiteBundle:Expense:indexshow.html.twig', array('month' => date('n'),
                 'year' => date('Y'), 'tab_mois' => $data->getTabMonth(), 'tab_num_mois' => $data->getTabNumMonth(),
                 'tab_annee' => $data->getTabYear(), 'tab_num_annee' => $data->getTabNumYear()));
         }
