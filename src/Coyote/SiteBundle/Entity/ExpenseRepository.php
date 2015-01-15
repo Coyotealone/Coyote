@@ -46,13 +46,13 @@ class ExpenseRepository extends EntityRepository
      */
     public function updateStatus()
     {
-        $expense = $this->_$em->getRepository('CoyoteSiteBundle:Expense')->findAll();
+        $expense = $this->_em->getRepository('CoyoteSiteBundle:Expense')->findAll();
         foreach($expense as $data)
         {
             $data->setStatus(0);
-            $em->persist($data);
+            $this->_em->persist($data);
         }
-        $em->flush();
+        $this->_em->flush();
         return "OK";
     }
 
