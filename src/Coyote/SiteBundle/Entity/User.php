@@ -6,6 +6,8 @@ use Doctrine\ORM\Mapping as ORM;
 
 use FOS\UserBundle\Model\User as BaseUser;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * User
  */
@@ -89,6 +91,7 @@ class User extends BaseUser
         parent::__construct();
         $this->schedules = new \Doctrine\Common\Collections\ArrayCollection();
         $this->userfeess = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->roles = array('ROLE_USER');
     }
 
     /**
