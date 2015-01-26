@@ -82,7 +82,7 @@ class ExpenseRepository extends EntityRepository
             }
             $result .= "D;";
             $result .= $data->getUserFees()->getLogin().";";//En majuscule
-            $result .= $data->getSite()->getCode().";";
+            $result .= $data->getSite().";";
             $result .= $data->getDate()->format('dmy').";";
             $result .= $data->getFee()->getCode().";";
             $result .= $data->getCurrency()->getCode().";";

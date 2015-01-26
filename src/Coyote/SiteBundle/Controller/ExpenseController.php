@@ -215,6 +215,7 @@ class ExpenseController extends Controller
             return $this->redirect($this->generateUrl('main_accueil'));
         else
         {
+            $count_expense = 0;
             /** @var $em object doctrine request */
             $em = $this->getDoctrine()->getManager();
             /** @var $request */
@@ -238,6 +239,7 @@ class ExpenseController extends Controller
                     $em->persist($expense);
                     /** add data in db */
                     $em->flush();
+                    $count_expense ++;
                 }
                 /** check $expense */
                 if(isset($expense))
@@ -245,14 +247,14 @@ class ExpenseController extends Controller
                     $tab_id[$i] = $expense->getId();
 
             }
-            /** check $tab_id */
-            if(isset($tab_id))
+            /** check $count_expense */
+            if($count_expense >= 1 )
             {
-                /** check $tab_id */
-                if(count(array_unique($tab_id)) > 1)
+                /** check $count_expense */
+                if($count_expense > 1)
                 {
                     /** @var $message string */
-                    $message = count($tab_id).' enregistrement effectués';
+                    $message = $count_expense.' enregistrement effectués';
                 }
                 else
                 {
@@ -515,12 +517,14 @@ class ExpenseController extends Controller
         /** check $year and $month */
         if(empty($id_start) && empty($id_end))
         {
+            $message = "Aucune donnée mise à jour";
+            $this->get('session')->getFlashBag()->set('updatestatus', $message);
             /** redirect ExpenseController:indexprintAction */
             return $this->redirect($this->generateUrl('expense_indexupdatestatus'));
         }
         else
         {
-            if($id_end>$id_start)
+            if($id_end > $id_start)
             {
                 for($i = $id_start; $i<=$id_end; $i++)
                 {
@@ -532,9 +536,10 @@ class ExpenseController extends Controller
                     $em->flush();
                 }
                 $message = "Mise à jour effectuée";
+                //alert($message);
                 $this->get('session')->getFlashBag()->set('updatestatus', $message);
             }
-            if($id_start>$id_end)
+            if($id_start > $id_end)
             {
                 for($i = $id_end; $i<=$id_start; $i++)
                 {
@@ -546,11 +551,7 @@ class ExpenseController extends Controller
                     $em->flush();
                 }
                 $message = "Mise à jour effectuée";
-                $this->get('session')->getFlashBag()->set('updatestatus', $message);
-            }
-            else
-            {
-                $message = "Aucune donnée mise à jour";
+                alert($message);
                 $this->get('session')->getFlashBag()->set('updatestatus', $message);
             }
         }
