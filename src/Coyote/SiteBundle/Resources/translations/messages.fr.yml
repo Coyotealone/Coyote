@@ -1,0 +1,477 @@
+base:
+    copyright: Copyright ©2015 PICHON - Tous droits réservés
+    version: Version 1.12.0
+    title: Pichon - WebSite
+    link: www.pichonindustries.fr
+    choose_language: Choisissez votre pays
+    welcome: Bienvenue sur le site Pichon
+    nav:
+        accueil: Accueil
+        schedule:
+            index: Saisie
+            indexshow: Consultation
+            indexprint: Impression PDF
+            name: Présence
+            overtime: Heures supplémentaires
+            indexexportprintyear: "Export de l'année en PDF"
+        expense:
+            name: Note de frais
+            create: Saisie
+            indexshow: Consultation
+            indexprint: Impression PDF
+            indexupdatestatus: Mise à jour du status des notes de frais
+        profile:
+            name: Profil
+            profile: Information Profil
+            changepassword: Changement de mot de passe
+        schedule_admin:
+            name: Export présence
+            indexexport: Export données BE
+        expense_admin:
+            name: Export Notes de frais
+            exportexpense: Export données notes de frais
+        profile_admin:
+            name: Administrateur
+            register: "Ajout d'un utilisateur"
+accueil:
+    menu:
+        message: Bienvenue sur le site PICHON
+
+userinfo:
+    welcome: Bienvenue
+
+admin:
+    month: Mois
+    year: Année
+    download:
+        submit: Télécharger
+
+change_password:
+    submit: Modifier le mot de passe
+    title: Changement de votre mot de passe
+
+contact:
+    title: Contactez-nous
+    submit: Envoyez
+    email: Email
+    subject: Sujet
+    content: Contenu
+
+schedule:
+    title:
+        edit: Temps de travail
+    message_week: "Voici la semaine %no_week% affichée de l'année %year%"
+    dayofweek: Jour de la semaine
+    start: Début
+    end: Fin
+    break: Pause
+    working_time: Heures travaillées
+    travel: Déplacement
+    absence: Absence
+    absence_time: Temps Absence
+    comment: Commentaire
+    monday: Lundi
+    tuesday: Mardi
+    wednesday: Mercredi
+    thursday: Jeudi
+    friday: Vendredi
+    saturday: Samedi
+    sunday: Dimanche
+    write_comment: Saisir un commentaire
+    rtt: RTT
+    cp: Congés payés
+    ca: Congés ancienneté
+    css: Congés sans solde
+    sick: Maladie
+    at: Arrêt de travail
+    mp: Maternité/Paternité
+    recup: Récup/Heures supp
+    various: Autre
+    previous_week: Semaine Précédente
+    next_week: Semaine Suivante
+    submit:
+        save: Enregistrer
+    message: "Saisie automatique des heures (Cochez les jours que vous souhaitez remplir et saisissez les valeurs dans les champs début fin pause ci-dessous)"
+    write_auto: Saisie Automatique
+
+expense:
+    title:
+        create: Ajout de notes de frais
+        edit: Edition de la note de frais
+        index: Bienvenue dans la partie des Notes de frais
+        indexprint: Téléchargement des notes de frais au format PDF
+        indexshow: Consultation des notes de frais
+        print: Impression Notes de frais
+        show: Récapitulatif du mois
+        updatestatus: Mise à jour status Notes de frais
+    submit:
+        save: Enregistrer
+        update: Mise à jour
+        back: Retour à la liste
+        download: Télécharger
+        show: Afficher
+        edit: Editer
+    site: Site
+    date: Date
+    item: Code Article
+    currency: Devise
+    quantity: Quantité
+    amountttc: Montant TTC
+    amounttva: Montant TVA
+    business: Affaire
+    comment: Commentaire
+    actual_amount: Montant réel
+    month: Mois
+    year: Année
+    message: Aucune donnée trouvée
+    id_start: ID Start
+    id_end: ID End
+
+profile:
+    show:
+        username: "Nom d'utilisateur"
+        email: Adresse e-mail
+        name: NOM Prénom
+        phone: N° Téléphone
+        cell: N° Portable
+        message: Si vous rencontrez une erreur sur votre profil, merci de contacter votre administrateur
+
+form:
+    group_name: "Nom du groupe :"
+    username: "Nom d'utilisateur :"
+    email: "Adresse e-mail :"
+    current_password: "Mot de passe actuel :"
+    password: "Mot de passe :"
+    password_confirmation: "Vérification :"
+    new_password: "Nouveau mot de passe :"
+    new_password_confirmation: "Vérification :"
+    name: NOM Prénom
+    adress1: Adresse
+    adress2: Adresse(suite)
+    zip_code: Code Postal
+    postal_box: Boite Postal
+    city: Ville
+    country: Pays
+    phone: N° Téléphone
+    cell: N° Portable
+    website: Site Web
+    roles: Rôles
+    fax: Fax
+
+registration:
+    title: "Création d'un compte utilisateur"
+    check_email: Un e-mail a été envoyé à l'adresse %email%. Il contient un lien d'activation sur lequel il vous faudra cliquer afin d'activer votre compte.
+    confirmed: Félicitations %username%, votre compte est maintenant activé.
+    back: Retour à la page d'origine.
+    submit: Enregistrer
+    flash:
+        user_created: L'utilisateur a été créé avec succès
+    email:
+        subject: Bienvenue %username% !
+        message: |
+            Bonjour %username% !
+
+            Pour valider votre compte utilisateur, merci de vous rendre sur %confirmationUrl%
+
+            Cordialement,
+            L'équipe.
+
+resetting:
+    password_already_requested: Un nouveau mot de passe a déjà été demandé pour cet utilisateur dans les dernières 24 heures.
+    check_email: Un e-mail a été envoyé à l'adresse %email%. Il contient un lien sur lequel il vous faudra cliquer afin de réinitialiser votre mot de passe.
+    request:
+        invalid_username: Le nom d'utilisateur ou l'adresse e-mail "%username%" n'existe pas.
+        username: "Nom d'utilisateur ou adresse e-mail :"
+        submit: Réinitialiser le mot de passe
+    reset:
+        submit: Modifier le mot de passe
+    flash:
+        success: Le mot de passe a été réinitialisé avec succès
+    email:
+        subject: Réinitialisation de votre mot de passe
+        message: |
+            Bonjour %username% !
+
+            Pour réinitialiser votre mot de passe, merci de vous rendre sur %confirmationUrl%
+
+            Cordialement,
+            L'équipe.
+
+# En-tête #
+# Choisissez votre pays: Choose your country
+# Contact: Contact
+# Site Pichon: Pichon Website
+# Bienvenue: Welcome
+#
+# # Pied de page #
+# "Copyright ©2014 PICHON - Tous droits réservés": Copyright ©2014 PICHON - All rights reserved
+# Version: Version
+#
+# # Navbar #
+# Accueil: Home
+# Présence: Attendance
+# Consultation: Consultation
+# Saisie: Recording
+# Note de Frais: Expense
+# Profil: Profile
+# Configurateur: Configurator
+# Formulaire: Form
+# Index: Index
+# Information Profil: Profil information
+# Changement de mot de passe: Change password
+# "Création d'une config": Creating a configuration
+# Formulaire Bon de commande: Form order
+# Impression PDF: PDF print
+# "Impression de l'année en PDF": PDF print of the year
+# Export Présence: Export time and attendance
+# Export données BE: Export BE data
+# Export Notes de Frais: Export Expense
+# Export données notes de frais: Export expense data
+# "Export de l'année en PDF": Export PDF print of the year
+#
+# # Page Login #
+# Mot de passe oublié: Forgot password
+# Connexion: Login
+#
+# # Page Menu #
+# Bienvenue sur le site PICHON: Welcome to the website PICHON
+#
+# # Page présence #
+# Voici la semaine: Display Week
+# "d'affichée de l'année": of
+# Temps de travail: Working time
+# "Jour de la semaine": Weekday
+# Début: Start
+# Fin: End
+# Pause: Break
+# Journée travaillée: Working hours
+# Déplacement: Travel
+# Absence: Absence
+# Commentaire: Comment
+# Oui: Yes
+# Non: No
+# Saisir un commentaire: Write a comment
+# Saisie automatique des heures (Cochez les jours que vous souhaitez remplir et saisissez les valeurs dans les champs début fin pause ci-dessous): AutoFill hours (check the days you want to fill and enter the values ​​in the start end break below)
+# Saisie Automatique: AutoFill
+# Semaine Précédente: Previous Week
+# Semaine Suivante: Next Week
+# Lundi: Monday
+# Mardi: Tuesday
+# Mercredi: Wednesday
+# Jeudi: Thursday
+# Vendredi: Friday
+# Samedi: Saturday
+# Dimanche: Sunday
+# Mois: Month
+# Année: Year
+# Janvier: January
+# Février: February
+# Mars: March
+# Avril: April
+# Mai: May
+# Juin: June
+# Juillet: July
+# Août: August
+# Septembre: September
+# Octobre: October
+# Novembre: November
+# Décembre: December
+# Afficher: Display
+# Récapitulatif du mois: Summury of the month
+# Nombre d'heure travaillé dans la semaine: Number of hours worked in the week
+# Temps total travaillé dans le mois: Total time worked during the month
+# Nombre de RTT utilisé dans le mois / année: Number of RTT used in the month / year
+# Nombre de congés payés (CP) utilisé dans le mois /année: Number of paid leave (CP) used in the month / year
+# Nombre de congés d'anciennetés (CA) utilisé dans le mois / année: Number of seniority leave (CA) used in the month / year
+# Jour férié: Public Holiday
+# Weekend: Weekend
+# Temps de la semaine: Time of the week
+# lundi: monday
+# mardi: tuesday
+# mercredi: wednesday
+# jeudi: thursday
+# vendredi: friday
+# samedi: saturday
+# dimanche: sunday
+# Enregistrer: Save
+# Consultation des temps de présence: Consultation of time in work
+# Jour travaillé dans le mois / année: Working day in the month / year
+# "Récapitulatif de l'année": Summury of the year
+# "Nombre de RTT utilisé dans l'année": Number of RTT user in the year
+# "Nombre de congés payés (CP) utilisé dans l'année" : Number of paid leave (CP) used in the year
+# "Nombre de congés d'anciennetés (CA) utilisé dans l'année": Number of seniority leave (CA) used in the year
+# "Téléchargement des temps de présence de l'année au format PDF": Download to PDF working time in the year
+# "Période": Period
+# "Temps travaillé dans la semaine": Time worked in a week
+# Téléchargement des temps de présence au format PDF: Download the working time in PDF
+# Aucune: None
+# RTT: Reduction of working time
+# Congés payés: Paid leave
+# Congés ancienneté: Leave seniority
+# Congés sans solde: Unpaid leave
+# Autres: Anything else
+# Maladie/Accident travail/Paternité: Illness/Work accident/Paternity
+# Aucune donnée trouvée: No data found
+# "Export des temps de présence de l'année au format PDF": Export attendance time of the year to PDF
+#
+# # Page Profil #
+# "En cas de problème de mot de passe, merci de contacter votre administrateur ou d'envoyer un mail dans l'onglet Contact": Thanks to contact your administrator, if you have a problem with password. Or send an email from Contact tab
+# 'Le mot de passe doit faire': The password must be
+# 'caractères': characters
+#
+# # Page Note de frais #
+# Bienvenue dans la partie des Notes de frais: Welcome to the part of the Expense
+# Saisie des notes de frais: Entering expense
+# Visualiser les notes de frais: Warning fees
+# Site: Site
+# Date: Date
+# Code Article: Item code
+# Devise: Currency
+# Quantité: Amount
+# Montant réel: Actual amount
+# Montant TTC: Tax amount
+# Montant TVA: TVA amount
+# Affaire: Business
+# Commentaire: Comment
+# Editer: Edit
+# Edité: Edit
+# Mise à jour: Update
+# Edition de la note de frais: Editing the expense
+# Retour à la liste: Back to the list
+# Consultation des notes de frais: Consultation expense
+# Ajout de notes de frais: Adding expense
+# "Merci d'écrire la date qu'avec des chiffres. Exemple pour la date du 7 juin 2014, il faut écrire : 070614": Thank you write the date with numbers. For example the date of June 7, 2014, write: 070614
+# Aucune donnée trouvée: No data found
+# Téléchargement des notes de frais au format PDF: Download expense PDF
+# Impression Notes de frais: Print expense
+# Artcle: Item
+#
+# # Group
+# group:
+#     edit:
+#         submit: Update group
+#     show:
+#         name: Group name
+#     new:
+#         submit: Create group
+#     flash:
+#         updated: The group has been updated
+#         created: The group has been created
+#         deleted: The group has been deleted
+#
+# # Security
+# "Bad credentials": Invalid username or password
+# "User account is disabled.": User account is disabled.
+#
+# security:
+#     login:
+#         username: "Username:"
+#         password: "Password:"
+#         remember_me: Remember me
+#         submit: Login
+#
+# # Profile
+# profile:
+#     show:
+#         username: Username
+#         email: Email
+#     edit:
+#         submit: Update
+#     flash:
+#         updated: The profile has been updated
+#
+# # Password change
+# change_password:
+#     submit: Change password
+#     flash:
+#         success: The password has been changed
+#
+# # Registration
+# registration:
+#     check_email: An email has been sent to %email%. It contains an activation link you must click to activate your account.
+#     confirmed: Congrats %username%, your account is now activated.
+#     back: Back to the originating page.
+#     submit: Register
+#     flash:
+#         user_created: The user has been created successfully
+#     email:
+#         subject: Welcome %username%!
+#         message: |
+#             Hello %username%!
+#
+#             To finish activating your account - please visit %confirmationUrl%
+#
+#             Regards,
+#             the Team.
+#
+# # Password resetting
+# resetting:
+#     password_already_requested: The password for this user has already been requested within the last 24 hours.
+#     check_email: An email has been sent to %email%. It contains a link you must click to reset your password.
+#     request:
+#         invalid_username: The username or email address "%username%" does not exist.
+#         username: "Username or email address:"
+#         submit: Reset password
+#     reset:
+#         submit: Change password
+#     flash:
+#         success: The password has been reset successfully
+#     email:
+#         subject: Reset Password
+#         message: |
+#             Hello %username%!
+#
+#             To reset your password - please visit %confirmationUrl%
+#
+#             Regards,
+#             the Team.
+#
+# # Global strings
+# layout:
+#     logout: Logout
+#     login: Login
+#     register: Register
+#     logged_in_as: Logged in as %username%
+#
+# # Form field labels
+# form:
+#     group_name: "Group name:"
+#     username: "Username:"
+#     email: "Email:"
+#     current_password: "Current password:"
+#     password: "Password:"
+#     password_confirmation: "Verification:"
+#     new_password: "New password:"
+#     new_password_confirmation: "Verification:"
+#     name: "Name :"
+#     adress1: "Adress :"
+#     adress2: "Adress(suite) :"
+#     zip_code: "Zip Code :"
+#     postal_box: "Postal Box :"
+#     city: "City :"
+#     country: "Country :"
+#     phone: "Phone :"
+#     cell: "Cell :"
+#     fax: "Fax :"
+#     website: "Website :"
+#     roles: "Role :"
+#
+# #Ajout personnel
+# Mot de passe oublié: Forget password
+# Nom prénom: Name
+# N° Téléphone: Phone number
+# Si vous rencontrez une erreur sur votre profil, merci de contacter votre administrateur: If you encounter an error on your profile, thank you to contact your administrator
+# Le mot de passe doit faire 6 caractères: The password must be 6 characters
+# Information sur votre profil: Profil Information
+# Changement de votre mot de passe: Change your password
+#
+# Se souvenir de moi: Remember me
+# Identifiant: Login
+# Mot de passe: Password
+#
+# "Création d'un compte utilisateur": Create user account
+#
+# #Messages d'erreur
+#
+# Une erreur est survenue: An Error Occurred
+# Le serveur a renvoyé une: The server returned a
