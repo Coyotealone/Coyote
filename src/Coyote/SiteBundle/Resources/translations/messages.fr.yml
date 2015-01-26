@@ -60,6 +60,10 @@ contact:
 schedule:
     title:
         edit: Temps de travail
+        index: Choisissez votre méthode de saisie des temps.
+        hour: Saisie par heure
+        day: Saisie par jour
+        indexexportprintyear: "Export des temps de présence de l'année au format PDF"
     message_week: "Voici la semaine %no_week% affichée de l'année %year%"
     dayofweek: Jour de la semaine
     start: Début
@@ -91,6 +95,7 @@ schedule:
     next_week: Semaine Suivante
     submit:
         save: Enregistrer
+        indexexportprintyear: Afficher
     message: "Saisie automatique des heures (Cochez les jours que vous souhaitez remplir et saisissez les valeurs dans les champs début fin pause ci-dessous)"
     write_auto: Saisie Automatique
 

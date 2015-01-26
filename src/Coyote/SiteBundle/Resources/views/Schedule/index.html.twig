@@ -26,10 +26,10 @@
 
 {% block content %}
     <div class="jumbotron">
-        <p class="lead">{{'Choisissez votre méthode de saisie des temps.'|trans}}</p>
+        <p class="lead">{{'schedule.title.index'|trans}}</p>
         <p>
-        	<a href={{ path('schedule_user')}} class="btntime">{{'Saisie par heure'|trans}}</a>
-        	<a href={{ path('schedule_framework')}} class="btntime">{{'Saisie par jour'|trans}}</a>
+        	<a href={{ path('schedule_user')}} class="btntime">{{'schedule.title.hour'|trans}}</a>
+        	<a href={{ path('schedule_framework')}} class="btntime">{{'schedule.title.day'|trans}}</a>
 	  	</p>
     </div>
 {% endblock %}
