@@ -3,7 +3,7 @@
     <head>
         <title>
             {% block title %}
-                Pichon - WebSite
+                {{'base.title'|trans}}
             {% endblock %}
         </title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -24,11 +24,11 @@
         <header>
             <div id="lien">
                 <a href="{{ path('main_accueil') }}"><img src="{{ asset('bundles/coyotesite/images/logo1.png') }}" alt="PICHON" id="logo"/></a>
-                <a href="http://www.pichonindustries.fr" class="lien">Site Pichon</a>
+                <a href={{'base.link'|trans}} class="lien">Site Pichon</a>
                 <a href="{{ path('main_accueil') }}" class="lien">Contact</a>
             </div>
             <nav>
-                <div id="choisir_langue">{{ 'Choisissez votre pays'|trans}} :
+                <div id="choisir_langue">{{'base.choose_language'|trans}} :
                     <a href="{{ path('coyote_main_language', {'_locale' : 'fr'}) }}">
                         <img src="{{ asset('bundles/coyotesite/images/flag_francais.jpg') }}" alt="flag_french" id="flag_french"/>
                     </a> |
@@ -45,7 +45,7 @@
                 {% endblock %}
             </nav>
             <nav id="welcome">
-                <h4>Bienvenue sur le site Pichon</h4>
+                <h4>{{'base.welcome'|trans}}</h4>
             </nav>
         </header>
         <section>
@@ -55,7 +55,7 @@
             </article>
         </section>
         <footer>
-            <p>Copyright ©2014 PICHON - Tous droits réservés</p>
+            <p>{{'base.copyright'|trans}} | {{'base.version'|trans}}</p>
         </footer>
     </body>
 </html>

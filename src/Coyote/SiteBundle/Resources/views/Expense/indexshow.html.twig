@@ -16,7 +16,7 @@
 {% endblock %}
 
 {% block content %}
-<p id="titreconfig">{{'Consultation des notes de frais'|trans}} </p>
+<p id="titreconfig">{{'expense.title.indexshow'|trans}} </p>
 
 <form role="form" action="{{ path('expense_show') }}" method='get'>
     <table class='table' id='tab_expense'>
@@ -53,6 +53,6 @@
             </td>
         </tr>
     </table>
-    <button class='btnsave' type="submit" value="Afficher" id="afficher">{{ 'Afficher'|trans }}</button>
+    <button class='btnsave' type="submit" value="Afficher" id="afficher">{{ 'expense.submit.show'|trans }}</button>
 </form>
 {% endblock %}

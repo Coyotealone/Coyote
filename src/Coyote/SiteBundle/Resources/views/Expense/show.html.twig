@@ -11,23 +11,23 @@
     <p id="flashmessage">{{ flashMessage }}</p>
 
 {% endfor %}
-<p id="titreconfig">{{'Récapitulatif du mois'|trans}}</p>
+<p id="titreconfig">{{'expense.title.show'|trans}}</p>
 
 {% if data %}
 <div class='table-responsive'>
     <table class='table' id='tab_expense'>
     	<tr>
     	    <th>Id</th>
-    		<th id='tab_expense_site'>{{ 'Site'|trans}}</th>
-    		<th id='tab_expense_date'>{{ 'Date'|trans}}</th>
-    		<th id='tab_expense_item'>{{ 'Code Article'|trans}}</th>
-    		<th id='tab_expense_devise'>{{ 'Devise'|trans}}</th>
-    		<th id='tab_expense_qte'>{{ 'Quantité'|trans}}</th>
-    		<th id='tab_expense_amounttc'>{{ 'Montant TTC'|trans}}</th>
-    		<th id='tab_expense_amounttva'>{{ 'Montant TVA'|trans}}</th>
-    		<th id='tab_expense_business'>{{ 'Affaire'|trans}}</th>
-    		<th id='tab_expense_comment'>{{ 'Commentaire'|trans}}</th>
-    		<th>{{ 'Editer'|trans}}</th>
+    		<th id='tab_expense_site'>{{ 'expense.site'|trans}}</th>
+    		<th id='tab_expense_date'>{{ 'expense.date'|trans}}</th>
+    		<th id='tab_expense_item'>{{ 'expense.item'|trans}}</th>
+    		<th id='tab_expense_devise'>{{ 'expense.currency'|trans}}</th>
+    		<th id='tab_expense_qte'>{{ 'expense.quantity'|trans}}</th>
+    		<th id='tab_expense_amounttc'>{{ 'expense.amountttc'|trans}}</th>
+    		<th id='tab_expense_amounttva'>{{ 'expense.amounttva'|trans}}</th>
+    		<th id='tab_expense_business'>{{ 'expense.business'|trans}}</th>
+    		<th id='tab_expense_comment'>{{ 'expense.comment'|trans}}</th>
+    		<th>{{ 'expense.submit.edit'|trans}}</th>
     	</tr>
     	{% for entity in data %}
             <tr>
@@ -42,14 +42,14 @@
                 <td id='tab_expense_business'>{{ entity.business.name }}</td>
                 <td id='tab_expense_comment'>{{ entity.comment }}</td>
                 <td>
-                    <a href="{{ path('expense_edit', { 'id': entity.id }) }}">{{'Edité'|trans}}</a>
+                    <a href="{{ path('expense_edit', { 'id': entity.id }) }}">{{'expense.submit.edit'|trans}}</a>
                 </td>
             </tr>
         {% endfor %}
     </table>
 </div><br>
 {% else %}
-<p id="titreconfig">{{'Aucune donnée trouvée'|trans}}</p>
+<p id="titreconfig">{{'expense.message'|trans}}</p>
 {% endif %}
 
 {% endblock %}

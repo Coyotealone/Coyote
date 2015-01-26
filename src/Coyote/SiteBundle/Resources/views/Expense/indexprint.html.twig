@@ -12,13 +12,13 @@
 {% endblock %}
 
 {% block content %}
-<p id="titreconfig">{{'Téléchargement des notes de frais au format PDF'|trans}} </p>
+<p id="titreconfig">{{'expense.title.indexprint'|trans}} </p>
 
 <form role="form" action="{{ path('expense_print') }}" method='get'>
     <table class='table'>
     	<tr>
-    	    <th>{{'Mois'|trans}}</th>
-    		<th>{{'Année'|trans}}</th>
+    	    <th>{{'expense.month'|trans}}</th>
+    		<th>{{'expense.year'|trans}}</th>
     	</tr>
         <tr>
             <td>
@@ -49,6 +49,6 @@
             </td>
         </tr>
     </table>
-    <button class='btnsave' type="submit" value="Afficher" id="afficher">{{'Télécharger'|trans }}</button>
+    <button class='btnsave' type="submit" value="Afficher" id="afficher">{{'expense.submit.download'|trans }}</button>
 </form>
 {% endblock %}

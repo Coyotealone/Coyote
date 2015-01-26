@@ -27,15 +27,12 @@
 
     {% endfor %}
     <div id="contenu-contact">
-        <p id="titreconfig"><b>{{'Contactez-nous'|trans}}</b></p>
-
+        <p id="titreconfig"><b>{{'contact.title'|trans}}</b></p>
         <form action="{{ path('contact_index') }}" method="post" {{ form_enctype(form) }}>
-
-                    <input id="contact_email" type="email" required="required" name="contact[email]" class="form-control" placeholder="{{"Email"|trans}}" >
-                    <input id="contact_subject" type="text" class="form-control" placeholder="{{"Sujet"|trans}}" required="required" name="contact[subject]">
-                    <textarea class="form-control" rows="5" placeholder="{{"Contenu"|trans}}" id="contact_content" required="required" name="contact[content]"></textarea>
-
-                    </br><button class="btn btn-danger btn-default" type="submit" id="_submit" name="_submit">{{ 'Envoyez'|trans }}</button>
+            <input id="contact_email" type="email" required="required" name="contact[email]" class="form-control" placeholder="{{"contact.email"|trans}}" >
+            <input id="contact_subject" type="text" class="form-control" placeholder="{{"contact.subject"|trans}}" required="required" name="contact[subject]">
+            <textarea class="form-control" rows="5" placeholder="{{"contact.content"|trans}}" id="contact_content" required="required" name="contact[content]"></textarea>
+            </br><button class="btn btn-danger btn-default" type="submit" id="_submit" name="_submit">{{ 'contact.submit'|trans }}</button>
         </form>
     </div>
 {% endblock %}
