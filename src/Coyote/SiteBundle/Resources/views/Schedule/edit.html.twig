@@ -79,7 +79,6 @@
         					<option value='CP'>{{'schedule.cp'|trans}}</option>
         					<option value='CA'>{{'schedule.ca'|trans}}</option>
         					<option value='CSS'>{{'schedule.css'|trans}}</option>
-        					<option value='Maladie'>{{'schedule.sick'|trans}}</option>
         					<option value="AT">{{'schedule.at'|trans}}</option>
         					<option value="MP">{{'schedule.mp'|trans}}</option>
         					<option value="Recup">{{'schedule.recup'|trans}}</option>
@@ -124,7 +123,6 @@
         					<option value='CP'>{{'schedule.cp'|trans}}</option>
         					<option value='CA'>{{'schedule.ca'|trans}}</option>
         					<option value='CSS'>{{'schedule.css'|trans}}</option>
-        					<option value='Maladie'>{{'schedule.sick'|trans}}</option>
         					<option value="AT">{{'schedule.at'|trans}}</option>
         					<option value="MP">{{'schedule.mp'|trans}}</option>
         					<option value="Recup">{{'schedule.recup'|trans}}</option>
@@ -169,7 +167,6 @@
         					<option value='CP'>{{'schedule.cp'|trans}}</option>
         					<option value='CA'>{{'schedule.ca'|trans}}</option>
         					<option value='CSS'>{{'schedule.css'|trans}}</option>
-        					<option value='Maladie'>{{'schedule.sick'|trans}}</option>
         					<option value="AT">{{'schedule.at'|trans}}</option>
         					<option value="MP">{{'schedule.mp'|trans}}</option>
         					<option value="Recup">{{'schedule.recup'|trans}}</option>
@@ -214,7 +211,6 @@
         					<option value='CP'>{{'schedule.cp'|trans}}</option>
         					<option value='CA'>{{'schedule.ca'|trans}}</option>
         					<option value='CSS'>{{'schedule.css'|trans}}</option>
-        					<option value='Maladie'>{{'schedule.sick'|trans}}</option>
         					<option value="AT">{{'schedule.at'|trans}}</option>
         					<option value="MP">{{'schedule.mp'|trans}}</option>
         					<option value="Recup">{{'schedule.recup'|trans}}</option>
@@ -259,7 +255,6 @@
         					<option value='CP'>{{'schedule.cp'|trans}}</option>
         					<option value='CA'>{{'schedule.ca'|trans}}</option>
         					<option value='CSS'>{{'schedule.css'|trans}}</option>
-        					<option value='Maladie'>{{'schedule.sick'|trans}}</option>
         					<option value="AT">{{'schedule.at'|trans}}</option>
         					<option value="MP">{{'schedule.mp'|trans}}</option>
         					<option value="Recup">{{'schedule.recup'|trans}}</option>
@@ -304,7 +299,6 @@
         					<option value='CP'>{{'schedule.cp'|trans}}</option>
         					<option value='CA'>{{'schedule.ca'|trans}}</option>
         					<option value='CSS'>{{'schedule.css'|trans}}</option>
-        					<option value='Maladie'>{{'schedule.sick'|trans}}</option>
         					<option value="AT">{{'schedule.at'|trans}}</option>
         					<option value="MP">{{'schedule.mp'|trans}}</option>
         					<option value="Recup">{{'schedule.recup'|trans}}</option>
@@ -349,7 +343,6 @@
         					<option value='CP'>{{'schedule.cp'|trans}}</option>
         					<option value='CA'>{{'schedule.ca'|trans}}</option>
         					<option value='CSS'>{{'schedule.css'|trans}}</option>
-        					<option value='Maladie'>{{'schedule.sick'|trans}}</option>
         					<option value="AT">{{'schedule.at'|trans}}</option>
         					<option value="MP">{{'schedule.mp'|trans}}</option>
         					<option value="Recup">{{'schedule.recup'|trans}}</option>
@@ -386,13 +379,13 @@
 		{{ 'schedule.break'|trans }}<input class='input' type='text' id='pauseauto'>
 	</div><br>
     <a id='saisie_auto' class='btnauto' onclick='saisie_auto()'>{{'schedule.write_auto'|trans}}</a><br><br>
-    <a id='work_less' class='btnpage' href="{{ path('schedule_workless')}}" >{{'schedule.previous_week'|trans}}</a>
-    <a id='work_more' class='btnpage' href="{{ path('schedule_workmore')}}" >{{'schedule.next_week'|trans}}</a><br><br>
+    <a id='work_less' class='btnpage' href="{{ path('schedule_workless')}}" >{{'schedule.submit.previous_week'|trans}}</a>
+    <a id='work_more' class='btnpage' href="{{ path('schedule_workmore')}}" >{{'schedule.submit.next_week'|trans}}</a><br><br>
 
     <button class='btnsave' type="submit" value="Enregistrer" id="enregistrer">{{ 'schedule.submit.save'|trans }}</button>
 </form>
 
-<br><br>{{'Temps travaillé dans la semaine'|trans}} <input disabled type="text" id="timeweek"></input>
+<br><br>{{'schedule.working_time_week'|trans}} <input disabled type="text" id="timeweek"></input>
 {% endif %}
 
 {% if is_granted('ROLE_CADRE') %}
@@ -692,8 +685,8 @@
             </table>
         </div>
         <br>
-	    <a id='work_less' class='btnpage' href="{{ path('schedule_workless')}}" >{{'schedule.previous_week'|trans}}</a>
-        <a id='work_more' class='btnpage' href="{{ path('schedule_workmore')}}" >{{'schedule.next_week'|trans}}</a>
+	    <a id='work_less' class='btnpage' href="{{ path('schedule_workless')}}" >{{'schedule.submit.previous_week'|trans}}</a>
+        <a id='work_more' class='btnpage' href="{{ path('schedule_workmore')}}" >{{'schedule.submit.next_week'|trans}}</a>
         <br><br>
         <button class='btnsave' type="submit" value="Enregistrer" id="enregistrer">{{ 'schedule.submit.save'|trans }}</button>
     </div>

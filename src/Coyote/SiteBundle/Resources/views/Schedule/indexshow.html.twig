@@ -13,12 +13,12 @@
 
 
 {% block content %}
-<p id="titreconfig">{{'Consultation des temps de présence'|trans}} </p>
+<p id="titreconfig">{{'schedule.title.indexshow'|trans}} </p>
 <form role="form" action="{{ path('schedule_show') }}" method='get'>
     <table class='table'>
     	<tr>
-    	    <th>{{'Mois'|trans}}</th>
-    		<th>{{'Année'|trans}}</th>
+    	    <th>{{'schedule.month'|trans}}</th>
+    		<th>{{'schedule.year'|trans}}</th>
     	</tr>
         <tr>
             <td>
@@ -47,6 +47,6 @@
             </td>
         </tr>
     </table>
-    <button class='btnsave' type="submit" value="Afficher" id="afficher">{{'Afficher'|trans }}</button>
+    <button class='btnsave' type="submit" value="Afficher" id="afficher">{{'schedule.submit.indexshow'|trans }}</button>
 </form>
 {% endblock %}
