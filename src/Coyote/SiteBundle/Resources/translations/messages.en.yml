@@ -2,11 +2,13 @@ base:
     copyright: Copyright ©2015 PICHON - All rights reserved
     version: Version 1.12.0
     title: Pichon - WebSite
-    link: www.pichonindustries.com
+    link: http://www.pichonindustries.com
     choose_language: Choose your country
     welcome: Welcome to the website Pichon
     nav:
         accueil: Home
+        contact: Contact
+        site: Website Pichon
         schedule:
             index: Recording
             indexshow: Consultation
@@ -175,8 +177,8 @@ group:
 
 # Security
 security:
-    username: "Username:"
-    password: "Password:"
+    username: "Username"
+    password: "Password"
     remember_me: Remember me
     submit:
         connexion: Connexion

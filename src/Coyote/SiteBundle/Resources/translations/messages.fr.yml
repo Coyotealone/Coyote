@@ -2,11 +2,13 @@ base:
     copyright: Copyright ©2015 PICHON - Tous droits réservés
     version: Version 1.12.0
     title: Pichon - WebSite
-    link: www.pichonindustries.fr
+    link: http://www.pichonindustries.fr
     choose_language: Choisissez votre pays
     welcome: Bienvenue sur le site Pichon
     nav:
         accueil: Accueil
+        contact: Contact
+        site: Site Pichon
         schedule:
             index: Saisie
             indexshow: Consultation
