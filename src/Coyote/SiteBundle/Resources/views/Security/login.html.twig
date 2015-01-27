@@ -18,22 +18,20 @@
     <div class="table-responsive">
     <table class="table" style="max-width:500px; margin:auto">
         <tr>
-            <th><label for="username">{{ 'Identifiant'|trans }} :</label></th>
+            <th><label for="username">{{ 'security.username'|trans }} :</label></th>
             <td><input type="text" id="username" name="_username" value="{{ last_username }}" required="required" /></td>
         </tr>
         <tr>
-            <th><label for="password">{{ 'Mot de passe'|trans }} :</label></th>
+            <th><label for="password">{{ 'security.password'|trans }} :</label></th>
             <td><input type="password" id="password" name="_password" required="required" /></td>
         </tr>
-
     </table>
     </div>
-
     <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
-    <label for="remember_me">{{ 'Se souvenir de moi'|trans }}</label><br>
+    <label for="remember_me">{{ 'security.remember_me'|trans }}</label><br>
 
-    <button class="btn btn-danger btn-default" type="submit" id="_submit" name="_submit">{{ 'Connexion'|trans }}</button>
+    <button class="btn btn-danger btn-default" type="submit" id="_submit" name="_submit">{{ 'security.submit.connexion'|trans }}</button>
 </form>
-<a class="btn btn-primary btn-default" href="{{ path('resetting_request') }}">{{"Mot de passe oublié"|trans}} ?</a>
+<a class="btn btn-primary btn-default" href="{{ path('resetting_request') }}">{{"security.submit.resetting"|trans}} ?</a>
 
 {% endblock fos_user_content %}

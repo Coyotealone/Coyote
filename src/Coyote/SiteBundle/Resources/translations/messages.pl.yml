@@ -1,151 +1,4 @@
-# En-tête #
-Choisissez votre pays: Wybierz swój kraj
-Contact: Kontakt
-Site Pichon: Strona internetowa Pichon
-Bienvenue: Witamy
-
-# Pied de page #
-"Copyright ©2014 PICHON - Tous droits réservés": Copyright ©2014 PICHON - Wszystkie prawa zastrzeżone
-Version: wersja
-
-# Navbar #
-Accueil: Strona główna
-Présence: Obecność
-Consultation: Konsultacja
-Saisie: Wpisanie
-Note de Frais: Opłata
-Profil: Profile
-Configurateur: Konfigurator
-Formulaire: Formularz
-Index: Indeks
-Information Profil: Informacje o profilu
-Changement de mot de passe: Zmień hasło
-"Création d'une config": Konfiguruj
-Formulaire Bon de commande: Formularz zamówienia
-Impression PDF: drukowania w formacie PDF
-"Impression de l'année en PDF": Drukuj pdf roku
-Export Présence: Czas eksportu i frekwencja
-Export données BE: Eksport danych
-Export Notes de Frais: Koszty Export
-Export données notes de frais: Eksport danych wydatków
-"Export de l'année en PDF": Drukuj Eksport PDF roku
-
-# Page Login #
-Mot de passe oublié: Zapomniałem hasła
-Connexion: Login
-
-# Page Menu #
-Bienvenue sur le site PICHON: Witamy na stronie internetowej Pichon
-
-# Page présence #
-Voici la semaine: Wyświetl tydzień
-"d'affichée de l'année": z
-Temps de travail: Czas pracy
-Jour de la semaine: Dzień tygodnia
-Début: Start
-Fin: Koniec
-Pause: Przerwa
-Journée travaillée: Godziny pracy
-Déplacement: Przeniesienie
-Absence: Nieobecność
-Commentaire: Komentarz
-Oui: Tak
-Non: Nie
-Saisir un commentaire: Napisz komentarz
-Saisie automatique des heures (Cochez les jours que vous souhaitez remplir et saisissez les valeurs dans les champs début fin pause ci-dessous): Autouzupełnienie godzin (sprawdź dni, które chcesz uzupełnić i wprowadź dane na początku i końcu przerwy).
-Saisie Automatique: Autouzupełnianie
-Semaine Précédente: Poprzedni tydzień
-Semaine Suivante: Następny tydzień
-Lundi: Poniedziałek
-Mardi: Wtorek
-Mercredi: Środa
-Jeudi: Czwartek
-Vendredi: Piątek
-Samedi: Sobota
-Dimanche: Niedziela
-Mois: Miesiąc
-Année: Rok
-Janvier: Styczeń
-Février: Luty
-Mars: Marzec
-Avril: Kwiecień
-Mai: Maj
-Juin: Czerwiec
-Juillet: Lipiec
-Août: Sierpień
-Septembre: Wrzesień
-Octobre: Październik
-Novembre: Listopad
-Décembre: Grudzień
-Afficher: Wyświetl
-Récapitulatif du mois: Podsumowanie miesiąca
-"Nombre d'heure travaillé dans la semaine": Liczba godzin przepracowanych w tygodniu
-Temps total travaillé dans le mois: Łączny czas pracy w ciągu miesiąca
-Nombre de RTT utilisé dans le mois / année: Ilość RTT wykorzystanego w miesiącu/ roku
-'Nombre de congés payés (CP) utilisé dans le mois / année': Ilość płatnego urlopu (CP) wykorzystanego w miesiącu / roku
-"Nombre de congés d'anciennetés (CA) utilisé dans le mois / année": Ilość urlopu stażowego (CA ) wykorzystanego w miesiącu / roku
-Jour férié: Święto
-Weekend: Weekend
-Temps de la semaine: Czas tygodnia
-lundi: poniedziałek
-mardi: wtorek
-mercredi: środa
-jeudi: czwartek
-vendredi: piątek
-samedi: sobota
-dimanche: niedziela
-Enregistrer: Zapisz
-Consultation des temps de présence: Konsultacje w czasie pracy
-Jour travaillé dans le mois / année: Dzień pracy w miesiącu / roku
-"Récapitulatif de l'année": Podsumowanie roku
-"Nombre de RTT utilisé dans l'année": Ilość RTT wykorzystanego w roku
-"Nombre de congés payés (CP) utilisé dans l'année" : Ilość płatnego urlopu (CP) wykorzystanego w roku
-"Nombre de congés d'anciennetés (CA) utilisé dans l'année": Ilość urlopu stażowego (CA ) wykorzystanego w roku
-"Téléchargement des temps de présence de l'année au format PDF": Czas pobierania i stawiennictwa roku w formacie PDF
-"Période": okres
-"Temps travaillé dans la semaine": Czas pracy w tygodniu
-Téléchargement des temps de présence au format PDF: Pobierz czasu pracy w formacie PDF
-Aucune: żaden
-RTT: Redukcja czasu pracy
-Congés payés: Płatny urlop
-Congés ancienneté: Zostaw staż
-Congés sans solde: Urlopu bezpłatnego
-Autres: więcej
-Maladie/Accident travail/Paternité: Choroba/wypadek przy pracy/ojcostwa
-Aucune donnée trouvée: Nie znaleziono danych
-"Export des temps de présence de l'année au format PDF": Udział eksportu w czasie roku do PDF
-
-# Page Profil #
-"En cas de problème de mot de passe, merci de contacter votre administrateur ou d'envoyer un mail dans l'onglet Contact": Dziękujemy za kontakt z administratorem. Jeśli masz problem z hasłem, wyślij e-mail z zakładki Kontakt.
-'Le mot de passe doit faire': Hasło musi mieć
-'caractères': znaków
-
-# Page Note de frais #
-Bienvenue dans la partie des Notes de frais: Witamy w części  dotyczącej kosztów
-Saisie des notes de frais: Wprowadzanie kosztów
-Visualiser les notes de frais: Podgląd do kosztów
-Site: Miejsce
-Date: Data
-Code Article: Kod produktu
-Devise: Waluta
-Quantité: Ilość
-Montant réel: Rzeczywista wartość
-Montant TTC: Kwota brutto
-Montant TVA: Kwota podatku VAT
-Affaire: Zamówienie
-Commentaire: Komentarz
-Editer: Edytuj
-Edité: Zredagowano
-Mise à jour: Aktualizacja
-Edition de la note de frais: Edytować koszty
-Retour à la liste: Powrót do listy
-Consultation des notes de frais: Konsultować koszty
-Ajout de notes de frais: Dodać koszty
-"Merci d'écrire la date qu'avec des chiffres. Exemple pour la date du 7 juin 2014, il faut écrire : 070614": Dziękuję napisać datę z numerami. Na przykład data 07 czerwca 2014, napisz: 070614
-Aucune donnée trouvée: Nie znaleziono danych
-Téléchargement des notes de frais au format PDF: Pobierz PDF wydatek
-Impression Notes de frais: Koszty druku
-Article: Pozycja
+# FOSUserBundle Translation #
 
 # Group
 group:
@@ -161,9 +14,6 @@ group:
         deleted: Grupa została usunięta
 
 # Security
-"Bad credentials": Nieprawidłowa nazwa użytkownika lub hasło
-"User account is locked.": Konto użytkownika jest zablokowane
-
 security:
     login:
         username: "Nazwa użytkownika:"
@@ -191,7 +41,7 @@ change_password:
 registration:
     check_email: Na adres %email% wysłano wiadomość e-mail. Zawiera ona link, na który należy kliknąć, aby aktywować konto.
     confirmed: Gratulacje %username%, potwierdziłeś konto.
-    #back: Back to the originating page.
+    back: Powrót do poprzedniej strony.
     submit: Zarejestruj
     flash:
         user_created: Stworzono użytkownika
@@ -244,16 +94,3 @@ form:
     password_confirmation: "Powtórz hasło:"
     new_password: "Nowe hasło:"
     new_password_confirmation: "Powtórz hasło:"
-
-#Ajout personnel
-Mot de passe oublié: Zapomniałem hasła
-Nom prénom: imię
-N° Téléphone: numer telefonu
-Si vous rencontrez une erreur sur votre profil, merci de contacter votre administrateur: W przypadku wystąpienia błędu w swoim profilu, dziękujemy Ci skontaktować się z administratorem
-Le mot de passe doit faire 6 caractères: Hasło musi zawierać 6 znaków
-Information sur votre profil: Informacja o profilu
-Changement de votre mot de passe: Zmiana hasła
-
-Identifiant: Zaloguj się
-Mot de passe: Hasło
-Se souvenir de moi: Zapamiętaj mnie

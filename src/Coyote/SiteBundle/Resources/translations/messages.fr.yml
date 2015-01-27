@@ -19,7 +19,7 @@ base:
             create: Saisie
             indexshow: Consultation
             indexprint: Impression PDF
-            indexupdatestatus: Mise à jour du status des notes de frais
+            indexupdatestatus: Mise à jour du statut des notes de frais
         profile:
             name: Profil
             profile: Information Profil
@@ -34,11 +34,13 @@ base:
             name: Administrateur
             register: "Ajout d'un utilisateur"
 
-layout:
-    logout: Déconnexion
-    login: Connexion
-    register: Inscription
-    logged_in_as: Connecté en tant que %username%
+security:
+    username: Identifiant
+    password: Mot de passe
+    remember_me: Se souvenir de moi
+    submit:
+        connexion: Connexion
+        resetting: Mot de passe oublié
 
 accueil:
     menu:
@@ -52,10 +54,6 @@ admin:
     year: Année
     submit:
         download: Télécharger
-
-change_password:
-    submit: Modifier le mot de passe
-    title: Changement de votre mot de passe
 
 contact:
     title: Contactez-nous
@@ -144,7 +142,7 @@ expense:
         indexshow: Consultation des notes de frais
         print: Impression Notes de frais
         show: Récapitulatif du mois
-        updatestatus: Mise à jour status Notes de frais
+        updatestatus: Mise à jour statut Notes de frais
     submit:
         save: Enregistrer
         update: Mise à jour
@@ -168,7 +166,11 @@ expense:
     id_start: ID Start
     id_end: ID End
 
+# FOSUserBundle Translation #
+
 profile:
+    title:
+        show: Information sur votre profil
     show:
         username: "Nom d'utilisateur"
         email: Adresse e-mail
@@ -187,8 +189,8 @@ form:
     new_password: "Nouveau mot de passe :"
     new_password_confirmation: "Vérification :"
     name: NOM Prénom
-    adress1: Adresse
-    adress2: Adresse(suite)
+    address1: Adresse
+    address2: Adresse(suite)
     zip_code: Code Postal
     postal_box: Boite Postal
     city: Ville
@@ -238,10 +240,12 @@ resetting:
             Cordialement,
             L'équipe.
 
-security:
-    username: Identifiant
-    password: Mot de passe
-    remember_me: Se souvenir de moi
-    submit:
-        connexion: Connexion
-        resetting: Mot de passe oublié ?
+layout:
+    logout: Déconnexion
+    login: Connexion
+    register: Inscription
+    logged_in_as: Connecté en tant que %username%
+
+change_password:
+    submit: Modifier le mot de passe
+    title: Changement de votre mot de passe
