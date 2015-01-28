@@ -1,15 +1,11 @@
 <div class="fos_user_user_show">
-    <p id="titreconfig">{{'Information sur votre profil'|trans}} </p>
-
-    <br>
+    <p id="titreconfig">{{'profile.title.show'|trans}} </p><br>
     <p>{{ 'profile.show.username'|trans }}: {{ user.username }}</p>
-    <p>{{ 'Nom prénom'|trans }}: {{ user.name }}</p>
+    <p>{{ 'profile.show.name'|trans }}: {{ user.name }}</p>
     <p>{{ 'profile.show.email'|trans }}: {{ user.email }}</p>
-    <p>{{ 'N° Téléphone'|trans }} : {{ user.phone }}</p>
+    <p>{{ 'profile.show.phone'|trans }} : {{ user.phone }}</p>
     {% if user.cell %}
-    <p>{{ 'N° Portable'|trans }} : {{ user.cell }}</p>
-    {% endif %}
-    <br>
-    <p>{{'Si vous rencontrez une erreur sur votre profil, merci de contacter votre administrateur'|trans}}</p>
-
+        <p>{{ 'profile.show.cell'|trans }} : {{ user.cell }}</p>
+    {% endif %}<br>
+    <p>{{'profile.show.message'|trans}}</p>
 </div>

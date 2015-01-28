@@ -5,12 +5,12 @@
 {% endblock %}
 
 {% block content %}
-<p>{{'Récapitulatif du mois'|trans}}</p>
+<p>{{'schedule.title.summary'|trans}}</p>
 
 <table>
 <tr>
-    <td style="background:#7FC6BC; color:white">{{'Jour férié'|trans}}</td>
-    <td style="background:#01B0F0; color:white">{{'Weekend'|trans}}</td>
+    <td style="background:#7FC6BC; color:white">{{'schedule.holiday'|trans}}</td>
+    <td style="background:#01B0F0; color:white">{{'schedule.weekend'|trans}}</td>
 </tr>
 </table>
 
@@ -18,13 +18,13 @@
 <div class='table-responsive'>
     <table class='table' id='tab_expense'>
     	<tr>
-    	    <th>{{'Jour de la semaine'|trans}}</th>
-    		<th id='tab_time_date'>{{'Date'|trans}}</th>
-    		<th id='tab_time_workinghours'>{{'Journée travaillée'|trans}}</th>
-    		<th id='tab_time_travel'>{{'Déplacement'|trans}}</th>
-    		<th id='tab_time_absence'>{{'Absence'|trans}}</th>
-    		<th id='tab_time_absence'>{{'Temps Absence'|trans}}</th>
-    		<th id='tab_time_comment'>{{'Commentaire'|trans}}</th>
+    	    <th>{{'schedule.dayofweek'|trans}}</th>
+    		<th id='tab_time_date'>{{'schedule.date'|trans}}</th>
+    		<th id='tab_time_workinghours'>{{'schedule.working_hours'|trans}}</th>
+    		<th id='tab_time_travel'>{{'schedule.travel'|trans}}</th>
+    		<th id='tab_time_absence'>{{'schedule.absence'|trans}}</th>
+    		<th id='tab_time_absence'>{{'schedule.absence_time'|trans}}</th>
+    		<th id='tab_time_comment'>{{'schedule.comment'|trans}}</th>
     	</tr>
     	{% for entity in dataschedule %}
             <tr>
@@ -65,13 +65,12 @@
         {% endfor %}
     </table>
 </div>
-
-{{'Jour travaillé dans le mois / année'|trans }} : {{daymonth}} / {{dayyear}}<br>
-{{'Nombre de RTT utilisé dans le mois / année'|trans}} : {{absencertt}} / {{rttyear}}<br>
-{{"Nombre de congés payés (CP) utilisé dans le mois / année" | trans }} : {{absencecp}} / {{cpyear}} <br>
-{{"Nombre de congés d'anciennetés (CA) utilisé dans le mois / année" | trans }} : {{absenceca}} / {{cayear}} <br>
+    {{'schedule.working_day_month_year'|trans }} : {{daymonth}} / {{dayyear}}<br>
+    {{'schedule.number_rtt_month_year'|trans}} : {{absencertt}} / {{rttyear}}<br>
+    {{'schedule.number_cp_month_year' | trans }} : {{absencecp}} / {{cpyear}} <br>
+    {{"schedule.number_ca_month_year" | trans }} : {{absenceca}} / {{cayear}}
 {% else %}
-<p style="text-align:center">{{'Aucune donnée trouvée'|trans}}</p>
+<p style="text-align:center">{{'schedule.no_data_found'|trans}}</p>
 {% endif %}
 
 

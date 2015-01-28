@@ -1,55 +1,220 @@
-# Group
-group:
-    edit:
-        submit: Mettre à jour le groupe
-    show:
-        name: Nom du groupe
-    new:
-        submit: Créer le groupe
-    flash:
-        updated: Le groupe a été mis à jour
-        created: Le groupe a été créé
-        deleted: Le groupe a été supprimé
-
-# Security
-"Bad credentials": Nom d'utilisateur ou mot de passe incorrect
-"User account is disabled.": Vous devez activer votre compte.
-"User account is locked.":   Le compte utilisateur est verrouillé.
-"User account has expired.": Le compte de l'utilisateur a expiré.
-"User credentials have expired.": Les informations d'identification ont expiré.
-
+base:
+    copyright: Copyright ©2015 PICHON - Tous droits réservés
+    version: Version 1.12.0
+    title: Pichon - WebSite
+    link: http://www.pichonindustries.fr
+    choose_language: Choisissez votre pays
+    welcome: Bienvenue sur le site Pichon
+    nav:
+        accueil: Accueil
+        contact: Contact
+        site: Site Pichon
+        schedule:
+            index: Saisie
+            indexshow: Consultation
+            indexprint: Impression PDF
+            name: Présence
+            overtime: Heures supplémentaires
+            indexexportprintyear: "Export de l'année en PDF"
+        expense:
+            name: Note de frais
+            create: Saisie
+            indexshow: Consultation
+            indexprint: Impression PDF
+            indexupdatestatus: Mise à jour du statut des notes de frais
+        profile:
+            name: Profil
+            profile: Information Profil
+            changepassword: Changement de mot de passe
+        schedule_admin:
+            name: Export présence
+            indexexport: Export données BE
+        expense_admin:
+            name: Export Notes de frais
+            exportexpense: Export données notes de frais
+        profile_admin:
+            name: Administrateur
+            register: "Ajout d'un utilisateur"
 
 security:
-    login:
-        username: "Nom d'utilisateur :"
-        password: "Mot de passe :"
-        remember_me: Se souvenir de moi
-        submit: Connexion
+    username: Identifiant
+    password: Mot de passe
+    remember_me: Se souvenir de moi
+    submit:
+        connexion: Connexion
+        resetting: Mot de passe oublié
 
-# Profile
+accueil:
+    menu:
+        message: Bienvenue sur le site PICHON
+
+userinfo:
+    welcome: Bienvenue
+
+admin:
+    month: Mois
+    year: Année
+    submit:
+        download: Télécharger
+
+contact:
+    title: Contactez-nous
+    submit: Envoyez
+    email: Email
+    subject: Sujet
+    content: Contenu
+
+schedule:
+    title:
+        edit: Temps de travail
+        new: Temps de travail
+        index: Choisissez votre méthode de saisie des temps.
+        hour: Saisie par heure
+        day: Saisie par jour
+        indexexportprintyear: "Export des temps de présence de l'année au format PDF"
+        indexprint: Téléchargement des temps de présence au format PDF
+        indexprintyear: "Téléchargement des temps de présence de l'année au format PDF"
+        indexshow: Consultation des temps de présence
+        summary: Récapitulatif du mois
+        overtime: "Nombre d'heures supplémentaires sur l'année"
+    holiday: Jour férié
+    weekend: Weekend
+    message_week: "Voici la semaine %no_week% affichée de l'année %year%"
+    dayofweek: Jour de la semaine
+    date: Date
+    start: Début
+    end: Fin
+    break: Pause
+    working_time: Heures travaillées
+    travel: Déplacement
+    absence: Absence
+    absence_time: Temps Absence
+    comment: Commentaire
+    working_hours: Journées travaillées
+    monday: Lundi
+    tuesday: Mardi
+    wednesday: Mercredi
+    thursday: Jeudi
+    friday: Vendredi
+    saturday: Samedi
+    sunday: Dimanche
+    write_comment: Saisir un commentaire
+    rtt: RTT
+    cp: Congés payés
+    ca: Congés ancienneté
+    css: Congés sans solde
+    at: Arrêt de travail
+    mp: Maternité/Paternité
+    recup: Récup/Heures supp
+    various: Autre
+    month: Mois
+    year: Année
+    period: Période
+    working_time_week: Temps travaillé dans la semaine
+    wroking_day_week: Jour travaillé dans la semaine
+    working_day_month: Jour travaillé dans le mois
+    hours_worked_week: "Nombre d'heure travaillé dans la semaine"
+    total_time_worked_month: Temps total travaillé dans le mois
+    number_rtt_month_year: Nombre de RTT utilisé dans le mois / année
+    number_cp_month_year: Nombre de congés payés (CP) utilisé dans le mois /année
+    number_ca_month_year: "Nombre de congés d'anciennetés (CA) utilisé dans le mois / année"
+    no_data_found: Aucune donnée trouvée
+    working_day_month_year: Jour travaillé dans le mois / année
+    working_day_year: "Jour travaillé dans l'année"
+    number_rtt_year: "Nombre de RTT utilisé dans l'année"
+    number_cp_year: "Nombre de congés payés (CP) utilisé dans l'année"
+    number_ca_year: "Nombre de congés d'anciennetés (CA) utilisé dans l'année"
+    submit:
+        save: Enregistrer
+        indexexportprintyear: Afficher
+        indexprint: Télécharger
+        indexprintyear: Télécharger
+        indexshow: Afficher
+        previous_week: Semaine Précédente
+        next_week: Semaine Suivante
+    message: "Saisie automatique des heures (Cochez les jours que vous souhaitez remplir et saisissez les valeurs dans les champs début fin pause ci-dessous)"
+    write_auto: Saisie Automatique
+
+expense:
+    title:
+        create: Ajout de notes de frais
+        edit: Edition de la note de frais
+        index: Bienvenue dans la partie des Notes de frais
+        indexprint: Téléchargement des notes de frais au format PDF
+        indexshow: Consultation des notes de frais
+        print: Impression Notes de frais
+        show: Récapitulatif du mois
+        updatestatus: Mise à jour statut Notes de frais
+    submit:
+        save: Enregistrer
+        update: Mise à jour
+        back: Retour à la liste
+        download: Télécharger
+        show: Afficher
+        edit: Editer
+    site: Site
+    date: Date
+    item: Code Article
+    currency: Devise
+    amount: Quantité
+    amountttc: Montant TTC
+    amounttva: Montant TVA
+    business: Affaire
+    comment: Commentaire
+    actual_amount: Montant réel
+    month: Mois
+    year: Année
+    message: Aucune donnée trouvée
+    id_start: ID Start
+    id_end: ID End
+    treated: Traité
+    status:
+        yes: Oui
+        no: Non
+
+# FOSUserBundle Translation #
+
 profile:
+    title:
+        show: Information sur votre profil
     show:
-        username: Nom d'utilisateur
+        username: "Nom d'utilisateur"
         email: Adresse e-mail
-    edit:
-        submit: Mettre à jour
-    flash:
-        updated: Le profil a été mis à jour
+        name: NOM Prénom
+        phone: N° Téléphone
+        cell: N° Portable
+        message: Si vous rencontrez une erreur sur votre profil, merci de contacter votre administrateur
 
-# Password change
-change_password:
-    submit: Modifier le mot de passe
-    flash:
-        success: Le mot de passe a été modifié
+form:
+    group_name: "Nom du groupe :"
+    username: "Nom d'utilisateur :"
+    email: "Adresse e-mail :"
+    current_password: "Mot de passe actuel :"
+    password: "Mot de passe :"
+    password_confirmation: "Vérification :"
+    new_password: "Nouveau mot de passe :"
+    new_password_confirmation: "Vérification :"
+    name: NOM Prénom
+    address1: Adresse
+    address2: Adresse(suite)
+    zip_code: Code Postal
+    postal_box: Boite Postal
+    city: Ville
+    country: Pays
+    phone: N° Téléphone
+    cell: N° Portable
+    website: Site Web
+    roles: Rôles
+    fax: Fax
 
-# Registration
 registration:
-    check_email: Un e-mail a été envoyé à l'adresse %email%. Il contient un lien d'activation sur lequel il vous faudra cliquer afin d'activer votre compte.
+    title: "Création d'un compte utilisateur"
+    check_email: "Un e-mail a été envoyé à l'adresse %email%. Il contient un lien d'activation sur lequel il vous faudra cliquer afin d'activer votre compte."
     confirmed: Félicitations %username%, votre compte est maintenant activé.
-    back: Retour à la page d'origine.
+    back: "Retour à la page d'origine."
     submit: Enregistrer
     flash:
-        user_created: L'utilisateur a été créé avec succès
+        user_created: "L'utilisateur a été créé avec succès"
     email:
         subject: Bienvenue %username% !
         message: |
@@ -60,10 +225,9 @@ registration:
             Cordialement,
             L'équipe.
 
-# Password resetting
 resetting:
     password_already_requested: Un nouveau mot de passe a déjà été demandé pour cet utilisateur dans les dernières 24 heures.
-    check_email: Un e-mail a été envoyé à l'adresse %email%. Il contient un lien sur lequel il vous faudra cliquer afin de réinitialiser votre mot de passe.
+    check_email: "Un e-mail a été envoyé à l'adresse %email%. Il contient un lien sur lequel il vous faudra cliquer afin de réinitialiser votre mot de passe."
     request:
         invalid_username: Le nom d'utilisateur ou l'adresse e-mail "%username%" n'existe pas.
         username: "Nom d'utilisateur ou adresse e-mail :"
@@ -82,32 +246,12 @@ resetting:
             Cordialement,
             L'équipe.
 
-# Global strings
 layout:
     logout: Déconnexion
     login: Connexion
     register: Inscription
     logged_in_as: Connecté en tant que %username%
 
-# Form field labels
-form:
-    group_name: "Nom du groupe :"
-    username: "Nom d'utilisateur :"
-    email: "Adresse e-mail :"
-    current_password: "Mot de passe actuel :"
-    password: "Mot de passe :"
-    password_confirmation: "Vérification :"
-    new_password: "Nouveau mot de passe :"
-    new_password_confirmation: "Vérification :"
-    name: "Nom :"
-    adress1: "Adresse :"
-    adress2: "Adresse(suite) :"
-    zip_code: "Code Postal :"
-    postal_box: "Boite Postal :"
-    city: "Ville :"
-    country: "Pays :"
-    phone: "Téléphone :"
-    cell: "Portable :"
-    fax: "Fax :"
-    website: "Site web :"
-    roles: "Rôle :"
+change_password:
+    submit: Modifier le mot de passe
+    title: Changement de votre mot de passe

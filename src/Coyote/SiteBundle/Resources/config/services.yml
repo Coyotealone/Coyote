@@ -1,19 +1,5 @@
-parameters:
-#    coyote_site.example.class: Coyote\SiteBundle\Example
-
 services:
     coyote_site.registration.form.type:
-        class: Coyote\SiteBundle\Form\RegistrationFormType
-        arguments: [%fos_user.model.user.class%]
+        class: Coyote\SiteBundle\Form\Type\RegistrationFormType
         tags:
             - { name: form.type, alias: coyote_site_registration }
-#     coyote.site.admin.userinfo:
-#         class: Coyote\SiteBundle\Admin\UserInfoAdmin
-#         tags:
-#             - { name: sonata.admin, manager_type: orm, label: UserInfo }
-#         arguments: [null, Coyote\SiteBundle\Entity\UserInfo, CoyoteSiteBundle:UserInfoAdmin]
-        
-    
-#    coyote_site.example:
-#        class: %coyote_site.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]

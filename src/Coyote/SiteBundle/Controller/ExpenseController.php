@@ -15,6 +15,7 @@ use Coyote\SiteBundle\Entity\UserInfo;
 use Coyote\SiteBundle\Entity\Expense;
 use Coyote\SiteBundle\Entity\Site;
 use Coyote\SiteBundle\Entity\Currency;
+use Coyote\SiteBundle\Entity\Data;
 
 use Doctrine\ORM\EntityRepository;
 
@@ -49,7 +50,7 @@ class ExpenseController extends Controller
             return $this->render('CoyoteSiteBundle:Expense:index.html.twig');
         else
             /** redirect MainController:indexAction */
-            return $this->redirect($this->generateUrl('main_accueil'));
+            return $this->redirect($this->generateUrl('main_menu'));
     }
 
     /**
@@ -73,11 +74,11 @@ class ExpenseController extends Controller
         /** check object session userfeesid */
         if($session->get('userfeesid') == null)
             /** redirect MainController:indexAction */
-            return $this->redirect($this->generateUrl('main_accueil'));
+            return $this->redirect($this->generateUrl('main_menu'));
         else
         {
             /** @var $currency object currency all data from Currency */
-            $currency = $em->getRepository('CoyoteSiteBundle:Currency')->findAll();
+            $currency = $em->getRepository('CoyoteSiteBundle:Currency')->findAllOrderByCode();
             /** @var $business object business all data from Business */
             $business = $em->getRepository('CoyoteSiteBundle:Business')->findAll();
             /** @var $fee object fee all data from Fee */
@@ -103,26 +104,14 @@ class ExpenseController extends Controller
         /** check object session userfeesid */
         if($session->get('userfeesid') == null)
             /** redirect MainController:indexAction */
-            return $this->redirect($this->generateUrl('main_accueil'));
+            return $this->redirect($this->generateUrl('main_menu'));
         else
         {
-            /** @var $month int mm */
-            $month = date('n');
-            /** @var $year int yyyy */
-            $year = date('Y');
-            /** @var $tab_month array month */
-            $tab_month = array( 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre',
-                'Octobre', 'Novembre', 'Décembre' );
-            /** @var $tab_num_month array num month */
-            $tab_num_month = array( '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12' );
-            /** @var $tab_year array year */
-            $tab_year = array('2014', '2015');
-            /** @var $tab_num_year array yy */
-            $tab_num_year = array('2014', '2015');
+            $data = new Data();
             /** show view */
-            return $this->render('CoyoteSiteBundle:Expense:indexshow.html.twig', array('month' => $month,
-                'year' => $year, 'tab_mois' => $tab_month, 'tab_num_mois' => $tab_num_month, 'tab_annee' => $tab_year,
-                'tab_num_annee' => $tab_num_year));
+            return $this->render('CoyoteSiteBundle:Expense:indexshow.html.twig', array('month' => date('n'),
+                'year' => date('Y'), 'tab_mois' => $data->getTabMonth(), 'tab_num_mois' => $data->getTabNumMonth(),
+                'tab_annee' => $data->getTabYear(), 'tab_num_annee' => $data->getTabNumYear()));
         }
     }
 
@@ -143,7 +132,7 @@ class ExpenseController extends Controller
             return $this->redirect($this->generateUrl('fos_user_security_login'));
         /** check @var $session 'userfeesid' */
         if($session->get('userfeesid') == null)
-            return $this->redirect($this->generateUrl('main_accueil'));
+            return $this->redirect($this->generateUrl('main_menu'));
 
         if (array_key_exists('year', $_GET)) {
                 $year = $_GET['year'];
@@ -152,11 +141,6 @@ class ExpenseController extends Controller
                 $month = $_GET['month'];
             }
 
-        /** @var $year string year */
-        //$year = $_GET['year'];
-        /** @var $month string month */
-        //$month = $_GET['month'];
-        /** check @var $year and $month */
         if(empty($year) && empty($month))
             return $this->redirect($this->generateUrl('expense_indexshow'));
         else
@@ -189,7 +173,7 @@ class ExpenseController extends Controller
             return $this->redirect($this->generateUrl('fos_user_security_login'));
         /** check @var $session 'userfeesid' */
         if($session->get('userfeesid') == null)
-            return $this->redirect($this->generateUrl('main_accueil'));
+            return $this->redirect($this->generateUrl('main_menu'));
         if(empty($year) && empty($month))
             /** show view */
             return $this->redirect($this->generateUrl('expense_indexshow'));
@@ -228,9 +212,10 @@ class ExpenseController extends Controller
         /** check $session 'userfeesid' */
         if($session->get('userfeesid') == null)
             /** redirect MainController:indexAction */
-            return $this->redirect($this->generateUrl('main_accueil'));
+            return $this->redirect($this->generateUrl('main_menu'));
         else
         {
+            $count_expense = 0;
             /** @var $em object doctrine request */
             $em = $this->getDoctrine()->getManager();
             /** @var $request */
@@ -254,6 +239,7 @@ class ExpenseController extends Controller
                     $em->persist($expense);
                     /** add data in db */
                     $em->flush();
+                    $count_expense ++;
                 }
                 /** check $expense */
                 if(isset($expense))
@@ -261,14 +247,14 @@ class ExpenseController extends Controller
                     $tab_id[$i] = $expense->getId();
 
             }
-            /** check $tab_id */
-            if(isset($tab_id))
+            /** check $count_expense */
+            if($count_expense >= 1 )
             {
-                /** check $tab_id */
-                if(count(array_unique($tab_id)) > 1)
+                /** check $count_expense */
+                if($count_expense > 1)
                 {
                     /** @var $message string */
-                    $message = count($tab_id).' enregistrement effectués';
+                    $message = $count_expense.' enregistrement effectués';
                 }
                 else
                 {
@@ -300,7 +286,7 @@ class ExpenseController extends Controller
         /** check $session 'userfeesid' */
         if($session->get('userfeesid') == null)
             /** redirect MainController:indexAction */
-            return $this->redirect($this->generateUrl('main_accueil'));
+            return $this->redirect($this->generateUrl('main_menu'));
         /** @var $em object doctrine request */
         $em = $this->getDoctrine()->getManager();
         /** @var $entity entity Expense */
@@ -369,7 +355,7 @@ class ExpenseController extends Controller
     {
         $session = new Session();
         if($session->get('userfeesid') == null)
-            return $this->redirect($this->generateUrl('main_accueil'));
+            return $this->redirect($this->generateUrl('main_menu'));
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('CoyoteSiteBundle:Expense')->find($id);
@@ -419,7 +405,7 @@ class ExpenseController extends Controller
     {
         $session = new Session();
         if($session->get('userfeesid') == null)
-            return $this->redirect($this->generateUrl('main_accueil'));
+            return $this->redirect($this->generateUrl('main_menu'));
         $form = $this->createDeleteForm($id);
         $form->handleRequest($request);
 
@@ -446,23 +432,11 @@ class ExpenseController extends Controller
      */
     public function indexprintAction()
     {
-        /** @var $month string mm */
-        $month = date('n');
-        /** @var $year string yyyy */
-        $year = date('Y');
-        /** @var $tab_month array month */
-        $tab_month = array( 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre',
-            'Octobre', 'Novembre', 'Décembre' );
-        /** @var $tab_num_month array num month */
-        $tab_num_month = array( '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12' );
-        /** @var $tab_year array year */
-        $tab_year = array( '2014', '2015');
-        /** @var $tab_num_year array num year */
-        $tab_num_year = array( '2014', '2015');
+        $data = new Data();
         /** show view */
-        return $this->render('CoyoteSiteBundle:Expense:indexprint.html.twig', array('month' => $month, 'year' => $year,
-            'tab_mois' => $tab_month, 'tab_num_mois' =>
-            $tab_num_month, 'tab_annee' => $tab_year, 'tab_num_annee' => $tab_num_year));
+        return $this->render('CoyoteSiteBundle:Expense:indexprint.html.twig', array('month' => date('n'),
+            'year' => date('Y'), 'tab_mois' => $data->getTabMonth(), 'tab_num_mois' => $data->getTabNumMonth(),
+            'tab_annee' => $data->getTabYear(), 'tab_num_annee' => $data->getTabNumYear()));
     }
 
     /**
@@ -499,12 +473,8 @@ class ExpenseController extends Controller
             $data_user = $em->getRepository('CoyoteSiteBundle:User')->find($session->get('userid'));
             /** @var $page view Expense:print */
             $page = $this->render('CoyoteSiteBundle:Expense:print.html.twig', array('data' => $data_expense));
-            /** @var $date string yyyymmdd */
-            $date = date("Ymd");
-            /** @var $hour string hhmmss */
-            $hour = date("His");
             /** @var $filename string filename PDF */
-            $filename = $data_user->getName()."_expense".$date."-".$hour.".pdf";
+            $filename = $data_user->getName()."_expense".date("Ymd-His").".pdf";
             /** prepare pdf */
             $html = $page->getContent();
             $html2pdf = new \Html2Pdf_Html2Pdf('P', 'A4', 'fr');
@@ -547,12 +517,14 @@ class ExpenseController extends Controller
         /** check $year and $month */
         if(empty($id_start) && empty($id_end))
         {
+            $message = "Aucune donnée mise à jour";
+            $this->get('session')->getFlashBag()->set('updatestatus', $message);
             /** redirect ExpenseController:indexprintAction */
             return $this->redirect($this->generateUrl('expense_indexupdatestatus'));
         }
         else
         {
-            if($id_end>$id_start)
+            if($id_end > $id_start)
             {
                 for($i = $id_start; $i<=$id_end; $i++)
                 {
@@ -564,9 +536,10 @@ class ExpenseController extends Controller
                     $em->flush();
                 }
                 $message = "Mise à jour effectuée";
+                //alert($message);
                 $this->get('session')->getFlashBag()->set('updatestatus', $message);
             }
-            if($id_start>$id_end)
+            if($id_start > $id_end)
             {
                 for($i = $id_end; $i<=$id_start; $i++)
                 {
@@ -578,11 +551,7 @@ class ExpenseController extends Controller
                     $em->flush();
                 }
                 $message = "Mise à jour effectuée";
-                $this->get('session')->getFlashBag()->set('updatestatus', $message);
-            }
-            else
-            {
-                $message = "Aucune donnée mise à jour";
+                alert($message);
                 $this->get('session')->getFlashBag()->set('updatestatus', $message);
             }
         }

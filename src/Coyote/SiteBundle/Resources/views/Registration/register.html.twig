@@ -14,19 +14,19 @@
 {% endblock %}
 
 {% block link %}
-    
+
     <!--[if lt IE 9]>
         {{ include('CoyoteSiteBundle:Base:navigation_ie.html.twig') }}
     <![endif]-->
     <!--[if !IE]><!-->
         {{ include('CoyoteSiteBundle:Base:navigation.html.twig') }}
 	<!--<![endif]-->
-	
+
 {% endblock %}
 
 {% if is_granted('ROLE_ADMIN') %}
     {% block content %}
-        <p class="lead">{{ "Création d'un compte utilisateur"|trans }}</p>
+        <p class="lead">{{ "registration.title"|trans }}</p>
         {% include "CoyoteSiteBundle:Registration:register_content.html.twig" %}
     {% endblock content %}
 {% endif %}

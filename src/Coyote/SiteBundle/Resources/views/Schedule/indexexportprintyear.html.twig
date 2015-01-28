@@ -12,11 +12,11 @@
 {% endblock %}
 
 {% block content %}
-<p id="titreconfig">{{"Export des temps de présence de l'année au format PDF"|trans}} </p>
+<p id="titreconfig">{{"schedule.title.indexexportprintyear"|trans}} </p>
 <form role="form" action="{{ path('schedule_exportprintyear') }}" method='get'>
     <table class='table'>
     	<tr>
-    		<th>{{'Période'|trans}}</th>
+    		<th>{{'schedule.period'|trans}}</th>
     	</tr>
     	<tr>
             <td>
@@ -32,6 +32,6 @@
             </td>
         </tr>
     </table>
-    <button class='btnsave' type="submit" value="Afficher" id="afficher">{{'Afficher'|trans }}</button>
+    <button class='btnsave' type="submit" value="Afficher" id="afficher">{{'schedule.submit.indexexportprintyear'|trans }}</button>
 </form>
 {% endblock %}

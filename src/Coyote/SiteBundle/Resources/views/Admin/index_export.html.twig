@@ -4,8 +4,8 @@
     <form role="form" action="{{ path('admin_exportdatauser') }}" method='post'>
         <table class='table' id='tab_expense'>
         	<tr>
-        	    <th>{{'Mois'|trans}}</th>
-        		<th>{{'Année'|trans}}</th>
+        	    <th>{{'admin.month'|trans}}</th>
+        		<th>{{'admin.year'|trans}}</th>
         	</tr>
             <tr>
                 <td>
@@ -34,6 +34,6 @@
                 </td>
             </tr>
         </table>
-        <button class='btnsave' type="submit" value="Telecharger" id="telecharger">{{ 'Télécharger'|trans }}</button>
+        <button class='btnsave' type="submit" value="Telecharger" id="telecharger">{{'admin.submit.download'|trans}}</button>
     </form>
 {% endblock %}

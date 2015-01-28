@@ -3,29 +3,29 @@
     <img src="./bundles/coyotesite/images/logo1.jpg" alt="PICHON" id="logo"/>
 </div>
 
-<p style="text-align:center">{{"Récapitulatif de l'année"|trans}}</p>
+<p style="text-align:center">{{"schedule.title.summary"|trans}}</p>
 
 {% if dataschedule %}
 <table>
     <tr>
-        <td style="background:#7FC6BC; color:white">{{'Jour férié'|trans}}</td>
-        <td style="background:#01B0F0; color:white">{{'Weekend'|trans}}</td>
-        <td style="background:#99CCCC; color:white">{{'Temps de la semaine'|trans}}</td>
+        <td style="background:#7FC6BC; color:white">{{'schedule.holiday'|trans}}</td>
+        <td style="background:#01B0F0; color:white">{{'schedule.weekend'|trans}}</td>
+        <td style="background:#99CCCC; color:white">{{'schedule.working_time_week'|trans}}</td>
     </tr>
 </table>
 
 <table class='table' id='tab_expense' style="width:900px;">
 	<tr style="width:900px;">
-	    <th style="width: 80px; text-align:center">{{'Jour de la semaine'|trans}}</th>
-	    <th style="width: 85px; text-align:center" id='tab_time_date'>{{'Date'|trans}}</th>
-		<th style="text-align:center" id='tab_time_debut'>{{'Début'|trans}}</th>
-		<th style="text-align:center" id='tab_time_fin'>{{'Fin'|trans}}</th>
-		<th style="text-align:center" id='tab_time_pause'>{{'Pause'|trans}}</th>
-		<th style="width: 60px; text-align:center" id='tab_time_working_time'>{{'Temps de travail'|trans}}</th>
-		<th style="text-align:center" id='tab_time_travel'>{{'Déplacement'|trans}}</th>
-		<th style="text-align:center" id='tab_time_absence'>{{'Absence'|trans}}</th>
-		<th style="width: 60px; text-align:center" id='tab_time_workingtime'>{{'Temps Absence'|trans}}</th>
-		<th style="width: 20%; text-align:center" id='tab_time_comment'>{{'Commentaire'|trans}}</th>
+	    <th style="width: 80px; text-align:center">{{'schedule.dayofweek'|trans}}</th>
+	    <th style="width: 85px; text-align:center" id='tab_time_date'>{{'schedule.date'|trans}}</th>
+		<th style="text-align:center" id='tab_time_debut'>{{'schedule.start'|trans}}</th>
+		<th style="text-align:center" id='tab_time_fin'>{{'schedule.end'|trans}}</th>
+		<th style="text-align:center" id='tab_time_pause'>{{'schedule.break'|trans}}</th>
+		<th style="width: 60px; text-align:center" id='tab_time_working_time'>{{'schedule.working_time'|trans}}</th>
+		<th style="text-align:center" id='tab_time_travel'>{{'schedule.travel'|trans}}</th>
+		<th style="text-align:center" id='tab_time_absence'>{{'schedule.absence'|trans}}</th>
+		<th style="width: 60px; text-align:center" id='tab_time_workingtime'>{{'schedule.absence_time'|trans}}</th>
+		<th style="width: 20%; text-align:center" id='tab_time_comment'>{{'schedule.comment'|trans}}</th>
 	</tr>
 	{% set counter = 0 %}
 	{% for entity in dataschedule %}
@@ -65,7 +65,7 @@
                 <td style="width: 20%; background:#01B0F0; color:white;">{{ entity.comment }}</td>
         </tr>
         <tr>
-                <td colspan=10 style="width: 30%; background:#99CCCC; color:white; text-align:center">{{"Nombre d'heure travaillé dans la semaine"|trans}} : {{timeweek[counter]}}</td>
+                <td colspan=10 style="width: 30%; background:#99CCCC; color:white; text-align:center">{{"schedule.hours_worked_week"|trans}} : {{timeweek[counter]}}</td>
                 {% set counter = counter + 1 %}
         </tr>
         <tr>
@@ -83,7 +83,7 @@
                 {% if loop.last %}
         </tr>
         <tr>
-                <td colspan=10 style="width: 30%; background:#99CCCC; color:white; text-align:center">{{"Nombre d'heure travaillé dans la semaine"|trans}} : {{timeweek[counter]}}</td>
+                <td colspan=10 style="width: 30%; background:#99CCCC; color:white; text-align:center">{{"schedule.hours_worked_week"|trans}} : {{timeweek[counter]}}</td>
                 {% endif %}
             {% endif %}
         </tr>
@@ -91,14 +91,12 @@
 
 </table>
 <p style="text-align:center">
-
-    {{"Nombre de RTT utilisé dans l'année"|trans}} : {{rttyear}}<br>
-    {{"Nombre de congés payés (CP) utilisé dans l'année" | trans }} : {{cpyear}} <br>
-    {{"Nombre de congés d'anciennetés (CA) utilisé dans l'année" | trans }} : {{cayear}}
+    {{'schedule.number_rtt_year'|trans}} : {{rttyear}}<br>
+    {{'schedule.number_cp_year' | trans }} : {{cpyear}} <br>
+    {{"schedule.number_ca_year" | trans }} : {{cayear}}
 </p>
-
 {% else %}
-<p style="text-align:center">{{'Aucune donnée trouvée'|trans}}</p>
+<p style="text-align:center">{{'schedule.no_data_found'|trans}}</p>
 {% endif %}
 
 </page>

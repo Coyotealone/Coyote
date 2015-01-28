@@ -44,15 +44,15 @@ class ExpenseRepository extends EntityRepository
      * @param mixed $em
      * @return "OK"
      */
-    public function updateStatus($em)
+    public function updateStatus()
     {
-        $expense = $em->getRepository('CoyoteSiteBundle:Expense')->findAll();
+        $expense = $this->_em->getRepository('CoyoteSiteBundle:Expense')->findAll();
         foreach($expense as $data)
         {
             $data->setStatus(0);
-            $em->persist($data);
+            $this->_em->persist($data);
         }
-        $em->flush();
+        $this->_em->flush();
         return "OK";
     }
 
@@ -62,7 +62,7 @@ class ExpenseRepository extends EntityRepository
      * @access public
      * @return string
      */
-    public function findforCompta()
+    public function fileDataExpenseCompta()
     {
         $query = $this->getEntityManager()
                       ->createQuery("
@@ -82,7 +82,7 @@ class ExpenseRepository extends EntityRepository
             }
             $result .= "D;";
             $result .= $data->getUserFees()->getLogin().";";//En majuscule
-            $result .= $data->getSite()->getCode().";";
+            $result .= $data->getSite().";";
             $result .= $data->getDate()->format('dmy').";";
             $result .= $data->getFee()->getCode().";";
             $result .= $data->getCurrency()->getCode().";";

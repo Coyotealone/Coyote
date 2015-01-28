@@ -1,7 +1,7 @@
 security:
     encoders:
         FOS\UserBundle\Model\UserInterface: sha512
-    access_denied_url:                      accueil
+    access_denied_url:                      CoyoteSiteBundle_accueil
 
     role_hierarchy:
         ROLE_USER:          ROLE_USER
@@ -89,7 +89,7 @@ security:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/contact/, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/register/, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: .*/register/*, role: ROLE_ADMIN }
         - { path: .*/expense/.*, role: [ROLE_TRADE, ROLE_SUPER_ADMIN, ROLE_ADMIN] }
         - { path: .*/menu, role: [ROLE_TECH, ROLE_CADRE] }
         - { path: .*/schedule/.*, role: [ROLE_TECH, ROLE_CADRE, ROLE_SUPER_ADMIN, ROLE_ADMIN] }

@@ -2,59 +2,68 @@
   <div class="container-fluid">
 	<ul class="nav navbar-nav">
 
-		<li class="active"><a href="{{ path('main_index') }}">{{'Accueil'|trans}}</a></li>
+		<li class="active"><a href="{{ path('main_index') }}">{{'base.nav.accueil'|trans}}</a></li>
 
-		<li id="frais" class="dropdown">
-          <a href="{{ path('schedule_index') }}" class="dropdown-toggle" data-toggle="dropdown">{{'Présence'|trans}}<b class="caret"></b></a>
+		<li id="presence" class="dropdown">
+          <a href="{{ path('schedule_index') }}" class="dropdown-toggle" data-toggle="dropdown">{{'base.nav.schedule.name'|trans}}<b class="caret"></b></a>
           <ul class="dropdown-menu">
-            <li><a href="{{ path('schedule_index') }}">{{'Saisie'|trans}}</a></li>
-            <li><a href="{{ path('schedule_indexshow') }}">{{'Consultation'|trans}}</a></li>
-            <li><a href="{{ path('schedule_indexprint') }}">{{'Impression PDF'|trans}}</a></li>
-            {#<li><a href="{{ path('schedule_indexprintyear') }}">{{"Impression de l'année en PDF"|trans}}</a></li>#}
+            <li><a href="{{ path('schedule_index') }}">{{'base.nav.schedule.index'|trans}}</a></li>
+            <li><a href="{{ path('schedule_indexshow') }}">{{'base.nav.schedule.indexshow'|trans}}</a></li>
+            <li><a href="{{ path('schedule_indexprint') }}">{{'base.nav.schedule.indexprint'|trans}}</a></li>
+            <li><a href="{{ path('schedule_indexprintyear') }}">{{"Impression de l'année en PDF"|trans}}</a></li>
             {% if is_granted('ROLE_ADMIN') %}
-                <li><a href="{{ path('schedule_overtime') }}">{{"Heures supplémentaires"|trans}}</a></li>
-                <li><a href="{{ path('schedule_indexexportprintyear') }}">{{"Export de l'année en PDF"|trans}}</a></li>
+                <li><a href="{{ path('schedule_overtime') }}">{{'base.nav.schedule.overtime'|trans}}</a></li>
+                <li><a href="{{ path('schedule_indexexportprintyear') }}">{{'base.nav.schedule.indexexportprintyear'|trans}}</a></li>
             {% endif %}
           </ul>
         </li>
 
         {% if is_granted('ROLE_BUSINESS') %}
         <li id="frais" class="dropdown">
-          <a href="{{ path('expense_create') }}" class="dropdown-toggle" data-toggle="dropdown">{{'Note de Frais'|trans}}<b class="caret"></b></a>
+          <a href="{{ path('expense_create') }}" class="dropdown-toggle" data-toggle="dropdown">{{'base.nav.expense.name'|trans}}<b class="caret"></b></a>
           <ul class="dropdown-menu">
-            <li><a href="{{ path('expense_create') }}">{{'Saisie'|trans}}</a></li>
-            <li><a href="{{ path('expense_indexshow') }}">{{'Consultation'|trans}}</a></li>
-            <li><a href="{{ path('expense_indexprint') }}">{{'Impression PDF'|trans}}</a></li>
+            <li><a href="{{ path('expense_create') }}">{{'base.nav.expense.create'|trans}}</a></li>
+            <li><a href="{{ path('expense_indexshow') }}">{{'base.nav.expense.indexshow'|trans}}</a></li>
+            <li><a href="{{ path('expense_indexprint') }}">{{'base.nav.expense.indexprint'|trans}}</a></li>
             {% if is_granted('ROLE_ADMIN') %}
-                <li><a href="{{ path('expense_indexupdatestatus') }}">{{"Mise à jour du status Notes de frais"|trans}}</a></li>
+                <li><a href="{{ path('expense_indexupdatestatus') }}">{{'base.nav.expense.indexupdatestatus'|trans}}</a></li>
             {% endif %}
           </ul>
         </li>
         {% endif %}
 
         <li id="profil" class="dropdown">
-          <a href="{{ path('profil_profile') }}" class="dropdown-toggle" data-toggle="dropdown">{{'Profil'|trans}}<b class="caret"></b></a>
+          <a href="{{ path('profil_profile') }}" class="dropdown-toggle" data-toggle="dropdown">{{'base.nav.profile.name'|trans}}<b class="caret"></b></a>
           <ul class="dropdown-menu">
-            <li><a href="{{ path('profil_profile') }}">{{'Information Profil'|trans}}</a></li>
-            <li><a href="{{ path('profil_changepassword') }}">{{'Changement de mot de passe'|trans}}</a></li>
+            <li><a href="{{ path('profil_profile') }}">{{'base.nav.profile.profile'|trans}}</a></li>
+            <li><a href="{{ path('profil_changepassword') }}">{{'base.nav.profile.changepassword'|trans}}</a></li>
           </ul>
         </li>
 
         {% if is_granted('ROLE_CHEF_BE') %}
-		<li id="frais" class="dropdown">
-          <a href=# class="dropdown-toggle" data-toggle="dropdown">{{'Export Présence'|trans}}<b class="caret"></b></a>
+		<li id="presence_admin" class="dropdown">
+          <a href=# class="dropdown-toggle" data-toggle="dropdown">{{'base.nav.schedule_admin.name'|trans}}<b class="caret"></b></a>
           <ul class="dropdown-menu">
-            <li><a href="{{ path('admin_export_index')}}">{{'Export données BE'|trans}}</a></li>
+            <li><a href="{{ path('admin_export_index')}}">{{'base.nav.schedule_admin.indexexport'|trans}}</a></li>
           </ul>
         </li>
         {% endif %}
 
         {% if is_granted('ROLE_COMPTA') %}
-        <li id="frais" class="dropdown">
-          <a href="{{ path('admin_exportexpense') }}" class="dropdown-toggle" data-toggle="dropdown">{{'Export Notes de Frais'|trans}}<b class="caret"></b></a>
+        <li id="frais_admin" class="dropdown">
+          <a href="{{ path('admin_exportexpense') }}" class="dropdown-toggle" data-toggle="dropdown">{{'base.nav.expense_admin.name'|trans}}<b class="caret"></b></a>
           <ul class="dropdown-menu">
-            <li><a href="{{ path('admin_exportexpense') }}">{{'Export données notes de frais'|trans}}</a></li>
+            <li><a href="{{ path('admin_exportexpense') }}">{{'base.nav.expense_admin.exportexpense'|trans}}</a></li>
           </ul>
+        </li>
+        {% endif %}
+
+        {% if is_granted('ROLE_ADMIN') %}
+        <li id="profil_admin" class="dropdown">
+            <a href="{{ path('registration_register') }}" class="dropdown-toggle" data-toggle="dropdown">{{'base.nav.profile_admin.name'|trans}}<b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                <li><a href="{{ path('registration_register') }}">{{'base.nav.profile_admin.register'|trans}}</a></li>
+            </ul>
         </li>
         {% endif %}
 

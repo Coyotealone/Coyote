@@ -1,151 +1,170 @@
-# En-tête #
-Choisissez votre pays: Choose your country
-Contact: Contact
-Site Pichon: Pichon Website
-Bienvenue: Welcome
+base:
+    copyright: Copyright ©2015 PICHON - All rights reserved
+    version: Version 1.12.0
+    title: Pichon - WebSite
+    link: http://www.pichonindustries.com
+    choose_language: Choose your country
+    welcome: Welcome to the website Pichon
+    nav:
+        accueil: Home
+        contact: Contact
+        site: Website Pichon
+        schedule:
+            index: Recording
+            indexshow: Consultation
+            indexprint: PDF printing
+            name: Time Attendance
+            overtime: Overtime
+            indexexportprintyear: Export of the Year in PDF
+        expense:
+            name: Expense report
+            create: Recording
+            indexshow: Consultation
+            indexprint: PDF printing
+            indexupdatestatus: Update the status of expense
+        profile:
+            name: Profile
+            profile: Profile Information
+            changepassword: Password change
+        schedule_admin:
+            name: Export of time attendance
+            indexexport: Export of data research department
+        expense_admin:
+            name: Export of expense
+            exportexpense: Export of data expense
+        profile_admin:
+            name: Administrator
+            register: Adding a user
 
-# Pied de page #
-"Copyright ©2014 PICHON - Tous droits réservés": Copyright ©2014 PICHON - All rights reserved
-Version: Version
+accueil:
+    menu:
+        message: Welcome to the website Pichon
 
-# Navbar #
-Accueil: Home
-Présence: Attendance
-Consultation: Consultation
-Saisie: Recording
-Note de Frais: Expense
-Profil: Profile
-Configurateur: Configurator
-Formulaire: Form
-Index: Index
-Information Profil: Profil information
-Changement de mot de passe: Change password
-"Création d'une config": Creating a configuration
-Formulaire Bon de commande: Form order
-Impression PDF: PDF print
-"Impression de l'année en PDF": PDF print of the year
-Export Présence: Export time and attendance
-Export données BE: Export BE data
-Export Notes de Frais: Export Expense
-Export données notes de frais: Export expense data
-"Export de l'année en PDF": Export PDF print of the year
+userinfo:
+    welcome: Welcome
 
-# Page Login #
-Mot de passe oublié: Forgot password
-Connexion: Login
+admin:
+    month: Month
+    year: Year
+    submit:
+        download: Download
 
-# Page Menu #
-Bienvenue sur le site PICHON: Welcome to the website PICHON
+contact:
+    title: Contact us
+    submit: Send
+    email: Email
+    subject: Subject
+    content: Content
 
-# Page présence #
-Voici la semaine: Display Week
-"d'affichée de l'année": of
-Temps de travail: Working time
-"Jour de la semaine": Weekday
-Début: Start
-Fin: End
-Pause: Break
-Journée travaillée: Working hours
-Déplacement: Travel
-Absence: Absence
-Commentaire: Comment
-Oui: Yes
-Non: No
-Saisir un commentaire: Write a comment
-Saisie automatique des heures (Cochez les jours que vous souhaitez remplir et saisissez les valeurs dans les champs début fin pause ci-dessous): AutoFill hours (check the days you want to fill and enter the values ​​in the start end break below)
-Saisie Automatique: AutoFill
-Semaine Précédente: Previous Week
-Semaine Suivante: Next Week
-Lundi: Monday
-Mardi: Tuesday
-Mercredi: Wednesday
-Jeudi: Thursday
-Vendredi: Friday
-Samedi: Saturday
-Dimanche: Sunday
-Mois: Month
-Année: Year
-Janvier: January
-Février: February
-Mars: March
-Avril: April
-Mai: May
-Juin: June
-Juillet: July
-Août: August
-Septembre: September
-Octobre: October
-Novembre: November
-Décembre: December
-Afficher: Display
-Récapitulatif du mois: Summury of the month
-Nombre d'heure travaillé dans la semaine: Number of hours worked in the week
-Temps total travaillé dans le mois: Total time worked during the month
-Nombre de RTT utilisé dans le mois / année: Number of RTT used in the month / year
-Nombre de congés payés (CP) utilisé dans le mois /année: Number of paid leave (CP) used in the month / year
-Nombre de congés d'anciennetés (CA) utilisé dans le mois / année: Number of seniority leave (CA) used in the month / year
-Jour férié: Public Holiday
-Weekend: Weekend
-Temps de la semaine: Time of the week
-lundi: monday
-mardi: tuesday
-mercredi: wednesday
-jeudi: thursday
-vendredi: friday
-samedi: saturday
-dimanche: sunday
-Enregistrer: Save
-Consultation des temps de présence: Consultation of time in work
-Jour travaillé dans le mois / année: Working day in the month / year
-"Récapitulatif de l'année": Summury of the year
-"Nombre de RTT utilisé dans l'année": Number of RTT user in the year
-"Nombre de congés payés (CP) utilisé dans l'année" : Number of paid leave (CP) used in the year
-"Nombre de congés d'anciennetés (CA) utilisé dans l'année": Number of seniority leave (CA) used in the year
-"Téléchargement des temps de présence de l'année au format PDF": Download to PDF working time in the year
-"Période": Period
-"Temps travaillé dans la semaine": Time worked in a week
-Téléchargement des temps de présence au format PDF: Download the working time in PDF
-Aucune: None
-RTT: Reduction of working time
-Congés payés: Paid leave
-Congés ancienneté: Leave seniority
-Congés sans solde: Unpaid leave
-Autres: Anything else
-Maladie/Accident travail/Paternité: Illness/Work accident/Paternity
-Aucune donnée trouvée: No data found
-"Export des temps de présence de l'année au format PDF": Export attendance time of the year to PDF
+schedule:
+    title:
+        edit: Working time
+        new: Working time
+        index: Choose your time recording method
+        hour: Input per hour
+        day: Entry per day
+        indexexportprintyear: Export attendance time of the year to PDF
+        indexprint: Download time and attendance in PDF format
+        indexprintyear: Download time and attendance in the year to PDF
+        indexshow: Consultation time and attendance
+        summary: Summary of the month
+        overtime: Number of overtime in the year
+    holiday: Holiday
+    weekend: Weekend
+    message_week: Here week %no_week% of %year% displayed
+    dayofweek: Day of the week
+    date: Date
+    start: Start
+    end: End
+    break: Break
+    working_time: Working Time
+    travel: Travel
+    absence: Absence
+    absence_time: Absence Time
+    comment: Comment
+    working_hours: Working hours
+    monday: Monday
+    tuesday: Tuesday
+    wednesday: Wednesday
+    thursday: Thursday
+    friday: Friday
+    saturday: Saturday
+    sunday: Sunday
+    write_comment: Write a comment
+    rtt: Reduction of working time
+    cp: Paid leave
+    ca: Leave seniority
+    css: Unpaid leave
+    at: Work stoppage
+    mp: Maternity/Paternity
+    recup: Recovery/Overtime
+    various: Various
+    month: Month
+    year: Year
+    period: Period
+    working_time_week: Time worked in the week
+    wroking_day_week: Day worked in the week
+    working_day_month: Day worked in the month
+    hours_worked_week: Number of hours worked in the week
+    total_time_worked_month: Total time worked in the month
+    number_rtt_month_year: Number of reduction of working time in the month / year
+    number_cp_month_year: Number of paid leave used in the month / year
+    number_ca_month_year: Number of seniority leave used in the month /year
+    no_data_found: No data found
+    working_day_month_year: Day worked in the month / year
+    working_day_year: Day worked in the year
+    number_rtt_year: Number of reduction of working time in the year
+    number_cp_year: Number of paid leave used in the year
+    number_ca_year: Number of seniority leave used in the year
+    submit:
+        save: Save
+        indexexportprintyear: Display
+        indexprint: Download
+        indexprintyear: Download
+        indexshow: Display
+        previous_week: Previous week
+        next_week: Next week
+    message: AutoFill hours (check the days you want to fill and enter the values in the fields start end break below)
+    write_auto: AutoFill
 
-# Page Profil #
-"En cas de problème de mot de passe, merci de contacter votre administrateur ou d'envoyer un mail dans l'onglet Contact": Thanks to contact your administrator, if you have a problem with password. Or send an email from Contact tab
-'Le mot de passe doit faire': The password must be
-'caractères': characters
+expense:
+    title:
+        create: Add expense reports
+        edit: Edit expense reports
+        index: Welcome to the portion of expense
+        indexprint: Download expense reports in PDF format
+        indexshow: Consultation expense reports
+        print: Printing expense reports
+        show: Summary of the month
+        updatestatus: Udpate status expense reports
+    submit:
+        save: Save
+        update: Update
+        back: Back to the list
+        download: Download
+        show: Display
+        edit: Edit
+    site: Site
+    date: Date
+    item: Item
+    currency: Currency
+    amount: Amount
+    amountttc: Tax price
+    amounttva: VAT amount
+    business: Business
+    comment: Comment
+    actual_amount: Actual Amount
+    month: Month
+    year: Year
+    message: No data found
+    id_start: ID Start
+    id_end: ID End
+    treated: Treated
+    status:
+        yes: Yes
+        no: No
 
-# Page Note de frais #
-Bienvenue dans la partie des Notes de frais: Welcome to the part of the Expense
-Saisie des notes de frais: Entering expense
-Visualiser les notes de frais: Warning fees
-Site: Site
-Date: Date
-Code Article: Item code
-Devise: Currency
-Quantité: Amount
-Montant réel: Actual amount
-Montant TTC: Tax amount
-Montant TVA: TVA amount
-Affaire: Business
-Commentaire: Comment
-Editer: Edit
-Edité: Edit
-Mise à jour: Update
-Edition de la note de frais: Editing the expense
-Retour à la liste: Back to the list
-Consultation des notes de frais: Consultation expense
-Ajout de notes de frais: Adding expense
-"Merci d'écrire la date qu'avec des chiffres. Exemple pour la date du 7 juin 2014, il faut écrire : 070614": Thank you write the date with numbers. For example the date of June 7, 2014, write: 070614
-Aucune donnée trouvée: No data found
-Téléchargement des notes de frais au format PDF: Download expense PDF
-Impression Notes de frais: Print expense
-Artcle: Item
+# FOSUserBundle Translation #
 
 # Group
 group:
@@ -161,31 +180,36 @@ group:
         deleted: The group has been deleted
 
 # Security
-"Bad credentials": Invalid username or password
-"User account is disabled.": User account is disabled.
-
 security:
-    login:
-        username: "Username:"
-        password: "Password:"
-        remember_me: Remember me
-        submit: Login
+    username: "Username"
+    password: "Password"
+    remember_me: Remember me
+    submit:
+        connexion: Connexion
+        resetting: Password forget
 
 # Profile
 profile:
     show:
         username: Username
         email: Email
+        name: Name
+        phone: Phone
+        cell: Cell
+        message: If you encounter an error on your profile, contact your administrator.
     edit:
         submit: Update
     flash:
         updated: The profile has been updated
+    title:
+        show: Information on your profile
 
 # Password change
 change_password:
     submit: Change password
     flash:
         success: The password has been changed
+    title: Change your password
 
 # Registration
 registration:
@@ -241,38 +265,88 @@ form:
     email: "Email:"
     current_password: "Current password:"
     password: "Password:"
-    password_confirmation: "Verification:"
+    password_confirmation: "Repeat password:"
     new_password: "New password:"
-    new_password_confirmation: "Verification:"
-    name: "Name :"
-    adress1: "Adress :"
-    adress2: "Adress(suite) :"
-    zip_code: "Zip Code :"
-    postal_box: "Postal Box :"
-    city: "City :"
-    country: "Country :"
-    phone: "Phone :"
-    cell: "Cell :"
-    fax: "Fax :"
-    website: "Website :"
-    roles: "Role :"
+    new_password_confirmation: "Repeat new password:"
+    name: NAME
+    address1: Address
+    address2: Address(continued)
+    zip_code: Zip Code
+    postal_box: Postal Box
+    city: City
+    country: Country
+    phone: Phone
+    cell: Cell
+    website: Website
+    roles: Roles
+    fax: Fax
 
-#Ajout personnel
-Mot de passe oublié: Forget password
-Nom prénom: Name
-N° Téléphone: Phone number
-Si vous rencontrez une erreur sur votre profil, merci de contacter votre administrateur: If you encounter an error on your profile, thank you to contact your administrator
-Le mot de passe doit faire 6 caractères: The password must be 6 characters
-Information sur votre profil: Profil Information
-Changement de votre mot de passe: Change your password
+# Month
 
-Se souvenir de moi: Remember me
-Identifiant: Login
-Mot de passe: Password
+Janvier: January
+Février: February
+Mars: March
+Avril: April
+Mai: May
+Juin: June
+Juillet: July
+Août: August
+Septembre: September
+Octobre: October
+Novembre: November
+Décembre: December
 
-"Création d'un compte utilisateur": Create user account
+# Day
 
-#Messages d'erreur
+Lundi: Monday
+Mardi: Tuesday
+Mercredi: Wednesday
+Jeudi: Thursday
+Vendredi: Friday
+Samedi: Saturday
+Dimanche: Sunday
 
-Une erreur est survenue: An Error Occurred
-Le serveur a renvoyé une: The server returned a
+# Absence
+
+RTT: Reduction of working time
+CP: Paid leave
+CA: Leave seniority
+CSS: Unpaid leave
+AT: Work stoppage
+MP: Maternity/Paternity
+Recup: Recovery/Overtime
+Various: Various
+Aucune: No
+
+# Item
+
+Carburant sans TVA: Free fuel value added tax
+Carburant Camion Fourgon: Van Truck Fuel
+Carburant Voiture: Car Fuel
+DIESEL UK carburant: Diesel Fuel UK
+Cadeaux clients 5.5%: Customer Rewards 5.5%
+Entretien Voitures: Car Maintenance
+Entretien Camion Fourgon: Van Truck Maintenance
+Car maintenance UK: Car Maintenace UK
+Entree salon-foire sans TVA: Fair lounge entry
+show VAT UK: Show VAT UK
+Fournitures sans TVA: Supplies without VAT
+Fournitures: Supplies
+Fourniture 5,5%: Supplies 5.5%
+stationary UK fourniture: Supplies UK
+Hotel: Hostal
+Hotel UK 20%: Hostel UK 20%
+Location vehicules: Rent Car
+Telephone sans TVA: Phone without VAT
+Telephone UK 20%: Phone UK 20%
+Frais Postaux: Postage
+Receptions sans TVA: Receipt without VAT
+Receptions a 19,6%=>20%: Receipt 20%
+Receptions a 5,5%: Receipt 5.5%
+Receptions a 7%=>10%: Receipt 10%
+Entertaining UK 20% reception: Receipt UK 20%
+Repas sans TVA: Meal without VAT
+Repas a 19,6% => 20%: Meal 20%
+Repas a 5,5%: Meal 5.5%
+Repas a 7% => 10%: Meal 10%
+meal UK 20%: Meal UK 20%
