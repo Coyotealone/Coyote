@@ -254,19 +254,24 @@ class ExpenseController extends Controller
                 if($count_expense > 1)
                 {
                     /** @var $message string */
-                    $message = $count_expense.' enregistrement effectués';
+                    //$message = $count_expense.' enregistrement effectués';
+                    $message = 'expense.flash.save_multiple';
+                    $session->set('countExpense', $count_expense);
                 }
                 else
                 {
                     /** @var $message string */
-                    $message = '1 enregistrement effectué';
+                    //$message = '1 enregistrement effectué';
+                    $message = 'expense.flash.save';
                 }
             }
             else
                 /** @var $message string */
-                $message = 'Aucun enregistrement effectué';
+                //$message = 'Aucun enregistrement effectué';
+                $message = 'expense.flash.no_save';
             /** set $message in flashbag */
             $this->get('session')->getFlashBag()->set('saveexpense', $message);
+
             /** redirect ExpenseController:createAction */
             return $this->redirect($this->generateUrl('expense_create'));
         }

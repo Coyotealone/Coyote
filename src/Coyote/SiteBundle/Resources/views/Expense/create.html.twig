@@ -33,9 +33,11 @@
 {% block content %}
 
 {% for flashMessage in app.session.flashbag.get('saveexpense') %}
-
-    <p id="flashmessage">{{ flashMessage }}</p>
-
+    {% if app.session.get('countExpense') %}
+        <p id="flashmessage">{{ flashMessage|trans({'%count%': app.session.get('countExpense') }) }}</p>
+    {% else %}
+        <p id="flashmessage">{{ flashMessage|trans }}</p>
+    {% endif %}
 {% endfor %}
 
 <p id="titreconfig">{{'expense.title.create'|trans}} </p>

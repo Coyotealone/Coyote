@@ -163,6 +163,10 @@ expense:
     status:
         yes: Yes
         no: No
+    flash:
+        save: 1 recording made
+        save_multiple: %count% performed registration
+        no_save: No recording made
 
 # FOSUserBundle Translation #
 

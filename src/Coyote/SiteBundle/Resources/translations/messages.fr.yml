@@ -171,6 +171,10 @@ expense:
     status:
         yes: Oui
         no: Non
+    flash:
+        save: 1 enregistrement effectué
+        save_multiple: %count% enregistrement effectués
+        no_save: Aucune enregistrement effectué
 
 # FOSUserBundle Translation #
 
