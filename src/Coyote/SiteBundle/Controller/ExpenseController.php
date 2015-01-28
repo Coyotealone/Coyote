@@ -78,7 +78,7 @@ class ExpenseController extends Controller
         else
         {
             /** @var $currency object currency all data from Currency */
-            $currency = $em->getRepository('CoyoteSiteBundle:Currency')->findAll();
+            $currency = $em->getRepository('CoyoteSiteBundle:Currency')->findAllOrderByCode();
             /** @var $business object business all data from Business */
             $business = $em->getRepository('CoyoteSiteBundle:Business')->findAll();
             /** @var $fee object fee all data from Fee */
