@@ -159,6 +159,10 @@ expense:
     message: No data found
     id_start: ID Start
     id_end: ID End
+    treated: Treated
+    status:
+        yes: Yes
+        no: No
 
 # FOSUserBundle Translation #
 

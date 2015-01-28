@@ -167,6 +167,10 @@ expense:
     message: Aucune donnée trouvée
     id_start: ID Start
     id_end: ID End
+    treated: Traité
+    status:
+        yes: Oui
+        no: Non
 
 # FOSUserBundle Translation #
 

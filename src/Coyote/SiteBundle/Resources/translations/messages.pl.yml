@@ -159,6 +159,10 @@ expense:
     message: Brak danych
     id_start: Identyfikator start
     id_end: Identyfikator Koniec
+    treated: Traktowane
+    status:
+        yes: Tak
+        no: Nie
 
 # FOSUserBundle Translation #
 
