@@ -77,15 +77,22 @@ class ScheduleRepository extends EntityRepository
     public function findAbsenceYear($pay_period, $user, $absence)
     {
         $qb = $this->_em->createQueryBuilder();
-        $qb->select('s.id')
+        $qb->select('s.absence_duration')
            ->from('CoyoteSiteBundle:Schedule', 's')
            ->innerJoin('CoyoteSiteBundle:Timetable', 't', 'WITH', 't.id = s.timetable')
-           ->where('s.user = :user and s.absence_name = :absence and t.pay_period = :pay_period')
-           ->setParameters(array('user' => $user, 'absence' => $absence, 'pay_period' => $pay_period));
-        $id_schedule =  $qb->getQuery()
-                           ->getResult();
+           ->where('s.user = :user and t.pay_period = :pay_period and s.absence_name = :absence')
+           ->setParameters(array('user' => $user, 'pay_period' => $pay_period, 'absence' => $absence));
+        $data_absence_duration = $qb->getQuery()
+                                    ->getResult();
 
-        return count($id_schedule);
+        $count_absence = 0.0;
+
+        for($i = 0; $i<count($data_absence_duration);$i++)
+        {
+            $count_absence += $data_absence_duration[$i]['absence_duration'];
+        }
+
+        return $count_absence;
     }
 
     /**
