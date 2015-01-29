@@ -126,6 +126,9 @@ schedule:
         next_week: W przyszłym tygodniu
     message: Autouzupełnianie godzin (sprawdź dni, które chcesz wypełnić i wprowadź wartości w polach Początek Koniec przerwy poniżej)
     write_auto: Autouzupełnianie
+    flash:
+        no_save: Wystąpił błąd!
+        save: Rejestracja zrealizowanych danych
 
 expense:
     title:
@@ -167,6 +170,8 @@ expense:
         save: 1 Nagranie wykonane
         save_multiple: %count% wykonywane Rejestracja
         no_save: Brak zapisu wykonane
+        no_update: Brak aktualizacji danych
+        update: Aktualizacja wykonywana
 
 # FOSUserBundle Translation #
 

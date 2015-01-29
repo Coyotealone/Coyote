@@ -17,9 +17,13 @@
 
 {% block content %}
 {% for flashMessage in app.session.flashbag.get('updatestatus') %}
-
-    <p id="flashmessage">{{ flashMessage }}</p>
-
+    {% set message = flashMessage %}
+    {% if message == "expense.flash.update" %}
+        <p id="flashmessage_valid">{{ flashMessage|trans }}</p>
+    {% endif %}
+    {% if message == "expense.flash.no_update" %}
+        <p id="flashmessage_warning">{{ flashMessage|trans }}</p>
+    {% endif %}
 {% endfor %}
 <p id="titreconfig">{{'expense.title.updatestatus'|trans}} </p>
 

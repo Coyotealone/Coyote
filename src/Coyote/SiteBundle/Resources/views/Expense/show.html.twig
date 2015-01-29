@@ -6,9 +6,9 @@
 
 {% block content %}
 
-{% for flashMessage in app.session.flashbag.get('saveexpense') %}
+{% for flashMessage in app.session.flashbag.get('save_expense') %}
 
-    <p id="flashmessage">{{ flashMessage }}</p>
+    <p id="flashmessage">{{ flashMessage|trans }}</p>
 
 {% endfor %}
 <p id="titreconfig">{{'expense.title.show'|trans}}</p>

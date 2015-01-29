@@ -32,12 +32,18 @@
 
 {% block content %}
 
-{% for flashMessage in app.session.flashbag.get('saveexpense') %}
-    {% if app.session.get('countExpense') %}
-        <p id="flashmessage">{{ flashMessage|trans({'%count%': app.session.get('countExpense') }) }}</p>
-    {% else %}
-        <p id="flashmessage">{{ flashMessage|trans }}</p>
+{% for flashMessage in app.session.flashbag.get('save_expense') %}
+    {% set message = flashMessage %}
+    {% if message == 'expense.flash.no_save' %}
+        <p id="flashmessage_error">{{ flashMessage|trans }}</p>
     {% endif %}
+    {% if message == 'expense.flash.save' %}
+        <p id="flashmessage_valid">{{ flashMessage|trans }}</p>
+    {% endif %}
+    {% if message == 'expense.flash.save_multiple' %}
+        <p id="flashmessage_valid">{{ flashMessage|trans({'%count%': app.session.get('countExpense') }) }}</p>
+    {% endif %}
+
 {% endfor %}
 
 <p id="titreconfig">{{'expense.title.create'|trans}} </p>
@@ -109,7 +115,11 @@
     		<th id='tab_expense_business'>
     			<select name='affaire{{i}}' id='affaire{{i}}'>
     			    {% for databusiness in business %}
-    			        <option value={{ databusiness.id }}>{{ databusiness }}</option>
+    			        {% if databusiness.id == 1 %}
+    			             <option value={{ databusiness.id }}>{{ databusiness }}</option>
+    			        {% else %}
+    			            <option value={{ databusiness.id }}>{{ databusiness }} : {{ databusiness.code }}</option>
+                        {% endif %}
     			    {% endfor %}
     			</select>
     		</th>

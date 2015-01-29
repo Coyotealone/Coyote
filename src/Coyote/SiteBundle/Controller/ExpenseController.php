@@ -270,7 +270,7 @@ class ExpenseController extends Controller
                 //$message = 'Aucun enregistrement effectué';
                 $message = 'expense.flash.no_save';
             /** set $message in flashbag */
-            $this->get('session')->getFlashBag()->set('saveexpense', $message);
+            $this->get('session')->getFlashBag()->set('save_expense', $message);
 
             /** redirect ExpenseController:createAction */
             return $this->redirect($this->generateUrl('expense_create'));
@@ -522,7 +522,7 @@ class ExpenseController extends Controller
         /** check $year and $month */
         if(empty($id_start) && empty($id_end))
         {
-            $message = "Aucune donnée mise à jour";
+            $message = 'expense.flash.no_update';
             $this->get('session')->getFlashBag()->set('updatestatus', $message);
             /** redirect ExpenseController:indexprintAction */
             return $this->redirect($this->generateUrl('expense_indexupdatestatus'));
@@ -534,13 +534,16 @@ class ExpenseController extends Controller
                 for($i = $id_start; $i<=$id_end; $i++)
                 {
                     $data_expense = $em->getRepository('CoyoteSiteBundle:Expense')->find($i);
-                    $data_expense->setStatus(1);
+                    if($data_expense != null)
+                    {
+                        $data_expense->setStatus(1);
                     /** persist $expense */
-                    $em->persist($data_expense);
+                        $em->persist($data_expense);
+                    }
                     /** add data in db */
                     $em->flush();
                 }
-                $message = "Mise à jour effectuée";
+                $message = 'expense.flash.update';
                 //alert($message);
                 $this->get('session')->getFlashBag()->set('updatestatus', $message);
             }
@@ -555,7 +558,7 @@ class ExpenseController extends Controller
                     /** add data in db */
                     $em->flush();
                 }
-                $message = "Mise à jour effectuée";
+                $message = 'expense.flash.update';
                 alert($message);
                 $this->get('session')->getFlashBag()->set('updatestatus', $message);
             }

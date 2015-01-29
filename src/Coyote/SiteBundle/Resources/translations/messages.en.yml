@@ -126,6 +126,9 @@ schedule:
         next_week: Next week
     message: AutoFill hours (check the days you want to fill and enter the values in the fields start end break below)
     write_auto: AutoFill
+    flash:
+        no_save: An error has occurred!
+        save: Registration of completed data
 
 expense:
     title:
@@ -167,6 +170,8 @@ expense:
         save: 1 recording made
         save_multiple: %count% performed registration
         no_save: No recording made
+        no_update: No data update
+        update: Updated performed
 
 # FOSUserBundle Translation #
 

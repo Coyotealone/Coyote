@@ -134,6 +134,9 @@ schedule:
         next_week: Semaine Suivante
     message: "Saisie automatique des heures (Cochez les jours que vous souhaitez remplir et saisissez les valeurs dans les champs début fin pause ci-dessous)"
     write_auto: Saisie Automatique
+    flash:
+        no_save: "Une erreur s'est produite !"
+        save: Enregistrement terminé
 
 expense:
     title:
@@ -175,6 +178,8 @@ expense:
         save: 1 enregistrement effectué
         save_multiple: %count% enregistrement effectués
         no_save: Aucune enregistrement effectué
+        no_update: Aucune donnée mise à jour
+        update: Mise à jour effectuée
 
 # FOSUserBundle Translation #
 

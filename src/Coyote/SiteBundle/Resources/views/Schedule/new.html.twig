@@ -24,10 +24,13 @@
 
 {% block content %}
 
-    {% for flashMessage in app.session.flashbag.get('save') %}
-
-        {{ flashMessage }}
-
+    {% for flashMessage in app.session.flashbag.get('save_schedule') %}
+        {% set message = flashMessage %}
+        {% if message == "schedule.flash.save" %}
+            <p id="flashmessage_valid">{{ flashMessage|trans }}</p>
+        {% elseif message == "schedule.flash.no_save" %}
+            <p id="flashmessage_error">{{ flashMessage|trans }}</p>
+        {% endif %}
     {% endfor %}
 
     {% if is_granted('ROLE_TECH') %}

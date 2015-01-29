@@ -51,11 +51,25 @@ header, footer, section, hgroup, aside, nav, article, figure, figcaption, time, 
 }
 
 /* line 41, ../scss/styles.sass */
-#flashmessage {
+#flashmessage_valid {
   font-family: "Coda";
   font-size: large;
   color: white;
-  background-color: black;
+  background-color: green;
+}
+
+#flashmessage_error {
+    font-family: "Coda";
+    font-size: large;
+    color: white;
+    background-color: red;
+}
+
+#flashmessage_warning{
+    font-family: "Coda";
+    font-size: large;
+    color: white;
+    background-color: #f98729;
 }
 
 /* line 47, ../scss/styles.sass */
