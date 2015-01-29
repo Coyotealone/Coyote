@@ -17,6 +17,10 @@ Coyote\SiteBundle\Entity\Business:
             type: string
             lenght: 45
             notnull: true
+        currency:
+            type: string
+            lenght: 10
+            null: true
     oneToMany:
         expenses:
             targetEntity: Expense

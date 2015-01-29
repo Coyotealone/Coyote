@@ -116,9 +116,11 @@
     			<select name='affaire{{i}}' id='affaire{{i}}'>
     			    {% for databusiness in business %}
     			        {% if databusiness.id == 1 %}
-    			             <option value={{ databusiness.id }}>{{ databusiness }}</option>
+    			             <option value={{ databusiness.id }}>{{ databusiness.name }}</option>
+                        {% elseif databusiness.currency == NULL %}
+                            <option value={{ databusiness.id }}>{{ databusiness.name }}</option>
     			        {% else %}
-    			            <option value={{ databusiness.id }}>{{ databusiness }} : {{ databusiness.code }}</option>
+    			            <option value={{ databusiness.id }}>{{ databusiness.name }} : {{ databusiness.currency }}</option>
                         {% endif %}
     			    {% endfor %}
     			</select>

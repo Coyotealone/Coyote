@@ -24,6 +24,8 @@ class Business
      */
     private $name;
 
+    private $currency;
+
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
@@ -38,9 +40,32 @@ class Business
     }
 
     /**
+     * Set code
+     *
+     * @param string $code
+     * @return Currency
+     */
+    public function setCurrency($currency)
+    {
+        $this->currency = $currency;
+
+        return $this;
+    }
+
+    /**
+     * Get code
+     *
+     * @return string
+     */
+    public function getCurrency()
+    {
+        return $this->currency;
+    }
+
+    /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -63,7 +88,7 @@ class Business
     /**
      * Get code
      *
-     * @return string 
+     * @return string
      */
     public function getCode()
     {
@@ -86,7 +111,7 @@ class Business
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -119,13 +144,13 @@ class Business
     /**
      * Get expenses
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getExpenses()
     {
         return $this->expenses;
     }
-    
+
     public function __toString()
     {
         return $this->name;
