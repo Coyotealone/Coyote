@@ -80,7 +80,7 @@ class ExpenseController extends Controller
             /** @var $currency object currency all data from Currency */
             $currency = $em->getRepository('CoyoteSiteBundle:Currency')->findAllOrderByCode();
             /** @var $business object business all data from Business */
-            $business = $em->getRepository('CoyoteSiteBundle:Business')->findAll();
+            $business = $em->getRepository('CoyoteSiteBundle:Business')->findAllOrderByName();
             /** @var $fee object fee all data from Fee */
             $fee = $em->getRepository('CoyoteSiteBundle:Fee')->findAll();
             /** show view */

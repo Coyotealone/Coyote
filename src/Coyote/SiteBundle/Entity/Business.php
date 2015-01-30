@@ -24,8 +24,6 @@ class Business
      */
     private $name;
 
-    private $currency;
-
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
@@ -37,29 +35,6 @@ class Business
     public function __construct()
     {
         $this->expenses = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Set code
-     *
-     * @param string $code
-     * @return Currency
-     */
-    public function setCurrency($currency)
-    {
-        $this->currency = $currency;
-
-        return $this;
-    }
-
-    /**
-     * Get code
-     *
-     * @return string
-     */
-    public function getCurrency()
-    {
-        return $this->currency;
     }
 
     /**

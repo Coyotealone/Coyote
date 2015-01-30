@@ -12,4 +12,8 @@ use Doctrine\ORM\EntityRepository;
  */
 class BusinessRepository extends EntityRepository
 {
+    public function findAllOrderByName()
+    {
+        return $this->findBy(array(), array('name' => 'ASC'));
+    }
 }
