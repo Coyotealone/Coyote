@@ -24,7 +24,7 @@ class ExpenseRepository extends EntityRepository
      * @access public
      * @param mixed $date
      * @param mixed $id
-     * @return array expense
+     * @return array Expense
      */
     public function findExpense($date, $id)
     {
@@ -157,7 +157,7 @@ class ExpenseRepository extends EntityRepository
      * @param mixed $user_fee_id
      * @param mixed $data
      * @param mixed $increment
-     * @return array expense
+     * @return array Expense
      */
     public function saveExpense($user_fee_id, $data, $increment)
     {
@@ -189,6 +189,15 @@ class ExpenseRepository extends EntityRepository
         return $expense;
     }
 
+    /**
+     * findExpenseById function.
+     * function to find entity by id
+     *
+     * @access public
+     * @param integer $id_start
+     * @param integer $id_end
+     * @return array Expense
+     */
     public function findExpenseById($id_start, $id_end)
     {
         $query = $this->getEntityManager()
@@ -200,6 +209,15 @@ class ExpenseRepository extends EntityRepository
         return $query->getResult();
     }
 
+    /**
+     * updateStatusExense function.
+     * function to set status
+     *
+     * @access public
+     * @param mixed $em
+     * @param mixed $expense
+     * @return 'OK'
+     */
     public function updateStatusExense($em, $expense)
     {
         foreach($expense as $data)
@@ -211,6 +229,15 @@ class ExpenseRepository extends EntityRepository
         return "OK";
     }
 
+    /**
+     * findAllOrderByUserFeesID function.
+     * function to find all entity Expense
+     *
+     * @access public
+     * @param status = 1
+     * @param order by userfeess, id ASC
+     * @return array Business
+     */
     public function findAllOrderByUserFeesID()
     {
         return $this->findBy(array('status' => 1), array('userfees' => 'ASC', 'id' => 'ASC'));

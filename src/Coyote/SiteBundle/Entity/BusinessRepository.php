@@ -12,6 +12,15 @@ use Doctrine\ORM\EntityRepository;
  */
 class BusinessRepository extends EntityRepository
 {
+
+    /**
+     * findAllOrderByName function.
+     * function to find all entity business order by name
+     *
+     * @access public
+     * @param order by name ASC
+     * @return array Business
+     */
     public function findAllOrderByName()
     {
         return $this->findBy(array(), array('name' => 'ASC'));
