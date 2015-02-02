@@ -22,6 +22,7 @@ base:
             indexshow: Konsultacje
             indexprint: drukowanie w formacie PDF
             indexupdatestatus: Aktualizacja statusu koszt
+            showadmin: Konsultacje z toczącym raporty wydatków
         profile:
             name: Profil
             profile: Informacje Profil
@@ -140,6 +141,7 @@ expense:
         print: Drukowanie raporty wydatków
         show: Podsumowanie miesiąca
         updatestatus: UDPATE raporty wydatków stan
+        showadmin: Konsultacje z toczącym raporty wydatków
     submit:
         save: Zapisz
         update: Aktualizacja

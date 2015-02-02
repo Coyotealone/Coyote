@@ -210,4 +210,9 @@ class ExpenseRepository extends EntityRepository
         $em->flush();
         return "OK";
     }
+
+    public function findAllOrderByUserFeesID()
+    {
+        return $this->findBy(array('status' => 1), array('userfees' => 'ASC', 'id' => 'ASC'));
+    }
 }

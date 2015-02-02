@@ -565,5 +565,35 @@ class ExpenseController extends Controller
         }
         return $this->redirect($this->generateUrl('expense_indexupdatestatus'));
     }
+
+    /**
+     * show expense save.
+     *
+     * @access public
+     * @return showparameters
+     */
+    public function showadminAction()
+    {
+        /** @var $session new object Session */
+        $session = new Session();
+        /** @var $user object data user connected */
+        $user = $this->get('security.context')->getToken()->getUser();
+        /** check @var $user */
+        if($user == "anon.")
+            return $this->redirect($this->generateUrl('fos_user_security_login'));
+        /** check @var $session 'userfeesid' */
+
+
+        else
+        {
+            /** @var $em object doctrine request */
+            $em = $this->getDoctrine()->getManager();
+            /** @var $data_expense object Expense*/
+            $data_expense = $em->getRepository('CoyoteSiteBundle:Expense')->findAllOrderByUserFeesID();
+            /** show view */
+            //return new Response($data_expense[0]->getStatus()->getString());
+            return $this->render('CoyoteSiteBundle:Expense:showadmin.html.twig', array('data' => $data_expense));
+        }
+    }
 }
 

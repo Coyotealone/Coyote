@@ -22,6 +22,7 @@ base:
             indexshow: Consultation
             indexprint: PDF printing
             indexupdatestatus: Update the status of expense
+            showadmin: Consultation of pending expense reports
         profile:
             name: Profile
             profile: Profile Information
@@ -140,6 +141,7 @@ expense:
         print: Printing expense reports
         show: Summary of the month
         updatestatus: Udpate status expense reports
+        showadmin: Consultation of pending expense reports
     submit:
         save: Save
         update: Update

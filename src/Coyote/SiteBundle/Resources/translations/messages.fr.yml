@@ -22,6 +22,7 @@ base:
             indexshow: Consultation
             indexprint: Impression PDF
             indexupdatestatus: Mise à jour du statut des notes de frais
+            showadmin: Consultation des notes de frais en attente
         profile:
             name: Profil
             profile: Information Profil
@@ -148,6 +149,7 @@ expense:
         print: Impression Notes de frais
         show: Récapitulatif du mois
         updatestatus: Mise à jour statut Notes de frais
+        showadmin: Consultation des notes de frais en attente
     submit:
         save: Enregistrer
         update: Mise à jour
