@@ -27,8 +27,6 @@
     		<th id='tab_expense_amounttva'>{{ 'expense.amounttva'|trans}}</th>
     		<th id='tab_expense_business'>{{ 'expense.business'|trans}}</th>
     		<th id='tab_expense_comment'>{{ 'expense.comment'|trans}}</th>
-    		<th>{{'expense.treated'|trans}}</th>
-    		<th>{{ 'expense.submit.edit'|trans}}</th>
     	</tr>
     	{% for entity in data %}
             <tr>
@@ -42,14 +40,6 @@
                 <td>{{ entity.amounttva }}</td>
                 <td id='tab_expense_business'>{{ entity.business.name }}</td>
                 <td id='tab_expense_comment'>{{ entity.comment }}</td>
-                {% if entity.status == 1 %}
-                    <td>{{'expense.status.no'|trans}}</td>
-                {% else %}
-                    <td>{{'expense.status.yes'|trans}}</td>
-                {% endif %}
-                <td>
-                    <a href="{{ path('expense_edit', { 'id': entity.id }) }}">{{'expense.submit.edit'|trans}}</a>
-                </td>
             </tr>
         {% endfor %}
     </table>

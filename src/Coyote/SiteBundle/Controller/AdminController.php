@@ -164,7 +164,6 @@ class AdminController extends Controller
         else
             /** redirect MainController:indexAction */
             return $this->redirect($this->generateUrl('main_accueil'));
-
     }
 
     /**
@@ -176,50 +175,157 @@ class AdminController extends Controller
      */
     public function registerAction(Request $request)
     {
-        /** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */
-        $formFactory = $this->container->get('fos_user.registration.form.factory');
-        /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
-        $userManager = $this->container->get('fos_user.user_manager');
-        /** @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
-        $dispatcher = $this->container->get('event_dispatcher');
+        if($this->get('security.context')->isGranted('ROLE_ADMIN'))
+        {
+            /** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */
+            $formFactory = $this->container->get('fos_user.registration.form.factory');
+            /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
+            $userManager = $this->container->get('fos_user.user_manager');
+            /** @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
+            $dispatcher = $this->container->get('event_dispatcher');
 
-        $user = $userManager->createUser();
-        $user->setEnabled(true);
+            $user = $userManager->createUser();
+            $user->setEnabled(true);
 
-        $event = new GetResponseUserEvent($user, $request);
-        $dispatcher->dispatch(FOSUserEvents::REGISTRATION_INITIALIZE, $event);
+            $event = new GetResponseUserEvent($user, $request);
+            $dispatcher->dispatch(FOSUserEvents::REGISTRATION_INITIALIZE, $event);
 
-        if (null !== $event->getResponse()) {
-            return $event->getResponse();
-        }
+            if (null !== $event->getResponse()) {
+                return $event->getResponse();
+            }
 
-        $form = $formFactory->createForm();
-        $form->setData($user);
+            $form = $formFactory->createForm();
+            $form->setData($user);
 
-        if ('POST' === $request->getMethod()) {
-            $form->bind($request);
+            if ('POST' === $request->getMethod()) {
+                $form->bind($request);
 
-            if ($form->isValid()) {
-                $event = new FormEvent($form, $request);
-                $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
+                if ($form->isValid()) {
+                    $event = new FormEvent($form, $request);
+                    $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
 
-                $userManager->updateUser($user);
+                    $userManager->updateUser($user);
 
-                if (null === $response = $event->getResponse()) {
-                    $url = $this->container->get('router')->generate('fos_user_registration_confirmed');
-                    $response = new RedirectResponse($url);
+                    if (null === $response = $event->getResponse()) {
+                        $url = $this->container->get('router')->generate('fos_user_registration_confirmed');
+                        $response = new RedirectResponse($url);
+                    }
+
+                    $dispatcher->dispatch(FOSUserEvents::REGISTRATION_COMPLETED, new FilterUserResponseEvent($user,
+                        $request, $response));
+
+                    return $response;
                 }
+            }
 
-                $dispatcher->dispatch(FOSUserEvents::REGISTRATION_COMPLETED, new FilterUserResponseEvent($user,
-                    $request, $response));
+            return $this->container->get('templating')->renderResponse('FOSUserBundle:Registration:register.html.', array(
+                'form' => $form->createView(),
+            ));
+        }
+        else
+             return $this->redirect($this->generateUrl('main_accueil'));
+    }
 
-                return $response;
+
+    /**
+     * indexchoicesuserAction function.
+     * function to choose user
+     *
+     * @access public
+     * @return void
+     */
+    public function indexchoicesuserAction()
+    {
+        if($this->get('security.context')->isGranted('ROLE_ADMIN'))
+        {
+            $em = $this->getDoctrine()->getManager();
+            $request = $this->getRequest();
+            $users = $em->getRepository('CoyoteSiteBundle:User')->findAllOrderById();
+            return $this->render('CoyoteSiteBundle:Admin:index_choicesuser.html.twig', array('users' => $users));
+        }
+        else
+            return $this->redirect($this->generateUrl('main_accueil'));
+    }
+
+
+    /**
+     * choicesrolesAction function.
+     * function to choose roles user
+     *
+     * @access public
+     * @return void
+     */
+    public function choicesrolesAction()
+    {
+        if($this->get('security.context')->isGranted('ROLE_ADMIN'))
+        {
+            /** @var $em object doctrine request */
+            $em = $this->getDoctrine()->getManager();
+            /** @var $request object request */
+            $request = Request::createFromGlobals();
+            /** @var $data array data request */
+            $data_request = $request->request->all();
+
+            /** check @var data */
+            if($data_request == null)
+                /** show view */
+                return $this->render('CoyoteSiteBundle:Admin:index_choicesroles.html.twig');
+            else
+            {
+                $request = $this->getRequest();
+                $session = $request->getSession();
+                $session->set('choicesroles', $data_request['user']);
+                $user = $em->getRepository('CoyoteSiteBundle:User')->find($data_request['user']);
+                return $this->render('CoyoteSiteBundle:Admin:choicesroles.html.twig', array('user' => $user));
             }
         }
+        else
+            return $this->redirect($this->generateUrl('main_accueil'));
+    }
 
-        return $this->container->get('templating')->renderResponse('FOSUserBundle:Registration:register.html.', array(
-            'form' => $form->createView(),
-        ));
+
+    /**
+     * updaterolesAction function.
+     * function to update roles user
+     *
+     * @access public
+     * @return void
+     */
+    public function updaterolesAction()
+    {
+        if($this->get('security.context')->isGranted('ROLE_ADMIN'))
+        {
+            $em = $this->getDoctrine()->getManager();
+            /** @var $request object request */
+            $request = Request::createFromGlobals();
+            /** @var $data array data request */
+            $data_request = $request->request->all();
+
+            if(isset($data_request['add']))
+            {
+                $request = $this->getRequest();
+                $session = $request->getSession();
+                $user = $em->getRepository('CoyoteSiteBundle:User')->find($session->get('choicesroles'));
+                $result = $em->getRepository('CoyoteSiteBundle:User')->updateRole($user, $data_request, "add");
+                $message = 'admin.updaterole.flash.add';
+                $this->get('session')->getFlashBag()->set('admin_updaterole', $message);
+                return $this->redirect($this->generateUrl('admin_indexchoicesuser'));
+            }
+            if(isset($data_request['remove']))
+            {
+                $request = $this->getRequest();
+                $session = $request->getSession();
+                $user = $em->getRepository('CoyoteSiteBundle:User')->find($session->get('choicesroles'));
+                $result = $em->getRepository('CoyoteSiteBundle:User')->updateRole($user, $data_request, "remove");
+                $message = 'admin.updaterole.flash.remove';
+                $this->get('session')->getFlashBag()->set('admin_updaterole', $message);
+                return $this->redirect($this->generateUrl('admin_indexchoicesuser'));
+            }
+            else
+                return $this->redirect($this->generateUrl('main_accueil'));
+        }
+        else
+            return $this->redirect($this->generateUrl('main_accueil'));
     }
 
 }

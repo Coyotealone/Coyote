@@ -1,6 +1,6 @@
 base:
     copyright: Copyright © 2015 PICHON - Wszystkie prawa zastrzeżone
-    version: Wersja 1.12.0
+    version: Wersja 1.14.0
     title: Pichon - WebSite
     link: www.pichonindustries.com
     choose_language: Wybierz swój kraj
@@ -36,6 +36,7 @@ base:
         profile_admin:
             name: Administrator
             register: Dodawanie użytkownika
+            indexchoicesuser: Role Aktualizacja użytkownika
 
 accueil:
     menu:
@@ -45,10 +46,36 @@ userinfo:
     welcome: Witamy
 
 admin:
+    updaterole:
+        flash:
+            add: Przygotowana dodatkiem
+            remove: Tłumienie osiągnięte
     month: Miesiąc
     year: Rok
+    user: Użytkownik
+    schedule:
+        title: Uczęszcza
+        technician: Technik (wejście na godzinę)
+        business: Biznes (wpis na dzień)
+    expense:
+        title: Koszt
+        trade: Handel
+    accounting:
+        title: Księgowość
+        accountant: Księgowy
+    designoffice:
+        title: Biuro Projektowe
+        responsible: Odpowiedzialny za biurze projektowym
+    title:
+        indexchoicesuser: Wybór użytkownika
+        choicesroles: Dodaj / Usuń role
+    title:
+        indexchoicesuser: Wybór użytkownika
     submit:
         download: Pobierz
+        display: Wystawa
+        add: Dodać
+        remove: Usunąć
 
 contact:
     title: Skontaktuj się z nami

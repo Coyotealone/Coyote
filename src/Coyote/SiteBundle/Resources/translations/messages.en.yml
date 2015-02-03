@@ -1,6 +1,6 @@
 base:
     copyright: Copyright ©2015 PICHON - All rights reserved
-    version: Version 1.12.0
+    version: Version 1.14.0
     title: Pichon - WebSite
     link: http://www.pichonindustries.com
     choose_language: Choose your country
@@ -36,6 +36,7 @@ base:
         profile_admin:
             name: Administrator
             register: Adding a user
+            indexchoicesuser: Update User Roles
 
 accueil:
     menu:
@@ -45,10 +46,36 @@ userinfo:
     welcome: Welcome
 
 admin:
+    updaterole:
+        flash:
+            add: Carried addition
+            remove: Suppression achieved
     month: Month
     year: Year
+    user: User
+    schedule:
+        title: Time attendance
+        technician: Technician (entry per hour)
+        business: Business (entry per day)
+    expense:
+        title: Expense
+        trade: Trade
+    accounting:
+        title: Accounting
+        accountant: Accountant
+    designoffice:
+        title: Design Office
+        responsible: Responsible for the design office
+    title:
+        indexchoicesuser: User choice
+        choicesroles: Add / Remove Roles
+    title:
+        indexchoicesuser: User choice
     submit:
         download: Download
+        display: Afficher
+        add: Add
+        remove: Remove
 
 contact:
     title: Contact us
