@@ -59,4 +59,3 @@ expense_delete:
 expense_showadmin:
     pattern:    /showadmin
     defaults:   { _controller: "CoyoteSiteBundle:Expense:showadmin"}
-    requirements: { _method: get }

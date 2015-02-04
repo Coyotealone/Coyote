@@ -8,6 +8,13 @@
    {{ include('CoyoteSiteBundle:Base:css.html.twig') }}
 {% endblock %}
 
+{% block userinfo %}
+    {{ 'userinfo.welcome'|trans }} {{ app.session.get('username') }} |
+    <a href="{{ path('fos_user_security_logout') }}">
+        {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+    </a>
+{% endblock %}
+
 {% block link %}
 
     {% if is_granted('ROLE_CHEF_BE') %}
