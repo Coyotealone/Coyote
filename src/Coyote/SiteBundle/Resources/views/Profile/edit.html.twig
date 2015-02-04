@@ -4,21 +4,12 @@
 {% include "FOSUserBundle:Profile:edit_content.html.twig" %}
 {% endblock content %}
 
-{% block userinfo %}
-
-{{ 'Bienvenue'|trans }} {{ app.session.get('username') }} |
-<a href="{{ path('fos_user_security_logout') }}">
-    {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
-</a>
-
-{% endblock %}
-
 {% block stylesheets %}
    {{ include('CoyoteSiteBundle:Base:css.html.twig') }}
 {% endblock %}
 
 {% block link %}
-    
+
     {% if is_granted('ROLE_CHEF_BE') %}
 	    {{ include('CoyoteSiteBundle:Base:navigation_admin.html.twig') }}
     {% elseif is_granted('ROLE_COMPTA') %}
@@ -31,5 +22,5 @@
         {{ include('CoyoteSiteBundle:Base:navigation.html.twig') }}
 	<!--<![endif]-->
 	{% endif %}
-	
+
 {% endblock %}

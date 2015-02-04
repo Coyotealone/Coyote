@@ -55,3 +55,8 @@ expense_delete:
     pattern:  /{id}/delete
     defaults: { _controller: "CoyoteSiteBundle:Expense:delete" }
     requirements: { _method: post|delete }
+
+expense_showadmin:
+    pattern:    /showadmin
+    defaults:   { _controller: "CoyoteSiteBundle:Expense:showadmin"}
+    requirements: { _method: get }

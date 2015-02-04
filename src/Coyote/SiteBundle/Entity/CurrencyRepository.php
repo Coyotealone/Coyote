@@ -12,6 +12,14 @@ use Doctrine\ORM\EntityRepository;
  */
 class CurrencyRepository extends EntityRepository
 {
+    /**
+     * findAllOrderByCode function.
+     * function to find all entity currency order by code
+     *
+     * @access public
+     * @param order by code ASC
+     * @return array Currency
+     */
     public function findAllOrderByCode()
     {
         return $this->findBy(array(), array('code' => 'ASC'));

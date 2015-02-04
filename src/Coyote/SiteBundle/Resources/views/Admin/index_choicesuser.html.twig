@@ -1,0 +1,31 @@
+{% extends 'CoyoteSiteBundle:Admin:index.html.twig' %}
+
+{% block content %}
+
+    {% for flashMessage in app.session.flashbag.get('admin_updaterole') %}
+        {% set message = flashMessage %}
+        {% if message == "admin.updaterole.flash.add" %}
+            <p id="flashmessage_valid">{{ flashMessage|trans }}</p>
+        {% elseif message == "admin.updaterole.flash.remove" %}
+            <p id="flashmessage_valid">{{ flashMessage|trans }}</p>
+        {% endif %}
+    {% endfor %}
+
+    <form role="form" action="{{ path('admin_choicesroles') }}" method='post'>
+        <table class='table' id='tab_expense'>
+        	<tr>
+        	    <th>{{'admin.title.indexchoicesuser'|trans}}</th>
+        	</tr>
+            <tr>
+                <td>
+                    <select name='user' id='user' >
+                    {% for user in users %}
+                        <option value={{user.id}}>{{user.name|trans}}</option>
+                    {% endfor %}
+                    </select>
+                </td>
+            </tr>
+        </table>
+        <button class='btnsave' type="submit" value="Telecharger" id="telecharger">{{'admin.submit.display'|trans}}</button>
+    </form>
+{% endblock %}

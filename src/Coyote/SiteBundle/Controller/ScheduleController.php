@@ -352,12 +352,12 @@ class ScheduleController extends Controller
             if(empty($schedulelundi_id) && empty($schedulemardi_id) && empty($schedulemercredi_id)
                 && empty($schedulejeudi_id) && empty($schedulevendredi_id) && empty($schedulesamedi_id)
                 && empty($scheduledimanche_id)){
-                $message = "Une erreur s'est produite !";
+                $message = 'schedule.flash.no_save';
             }
             else{
-                $message = "Enregistrement terminé";
+                $message = 'schedule.flash.save';
             }
-            $this->get('session')->getFlashBag()->set('save', $message);
+            $this->get('session')->getFlashBag()->set('save_schedule', $message);
             return $this->redirect($this->generateUrl('schedule_index'));
         }
     }
@@ -513,12 +513,12 @@ class ScheduleController extends Controller
             if(empty($schedulelundi_id) && empty($schedulemardi_id) && empty($schedulemercredi_id)
                 && empty($schedulejeudi_id) && empty($schedulevendredi_id) && empty($schedulesamedi_id)
                 && empty($scheduledimanche_id)){
-                $message = "Une erreur s'est produite !";
+                $message = 'schedule.flash.no_save';
             }
             else{
-                $message = "Enregistrement terminé";
+                $message = 'schedule.flash.save';
             }
-            $this->get('session')->getFlashBag()->set('save', $message);
+            $this->get('session')->getFlashBag()->set('save_schedule', $message);
             return $this->redirect($this->generateUrl('schedule_index'));
         }
     }

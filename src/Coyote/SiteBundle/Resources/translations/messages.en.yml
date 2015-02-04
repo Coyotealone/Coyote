@@ -1,6 +1,6 @@
 base:
     copyright: Copyright ©2015 PICHON - All rights reserved
-    version: Version 1.12.0
+    version: Version 1.14.0
     title: Pichon - WebSite
     link: http://www.pichonindustries.com
     choose_language: Choose your country
@@ -22,6 +22,7 @@ base:
             indexshow: Consultation
             indexprint: PDF printing
             indexupdatestatus: Update the status of expense
+            showadmin: Consultation of pending expense reports
         profile:
             name: Profile
             profile: Profile Information
@@ -35,6 +36,7 @@ base:
         profile_admin:
             name: Administrator
             register: Adding a user
+            indexchoicesuser: Update User Roles
 
 accueil:
     menu:
@@ -44,10 +46,36 @@ userinfo:
     welcome: Welcome
 
 admin:
+    updaterole:
+        flash:
+            add: Carried addition
+            remove: Suppression achieved
     month: Month
     year: Year
+    user: User
+    schedule:
+        title: Time attendance
+        technician: Technician (entry per hour)
+        business: Business (entry per day)
+    expense:
+        title: Expense
+        trade: Trade
+    accounting:
+        title: Accounting
+        accountant: Accountant
+    designoffice:
+        title: Design Office
+        responsible: Responsible for the design office
+    title:
+        indexchoicesuser: User choice
+        choicesroles: Add / Remove Roles
+    title:
+        indexchoicesuser: User choice
     submit:
         download: Download
+        display: Afficher
+        add: Add
+        remove: Remove
 
 contact:
     title: Contact us
@@ -126,6 +154,9 @@ schedule:
         next_week: Next week
     message: AutoFill hours (check the days you want to fill and enter the values in the fields start end break below)
     write_auto: AutoFill
+    flash:
+        no_save: An error has occurred!
+        save: Registration of completed data
 
 expense:
     title:
@@ -137,6 +168,7 @@ expense:
         print: Printing expense reports
         show: Summary of the month
         updatestatus: Udpate status expense reports
+        showadmin: Consultation of pending expense reports
     submit:
         save: Save
         update: Update
@@ -163,6 +195,12 @@ expense:
     status:
         yes: Yes
         no: No
+    flash:
+        save: 1 recording made
+        save_multiple: %count% performed registration
+        no_save: No recording made
+        no_update: No data update
+        update: Updated performed
 
 # FOSUserBundle Translation #
 

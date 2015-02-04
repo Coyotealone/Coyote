@@ -32,9 +32,17 @@
 
 {% block content %}
 
-{% for flashMessage in app.session.flashbag.get('saveexpense') %}
-
-    <p id="flashmessage">{{ flashMessage }}</p>
+{% for flashMessage in app.session.flashbag.get('save_expense') %}
+    {% set message = flashMessage %}
+    {% if message == 'expense.flash.no_save' %}
+        <p id="flashmessage_error">{{ flashMessage|trans }}</p>
+    {% endif %}
+    {% if message == 'expense.flash.save' %}
+        <p id="flashmessage_valid">{{ flashMessage|trans }}</p>
+    {% endif %}
+    {% if message == 'expense.flash.save_multiple' %}
+        <p id="flashmessage_valid">{{ flashMessage|trans({'%count%': app.session.get('countExpense') }) }}</p>
+    {% endif %}
 
 {% endfor %}
 
@@ -107,7 +115,7 @@
     		<th id='tab_expense_business'>
     			<select name='affaire{{i}}' id='affaire{{i}}'>
     			    {% for databusiness in business %}
-    			        <option value={{ databusiness.id }}>{{ databusiness }}</option>
+    			         <option value={{ databusiness.id }}>{{ databusiness.name }}</option>
     			    {% endfor %}
     			</select>
     		</th>

@@ -9,3 +9,15 @@ admin_export_index:
 admin_exportdatauser:
     pattern:    /exportdatauser
     defaults:   { _controller: "CoyoteSiteBundle:Admin:exportDataUser" }
+
+admin_updateroles:
+    pattern:    /updaterole
+    defaults:   { _controller: "CoyoteSiteBundle:Admin:updateroles" }
+
+admin_indexchoicesuser:
+    pattern:    /indexchoicesuser
+    defaults:   { _controller: "CoyoteSiteBundle:Admin:indexchoicesuser" }
+
+admin_choicesroles:
+    pattern:    /choicesuser
+    defaults:   { _controller: "CoyoteSiteBundle:Admin:choicesroles" }

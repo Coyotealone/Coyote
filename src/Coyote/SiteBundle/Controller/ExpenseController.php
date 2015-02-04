@@ -80,7 +80,7 @@ class ExpenseController extends Controller
             /** @var $currency object currency all data from Currency */
             $currency = $em->getRepository('CoyoteSiteBundle:Currency')->findAllOrderByCode();
             /** @var $business object business all data from Business */
-            $business = $em->getRepository('CoyoteSiteBundle:Business')->findAll();
+            $business = $em->getRepository('CoyoteSiteBundle:Business')->findAllOrderByName();
             /** @var $fee object fee all data from Fee */
             $fee = $em->getRepository('CoyoteSiteBundle:Fee')->findAll();
             /** show view */
@@ -184,11 +184,9 @@ class ExpenseController extends Controller
             /** @var $date string mm/yyyy */
             $date = $year.'-'.$month.'%';
             /** @var $data_expense object Expense*/
-            //return new Response($date);
             $data_expense = $em->getRepository('CoyoteSiteBundle:Expense')->findExpense($date,
                 $session->get('userfeesid'));
             /** show view */
-            //return new Response($data_expense[0]->getStatus()->getString());
             return $this->render('CoyoteSiteBundle:Expense:show.html.twig', array('data' => $data_expense));
         }
     }
@@ -254,19 +252,24 @@ class ExpenseController extends Controller
                 if($count_expense > 1)
                 {
                     /** @var $message string */
-                    $message = $count_expense.' enregistrement effectués';
+                    //$message = $count_expense.' enregistrement effectués';
+                    $message = 'expense.flash.save_multiple';
+                    $session->set('countExpense', $count_expense);
                 }
                 else
                 {
                     /** @var $message string */
-                    $message = '1 enregistrement effectué';
+                    //$message = '1 enregistrement effectué';
+                    $message = 'expense.flash.save';
                 }
             }
             else
                 /** @var $message string */
-                $message = 'Aucun enregistrement effectué';
+                //$message = 'Aucun enregistrement effectué';
+                $message = 'expense.flash.no_save';
             /** set $message in flashbag */
-            $this->get('session')->getFlashBag()->set('saveexpense', $message);
+            $this->get('session')->getFlashBag()->set('save_expense', $message);
+
             /** redirect ExpenseController:createAction */
             return $this->redirect($this->generateUrl('expense_create'));
         }
@@ -486,76 +489,128 @@ class ExpenseController extends Controller
         }
     }
 
+
+    /**
+     * indexupdatestatusAction function.
+     * index to update status expense
+     *
+     * @access public
+     * @return void
+     */
     public function indexupdatestatusAction()
     {
-        return $this->render('CoyoteSiteBundle:Expense:updatestatus.html.twig');
+        if($this->get('security.context')->isGranted('ROLE_ADMIN'))
+            /** show view updatestatus */
+            return $this->render('CoyoteSiteBundle:Expense:updatestatus.html.twig');
+        else
+            /** redirect MainController:indexAction */
+            return $this->redirect($this->generateUrl('main_menu'));
     }
 
+
+    /**
+     * updatestatusAction function.
+     * update status by expense id
+     *
+     * @access public
+     * @return void
+     */
     public function updatestatusAction()
     {
-        $request = $this->getRequest();
-        $session = $request->getSession();
-        /** @var $em object doctrine request */
-        $em = $this->getDoctrine()->getManager();
-        $request = Request::createFromGlobals();
-        //if (array_key_exists('id_start', $_GET['id_start']))
+        if($this->get('security.context')->isGranted('ROLE_ADMIN'))
         {
+            $request = $this->getRequest();
+            $session = $request->getSession();
+            /** @var $em object doctrine request */
+            $em = $this->getDoctrine()->getManager();
+            $request = Request::createFromGlobals();
             $id_start = $_GET['id_start'];
-        }
-
-        //if (array_key_exists('id_end', $_GET['id_end']))
-        {
             $id_end = $_GET['id_end'];
-        }
-
-        //else
-        //    return $this->redirect($this->generateUrl('expense_indexupdatestatus'));
-        /** @var $year string yyyy */
-
-        /** @var $month string mm */
-
-        /** check $year and $month */
-        if(empty($id_start) && empty($id_end))
-        {
-            $message = "Aucune donnée mise à jour";
-            $this->get('session')->getFlashBag()->set('updatestatus', $message);
-            /** redirect ExpenseController:indexprintAction */
+            /** check $year and $month */
+            if(empty($id_start) && empty($id_end))
+            {
+                $message = 'expense.flash.no_update';
+                $this->get('session')->getFlashBag()->set('updatestatus', $message);
+                /** redirect ExpenseController:indexprintAction */
+                return $this->redirect($this->generateUrl('expense_indexupdatestatus'));
+            }
+            else
+            {
+                if($id_end > $id_start)
+                {
+                    for($i = $id_start; $i<=$id_end; $i++)
+                    {
+                        $data_expense = $em->getRepository('CoyoteSiteBundle:Expense')->find($i);
+                        if($data_expense != null)
+                        {
+                            $data_expense->setStatus(1);
+                        /** persist $expense */
+                            $em->persist($data_expense);
+                        }
+                        /** add data in db */
+                        $em->flush();
+                    }
+                    $message = 'expense.flash.update';
+                    //alert($message);
+                    $this->get('session')->getFlashBag()->set('updatestatus', $message);
+                }
+                if($id_start > $id_end)
+                {
+                    for($i = $id_end; $i<=$id_start; $i++)
+                    {
+                        $data_expense = $em->getRepository('CoyoteSiteBundle:Expense')->find($i);
+                        $data_expense->setStatus(1);
+                        /** persist $expense */
+                        $em->persist($data_expense);
+                        /** add data in db */
+                        $em->flush();
+                    }
+                    $message = 'expense.flash.update';
+                    alert($message);
+                    $this->get('session')->getFlashBag()->set('updatestatus', $message);
+                }
+            }
             return $this->redirect($this->generateUrl('expense_indexupdatestatus'));
         }
         else
+            /** redirect MainController:indexAction */
+            return $this->redirect($this->generateUrl('main_menu'));
+    }
+
+    /**
+     * show expense save.
+     *
+     * @access public
+     * @return showparameters
+     */
+    public function showadminAction()
+    {
+        if($this->get('security.context')->isGranted('ROLE_COMPTA'))
         {
-            if($id_end > $id_start)
+            /** @var $session new object Session */
+            $session = new Session();
+            /** @var $user object data user connected */
+            $user = $this->get('security.context')->getToken()->getUser();
+            /** check @var $user */
+            if($user == "anon.")
+                return $this->redirect($this->generateUrl('fos_user_security_login'));
+            /** check @var $session 'userfeesid' */
+
+
+            else
             {
-                for($i = $id_start; $i<=$id_end; $i++)
-                {
-                    $data_expense = $em->getRepository('CoyoteSiteBundle:Expense')->find($i);
-                    $data_expense->setStatus(1);
-                    /** persist $expense */
-                    $em->persist($data_expense);
-                    /** add data in db */
-                    $em->flush();
-                }
-                $message = "Mise à jour effectuée";
-                //alert($message);
-                $this->get('session')->getFlashBag()->set('updatestatus', $message);
-            }
-            if($id_start > $id_end)
-            {
-                for($i = $id_end; $i<=$id_start; $i++)
-                {
-                    $data_expense = $em->getRepository('CoyoteSiteBundle:Expense')->find($i);
-                    $data_expense->setStatus(1);
-                    /** persist $expense */
-                    $em->persist($data_expense);
-                    /** add data in db */
-                    $em->flush();
-                }
-                $message = "Mise à jour effectuée";
-                alert($message);
-                $this->get('session')->getFlashBag()->set('updatestatus', $message);
+                /** @var $em object doctrine request */
+                $em = $this->getDoctrine()->getManager();
+                /** @var $data_expense object Expense*/
+                $data_expense = $em->getRepository('CoyoteSiteBundle:Expense')->findAllOrderByUserFeesID();
+                /** show view */
+                //return new Response($data_expense[0]->getStatus()->getString());
+                return $this->render('CoyoteSiteBundle:Expense:showadmin.html.twig', array('data' => $data_expense));
             }
         }
-        return $this->redirect($this->generateUrl('expense_indexupdatestatus'));
+        else
+            /** redirect MainController:indexAction */
+            return $this->redirect($this->generateUrl('main_menu'));
     }
 }
 

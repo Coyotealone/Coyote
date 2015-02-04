@@ -1,6 +1,6 @@
 base:
     copyright: Copyright © 2015 PICHON - Wszystkie prawa zastrzeżone
-    version: Wersja 1.12.0
+    version: Wersja 1.14.0
     title: Pichon - WebSite
     link: www.pichonindustries.com
     choose_language: Wybierz swój kraj
@@ -22,6 +22,7 @@ base:
             indexshow: Konsultacje
             indexprint: drukowanie w formacie PDF
             indexupdatestatus: Aktualizacja statusu koszt
+            showadmin: Konsultacje z toczącym raporty wydatków
         profile:
             name: Profil
             profile: Informacje Profil
@@ -35,6 +36,7 @@ base:
         profile_admin:
             name: Administrator
             register: Dodawanie użytkownika
+            indexchoicesuser: Role Aktualizacja użytkownika
 
 accueil:
     menu:
@@ -44,10 +46,36 @@ userinfo:
     welcome: Witamy
 
 admin:
+    updaterole:
+        flash:
+            add: Przygotowana dodatkiem
+            remove: Tłumienie osiągnięte
     month: Miesiąc
     year: Rok
+    user: Użytkownik
+    schedule:
+        title: Uczęszcza
+        technician: Technik (wejście na godzinę)
+        business: Biznes (wpis na dzień)
+    expense:
+        title: Koszt
+        trade: Handel
+    accounting:
+        title: Księgowość
+        accountant: Księgowy
+    designoffice:
+        title: Biuro Projektowe
+        responsible: Odpowiedzialny za biurze projektowym
+    title:
+        indexchoicesuser: Wybór użytkownika
+        choicesroles: Dodaj / Usuń role
+    title:
+        indexchoicesuser: Wybór użytkownika
     submit:
         download: Pobierz
+        display: Wystawa
+        add: Dodać
+        remove: Usunąć
 
 contact:
     title: Skontaktuj się z nami
@@ -126,6 +154,9 @@ schedule:
         next_week: W przyszłym tygodniu
     message: Autouzupełnianie godzin (sprawdź dni, które chcesz wypełnić i wprowadź wartości w polach Początek Koniec przerwy poniżej)
     write_auto: Autouzupełnianie
+    flash:
+        no_save: Wystąpił błąd!
+        save: Rejestracja zrealizowanych danych
 
 expense:
     title:
@@ -137,6 +168,7 @@ expense:
         print: Drukowanie raporty wydatków
         show: Podsumowanie miesiąca
         updatestatus: UDPATE raporty wydatków stan
+        showadmin: Konsultacje z toczącym raporty wydatków
     submit:
         save: Zapisz
         update: Aktualizacja
@@ -163,6 +195,12 @@ expense:
     status:
         yes: Tak
         no: Nie
+    flash:
+        save: 1 Nagranie wykonane
+        save_multiple: %count% wykonywane Rejestracja
+        no_save: Brak zapisu wykonane
+        no_update: Brak aktualizacji danych
+        update: Aktualizacja wykonywana
 
 # FOSUserBundle Translation #
 

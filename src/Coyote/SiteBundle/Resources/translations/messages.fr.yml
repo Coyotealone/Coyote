@@ -1,6 +1,6 @@
 base:
     copyright: Copyright ©2015 PICHON - Tous droits réservés
-    version: Version 1.12.0
+    version: Version 1.14.0
     title: Pichon - WebSite
     link: http://www.pichonindustries.fr
     choose_language: Choisissez votre pays
@@ -22,6 +22,7 @@ base:
             indexshow: Consultation
             indexprint: Impression PDF
             indexupdatestatus: Mise à jour du statut des notes de frais
+            showadmin: Consultation des notes de frais en attente
         profile:
             name: Profil
             profile: Information Profil
@@ -35,6 +36,7 @@ base:
         profile_admin:
             name: Administrateur
             register: "Ajout d'un utilisateur"
+            indexchoicesuser: Mise à jour des rôles utilisateurs
 
 security:
     username: Identifiant
@@ -52,10 +54,34 @@ userinfo:
     welcome: Bienvenue
 
 admin:
+    updaterole:
+        flash:
+            add: Ajout réalisé
+            remove: Suppression réalisé
     month: Mois
     year: Année
+    user: Utilisateur
+    schedule:
+        title: Temps de présence
+        technician: Technicien (saisie par heure)
+        business: Cadre (saisie par jour)
+    expense:
+        title: Notes de frais
+        trade: Commercial
+    accounting:
+        title: Comptabilité
+        accountant: Compable
+    designoffice:
+        title: "Bureau d'étude"
+        responsible: "Responsable du bureau d'étude"
+    title:
+        indexchoicesuser: "Choix de l'utilisateur"
+        choicesroles: Ajout/Suppression de rôles
     submit:
         download: Télécharger
+        display: Afficher
+        add: Ajouter
+        remove: Supprimer
 
 contact:
     title: Contactez-nous
@@ -134,6 +160,9 @@ schedule:
         next_week: Semaine Suivante
     message: "Saisie automatique des heures (Cochez les jours que vous souhaitez remplir et saisissez les valeurs dans les champs début fin pause ci-dessous)"
     write_auto: Saisie Automatique
+    flash:
+        no_save: "Une erreur s'est produite !"
+        save: Enregistrement terminé
 
 expense:
     title:
@@ -145,6 +174,7 @@ expense:
         print: Impression Notes de frais
         show: Récapitulatif du mois
         updatestatus: Mise à jour statut Notes de frais
+        showadmin: Consultation des notes de frais en attente
     submit:
         save: Enregistrer
         update: Mise à jour
@@ -171,6 +201,12 @@ expense:
     status:
         yes: Oui
         no: Non
+    flash:
+        save: 1 enregistrement effectué
+        save_multiple: %count% enregistrement effectués
+        no_save: Aucune enregistrement effectué
+        no_update: Aucune donnée mise à jour
+        update: Mise à jour effectuée
 
 # FOSUserBundle Translation #
 

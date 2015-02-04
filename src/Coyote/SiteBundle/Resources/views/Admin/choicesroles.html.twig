@@ -1,0 +1,79 @@
+{% extends 'CoyoteSiteBundle:Admin:index.html.twig' %}
+
+{% block javascripts %}
+    <!--[if IE]>
+        <script src="{{ asset('bundles/coyotesite/js/jquery-min.js') }}"/></script>
+        <script src="{{ asset('bundles/coyotesite/js/jquery.js') }}"></script>
+
+        <script src="{{ asset('bundles/coyotesite/js/script_timeusers_change.js') }}"/></script>
+    <![endif]-->
+    <!--[if !IE]><!-->
+        <script src="{{ asset('bundles/coyotesite/js/jquery-min.js') }}"/></script>
+        <script src="{{ asset('bundles/coyotesite/js/jquery.js') }}"></script>
+    <!--<![endif]-->
+{% endblock %}
+
+{% block content %}
+
+    <form role="form" action="{{ path('admin_updateroles') }}" method='post'>
+            <p id="titreconfig">
+                <b>{{'admin.title.choicesroles'|trans}}</b>
+            </p>
+            <p>{{'admin.user'|trans}} : {{user.name}}</p>
+            <div class='table-responsive'>
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th colspan="2">{{'admin.schedule.title'|trans}}</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>{{'admin.schedule.technician'|trans}}</td>
+                        <td><input type="checkbox" name="checkBoxTech" id="checkBoxTech" value="Tech"></td>
+                      </tr>
+                      <tr>
+                        <td>{{'admin.schedule.business'|trans}}</td>
+                        <td><input type="checkbox" name="checkBoxCadre" id="checkBoxCadre" value="Cadre"></td>
+                      </tr>
+                    </tbody>
+                    <thead>
+                      <tr>
+                        <th colspan="2">{{'admin.expense.title'|trans}}</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>{{'admin.expense.trade'|trans}}</td>
+                        <td><input type="checkbox" name="checkBoxTrade" id="checkBoxTrade" value="Trade"></td>
+                      </tr>
+                    </tbody>
+                    <thead>
+                      <tr>
+                        <th colspan="2">{{'admin.accounting.title'|trans}}</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>{{'admin.accounting.accountant'|trans}}</td>
+                        <td><input type="checkbox" name="checkBoxCompta" id="checkBoxCompta" value="Compta"></td>
+                      </tr>
+                    </tbody>
+                    <thead>
+                      <tr>
+                        <th colspan="2">{{'admin.designoffice.title'|trans}}</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>{{'admin.designoffice.responsible'|trans}}</td>
+                        <td><input type="checkbox" name="checkBoxBE" id="checkBoxBE" value="BE"></td>
+                      </tr>
+                    </tbody>
+                </table>
+            <div>
+        <button class='btnsave' type="submit" value="Add" id='add' name='add' >{{ 'admin.submit.add'|trans }}</button>
+        <button class='btnsave' type="submit" value="Remove" id='remove' name='remove' >{{ 'admin.submit.remove'|trans }}</button>
+    </form>
+
+{% endblock content %}

@@ -110,8 +110,6 @@ class MainController extends Controller
         $session = $request->getSession();
 
         $_locale = $session->get('lang');
-        /** set lang */
-        //$session->set('lang', $locale);
 
         // get the error if any (works with forward and redirect -- see below)
         if ($request->attributes->has(SecurityContextInterface::AUTHENTICATION_ERROR))
