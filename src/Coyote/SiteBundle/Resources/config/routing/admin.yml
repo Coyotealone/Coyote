@@ -21,3 +21,7 @@ admin_indexchoicesuser:
 admin_choicesroles:
     pattern:    /choicesroles
     defaults:   { _controller: "CoyoteSiteBundle:Admin:choicesroles" }
+
+admin_showadmin:
+    pattern:    /showadmin
+    defaults:   { _controller: "CoyoteSiteBundle:Expense:showadmin"}

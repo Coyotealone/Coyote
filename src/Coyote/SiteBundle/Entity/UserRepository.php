@@ -84,6 +84,6 @@ class UserRepository extends EntityRepository
      */
     public function findAllOrderById()
     {
-        return $this->findBy(array('enabled' => 1), array('id' => 'ASC'));
+        return $this->findBy(array('enabled' => 1), array('name' => 'ASC'));
     }
 }

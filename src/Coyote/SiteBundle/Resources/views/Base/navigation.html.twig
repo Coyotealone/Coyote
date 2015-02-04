@@ -4,6 +4,7 @@
 
 		<li class="active"><a href="{{ path('main_index') }}">{{'base.nav.accueil'|trans}}</a></li>
 
+        {% if is_granted('ROLE_TECH') or is_granted('ROLE_CADRE') %}
 		<li id="presence" class="dropdown">
           <a href="{{ path('schedule_index') }}" class="dropdown-toggle" data-toggle="dropdown">{{'base.nav.schedule.name'|trans}}<b class="caret"></b></a>
           <ul class="dropdown-menu">
@@ -17,8 +18,9 @@
             {% endif %}
           </ul>
         </li>
+        {% endif %}
 
-        {% if is_granted('ROLE_BUSINESS') %}
+        {% if is_granted('ROLE_TRADE') %}
         <li id="frais" class="dropdown">
           <a href="{{ path('expense_create') }}" class="dropdown-toggle" data-toggle="dropdown">{{'base.nav.expense.name'|trans}}<b class="caret"></b></a>
           <ul class="dropdown-menu">
@@ -51,7 +53,7 @@
           <a href="{{ path('admin_exportexpense') }}" class="dropdown-toggle" data-toggle="dropdown">{{'base.nav.expense_admin.name'|trans}}<b class="caret"></b></a>
           <ul class="dropdown-menu">
             <li><a href="{{ path('admin_exportexpense') }}">{{'base.nav.expense_admin.exportexpense'|trans}}</a></li>
-            <li><a href="{{ path('expense_showadmin') }}">{{'base.nav.expense.showadmin'|trans}}</a></li>
+            <li><a href="{{ path('admin_showadmin') }}">{{'base.nav.expense.showadmin'|trans}}</a></li>
           </ul>
         </li>
         {% endif %}
