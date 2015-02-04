@@ -93,7 +93,7 @@ class MainController extends Controller
             if(empty($lang))
                 $lang = 'fr';
             /** show view */
-            return $response = $this->forward('CoyoteSiteBundle:Main:menu', array('_locale' => $lang));
+            return $this->redirect($this->generateUrl('main_menu', array('_locale' => $lang)));
         }
     }
 
