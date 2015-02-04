@@ -31,7 +31,7 @@ base:
             name: Export présence
             indexexport: Export données BE
         expense_admin:
-            name: Export Notes de frais
+            name: Gestion des Notes de frais
             exportexpense: Export données notes de frais
         profile_admin:
             name: Administrateur

@@ -31,7 +31,7 @@ base:
             name: Eksport rejestracji czasu
             indexexport: Eksport danych działu badań
         expense_admin:
-            name: Eksport koszt
+            name: Sprawozdanie z wydatków
             exportexpense: Eksport koszt danych
         profile_admin:
             name: Administrator

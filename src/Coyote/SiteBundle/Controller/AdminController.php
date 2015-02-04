@@ -50,7 +50,7 @@ class AdminController extends Controller
         }
         else
             /** redirect MainController:indexAction */
-            return $this->redirect($this->generateUrl('main_accueil'));
+            return $this->redirect($this->generateUrl('main_menu'));
     }
 
     /**
@@ -100,7 +100,7 @@ class AdminController extends Controller
     public function profileditAction()
     {
         /** redirect MainController:indexAction */
-        return $this->redirect($this->generateUrl('main_accueil'));
+        return $this->redirect($this->generateUrl('main_menu'));
     }
 
     /**
@@ -122,7 +122,7 @@ class AdminController extends Controller
         }
         else
         /** redirect MainController:IndexAction */
-            return $this->redirect($this->generateUrl('main_accueil'));
+            return $this->redirect($this->generateUrl('main_menu'));
     }
 
     /**
@@ -163,7 +163,7 @@ class AdminController extends Controller
         }
         else
             /** redirect MainController:indexAction */
-            return $this->redirect($this->generateUrl('main_accueil'));
+            return $this->redirect($this->generateUrl('main_menu'));
     }
 
     /**
@@ -223,7 +223,7 @@ class AdminController extends Controller
             ));
         }
         else
-             return $this->redirect($this->generateUrl('main_accueil'));
+             return $this->redirect($this->generateUrl('main_menu'));
     }
 
 
@@ -244,7 +244,7 @@ class AdminController extends Controller
             return $this->render('CoyoteSiteBundle:Admin:index_choicesuser.html.twig', array('users' => $users));
         }
         else
-            return $this->redirect($this->generateUrl('main_accueil'));
+            return $this->redirect($this->generateUrl('main_menu'));
     }
 
 
@@ -280,7 +280,7 @@ class AdminController extends Controller
             }
         }
         else
-            return $this->redirect($this->generateUrl('main_accueil'));
+            return $this->redirect($this->generateUrl('main_menu'));
     }
 
 
@@ -322,10 +322,10 @@ class AdminController extends Controller
                 return $this->redirect($this->generateUrl('admin_indexchoicesuser'));
             }
             else
-                return $this->redirect($this->generateUrl('main_accueil'));
+                return $this->redirect($this->generateUrl('main_menu'));
         }
         else
-            return $this->redirect($this->generateUrl('main_accueil'));
+            return $this->redirect($this->generateUrl('main_menu'));
     }
 
 }

@@ -31,7 +31,7 @@ base:
             name: Export of time attendance
             indexexport: Export of data research department
         expense_admin:
-            name: Export of expense
+            name: Expense Report Management
             exportexpense: Export of data expense
         profile_admin:
             name: Administrator
