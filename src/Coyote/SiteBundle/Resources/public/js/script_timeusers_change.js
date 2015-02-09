@@ -632,27 +632,21 @@ function visibilityAbsenceTime(absence, jour)
 		document.getElementById("absenceday"+jour).style.visibility = "visible";
 		document.getElementById("absencetime"+jour).style.visibility = "hidden";
     }
-	if(absence == "Maladie")
+	if(absence == "AT")
 	{
     	document.getElementById("absence"+jour).selectedIndex = 5;
-    	document.getElementById("absenceday"+jour).style.visibility = "visible";
-		document.getElementById("absencetime"+jour).style.visibility = "hidden";
-    }
-    if(absence == "AT")
-	{
-    	document.getElementById("absence"+jour).selectedIndex = 6;
     	document.getElementById("absenceday"+jour).style.visibility = "visible";
 		document.getElementById("absencetime"+jour).style.visibility = "hidden";
 	}
 	if(absence == "MP")
 	{
-    	document.getElementById("absence"+jour).selectedIndex = 7;
+    	document.getElementById("absence"+jour).selectedIndex = 6;
     	document.getElementById("absenceday"+jour).style.visibility = "visible";
 		document.getElementById("absencetime"+jour).style.visibility = "hidden";
 	}
 	if(absence == "Recup")
 	{
-    	document.getElementById("absence"+jour).selectedIndex = 8;
+    	document.getElementById("absence"+jour).selectedIndex = 7;
     	document.getElementById("absenceday"+jour).style.visibility = "hidden";
 		document.getElementById("absencetime"+jour).style.visibility = "visible";
 		//document.getElementById("absencetime"+jour).value = "";
