@@ -1,6 +1,8 @@
+user_block_logout: Wyloguj
+
 base:
     copyright: Copyright © 2015 PICHON - Wszystkie prawa zastrzeżone
-    version: Wersja 1.14.0
+    version: Wersja 1.15.0
     title: Pichon - WebSite
     link: www.pichonindustries.com
     choose_language: Wybierz swój kraj
@@ -254,6 +256,7 @@ change_password:
 
 # Registration:
 registration:
+    title: Załóż konto
     check_email: Na adres %email% wysłano wiadomość e-mail. Zawiera ona link, na który należy kliknąć, aby aktywować konto.
     confirmed: Gratulacje %username%, potwierdziłeś konto.
     back: Powrót do poprzedniej strony. strony.
@@ -310,8 +313,8 @@ form:
     new_password: "Nowe hasło"
     new_password_confirmation: "Powtórz hasło"
     name: NAZWA
-    address1: Adres
-    address2: Adres (cd)
+    adress1: Adres
+    adress2: Adres (cd)
     zip_code: Kod pocztowy
     postal_box: Postal Box
     city: Miasto
@@ -321,6 +324,10 @@ form:
     website: Strona WWW
     roles: Role
     fax: Faks
+    choices:
+        technician: Technik
+        business: Biznes
+        trade: Handel
 
 # Month:
 

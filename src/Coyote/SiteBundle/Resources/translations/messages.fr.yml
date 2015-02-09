@@ -1,6 +1,8 @@
+user_block_logout: Deconnexion
+
 base:
     copyright: Copyright ©2015 PICHON - Tous droits réservés
-    version: Version 1.14.0
+    version: Version 1.15.0
     title: Pichon - WebSite
     link: http://www.pichonindustries.fr
     choose_language: Choisissez votre pays
@@ -231,8 +233,8 @@ form:
     new_password: "Nouveau mot de passe :"
     new_password_confirmation: "Vérification :"
     name: NOM Prénom
-    address1: Adresse
-    address2: Adresse(suite)
+    adress1: Adresse
+    adress2: Adresse(suite)
     zip_code: Code Postal
     postal_box: Boite Postal
     city: Ville
@@ -242,6 +244,10 @@ form:
     website: Site Web
     roles: Rôles
     fax: Fax
+    choices:
+        technician: Technicien
+        business: Cadre
+        trade: Commercial
 
 registration:
     title: "Création d'un compte utilisateur"
@@ -251,6 +257,7 @@ registration:
     submit: Enregistrer
     flash:
         user_created: "L'utilisateur a été créé avec succès"
+        no_save: "Une erreur est survenue"
     email:
         subject: Bienvenue %username% !
         message: |

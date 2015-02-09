@@ -21,6 +21,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
 use FOS\UserBundle\Model\UserInterface;
 
 /**
@@ -53,29 +55,31 @@ class RegistrationController extends ContainerAware
         $form = $formFactory->createForm();
         $form->setData($user);
 
-        if ('POST' === $request->getMethod()) {
-            $form->bind($request);
+        $form->handleRequest($request);
 
-            if ($form->isValid()) {
-                $event = new FormEvent($form, $request);
-                $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
+        if ($form->isValid()) {
+            $event = new FormEvent($form, $request);
+            $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
 
-                $userManager->updateUser($user);
+            $userManager->updateUser($user);
 
-                if (null === $response = $event->getResponse()) {
-                    $url = $this->container->get('router')->generate('fos_user_registration_confirmed');
-                    $response = new RedirectResponse($url);
-                }
-
-                $dispatcher->dispatch(FOSUserEvents::REGISTRATION_COMPLETED, new FilterUserResponseEvent($user,
-                    $request, $response));
-
-                return $response;
+            if (null === $response = $event->getResponse()) {
+                //$url = $this->container->generateUrl('fos_user_registration_confirmed');
+                //$response = new RedirectResponse($url); // A Modifier pour ne pas se connecter sur le nouveau compte créé
+                $message = 'registration.flash.user_created';
             }
+            if($message  == null)
+                $message = 'registration.flash.no_save';
+            $session = new Session();
+            $session->getFlashBag()->set('save_registration', $message);
+            //$dispatcher->dispatch(FOSUserEvents::REGISTRATION_COMPLETED, new FilterUserResponseEvent($user, $request, $response));
+            return $this->container->get('templating')->renderResponse('FOSUserBundle:Registration:register.html.twig', array(
+                'form' => $form->createView(),
+            ));
+            //return $response;
         }
-
-        return $this->container->get('templating')->renderResponse('CoyoteSiteBundle:Registration:register.html.twig',
-            array( 'form' => $form->createView(),
+        return $this->container->get('templating')->renderResponse('FOSUserBundle:Registration:register.html.twig', array(
+            'form' => $form->createView(),
         ));
     }
 
