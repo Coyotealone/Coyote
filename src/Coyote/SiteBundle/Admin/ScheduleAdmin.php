@@ -27,7 +27,8 @@ class ScheduleAdmin extends Admin
             ->add('working_time')
             ->add('working_hours')
             ->add('travel')
-            ->add('absence')
+            ->add('absence_name')
+            ->add('absence_duration')
             ->add('comment')
         ;
     }
@@ -45,7 +46,8 @@ class ScheduleAdmin extends Admin
             ->add('working_time')
             ->add('working_hours')
             ->add('travel')
-            ->add('absence')
+            ->add('absence_name')
+            ->add('absence_duration')
             ->add('comment')
         ;
     }
@@ -63,7 +65,8 @@ class ScheduleAdmin extends Admin
             ->add('working_time')
             ->add('working_hours')
             ->add('travel')
-            ->add('absence')
+            ->add('absence_name')
+            ->add('absence_duration')
             ->add('comment')
         ;
     }
