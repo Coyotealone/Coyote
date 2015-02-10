@@ -649,6 +649,11 @@ function visibilityAbsenceTime(absence, jour)
     	document.getElementById("absence"+jour).selectedIndex = 7;
     	document.getElementById("absenceday"+jour).style.visibility = "hidden";
 		document.getElementById("absencetime"+jour).style.visibility = "visible";
-		//document.getElementById("absencetime"+jour).value = "";
+    }
+    if(absence == "Autre")
+	{
+    	document.getElementById("absence"+jour).selectedIndex = 8;
+    	document.getElementById("absenceday"+jour).style.visibility = "hidden";
+		document.getElementById("absencetime"+jour).style.visibility = "visible";
     }
 }
