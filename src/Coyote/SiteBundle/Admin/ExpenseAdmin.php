@@ -31,7 +31,7 @@ class ExpenseAdmin extends Admin
             ->add('amount_TTC')
             ->add('amount_TVA')
             ->add('comment', 'text', array('required' => false))
-            ->add('userfees.login')
+            ->add('userfees')
         ;
     }
 

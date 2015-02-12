@@ -11,8 +11,6 @@ class RegistrationFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        // add your custom field
-        //parent::buildForm($builder, $options);
         $builder
             ->add('username', null, array('label' => 'form.username', 'translation_domain' => 'messages'))
             ->add('plainPassword', 'repeated', array(
@@ -33,8 +31,8 @@ class RegistrationFormType extends AbstractType
             ->add('cell', null, array('required' => false, 'label' => 'form.cell',  'translation_domain' => 'messages'))
             ->add('fax', null, array('label' => 'form.fax',  'translation_domain' => 'messages', 'data' => '(+33) 02 98 344 120'))
             ->add('website', null, array('label' => 'form.website',  'translation_domain' => 'messages', 'data' => 'www.pichonindustries.com'))
-            ->add('roles', 'choice',  array( 'label' => 'form.roles','choices' => array('ROLE_TECH' => 'Technicien',
-                'ROLE_CADRE' => 'Cadre', 'ROLE_TRADE' => 'Commercial'),'multiple'  => true));
+            ->add('roles', 'choice',  array( 'label' => 'form.roles','choices' => array('ROLE_TECH' => 'form.choices.technician',
+                'ROLE_CADRE' => 'form.choices.business', 'ROLE_TRADE' => 'form.choices.trade'),'multiple'  => true));
     }
 
     public function getParent()
@@ -44,7 +42,7 @@ class RegistrationFormType extends AbstractType
 
     public function getName()
     {
-        return 'coyote_site_registration';
+        return 'coyote_site_registration_type';
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

@@ -335,6 +335,6 @@ class Timetable
 
     public function __toString()
     {
-        return $this->date;
+       return $this->date->format('d/m/Y');
     }
 }

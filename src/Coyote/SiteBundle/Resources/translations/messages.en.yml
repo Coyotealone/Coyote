@@ -1,6 +1,8 @@
+user_block_logout: Logout
+
 base:
     copyright: Copyright ©2015 PICHON - All rights reserved
-    version: Version 1.14.0
+    version: Version 1.15.0
     title: Pichon - WebSite
     link: http://www.pichonindustries.com
     choose_language: Choose your country
@@ -251,6 +253,7 @@ change_password:
 
 # Registration
 registration:
+    title: Create an account
     check_email: An email has been sent to %email%. It contains an activation link you must click to activate your account.
     confirmed: Congrats %username%, your account is now activated.
     back: Back to the originating page.
@@ -307,8 +310,8 @@ form:
     new_password: "New password:"
     new_password_confirmation: "Repeat new password:"
     name: NAME
-    address1: Address
-    address2: Address(continued)
+    adress1: Address
+    adress2: Address(continued)
     zip_code: Zip Code
     postal_box: Postal Box
     city: City
@@ -318,6 +321,10 @@ form:
     website: Website
     roles: Roles
     fax: Fax
+    choices:
+        technician: Technician
+        business: Business
+        trade: Trade
 
 # Month
 

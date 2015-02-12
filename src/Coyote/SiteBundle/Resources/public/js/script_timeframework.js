@@ -272,28 +272,28 @@ function visibilityAbsenceTime(absence, jour, absenceday)
 		document.getElementById("absencetime"+jour).style.visibility = "hidden";
 		timeAbsence(0, absenceday, jour);
     }
-	if(absence == "Maladie")
+	if(absence == "AT")
 	{
     	document.getElementById("absence"+jour).selectedIndex = 5;
-    	document.getElementById("absenceday"+jour).style.visibility = "visible";
-		document.getElementById("absencetime"+jour).style.visibility = "hidden";
-		timeAbsence(0, absenceday, jour);
-    }
-    if(absence == "AT")
-	{
-    	document.getElementById("absence"+jour).selectedIndex = 6;
     	document.getElementById("absenceday"+jour).style.visibility = "visible";
 		document.getElementById("absencetime"+jour).style.visibility = "hidden";
 		timeAbsence(0, absenceday, jour);
 	}
 	if(absence == "MP")
 	{
-    	document.getElementById("absence"+jour).selectedIndex = 7;
+    	document.getElementById("absence"+jour).selectedIndex = 6;
     	document.getElementById("absenceday"+jour).style.visibility = "visible";
 		document.getElementById("absencetime"+jour).style.visibility = "hidden";
 		timeAbsence(0, absenceday, jour);
 	}
 	if(absence == "Recup")
+	{
+    	document.getElementById("absence"+jour).selectedIndex = 7;
+    	document.getElementById("absenceday"+jour).style.visibility = "hidden";
+		document.getElementById("absencetime"+jour).style.visibility = "visible";
+		timeAbsence(2, absenceday, jour);
+    }
+    if(absence == "Autre")
 	{
     	document.getElementById("absence"+jour).selectedIndex = 8;
     	document.getElementById("absenceday"+jour).style.visibility = "hidden";

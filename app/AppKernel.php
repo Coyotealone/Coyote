@@ -18,24 +18,11 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Coyote\SiteBundle\CoyoteSiteBundle(),
             new FOS\UserBundle\FOSUserBundle(),
-            new Spraed\PDFGeneratorBundle\SpraedPDFGeneratorBundle(),
-            // Add your dependencies Sonata
             new Sonata\CoreBundle\SonataCoreBundle(),
             new Sonata\BlockBundle\SonataBlockBundle(),
-            //new Sonata\jQueryBundle\SonatajQueryBundle(),
-            new Knp\Bundle\MenuBundle\KnpMenuBundle(),
-            // If you haven't already, add the storage bundle
-            // This example uses SonataDoctrineORMAdmin but
-            // it works the same with the alternatives
             new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
-            // Then add SonataAdminBundle
             new Sonata\AdminBundle\SonataAdminBundle(),
-            
-            
-            //new JMS\I18nRoutingBundle\JMSI18nRoutingBundle(),
-
-            // not required, but recommended for better extraction
-            //new JMS\TranslationBundle\JMSTranslationBundle(),
+            new Knp\Bundle\MenuBundle\KnpMenuBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
