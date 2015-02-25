@@ -86,4 +86,25 @@ class TimetableRepository extends EntityRepository
 
         return count($timetable);
     }
+    
+    public function searchIdDate()
+    {
+        $date = new \DateTime('NOW');
+        $result = $date->format('N');
+        if ($result > 1)
+        {
+            $result--;
+            $date->modify("-".$result." day");
+        }
+        
+        $qb = $this->_em->createQueryBuilder();
+        $qb->select('t')
+            ->from('CoyoteSiteBundle:Timetable', 't')
+            ->where('t.date >= :date')
+            ->setParameters(array('date' => $date->format('Y-m-d')));
+        $data_timetable = $qb->getQuery()
+                             ->setMaxResults(7)
+                             ->getResult();
+        return $data_timetable;
+    }
 }

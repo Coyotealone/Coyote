@@ -20,12 +20,6 @@ CoyoteSiteBundle_main:
     requirements:
         _locale: fr|en|pl
 
-CoyoteSiteBundle_schedule:
-    resource: "@CoyoteSiteBundle/Resources/config/routing/schedule.yml"
-    prefix:   /{_locale}/schedule
-    requirements:
-        _locale: fr|en|pl
-
 CoyoteSiteBundle_expense:
     resource: "@CoyoteSiteBundle/Resources/config/routing/expense.yml"
     prefix:   /{_locale}/expense
@@ -47,5 +41,11 @@ CoyoteSiteBundle_profil:
 CoyoteSiteBundle_resetting:
     resource: "@CoyoteSiteBundle/Resources/config/routing/resetting.yml"
     prefix:   /{_locale}/resetting
+    requirements:
+        _locale: fr|en|pl
+
+CoyoteSiteBundle_schedule:
+    resource: "@CoyoteSiteBundle/Resources/config/routing/schedule.yml"
+    prefix:   /{_locale}/schedule
     requirements:
         _locale: fr|en|pl

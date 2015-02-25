@@ -5,32 +5,41 @@ namespace Coyote\SiteBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Currency
+ * Class Currency
+ * @author Coyote
+ * @ORM\Entity
+ *
  */
 class Currency
 {
     /**
      * @var integer
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @var string
+     * @ORM\Column(name="code", type="string", length=3, unique=true)
      */
     private $code;
 
     /**
      * @var string
+     * @ORM\Column(name="name", type="string", length=45, unique=true)
      */
     private $name;
 
     /**
      * @var float
+     * @ORM\Column(name="exchange_rate", type="float", options={"unsigned":true})
      */
     private $exchange_rate;
-
+    
     /**
-     * @var \Doctrine\Common\Collections\Collection
+     * @ORM\OneToMany(targetEntity="Expense", mappedBy="currency", cascade={"persist", "merge"})
      */
     private $expenses;
 
@@ -45,7 +54,7 @@ class Currency
     /**
      * Get id
      *
-     * @return integer
+     * @return integer 
      */
     public function getId()
     {
@@ -68,7 +77,7 @@ class Currency
     /**
      * Get code
      *
-     * @return string
+     * @return string 
      */
     public function getCode()
     {
@@ -91,7 +100,7 @@ class Currency
     /**
      * Get name
      *
-     * @return string
+     * @return string 
      */
     public function getName()
     {
@@ -114,7 +123,7 @@ class Currency
     /**
      * Get exchange_rate
      *
-     * @return float
+     * @return float 
      */
     public function getExchangeRate()
     {
@@ -147,15 +156,10 @@ class Currency
     /**
      * Get expenses
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \Doctrine\Common\Collections\Collection 
      */
     public function getExpenses()
     {
         return $this->expenses;
-    }
-
-    public function __toString()
-    {
-        return $this->code;
     }
 }

@@ -5,44 +5,56 @@ namespace Coyote\SiteBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Country
+ * Class Country
+ * @author Coyote
+ * @ORM\Entity
+ *
  */
 class Country
 {
     /**
      * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
+     * 
      * @var integer
+     * 
+     * @ORM\Column(name="code", type="integer", unique=true, options={"unsigned":true})
      */
     private $code;
 
     /**
+     * 
      * @var string
+     * @ORM\Column(name="alpha2", type="string", length=2, unique=true)
      */
     private $alpha2;
-
+    
     /**
+     *
      * @var string
+     * @ORM\Column(name="alpha3", type="string", length=3, unique=true)
      */
     private $alpha3;
-
+    
     /**
+     * 
      * @var string
-     */
-    private $entitledfr;
-
-    /**
-     * @var string
+     * @ORM\Column(name="entitledgb", type="string", length=45)
      */
     private $entitledgb;
+
 
     /**
      * Get id
      *
-     * @return integer
+     * @return integer 
      */
     public function getId()
     {
@@ -65,7 +77,7 @@ class Country
     /**
      * Get code
      *
-     * @return integer
+     * @return integer 
      */
     public function getCode()
     {
@@ -88,7 +100,7 @@ class Country
     /**
      * Get alpha2
      *
-     * @return string
+     * @return string 
      */
     public function getAlpha2()
     {
@@ -111,34 +123,11 @@ class Country
     /**
      * Get alpha3
      *
-     * @return string
+     * @return string 
      */
     public function getAlpha3()
     {
         return $this->alpha3;
-    }
-
-    /**
-     * Set entitledfr
-     *
-     * @param string $entitledfr
-     * @return Country
-     */
-    public function setEntitledfr($entitledfr)
-    {
-        $this->entitledfr = $entitledfr;
-
-        return $this;
-    }
-
-    /**
-     * Get entitledfr
-     *
-     * @return string
-     */
-    public function getEntitledfr()
-    {
-        return $this->entitledfr;
     }
 
     /**
@@ -157,15 +146,10 @@ class Country
     /**
      * Get entitledgb
      *
-     * @return string
+     * @return string 
      */
     public function getEntitledgb()
     {
         return $this->entitledgb;
-    }
-
-    public function __toString()
-    {
-        return $this->alpha2;
     }
 }

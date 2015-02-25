@@ -5,49 +5,38 @@ namespace Coyote\SiteBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Timetable
+ * Class Timetable
+ * @author Coyote
+ * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Coyote\SiteBundle\Entity\TimetableRepository");
  */
 class Timetable
 {
     /**
      * @var integer
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
-     * @var integer
-     */
-    private $no_week;
-
-    /**
-     * @var integer
-     */
-    private $year;
-
-    /**
-     * @var string
-     */
-    private $day;
-
-    /**
-     * @var string
+     * @var \DateTime
+     * @ORM\Column(name="date", type="datetime")
      */
     private $date;
-
+    
     /**
      * @var boolean
+     * @ORM\Column(name="holiday", type="boolean")
      */
     private $holiday;
-
+    
     /**
      * @var string
+     * @ORM\Column(name="period", type="string", length=9)
      */
-    private $pay_period;
-
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $schedules;
+    private $period;
 
     /**
      * Constructor
@@ -60,7 +49,7 @@ class Timetable
     /**
      * Get id
      *
-     * @return integer
+     * @return integer 
      */
     public function getId()
     {
@@ -68,78 +57,9 @@ class Timetable
     }
 
     /**
-     * Set no_week
-     *
-     * @param integer $noWeek
-     * @return Timetable
-     */
-    public function setNoWeek($noWeek)
-    {
-        $this->no_week = $noWeek;
-
-        return $this;
-    }
-
-    /**
-     * Get no_week
-     *
-     * @return integer
-     */
-    public function getNoWeek()
-    {
-        return $this->no_week;
-    }
-
-    /**
-     * Set year
-     *
-     * @param integer $year
-     * @return Timetable
-     */
-    public function setYear($year)
-    {
-        $this->year = $year;
-
-        return $this;
-    }
-
-    /**
-     * Get year
-     *
-     * @return integer
-     */
-    public function getYear()
-    {
-        return $this->year;
-    }
-
-    /**
-     * Set day
-     *
-     * @param string $day
-     * @return Timetable
-     */
-    public function setDay($day)
-    {
-        $this->day = $day;
-
-        return $this;
-    }
-
-    /**
-     * Get day
-     *
-     * @return string
-     */
-    public function getDay()
-    {
-        return $this->day;
-    }
-
-    /**
      * Set date
      *
-     * @param string $date
+     * @param \DateTime $date
      * @return Timetable
      */
     public function setDate($date)
@@ -152,7 +72,7 @@ class Timetable
     /**
      * Get date
      *
-     * @return string
+     * @return \DateTime 
      */
     public function getDate()
     {
@@ -175,7 +95,7 @@ class Timetable
     /**
      * Get holiday
      *
-     * @return boolean
+     * @return boolean 
      */
     public function getHoliday()
     {
@@ -183,26 +103,26 @@ class Timetable
     }
 
     /**
-     * Set pay_period
+     * Set period
      *
-     * @param string $payPeriod
+     * @param string $period
      * @return Timetable
      */
-    public function setPayPeriod($payPeriod)
+    public function setPeriod($period)
     {
-        $this->pay_period = $payPeriod;
+        $this->period = $period;
 
         return $this;
     }
 
     /**
-     * Get pay_period
+     * Get period
      *
-     * @return string
+     * @return string 
      */
-    public function getPayPeriod()
+    public function getPeriod()
     {
-        return $this->pay_period;
+        return $this->period;
     }
 
     /**
@@ -231,110 +151,15 @@ class Timetable
     /**
      * Get schedules
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \Doctrine\Common\Collections\Collection 
      */
     public function getSchedules()
     {
         return $this->schedules;
     }
-
-    public function second_to_hour($time)// Transformation d'un temps en seconde en H:M
-    {
-        if($time == '0')
-            return '0:00';
-        else
-        {
-            $ss = $time % 60;
-            $m = ($time - $ss) / 60;
-            $mm = $m % 60;
-            $hh = ($m - $mm) / 60;
-            if($ss=='0')
-            	$ss = '00';
-            if($mm == '0')
-            	$mm = '00';
-            if($mm < '10' && $mm > '0')
-            	$mm = '0'.$mm;
-            $restime = $hh.':'.$mm;
-            return $restime;
-    	}
-    }
-
-    public function hour_to_second($time)// Transformation d'un temps en H:M en seconde
-    {
-    	$timesec = explode(':', $time);
-    	if(count($timesec) < 2)
-    	    return "0";
-    	if(is_numeric($timesec[0]) && is_numeric($timesec[1]))
-    	{
-    	    $sec = 3600*$timesec[0] + 60*$timesec[1];
-            return $sec;
-        }
-        else
-            return "0";
-    }
-
-    public function working_time_day($start, $end, $break)// Calcul du temps de travail
-    {
-        if(empty($start) and empty($end) and empty($break))
-    		return "0:00";
-    	if($start == "00:00" and $end == "00:00" and $break == "00:00")
-    		return "0:00";
-    	if($start == "0:00" and $end == "0:00" and $break == "0:00")
-    		return "0:00";
-    	else
-    	{
-    		if(empty($end))
-    			$end = "24:00";
-    		if($end == "0:00")
-    			$end = "24:00";
-    		if($end == "00:00")
-    			$end = "24:00";
-    		$timestart = $this->hour_to_second($start);
-    		$timeend = $this->hour_to_second($end);
-    		$timebreak = $this->hour_to_second($break);
-
-    		$worktime = $timeend-$timestart;
-    		$worktime = $worktime-$timebreak;
-    		if($worktime == "0")
-    		    return "0:00";
-            else
-    		    $worktime = $this->second_to_hour($worktime);
-    		return  $worktime;
-    	}
-    }
-
-    public function working_hours_day($worktime)// Calcul de la journée de travail
-    {
-    	if($worktime == "00:00" || $worktime == "0:00")
-    		return 0;
-
-    	$worktime = $this->hour_to_second($worktime);
-
-    	$timeday = $worktime;
-    	if($timeday <= 0)
-    		$timeday = 0;
-    	if($timeday > 0 && $timeday <= 12600)
-    		$timeday = 0.5;
-    	else
-    		$timeday = 1;
-    	return $timeday;
-    }
-
-    function working_time_week($time1, $time2, $time3, $time4, $time5, $time6, $time7)
-    {
-    	$timetotsec = $time1 + $time2 + $time3 + $time4 + $time5 + $time6 + $time7;
-    	$ss = $timetotsec % 60;
-    	$m = ($timetotsec - $ss) / 60;
-    	$mm = $m % 60;
-    	$hh = ($m - $mm) / 60;
-    	if($mm == '0')
-    		$mm = '00';
-    	$restime = $hh.':'.$mm;
-    	return $restime;
-    }
-
+    
     public function __toString()
     {
-       return $this->date->format('d/m/Y');
+        return $this->date->format('d/m/Y');
     }
 }

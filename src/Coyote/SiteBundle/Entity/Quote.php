@@ -5,32 +5,42 @@ namespace Coyote\SiteBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Quote
+ * Class Quote
+ * @author Coyote
+ * @ORM\Entity
+ *
  */
 class Quote
 {
     /**
      * @var integer
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @var string
+     * @ORM\Column(name="citation", type="string", length=255, unique=true)
      */
     private $citation;
 
     /**
      * @var string
+     * @ORM\Column(name="author", type="string", length=45)
      */
     private $author;
 
     /**
      * @var integer
+     * @ORM\Column(name="week", type="integer", options={"unsigned":true})
      */
     private $week;
 
     /**
      * @var integer
+     * @ORM\Column(name="year", type="integer", options={"unsigned":true})
      */
     private $year;
 

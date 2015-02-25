@@ -5,13 +5,11 @@ namespace Coyote\SiteBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Compenent\Form\FormBuilder;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 
 use Coyote\SiteBundle\Entity\User;
-use Coyote\SiteBundle\Entity\UserInfo;
 use Coyote\SiteBundle\Form\UserType;
 
 use Doctrine\ORM\EntityRepository;
@@ -59,19 +57,15 @@ class MainController extends Controller
             $session->set('userid', $user_id);
             /** @var $data_user entity User */
             $data_user = $em->getRepository('CoyoteSiteBundle:User')->findOneById($user_id);
-            /** set no_week */
-            $session->set('no_week', date('W'));
-            /** set year */
-            $year = date('Y');
-            if($session->get('no_week') == 1)
-                $year = $year + 1;
-            $session->set('year', $year);
 
             $date = date('Y').'-'.date('m').'-'.date('d');
             $date = (new \DateTime($date));
+            /** set week */
+            $session->set('week', $date->format('W'));
             $date = $em->getRepository('CoyoteSiteBundle:Timetable')->findOneBy(array('date' => $date));
-            /** set pay_period */
-            $session->set('pay_period', $date->getPayPeriod());
+            
+            /** set period */
+            $session->set('period', $date->getPeriod());
             /** set username */
             $session->set('username', $data_user->getName());
             /** set status */
@@ -175,20 +169,14 @@ class MainController extends Controller
     public function menuAction()
     {
         $request = $this->getRequest();
-        $session = $request->getSession();
         /** @var $locale string _locale */
         $locale = $request->getLocale();
 
-        /** @var $week string mm */
-        $week = date('W');
-        /** @var $year string yyyy */
-        $year = date('Y');
-        if($week == 1)
-            $year = $year + 1;
         /** @var $em object doctrine request */
         $em = $this->getDoctrine()->getManager();
         /** @var $data_quote entity Quote */
-        $data_quote = $em->getRepository('CoyoteSiteBundle:Quote')->findby(array('week' => $week, 'year' => $year));
+        $data_quote = $em->getRepository('CoyoteSiteBundle:Quote')->findby(array
+                ('week' => date('W'), 'year' => date('Y')));
         /** show view */
         return $this->render('CoyoteSiteBundle:Accueil:menu.html.twig', array('quote' => $data_quote,
             '_locale' => $locale));
@@ -207,12 +195,8 @@ class MainController extends Controller
     {
         $request = $this->getRequest();
         $session = $request->getSession();
-        /** @var $locale string _locale */
-        $locale = $request->getLocale();
         /** set lang */
         $session->set('lang', $_locale);
-
-
         /** @var $user role */
         $user = $this->get('security.context')->getToken()->getUser();
         /** check $user */
@@ -234,9 +218,7 @@ class MainController extends Controller
      */
     public function redirectAction()
     {
-
         $request = $this->getRequest();
-        $session = $request->getSession();
-        return $response = $this->forward('CoyoteSiteBundle:Main:index', array('_locale' => $request->getLocale()));
+        return $this->forward('CoyoteSiteBundle:Main:index', array('_locale' => $request->getLocale()));
     }
 }

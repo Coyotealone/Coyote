@@ -5,39 +5,54 @@ namespace Coyote\SiteBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * UserFees
+ * Class UserFees
+ * @author Coyote
+ * @ORM\Entity
  */
 class UserFees
 {
     /**
      * @var integer
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @var string
+     * @ORM\Column(name="login", type="string", length=45, unique=true)
      */
     private $login;
-
+    
     /**
-     * @var string
+     * @var integer
+     * @ORM\Column(name="code", type="integer", unique=true, options={"unsigned":true})
      */
     private $code;
-
+    
     /**
      * @var string
+     * @ORM\Column(name="service", type="string", length=45)
      */
     private $service;
-
+    
     /**
-     * @var \Doctrine\Common\Collections\Collection
+     * @ORM\OneToMany(targetEntity="Expense", mappedBy="userfees", cascade={"persist", "merge"})
      */
     private $expenses;
-
+    
     /**
-     * @var \Coyote\SiteBundle\Entity\User
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="userfeess")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Car", inversedBy="userfeess")
+     * @ORM\JoinColumn(name="car_id", referencedColumnName="id")
+     */
+    private $car;
 
     /**
      * Constructor
@@ -83,7 +98,7 @@ class UserFees
     /**
      * Set code
      *
-     * @param string $code
+     * @param integer $code
      * @return UserFees
      */
     public function setCode($code)
@@ -96,7 +111,7 @@ class UserFees
     /**
      * Get code
      *
-     * @return string 
+     * @return integer 
      */
     public function getCode()
     {
@@ -181,16 +196,6 @@ class UserFees
     {
         return $this->user;
     }
-    
-    public function __toString()
-    {
-        return $this->code;
-    }
-    /**
-     * @var \Coyote\SiteBundle\Entity\Car
-     */
-    private $car;
-
 
     /**
      * Set car

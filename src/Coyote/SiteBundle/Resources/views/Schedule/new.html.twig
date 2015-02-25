@@ -37,7 +37,7 @@
         <form role="form" action="{{ path('schedule_savetime') }}" method='post'>
                 <p id="titreconfig">
                     <b>{{'schedule.title.new'|trans}} - </b>
-                    {{'schedule.message_week'|trans({'%no_week%': app.session.get('no_week'), '%year%': app.session.get('year')})}}
+                    {{'schedule.message_week'|trans({'%no_week%': app.session.get('week'), '%year%': app.session.get('year')})}}
                 </p>
                 <div class='table-responsive'>
             	    <table id='table_temps' class='table'>
@@ -422,7 +422,7 @@
                     <div id="contenu">
                         <p id="titreconfig">
                             <b>{{'schedule.title.new'|trans}}</b>
-                            {{'schedule.message_week'|trans({'%no_week%': app.session.get('no_week'), '%year%': app.session.get('year')})}}
+                            {{'schedule.message_week'|trans({'%no_week%': app.session.get('week'), '%year%': app.session.get('year')})}}
                         </p>
                             <div class='table-responsive'>
                         	    <table id='table_temps' class='table'>

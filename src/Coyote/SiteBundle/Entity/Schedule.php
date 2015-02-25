@@ -5,62 +5,100 @@ namespace Coyote\SiteBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Schedule
+ * Class Schedule
+ * @author Coyote
+ * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks
  */
 class Schedule
 {
     /**
      * @var integer
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @var string
+     * @ORM\Column(name="start", type="string", length=5)
      */
     private $start;
 
     /**
      * @var string
+     * @ORM\Column(name="end", type="string", length=5)
      */
     private $end;
 
     /**
      * @var string
+     * @ORM\Column(name="break", type="string", length=5)
      */
     private $break;
-
+    
     /**
      * @var string
+     * @ORM\Column(name="working_time", type="string", length=5)
      */
     private $working_time;
-
+    
     /**
      * @var float
+     * @ORM\Column(name="working_hours", type="float")
      */
     private $working_hours;
-
+    
     /**
      * @var boolean
+     * @ORM\Column(name="travel", type="boolean")
      */
     private $travel;
-
+    
     /**
      * @var string
+     * @ORM\Column(name="absence_name", type="string", length=20)
      */
-    private $absence;
-
+    private $absence_name;
+    
     /**
      * @var string
+     * @ORM\Column(name="absence_duration", type="string", length=5)
+     */
+    private $absence_duration;
+    
+    /**
+     * @var string
+     * @ORM\Column(name="comment", type="string", length=255)
      */
     private $comment;
-
+    
     /**
-     * @var \Coyote\SiteBundle\Entity\User
+     * @var \DateTime
+     * @ORM\Column(name="created_at", type="datetime")
+     */
+    private $created_at;
+    
+    /**
+     * @var \DateTime
+     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
+     */
+    private $updated_at;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="schedules")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;
-
+    
+    /*
+     * 
+     * @ORM\ManyToMany(targetEntity="Timetable")
+     */
     /**
-     * @var \Coyote\SiteBundle\Entity\Timetable
+     * @ORM\ManyToOne(targetEntity="Timetable")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $timetable;
 
@@ -214,26 +252,49 @@ class Schedule
     }
 
     /**
-     * Set absence
+     * Set absence_name
      *
-     * @param string $absence
+     * @param string $absenceName
      * @return Schedule
      */
-    public function setAbsence($absence)
+    public function setAbsenceName($absenceName)
     {
-        $this->absence = $absence;
+        $this->absence_name = $absenceName;
 
         return $this;
     }
 
     /**
-     * Get absence
+     * Get absence_name
      *
      * @return string 
      */
-    public function getAbsence()
+    public function getAbsenceName()
     {
-        return $this->absence;
+        return $this->absence_name;
+    }
+
+    /**
+     * Set absence_duration
+     *
+     * @param string $absenceDuration
+     * @return Schedule
+     */
+    public function setAbsenceDuration($absenceDuration)
+    {
+        $this->absence_duration = $absenceDuration;
+
+        return $this;
+    }
+
+    /**
+     * Get absence_duration
+     *
+     * @return string 
+     */
+    public function getAbsenceDuration()
+    {
+        return $this->absence_duration;
     }
 
     /**
@@ -257,6 +318,51 @@ class Schedule
     public function getComment()
     {
         return $this->comment;
+    }
+
+    /**
+     * Set created_at
+     * @ORM\PrePersist
+     * @param \DateTime $createdAt
+     * @return Expense
+     */
+    public function setCreatedAt($createdAt)
+    {
+        if(!$this->getCreatedAt())
+        {
+            $this->created_at = new \DateTime();
+        }
+    }
+
+    /**
+     * Get created_at
+     *
+     * @return \DateTime 
+     */
+    public function getCreatedAt()
+    {
+        return $this->created_at;
+    }
+
+    /**
+     * Set updated_at
+     * @ORM\PrePersist
+     * @param \DateTime $updatedAt
+     * @return Expense
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updated_at = new \DateTime();
+    }
+
+    /**
+     * Get updated_at
+     *
+     * @return \DateTime 
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updated_at;
     }
 
     /**
@@ -305,59 +411,33 @@ class Schedule
         return $this->timetable;
     }
     /**
-     * @var string
+     * Constructor
      */
-    private $absence_name;
+    public function __construct()
+    {
+        $this->timetable = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
-     * @var string
-     */
-    private $absence_duration;
-
-
-    /**
-     * Set absence_name
+     * Add timetable
      *
-     * @param string $absenceName
+     * @param \Coyote\SiteBundle\Entity\Timetable $timetable
      * @return Schedule
      */
-    public function setAbsenceName($absenceName)
+    public function addTimetable(\Coyote\SiteBundle\Entity\Timetable $timetable)
     {
-        $this->absence_name = $absenceName;
+        $this->timetable[] = $timetable;
 
         return $this;
     }
 
     /**
-     * Get absence_name
+     * Remove timetable
      *
-     * @return string 
+     * @param \Coyote\SiteBundle\Entity\Timetable $timetable
      */
-    public function getAbsenceName()
+    public function removeTimetable(\Coyote\SiteBundle\Entity\Timetable $timetable)
     {
-        return $this->absence_name;
-    }
-
-    /**
-     * Set absence_duration
-     *
-     * @param string $absenceDuration
-     * @return Schedule
-     */
-    public function setAbsenceDuration($absenceDuration)
-    {
-        $this->absence_duration = $absenceDuration;
-
-        return $this;
-    }
-
-    /**
-     * Get absence_duration
-     *
-     * @return string 
-     */
-    public function getAbsenceDuration()
-    {
-        return $this->absence_duration;
+        $this->timetable->removeElement($timetable);
     }
 }

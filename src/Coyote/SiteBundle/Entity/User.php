@@ -3,83 +3,96 @@
 namespace Coyote\SiteBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
 use FOS\UserBundle\Model\User as BaseUser;
 
-use Symfony\Component\Validator\Constraints as Assert;
-
 /**
- * User
+ * Class User
+ * @author Coyote
+ * @ORM\Entity
  */
 class User extends BaseUser
 {
     /**
      * @var integer
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
 
     /**
      * @var string
+     * @ORM\Column(name="name", type="string", length=80)
      */
     private $name;
 
     /**
      * @var string
+     * @ORM\Column(name="address1", type="string", length=45)
      */
-    private $adress1;
+    private $address1;
 
     /**
      * @var string
+     * @ORM\Column(name="address2", type="string", length=45, nullable=true)
      */
-    private $adress2;
+    private $address2;
 
     /**
      * @var string
+     * @ORM\Column(name="zip_code", type="string", length=10)
      */
     private $zip_code;
 
     /**
      * @var string
+     * @ORM\Column(name="postal_box", type="string", length=10, nullable=true)
      */
     private $postal_box;
 
     /**
      * @var string
+     * @ORM\Column(name="city", type="string", length=80)
      */
     private $city;
 
     /**
      * @var string
+     * @ORM\Column(name="country", type="string", length=45)
      */
     private $country;
 
     /**
      * @var string
+     * @ORM\Column(name="phone", type="string", length=20)
      */
     private $phone;
 
     /**
      * @var string
+     * @ORM\Column(name="cell", type="string", length=20, nullable=true)
      */
     private $cell;
 
     /**
      * @var string
+     * @ORM\Column(name="fax", type="string", length=20, nullable=true)
      */
     private $fax;
 
     /**
      * @var string
+     * @ORM\Column(name="website", type="string", length=100, nullable=true)
      */
     private $website;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
+     * @ORM\OneToMany(targetEntity="Schedule", mappedBy="user", cascade={"persist", "merge"})
      */
     private $schedules;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
+     * @ORM\OneToMany(targetEntity="UserFees", mappedBy="user", cascade={"persist", "merge"})
      */
     private $userfeess;
 
@@ -88,10 +101,8 @@ class User extends BaseUser
      */
     public function __construct()
     {
-        parent::__construct();
         $this->schedules = new \Doctrine\Common\Collections\ArrayCollection();
         $this->userfeess = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->roles = array('ROLE_USER');
     }
 
     /**
@@ -128,49 +139,49 @@ class User extends BaseUser
     }
 
     /**
-     * Set adress1
+     * Set address1
      *
-     * @param string $adress1
+     * @param string $address1
      * @return User
      */
-    public function setAdress1($adress1)
+    public function setAddress1($address1)
     {
-        $this->adress1 = $adress1;
+        $this->address1 = $address1;
 
         return $this;
     }
 
     /**
-     * Get adress1
+     * Get address1
      *
      * @return string
      */
-    public function getAdress1()
+    public function getAddress1()
     {
-        return $this->adress1;
+        return $this->address1;
     }
 
     /**
-     * Set adress2
+     * Set address2
      *
-     * @param string $adress2
+     * @param string $address2
      * @return User
      */
-    public function setAdress2($adress2)
+    public function setAddress2($address2)
     {
-        $this->adress2 = $adress2;
+        $this->address2 = $address2;
 
         return $this;
     }
 
     /**
-     * Get adress2
+     * Get address2
      *
      * @return string
      */
-    public function getAdress2()
+    public function getAddress2()
     {
-        return $this->adress2;
+        return $this->address2;
     }
 
     /**
@@ -266,29 +277,6 @@ class User extends BaseUser
     }
 
     /**
-     * Set phone
-     *
-     * @param string $phone
-     * @return User
-     */
-    public function setPhone($phone)
-    {
-        $this->phone = $phone;
-
-        return $this;
-    }
-
-    /**
-     * Get phone
-     *
-     * @return string
-     */
-    public function getPhone()
-    {
-        return $this->phone;
-    }
-
-    /**
      * Set cell
      *
      * @param string $cell
@@ -332,29 +320,6 @@ class User extends BaseUser
     public function getFax()
     {
         return $this->fax;
-    }
-
-    /**
-     * Set website
-     *
-     * @param string $website
-     * @return User
-     */
-    public function setWebsite($website)
-    {
-        $this->website = $website;
-
-        return $this;
-    }
-
-    /**
-     * Get website
-     *
-     * @return string
-     */
-    public function getWebsite()
-    {
-        return $this->website;
     }
 
     /**
@@ -421,5 +386,51 @@ class User extends BaseUser
     public function getUserfeess()
     {
         return $this->userfeess;
+    }
+
+    /**
+     * Set website
+     *
+     * @param string $website
+     * @return User
+     */
+    public function setWebsite($website)
+    {
+        $this->website = $website;
+
+        return $this;
+    }
+
+    /**
+     * Get website
+     *
+     * @return string
+     */
+    public function getWebsite()
+    {
+        return $this->website;
+    }
+
+    /**
+     * Set phone
+     *
+     * @param string $phone
+     * @return User
+     */
+    public function setPhone($phone)
+    {
+        $this->phone = $phone;
+
+        return $this;
+    }
+
+    /**
+     * Get phone
+     *
+     * @return string 
+     */
+    public function getPhone()
+    {
+        return $this->phone;
     }
 }

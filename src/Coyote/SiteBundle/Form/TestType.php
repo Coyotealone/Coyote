@@ -6,30 +6,22 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class ScheduleType extends AbstractType
+class TestType extends AbstractType
 {
-        /**
+    /**
      * @param FormBuilderInterface $builder
      * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        /*$builder->add('start', 'time', array(
-                    'input'  => 'timestamp',
-                    'widget' => 'choice',
-                    ));*/
         $builder
-            ->add('start')
-            ->add('end')
-            ->add('break')
-            ->add('working_time')
-            ->add('working_hours')
-            ->add('travel')
-            ->add('absence')
-            ->add('comment')
-            //->add('user')
-            ->add('timetable')
-            ;
+            ->add('start','collection',array('type'=>new ScheduleType(),
+                            'prototype'=>true,
+                            'allow_add'=>true))
+            ->add('end','collection',array('type'=>new ScheduleType,
+                            'prototype'=>true,
+                            'allow_add'=>true))
+        ;
     }
     
     /**

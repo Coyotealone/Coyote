@@ -5,38 +5,52 @@ namespace Coyote\SiteBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Fee
+ * Class Fee
+ * @author Coyote
+ * @ORM\Entity
+ *
  */
 class Fee
 {
     /**
      * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
+     * 
      * @var string
+     * 
+     * @ORM\Column(name="code", type="string", length=6, unique=true)
      */
     private $code;
 
     /**
+     * 
      * @var string
+     * @ORM\Column(name="name", type="string", length=45, unique=true)
      */
     private $name;
-
+    
     /**
      * @var float
+     * @ORM\Column(name="rate", type="float")
      */
     private $rate;
-
+    
     /**
      * @var string
+     * @ORM\Column(name="code_rate", type="string", length=4)
      */
     private $code_rate;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
+    * @ORM\OneToMany(targetEntity="Expense", mappedBy="fee", cascade={"persist", "merge"})
+    */
     private $expenses;
 
     /**
@@ -180,11 +194,5 @@ class Fee
     public function getExpenses()
     {
         return $this->expenses;
-    }
-    
-    public function __toString()
-    {
-        $data = $this->code.' : '.$this->name;
-        return $data;
     }
 }
