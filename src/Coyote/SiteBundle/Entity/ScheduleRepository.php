@@ -170,7 +170,7 @@ class ScheduleRepository extends EntityRepository
     public function saveSchedule($user, $timetable_id, $time_start, $time_end, $time_break, $time_travel, $time_absence,
         $time_absenceday, $time_absencetime, $time_comment)
     {
-        $schedule = new schedule();
+        $schedule = new Schedule();
 
         $schedule->setUser($user);
         $schedule->setTimetable($timetable_id);
@@ -187,8 +187,8 @@ class ScheduleRepository extends EntityRepository
             $time_break = '0:00';
         $schedule->setBreak($time_break);
 
-        $timetable = new timetable();
-
+        $timetable = new Timetable();
+        
         $working_time_day = $timetable->working_time_day($time_start, $time_end, $time_break);
 
         $schedule->setWorkingTime($working_time_day);

@@ -95,9 +95,9 @@ class ScheduleController extends Controller
         $em = $this->getDoctrine()->getManager();
         $request = $this->getRequest();
         $session = $request->getSession();
-        $data_timetable = $em->getRepository('CoyoteSiteBundle:Timetable')->findBy(
-            array('no_week' => $session->get('no_week'),'year' => $session->get('year'),
-                             ));
+
+        $data_timetable = $em->getRepository('CoyoteSiteBundle:Timetable')->searchIdDate();
+        
         $time = $em->getRepository('CoyoteSiteBundle:Schedule')->findBy(
             array('timetable' => $data_timetable, 'user' => $session->get('userid')));
         $session->set('id_lundi', $time[0]->getId());
@@ -129,7 +129,7 @@ class ScheduleController extends Controller
         $em = $this->getDoctrine()->getManager();
         $request = $this->getRequest();
         $session = $request->getSession();
-        $no_week = $session->get('no_week');
+        $no_week = $session->get('week');
         $year = $session->get('year');
         if($no_week == 1)
         {
@@ -138,7 +138,7 @@ class ScheduleController extends Controller
         }
         else
             $no_week--;
-        $session->set('no_week', $no_week);
+        $session->set('week', $no_week);
         $session->set('year', $year);
         $data_timetable = $em->getRepository('CoyoteSiteBundle:Timetable')->findBy(
             array('no_week' => $session->get('no_week'),'year' => $session->get('year')));
@@ -159,7 +159,7 @@ class ScheduleController extends Controller
         $em = $this->getDoctrine()->getManager();
         $request = $this->getRequest();
         $session = $request->getSession();
-        $no_week = $session->get('no_week');
+        $no_week = $session->get('week');
         $year = $session->get('year');
         if($no_week == 52)
         {
@@ -168,7 +168,7 @@ class ScheduleController extends Controller
         }
         else
             $no_week++;
-        $session->set('no_week', $no_week);
+        $session->set('week', $no_week);
         $session->set('year', $year);
         $data_timetable = $em->getRepository('CoyoteSiteBundle:Timetable')->findBy(
             array('no_week' => $session->get('no_week'),'year' => $session->get('year')));
@@ -236,8 +236,7 @@ class ScheduleController extends Controller
             $schedulesamedi = $em->getRepository('CoyoteSiteBundle:Schedule')->find($session->get('id_samedi'));
             $scheduledimanche = $em->getRepository('CoyoteSiteBundle:Schedule')->find($session->get('id_dimanche'));
 
-            $timetable_ids = $em->getRepository('CoyoteSiteBundle:Timetable')->findBy(
-                array('no_week' => $session->get('no_week'), 'pay_period' => $session->get('pay_period')));
+            $timetable_ids = $em->getRepository('CoyoteSiteBundle:Timetable')->searchIdDate();
             $user = $em->getRepository('CoyoteSiteBundle:User')->find($session->get('userid'));
 
             if($schedulelundi === null)
