@@ -5,11 +5,9 @@ namespace Coyote\SiteBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Compenent\Form\FormBuilder;
 use Symfony\Component\HttpFoundation\Session\Session;
 
 use Coyote\SiteBundle\Form\UserType;
-use Coyote\SiteBundle\Form\TimeType;
 use Coyote\SiteBundle\Form\ScheduleType;
 
 use Coyote\SiteBundle\Entity\Schedule;
@@ -39,7 +37,6 @@ class ScheduleController extends Controller
         $session = $request->getSession();
         $em = $this->getDoctrine()->getManager();
 
-        $user = $this->get('security.context')->getToken()->getUser();
         if($this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED') == false)
         {
             return $this->redirect($this->generateUrl('fos_user_security_login'));
@@ -66,11 +63,11 @@ class ScheduleController extends Controller
     public function newAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $user = $this->get('security.context')->getToken()->getUser();
         $request = $this->getRequest();
         $session = $request->getSession();
         $data_timetable = $em->getRepository('CoyoteSiteBundle:Timetable')->findBy(
-            array('no_week' => $session->get('no_week'),'pay_period' => $session->get('pay_period')));
+            array('no_week' => $session->get('no_week'),'year' => $session->get('year'),
+                            ));
         $session->set('id_lundi', '');
         $session->set('id_mardi', '');
         $session->set('id_mercredi', '');
@@ -92,11 +89,11 @@ class ScheduleController extends Controller
     public function editAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $user = $this->get('security.context')->getToken()->getUser();
         $request = $this->getRequest();
         $session = $request->getSession();
         $data_timetable = $em->getRepository('CoyoteSiteBundle:Timetable')->findBy(
-            array('no_week' => $session->get('no_week'),'pay_period' => $session->get('pay_period')));
+            array('no_week' => $session->get('no_week'),'year' => $session->get('year'),
+                             ));
         $time = $em->getRepository('CoyoteSiteBundle:Schedule')->findBy(
             array('timetable' => $data_timetable, 'user' => $session->get('userid')));
         $session->set('id_lundi', $time[0]->getId());
@@ -237,12 +234,7 @@ class ScheduleController extends Controller
 
             $timetable_ids = $em->getRepository('CoyoteSiteBundle:Timetable')->findBy(
                 array('no_week' => $session->get('no_week'), 'pay_period' => $session->get('pay_period')));
-            $id = $em->getRepository('CoyoteSiteBundle:Timetable')->myFindScheduleId(
-                $session->get('no_week'), $session->get('year'), $session->get('userid'));
-
             $user = $em->getRepository('CoyoteSiteBundle:User')->find($session->get('userid'));
-
-            $timetable = new timetable();
 
             if($schedulelundi === null)
             {
@@ -423,10 +415,7 @@ class ScheduleController extends Controller
 
             $timetable_ids = $em->getRepository('CoyoteSiteBundle:Timetable')->findBy(
                 array('no_week' => $session->get('no_week'), 'pay_period' => $session->get('pay_period')));
-            $id = $em->getRepository('CoyoteSiteBundle:Timetable')->myFindScheduleId(
-                $session->get('no_week'), $session->get('year'), $session->get('userid'));
             $user = $em->getRepository('CoyoteSiteBundle:User')->find($session->get('userid'));
-            $timetable = new timetable();
             if($schedulelundi === null){
                 $timetable_id = $em->getRepository('CoyoteSiteBundle:TimeTable')->find($timetable_ids[0]->getId());
                 $schedulelundi = $em->getRepository('CoyoteSiteBundle:Schedule')->saveSchedulefm(
@@ -611,7 +600,6 @@ class ScheduleController extends Controller
                     }
                     if($i == $value_max)
                     {
-                        $bim = $value;
                         $timeweek[$index] = $em->getRepository('CoyoteSiteBundle:Schedule')->formatTime($value);
                     }
                 }
@@ -720,7 +708,6 @@ class ScheduleController extends Controller
                     }
                     if($i == $value_max)
                     {
-                        $bim = $value;
                         $timeweek[$index] = $em->getRepository('CoyoteSiteBundle:Schedule')->formatTime($value);
                     }
                 }
@@ -832,7 +819,6 @@ class ScheduleController extends Controller
                     }
                     if($i == $value_max)
                     {
-                        $bim = $value;
                         $timeweek[$index] = $em->getRepository('CoyoteSiteBundle:Schedule')->formatTime($value);
                     }
                 }
@@ -886,11 +872,8 @@ class ScheduleController extends Controller
      */
     public function exportprintyearAction()
     {
-        $request = $this->getRequest();
-        $session = $request->getSession();
         $doctrine = $this->getDoctrine();
         $em = $doctrine->getManager();
-        $request = Request::createFromGlobals();
         $pay_period = $_GET['pay_period'];
         define("pay_period", $pay_period, true);
         $data = new Data();
@@ -964,7 +947,6 @@ class ScheduleController extends Controller
                         }
                         if($i == $value_max)
                         {
-                            $bim = $value;
                             $timeweek[$index] = $em->getRepository('CoyoteSiteBundle:Schedule')->formatTime($value);
                         }
                     }
