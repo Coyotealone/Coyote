@@ -100,19 +100,19 @@ class ScheduleController extends Controller
         
         $time = $em->getRepository('CoyoteSiteBundle:Schedule')->findBy(
             array('timetable' => $data_timetable, 'user' => $session->get('userid')));
-        $session->set('id_lundi', $time[0]->getId());
+       /* $session->set('id_lundi', $time[0]->getId());
         $session->set('id_mardi', $time[1]->getId());
         $session->set('id_mercredi', $time[2]->getId());
         $session->set('id_jeudi', $time[3]->getId());
         $session->set('id_vendredi', $time[4]->getId());
         $session->set('id_samedi', $time[5]->getId());
-        $session->set('id_dimanche', $time[6]->getId());
+        $session->set('id_dimanche', $time[6]->getId());*/
         $duration = array();
-        for($i=0;$i<7;$i++)
+        for($i=0;$i<count($time);$i++)
         {
             $duration[$i] = $time[$i]->getAbsenceDuration();
         }
-        return $this->render('CoyoteSiteBundle:Schedule:edit.html.twig',
+        return $this->render('CoyoteSiteBundle:Schedule:new.html.twig',
             array('data_timetable' => $data_timetable, 'time' => $time, 'duration' => $duration));
     }
 
