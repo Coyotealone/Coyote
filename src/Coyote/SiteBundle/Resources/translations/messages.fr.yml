@@ -166,6 +166,14 @@ schedule:
         no_save: "Une erreur s'est produite !"
         save: Enregistrement terminé
 
+schedule1: Lundi
+schedule2: Mardi
+schedule3: Mercredi
+schedule4: Jeudi
+schedule5: Vendredi
+schedule6: Samedi
+schedule7: Dimanche
+
 expense:
     title:
         create: Ajout de notes de frais

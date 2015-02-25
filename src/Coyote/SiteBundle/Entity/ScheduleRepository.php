@@ -188,7 +188,7 @@ class ScheduleRepository extends EntityRepository
         $schedule->setBreak($time_break);
 
         $timetable = new Timetable();
-        
+
         $working_time_day = $timetable->working_time_day($time_start, $time_end, $time_break);
 
         $schedule->setWorkingTime($working_time_day);
@@ -707,5 +707,28 @@ class ScheduleRepository extends EntityRepository
             }
         }
         return $result;
+    }
+
+    public function timeData($timetable, $user )
+    {
+        $index = 0;
+        foreach($timetable as $data)
+        {
+            $qb = $this->_em->createQueryBuilder();
+            $qb->select('s')
+                   ->from('CoyoteSiteBundle:Schedule', 's')
+                   ->where('s.user = :user and s.timetable = :timetable')
+                   ->setParameters(array('user' => $user, 'timetable' => $data));
+            $result = $qb->getQuery()->getOneOrNullResult();//$qb->getQuery()->getResult();
+            if($result == null)
+                $time[$index] = array();
+            else
+                $time[$index] = $result;
+            $index++;
+        }
+        return $time;
+
+        $time = $em->getRepository('CoyoteSiteBundle:Schedule')->findBy(
+            array('timetable' => $data_timetable, 'user' => $session->get('userid')));
     }
 }

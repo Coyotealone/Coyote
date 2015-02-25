@@ -41,9 +41,9 @@ class ScheduleController extends Controller
         {
             return $this->redirect($this->generateUrl('fos_user_security_login'));
         }
-        
+
         $date = $em->getRepository('CoyoteSiteBundle:Timetable')->searchIdDate();
-        
+
         //return new Response($date);
         $time = $em->getRepository('CoyoteSiteBundle:Schedule')->findBy(
             array('timetable' => $date, 'user' => $session->get('userid')));
@@ -71,7 +71,7 @@ class ScheduleController extends Controller
         //    array('no_week' => $session->get('no_week'),'year' => $session->get('year'),
         //                    ));
         $data_timetable = $em->getRepository('CoyoteSiteBundle:Timetable')->searchIdDate();
-        
+
         $session->set('id_lundi', '');
         $session->set('id_mardi', '');
         $session->set('id_mercredi', '');
@@ -97,9 +97,34 @@ class ScheduleController extends Controller
         $session = $request->getSession();
 
         $data_timetable = $em->getRepository('CoyoteSiteBundle:Timetable')->searchIdDate();
-        
-        $time = $em->getRepository('CoyoteSiteBundle:Schedule')->findBy(
-            array('timetable' => $data_timetable, 'user' => $session->get('userid')));
+
+        /*$time = $em->getRepository('CoyoteSiteBundle:Schedule')->findBy(
+            array('timetable' => $data_timetable, 'user' => $session->get('userid')));*/
+        $time = $em->getRepository('CoyoteSiteBundle:Schedule')->timeData(
+            $data_timetable, $session->get('userid'));
+
+        //return new Response($time[0]->getStart());
+        $j = 0;
+        $duration = array();
+        for($i=0;$i<count($time);$i++)
+        {
+            if(empty($time[$j]))
+            {
+                if($data_timetable[$i]->getId() == $time[$j]->getTimetable()->getId())
+                {
+                    $session->set('id_'.$i, $time[$j]->getId());
+                    $duration[$i] = $time[$j]->getAbsenceDuration();
+                    $j++;
+                }
+            }
+            else
+            {
+                $session->set('id_'.$i, '');
+            }
+        }
+
+        //return new Response($data_timetable[0]->getId());
+        //return new Response($time[0]->getTimetable()->getId());
        /* $session->set('id_lundi', $time[0]->getId());
         $session->set('id_mardi', $time[1]->getId());
         $session->set('id_mercredi', $time[2]->getId());
@@ -107,11 +132,12 @@ class ScheduleController extends Controller
         $session->set('id_vendredi', $time[4]->getId());
         $session->set('id_samedi', $time[5]->getId());
         $session->set('id_dimanche', $time[6]->getId());*/
-        $duration = array();
+        /*$duration = array();
         for($i=0;$i<count($time);$i++)
         {
+
             $duration[$i] = $time[$i]->getAbsenceDuration();
-        }
+        }*/
         return $this->render('CoyoteSiteBundle:Schedule:new.html.twig',
             array('data_timetable' => $data_timetable, 'time' => $time, 'duration' => $duration));
     }
