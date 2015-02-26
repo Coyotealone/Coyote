@@ -38,63 +38,87 @@ class Schedule
      * @ORM\Column(name="break", type="string", length=5)
      */
     private $break;
-    
+
     /**
      * @var string
      * @ORM\Column(name="working_time", type="string", length=5)
      */
     private $working_time;
-    
+
     /**
      * @var float
      * @ORM\Column(name="working_hours", type="float")
      */
     private $working_hours;
-    
+
     /**
      * @var boolean
      * @ORM\Column(name="travel", type="boolean")
      */
     private $travel;
-    
+
     /**
      * @var string
      * @ORM\Column(name="absence_name", type="string", length=20)
      */
     private $absence_name;
-    
+
     /**
      * @var string
      * @ORM\Column(name="absence_duration", type="string", length=5)
      */
     private $absence_duration;
-    
+
     /**
      * @var string
      * @ORM\Column(name="comment", type="string", length=255)
      */
     private $comment;
-    
+
+    /**
+     * @var boolean
+     * @ORM\Column(name="locked", type="boolean")
+     */
+    private $locked;
+
+    /**
+     * @var string
+     * @ORM\Column(name="locked_by", type="string", length=50, nullable=true)
+     */
+    private $locked_by;
+
+    /**
+     * @var string
+     * @ORM\Column(name="validated_by", type="string", length=50, nullable=true)
+     */
+    private $validated_by;
+
     /**
      * @var \DateTime
      * @ORM\Column(name="created_at", type="datetime")
      */
     private $created_at;
-    
+
     /**
      * @var \DateTime
      * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
     private $updated_at;
-    
+
+    /**
+     * @var \DateTime
+     * @ORM\Column(name="locked_at", type="datetime", nullable=true)
+     */
+    private $locked_at;
+
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="schedules")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;
-    
+
     /*
-     * 
+     *
      * @ORM\ManyToMany(targetEntity="Timetable")
      */
     /**
@@ -107,7 +131,7 @@ class Schedule
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -130,7 +154,7 @@ class Schedule
     /**
      * Get start
      *
-     * @return string 
+     * @return string
      */
     public function getStart()
     {
@@ -153,7 +177,7 @@ class Schedule
     /**
      * Get end
      *
-     * @return string 
+     * @return string
      */
     public function getEnd()
     {
@@ -176,7 +200,7 @@ class Schedule
     /**
      * Get break
      *
-     * @return string 
+     * @return string
      */
     public function getBreak()
     {
@@ -199,7 +223,7 @@ class Schedule
     /**
      * Get working_time
      *
-     * @return string 
+     * @return string
      */
     public function getWorkingTime()
     {
@@ -222,7 +246,7 @@ class Schedule
     /**
      * Get working_hours
      *
-     * @return float 
+     * @return float
      */
     public function getWorkingHours()
     {
@@ -245,7 +269,7 @@ class Schedule
     /**
      * Get travel
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getTravel()
     {
@@ -268,7 +292,7 @@ class Schedule
     /**
      * Get absence_name
      *
-     * @return string 
+     * @return string
      */
     public function getAbsenceName()
     {
@@ -291,7 +315,7 @@ class Schedule
     /**
      * Get absence_duration
      *
-     * @return string 
+     * @return string
      */
     public function getAbsenceDuration()
     {
@@ -314,7 +338,7 @@ class Schedule
     /**
      * Get comment
      *
-     * @return string 
+     * @return string
      */
     public function getComment()
     {
@@ -338,7 +362,7 @@ class Schedule
     /**
      * Get created_at
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreatedAt()
     {
@@ -359,7 +383,7 @@ class Schedule
     /**
      * Get updated_at
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getUpdatedAt()
     {
@@ -382,7 +406,7 @@ class Schedule
     /**
      * Get user
      *
-     * @return \Coyote\SiteBundle\Entity\User 
+     * @return \Coyote\SiteBundle\Entity\User
      */
     public function getUser()
     {
@@ -405,7 +429,7 @@ class Schedule
     /**
      * Get timetable
      *
-     * @return \Coyote\SiteBundle\Entity\Timetable 
+     * @return \Coyote\SiteBundle\Entity\Timetable
      */
     public function getTimetable()
     {
@@ -440,5 +464,97 @@ class Schedule
     public function removeTimetable(\Coyote\SiteBundle\Entity\Timetable $timetable)
     {
         $this->timetable->removeElement($timetable);
+    }
+
+    /**
+     * Set locked
+     *
+     * @param boolean $locked
+     * @return Schedule
+     */
+    public function setLocked($locked)
+    {
+        $this->locked = $locked;
+
+        return $this;
+    }
+
+    /**
+     * Get locked
+     *
+     * @return boolean 
+     */
+    public function getLocked()
+    {
+        return $this->locked;
+    }
+
+    /**
+     * Set locked_by
+     *
+     * @param string $lockedBy
+     * @return Schedule
+     */
+    public function setLockedBy($lockedBy)
+    {
+        $this->locked_by = $lockedBy;
+
+        return $this;
+    }
+
+    /**
+     * Get locked_by
+     *
+     * @return string 
+     */
+    public function getLockedBy()
+    {
+        return $this->locked_by;
+    }
+
+    /**
+     * Set validated_by
+     *
+     * @param string $validatedBy
+     * @return Schedule
+     */
+    public function setValidatedBy($validatedBy)
+    {
+        $this->validated_by = $validatedBy;
+
+        return $this;
+    }
+
+    /**
+     * Get validated_by
+     *
+     * @return string 
+     */
+    public function getValidatedBy()
+    {
+        return $this->validated_by;
+    }
+
+    /**
+     * Set locked_at
+     *
+     * @param \DateTime $lockedAt
+     * @return Schedule
+     */
+    public function setLockedAt($lockedAt)
+    {
+        $this->locked_at = $lockedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get locked_at
+     *
+     * @return \DateTime 
+     */
+    public function getLockedAt()
+    {
+        return $this->locked_at;
     }
 }

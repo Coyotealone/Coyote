@@ -63,8 +63,6 @@ class ScheduleController extends Controller
 
         $data_timetable = $em->getRepository('CoyoteSiteBundle:Timetable')->searchIdDate($date);
 
-        //return new Response($data_timetable[0]->getId()." : ".$date." : ".$session->get('week'));
-
         $time = $em->getRepository('CoyoteSiteBundle:Schedule')->timeData(
             $data_timetable, $session->get('userid'));
 
@@ -173,14 +171,16 @@ class ScheduleController extends Controller
                     $deplacement[$i] = $data['deplacement'.$i];
                 if (!array_key_exists('deplacement'.$i, $data))
                     $deplacement[$i] = "";
-                $date = $em->getRepository('CoyoteSiteBundle:Timetable')->createDate($data['date'.$i]);
+                $date = $em->getRepository('CoyoteSiteBundle:Timetable')->createDateString($data['date'.$i]);
                 $timetable[$i] = $em->getRepository('CoyoteSiteBundle:Timetable')->findByDate($date);
                 $schedule[$i] = $em->getRepository('CoyoteSiteBundle:Schedule')->findOneBy(array(
                     'timetable' => $timetable[$i], 'user' => $user
                 ));
             }
 
-            $timetable_ids = $em->getRepository('CoyoteSiteBundle:Timetable')->searchIdDate();
+            $date = $em->getRepository('CoyoteSiteBundle:Timetable')->createDateYearWeek(
+            $session->get('year'), $session->get('week'));
+            $timetable_ids = $em->getRepository('CoyoteSiteBundle:Timetable')->searchIdDate($date);
             $user = $em->getRepository('CoyoteSiteBundle:User')->find($session->get('userid'));
 
             $j = 0;
@@ -211,9 +211,12 @@ class ScheduleController extends Controller
             }
             $em->flush();
             $tab_id = explode(";", $list_id);
-            for($i=1;$i<count($tab_id);$i++)
+            $index = 0;
+
+            for($i=0;$i<count($tab_id)-1;$i++)
             {
-                if( $schedule[$i]->getId() != "")
+                $index = $tab_id[$i];
+                if( $schedule[$index]->getId() != "")
                     $message = 'schedule.flash.save';
                 else
                     $message = 'schedule.flash.no_save';
@@ -244,137 +247,67 @@ class ScheduleController extends Controller
             $request = Request::createFromGlobals();
             $data = $request->request->all();
 
-            $deplacementlundi = "";
-            $deplacementmardi = "";
-            $deplacementmercredi = "";
-            $deplacementjeudi = "";
-            $deplacementvendredi = "";
-            $deplacementsamedi = "";
-            $deplacementdimanche = "";
+            $request = $this->getRequest();
+            $session = $request->getSession();
+            $doctrine = $this->getDoctrine();
+            $em = $doctrine->getManager();
+            $request = Request::createFromGlobals();
+            $data = $request->request->all();
 
-            if (array_key_exists('deplacementlundi', $data)) {
-                $deplacementlundi = $data['deplacementlundi'];
-            }
-            if (array_key_exists('deplacementmardi', $data)) {
-                $deplacementmardi = $data['deplacementmardi'];
-            }
-            if (array_key_exists('deplacementmercredi', $data)) {
-                $deplacementmercredi = $data['deplacementmercredi'];
-            }
-            if (array_key_exists('deplacementjeudi', $data)) {
-                $deplacementjeudi = $data['deplacementjeudi'];
-            }
-            if (array_key_exists('deplacementvendredi', $data)) {
-                $deplacementvendredi = $data['deplacementvendredi'];
-            }
-            if (array_key_exists('deplacementsamedi', $data)) {
-                $deplacementsamedi = $data['deplacementsamedi'];
-            }
-            if (array_key_exists('deplacementdimanche', $data)) {
-                $deplacementdimanche = $data['deplacementdimanche'];
+            for($i=1;$i<8;$i++)
+            {
+                if (array_key_exists('deplacement'.$i, $data))
+                    $deplacement[$i] = $data['deplacement'.$i];
+                if (!array_key_exists('deplacement'.$i, $data))
+                    $deplacement[$i] = "";
+                $date = $em->getRepository('CoyoteSiteBundle:Timetable')->createDateString($data['date'.$i]);
+                $timetable[$i] = $em->getRepository('CoyoteSiteBundle:Timetable')->findByDate($date);
+                $schedule[$i] = $em->getRepository('CoyoteSiteBundle:Schedule')->findOneBy(array(
+                    'timetable' => $timetable[$i], 'user' => $user
+                ));
             }
 
-            $schedulelundi = $em->getRepository('CoyoteSiteBundle:Schedule')->find($session->get('id_lundi'));
-            $schedulemardi = $em->getRepository('CoyoteSiteBundle:Schedule')->find($session->get('id_mardi'));
-            $schedulemercredi = $em->getRepository('CoyoteSiteBundle:Schedule')->find($session->get('id_mercredi'));
-            $schedulejeudi = $em->getRepository('CoyoteSiteBundle:Schedule')->find($session->get('id_jeudi'));
-            $schedulevendredi = $em->getRepository('CoyoteSiteBundle:Schedule')->find($session->get('id_vendredi'));
-            $schedulesamedi = $em->getRepository('CoyoteSiteBundle:Schedule')->find($session->get('id_samedi'));
-            $scheduledimanche = $em->getRepository('CoyoteSiteBundle:Schedule')->find($session->get('id_dimanche'));
-
-            $timetable_ids = $em->getRepository('CoyoteSiteBundle:Timetable')->findBy(
-                array('no_week' => $session->get('no_week'), 'pay_period' => $session->get('pay_period')));
+            $date = $em->getRepository('CoyoteSiteBundle:Timetable')->createDateYearWeek(
+            $session->get('year'), $session->get('week'));
+            $timetable_ids = $em->getRepository('CoyoteSiteBundle:Timetable')->searchIdDate($date);
             $user = $em->getRepository('CoyoteSiteBundle:User')->find($session->get('userid'));
-            if($schedulelundi === null){
-                $timetable_id = $em->getRepository('CoyoteSiteBundle:TimeTable')->find($timetable_ids[0]->getId());
-                $schedulelundi = $em->getRepository('CoyoteSiteBundle:Schedule')->saveSchedulefm(
-                    $user, $timetable_id, $deplacementlundi, $data['absencelundi'], $data['absencedaylundi'],
-                    $data['absencetimelundi'], $data['commentairelundi'], $data['jourlundi']);
-            }
-            if($schedulemardi === null){
-                $timetable_id = $em->getRepository('CoyoteSiteBundle:TimeTable')->find($timetable_ids[1]->getId());
-                $schedulemardi = $em->getRepository('CoyoteSiteBundle:Schedule')->saveSchedulefm(
-                    $user, $timetable_id, $deplacementmardi, $data['absencemardi'], $data['absencedaymardi'],
-                    $data['absencetimemardi'], $data['commentairemardi'], $data['jourmardi']);
-            }
-            if($schedulemercredi === null){
-                $timetable_id = $em->getRepository('CoyoteSiteBundle:TimeTable')->find($timetable_ids[2]->getId());
-                $schedulemercredi = $em->getRepository('CoyoteSiteBundle:Schedule')->saveSchedulefm($user,
-                    $timetable_id, $deplacementmercredi, $data['absencemercredi'], $data['absencedaymercredi'],
-                    $data['absencetimemercredi'], $data['commentairemercredi'], $data['jourmercredi']);
-            }
-            if($schedulejeudi === null){
-                $timetable_id = $em->getRepository('CoyoteSiteBundle:TimeTable')->find($timetable_ids[3]->getId());
-                $schedulejeudi = $em->getRepository('CoyoteSiteBundle:Schedule')->saveSchedulefm($user, $timetable_id,
-                    $deplacementjeudi, $data['absencejeudi'], $data['absencedayjeudi'], $data['absencetimejeudi'],
-                    $data['commentairejeudi'], $data['jourjeudi']);
-            }
-            if($schedulevendredi === null){
-                $timetable_id = $em->getRepository('CoyoteSiteBundle:TimeTable')->find($timetable_ids[4]->getId());
-                $schedulevendredi = $em->getRepository('CoyoteSiteBundle:Schedule')->saveSchedulefm($user,
-                    $timetable_id, $deplacementvendredi, $data['absencevendredi'], $data['absencedayvendredi'],
-                    $data['absencetimevendredi'], $data['commentairevendredi'], $data['jourvendredi']);
-            }
-            if($schedulesamedi === null){
-                $timetable_id = $em->getRepository('CoyoteSiteBundle:TimeTable')->find($timetable_ids[5]->getId());
-                $schedulesamedi = $em->getRepository('CoyoteSiteBundle:Schedule')->saveSchedulefm($user, $timetable_id,
-                 $deplacementsamedi, $data['absencesamedi'], $data['absencedaysamedi'], $data['absencetimesamedi'],
-                 $data['commentairesamedi'], $data['joursamedi']);
-            }
-            if($scheduledimanche === null){
-                $timetable_id = $em->getRepository('CoyoteSiteBundle:TimeTable')->find($timetable_ids[6]->getId());
-                $scheduledimanche = $em->getRepository('CoyoteSiteBundle:Schedule')->saveSchedulefm($user,
-                    $timetable_id, $deplacementdimanche, $data['absencedimanche'], $data['absencedaydimanche'],
-                    $data['absencetimedimanche'], $data['commentairedimanche'], $data['jourdimanche']);
-            }
-            else{
-                $schedulelundi = $em->getRepository('CoyoteSiteBundle:Schedule')->updateSchedulefm($schedulelundi,
-                    $deplacementlundi, $data['absencelundi'], $data['absencedaylundi'], $data['absencetimelundi'],
-                    $data['commentairelundi'], floatval($data['jourlundi']));
-                $schedulemardi = $em->getRepository('CoyoteSiteBundle:Schedule')->updateSchedulefm($schedulemardi,
-                    $deplacementmardi, $data['absencemardi'], $data['absencedaymardi'], $data['absencetimemardi'],
-                    $data['commentairemardi'], floatval($data['jourmardi']));
-                $schedulemercredi = $em->getRepository('CoyoteSiteBundle:Schedule')->updateSchedulefm($schedulemercredi,
-                    $deplacementmercredi, $data['absencemercredi'], $data['absencedaymercredi'],
-                    $data['absencetimemercredi'], $data['commentairemercredi'], floatval($data['jourmercredi']));
-                $schedulejeudi = $em->getRepository('CoyoteSiteBundle:Schedule')->updateSchedulefm($schedulejeudi,
-                    $deplacementjeudi, $data['absencejeudi'], $data['absencedayjeudi'], $data['absencetimejeudi'],
-                    $data['commentairejeudi'], floatval($data['jourjeudi']));
-                $schedulevendredi = $em->getRepository('CoyoteSiteBundle:Schedule')->updateSchedulefm($schedulevendredi,
-                    $deplacementvendredi, $data['absencevendredi'], $data['absencedayvendredi'],
-                    $data['absencetimevendredi'], $data['commentairevendredi'], floatval($data['jourvendredi']));
-                $schedulesamedi = $em->getRepository('CoyoteSiteBundle:Schedule')->updateSchedulefm($schedulesamedi,
-                    $deplacementsamedi, $data['absencesamedi'], $data['absencedaysamedi'], $data['absencetimesamedi'],
-                    $data['commentairesamedi'], floatval($data['joursamedi']));
-                $scheduledimanche = $em->getRepository('CoyoteSiteBundle:Schedule')->updateSchedulefm($scheduledimanche,
-                    $deplacementdimanche, $data['absencedimanche'], $data['absencedaydimanche'],
-                    $data['absencetimedimanche'], $data['commentairedimanche'], floatval($data['jourdimanche']));
-            }
 
-            $em->persist($schedulelundi);
-            $em->persist($schedulemardi);
-            $em->persist($schedulemercredi);
-            $em->persist($schedulejeudi);
-            $em->persist($schedulevendredi);
-            $em->persist($schedulesamedi);
-            $em->persist($scheduledimanche);
+            $j = 0;
+            $list_id = "";
+
+            for ($i=1;$i<8;$i++)
+            {
+                if(empty($schedule[$i]))
+                {
+                    $timetable_id = $em->getRepository('CoyoteSiteBundle:TimeTable')->findOneById($timetable_ids[($i-1)]->getId());
+                    $schedule[$i] = $em->getRepository('CoyoteSiteBundle:Schedule')->saveSchedulefm(
+                        $user, $timetable_id, $deplacement[$i], $data['absence'.$i], $data['absenceday'.$i], $data['absencetime'.$i],
+                        $data['commentaire'.$i], $data['jour'.$i]);
+                }
+                else
+                {
+                    $schedule[$i] = $em->getRepository('CoyoteSiteBundle:Schedule')->updateSchedulefm(
+                    $schedule[$i], $deplacement[$i], $data['absence'.$i], $data['absenceday'.$i], $data['absencetime'.$i],
+                    $data['commentaire'.$i], floatval($data['jour'.$i]));
+                }
+                if($schedule[$i] != null)
+                {
+                    $em->persist($schedule[$i]);
+                    $list_id .= $i.';';
+                }
+            }
             $em->flush();
 
-            $schedulelundi_id = $schedulelundi->getId();
-            $schedulemardi_id = $schedulemardi->getId();
-            $schedulemercredi_id = $schedulemercredi->getId();
-            $schedulejeudi_id = $schedulejeudi->getId();
-            $schedulevendredi_id = $schedulevendredi->getId();
-            $schedulesamedi_id = $schedulesamedi->getId();
-            $scheduledimanche_id = $scheduledimanche->getId();
+            $tab_id = explode(";", $list_id);
+            $index = 0;
 
-            if(empty($schedulelundi_id) && empty($schedulemardi_id) && empty($schedulemercredi_id)
-                && empty($schedulejeudi_id) && empty($schedulevendredi_id) && empty($schedulesamedi_id)
-                && empty($scheduledimanche_id)){
-                $message = 'schedule.flash.no_save';
-            }
-            else{
-                $message = 'schedule.flash.save';
+            for($i=0;$i<count($tab_id)-1;$i++)
+            {
+                $index = $tab_id[$i];
+                if( $schedule[$index]->getId() != "")
+                    $message = 'schedule.flash.save';
+                else
+                    $message = 'schedule.flash.no_save';
             }
             $this->get('session')->getFlashBag()->set('save_schedule', $message);
             return $this->redirect($this->generateUrl('schedule_index'));
@@ -863,5 +796,10 @@ class ScheduleController extends Controller
         $overtime = $em->getRepository('CoyoteSiteBundle:Schedule')->calculOvertime($working_day, $sum_working_time,
             $count_absence);
         return $this->render('CoyoteSiteBundle:Schedule:showovertime.html.twig', array('overtime' => $overtime));
+    }
+
+    public function putAbsenceDay()
+    {
+
     }
 }

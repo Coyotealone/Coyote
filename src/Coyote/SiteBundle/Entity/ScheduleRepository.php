@@ -228,6 +228,15 @@ class ScheduleRepository extends EntityRepository
         $time_absenceday, $time_absencetime, $time_comment)
     {
         $timetable = new timetable();
+        if(empty($time_start))
+            $time_start = '0:00';
+
+        if(empty($time_end))
+            $time_end = '0:00';
+
+        if(empty($time_break))
+            $time_break = '0:00';
+        $schedule->setBreak($time_break);
         $schedule->setStart($time_start);
         $schedule->setEnd($time_end);
         $schedule->setBreak($time_break);
@@ -264,6 +273,9 @@ class ScheduleRepository extends EntityRepository
     public function saveSchedulefm($user, $timetable_id, $time_travel, $time_absence, $time_absenceday,
         $time_absencetime, $time_comment, $day)
     {
+        if(empty($day) && empty($time_travel) && empty($time_comment)
+            && ($time_absence == "Aucune"))
+            return null;
         $schedule = new schedule();
         $schedule->setUser($user);
         $schedule->setTimetable($timetable_id);
