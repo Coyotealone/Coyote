@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "5bc8fa6364ff4e396c89cb410f9fd455",
+    "hash": "9890bb17150af060316d3fb9faf7c041",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1598,16 +1598,16 @@
         },
         {
             "name": "sonata-project/doctrine-orm-admin-bundle",
-            "version": "2.3.0",
+            "version": "2.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataDoctrineORMAdminBundle.git",
-                "reference": "1ab6b728ef03d6565bdde6b0c2b65a9e7a2659b9"
+                "reference": "7230b4f5388319bb21dfff7903cda07dfa4e9fba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataDoctrineORMAdminBundle/zipball/1ab6b728ef03d6565bdde6b0c2b65a9e7a2659b9",
-                "reference": "1ab6b728ef03d6565bdde6b0c2b65a9e7a2659b9",
+                "url": "https://api.github.com/repos/sonata-project/SonataDoctrineORMAdminBundle/zipball/7230b4f5388319bb21dfff7903cda07dfa4e9fba",
+                "reference": "7230b4f5388319bb21dfff7903cda07dfa4e9fba",
                 "shasum": ""
             },
             "require": {
@@ -1664,7 +1664,7 @@
                 "generator",
                 "sonata"
             ],
-            "time": "2014-09-01 20:21:38"
+            "time": "2015-02-14 15:52:30"
         },
         {
             "name": "sonata-project/exporter",
@@ -1733,12 +1733,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataTimelineBundle.git",
-                "reference": "2765d6d7a68428d7149fa5de9e533d1557912add"
+                "reference": "0d7e8946625229ba9aa7620e53621496d7b53163"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataTimelineBundle/zipball/2765d6d7a68428d7149fa5de9e533d1557912add",
-                "reference": "2765d6d7a68428d7149fa5de9e533d1557912add",
+                "url": "https://api.github.com/repos/sonata-project/SonataTimelineBundle/zipball/0d7e8946625229ba9aa7620e53621496d7b53163",
+                "reference": "0d7e8946625229ba9aa7620e53621496d7b53163",
                 "shasum": ""
             },
             "require": {
@@ -1779,7 +1779,7 @@
                 "time",
                 "wall"
             ],
-            "time": "2014-08-31 16:30:12"
+            "time": "2015-02-17 10:06:42"
         },
         {
             "name": "stephpy/timeline",
@@ -1843,16 +1843,16 @@
         },
         {
             "name": "stephpy/timeline-bundle",
-            "version": "2.1.0",
+            "version": "2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/stephpy/timeline-bundle.git",
-                "reference": "0b73f422fa9f8a3cc9f2fe2246cda8e122e7ddca"
+                "reference": "894880db345623ce733e656fade9a872665866ff"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/stephpy/timeline-bundle/zipball/0b73f422fa9f8a3cc9f2fe2246cda8e122e7ddca",
-                "reference": "0b73f422fa9f8a3cc9f2fe2246cda8e122e7ddca",
+                "url": "https://api.github.com/repos/stephpy/timeline-bundle/zipball/894880db345623ce733e656fade9a872665866ff",
+                "reference": "894880db345623ce733e656fade9a872665866ff",
                 "shasum": ""
             },
             "require": {
@@ -1876,7 +1876,7 @@
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.1.x-dev"
+                    "dev-master": "2.2.x-dev"
                 }
             },
             "autoload": {
@@ -1902,7 +1902,7 @@
                 "symfony",
                 "timeline"
             ],
-            "time": "2014-12-04 12:51:15"
+            "time": "2015-02-18 14:48:37"
         },
         {
             "name": "swiftmailer/swiftmailer",
