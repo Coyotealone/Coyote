@@ -1,0 +1,72 @@
+services:
+    coyote_site.admin.business:
+        class: Coyote\SiteBundle\Admin\BusinessAdmin
+        arguments: [~, Coyote\SiteBundle\Entity\Business, CoyoteSiteBundle:BusinessAdmin]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Notes de frais, label: Affaire}
+
+    coyote_site.admin.car:
+        class: Coyote\SiteBundle\Admin\CarAdmin
+        arguments: [~, Coyote\SiteBundle\Entity\Car, CoyoteSiteBundle:CarAdmin]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Notes de frais, label: Voitures}
+
+    coyote_site.admin.country:
+        class: Coyote\SiteBundle\Admin\CountryAdmin
+        arguments: [~, Coyote\SiteBundle\Entity\Country, CoyoteSiteBundle:CountryAdmin]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Divers, label: Pays}
+
+    coyote_site.admin.currency:
+        class: Coyote\SiteBundle\Admin\CurrencyAdmin
+        arguments: [~, Coyote\SiteBundle\Entity\Currency, CoyoteSiteBundle:CurrencyAdmin]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Divers, label: Monnaie}
+
+    coyote_site.admin.expense:
+        class: Coyote\SiteBundle\Admin\ExpenseAdmin
+        arguments: [~, Coyote\SiteBundle\Entity\Expense, CoyoteSiteBundle:ExpenseAdmin]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Notes de frais, label: Notes de frais}
+
+    coyote_site.admin.fee:
+        class: Coyote\SiteBundle\Admin\FeeAdmin
+        arguments: [~, Coyote\SiteBundle\Entity\Fee, CoyoteSiteBundle:FeeAdmin]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Notes de frais, label: Articles}
+
+    coyote_site.admin.quote:
+        class: Coyote\SiteBundle\Admin\QuoteAdmin
+        arguments: [~, Coyote\SiteBundle\Entity\Quote, CoyoteSiteBundle:QuoteAdmin]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Citations, label: Citations}
+
+    coyote_site.admin.schedule:
+        class: Coyote\SiteBundle\Admin\ScheduleAdmin
+        arguments: [~, Coyote\SiteBundle\Entity\Schedule, CoyoteSiteBundle:ScheduleAdmin]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Temps de présence, label: Présence}
+
+    coyote_site.admin.site:
+        class: Coyote\SiteBundle\Admin\SiteAdmin
+        arguments: [~, Coyote\SiteBundle\Entity\Site, CoyoteSiteBundle:SiteAdmin]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Notes de frais, label: Site}
+
+    coyote_site.admin.timetable:
+        class: Coyote\SiteBundle\Admin\TimetableAdmin
+        arguments: [~, Coyote\SiteBundle\Entity\Timetable, CoyoteSiteBundle:TimetableAdmin]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Temps de présence, label: Calendrier}
+
+    coyote_site.admin.user:
+        class: Coyote\SiteBundle\Admin\UserAdmin
+        arguments: [~, Coyote\SiteBundle\Entity\User, CoyoteSiteBundle:UserAdmin]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Utilisateur, label: Comptes utilisateurs }
+
+    coyote_site.admin.user_fees:
+        class: Coyote\SiteBundle\Admin\UserFeesAdmin
+        arguments: [~, Coyote\SiteBundle\Entity\UserFees, CoyoteSiteBundle:UserFeesAdmin]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Utilisateur, label: Comptes commerciaux}
