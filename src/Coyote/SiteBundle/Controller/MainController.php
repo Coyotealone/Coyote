@@ -62,8 +62,9 @@ class MainController extends Controller
             $date = (new \DateTime($date));
             /** set week */
             $session->set('week', $date->format('W'));
+            /** set year */
+            $session->set('year', $date->format('Y'));
             $date = $em->getRepository('CoyoteSiteBundle:Timetable')->findOneBy(array('date' => $date));
-            
             /** set period */
             $session->set('period', $date->getPeriod());
             /** set username */

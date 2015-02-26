@@ -38,13 +38,9 @@ schedule_indexprint:
     pattern:    /indexprint
     defaults:   { _controller: "CoyoteSiteBundle:Schedule:indexprint"}
 
-schedule_new:
-    pattern:    /schedulecreate
-    defaults:   { _controller: "CoyoteSiteBundle:Schedule:new"}
-
-schedule_edit:
-    pattern:    /scheduleedit
-    defaults:   { _controller: "CoyoteSiteBundle:Schedule:edit"}
+schedule_post:
+    pattern:    /schedule
+    defaults:   { _controller: "CoyoteSiteBundle:Schedule:postSchedule"}
 
 schedule_indexprintyear:
     pattern:    /indexprintyear

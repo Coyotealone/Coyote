@@ -304,39 +304,39 @@ $(document).ready(function()
     visibilityAbsenceTime(absdimanche, 7, absdaydimanche);
 
 	if(deplundi == 0 | deplundi == "")
-		document.getElementById('deplacement0').checked = false;
+		document.getElementById('deplacement1').checked = false;
 	if(deplundi == 1)
-		document.getElementById('deplacement0').checked = true;
+		document.getElementById('deplacement1').checked = true;
 
     if(depmardi == 0 | depmardi == "")
-    	document.getElementById('deplacement1').checked = false;
-    if(depmardi == 1)
-    	document.getElementById('deplacement1').checked = true;
-
-    if(depmercredi == 0 | depmercredi == "")
     	document.getElementById('deplacement2').checked = false;
-    if(depmercredi == 1)
+    if(depmardi == 1)
     	document.getElementById('deplacement2').checked = true;
 
-    if(depjeudi == 0 | depjeudi == "")
+    if(depmercredi == 0 | depmercredi == "")
     	document.getElementById('deplacement3').checked = false;
-    if(depjeudi == 1)
+    if(depmercredi == 1)
     	document.getElementById('deplacement3').checked = true;
 
-    if(depvendredi == 0 | depvendredi == "")
+    if(depjeudi == 0 | depjeudi == "")
     	document.getElementById('deplacement4').checked = false;
-    if(depvendredi == 1)
+    if(depjeudi == 1)
     	document.getElementById('deplacement4').checked = true;
 
-    if(depsamedi == 0 | depsamedi == "")
+    if(depvendredi == 0 | depvendredi == "")
     	document.getElementById('deplacement5').checked = false;
-    if(depsamedi == 1)
+    if(depvendredi == 1)
     	document.getElementById('deplacement5').checked = true;
 
-    if(depdimanche == 0 | depdimanche == "")
+    if(depsamedi == 0 | depsamedi == "")
     	document.getElementById('deplacement6').checked = false;
-    if(depdimanche == 1)
+    if(depsamedi == 1)
     	document.getElementById('deplacement6').checked = true;
+
+    if(depdimanche == 0 | depdimanche == "")
+    	document.getElementById('deplacement7').checked = false;
+    if(depdimanche == 1)
+    	document.getElementById('deplacement7').checked = true;
 
     var res = timeweek(workingtimelundi, workingtimemardi, workingtimemercredi, workingtimejeudi, workingtimevendredi, workingtimesamedi, workingtimedimanche);
     if(document.getElementById('timeweek') != null)
@@ -345,13 +345,35 @@ $(document).ready(function()
 
 function timeweek(timemonday, timetuesday, timewednesday, timethursday, timefriday, timesunday, timesaturday)
 {
-    var monday = new Number(timeinminutes(timemonday));
-    var tuesday = new Number(timeinminutes(timetuesday));
-    var wednesday = new Number(timeinminutes(timewednesday));
-    var thursday = new Number(timeinminutes(timethursday));
-    var friday = new Number(timeinminutes(timefriday));
-    var sunday = new Number(timeinminutes(timesunday));
-    var saturday = new Number(timeinminutes(timesaturday));
+    if(timemonday != null)
+        var monday = new Number(timeinminutes(timemonday));
+    if (timemonday == null)
+        var monday = new Number(0);
+    if (timetuesday != null)
+        var tuesday = new Number(timeinminutes(timetuesday));
+    if (timetuesday == null)
+        var tuesday = new Number(0);
+    if (timewednesday != null)
+        var wednesday = new Number(timeinminutes(timewednesday));
+    if (timewednesday == null)
+        var wednesday = new Number(0);
+    if (timethursday != null)
+        var thursday = new Number(timeinminutes(timethursday));
+    if (timethursday == null)
+        var thursday = new Number(0);
+    if (timefriday != null)
+        var friday = new Number(timeinminutes(timefriday));
+    if (timefriday == null)
+        var friday = new Number(0);
+    if (timesunday != null)
+        var sunday = new Number(timeinminutes(timesunday));
+    if (timesunday == null)
+        var sunday = new Number(0);
+    if (timesaturday != null)
+        var saturday = new Number(timeinminutes(timesaturday));
+    if (timesaturday == null)
+        var saturday = new Number(0);
+
 
     var timetotal = new Number(monday+tuesday+wednesday+thursday+friday+sunday+saturday);
     return timeinhours(timetotal);

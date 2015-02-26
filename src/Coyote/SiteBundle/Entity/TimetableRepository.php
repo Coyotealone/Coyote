@@ -86,17 +86,18 @@ class TimetableRepository extends EntityRepository
 
         return count($timetable);
     }
-    
-    public function searchIdDate()
+
+    public function searchIdDate($date)
     {
-        $date = new \DateTime('NOW');
+        //$date = new \DateTime('NOW');
+        $date = new \DateTime($date);
         $result = $date->format('N');
         if ($result > 1)
         {
             $result--;
             $date->modify("-".$result." day");
         }
-        
+
         $qb = $this->_em->createQueryBuilder();
         $qb->select('t')
             ->from('CoyoteSiteBundle:Timetable', 't')
@@ -106,5 +107,21 @@ class TimetableRepository extends EntityRepository
                              ->setMaxResults(7)
                              ->getResult();
         return $data_timetable;
+    }
+
+    public function createDateString($datestring)
+    {
+        $dateexplode = explode('/', $datestring);
+        $datecompose = date($dateexplode[2]).'-'.date($dateexplode[1]).'-'.date($dateexplode[0]);
+        $date = (new \DateTime($datecompose));
+        return $date;
+    }
+
+    public function createDateYearWeek($year, $week)
+    {
+        if(strlen($week) == 1)
+            $week = "0".$week;
+        $date = date( "Y-m-d", strtotime($year."W".$week."1") );
+        return $date;
     }
 }

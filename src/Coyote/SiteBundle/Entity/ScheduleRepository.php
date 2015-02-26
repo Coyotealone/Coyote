@@ -170,6 +170,9 @@ class ScheduleRepository extends EntityRepository
     public function saveSchedule($user, $timetable_id, $time_start, $time_end, $time_break, $time_travel, $time_absence,
         $time_absenceday, $time_absencetime, $time_comment)
     {
+        if(empty($time_start) && empty($time_end) && empty($time_break) && empty($time_travel) && empty($time_comment)
+            && ($time_absence == "Aucune"))
+            return null;
         $schedule = new Schedule();
 
         $schedule->setUser($user);
