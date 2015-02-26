@@ -169,6 +169,7 @@
     <form role="form" action="{{ path('schedule_savetimefm') }}" method='post'>
         <div id="contenu">
             <p id="titreconfig">
+                <button class='btnsave' type="submit" value="Enregistrer" id="enregistrer">{{ 'schedule.submit.save'|trans }}</button>
                  <b>{{'schedule.title.new'|trans}} - </b>
                 {{'schedule.message_week'|trans({'%no_week%': app.session.get('week'), '%year%': app.session.get('year')})}}
             </p>
@@ -177,10 +178,7 @@
                     <thead>
         		    	<tr>
             				<td>{{'schedule.dayofweek'|trans}}</td>
-            				<td>{{'schedule.start'|trans}}</td>
-            				<td>{{'schedule.end'|trans}}</td>
-            				<td>{{'schedule.break'|trans}}</td>
-            				<td>{{'schedule.working_time'|trans}}</td>
+            				<td>{{'schedule.working_hours'|trans}}</td>
             				<td>{{'schedule.travel'|trans}}</td>
             				<td>{{'schedule.absence'|trans}}</td>
             				<td>{{'schedule.absence_time'|trans}}</td>
@@ -194,38 +192,16 @@
             				<td class='jour'>{{ "schedule#{loop.index}"|trans }} :
             				    <input class='input' type='text' readonly name="date{{loop.index}}" id="date{{loop.index}}" value={{ date.date|date("d/m/Y") }} />
             				</td>
-            				<td>
-
-            				    {% if attribute(time,loop.index0) is not empty and attribute(time,loop.index0).start %}
-            				        <input class='input' type='time' name="debut{{loop.index}}" id="debut{{loop.index}}" maxlength='5'
-            				        data-value={{ attribute(time,loop.index0).start }} value={{ attribute(time,loop.index0).start }} />
-            				    {% else %}
-            				        <input class='input' type='time' name="debut{{loop.index}}" id="debut{{loop.index}}" maxlength='5'>
-            				    {% endif %}
-            				</td>
-            				<td>
-            				    {% if attribute(time,loop.index0) is not empty and attribute(time,loop.index0).end %}
-            				        <input class='input' type='time' name='fin{{loop.index}}' id='fin{{loop.index}}' maxlength='5'
-            				        data-value={{ attribute(time,loop.index0).end }} value={{ attribute(time,loop.index0).end }} />
-            				    {% else %}
-            				        <input class='input' type='time' name="fin{{loop.index}}" id="fin{{loop.index}}" maxlength='5' />
-            				    {% endif %}
-            				</td>
-            				<td>
-            				    {% if attribute(time,loop.index0) is not empty and attribute(time,loop.index0).break %}
-            				        <input class='input' type='time' name='pause{{loop.index}}' id='pause{{loop.index}}' maxlength='5'
-            				        data-value={{ attribute(time,loop.index0).break }} value={{ attribute(time,loop.index0).break }} />
-            				    {% else %}
-            				        <input class='input' type='time' name="pause{{loop.index}}" id="pause{{loop.index}}" maxlength='5' />
-            				    {% endif %}
-            				</td>
-            				<td>
-            				    {% if attribute(time,loop.index0) is not empty and attribute(time,loop.index0).workingtime %}
-            				        <input class='input' type='text' name='tps{{loop.index}}' id='tps{{loop.index}}' disabled
-            				        data-value={{ attribute(time,loop.index0).workingtime }} value={{ attribute(time,loop.index0).workingtime }} />
-            				    {% else %}
-            				        <input class='input' type='text' name="tps{{loop.index}}" id="tps{{loop.index}}" readonly />
-            				    {% endif %}
+            				<td class='jour'>
+            				    {% if attribute(time,loop.index0) is not empty and attribute(time,loop.index0).workinghours %}
+            					    <select name='jour{{loop.index}}' id='jour{{loop.index}}' data-value={{ attribute(time,loop.index0).workinghours }} >
+            					{% else %}
+            					    <select name='jour{{loop.index}}' id='jour{{loop.index}}'>
+            					{% endif %}
+            						<option value='0'>0</option>
+            						<option value='0.5'>1/2</option>
+            						<option value='1'>1</option>
+            					</select>
             				</td>
             				<td class='deplacement'>
             				    {% if attribute(time,loop.index0) is not empty and attribute(time,loop.index0).travel %}
@@ -277,6 +253,8 @@
                     </tbody>
                 </table>
             </div>
+            <a id='work_less' class='btnpage' href="{{ path('schedule_workless')}}" >{{'schedule.submit.previous_week'|trans}}</a>
+            <a id='work_more' class='btnpage' href="{{ path('schedule_workmore')}}" >{{'schedule.submit.next_week'|trans}}</a>
         </form>
     {% endif %}
 
