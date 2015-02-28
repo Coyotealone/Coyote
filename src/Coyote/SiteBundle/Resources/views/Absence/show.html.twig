@@ -1,0 +1,33 @@
+<p id="titreconfig">{{'absence.title.show'|trans}} </p>
+
+{% if entity %}
+<form role="form" action="{{ path('absence') }}" method='post'>
+<div class='table-responsive'>
+    <table class='table' id='tab_expense'>
+    	<tr>
+    		<th>{{ 'absence.travel'|trans }}</th>
+    		<th>{{ 'absence.absence_name'|trans }}</th>
+    		<th>{{ 'absence.absence_duration'|trans }}</th>
+    		<th>{{ 'absence.comment'|trans }}</th>
+    		<th>{{ 'absence.timetable'|trans }}</th>
+    		<th>{{ 'absence.edit' | trans }}</th>
+    	</tr>
+    	<tr>
+    	    <td>{{ entity.travel }}</td>
+		    <td>{{ entity.absencename }}</td>
+		    <td>{{ entity.absenceduration }}</td>
+		    <td>{{ entity.comment }}</td>
+		    <td>{#{{ entity.timetable }}#}</td>
+            <td>
+    		    <a href="{{ path('absence_edit') }}">{{ 'entity.edit' | trans }}</a>
+            </td>
+    	</tr>
+    </table>
+</div><br>
+{% else %}
+<form role="form" action="{{ path('absence_create') }}" method='post'>
+<div class='table-responsive'>
+    <p>{{ 'absence.empty' | trans }}</p>
+    <p><a href="{{ path('absence_new') }}">{{ 'absence.create' | trans }}</a></p>
+</div>
+{% endif %}

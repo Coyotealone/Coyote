@@ -97,11 +97,6 @@ class User extends BaseUser
     private $userfeess;
 
     /**
-     * @ORM\OneToOne(targetEntity="Holiday", cascade={"persist"})
-     */
-    private $holidays;
-
-    /**
      * Constructor
      */
     public function __construct()
@@ -439,26 +434,4 @@ class User extends BaseUser
         return $this->phone;
     }
 
-    /**
-     * Set holidays
-     *
-     * @param \Coyote\SiteBundle\Entity\Holiday $holidays
-     * @return User
-     */
-    public function setHolidays(\Coyote\SiteBundle\Entity\Holiday $holidays = null)
-    {
-        $this->holidays = $holidays;
-
-        return $this;
     }
-
-    /**
-     * Get holidays
-     *
-     * @return \Coyote\SiteBundle\Entity\Holiday 
-     */
-    public function getHolidays()
-    {
-        return $this->holidays;
-    }
-}

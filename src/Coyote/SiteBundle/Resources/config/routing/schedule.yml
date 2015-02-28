@@ -57,3 +57,7 @@ schedule_indexexportprintyear:
 schedule_exportprintyear:
     pattern:    /exportscheduleyear
     defaults:   { _controller: "CoyoteSiteBundle:Schedule:exportprintyear"}
+
+#schedule_absenceday:
+#    pattern:    /absenceday
+#    defaults:   { _controller: "CoyoteSiteBundle:Schedule:absenceday"}

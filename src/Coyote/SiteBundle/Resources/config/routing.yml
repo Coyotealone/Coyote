@@ -1,3 +1,11 @@
+CoyoteSiteBundle_absence:
+    resource: "@CoyoteSiteBundle/Resources/config/routing/absence.yml"
+    prefix:   /{_locale}/absence
+
+CoyoteSiteBundle_holiday:
+    resource: "@CoyoteSiteBundle/Resources/config/routing/holiday.yml"
+    prefix:   /{_locale}/profile/holiday
+
 CoyoteSiteBundle_accueil:
     path:     /
     defaults: { _controller: CoyoteSiteBundle:Main:redirect }

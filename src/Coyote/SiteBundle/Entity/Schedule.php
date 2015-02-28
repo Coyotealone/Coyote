@@ -482,7 +482,7 @@ class Schedule
     /**
      * Get locked
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getLocked()
     {
@@ -505,7 +505,7 @@ class Schedule
     /**
      * Get locked_by
      *
-     * @return string 
+     * @return string
      */
     public function getLockedBy()
     {
@@ -528,7 +528,7 @@ class Schedule
     /**
      * Get validated_by
      *
-     * @return string 
+     * @return string
      */
     public function getValidatedBy()
     {
@@ -551,7 +551,7 @@ class Schedule
     /**
      * Get locked_at
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getLockedAt()
     {

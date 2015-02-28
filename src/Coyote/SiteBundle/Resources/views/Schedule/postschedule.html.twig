@@ -62,7 +62,6 @@
             				    <input class='input' type='text' readonly name="date{{loop.index}}" id="date{{loop.index}}" value={{ date.date|date("d/m/Y") }} />
             				</td>
             				<td>
-
             				    {% if attribute(time,loop.index0) is not empty and attribute(time,loop.index0).start %}
             				        <input class='input' type='time' name="debut{{loop.index}}" id="debut{{loop.index}}" maxlength='5'
             				        data-value={{ attribute(time,loop.index0).start }} value={{ attribute(time,loop.index0).start }} />

@@ -1,0 +1,33 @@
+{% extends 'CoyoteSiteBundle:Base:base.html.twig' %}
+
+{% block userinfo %}
+    {{ 'userinfo.welcome'|trans }} {{ app.session.get('username') }} |
+    <a href="{{ path('fos_user_security_logout') }}">
+        {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+    </a>
+{% endblock %}
+
+{% block link %}
+
+    <!--[if lt IE 9]>
+        {{ include('CoyoteSiteBundle:Base:navigation_ie.html.twig') }}
+    <![endif]-->
+    <!--[if !IE]><!-->
+        {{ include('CoyoteSiteBundle:Base:navigation.html.twig') }}
+	<!--<![endif]-->
+
+{% endblock %}
+
+{% block stylesheets %}
+   {{ include('CoyoteSiteBundle:Base:css.html.twig') }}
+{% endblock %}
+
+{% block content %}
+    <div class="jumbotron">
+        <p class="lead">{{'schedule.title.index'|trans}}</p>
+        <p>
+        	<a href={{ path('schedule_user')}} class="btntime">{{'schedule.title.absenceday'|trans}}</a>
+        	<a href={{ path('schedule_framework')}} class="btntime">{{'schedule.title.absenceweek'|trans}}</a>
+	  	</p>
+    </div>
+{% endblock %}

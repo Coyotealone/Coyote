@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class ScheduleType extends AbstractType
+class AbsenceType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -15,22 +15,14 @@ class ScheduleType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('start')
-            ->add('end')
-            ->add('break')
-            ->add('working_time')
-            ->add('working_hours')
             ->add('travel')
             ->add('absence_name')
             ->add('absence_duration')
             ->add('comment')
-            ->add('created_at')
-            ->add('updated_at')
-            ->add('user')
             ->add('timetable')
         ;
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */

@@ -45,6 +45,12 @@ class Holiday
     private $hs;
 
     /**
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false, unique=true)
+     */
+    private $user;
+
+    /**
      * Get id
      *
      * @return integer
@@ -144,5 +150,28 @@ class Holiday
     public function getHs()
     {
         return $this->hs;
+    }
+
+    /**
+     * Set user
+     *
+     * @param string $user
+     * @return Holiday
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return string
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

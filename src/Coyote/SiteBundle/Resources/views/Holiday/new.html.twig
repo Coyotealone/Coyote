@@ -1,0 +1,26 @@
+<p id="titreconfig">{{'holiday.title.create'|trans}} </p>
+
+{{ form_start(form) }}
+<div class='table-responsive'>
+    <table class='table' id='tab_expense'>
+    	<tr>
+    		<th>{{ 'holiday.ca'|trans }}</th>
+    		<th>{{ 'holiday.cp'|trans }}</th>
+    		<th>{{ 'holiday.rtt'|trans }}</th>
+    		<th>{{ 'holiday.hs'|trans }}</th>
+    	</tr>
+    	<td>
+    	    {{ form_widget(form.ca) }}
+		</td>
+		<td>
+		    {{ form_widget(form.cp) }}
+		</td>
+		<td>
+		    {{ form_widget(form.rtt) }}
+		</td>
+		<td>
+		    {{ form_widget(form.hs) }}
+		</td>
+    </table>
+</div><br>
+{{ form_end(form) }}

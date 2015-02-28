@@ -798,8 +798,4 @@ class ScheduleController extends Controller
         return $this->render('CoyoteSiteBundle:Schedule:showovertime.html.twig', array('overtime' => $overtime));
     }
 
-    public function putAbsenceDay()
-    {
-
-    }
 }
