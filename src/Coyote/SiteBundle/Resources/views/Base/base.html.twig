@@ -2,49 +2,55 @@
 <html>
     <head>
         <title>
-            {% block title %}
-                {{'base.title'|trans}}
-            {% endblock %}
+            {{'base.title'|trans}}
         </title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        {% block stylesheets %}
+        <!--[if lt IE 9]>
+            <script src="{{ asset('bundles/coyotesite/js/html5.js') }}"></script>
             <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/styles.css') }}" type="text/css" media="all" />
             <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/bootstrap.css') }}" type="text/css" media="all" />
             <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/justified-nav.css') }}" type="text/css" media="all" />
             <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/signin.css') }}" type="text/css" media="all" />
-            <!--[if lt IE 9]>
-              <script src="{{ asset('bundles/coyotesite/js/html5shiv.min.js') }}"></script>
-              <script src="{{ asset('bundles/coyotesite/js/respond.min.js') }}"></script>
-            <![endif]-->
+        <![endif]-->
+        <!--[if IE 9]>
+          <script src="{{ asset('bundles/coyotesite/js/html5shiv.min.js') }}"></script>
+          <script src="{{ asset('bundles/coyotesite/js/respond.min.js') }}"></script>
+        <![endif]-->
+        <!--[if !IE]><!-->
+            <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/styles.css') }}" type="text/css" media="all" />
+            <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/bootstrap.css') }}" type="text/css" media="all" />
+            <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/justified-nav.css') }}" type="text/css" media="all" />
+            <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/signin.css') }}" type="text/css" media="all" />
+        <!--<![endif]-->
+        {% block stylesheets %}
         {% endblock %}
-
         {% block javascripts %}
         {% endblock %}
-
         <link rel="shortcut icon" href="{{ asset('bundles/coyotesite/images/pichonicon.ico') }}" />
     </head>
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="{{path('main_index')}}">
+            <img alt="Pichon" src="{{ asset('bundles/coyotesite/images/logo_alpha.png') }}">
+          </a>
+          {% block nav %}
+          {% endblock nav %}
+        </div>
+      </div>
+    </nav>
+
     <div id="page">
         <body>
             <div id="bloc">
                 <header>
-                    <div id="lien">
-                        <a href="{{ path('main_index') }}"><img src="{{ asset('bundles/coyotesite/images/logo1.png') }}" alt="PICHON" id="logo"/></a>
-                    </div>
-                    <nav>
-                        {% block language %}
-                        {% endblock %}
-                        {% block userinfo %}
-                        {% endblock %}
-                    </nav>
-                    </br>
-                        {% block link %}
-                        {% endblock %}
+                    {% block header %}
+                    {% endblock header %}
                 </header>
                 <section>
                     <article>
                         {% block content %}
-                        {% endblock %}
+                        {% endblock content %}
                     </article>
                 </section>
             </div>

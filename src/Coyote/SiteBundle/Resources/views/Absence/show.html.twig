@@ -1,3 +1,18 @@
+{% extends 'CoyoteSiteBundle:Base:base.html.twig' %}
+
+{% block nav %}
+
+    <!--[if lt IE 9]>
+        {{ include('CoyoteSiteBundle:Base:navigation_ie.html.twig') }}
+    <![endif]-->
+    <!--[if !IE]><!-->
+        {{ include('CoyoteSiteBundle:Base:navigation.html.twig') }}
+	<!--<![endif]-->
+
+{% endblock %}
+
+{% block content %}
+
 <p id="titreconfig">{{'absence.title.show'|trans}} </p>
 
 {% if entity %}
@@ -17,9 +32,9 @@
 		    <td>{{ entity.absencename }}</td>
 		    <td>{{ entity.absenceduration }}</td>
 		    <td>{{ entity.comment }}</td>
-		    <td>{#{{ entity.timetable }}#}</td>
+		    <td>{{entity.timetable}}</td>
             <td>
-    		    <a href="{{ path('absence_edit', { 'id': entity.id }) }}">{{ 'entity.edit' | trans }}</a>
+    		    <a href="{{ path('absence_edit', { 'id': entity.id }) }}">{{ 'absence.edit' | trans }}</a>
             </td>
     	</tr>
     </table>
@@ -27,7 +42,9 @@
 {% else %}
 <form role="form" action="{{ path('absence_create') }}" method='post'>
 <div class='table-responsive'>
-    <p>{{ 'absence.empty' | trans }}</p>
+    <p>{{ 'absence.title.empty' | trans }}</p>
     <p><a href="{{ path('absence_new') }}">{{ 'absence.create' | trans }}</a></p>
 </div>
 {% endif %}
+
+{% endblock %}

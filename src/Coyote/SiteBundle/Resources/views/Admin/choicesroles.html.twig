@@ -1,18 +1,5 @@
 {% extends 'CoyoteSiteBundle:Admin:index.html.twig' %}
 
-{% block javascripts %}
-    <!--[if IE]>
-        <script src="{{ asset('bundles/coyotesite/js/jquery-min.js') }}"/></script>
-        <script src="{{ asset('bundles/coyotesite/js/jquery.js') }}"></script>
-
-        <script src="{{ asset('bundles/coyotesite/js/script_timeusers_change.js') }}"/></script>
-    <![endif]-->
-    <!--[if !IE]><!-->
-        <script src="{{ asset('bundles/coyotesite/js/jquery-min.js') }}"/></script>
-        <script src="{{ asset('bundles/coyotesite/js/jquery.js') }}"></script>
-    <!--<![endif]-->
-{% endblock %}
-
 {% block content %}
 
     <form role="form" action="{{ path('admin_updateroles') }}" method='post'>

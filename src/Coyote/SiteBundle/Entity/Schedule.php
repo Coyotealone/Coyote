@@ -441,6 +441,7 @@ class Schedule
     public function __construct()
     {
         $this->timetable = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->locked = 0;
     }
 
     /**

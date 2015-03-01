@@ -34,7 +34,7 @@
     	{% for data in dataschedule %}
         <tr>
             {% if data.holiday == "1" %}
-                <td style="background:#7FC6BC; color:white">{{ data.day|capitalize|trans}}</td>
+                <td style="background:#7FC6BC; color:white">{{ data.date|date("l")|trans}}</td>
                 <td style="background:#7FC6BC; color:white">{{ data.date|date("d/m/Y")}}</td>
                 <td style="background:#7FC6BC; color:white">{{ data.start }}</td>
                 <td style="background:#7FC6BC; color:white">{{ data.end }}</td>
@@ -45,8 +45,8 @@
                 <td style="background:#7FC6BC; color:white">{{ data.absence_name|trans }}</td>
                 <td style="background:#7FC6BC; color:white">{{ data.absence_duration }}</td>
                 <td style="background:#7FC6BC; color:white">{{ data.comment }}</td>
-            {% elseif data.day == "samedi" %}
-                <td style="background:#01B0F0; color:white">{{ data.day|capitalize|trans}}</td>
+            {% elseif data.date|date("l") == "Saturday" %}
+                <td style="background:#01B0F0; color:white">{{ data.date|date("l")|trans}}</td>
                 <td style="background:#01B0F0; color:white">{{ data.date|date("d/m/Y")}}</td>
                 <td style="background:#01B0F0; color:white">{{ data.start }}</td>
                 <td style="background:#01B0F0; color:white">{{ data.end }}</td>
@@ -57,8 +57,8 @@
                 <td style="background:#01B0F0; color:white">{{ data.absence_name|trans }}</td>
                 <td style="background:#01B0F0; color:white">{{ data.absence_duration }}</td>
                 <td style="background:#01B0F0; color:white">{{ data.comment }}</td>
-            {% elseif data.day == "dimanche" %}
-                <td style="background:#01B0F0; color:white">{{ data.day|capitalize|trans}}</td>
+            {% elseif data.date|date("l") == "Sunday" %}
+                <td style="background:#01B0F0; color:white">{{ data.date|date("l")|trans}}</td>
                 <td style="background:#01B0F0; color:white">{{ data.date|date("d/m/Y")}}</td>
                 <td style="background:#01B0F0; color:white">{{ data.start }}</td>
                 <td style="background:#01B0F0; color:white">{{ data.end }}</td>
@@ -71,12 +71,12 @@
                 <td style="background:#01B0F0; color:white">{{ data.comment }}</td>
         </tr>
         <tr>
-                <td style="background:#99CCCC; color:white" colspan = 11>{{"schedule.hours_worked_week"|trans}} : {{timeweek[counter]}}</td>
+                {#<td style="background:#99CCCC; color:white" colspan = 11>{{"schedule.hours_worked_week"|trans}} : {{timeweek[counter]}}</td>#}
                 {% set counter = counter + 1 %}
         </tr>
         <tr>
             {% else %}
-                <td>{{ data.day|capitalize|trans}}</td>
+                <td>{{ data.date|date("l")|trans}}</td>
                 <td>{{ data.date|date("d/m/Y")}}</td>
                 <td>{{ data.start }}</td>
                 <td>{{ data.end }}</td>
@@ -89,7 +89,7 @@
                 <td>{{ data.comment }}</td>
                 {% if loop.last %}
                 <tr>
-                    <td style="background:#99CCCC; color:white" colspan = 11>{{"schedule.hours_worked_week"|trans}} : {{timeweek[counter]}}</td>
+                    {#<td style="background:#99CCCC; color:white" colspan = 11>{{"schedule.hours_worked_week"|trans}} : {{timeweek[counter]}}</td>#}
                 </tr>
                 {% endif %}
             {% endif %}

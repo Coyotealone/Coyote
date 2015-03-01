@@ -1,3 +1,18 @@
+{% extends 'CoyoteSiteBundle:Base:base.html.twig' %}
+
+{% block nav %}
+
+    <!--[if lt IE 9]>
+        {{ include('CoyoteSiteBundle:Base:navigation_ie.html.twig') }}
+    <![endif]-->
+    <!--[if !IE]><!-->
+        {{ include('CoyoteSiteBundle:Base:navigation.html.twig') }}
+	<!--<![endif]-->
+
+{% endblock %}
+
+{% block content %}
+
 <p id="titreconfig">{{'holiday.title.show'|trans}} </p>
 
 {% if holiday %}
@@ -29,3 +44,4 @@
     <p><a href="{{ path('holiday_new') }}">{{ 'holiday.create' | trans }}</a></p>
 </div>
 {% endif %}
+{% endblock %}

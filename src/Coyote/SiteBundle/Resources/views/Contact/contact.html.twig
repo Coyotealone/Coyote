@@ -4,21 +4,6 @@
     {{ include('CoyoteSiteBundle:Base:navigation_login.html.twig') }}
 {% endblock %}
 
-{% block javascripts %}
-    <!--[if IE]>
-        <script src="{{ asset('bundles/coyotesite/js/jquery-min.js') }}"/></script>
-        <script src="{{ asset('bundles/coyotesite/js/jquery.js') }}"></script>
-    <![endif]-->
-    <!--[if !IE]><!-->
-        <script src="{{ asset('bundles/coyotesite/js/jquery-min.js') }}"/></script>
-        <script src="{{ asset('bundles/coyotesite/js/jquery.js') }}"></script>
-    <!--<![endif]-->
-{% endblock %}
-
-{% block stylesheets %}
-   {{ include('CoyoteSiteBundle:Base:css.html.twig') }}
-{% endblock %}
-
 {% block content %}
 
     {% for flashMessage in app.session.flashbag.get('sendmessage') %}

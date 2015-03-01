@@ -8,7 +8,7 @@
     <script src="{{ asset('bundles/coyotesite/js/script_expense.js') }}"/></script>
 {% endblock %}
 
-{% block link %}
+{% block nav %}
     <!--[if lt IE 9]>
         {{ include('CoyoteSiteBundle:Base:navigation_ie.html.twig') }}
     <![endif]-->
@@ -16,19 +16,6 @@
         {{ include('CoyoteSiteBundle:Base:navigation.html.twig') }}
 	<!--<![endif]-->
 {% endblock %}
-
-{% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/styles.css') }}" type="text/css" media="all" />
-    <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/jquery-ui.css') }}" type="text/css" media="all" />
-    <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/bootstrap.css') }}" type="text/css" media="all" />
-    <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/justified-nav.css') }}" type="text/css" media="all" />
-    <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/signin.css') }}" type="text/css" media="all" />
-    <!--[if lt IE 9]>
-      <script src="{{ asset('bundles/coyotesite/js/html5shiv.min.js') }}"></script>
-      <script src="{{ asset('bundles/coyotesite/js/respond.min.js') }}"></script>
-    <![endif]-->
-{% endblock %}
-
 
 {% block content %}
 

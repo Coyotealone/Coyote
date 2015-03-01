@@ -18,6 +18,8 @@ base:
             name: Présence
             overtime: Heures supplémentaires
             indexexportprintyear: "Export de l'année en PDF"
+            indexprintyear: "Impression de l'année en PDF"
+            absence: Gestion des absences
         expense:
             name: Note de frais
             create: Saisie
@@ -29,6 +31,7 @@ base:
             name: Profil
             profile: Information Profil
             changepassword: Changement de mot de passe
+            holiday: Gestion des congés
         schedule_admin:
             name: Export présence
             indexexport: Export données BE
@@ -306,3 +309,17 @@ layout:
 change_password:
     submit: Modifier le mot de passe
     title: Changement de votre mot de passe
+
+absence:
+    travel: Déplacement
+    absence_name: Absence
+    absence_duration: "Durée de l'absence"
+    comment: Commentaire
+    timetable: Date
+    edit: Editer
+    show: Afficher
+    create: Ajouter
+    update: Enregistrer
+    title:
+        show: Liste des absences
+        create: Ajouter une absence

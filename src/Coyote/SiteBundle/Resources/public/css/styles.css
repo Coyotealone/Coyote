@@ -10,7 +10,7 @@ header, footer, section, hgroup, aside, nav, article, figure, figcaption, time, 
 /* Configurateur */
 /* line 7, ../scss/styles.sass */
 #bloc_page {
-  max-width: 1000px;
+  max-width: 1170px;
   margin: auto;
 }
 
@@ -137,7 +137,7 @@ footer {
 footer p {
   text-align: center;
   margin: auto;
-  max-width: 1000px;
+  /*max-width: 1170px;*/
   background-color: #515151;
 }
 

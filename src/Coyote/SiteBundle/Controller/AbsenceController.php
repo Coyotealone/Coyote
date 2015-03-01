@@ -3,6 +3,7 @@
 namespace Coyote\SiteBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Coyote\SiteBundle\Entity\Schedule;
@@ -42,6 +43,12 @@ class AbsenceController extends Controller
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $entity->setUser($this->getUser());
+            $entity->setStart('0:00');
+            $entity->setBreak('0:00');
+            $entity->setEnd('0:00');
+            $entity->setWorkingTime('0:00');
+            $entity->setWorkingHours('0');
+            $entity->setComment("");
             $em->persist($entity);
             $em->flush();
 
@@ -108,6 +115,8 @@ class AbsenceController extends Controller
         }
         //$deleteForm = $this->createDeleteForm($id);
 
+        //return new Response($entity->getTimetable());
+
         return $this->render('CoyoteSiteBundle:Absence:show.html.twig', array(
             'entity'      => $entity,
             //'delete_form' => $deleteForm->createView(),
@@ -152,7 +161,7 @@ class AbsenceController extends Controller
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        //$form->add('submit', 'submit', array('label' => 'Update'));
 
         return $form;
     }

@@ -74,14 +74,14 @@ class ScheduleRepository extends EntityRepository
      * @param mixed $absence
      * @return integer count absence
      */
-    public function findAbsenceYear($pay_period, $user, $absence)
+    public function findAbsenceYear($period, $user, $absence)
     {
         $qb = $this->_em->createQueryBuilder();
         $qb->select('s.absence_duration')
            ->from('CoyoteSiteBundle:Schedule', 's')
            ->innerJoin('CoyoteSiteBundle:Timetable', 't', 'WITH', 't.id = s.timetable')
-           ->where('s.user = :user and t.pay_period = :pay_period and s.absence_name = :absence')
-           ->setParameters(array('user' => $user, 'pay_period' => $pay_period, 'absence' => $absence));
+           ->where('s.user = :user and t.period = :period and s.absence_name = :absence')
+           ->setParameters(array('user' => $user, 'period' => $period, 'absence' => $absence));
         $data_absence_duration = $qb->getQuery()
                                     ->getResult();
 
@@ -338,7 +338,7 @@ class ScheduleRepository extends EntityRepository
     public function dataSchedule($user, $date)
     {
         $qb = $this->_em->createQueryBuilder();
-        $qb->select('t.day, t.date, s.start, s.end, s.break, s.working_time, s.working_hours, s.travel, s.absence_name,
+        $qb->select('t.date, s.start, s.end, s.break, s.working_time, s.working_hours, s.travel, s.absence_name,
             s.absence_duration, s.comment , t.holiday')
            ->from('CoyoteSiteBundle:Timetable', 't')
            ->innerJoin('CoyoteSiteBundle:Schedule', 's', 'WITH', 't.id = s.timetable')
@@ -622,10 +622,10 @@ class ScheduleRepository extends EntityRepository
         $qb->select('t')
            ->from('CoyoteSiteBundle:Timetable', 't')
            ->innerJoin('CoyoteSiteBundle:Schedule', 's', 'WITH', 't.id = s.timetable')
-           ->where('t.holiday = :holiday and t.day != :day1 and t.day != :day2 and s.user = :user and
+           ->where('t.holiday = :holiday and s.user = :user and
                 s.absence_name != :absence1 and s.absence_name != :absence2 and t.date BETWEEN :date and :datefin')
            ->setParameters(array('date' => $date, 'datefin' => $datefin, 'holiday' => '0','user' => $user,
-                'absence1' => 'Aucune', 'absence2' => 'Recup', 'day1' => 'samedi', 'day2' => 'dimanche'));
+                'absence1' => 'Aucune', 'absence2' => 'Recup'));
         $timetable =  $qb->getQuery()
                          ->getResult();
         return count($timetable);

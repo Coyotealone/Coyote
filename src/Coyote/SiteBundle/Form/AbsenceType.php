@@ -15,10 +15,10 @@ class AbsenceType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('travel')
-            ->add('absence_name')
-            ->add('absence_duration')
-            ->add('comment')
+            ->add('travel','checkbox', array('required'  => false))
+            ->add('absence_name', 'text', array('required'  => false))
+            ->add('absence_duration', 'text', array('required'  => false))
+            ->add('comment', 'text', array('required'  => false))
             ->add('timetable')
         ;
     }

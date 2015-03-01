@@ -64,7 +64,7 @@ class ScheduleController extends Controller
         $data_timetable = $em->getRepository('CoyoteSiteBundle:Timetable')->searchIdDate($date);
 
         $time = $em->getRepository('CoyoteSiteBundle:Schedule')->timeData(
-            $data_timetable, $session->get('userid'));
+            $data_timetable, $this->getUser());
 
         $j = 0;
         $duration = array();
@@ -181,7 +181,6 @@ class ScheduleController extends Controller
             $date = $em->getRepository('CoyoteSiteBundle:Timetable')->createDateYearWeek(
             $session->get('year'), $session->get('week'));
             $timetable_ids = $em->getRepository('CoyoteSiteBundle:Timetable')->searchIdDate($date);
-            $user = $em->getRepository('CoyoteSiteBundle:User')->find($session->get('userid'));
 
             $j = 0;
             $list_id = "";
@@ -247,13 +246,6 @@ class ScheduleController extends Controller
             $request = Request::createFromGlobals();
             $data = $request->request->all();
 
-            $request = $this->getRequest();
-            $session = $request->getSession();
-            $doctrine = $this->getDoctrine();
-            $em = $doctrine->getManager();
-            $request = Request::createFromGlobals();
-            $data = $request->request->all();
-
             for($i=1;$i<8;$i++)
             {
                 if (array_key_exists('deplacement'.$i, $data))
@@ -270,7 +262,7 @@ class ScheduleController extends Controller
             $date = $em->getRepository('CoyoteSiteBundle:Timetable')->createDateYearWeek(
             $session->get('year'), $session->get('week'));
             $timetable_ids = $em->getRepository('CoyoteSiteBundle:Timetable')->searchIdDate($date);
-            $user = $em->getRepository('CoyoteSiteBundle:User')->find($session->get('userid'));
+            $user = $this->getUser();
 
             $j = 0;
             $list_id = "";
@@ -355,7 +347,7 @@ class ScheduleController extends Controller
         {
             if(empty($year) && empty($month))
                 return $this->render('CoyoteSiteBundle:Schedule:indexshow.html.twig');
-            $user = $em->getRepository('CoyoteSiteBundle:User')->find($session->get('userid'));
+            $user = $this->getUser();
             $period = $em->getRepository('CoyoteSiteBundle:Schedule')->findPeriod($month, $year);
             $date = $year."-".$month."-%";
             $absenceca = $em->getRepository('CoyoteSiteBundle:Schedule')->absenceMonth($date, $user->getId(), "CA");
@@ -391,10 +383,10 @@ class ScheduleController extends Controller
                 $value_max = count($dataschedule)-1;
                 for($i=0;$i<count($dataschedule);$i++)
                 {
-                    if($dataschedule[$i]['day'] != "dimanche")
+                    if($dataschedule[$i]['date']->format('l') != "Sunday")
                         $value += $em->getRepository('CoyoteSiteBundle:Schedule')->calculTime(
                             $dataschedule[$i]['working_time']);
-                    if($dataschedule[$i]['day'] == "dimanche" and $i != $value_max)
+                    if($dataschedule[$i]['date']->format('l') == "Sunday" and $i != $value_max)
                     {
                         $timeweek[$index] = $em->getRepository('CoyoteSiteBundle:Schedule')->formatTime($value);
                         $value = 0;
@@ -460,10 +452,12 @@ class ScheduleController extends Controller
         }
         else
         {
+            return new Response("En mainteance");
+
             if(empty($year) && empty($month))
                 return $this->render('CoyoteSiteBundle:Schedule:indexprint.html.twig');
 
-            $user = $em->getRepository('CoyoteSiteBundle:User')->find($session->get('userid'));
+            $user = $this->getUser();
             $period = $em->getRepository('CoyoteSiteBundle:Schedule')->findPeriod($month, $year);
             $date = $year."-".$month."-%";
             $absenceca = $em->getRepository('CoyoteSiteBundle:Schedule')->absenceMonth($date, $user->getId(), "CA");
@@ -499,10 +493,10 @@ class ScheduleController extends Controller
                 $value_max = count($dataschedule)-1;
                 for($i=0;$i<count($dataschedule);$i++)
                 {
-                    if($dataschedule[$i]['day'] != "dimanche")
+                    if($dataschedule[$i]['date']->format('l') != "Sunday")
                         $value += $em->getRepository('CoyoteSiteBundle:Schedule')->calculTime(
                             $dataschedule[$i]['working_time']);
-                    if($dataschedule[$i]['day'] == "dimanche" and $i != $value_max)
+                    if($dataschedule[$i]['date']->format('l') == "Sunday" and $i != $value_max)
                     {
                         $timeweek[$index] = $em->getRepository('CoyoteSiteBundle:Schedule')->formatTime($value);
                         $value = 0;
@@ -581,6 +575,7 @@ class ScheduleController extends Controller
         }
         else
         {
+            return new Response("En mainteance");
             if(empty($period))
                 return $this->render('CoyoteSiteBundle:Schedule:indexprint.html.twig');
 
@@ -655,6 +650,7 @@ class ScheduleController extends Controller
      */
     public function indexexportprintyearAction()
     {
+        return new Response("En mainteance");
         $date = date('Y-m-d');
         $doctrine = $this->getDoctrine();
         $em = $doctrine->getManager();
@@ -674,6 +670,7 @@ class ScheduleController extends Controller
      */
     public function exportprintyearAction()
     {
+        return new Response("En mainteance");
         $doctrine = $this->getDoctrine();
         $em = $doctrine->getManager();
         $pay_period = $_GET['pay_period'];

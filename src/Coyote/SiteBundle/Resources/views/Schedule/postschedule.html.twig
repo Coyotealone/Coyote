@@ -22,7 +22,7 @@
 {% endblock %}
 
 {% block content %}
-
+</br>
     {% for flashMessage in app.session.flashbag.get('save_schedule') %}
         {% set message = flashMessage %}
         {% if message == "schedule.flash.save" %}

@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Class Expense
  * @author Coyote
  * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Coyote\SiteBundle\Entity\ExpenseRepository");
  * @ORM\HasLifecycleCallbacks
  *
  */
@@ -32,37 +33,37 @@ class Expense
      * @ORM\Column(name="status", type="boolean")
      */
     private $status;
-    
+
     /**
      * @var float
      * @ORM\Column(name="amount", type="float")
      */
     private $amount;
-    
+
     /**
      * @var float
      * @ORM\Column(name="amount_TTC", type="float")
      */
     private $amount_TTC;
-    
+
     /**
      * @var float
      * @ORM\Column(name="amount_HT", type="float")
      */
     private $amount_HT;
-    
+
     /**
      * @var string
      * @ORM\Column(name="comment", type="string", length=255, nullable=true)
      */
     private $comment;
-    
+
     /**
      * @var \DateTime
      * @ORM\Column(name="created_at", type="datetime")
      */
     private $created_at;
-    
+
     /**
      * @var \DateTime
      * @ORM\Column(name="updated_at", type="datetime", nullable=true)
@@ -74,25 +75,25 @@ class Expense
      * @ORM\JoinColumn(name="site_id", referencedColumnName="id")
      */
     private $site;
-    
+
     /**
      * @ORM\ManyToOne(targetEntity="Currency", inversedBy="expenses")
      * @ORM\JoinColumn(name="currency_id", referencedColumnName="id")
      */
     private $currency;
-    
+
     /**
      * @ORM\ManyToOne(targetEntity="Business", inversedBy="expenses")
      * @ORM\JoinColumn(name="business_id", referencedColumnName="id")
      */
     private $business;
-    
+
     /**
      * @ORM\ManyToOne(targetEntity="Fee", inversedBy="expenses")
      * @ORM\JoinColumn(name="fee_id", referencedColumnName="id")
      */
     private $fee;
-    
+
     /**
      * @ORM\ManyToOne(targetEntity="UserFees", inversedBy="expenses")
      * @ORM\JoinColumn(name="userfees_id", referencedColumnName="id")
@@ -110,7 +111,7 @@ class Expense
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -133,7 +134,7 @@ class Expense
     /**
      * Get date
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDate()
     {
@@ -156,7 +157,7 @@ class Expense
     /**
      * Get status
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getStatus()
     {
@@ -179,7 +180,7 @@ class Expense
     /**
      * Get amount
      *
-     * @return float 
+     * @return float
      */
     public function getAmount()
     {
@@ -202,7 +203,7 @@ class Expense
     /**
      * Get amount_TTC
      *
-     * @return float 
+     * @return float
      */
     public function getAmountTTC()
     {
@@ -225,7 +226,7 @@ class Expense
     /**
      * Get amount_HT
      *
-     * @return float 
+     * @return float
      */
     public function getAmountHT()
     {
@@ -248,7 +249,7 @@ class Expense
     /**
      * Get comment
      *
-     * @return string 
+     * @return string
      */
     public function getComment()
     {
@@ -272,7 +273,7 @@ class Expense
     /**
      * Get created_at
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreatedAt()
     {
@@ -293,7 +294,7 @@ class Expense
     /**
      * Get updated_at
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getUpdatedAt()
     {
@@ -326,7 +327,7 @@ class Expense
     /**
      * Get expenses
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getExpenses()
     {
@@ -349,7 +350,7 @@ class Expense
     /**
      * Get site
      *
-     * @return \Coyote\SiteBundle\Entity\Site 
+     * @return \Coyote\SiteBundle\Entity\Site
      */
     public function getSite()
     {
@@ -372,7 +373,7 @@ class Expense
     /**
      * Get currency
      *
-     * @return \Coyote\SiteBundle\Entity\Currency 
+     * @return \Coyote\SiteBundle\Entity\Currency
      */
     public function getCurrency()
     {
@@ -395,7 +396,7 @@ class Expense
     /**
      * Get business
      *
-     * @return \Coyote\SiteBundle\Entity\Business 
+     * @return \Coyote\SiteBundle\Entity\Business
      */
     public function getBusiness()
     {
@@ -418,7 +419,7 @@ class Expense
     /**
      * Get fee
      *
-     * @return \Coyote\SiteBundle\Entity\Fee 
+     * @return \Coyote\SiteBundle\Entity\Fee
      */
     public function getFee()
     {
@@ -441,7 +442,7 @@ class Expense
     /**
      * Get userfeess
      *
-     * @return \Coyote\SiteBundle\Entity\UserFees 
+     * @return \Coyote\SiteBundle\Entity\UserFees
      */
     public function getUserfeess()
     {
@@ -464,7 +465,7 @@ class Expense
     /**
      * Get userfees
      *
-     * @return \Coyote\SiteBundle\Entity\UserFees 
+     * @return \Coyote\SiteBundle\Entity\UserFees
      */
     public function getUserfees()
     {

@@ -43,13 +43,13 @@ class TimetableRepository extends EntityRepository
      * @param mixed $year
      * @return array timetable id
      */
-    public function myFindTimetableId($no_week, $pay_period)
+    public function myFindTimetableId($no_week, $period)
     {
         $qb = $this->_em->createQueryBuilder();
         $qb->select('t.id')
            ->from('CoyoteSiteBundle:Timetable', 't')
-           ->where('t.no_week = :no_week and t.pay_period = :pay_period')
-           ->setParameters(array('no_week' => $no_week, 'pay_period' => $pay_period));
+           ->where('t.week = :week and t.period = :period')
+           ->setParameters(array('week' => $week, 'period' => $period));
         $timetable_id =  $qb->getQuery()
                             ->getResult();
 
@@ -79,8 +79,8 @@ class TimetableRepository extends EntityRepository
         $qb = $this->_em->createQueryBuilder();
         $qb->select('t')
            ->from('CoyoteSiteBundle:Timetable', 't')
-           ->where('t.date > :date and t.date < :datefin and t.holiday = :holiday and t.day != :day1 and t.day != :day2')
-           ->setParameters(array('date' => $date, 'datefin' => $datefin, 'holiday' => '0', 'day1' => 'samedi', 'day2' => 'dimanche'));
+           ->where('t.date > :date and t.date < :datefin and t.holiday = :holiday ')
+           ->setParameters(array('date' => $date, 'datefin' => $datefin, 'holiday' => '0'));
         $timetable =  $qb->getQuery()
                          ->getResult();
 
