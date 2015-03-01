@@ -282,7 +282,7 @@ class Expense
 
     /**
      * Set updated_at
-     * @ORM\PrePersist
+     * @ORM\PreUpdate
      * @param \DateTime $updatedAt
      * @return Expense
      */
