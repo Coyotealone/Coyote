@@ -13,3 +13,7 @@ main_language:
 main_index:
     pattern:    /index
     defaults:   { _controller: "CoyoteSiteBundle:Main:index"}
+
+main_test:
+    pattern:    /test
+    defaults:   { _controller: "CoyoteSiteBundle:Main:test"}

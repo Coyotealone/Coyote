@@ -19,7 +19,7 @@
 		    <td>{{ entity.comment }}</td>
 		    <td>{#{{ entity.timetable }}#}</td>
             <td>
-    		    <a href="{{ path('absence_edit') }}">{{ 'entity.edit' | trans }}</a>
+    		    <a href="{{ path('absence_edit', { 'id': entity.id }) }}">{{ 'entity.edit' | trans }}</a>
             </td>
     	</tr>
     </table>

@@ -3,7 +3,6 @@
 namespace Coyote\SiteBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Coyote\SiteBundle\Entity\Schedule;
@@ -24,7 +23,7 @@ class AbsenceController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('CoyoteSiteBundle:Schedule')->findAll();
+        $entities = $em->getRepository('CoyoteSiteBundle:Schedule')->absenceByUser($this->getUser());
 
         return $this->render('CoyoteSiteBundle:Absence:index.html.twig', array(
             'entities' => $entities,
@@ -37,7 +36,6 @@ class AbsenceController extends Controller
     public function createAction(Request $request)
     {
         $entity = new Schedule();
-
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
@@ -94,15 +92,20 @@ class AbsenceController extends Controller
      * Finds and displays a Schedule entity.
      *
      */
-    public function showAction()
+    public function showAction($id)
     {
+
         $em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository('CoyoteSiteBundle:Schedule')->findOneById(2);
+
+        $entity = $em->getRepository('CoyoteSiteBundle:Schedule')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Schedule entity.');
         }
-
+        if ($entity->getUser() != $this->getUser())
+        {
+            throw $this->createNotFoundException("You don't have permission to view this entity.");
+        }
         //$deleteForm = $this->createDeleteForm($id);
 
         return $this->render('CoyoteSiteBundle:Absence:show.html.twig', array(
@@ -115,11 +118,11 @@ class AbsenceController extends Controller
      * Displays a form to edit an existing Schedule entity.
      *
      */
-    public function editAction()
+    public function editAction($id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('CoyoteSiteBundle:Schedule')->findOneById(2);
+        $entity = $em->getRepository('CoyoteSiteBundle:Schedule')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Schedule entity.');
@@ -157,11 +160,11 @@ class AbsenceController extends Controller
      * Edits an existing Schedule entity.
      *
      */
-    public function updateAction(Request $request)
+    public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('CoyoteSiteBundle:Schedule')->findOneById(2);
+        $entity = $em->getRepository('CoyoteSiteBundle:Schedule')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Schedule entity.');
@@ -173,9 +176,7 @@ class AbsenceController extends Controller
 
         if ($editForm->isValid()) {
             $em->flush();
-
             return $this->redirect($this->generateUrl('absence'));
-            //return $this->redirect($this->generateUrl('absence_edit', array('id' => $id)));
         }
 
         return $this->render('CoyoteSiteBundle:Absence:edit.html.twig', array(

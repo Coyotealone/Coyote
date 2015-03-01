@@ -24,10 +24,10 @@
     		    <td>{{ entity.comment }}</td>
     		    <td></td>
                 <td>
-        		    <a href="{{ path('absence_edit') }}">{{ 'absence.edit' | trans }}</a>
+        		    <a href="{{ path('absence_edit', { 'id': entity.id }) }}">{{ 'absence.edit' | trans }}</a>
                 </td>
                 <td>
-                    <a href="{{ path('absence_show') }}">{{ 'absence.show' | trans }}</a>
+                    <a href="{{ path('absence_show', { 'id': entity.id }) }}">{{ 'absence.show' | trans }}</a>
                 </td>
         	</tr>
         {% endfor %}

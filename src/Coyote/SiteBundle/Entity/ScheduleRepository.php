@@ -742,8 +742,19 @@ class ScheduleRepository extends EntityRepository
             $index++;
         }
         return $time;
+    }
 
-        $time = $em->getRepository('CoyoteSiteBundle:Schedule')->findBy(
-            array('timetable' => $data_timetable, 'user' => $session->get('userid')));
+    public function absenceByUser($user)
+    {
+        $qb = $this->_em->createQueryBuilder();
+        $qb->select('s')
+               ->from('CoyoteSiteBundle:Schedule', 's')
+               ->where('s.user = :user and not s.absence_name = :absence')
+               ->setParameters(array(
+               'user' => $user,
+               'absence'  => 'Aucune',
+               ));
+        $entities = $qb->getQuery()->getResult();
+        return $entities;
     }
 }

@@ -222,4 +222,9 @@ class MainController extends Controller
         $request = $this->getRequest();
         return $this->forward('CoyoteSiteBundle:Main:index', array('_locale' => $request->getLocale()));
     }
+
+    public function testAction()
+    {
+        return $this->render('CoyoteSiteBundle:Accueil:test.html.twig');
+    }
 }
