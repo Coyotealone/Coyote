@@ -323,3 +323,13 @@ absence:
     title:
         show: Liste des absences
         create: Ajouter une absence
+
+holiday:
+    title:
+        show: Récapitulatif des congés
+    ca: Congés anciennetés
+    cp: Congés payés
+    rtt: Repos temps de travail
+    hs: Temps de travail par semaine
+    edit: Editer
+    update: Enregistrer
