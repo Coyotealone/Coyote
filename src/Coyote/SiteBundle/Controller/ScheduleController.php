@@ -377,26 +377,7 @@ class ScheduleController extends Controller
             if($this->get('security.context')->isGranted('ROLE_TECH'))
             {
                 $dataschedule = $em->getRepository('CoyoteSiteBundle:Schedule')->dataSchedule($user, $date);
-                $index = 0;
-                $value = 0;
-                $timeweek = '';
-                $value_max = count($dataschedule)-1;
-                for($i=0;$i<count($dataschedule);$i++)
-                {
-                    if($dataschedule[$i]['date']->format('l') != "Sunday")
-                        $value += $em->getRepository('CoyoteSiteBundle:Schedule')->calculTime(
-                            $dataschedule[$i]['working_time']);
-                    if($dataschedule[$i]['date']->format('l') == "Sunday" and $i != $value_max)
-                    {
-                        $timeweek[$index] = $em->getRepository('CoyoteSiteBundle:Schedule')->formatTime($value);
-                        $value = 0;
-                        $index++;
-                    }
-                    if($i == $value_max)
-                    {
-                        $timeweek[$index] = $em->getRepository('CoyoteSiteBundle:Schedule')->formatTime($value);
-                    }
-                }
+                $timeweek = $em->getRepository('CoyoteSiteBundle:Schedule')->timeWeek($dataschedule);
                 $timemonth = $em->getRepository('CoyoteSiteBundle:Schedule')->findTimeMonth($year.'-'.$month.'-%', $user);
 
                 return $this->render('CoyoteSiteBundle:Schedule:show.html.twig', array(
@@ -452,14 +433,13 @@ class ScheduleController extends Controller
         }
         else
         {
-            return new Response("En mainteance");
-
+            return $this->redirect($this->generateUrl('schedule_indexprint'));
             if(empty($year) && empty($month))
                 return $this->render('CoyoteSiteBundle:Schedule:indexprint.html.twig');
 
             $user = $this->getUser();
             $period = $em->getRepository('CoyoteSiteBundle:Schedule')->findPeriod($month, $year);
-            $date = $year."-".$month."-%";
+            $date = $year."-".$month."-";
             $absenceca = $em->getRepository('CoyoteSiteBundle:Schedule')->absenceMonth($date, $user->getId(), "CA");
             $absencecp = $em->getRepository('CoyoteSiteBundle:Schedule')->absenceMonth($date, $user->getId(), "CP");
             $absencertt = $em->getRepository('CoyoteSiteBundle:Schedule')->absenceMonth($date, $user->getId(), "RTT");
@@ -487,26 +467,7 @@ class ScheduleController extends Controller
             if($this->get('security.context')->isGranted('ROLE_TECH'))
             {
                 $dataschedule = $em->getRepository('CoyoteSiteBundle:Schedule')->dataSchedule($user, $date);
-                $index = 0;
-                $value = 0;
-                $timeweek = '';
-                $value_max = count($dataschedule)-1;
-                for($i=0;$i<count($dataschedule);$i++)
-                {
-                    if($dataschedule[$i]['date']->format('l') != "Sunday")
-                        $value += $em->getRepository('CoyoteSiteBundle:Schedule')->calculTime(
-                            $dataschedule[$i]['working_time']);
-                    if($dataschedule[$i]['date']->format('l') == "Sunday" and $i != $value_max)
-                    {
-                        $timeweek[$index] = $em->getRepository('CoyoteSiteBundle:Schedule')->formatTime($value);
-                        $value = 0;
-                        $index++;
-                    }
-                    if($i == $value_max)
-                    {
-                        $timeweek[$index] = $em->getRepository('CoyoteSiteBundle:Schedule')->formatTime($value);
-                    }
-                }
+                $timeweek = $em->getRepository('CoyoteSiteBundle:Schedule')->timeWeek($dataschedule);
                 $timemonth = $em->getRepository('CoyoteSiteBundle:Schedule')->findTimeMonth($year.'-'.$month.'-%', $user);
 
                 $page = $this->render('CoyoteSiteBundle:Schedule:print.html.twig', array(
@@ -523,6 +484,8 @@ class ScheduleController extends Controller
             }
             $date = date("Ymd");
             $heure = date("His");
+            $html = $page->getContent();
+            return new Response($html);
             $filename = $user->getName()."_presence".$date."-".$heure.".pdf";
             $html = $page->getContent();
             $html2pdf = new \Html2Pdf_Html2Pdf('P', 'A4', 'fr');

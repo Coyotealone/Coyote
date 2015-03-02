@@ -15,8 +15,7 @@
     		<th id='tab_expense_date' maxlength="6">{{ form_label(edit_form.date, 'expense.date'|trans) }}</th>
     		<th id='tab_expense_item'>{{ form_label(edit_form.fee, 'expense.item'|trans) }}</th>
     		<th id='tab_expense_devise'>{{ form_label(edit_form.currency, 'expense.currency'|trans) }}</th>
-    		<th id='tab_expense_qte'>{{ form_label(edit_form.amount, 'expense.quantity'|trans) }}</th>
-    		<th id='tab_expense_amount'>{{ form_label(edit_form.actual_amount, 'expense.actual_amount'|trans) }}</th>
+    		<th id='tab_expense_qte'>{{ form_label(edit_form.amount, 'expense.amount'|trans) }}</th>
     		<th id='tab_expense_amountttc'>{{ form_label(edit_form.amount_TTC, 'expense.amountttc'|trans) }}</th>
     		<th id='tab_expense_amounttva'>{{ form_label(edit_form.amount_TVA, 'expense.amounttva'|trans) }}</th>
     		<th id='tab_expense_business'>{{ form_label(edit_form.business, 'expense.business'|trans) }}</th>
@@ -27,7 +26,6 @@
             <td id='tab_expense_item'>{{ form_widget(edit_form.fee) }}</td>
             <td id='tab_expense_devise'>{{ form_widget(edit_form.currency) }}</td>
             <td id='tab_expense_qte'>{{ form_widget(edit_form.amount) }}</td>
-            <td id='tab_expense_amount'>{{ form_widget(edit_form.actual_amount) }}</td>
             <td id='tab_expense_amountttc'>{{ form_widget(edit_form.amount_TTC) }}</td>
             <td id='tab_expense_amounttva'>{{ form_widget(edit_form.amount_TVA) }}</td>
             <td id='tab_expense_business'>{{ form_widget(edit_form.business) }}</td>

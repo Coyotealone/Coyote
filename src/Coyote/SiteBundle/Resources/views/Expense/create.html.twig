@@ -71,26 +71,26 @@
     			<select name='devise{{i}}' id='devise{{i}}'>
     			    {% if app.session.get('lang') == "en" %}
         			    {% for datacurrency in currency %}
-        			        {% if datacurrency == "GBP" %}
-        			            <option value={{ datacurrency.id }} selected>{{ datacurrency }}</option>
+        			        {% if datacurrency.code == "GBP" %}
+        			            <option value={{ datacurrency.id }} selected>{{ datacurrency.code }}</option>
         			        {% else %}
-                                <option value={{ datacurrency.id }} >{{ datacurrency }}</option>
+                                <option value={{ datacurrency.id }} >{{ datacurrency.code }}</option>
         			        {% endif %}
     			        {% endfor %}
     			    {% elseif app.session.get('lang') == "pl" %}
         			    {% for datacurrency in currency %}
-        			        {% if datacurrency == "PLN" %}
-        			            <option value={{ datacurrency.id }} selected>{{ datacurrency }}</option>
+        			        {% if datacurrency.code == "PLN" %}
+        			            <option value={{ datacurrency.id }} selected>{{ datacurrency.code }}</option>
         			        {% else %}
-                                <option value={{ datacurrency.id }} >{{ datacurrency }}</option>
+                                <option value={{ datacurrency.id }} >{{ datacurrency.code }}</option>
         			        {% endif %}
     			        {% endfor %}
     			    {% else %}
         			    {% for datacurrency in currency %}
-        			        {% if datacurrency == "EUR" %}
-        			            <option value={{ datacurrency.id }} selected>{{ datacurrency }}</option>
+        			        {% if datacurrency.code == "EUR" %}
+        			            <option value={{ datacurrency.id }} selected>{{ datacurrency.code }}</option>
         			        {% else %}
-                                <option value={{ datacurrency.id }} >{{ datacurrency }}</option>
+                                <option value={{ datacurrency.id }} >{{ datacurrency.code }}</option>
         			        {% endif %}
     			        {% endfor %}
     			    {% endif %}

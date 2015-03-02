@@ -32,10 +32,9 @@ class ExpenseType extends AbstractType
                 'widget' => 'single_text',
                 'format' => 'dd/MM/yy',
             ))
-            ->add('amount', 'number', array('label' => 'Quantité'))
             ->add('amount_TTC', 'number',   array('required' => true,))
-            ->add('actual_amount', 'number', array('required' => true,))
-            ->add('amount','number', array('required' => true,))
+            ->add('amount_TVA', 'number', array('required' => true,))
+            ->add('amount','number', array('required' => true,'label' => 'Quantité'))
             ->add('currency')
             ->add('site')
             ->add('business')

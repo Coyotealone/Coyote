@@ -9,6 +9,7 @@ use FOS\UserBundle\Model\User as BaseUser;
  * Class User
  * @author Coyote
  * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Coyote\SiteBundle\Entity\UserRepository");
  */
 class User extends BaseUser
 {

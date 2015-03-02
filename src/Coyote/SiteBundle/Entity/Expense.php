@@ -48,9 +48,9 @@ class Expense
 
     /**
      * @var float
-     * @ORM\Column(name="amount_HT", type="float")
+     * @ORM\Column(name="amount_TVA", type="float")
      */
-    private $amount_HT;
+    private $amount_TVA;
 
     /**
      * @var string
@@ -72,31 +72,31 @@ class Expense
 
     /**
      * @ORM\ManyToOne(targetEntity="Site", inversedBy="expenses")
-     * @ORM\JoinColumn(name="site_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="site_id", referencedColumnName="id", nullable=false)
      */
     private $site;
 
     /**
      * @ORM\ManyToOne(targetEntity="Currency", inversedBy="expenses")
-     * @ORM\JoinColumn(name="currency_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="currency_id", referencedColumnName="id", nullable=false)
      */
     private $currency;
 
     /**
      * @ORM\ManyToOne(targetEntity="Business", inversedBy="expenses")
-     * @ORM\JoinColumn(name="business_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="business_id", referencedColumnName="id", nullable=false)
      */
     private $business;
 
     /**
      * @ORM\ManyToOne(targetEntity="Fee", inversedBy="expenses")
-     * @ORM\JoinColumn(name="fee_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="fee_id", referencedColumnName="id", nullable=false)
      */
     private $fee;
 
     /**
      * @ORM\ManyToOne(targetEntity="UserFees", inversedBy="expenses")
-     * @ORM\JoinColumn(name="userfees_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="userfees_id", referencedColumnName="id", nullable=false)
      */
     private $userfees;
 
@@ -470,5 +470,28 @@ class Expense
     public function getUserfees()
     {
         return $this->userfees;
+    }
+
+    /**
+     * Set amount_TVA
+     *
+     * @param float $amountTVA
+     * @return Expense
+     */
+    public function setAmountTVA($amountTVA)
+    {
+        $this->amount_TVA = $amountTVA;
+
+        return $this;
+    }
+
+    /**
+     * Get amount_TVA
+     *
+     * @return float
+     */
+    public function getAmountTVA()
+    {
+        return $this->amount_TVA;
     }
 }

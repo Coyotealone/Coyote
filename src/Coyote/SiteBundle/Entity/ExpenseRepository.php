@@ -87,7 +87,7 @@ class ExpenseRepository extends EntityRepository
             $result .= $data->getFee()->getCode().";";
             $result .= $data->getCurrency()->getCode().";";
             $result .= $data->getAmount().";";
-            $result .= $data->getActualAmount().";";
+            $result .= $data->getAmountTTC().";";
             $result .= $data->getAmountTTC().";";
             $result .= $data->getFee()->getCodeRate().";";
             $result .= $data->getAmountTVA().";";
@@ -179,7 +179,6 @@ class ExpenseRepository extends EntityRepository
         $tva = $this->calculTVA($rate, $price);
         $expense->setAmountTVA($tva);
         $expense->setAmountTTC($price);
-        $expense->setActualAmount($price);
         $expense->setAmount($data['qte'.$increment]);
         $expense->setStatus(1);
         $date = $this->checkDate($data['date'.$increment]);

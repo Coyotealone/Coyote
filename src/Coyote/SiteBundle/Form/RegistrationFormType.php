@@ -40,8 +40,8 @@ class RegistrationFormType extends AbstractType
                 'invalid_message' => 'fos_user.password.mismatch',
             ))
             ->add('name', null, array('label' => 'form.name',  'translation_domain' => 'messages'))
-            ->add('adress1', null, array('label' => 'form.address1',  'translation_domain' => 'messages'))
-            ->add('address2', null, array('label' => 'form.adress2',  'translation_domain' => 'messages'))
+            ->add('address1', null, array('label' => 'form.address1',  'translation_domain' => 'messages'))
+            ->add('address2', null, array('label' => 'form.address2',  'translation_domain' => 'messages'))
             ->add('zip_code', null, array('label' => 'form.zip_code',  'translation_domain' => 'messages'))
             ->add('postal_box', null, array('label' => 'form.postal_box',  'translation_domain' => 'messages'))
             ->add('city', null, array('label' => 'form.city',  'translation_domain' => 'messages'))

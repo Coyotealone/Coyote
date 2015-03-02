@@ -8,27 +8,28 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class UserType extends AbstractType
 {
-    /**
+        /**
      * @param FormBuilderInterface $builder
      * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
+            ->add('name')/*, 'entity', array('class' => 'CoyoteSiteBundle:UserInfo', 'property' => 'name',))*/
             ->add('address1')
-            ->add('address2')
+            ->add('address2', 'text', array('required'  => false,))
             ->add('zip_code')
-            ->add('postal_box')
+            ->add('postal_box', 'text', array('required'  => false,))
             ->add('city')
             ->add('country')
-            ->add('phone')
-            ->add('cell')
-            ->add('fax')
-            ->add('website')
+            ->add('phone', 'text', array('required'  => false,))
+            ->add('cell', 'text', array('required'  => false,))
+            ->add('fax', 'text', array('required'  => false,))
+            ->add('email')
+            ->add('website','text', array('required'  => false,))
         ;
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */

@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Class Currency
  * @author Coyote
  * @ORM\Entity
- *
+ * @ORM\Entity(repositoryClass="Coyote\SiteBundle\Entity\CurrencyRepository");
  */
 class Currency
 {
@@ -37,7 +37,7 @@ class Currency
      * @ORM\Column(name="exchange_rate", type="float", options={"unsigned":true})
      */
     private $exchange_rate;
-    
+
     /**
      * @ORM\OneToMany(targetEntity="Expense", mappedBy="currency", cascade={"persist", "merge"})
      */
@@ -54,7 +54,7 @@ class Currency
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -77,7 +77,7 @@ class Currency
     /**
      * Get code
      *
-     * @return string 
+     * @return string
      */
     public function getCode()
     {
@@ -100,7 +100,7 @@ class Currency
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -123,7 +123,7 @@ class Currency
     /**
      * Get exchange_rate
      *
-     * @return float 
+     * @return float
      */
     public function getExchangeRate()
     {
@@ -156,10 +156,15 @@ class Currency
     /**
      * Get expenses
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getExpenses()
     {
         return $this->expenses;
+    }
+
+    public function __toString()
+    {
+        return $this->code;
     }
 }

@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Class Business
  * @author Coyote
  * @ORM\Entity
- *
+ * @ORM\Entity(repositoryClass="Coyote\SiteBundle\Entity\BusinessRepository");
  */
 class Business
 {
@@ -48,7 +48,7 @@ class Business
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -71,7 +71,7 @@ class Business
     /**
      * Get code
      *
-     * @return string 
+     * @return string
      */
     public function getCode()
     {
@@ -94,7 +94,7 @@ class Business
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -127,10 +127,15 @@ class Business
     /**
      * Get expenses
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getExpenses()
     {
         return $this->expenses;
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 }

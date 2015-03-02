@@ -17,6 +17,7 @@
           <script src="{{ asset('bundles/coyotesite/js/respond.min.js') }}"></script>
         <![endif]-->
         <!--[if !IE]><!-->
+             <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/jquery-ui.css') }}" type="text/css" media="all" />
             <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/styles.css') }}" type="text/css" media="all" />
             <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/bootstrap.css') }}" type="text/css" media="all" />
             <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/justified-nav.css') }}" type="text/css" media="all" />
@@ -32,7 +33,7 @@
       <div class="container">
         <div class="navbar-header">
           <a class="navbar-brand" href="{{path('main_index')}}">
-            <img alt="Pichon" src="{{ asset('bundles/coyotesite/images/logo_alpha.png') }}">
+            <img alt="Pichon" src="{{ asset('bundles/coyotesite/images/Logo-PICHON_80.png') }}">
           </a>
           {% block nav %}
           {% endblock nav %}

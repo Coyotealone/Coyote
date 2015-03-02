@@ -27,67 +27,70 @@
 		<th style="width: 20%; text-align:center" id='tab_time_comment'>{{'schedule.comment'|trans}}</th>
 	</tr>
 	{% set counter = 0 %}
-	{% for entity in dataschedule %}
-        <tr style="width:900px;">
-            {% if entity.holiday == "1" %}
-                <td style="background:#7FC6BC; color:white; text-align:center">{{ entity.date|date("l")|trans}}</td>
-                <td style="background:#7FC6BC; color:white; text-align:center">{{ entity.date|date("d/m/Y")}}</td>
-                <td style="background:#7FC6BC; color:white; text-align:center">{{ entity.start }}</td>
-                <td style="background:#7FC6BC; color:white; text-align:center">{{ entity.end }}</td>
-                <td style="background:#7FC6BC; color:white; text-align:center">{{ entity.break }}</td>
-                <td style="background:#7FC6BC; color:white; text-align:center">{{ entity.working_time }}</td>
-                <td style="background:#7FC6BC; color:white; text-align:center">{{ entity.travel }}</td>
-                <td style="background:#7FC6BC; color:white; text-align:center">{{ entity.absence_name|trans }}</td>
-                <td style="background:#7FC6BC; color:white; text-align:center">{{ entity.absence_duration|trans }}</td>
-                <td style="width: 20%; background:#7FC6BC; color:white;">{{ entity.comment }}</td>
-            {% elseif entity.date|date("l") == "Saturday" %}
-                <td style="background:#01B0F0; color:white; text-align:center">{{ entity.date|date("l")|trans}}</td>
-                <td style="background:#01B0F0; color:white; text-align:center">{{ entity.date|date("d/m/Y")}}</td>
-                <td style="background:#01B0F0; color:white; text-align:center">{{ entity.start }}</td>
-                <td style="background:#01B0F0; color:white; text-align:center">{{ entity.end }}</td>
-                <td style="background:#01B0F0; color:white; text-align:center">{{ entity.break }}</td>
-                <td style="background:#01B0F0; color:white; text-align:center">{{ entity.working_time }}</td>
-                <td style="background:#01B0F0; color:white; text-align:center">{{ entity.travel }}</td>
-                <td style="background:#01B0F0; color:white; text-align:center">{{ entity.absence_name|trans }}</td>
-                <td style="background:#01B0F0; color:white; text-align:center">{{ entity.absence_duration|trans }}</td>
-                <td style="width: 20%; background:#01B0F0; color:white;">{{ entity.comment }}</td>
-            {% elseif entity.date|date("l") == "Sunday" %}
-                <td style="background:#01B0F0; color:white; text-align:center">{{ entity.date|date("l")|trans}}</td>
-                <td style="background:#01B0F0; color:white; text-align:center">{{ entity.date|date("d/m/Y")}}</td>
-                <td style="background:#01B0F0; color:white; text-align:center">{{ entity.start }}</td>
-                <td style="background:#01B0F0; color:white; text-align:center">{{ entity.end }}</td>
-                <td style="background:#01B0F0; color:white; text-align:center">{{ entity.break }}</td>
-                <td style="background:#01B0F0; color:white; text-align:center">{{ entity.working_time }}</td>
-                <td style="background:#01B0F0; color:white; text-align:center">{{ entity.travel }}</td>
-                <td style="background:#01B0F0; color:white; text-align:center">{{ entity.absence_name|trans }}</td>
-                <td style="background:#01B0F0; color:white; text-align:center">{{ entity.absence_duration|trans }}</td>
-                <td style="width: 20%; background:#01B0F0; color:white;">{{ entity.comment }}</td>
-        </tr>
-        <tr>
-                {#<td colspan=10 style="width: 30%; background:#99CCCC; color:white; text-align:center">{{"schedule.hours_worked_week"|trans}} : {{timeweek[counter]}}</td>#}
-                {% set counter = counter + 1 %}
-        </tr>
-        <tr>
-            {% else %}
-                <td style="text-align:center" >{{ entity.date|date("l")|trans}}</td>
-                <td style="text-align:center" >{{ entity.date|date("d/m/Y")}}</td>
-                <td style="text-align:center" >{{ entity.start }}</td>
-                <td style="text-align:center" >{{ entity.end }}</td>
-                <td style="text-align:center" >{{ entity.break }}</td>
-                <td style="text-align:center" >{{ entity.working_time }}</td>
-                <td style="text-align:center" >{{ entity.travel }}</td>
-                <td style="text-align:center" >{{ entity.absence_name|trans }}</td>
-                <td style="text-align:center" >{{ entity.absence_duration|trans }}</td>
-                <td style="width: 20%;">{{ entity.comment }}</td>
-                {% if loop.last %}
-        </tr>
-        <tr>
-                <td colspan=10 style="width: 30%; background:#99CCCC; color:white; text-align:center">{{"schedule.hours_worked_week"|trans}} : {#{timeweek[counter]}#}</td>
-                {% endif %}
-            {% endif %}
-        </tr>
+	{% set week = dataschedule.0.date|date('W') %}
+	{% for data in dataschedule %}
+	{% set date = data.date %}
+    <tr style="width:900px;">
+        {% if week != date|date('W')%}
+            <td colspan=10 style="width: 30%; background:#99CCCC; color:white; text-align:center">{{"schedule.hours_worked_week"|trans}} : {{timeweek[counter]}}</td>
+            {% set counter = counter + 1 %}
+        </tr><tr>
+        {% endif %}
+        {% if data.holiday == "1" %}
+            <td style="background:#7FC6BC; color:white; text-align:center">{{ date|date("l")|trans}}</td>
+            <td style="background:#7FC6BC; color:white; text-align:center">{{ date|date("d/m/Y")}}</td>
+            <td style="background:#7FC6BC; color:white; text-align:center">{{ data.start }}</td>
+            <td style="background:#7FC6BC; color:white; text-align:center">{{ data.end }}</td>
+            <td style="background:#7FC6BC; color:white; text-align:center">{{ data.break }}</td>
+            <td style="background:#7FC6BC; color:white; text-align:center">{{ data.working_time }}</td>
+            <td style="background:#7FC6BC; color:white; text-align:center">{{ data.travel }}</td>
+            <td style="background:#7FC6BC; color:white; text-align:center">{{ data.absence_name|trans }}</td>
+            <td style="background:#7FC6BC; color:white; text-align:center">{{ data.absence_duration }}</td>
+            <td style="background:#7FC6BC; color:white; width: 20%">{{ data.comment }}</td>
+        {% elseif date|date("l") == "Saturday" %}
+            <td style="background:#01B0F0; color:white; text-align:center">{{ date|date("l")|trans}}</td>
+            <td style="background:#01B0F0; color:white; text-align:center">{{ date|date("d/m/Y")}}</td>
+            <td style="background:#01B0F0; color:white; text-align:center">{{ data.start }}</td>
+            <td style="background:#01B0F0; color:white; text-align:center">{{ data.end }}</td>
+            <td style="background:#01B0F0; color:white; text-align:center">{{ data.break }}</td>
+            <td style="background:#01B0F0; color:white; text-align:center">{{ data.working_time }}</td>
+            <td style="background:#01B0F0; color:white; text-align:center">{{ data.travel }}</td>
+            <td style="background:#01B0F0; color:white; text-align:center">{{ data.absence_name|trans }}</td>
+            <td style="background:#01B0F0; color:white; text-align:center">{{ data.absence_duration }}</td>
+            <td style="background:#01B0F0; color:white; width: 20%">{{ data.comment }}</td>
+        {% elseif date|date("l") == "Sunday" %}
+            <td style="background:#01B0F0; color:white; text-align:center">{{ date|date("l")|trans}}</td>
+            <td style="background:#01B0F0; color:white; text-align:center">{{ date|date("d/m/Y")}}</td>
+            <td style="background:#01B0F0; color:white; text-align:center">{{ data.start }}</td>
+            <td style="background:#01B0F0; color:white; text-align:center">{{ data.end }}</td>
+            <td style="background:#01B0F0; color:white; text-align:center">{{ data.break }}</td>
+            <td style="background:#01B0F0; color:white; text-align:center">{{ data.working_time }}</td>
+            <td style="background:#01B0F0; color:white; text-align:center">{{ data.travel }}</td>
+            <td style="background:#01B0F0; color:white; text-align:center">{{ data.absence_name|trans }}</td>
+            <td style="background:#01B0F0; color:white; text-align:center">{{ data.absence_duration }}</td>
+            <td style="background:#01B0F0; color:white; width: 20%">{{ data.comment }}</td>
+    </tr>
+    <tr>
+        {% else %}
+            <td style="text-align:center" >{{ date|date("l")|trans}}</td>
+            <td style="text-align:center" >{{ date|date("d/m/Y")}}</td>
+            <td style="text-align:center" >{{ data.start }}</td>
+            <td style="text-align:center" >{{ data.end }}</td>
+            <td style="text-align:center" >{{ data.break }}</td>
+            <td style="text-align:center" >{{ data.working_time }}</td>
+            <td style="text-align:center" >{{ data.travel }}</td>
+            <td style="text-align:center" >{{ data.absence_name|trans }}</td>
+            <td style="text-align:center" >{{ data.absence_duration }}</td>
+            <td style="width: 20%;">{{ data.comment }}</td>
+        {% endif %}
+        {% set week = date|date('W') %}
+    </tr>
+        {% if loop.last %}
+    <tr>
+        <td colspan=10 style="width: 30%; background:#99CCCC; color:white; text-align:center">{{"schedule.hours_worked_week"|trans}} : {{timeweek[counter]}}</td>
+    </tr>
+        {% endif %}
     {% endfor %}
-
 </table>
 <p style="text-align:center">
     {{'schedule.total_time_worked_month'|trans}} : {{time}}<br>
@@ -98,5 +101,4 @@
 {% else %}
 <p style="text-align:center">{{'schedule.no_data_found'|trans}}</p>
 {% endif %}
-
 </page>
