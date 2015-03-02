@@ -329,10 +329,12 @@ holiday:
         show: Récapitulatif des congés
     ca: Congés anciennetés
     cp: Congés payés
-    rtt: Repos temps de travail
+    rtt: Réduction du temps de travail
     hs: Temps de travail par semaine
     edit: Editer
     update: Enregistrer
+    create: Nouveau
+    empty: Aucune donnée enregistré
 
 Monday: Lundi
 Tuesday: Mardi

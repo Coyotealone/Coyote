@@ -746,13 +746,18 @@ class ScheduleController extends Controller
         $session = $request->getSession();
         $doctrine = $this->getDoctrine();
         $em = $doctrine->getManager();
+
+        //$test = $em->getRepository("CoyoteSiteBundle:Schedule")->calculOvertimeTech($this->getUser(),1);
+        $count_time = $em->getRepository('CoyoteSiteBundle:Timetable')->findworkingday($this->getUser());
+        $count_absence = $em->getRepository('CoyoteSiteBundle:Schedule')->countAbsence($this->getUser());
+        $test = $em->getRepository("CoyoteSiteBundle:Schedule")->calculOvertimeTech($this->getUser(), $count_time, $count_absence);
+        return new Response($test);
         $request = Request::createFromGlobals();
-        $user_id = $session->get('userid');
         $date = "2014-06-%";
         $date_count_absence = "2014-06-0%";
-        $working_day = $em->getRepository('CoyoteSiteBundle:Timetable')->findworkingday($date, $user_id);
+        $working_day = $em->getRepository('CoyoteSiteBundle:Timetable')->findworkingday($this->getUser());
         $sum_working_time = $em->getRepository('CoyoteSiteBundle:Schedule')->sumWorkingTimeMonth($date, $user_id);
-        $count_absence = $em->getRepository('CoyoteSiteBundle:Schedule')->countAbsence($date_count_absence, $user_id);
+        //$count_absence = $em->getRepository('CoyoteSiteBundle:Schedule')->countAbsence($date_count_absence, $user_id);
         $overtime = $em->getRepository('CoyoteSiteBundle:Schedule')->calculOvertime($working_day, $sum_working_time,
             $count_absence);
         return $this->render('CoyoteSiteBundle:Schedule:showovertime.html.twig', array('overtime' => $overtime));

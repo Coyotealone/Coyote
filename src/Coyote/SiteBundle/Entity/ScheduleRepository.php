@@ -580,32 +580,7 @@ class ScheduleRepository extends EntityRepository
     }
 
 
-    /**
-     * calculOvertime function.
-     *
-     * @access public
-     * @param mixed $count_time
-     * @param mixed $working_time_month
-     * @param mixed $count_absence
-     * @return string
-     */
-    public function calculOvertime($count_time, $working_time_month, $count_absence)
-    {
-        $value_month = array(1 => 8, 2=> 9, 3 => 10, 4=> 11, 5 => 12, 6=> 1, 7 => 2, 8=> 3, 9 => 4, 10=> 5, 11 => 6,
-            12=> 7);
-        $month = date("n");
-        if($month == 1)
-            $month = 12;
-        else
-            $month--;
 
-        $count_time = $count_time - $count_absence - (5*$value_month[$month]);
-        $count_time = $count_time * 7;
-        $time_month = $count_time * 60;
-        $time_work = $this->calculTime($working_time_month);
-        $difference = $time_work - $time_month;
-        return $this->formatTime($difference);
-    }
 
 
     /**
@@ -668,8 +643,25 @@ class ScheduleRepository extends EntityRepository
      * @param mixed $user
      * @return integer
      */
-    public function countAbsence($date, $user)
+    public function countAbsence($user)
     {
+        $date = new \DateTime();
+
+        $qb = $this->_em->createQueryBuilder();
+        $qb->select('t')
+            ->from('CoyoteSiteBundle:Timetable', 't')
+            ->where('t.date = :date')
+            ->setParameters(array('date' => $date->format('Y-m-d')));
+        $data_date = $qb->getQuery()->getOneOrNullResult();
+
+        $qb = $this->_em->createQueryBuilder();
+        $qb->select('t')
+            ->from('CoyoteSiteBundle:Timetable', 't')
+            ->where('t.period = :period')
+            ->orderBy('t.id', 'ASC')
+            ->setParameters(array('period' => $data_date->getPeriod()));
+        $data_date = $qb->getQuery()->getResult();
+
         $datefin = date("Y-m-d H:i:s", mktime(23,59,59,date("m"),0,date("Y")));
         $qb = $this->_em->createQueryBuilder();
         $qb->select('t')
@@ -677,7 +669,7 @@ class ScheduleRepository extends EntityRepository
            ->innerJoin('CoyoteSiteBundle:Schedule', 's', 'WITH', 't.id = s.timetable')
            ->where('t.holiday = :holiday and s.user = :user and
                 s.absence_name != :absence1 and s.absence_name != :absence2 and t.date BETWEEN :date and :datefin')
-           ->setParameters(array('date' => $date, 'datefin' => $datefin, 'holiday' => '0','user' => $user,
+           ->setParameters(array('date' => $data_date[0]->getDate()->format('Y-m-d'), 'datefin' => $datefin, 'holiday' => '0','user' => $user,
                 'absence1' => 'Aucune', 'absence2' => 'Recup'));
         $timetable =  $qb->getQuery()
                          ->getResult();
@@ -809,5 +801,84 @@ class ScheduleRepository extends EntityRepository
                ));
         $entities = $qb->getQuery()->getResult();
         return $entities;
+    }
+
+    public function calculOvertimeTech($user, $count_time, $count_absence)
+    {
+        $date = new \DateTime();
+        $date = $date->sub(date_interval_create_from_date_string('1 days'));
+
+        $qb = $this->_em->createQueryBuilder();
+        $qb->select('t')
+            ->from('CoyoteSiteBundle:Timetable', 't')
+            ->where('t.date = :date')
+            ->setParameters(array('date' => $date->format('Y-m-d')));
+        $data_date = $qb->getQuery()->getOneOrNullResult();
+
+        $period = $data_date->getPeriod();
+
+        $qb = $this->_em->createQueryBuilder();
+        $qb->select('s.working_time')
+           ->from('CoyoteSiteBundle:Schedule', 's')
+           ->innerJoin('CoyoteSiteBundle:Timetable', 't', 'WITH', 't.id = s.timetable')
+           ->where('s.user = :user and t.date < :date and t.period = :period')
+           ->setParameters(array('user' => $user, 'date' => $date, 'period' => $period));
+        $workingtime_schedule =  $qb->getQuery()
+                                    ->getResult();
+
+        $nb_work = 0;
+        for($i=0;$i<count($workingtime_schedule);$i++)
+        {
+            $nb_work += $this->calculTime($workingtime_schedule[$i]['working_time']);
+        }
+
+        $qb2 = $this->_em->createQueryBuilder();
+        $qb2->select('s.absence_duration')
+           ->from('CoyoteSiteBundle:Schedule', 's')
+           ->innerJoin('CoyoteSiteBundle:Timetable', 't', 'WITH', 't.id = s.timetable')
+           ->where('s.user = :user and t.date < :date and t.period = :period and s.absence_name = :absence')
+           ->setParameters(array('user' => $user, 'date' => $date, 'period' => $period, 'absence' => "Recup"));
+        $absence_duration_schedule =  $qb2->getQuery()
+                                    ->getResult();
+
+        $nb_hs = 0;
+        for($i=0;$i<count($absence_duration_schedule);$i++)
+        {
+            $nb_hs += $this->calculTime($absence_duration_schedule[$i]['absence_duration']);
+        }
+        $count_time = $count_time - $count_absence;
+        $count_time = $count_time * 7;
+        $time_month = $count_time * 60;
+        $nb_work = $nb_work - $nb_hs;
+        //$time_work = $this->calculTime($result);
+        $difference = $nb_work - $time_month;
+        return $this->formatTime($difference);
+    }
+
+    /**
+     * calculOvertime function.
+     *
+     * @access public
+     * @param mixed $count_time
+     * @param mixed $working_time_month
+     * @param mixed $count_absence
+     * @return string
+     */
+    public function calculOvertime($count_time, $working_time_month, $count_absence)
+    {
+        $value_month = array(1 => 8, 2=> 9, 3 => 10, 4=> 11, 5 => 12, 6=> 1, 7 => 2, 8=> 3, 9 => 4, 10=> 5, 11 => 6,
+            12=> 7);
+        $month = date("n");
+        if($month == 1)
+            $month = 12;
+        else
+            $month--;
+
+        $count_time = $count_time - $count_absence - (5*$value_month[$month]);
+        $count_time = $count_time * 7;
+        $time_month = $count_time * 60;
+        $time_work = $this->calculTime($working_time_month);
+        $difference = $time_work - $time_month;
+        return $this->formatTime($difference);
     }
 }

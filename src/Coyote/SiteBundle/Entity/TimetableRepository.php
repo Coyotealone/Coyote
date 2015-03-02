@@ -73,17 +73,41 @@ class TimetableRepository extends EntityRepository
         return $qb->getQuery()->getSingleScalarResult();
     }
 
-    public function findworkingday($date, $user)
+    public function findworkingday($user)
     {
+        $date = new \DateTime();
+
+        $qb = $this->_em->createQueryBuilder();
+        $qb->select('t')
+            ->from('CoyoteSiteBundle:Timetable', 't')
+            ->where('t.date = :date')
+            ->setParameters(array('date' => $date->format('Y-m-d')));
+        $data_date = $qb->getQuery()->getOneOrNullResult();
+
+        $qb = $this->_em->createQueryBuilder();
+        $qb->select('t')
+            ->from('CoyoteSiteBundle:Timetable', 't')
+            ->where('t.period = :period')
+            ->orderBy('t.id', 'ASC')
+            ->setParameters(array('period' => $data_date->getPeriod()));
+        $data_date = $qb->getQuery()->getResult();
+
         $datefin = date("Y-m-d H:i:s", mktime(23,59,59,date("m"),0,date("Y")));
         $qb = $this->_em->createQueryBuilder();
         $qb->select('t')
            ->from('CoyoteSiteBundle:Timetable', 't')
            ->where('t.date > :date and t.date < :datefin and t.holiday = :holiday ')
-           ->setParameters(array('date' => $date, 'datefin' => $datefin, 'holiday' => '0'));
+           ->setParameters(array('date' => $data_date[0]->getDate()->format('Y-m-d'), 'datefin' => $datefin, 'holiday' => '0'));
         $timetable =  $qb->getQuery()
                          ->getResult();
 
+        $count = 0;
+        foreach($timetable as $data)
+        {
+            if($data->getDate()->format('l') != "Sunday" and $data->getDate()->format('l') != "Saturday")
+                $count++;
+        }
+        return $count;
         return count($timetable);
     }
 
