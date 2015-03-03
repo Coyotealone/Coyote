@@ -2,33 +2,35 @@ schedule_overtime:
     pattern:    /overtime
     defaults:   { _controller: "CoyoteSiteBundle:Schedule:showovertime"}
 
-schedule_savetime:
-    pattern:    /scheduleusers/save
-    defaults:   { _controller: "CoyoteSiteBundle:Schedule:savetime"}
+schedule_postscheduleuser:
+    pattern:    /postscheduleuser
+    defaults:   { _controller: "CoyoteSiteBundle:Schedule:postScheduleUser"}
 
-schedule_savetimefm:
-    pattern:    /scheduleframes/save
-    defaults:   { _controller: "CoyoteSiteBundle:Schedule:savetimefm"}
-
-schedule_workmore:
-    pattern:    /scheduleusers/workmore
-    defaults:   { _controller: "CoyoteSiteBundle:Schedule:workmore"}
-
-schedule_workless:
-    pattern:    /scheduleusers/workless
-    defaults:   { _controller: "CoyoteSiteBundle:Schedule:workless"}
+schedule_weekless:
+    pattern:    /postscheduleuser/weekless
+    defaults:   { _controller: "CoyoteSiteBundle:Schedule:weekless"}
+    
+schedule_weekmore:
+    pattern:    /postscheduleuser/weekmore
+    defaults:   { _controller: "CoyoteSiteBundle:Schedule:weekmore"}
 
 schedule_index:
     pattern:    /
     defaults:   { _controller: "CoyoteSiteBundle:Schedule:index"}
 
-schedule_show:
-    pattern:    /show
-    defaults:   { _controller: "CoyoteSiteBundle:Schedule:show"}
+schedule_getschedule:
+    pattern:    /getSchedule
+    defaults:   { _controller: "CoyoteSiteBundle:Schedule:getSchedule"}
 
 schedule_indexshow:
     pattern:    /indexshow
     defaults:   { _controller: "CoyoteSiteBundle:Schedule:indexshow"}
+
+schedule_getscheduleuser:
+    pattern:    /getscheduleuser
+    defaults:   { _controller: "CoyoteSiteBundle:Schedule:getScheduleUser"}
+
+
 
 schedule_print:
     pattern:    /print
@@ -37,10 +39,6 @@ schedule_print:
 schedule_indexprint:
     pattern:    /indexprint
     defaults:   { _controller: "CoyoteSiteBundle:Schedule:indexprint"}
-
-schedule_post:
-    pattern:    /schedule
-    defaults:   { _controller: "CoyoteSiteBundle:Schedule:postSchedule"}
 
 schedule_indexprintyear:
     pattern:    /indexprintyear

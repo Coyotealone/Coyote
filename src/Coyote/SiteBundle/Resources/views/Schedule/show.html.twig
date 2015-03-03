@@ -35,7 +35,7 @@
     	{% for data in dataschedule %}
     	{% set date = data.date %}
         <tr>
-            {% if week != date|date('W')%}
+            {% if week != date|date('W') and not loop.last %}
                 <td style="background:#99CCCC; color:white" colspan = 11>{{"schedule.hours_worked_week"|trans}} : {{timeweek[counter]}}</td>
                 {% set counter = counter + 1 %}
             </tr><tr>
@@ -90,11 +90,6 @@
                 <td>{{ data.absence_name|trans }}</td>
                 <td>{{ data.absence_duration }}</td>
                 <td>{{ data.comment }}</td>
-                {% if loop.last %}
-                <tr>
-                    <td style="background:#99CCCC; color:white" colspan = 11>{{"schedule.hours_worked_week"|trans}} : {{timeweek[counter]}}</td>
-                </tr>
-                {% endif %}
             {% endif %}
             {% set week = date|date('W') %}
         </tr>

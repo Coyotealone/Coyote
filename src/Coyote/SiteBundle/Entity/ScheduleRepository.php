@@ -13,13 +13,474 @@ use Doctrine\ORM\EntityRepository;
  */
 class ScheduleRepository extends EntityRepository
 {
-
+    /***********************getScheduleUserAction**********************/
+    
     /**
-     * computing working time.
-     *
+     * Function to synchronize id Timetable about a same id array time.
+     * @param array $time Array data Schedule
+     * @param array $data_timetable Array id Timetable
+     * @return array $duration Array with absence duration Schedule
+     */
+    public function initGetSchedule($time, $data_timetable, $session)
+    {
+        $j = 0;
+        $duration = array();
+        for($i=0;$i<count($time);$i++)
+        {
+            if (count($time[$j])>0)
+            {
+                if ($data_timetable[$i]->getId() == $time[$j]->getTimetable()->getId())
+                {
+                    $session->set('id_'.$i, $time[$j]->getId());
+                    $duration[$i] = $time[$j]->getAbsenceDuration();
+                    $j++;
+                }
+            }
+            else
+            {
+                $session->set('id_'.$i, '');
+            }
+        }
+        return $duration;
+    }
+    
+    /**
+     * Function to find data about user and timetable
      * @access public
-     * @param mixed $date
+     * @param Timetable $timetable
+     * @param User $user
+     * @return null if no data, else array with data schedule
+     */
+    public function timeData($timetable, $user )
+    {
+        $index = 0;
+        $time = null;
+        foreach($timetable as $data)
+        {
+            $qb = $this->_em->createQueryBuilder();
+            $qb->select('s')
+            ->from('CoyoteSiteBundle:Schedule', 's')
+            ->where('s.user = :user and s.timetable = :timetable')
+            ->setParameters(array('user' => $user, 'timetable' => $data));
+            $result = $qb->getQuery()->getOneOrNullResult();
+            if($result == null)
+                $time[$index] = array();
+            else
+                $time[$index] = $result;
+            $index++;
+        }
+        return $time;
+    }
+    
+    /******************weeklessAction**weekmoreAction******************/
+    
+    /**
+     * Function to update week and period
+     * @access public
+     * @param string $value "less" or "more"
+     */
+    public function updateWeek($value, $session)
+    {
+        $week = $session->get('week');
+        $year = $session->get('year');
+        if ($value == "less")
+        {
+            if ($week == 1)
+            {
+                $week = 52;
+                $year--;
+            }
+            else
+            {
+                $week--;
+            }
+        }
+        if ($value == "more")
+        {
+            if ($week == 52)
+            {
+                $week = 1;
+                $year++;
+            }
+            else
+            {
+                $week++;
+            }
+        }
+        $session->set('week', $week);
+        $session->set('year', $year);
+    }
+    
+    /**********************postScheduleUserAction**********************/
+    
+    /**
+     * Function to save Schedule for technician user.
+     * @access public
+     * @param User $user
+     * @param Timetable $timetable
+     * @param string $time_start
+     * @param string $time_end
+     * @param string $time_break
+     * @param boolean $time_travel
+     * @param string $time_absence
+     * @param float $time_absenceday
+     * @param string $time_absencetime
+     * @param string $time_comment
+     * @return NULL if you don't need save entity else return entity Schedule
+     */
+    public function saveSchedule($user, $timetable, $time_start, $time_end, $time_break, $time_travel, $time_absence,
+            $time_absenceday, $time_absencetime, $time_comment)
+    {
+        if (empty($time_start) && empty($time_end) && empty($time_break) && empty($time_travel) && empty($time_comment)
+                && ($time_absence == "Aucune"))
+        {
+            return null;
+        }
+        else 
+        {
+            $schedule = new Schedule();
+            $schedule->setUser($user);
+            $schedule->setTimetable($timetable);
+            if (empty($time_start))
+                $time_start = '0:00';
+            $schedule->setStart($time_start);
+            if (empty($time_end))
+                $time_end = '0:00';
+            $schedule->setEnd($time_end);
+            if (empty($time_break))
+                $time_break = '0:00';
+            $schedule->setBreak($time_break);
+            $timetable = new Timetable();
+            $working_time_day = $timetable->working_time_day($time_start, $time_end, $time_break);
+            $schedule->setWorkingTime($working_time_day);
+            $working_hours_day = $timetable->working_hours_day($working_time_day);
+            $schedule->setWorkingHours($working_hours_day);
+            if ($time_travel == "on")
+                $time_travel = 1;
+            else
+                $time_travel = 0;
+            $schedule->setTravel($time_travel);
+            $schedule->setAbsenceName($time_absence);
+            if ($time_absenceday == "0.5" || $time_absenceday == "1")
+                $schedule->setAbsenceDuration($time_absenceday);
+            if ($time_absenceday == "empty")
+                $schedule->setAbsenceDuration($time_absencetime);
+            $schedule->setComment($time_comment);
+            return $schedule;
+        }
+    }
+    
+    /**
+     * Function to update Schedule for techician user.
+     * @param Schedule $schedule
+     * @param string $time_start
+     * @param string $time_end
+     * @param string $time_break
+     * @param boolean $time_travel
+     * @param string $time_absence
+     * @param float $time_absenceday
+     * @param string $time_absencetime
+     * @param string $time_comment
+     * @return Schedule
+     */
+    public function updateSchedule($schedule, $time_start, $time_end, $time_break, $time_travel, $time_absence,
+            $time_absenceday, $time_absencetime, $time_comment)
+    {
+        $timetable = new Timetable();
+        if (empty($time_start))
+            $time_start = '0:00';
+        if (empty($time_end))
+            $time_end = '0:00';
+        if (empty($time_break))
+            $time_break = '0:00';
+        $schedule->setBreak($time_break);
+        $schedule->setStart($time_start);
+        $schedule->setEnd($time_end);
+        $schedule->setBreak($time_break);
+        $working_time_day = $timetable->working_time_day($time_start, $time_end, $time_break);
+        $schedule->setWorkingTime($working_time_day);
+        $working_hours_day = $timetable->working_hours_day($working_time_day);
+        $schedule->setWorkingHours($working_hours_day);
+        if ($time_travel == "on")
+            $time_travel = 1;
+        else
+            $time_travel = 0;
+        $schedule->setTravel($time_travel);
+        $schedule->setAbsenceName($time_absence);
+        if ($time_absenceday == "0.5" || $time_absenceday == "1")
+            $schedule->setAbsenceDuration($time_absenceday);
+        if ($time_absenceday == "empty")
+            $schedule->setAbsenceDuration($time_absencetime);
+        $schedule->setComment($time_comment);
+        return $schedule;
+    }
+    
+    /**
+     * Function to save Schedule for framework user.
+     * @access public
+     * @param User $user
+     * @param Timetable $timetable
+     * @param boolean $time_travel
+     * @param string $time_absence
+     * @param float $time_absenceday
+     * @param string $time_absencetime
+     * @param string $time_comment
+     * @param float $day
+     * @return NULL if you don't need save entity else return entity Schedule
+     */
+    public function saveSchedulefm($user, $timetable, $time_travel, $time_absence, $time_absenceday,
+            $time_absencetime, $time_comment, $day)
+    {
+        if (empty($day) && empty($time_travel) && empty($time_comment)
+                && ($time_absence == "Aucune"))
+        {
+            return null;
+        }
+        else 
+        {
+            $schedule = new Schedule();
+            $schedule->setUser($user);
+            $schedule->setTimetable($timetable);
+            $schedule->setStart("0:00");
+            $schedule->setEnd("0:00");
+            $schedule->setBreak("0:00");
+            $schedule->setWorkingTime("0:00");
+            $schedule->setWorkingHours($day);
+            if ($time_travel == "on")
+                $time_travel = 1;
+            else
+                $time_travel = 0;
+            $schedule->setTravel($time_travel);
+            $schedule->setAbsenceName($time_absence);
+            if($time_absenceday == "0.5" || $time_absenceday == "1")
+                $schedule->setAbsenceDuration($time_absenceday);
+            if ($time_absenceday == "empty")
+            {
+                if($time_absencetime == "undef")
+                    $schedule->setAbsenceDuration('');
+                else
+                    $schedule->setAbsenceDuration($time_absencetime);
+            }
+            $schedule->setComment($time_comment);
+            return $schedule;
+        }
+    }
+    
+    /**
+     * Function to update Schedule for framework user.
+     * @access public
+     * @param Schedule $schedule
+     * @param boolean $time_travel
+     * @param string $time_absence
+     * @param float $time_absenceday
+     * @param string $time_absencetime
+     * @param string $time_comment
+     * @param float $day
+     * @return Schedule
+     */
+    public function updateSchedulefm($schedule, $time_travel, $time_absence, $time_absenceday, $time_absencetime,
+            $time_comment, $day)
+    {
+        $schedule->setWorkingHours($day);
+        if ($time_travel == "on")
+            $time_travel = 1;
+        else
+            $time_travel = 0;
+        $schedule->setTravel($time_travel);
+        $schedule->setAbsenceName($time_absence);
+        if($time_absenceday == "0.5" || $time_absenceday == "1")
+            $schedule->setAbsenceDuration($time_absenceday);
+        if ($time_absenceday == "empty")
+        {
+            if($time_absencetime == "undef")
+                $schedule->setAbsenceDuration('');
+            else
+                $schedule->setAbsenceDuration($time_absencetime);
+        }
+        $schedule->setComment($time_comment);
+        return $schedule;
+    }
+    
+    /*************************getScheduleAction************************/
+    
+    /**
+     * Function to find period about month and year.
+     * @param string $month
+     * @param string $year
+     * @return string $period
+     */
+    public function findPeriod($month, $year)
+    {
+        $period = "";
+        if ($month >= "01" && $month <= "05")
+        {
+            $previous_year = $year - 1;
+            $period = $previous_year."/".$year;
+        }
+        if ($month >= "06" && $month <= "12")
+        {
+            $following_year = $year + 1;
+            $period = $year."/".$following_year;
+        }
+        return $period;
+    }
+    
+    /**
+     * Function to count number absence.
+     * @access public
+     * @param datetime $date
+     * @param User $user
+     * @param string $absence
+     * @return number
+     */
+    public function absenceMonth($date, $user, $absence)
+    {
+        $qb = $this->_em->createQueryBuilder();
+        $qb->select('s.absence_duration')
+           ->from('CoyoteSiteBundle:Schedule', 's')
+           ->innerJoin('CoyoteSiteBundle:Timetable', 't', 'WITH', 't.id = s.timetable')
+           ->where('s.user = :user and t.date LIKE :date and s.absence_name = :absence')
+           ->setParameters(array('user' => $user, 'date' => $date, 'absence' => $absence));
+        $data_absence_duration = $qb->getQuery()
+                                    ->getResult();
+        $count_absence = 0.0;
+        for($i = 0; $i<count($data_absence_duration);$i++)
+        {
+            $count_absence += $data_absence_duration[$i]['absence_duration'];
+        }
+        return $count_absence;
+    }
+    
+    /**
+     * Function to count number absence about a period by user and specific absence.
+     * @access public
+     * @param string $period
+     * @param User $user
+     * @param string $absence
+     * @return number
+     */
+    public function findAbsenceYear($period, $user, $absence)
+    {
+        $qb = $this->_em->createQueryBuilder();
+        $qb->select('s.absence_duration')
+           ->from('CoyoteSiteBundle:Schedule', 's')
+           ->innerJoin('CoyoteSiteBundle:Timetable', 't', 'WITH', 't.id = s.timetable')
+           ->where('s.user = :user and t.period = :period and s.absence_name = :absence')
+           ->setParameters(array('user' => $user, 'period' => $period, 'absence' => $absence));
+        $data_absence_duration = $qb->getQuery()
+                                    ->getResult();
+        $count_absence = 0.0;
+        for($i = 0; $i<count($data_absence_duration);$i++)
+        {
+            $count_absence += $data_absence_duration[$i]['absence_duration'];
+        }
+    
+        return $count_absence;
+    }
+    
+    /**
+     * Function to count working hours in month.
+     * @access public
+     * @param string $date
+     * @param User $user
+     * @return float
+     */
+    public function findDayMonth($date, $user)
+    {
+        $qb = $this->_em->createQueryBuilder();
+        $qb->select('s.working_hours')
+        ->from('CoyoteSiteBundle:Timetable', 't')
+        ->innerJoin('CoyoteSiteBundle:Schedule', 's', 'WITH', 't.id = s.timetable')
+        ->where('t.date LIKE :date and s.user = :user')
+        ->setParameters(array('date' => $date, 'user' => $user));
+        $data_working_hours = $qb->getQuery()
+        ->getResult();
+        $working_day = 0.0;
+        foreach($data_working_hours as $value)
+        {
+            $working_day = $working_day + $value['working_hours'];
+        }
+        return $working_day;
+    }
+    
+    /**
+     * Function to count working hours in period
+     * @access public
+     * @param mixed $period
      * @param mixed $user
+     * @return number
+     */
+    public function findDayYear($period, $user)
+    {
+        $qb = $this->_em->createQueryBuilder();
+        $qb->select('s.working_hours')
+           ->from('CoyoteSiteBundle:Timetable', 't')
+           ->innerJoin('CoyoteSiteBundle:Schedule', 's', 'WITH', 't.id = s.timetable')
+           ->where('t.period = :period and s.user = :user')
+           ->setParameters(array('period' => $period, 'user' => $user));
+        $data_working_hours = $qb->getQuery()
+                                 ->getResult();
+        $working_day = 0.0;
+        foreach($data_working_hours as $value)
+        {
+            $working_day = $working_day + $value['working_hours'];
+        }
+        return $working_day;
+    }
+    
+    /**
+     * Function to calculate working time by week
+     * @access public
+     * @param Schedule $dataschedule
+     * @return string $timeweek if $dataschedule is empty $timeweek = ''
+     * else $timeweek is string format 'hh:mm'
+     */
+    public function timeWeek($dataschedule)
+    {
+        if(count($dataschedule)>0)
+        {
+            $week = $dataschedule[0]['date']->format('W');
+            $index = 0;
+            $value = 0;
+            $timeweek = '';
+            $count_item = count($dataschedule)-1;
+            for($i=0;$i<count($dataschedule);$i++)
+            {
+                if ($week == $dataschedule[$i]['date']->format('W'))
+                {
+                    $value += $this->calculTime($dataschedule[$i]['working_time']);
+                    $week = $dataschedule[$i]['date']->format('W');
+                }
+                if ($count_item == $i)
+                {
+                    $timeweek[$index] = $this->formatTime($value);
+                    $value=0;
+                    $index++;
+                    $value += $this->calculTime($dataschedule[$i]['working_time']);
+                    $timeweek[$index] = $this->formatTime($value);
+                }
+                if ($week != $dataschedule[$i]['date']->format('W'))
+                {
+                    $timeweek[$index] = $this->formatTime($value);
+                    $value=0;
+                    $index++;
+                    $value += $this->calculTime($dataschedule[$i]['working_time']);
+                    $week = $dataschedule[$i]['date']->format('W');
+                }
+            }
+        }
+        else
+        {
+            $timeweek = '';
+        }
+        return $timeweek;
+    }
+    
+    /**
+     * Function to count working time by month.
+     * @access public
+     * @param string $date
+     * @param User $user
      * @return string total working time
      */
     public function findTimeMonth($date, $user)
@@ -32,9 +493,7 @@ class ScheduleRepository extends EntityRepository
            ->setParameters(array('user' => $user, 'date' => $date));
         $workingtime_schedule =  $qb->getQuery()
                                     ->getResult();
-
         $timeend = "0";
-
         for($i = 0; $i<count($workingtime_schedule); $i++)
         {
             $timeend += $this->calculTime($workingtime_schedule[$i]['working_time']);
@@ -42,59 +501,56 @@ class ScheduleRepository extends EntityRepository
         $time = $this->formatTime($timeend);
         return $time;
     }
-
+    
     /**
-     * find pay period .
-     *
+     * Function to find data schedule for technician user by month.
      * @access public
-     * @param mixed $mois
-     * @param mixed $annee
-     * @return string period
+     * @param User $user
+     * @param string $date
+     * @return Schedule
      */
-    public function findPeriod($mois, $annee)
+    public function dataSchedule($user, $date)
     {
-        if($mois >= "01" && $mois <= "05")
-        {
-            $anneebefore = $annee - 1;
-            return $anneebefore."/".$annee;
-        }
-        if($mois >= "06" && $mois <= "12")
-        {
-            $anneenext = $annee + 1;
-            return $annee."/".$anneenext;
-        }
+        $date = $date."%";
+        $qb = $this->_em->createQueryBuilder();
+        $qb->select('t.date, s.start, s.end, s.break, s.working_time, s.working_hours, s.travel, s.absence_name,
+            s.absence_duration, s.comment , t.holiday')
+           ->from('CoyoteSiteBundle:Timetable', 't')
+           ->innerJoin('CoyoteSiteBundle:Schedule', 's', 'WITH', 't.id = s.timetable')
+           ->where('t.date LIKE :date and s.user = :user ')
+           ->orderBy('s.timetable')
+           ->setParameters(array('date' => $date, 'user' => $user, ));
+        $dataschedule =  $qb->getQuery()
+                            ->getResult();
+        return $dataschedule;
     }
-
+    
     /**
-     * find absence in pay period by user and specific absence.
-     *
+     * Function to find data schedule for framework user by month.
      * @access public
-     * @param mixed $pay_period
-     * @param mixed $user
-     * @param mixed $absence
-     * @return integer count absence
+     * @param User $user
+     * @param string $date
+     * @return Schedule
      */
-    public function findAbsenceYear($period, $user, $absence)
+    public function dataScheduleFM($user, $date)
     {
         $qb = $this->_em->createQueryBuilder();
-        $qb->select('s.absence_duration')
-           ->from('CoyoteSiteBundle:Schedule', 's')
-           ->innerJoin('CoyoteSiteBundle:Timetable', 't', 'WITH', 't.id = s.timetable')
-           ->where('s.user = :user and t.period = :period and s.absence_name = :absence')
-           ->setParameters(array('user' => $user, 'period' => $period, 'absence' => $absence));
-        $data_absence_duration = $qb->getQuery()
-                                    ->getResult();
-
-        $count_absence = 0.0;
-
-        for($i = 0; $i<count($data_absence_duration);$i++)
-        {
-            $count_absence += $data_absence_duration[$i]['absence_duration'];
-        }
-
-        return $count_absence;
+        $qb->select('t.date, s.working_hours, s.travel, s.absence_name, s.absence_duration, s.comment,
+            t.holiday')
+           ->from('CoyoteSiteBundle:Timetable', 't')
+           ->innerJoin('CoyoteSiteBundle:Schedule', 's', 'WITH', 't.id = s.timetable')
+           ->where('t.date LIKE :date and s.user = :user')
+           ->orderBy('s.timetable')
+           ->setParameters(array('date' => $date, 'user' => $user));
+        $dataschedule =  $qb->getQuery()
+                            ->getResult();
+        return $dataschedule;
     }
-
+    
+    /******************************************************************/
+    /***********************Anciennes Fonctions************************/
+    /******************************************************************/
+    
     /**
      * conversion time in minutes.
      *
@@ -156,360 +612,6 @@ class ScheduleRepository extends EntityRepository
     }
 
     /**
-     * pre save schedule for technician user.
-     *
-     * @access public
-     * @param mixed $user
-     * @param mixed $timetable_id
-     * @param mixed $time_start
-     * @param mixed $time_end
-     * @param mixed $time_break
-     * @param mixed $time_travel
-     * @param mixed $time_absence
-     * @param mixed $time_comment
-     * @return entity Schedule
-     */
-    public function saveSchedule($user, $timetable_id, $time_start, $time_end, $time_break, $time_travel, $time_absence,
-        $time_absenceday, $time_absencetime, $time_comment)
-    {
-        if(empty($time_start) && empty($time_end) && empty($time_break) && empty($time_travel) && empty($time_comment)
-            && ($time_absence == "Aucune"))
-            return null;
-        $schedule = new Schedule();
-
-        $schedule->setUser($user);
-        $schedule->setTimetable($timetable_id);
-
-        if(empty($time_start))
-            $time_start = '0:00';
-        $schedule->setStart($time_start);
-
-        if(empty($time_end))
-            $time_end = '0:00';
-        $schedule->setEnd($time_end);
-
-        if(empty($time_break))
-            $time_break = '0:00';
-        $schedule->setBreak($time_break);
-
-        $timetable = new Timetable();
-
-        $working_time_day = $timetable->working_time_day($time_start, $time_end, $time_break);
-
-        $schedule->setWorkingTime($working_time_day);
-        $working_hours_day = $timetable->working_hours_day($working_time_day);
-        $schedule->setWorkingHours($working_hours_day);
-        if($time_travel == "on")
-            $time_travel = 1;
-        else
-            $time_travel = 0;
-        $schedule->setTravel($time_travel);
-        $schedule->setAbsenceName($time_absence);
-        if($time_absenceday == "0.5" || $time_absenceday == "1")
-            $schedule->setAbsenceDuration($time_absenceday);
-        if($time_absenceday == "empty")
-            $schedule->setAbsenceDuration($time_absencetime);
-        $schedule->setComment($time_comment);
-        return $schedule;
-    }
-
-    /**
-     * pre update schedule for technician user.
-     *
-     * @access public
-     * @param mixed $schedule
-     * @param mixed $time_start
-     * @param mixed $time_end
-     * @param mixed $time_break
-     * @param mixed $time_travel
-     * @param mixed $time_absence
-     * @param mixed $time_comment
-     * @return entity Schedule
-     */
-    public function updateSchedule($schedule, $time_start, $time_end, $time_break, $time_travel, $time_absence,
-        $time_absenceday, $time_absencetime, $time_comment)
-    {
-        $timetable = new timetable();
-        if(empty($time_start))
-            $time_start = '0:00';
-
-        if(empty($time_end))
-            $time_end = '0:00';
-
-        if(empty($time_break))
-            $time_break = '0:00';
-        $schedule->setBreak($time_break);
-        $schedule->setStart($time_start);
-        $schedule->setEnd($time_end);
-        $schedule->setBreak($time_break);
-        $working_time_day = $timetable->working_time_day($time_start, $time_end, $time_break);
-        $schedule->setWorkingTime($working_time_day);
-        $working_hours_day = $timetable->working_hours_day($working_time_day);
-        $schedule->setWorkingHours($working_hours_day);
-        if($time_travel == "on")
-            $time_travel = 1;
-        else
-            $time_travel = 0;
-        $schedule->setTravel($time_travel);
-        $schedule->setAbsenceName($time_absence);
-        if($time_absenceday == "0.5" || $time_absenceday == "1")
-            $schedule->setAbsenceDuration($time_absenceday);
-        if($time_absenceday == "empty")
-            $schedule->setAbsenceDuration($time_absencetime);
-        $schedule->setComment($time_comment);
-        return $schedule;
-    }
-
-    /**
-     * pre save schedule for framework user.
-     *
-     * @access public
-     * @param mixed $user
-     * @param mixed $timetable_id
-     * @param mixed $time_travel
-     * @param mixed $time_absence
-     * @param mixed $time_comment
-     * @param mixed $day
-     * @return entity Shcedule
-     */
-    public function saveSchedulefm($user, $timetable_id, $time_travel, $time_absence, $time_absenceday,
-        $time_absencetime, $time_comment, $day)
-    {
-        if(empty($day) && empty($time_travel) && empty($time_comment)
-            && ($time_absence == "Aucune"))
-            return null;
-        $schedule = new schedule();
-        $schedule->setUser($user);
-        $schedule->setTimetable($timetable_id);
-        $schedule->setStart("0:00");
-        $schedule->setEnd("0:00");
-        $schedule->setBreak("0:00");
-        $schedule->setWorkingTime("0:00");
-        $schedule->setWorkingHours($day);
-        if($time_travel == "on")
-            $time_travel = 1;
-        else
-            $time_travel = 0;
-        $schedule->setTravel($time_travel);
-        $schedule->setAbsenceName($time_absence);
-        if($time_absenceday == "0.5" || $time_absenceday == "1")
-            $schedule->setAbsenceDuration($time_absenceday);
-        if($time_absenceday == "empty")
-        {
-            if($time_absencetime == "undef")
-                $schedule->setAbsenceDuration('');
-            else
-                $schedule->setAbsenceDuration($time_absencetime);
-        }
-        $schedule->setComment($time_comment);
-        return $schedule;
-    }
-
-    /**
-     * pre update schedule for framework user.
-     *
-     * @access public
-     * @param mixed $schedule
-     * @param mixed $time_travel
-     * @param mixed $time_absence
-     * @param mixed $time_comment
-     * @param mixed $day
-     * @return entity Schedule
-     */
-    public function updateSchedulefm($schedule, $time_travel, $time_absence, $time_absenceday, $time_absencetime,
-        $time_comment, $day)
-    {
-        $schedule->setWorkingHours($day);
-        if($time_travel == "on")
-            $time_travel = 1;
-        else
-            $time_travel = 0;
-        $schedule->setTravel($time_travel);
-        $schedule->setAbsenceName($time_absence);
-        if($time_absenceday == "0.5" || $time_absenceday == "1")
-            $schedule->setAbsenceDuration($time_absenceday);
-        if($time_absenceday == "empty")
-        {
-            if($time_absencetime == "undef")
-                $schedule->setAbsenceDuration('');
-            else
-                $schedule->setAbsenceDuration($time_absencetime);
-        }
-        $schedule->setComment($time_comment);
-        return $schedule;
-    }
-
-    /**
-     * data schedule for technician user.
-     *
-     * @access public
-     * @param mixed $user
-     * @param mixed $date
-     * @return array Schedule, Timetable
-     */
-    public function dataSchedule($user, $date)
-    {
-        $datestart = $date."01";
-        $date = $date."%";
-        $qb = $this->_em->createQueryBuilder();
-        $qb->select('t.date, s.start, s.end, s.break, s.working_time, s.working_hours, s.travel, s.absence_name,
-            s.absence_duration, s.comment , t.holiday')
-           ->from('CoyoteSiteBundle:Timetable', 't')
-           ->innerJoin('CoyoteSiteBundle:Schedule', 's', 'WITH', 't.id = s.timetable')
-           ->where('t.date LIKE :date and s.user = :user ')
-           ->orderBy('s.timetable')
-           ->setParameters(array('date' => $date, 'user' => $user, ));
-        $dataschedule =  $qb->getQuery()
-                            ->getResult();
-        return $dataschedule;
-    }
-
-    public function timeWeek($dataschedule)
-    {
-        if(count($dataschedule)>0)
-        {
-            $week = $dataschedule[0]['date']->format('W');
-            $index = 0;
-            $value = 0;
-            $timeweek = '';
-            $count_item = count($dataschedule)-1;
-            for($i=0;$i<count($dataschedule);$i++)
-            {
-                if($week == $dataschedule[$i]['date']->format('W'))
-                {
-                    $value += $this->calculTime($dataschedule[$i]['working_time']);
-                    $week = $dataschedule[$i]['date']->format('W');
-                }
-                if($count_item == $i)
-                {
-                    $timeweek[$index] = $this->formatTime($value);
-                    $value=0;
-                    $index++;
-                    $value += $this->calculTime($dataschedule[$i]['working_time']);
-                    $timeweek[$index] = $this->formatTime($value);
-                }
-                if($week != $dataschedule[$i]['date']->format('W'))
-                {
-                    $timeweek[$index] = $this->formatTime($value);
-                    $value=0;
-                    $index++;
-                    $value += $this->calculTime($dataschedule[$i]['working_time']);
-                    $week = $dataschedule[$i]['date']->format('W');
-                }
-            }
-        }
-        else
-            $timeweek = '';
-        return $timeweek;
-    }
-
-    /**
-     * data schedule for framework user .
-     *
-     * @access public
-     * @param mixed $user
-     * @param mixed $date
-     * @return array Schedule, Timetable
-     */
-    public function dataScheduleFM($user, $date)
-    {
-        $qb = $this->_em->createQueryBuilder();
-        $qb->select('t.date, s.working_hours, s.travel, s.absence_name, s.absence_duration, s.comment,
-            t.holiday')
-           ->from('CoyoteSiteBundle:Timetable', 't')
-           ->innerJoin('CoyoteSiteBundle:Schedule', 's', 'WITH', 't.id = s.timetable')
-           ->where('t.date LIKE :date and s.user = :user')
-           ->orderBy('s.timetable')
-           ->setParameters(array('date' => $date, 'user' => $user));
-        $dataschedule =  $qb->getQuery()
-                            ->getResult();
-        return $dataschedule;
-    }
-
-    /**
-     * find count absence
-     *
-     * @access public
-     * @param mixed $date
-     * @param mixed $user
-     * @param mixed $absence
-     * @return float
-     */
-    public function absenceMonth($date, $user, $absence)
-    {
-        $qb = $this->_em->createQueryBuilder();
-        $qb->select('s.absence_duration')
-           ->from('CoyoteSiteBundle:Schedule', 's')
-           ->innerJoin('CoyoteSiteBundle:Timetable', 't', 'WITH', 't.id = s.timetable')
-           ->where('s.user = :user and t.date LIKE :date and s.absence_name = :absence')
-           ->setParameters(array('user' => $user, 'date' => $date, 'absence' => $absence));
-        $data_absence_duration = $qb->getQuery()
-                                    ->getResult();
-
-        $count_absence = 0.0;
-
-        for($i = 0; $i<count($data_absence_duration);$i++)
-        {
-            $count_absence += $data_absence_duration[$i]['absence_duration'];
-        }
-
-        return $count_absence;
-    }
-
-    /**
-     * find count working day in month.
-     *
-     * @access public
-     * @param mixed $date
-     * @param mixed $user
-     * @return float
-     */
-    public function findDayMonth($date, $user)
-    {
-        $qb = $this->_em->createQueryBuilder();
-        $qb->select('s.working_hours')
-           ->from('CoyoteSiteBundle:Timetable', 't')
-           ->innerJoin('CoyoteSiteBundle:Schedule', 's', 'WITH', 't.id = s.timetable')
-           ->where('t.date LIKE :date and s.user = :user')
-           ->setParameters(array('date' => $date, 'user' => $user));
-        $data_working_hours = $qb->getQuery()
-                                 ->getResult();
-        $working_day = 0.0;
-        foreach($data_working_hours as $value)
-        {
-            $working_day = $working_day + $value['working_hours'];
-        }
-        return $working_day;
-    }
-
-    /**
-     * find count working day in year
-     *
-     * @access public
-     * @param mixed $period
-     * @param mixed $user
-     * @return float
-     */
-    public function findDayYear($period, $user)
-    {
-        $qb = $this->_em->createQueryBuilder();
-        $qb->select('s.working_hours')
-           ->from('CoyoteSiteBundle:Timetable', 't')
-           ->innerJoin('CoyoteSiteBundle:Schedule', 's', 'WITH', 't.id = s.timetable')
-           ->where('t.period = :period and s.user = :user')
-           ->setParameters(array('period' => $period, 'user' => $user));
-        $data_working_hours = $qb->getQuery()
-                                 ->getResult();
-        $working_day = 0.0;
-        foreach($data_working_hours as $value)
-        {
-            $working_day = $working_day + $value['working_hours'];
-        }
-        return $working_day;
-    }
-
-
-    /**
      * dataScheduleYear function.
      * data schedule technician user
      *
@@ -532,7 +634,6 @@ class ScheduleRepository extends EntityRepository
                             ->getResult();
         return $dataschedule;
     }
-
 
     /**
      * dataScheduleFMYear function.
@@ -579,10 +680,6 @@ class ScheduleRepository extends EntityRepository
         return $timetable_noweek;
     }
 
-
-
-
-
     /**
      * sumWorkingTimeMonth function.
      * function to calculate working time by month
@@ -611,7 +708,6 @@ class ScheduleRepository extends EntityRepository
         return $this->formatTimeDB($timetotal);
     }
 
-
     /**
      * formatTimeDB function.
      * convert string in datetime
@@ -633,7 +729,6 @@ class ScheduleRepository extends EntityRepository
         return $heures.':'.$minutes;
     }
 
-
     /**
      * countAbsence function.
      * function to calculate working day
@@ -653,7 +748,6 @@ class ScheduleRepository extends EntityRepository
             ->where('t.date = :date')
             ->setParameters(array('date' => $date->format('Y-m-d')));
         $data_date = $qb->getQuery()->getOneOrNullResult();
-
         $qb = $this->_em->createQueryBuilder();
         $qb->select('t')
             ->from('CoyoteSiteBundle:Timetable', 't')
@@ -661,7 +755,6 @@ class ScheduleRepository extends EntityRepository
             ->orderBy('t.id', 'ASC')
             ->setParameters(array('period' => $data_date->getPeriod()));
         $data_date = $qb->getQuery()->getResult();
-
         $datefin = date("Y-m-d H:i:s", mktime(23,59,59,date("m"),0,date("Y")));
         $qb = $this->_em->createQueryBuilder();
         $qb->select('t')
@@ -675,7 +768,6 @@ class ScheduleRepository extends EntityRepository
                          ->getResult();
         return count($timetable);
     }
-
 
     /**
      * dataFileBE function.
@@ -699,7 +791,6 @@ class ScheduleRepository extends EntityRepository
             return $timetableschedule;
     }
 
-
     /**
      * nameUser function.
      *
@@ -718,7 +809,6 @@ class ScheduleRepository extends EntityRepository
         return $user_name;
     }
 
-
     /**
      * fileDataUserBE function.
      * function to generate string with data user BE
@@ -731,21 +821,14 @@ class ScheduleRepository extends EntityRepository
      */
     public function fileDataUserBE($tab_user_id, $month, $year)
     {
-        $qb = $this->_em->createQueryBuilder();
         $result = "";
         $no_week = 0;
-
         foreach($tab_user_id as $user_id)
         {
             $timetableschedule = $this->dataFileBE($user_id, $year.'-'.$month.'-%');
-
             $timeres = 0;
-            $index = 0;
-
             $user_name = $this->nameUser($user_id);
-
             $result .= $user_name[0]['name'].";\r\n\r\n";
-
             foreach($timetableschedule as $data)
             {
                 if($no_week != 0 && $data['no_week'] != $no_week)
@@ -767,26 +850,6 @@ class ScheduleRepository extends EntityRepository
             }
         }
         return $result;
-    }
-
-    public function timeData($timetable, $user )
-    {
-        $index = 0;
-        foreach($timetable as $data)
-        {
-            $qb = $this->_em->createQueryBuilder();
-            $qb->select('s')
-                   ->from('CoyoteSiteBundle:Schedule', 's')
-                   ->where('s.user = :user and s.timetable = :timetable')
-                   ->setParameters(array('user' => $user, 'timetable' => $data));
-            $result = $qb->getQuery()->getOneOrNullResult();//$qb->getQuery()->getResult();
-            if($result == null)
-                $time[$index] = array();
-            else
-                $time[$index] = $result;
-            $index++;
-        }
-        return $time;
     }
 
     public function absenceByUser($user)

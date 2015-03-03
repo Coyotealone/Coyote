@@ -33,7 +33,7 @@
     {% endfor %}
 
     {% if is_granted('ROLE_TECH') %}
-        <form role="form" action="{{ path('schedule_savetime') }}" method='post'>
+        <form role="form" action="{{ path('schedule_postscheduleuser') }}" method='post'>
             <p id="titreconfig">
             <button class='btnsave' type="submit" value="Enregistrer" id="enregistrer">{{ 'schedule.submit.save'|trans }}</button>
                 <b>{{'schedule.title.new'|trans}} - </b>
@@ -157,15 +157,15 @@
         		{{ 'schedule.end'|trans }} <input class='input' type='text' id='finauto'>
         		{{ 'schedule.break'|trans }} <input class='input' type='text' id='pauseauto'>
         	</div><br>
-        	<a id='work_less' class='btnpage' href="{{ path('schedule_workless')}}" >{{'schedule.submit.previous_week'|trans}}</a>
+        	<a id='work_less' class='btnpage' href="{{ path('schedule_weekless')}}" >{{'schedule.submit.previous_week'|trans}}</a>
             <a id='saisie_auto' class='btnauto' onclick='saisie_auto()'>{{'schedule.write_auto'|trans}}</a>
-            <a id='work_more' class='btnpage' href="{{ path('schedule_workmore')}}" >{{'schedule.submit.next_week'|trans}}</a>
+            <a id='work_more' class='btnpage' href="{{ path('schedule_weekmore')}}" >{{'schedule.submit.next_week'|trans}}</a>
         </form>
         <br>{{'schedule.working_time_week'|trans}} <input readonly type="text" id="timeweek"></input>
 
     {% endif %}
     {% if is_granted('ROLE_CADRE') %}
-    <form role="form" action="{{ path('schedule_savetimefm') }}" method='post'>
+    <form role="form" action="{{ path('schedule_postscheduleuser') }}" method='post'>
         <div id="contenu">
             <p id="titreconfig">
                 <button class='btnsave' type="submit" value="Enregistrer" id="enregistrer">{{ 'schedule.submit.save'|trans }}</button>
@@ -252,8 +252,8 @@
                     </tbody>
                 </table>
             </div>
-            <a id='work_less' class='btnpage' href="{{ path('schedule_workless')}}" >{{'schedule.submit.previous_week'|trans}}</a>
-            <a id='work_more' class='btnpage' href="{{ path('schedule_workmore')}}" >{{'schedule.submit.next_week'|trans}}</a>
+            <a id='work_less' class='btnpage' href="{{ path('schedule_weekless')}}" >{{'schedule.submit.previous_week'|trans}}</a>
+            <a id='work_more' class='btnpage' href="{{ path('schedule_weekmore')}}" >{{'schedule.submit.next_week'|trans}}</a>
         </form>
     {% endif %}
 
