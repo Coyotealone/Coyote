@@ -547,20 +547,17 @@ class ScheduleRepository extends EntityRepository
         return $dataschedule;
     }
     
-    /******************************************************************/
-    /***********************Anciennes Fonctions************************/
-    /******************************************************************/
+    /*****************************Commun****************************/
     
     /**
-     * conversion time in minutes.
-     *
+     * Function to convert time in minutes.
      * @access public
-     * @param mixed $time
-     * @return integer minutes
+     * @param string $time
+     * @return number integer minutes
      */
     public function calculTime($time)
     {
-        if($time == "0:00")
+        if ($time == "0:00")
             return 0;
         $time = explode(":", $time);
         $minute = $time[1];
@@ -568,26 +565,34 @@ class ScheduleRepository extends EntityRepository
         $timefinal = $heure * 60 + $minute;
         return $timefinal;
     }
-
+    
     /**
-     * conversion time in hours.
+     * Function to convert time in hours.
      *
      * @access public
      * @param mixed $time
-     * @return string
+     * @return string format hh:mm
      */
     public function formatTime($time)
     {
         date_default_timezone_set('UTC');
         $time = $time * 60;
-
         $heures=intval($time / 3600);
         $minutes=intval(($time % 3600) / 60);
-        if(strlen($minutes) < 2)
+        if (strlen($minutes) < 2)
+        {
             $minutes = '0'.$minutes;
-
+        }
         return $heures.'h'.$minutes;
     }
+    
+    /******************************************************************/
+    /***********************Anciennes Fonctions************************/
+    /******************************************************************/
+    
+    
+
+    
 
     /**
      * find week and year.
