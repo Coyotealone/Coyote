@@ -51,12 +51,9 @@ class MainController extends Controller
         {
             /** @var $em object doctrine request */
             $em = $this->getDoctrine()->getManager();
-            /** @var $user_id int user id */
-            $user_id = $this->get('security.context')->getToken()->getUser()->getId();
-            /** set userid */
-            $session->set('userid', $user_id);
+            
             /** @var $data_user entity User */
-            $data_user = $em->getRepository('CoyoteSiteBundle:User')->findOneById($user_id);
+            $data_user = $em->getRepository('CoyoteSiteBundle:User')->findOneById($this->getUser());
 
             $date = date('Y').'-'.date('m').'-'.date('d');
             $date = (new \DateTime($date));
@@ -71,17 +68,7 @@ class MainController extends Controller
             $session->set('username', $data_user->getName());
             /** set status */
             $session->set('status', $data_user->getRoles());
-            /** check role */
-            if($this->get('security.context')->isGranted('ROLE_BUSINESS'))
-            {
-                /** @var $data_userfees entity UserFees */
-                $data_userfees = $em->getRepository('CoyoteSiteBundle:UserFees')->findOneByUser(
-                    $session->get('userid'));
-                /** check $data_userfees */
-                if($data_userfees != null)
-                    /** set userfeesid */
-                    $session->set('userfeesid', $data_userfees->getId());
-            }
+            
             /** @var $lang string _locale */
             $lang = $session->get('lang');
             /** check $lang */

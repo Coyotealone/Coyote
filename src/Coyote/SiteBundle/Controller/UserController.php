@@ -5,37 +5,37 @@ namespace Coyote\SiteBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-use Coyote\SiteBundle\Entity\Car;
-use Coyote\SiteBundle\Form\CarType;
+use Coyote\SiteBundle\Entity\User;
+use Coyote\SiteBundle\Form\UserType;
 
 /**
- * Car controller.
+ * User controller.
  *
  */
-class CarController extends Controller
+class UserController extends Controller
 {
 
     /**
-     * Lists all Car entities.
+     * Lists all User entities.
      *
      */
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('CoyoteSiteBundle:Car')->findAll();
+        $entities = $em->getRepository('CoyoteSiteBundle:User')->findAll();
 
-        return $this->render('CoyoteSiteBundle:Car:index.html.twig', array(
+        return $this->render('CoyoteSiteBundle:User:index.html.twig', array(
             'entities' => $entities,
         ));
     }
     /**
-     * Creates a new Car entity.
+     * Creates a new User entity.
      *
      */
     public function createAction(Request $request)
     {
-        $entity = new Car();
+        $entity = new User();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
@@ -44,26 +44,26 @@ class CarController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('test_car_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('user_test_show', array('id' => $entity->getId())));
         }
 
-        return $this->render('CoyoteSiteBundle:Car:new.html.twig', array(
+        return $this->render('CoyoteSiteBundle:User:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
     }
 
     /**
-     * Creates a form to create a Car entity.
+     * Creates a form to create a User entity.
      *
-     * @param Car $entity The entity
+     * @param User $entity The entity
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createCreateForm(Car $entity)
+    private function createCreateForm(User $entity)
     {
-        $form = $this->createForm(new CarType(), $entity, array(
-            'action' => $this->generateUrl('test_car_create'),
+        $form = $this->createForm(new UserType(), $entity, array(
+            'action' => $this->generateUrl('user_test_create'),
             'method' => 'POST',
         ));
 
@@ -73,60 +73,60 @@ class CarController extends Controller
     }
 
     /**
-     * Displays a form to create a new Car entity.
+     * Displays a form to create a new User entity.
      *
      */
     public function newAction()
     {
-        $entity = new Car();
+        $entity = new User();
         $form   = $this->createCreateForm($entity);
 
-        return $this->render('CoyoteSiteBundle:Car:new.html.twig', array(
+        return $this->render('CoyoteSiteBundle:User:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
     }
 
     /**
-     * Finds and displays a Car entity.
+     * Finds and displays a User entity.
      *
      */
     public function showAction($id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('CoyoteSiteBundle:Car')->find($id);
+        $entity = $em->getRepository('CoyoteSiteBundle:User')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Car entity.');
+            throw $this->createNotFoundException('Unable to find User entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('CoyoteSiteBundle:Car:show.html.twig', array(
+        return $this->render('CoyoteSiteBundle:User:show.html.twig', array(
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),
         ));
     }
 
     /**
-     * Displays a form to edit an existing Car entity.
+     * Displays a form to edit an existing User entity.
      *
      */
     public function editAction($id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('CoyoteSiteBundle:Car')->find($id);
+        $entity = $em->getRepository('CoyoteSiteBundle:User')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Car entity.');
+            throw $this->createNotFoundException('Unable to find User entity.');
         }
 
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('CoyoteSiteBundle:Car:edit.html.twig', array(
+        return $this->render('CoyoteSiteBundle:User:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -134,16 +134,16 @@ class CarController extends Controller
     }
 
     /**
-    * Creates a form to edit a Car entity.
+    * Creates a form to edit a User entity.
     *
-    * @param Car $entity The entity
+    * @param User $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createEditForm(Car $entity)
+    private function createEditForm(User $entity)
     {
-        $form = $this->createForm(new CarType(), $entity, array(
-            'action' => $this->generateUrl('test_car_update', array('id' => $entity->getId())),
+        $form = $this->createForm(new UserType(), $entity, array(
+            'action' => $this->generateUrl('user_test_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -152,17 +152,17 @@ class CarController extends Controller
         return $form;
     }
     /**
-     * Edits an existing Car entity.
+     * Edits an existing User entity.
      *
      */
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('CoyoteSiteBundle:Car')->find($id);
+        $entity = $em->getRepository('CoyoteSiteBundle:User')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Car entity.');
+            throw $this->createNotFoundException('Unable to find User entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -172,17 +172,17 @@ class CarController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('test_car_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('user_test_edit', array('id' => $id)));
         }
 
-        return $this->render('CoyoteSiteBundle:Car:edit.html.twig', array(
+        return $this->render('CoyoteSiteBundle:User:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }
     /**
-     * Deletes a Car entity.
+     * Deletes a User entity.
      *
      */
     public function deleteAction(Request $request, $id)
@@ -192,21 +192,21 @@ class CarController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('CoyoteSiteBundle:Car')->find($id);
+            $entity = $em->getRepository('CoyoteSiteBundle:User')->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Car entity.');
+                throw $this->createNotFoundException('Unable to find User entity.');
             }
 
             $em->remove($entity);
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('test_car'));
+        return $this->redirect($this->generateUrl('user_test'));
     }
 
     /**
-     * Creates a form to delete a Car entity by id.
+     * Creates a form to delete a User entity by id.
      *
      * @param mixed $id The entity id
      *
@@ -215,7 +215,7 @@ class CarController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('test_car_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('user_test_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()

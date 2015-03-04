@@ -590,6 +590,67 @@ class ScheduleRepository extends EntityRepository
         return $entities;
     }
     
+    /*******************Admin:exportDataUserAction******************/    
+    
+    /**
+     * Function to retrieve data user about a date.
+     * @param User $user
+     * @param string $date date format 'Y-m-%'
+     * @return Schedule Entity
+     */
+    public function dataFileBE($user, $date)
+    {
+        $qb = $this->_em->createQueryBuilder();
+        $qb->select('t.date, s.start, s.end, s.break, s.working_time, s.working_hours, s.comment,
+            s.travel, s.absence_name, s.absence_duration')
+                ->from('CoyoteSiteBundle:Timetable', 't')
+                ->innerJoin('CoyoteSiteBundle:Schedule', 's', 'WITH', 't.id = s.timetable')
+                ->where('t.date LIKE :date and s.user = :user')
+                ->setParameters(array('date' => $date, 'user' => $user));
+        $timetableschedule = $qb->getQuery()->getResult();
+        return $timetableschedule;
+    }
+    
+    /**
+     * Function to generate file for Chef_BE with data users.
+     * @param array $tab_user_id Id User who work to Chef_BE
+     * @param string $month
+     * @param string $year
+     * @return string data users
+     */
+    public function fileDataUserBE($tab_user_id, $month, $year)
+    {
+        $result = "";
+        $week = 0;
+        foreach($tab_user_id as $user_id)
+        {
+            $timetableschedule = $this->dataFileBE($user_id, $year.'-'.$month.'-%');
+            $timeres = 0;
+            $user_name = $this->nameUser($user_id);
+            $result .= $user_name[0]['name'].";\r\n\r\n";
+            foreach($timetableschedule as $data)
+            {
+                if($week != 0 && $data['date']->format('W') != $week)
+                {
+                    $result .= "Temps de travail de la semaine : ".$this->formatTime($timeres).";\r\n\r\n";
+                    $timeres = 0;
+                }
+                $week = $data['date']->format('W');
+                $result .= $data['date']->format('l').';'.$data['date']->format('Y-m-d').';';
+                $result .= $data['start'].";".$data['end'].";".$data['break'].";".$data['working_time'].";";
+                $result .= $data['working_hours'].";";
+                $result .= $data['travel'].";".$data['absence_name'].";".$data['absence_duration'].";".$data['comment'].";\r\n";
+                $timeres += $this->calculTime($data['working_time']).";\r\n";
+                if ($data === end($timetableschedule))
+                {
+                    $result .= "Temps de travail de la semaine : ".$this->formatTime($timeres).";\r\n\r\n";
+                    $timeres = 0;
+                }
+            }
+        }
+        return $result;
+    }
+    
     /*****************************Commun****************************/
     
     /**
@@ -817,27 +878,7 @@ class ScheduleRepository extends EntityRepository
         return count($timetable);
     }
 
-    /**
-     * dataFileBE function.
-     * function to retrieve data about user be
-     *
-     * @access public
-     * @param mixed $user
-     * @param mixed $date
-     * @return array Timetable, Schedule
-     */
-    public function dataFileBE($user, $date)
-    {
-        $qb = $this->_em->createQueryBuilder();
-        $qb->select('t.no_week, t.date, s.start, s.end, s.break, s.working_time, s.working_hours, s.comment,
-            s.travel, s.absence_name')
-               ->from('CoyoteSiteBundle:Timetable', 't')
-               ->innerJoin('CoyoteSiteBundle:Schedule', 's', 'WITH', 't.id = s.timetable')
-               ->where('t.date LIKE :date and s.user = :user')
-               ->setParameters(array('date' => $date, 'user' => $user));
-            $timetableschedule = $qb->getQuery()->getResult();
-            return $timetableschedule;
-    }
+    
 
     /**
      * nameUser function.
@@ -857,52 +898,7 @@ class ScheduleRepository extends EntityRepository
         return $user_name;
     }
 
-    /**
-     * fileDataUserBE function.
-     * function to generate string with data user BE
-     *
-     * @access public
-     * @param mixed $tab_user_id
-     * @param mixed $month
-     * @param mixed $year
-     * @return string
-     */
-    public function fileDataUserBE($tab_user_id, $month, $year)
-    {
-        $result = "";
-        $no_week = 0;
-        foreach($tab_user_id as $user_id)
-        {
-            $timetableschedule = $this->dataFileBE($user_id, $year.'-'.$month.'-%');
-            $timeres = 0;
-            $user_name = $this->nameUser($user_id);
-            $result .= $user_name[0]['name'].";\r\n\r\n";
-            foreach($timetableschedule as $data)
-            {
-                if($no_week != 0 && $data['no_week'] != $no_week)
-                {
-                    $result .= "Temps de travail de la semaine : ".$this->formatTime($timeres).";\r\n\r\n";
-                    $timeres = 0;
-                }
-                $no_week = $data['no_week'];
-                $result .= $data['day'].';'.$data['date']->format('Y-m-d').';';
-                $result .= $data['start'].";".$data['end'].";".$data['break'].";".$data['working_time'].";";
-                $result .= $data['working_hours'].";";
-                $result .= $data['travel'].";".$data['absence_name'].";".$data['comment'].";\r\n";
-                $timeres += $this->calculTime($data['working_time']).";\r\n";
-                if ($data === end($timetableschedule))
-                {
-                    $result .= "Temps de travail de la semaine : ".$this->formatTime($timeres).";\r\n\r\n";
-                    $timeres = 0;
-                }
-            }
-        }
-        return $result;
-    }
-
-    
-
-    public function calculOvertimeTech($user, $count_time, $count_absence)
+     public function calculOvertimeTech($user, $count_time, $count_absence)
     {
         $date = new \DateTime();
         $date = $date->sub(date_interval_create_from_date_string('1 days'));

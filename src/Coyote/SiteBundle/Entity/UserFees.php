@@ -43,12 +43,6 @@ class UserFees
     private $expenses;
     
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="userfeess")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
-     */
-    private $user;
-    
-    /**
      * @ORM\ManyToOne(targetEntity="Car", inversedBy="userfeess")
      * @ORM\JoinColumn(name="car_id", referencedColumnName="id")
      */

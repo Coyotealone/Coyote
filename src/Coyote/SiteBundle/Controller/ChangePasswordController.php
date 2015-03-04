@@ -26,8 +26,12 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 class ChangePasswordController extends Controller
 {
     /**
-    * Change user password
-    */
+     * Change user password
+     * @access public
+     * @param Request $request
+     * @throws AccessDeniedException
+     * @return Ambigous <\Symfony\Component\HttpFoundation\Response, NULL>|\Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public function changePasswordAction(Request $request)
     {
         $user = $this->container->get('security.context')->getToken()->getUser();

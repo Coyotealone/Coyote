@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class TestType extends AbstractType
+class UserFeesType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -15,12 +15,10 @@ class TestType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('start','collection',array('type'=>new ScheduleType(),
-                            'prototype'=>true,
-                            'allow_add'=>true))
-            ->add('end','collection',array('type'=>new ScheduleType,
-                            'prototype'=>true,
-                            'allow_add'=>true))
+            ->add('login')
+            ->add('code')
+            ->add('service')
+            ->add('car')
         ;
     }
     
@@ -30,7 +28,7 @@ class TestType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Coyote\SiteBundle\Entity\Schedule'
+            'data_class' => 'Coyote\SiteBundle\Entity\UserFees'
         ));
     }
 
@@ -39,6 +37,6 @@ class TestType extends AbstractType
      */
     public function getName()
     {
-        return 'coyote_sitebundle_schedule';
+        return 'coyote_sitebundle_userfees';
     }
 }

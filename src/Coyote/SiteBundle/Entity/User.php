@@ -93,17 +93,18 @@ class User extends BaseUser
     private $schedules;
 
     /**
-     * @ORM\OneToMany(targetEntity="UserFees", mappedBy="user", cascade={"persist", "merge"})
-     */
-    private $userfeess;
+    * @ORM\OneToOne(targetEntity="UserFees", cascade={"persist"})
+    * @ORM\JoinColumn(nullable=true)
+    */
+    private $userfees;
 
     /**
      * Constructor
      */
     public function __construct()
     {
+        parent::__construct();
         $this->schedules = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->userfeess = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -184,7 +185,7 @@ class User extends BaseUser
     {
         return $this->address2;
     }
-
+    
     /**
      * Set zip_code
      *
@@ -357,39 +358,6 @@ class User extends BaseUser
     }
 
     /**
-     * Add userfeess
-     *
-     * @param \Coyote\SiteBundle\Entity\UserFees $userfeess
-     * @return User
-     */
-    public function addUserfeess(\Coyote\SiteBundle\Entity\UserFees $userfeess)
-    {
-        $this->userfeess[] = $userfeess;
-
-        return $this;
-    }
-
-    /**
-     * Remove userfeess
-     *
-     * @param \Coyote\SiteBundle\Entity\UserFees $userfeess
-     */
-    public function removeUserfeess(\Coyote\SiteBundle\Entity\UserFees $userfeess)
-    {
-        $this->userfeess->removeElement($userfeess);
-    }
-
-    /**
-     * Get userfeess
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getUserfeess()
-    {
-        return $this->userfeess;
-    }
-
-    /**
      * Set website
      *
      * @param string $website
@@ -435,4 +403,26 @@ class User extends BaseUser
         return $this->phone;
     }
 
+    /**
+     * Set userfees
+     *
+     * @param \Coyote\SiteBundle\Entity\UserFees $userfees
+     * @return User
+     */
+    public function setUserfees(\Coyote\SiteBundle\Entity\UserFees $userfees = null)
+    {
+        $this->userfees = $userfees;
+
+        return $this;
     }
+
+    /**
+     * Get userfees
+     *
+     * @return \Coyote\SiteBundle\Entity\UserFees 
+     */
+    public function getUserfees()
+    {
+        return $this->userfees;
+    }
+}

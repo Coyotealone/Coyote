@@ -30,7 +30,6 @@
     {% if message == 'expense.flash.save_multiple' %}
         <p id="flashmessage_valid">{{ flashMessage|trans({'%count%': app.session.get('countExpense') }) }}</p>
     {% endif %}
-
 {% endfor %}
 
 <p id="titreconfig">{{'expense.title.create'|trans}} </p>
