@@ -34,7 +34,7 @@ class AbsenceController extends Controller
             'route_params' => array()
         );
         $entities = $this->getDoctrine()->getRepository('CoyoteSiteBundle:Schedule')
-        ->getListAbsenceUser($this->getUser(), $page, $maxItems);
+            ->getListAbsenceUser($this->getUser(), $page, $maxItems);
         return $this->render('CoyoteSiteBundle:Absence:index.html.twig', array(
                         'entities' => $entities,
                         'pagination' => $pagination));
@@ -115,11 +115,8 @@ class AbsenceController extends Controller
      */
     public function showAction($id)
     {
-
         $em = $this->getDoctrine()->getManager();
-
         $entity = $em->getRepository('CoyoteSiteBundle:Schedule')->find($id);
-
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Schedule entity.');
         }
@@ -127,13 +124,8 @@ class AbsenceController extends Controller
         {
             throw $this->createNotFoundException("You don't have permission to view this entity.");
         }
-        //$deleteForm = $this->createDeleteForm($id);
-
-        //return new Response($entity->getTimetable());
-
         return $this->render('CoyoteSiteBundle:Absence:show.html.twig', array(
             'entity'      => $entity,
-            //'delete_form' => $deleteForm->createView(),
         ));
     }
 
