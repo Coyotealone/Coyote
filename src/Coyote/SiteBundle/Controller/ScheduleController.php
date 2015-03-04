@@ -26,7 +26,7 @@ class ScheduleController extends Controller
     /**
      * Function to display a edit page of Time Attendance User about week.
      * getScheduleUserAction()
-     * 
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function getScheduleUserAction()
@@ -34,22 +34,22 @@ class ScheduleController extends Controller
         $em = $this->getDoctrine()->getManager();
         $request = $this->getRequest();
         $session = $request->getSession();
-    
+
         $date = $em->getRepository('CoyoteSiteBundle:Timetable')->createDateYearWeek(
                 $session->get('year'), $session->get('week'));
-    
+
         $data_timetable = $em->getRepository('CoyoteSiteBundle:Timetable')->searchIdDate($date);
-    
+
         $time = $em->getRepository('CoyoteSiteBundle:Schedule')->timeData(
                 $data_timetable, $this->getUser());
-    
+
         $duration = $em->getRepository('CoyoteSiteBundle:Schedule')->initGetSchedule(
                 $time, $data_timetable, $session);
-    
+
         return $this->render('CoyoteSiteBundle:Schedule:postschedule.html.twig',
                 array('data_timetable' => $data_timetable, 'time' => $time, 'duration' => $duration));
     }
-    
+
     /**
      * Function that redirect to getScheduleUserAction().
      * indexAction()
@@ -330,7 +330,7 @@ class ScheduleController extends Controller
                         'year' => date('Y'), 'tab_mois' => $data->getTabMonth(), 'tab_num_mois' => $data->getTabNumMonth(),
                         'tab_annee' => $data->getTabYear()));
     }
-    
+
     /**
      * Function to print time attendance by month
      * @access public
@@ -418,7 +418,7 @@ class ScheduleController extends Controller
             return new Response('PDF réalisé');
         }
     }
-    
+
     /*****************************************************************/
     /***********************Fonctions En cours************************/
     /*****************************************************************/
@@ -438,12 +438,12 @@ class ScheduleController extends Controller
             $doctrine = $this->getDoctrine();
             $em = $doctrine->getManager();
             $request = Request::createFromGlobals();
-            $user_id = $session->get('userid');
+
             $date = "2014-06-%";
             $date_count_absence = "2014-06-0%";
-            $working_day = $em->getRepository('CoyoteSiteBundle:Timetable')->findworkingday($date, $user_id);
-            $sum_working_time = $em->getRepository('CoyoteSiteBundle:Schedule')->sumWorkingTimeMonth($date, $user_id);
-            $count_absence = $em->getRepository('CoyoteSiteBundle:Schedule')->countAbsence($date_count_absence, $user_id);
+            $working_day = $em->getRepository('CoyoteSiteBundle:Timetable')->findworkingday($date, $this->getUser());
+            $sum_working_time = $em->getRepository('CoyoteSiteBundle:Schedule')->sumWorkingTimeMonth($date, $this->getUser());
+            $count_absence = $em->getRepository('CoyoteSiteBundle:Schedule')->countAbsence($date_count_absence, $this->getUser());
             $overtime = $em->getRepository('CoyoteSiteBundle:Schedule')->calculOvertime($working_day, $sum_working_time,
                     $count_absence);
             return $this->render('CoyoteSiteBundle:Schedule:showovertime.html.twig', array('overtime' => $overtime));
@@ -469,17 +469,17 @@ class ScheduleController extends Controller
             return $this->render('CoyoteSiteBundle:Schedule:showovertime.html.twig', array('overtime' => $overtime));
         }
     }
-    
-    
-    
-    
+
+
+
+
     /*****************************************************************/
     /***********************Fonctions Erronées************************/
     /*****************************************************************/
-    
-    
 
-    
+
+
+
 
     /**
      * affichage de la page avant d'obtenir un fichier pdf de l'année.
@@ -524,14 +524,13 @@ class ScheduleController extends Controller
             return new Response("En mainteance");
             if(empty($period))
                 return $this->render('CoyoteSiteBundle:Schedule:indexprint.html.twig');
-            $user = $em->getRepository('CoyoteSiteBundle:User')->find($session->get('userid'));
-            $absencerttyear = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsenceYear($period, $user, "RTT");
-            $absencecayear = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsenceYear($period, $user, "CA");
-            $absencecpyear = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsenceYear($period, $user, "CP");
+            $absencerttyear = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsenceYear($period, $this->getUser(), "RTT");
+            $absencecayear = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsenceYear($period, $this->getUser(), "CA");
+            $absencecpyear = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsenceYear($period, $this->getUser(), "CP");
             if ($this->get('security.context')->isGranted('ROLE_CADRE'))
             {
-                $dayyear = $em->getRepository('CoyoteSiteBundle:Schedule')->findDayYear($period, $user);
-                $dataschedule = $em->getRepository('CoyoteSiteBundle:Schedule')->dataScheduleFMYear($user, $period);
+                $dayyear = $em->getRepository('CoyoteSiteBundle:Schedule')->findDayYear($period, $this->getUser());
+                $dataschedule = $em->getRepository('CoyoteSiteBundle:Schedule')->dataScheduleFMYear($this->getUser(), $period);
                 $page = $this->render('CoyoteSiteBundle:Schedule:printfmpayperiod.html.twig', array(
                     'dataschedule' => $dataschedule,
                     'rttyear' => $absencerttyear,
@@ -542,7 +541,7 @@ class ScheduleController extends Controller
             }
             if ($this->get('security.context')->isGranted('ROLE_TECH'))
             {
-                $dataschedule = $em->getRepository('CoyoteSiteBundle:Schedule')->dataScheduleYear($user, $period);
+                $dataschedule = $em->getRepository('CoyoteSiteBundle:Schedule')->dataScheduleYear($this->getUser(), $period);
                 $index = 0;
                 $value = 0;
                 $timeweek = '';
@@ -709,6 +708,6 @@ class ScheduleController extends Controller
     }
 
 
-    
+
 
 }
