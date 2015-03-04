@@ -27,14 +27,14 @@ class ExpenseRepository extends EntityRepository
      * @param mixed $id
      * @return array Expense
      */
-    public function findExpense($date, $id)
+    public function findExpense($date, $user)
     {
         $query = $this->getEntityManager()
                         ->createQuery("
 	            SELECT e FROM CoyoteSiteBundle:Expense e
-	            WHERE e.userfees = :id and e.date LIKE :date"
+	            WHERE e.user = :user and e.date LIKE :date"
                         );
-        $query->setParameters(array('date' => $date, 'id' => $id));
+        $query->setParameters(array('date' => $date, 'user' => $user));
         return $query->getResult();
     }
 
@@ -160,16 +160,15 @@ class ExpenseRepository extends EntityRepository
      * @param mixed $increment
      * @return array Expense
      */
-    public function saveExpense($user_fee_id, $data, $increment)
+    public function saveExpense($user, $data, $increment)
     {
         $site = $this->_em->getRepository('CoyoteSiteBundle:Site')->find(9);//$data['site'.$increment]);
         $currency = $this->_em->getRepository('CoyoteSiteBundle:Currency')->find($data['devise'.$increment]);
         $business = $this->_em->getRepository('CoyoteSiteBundle:Business')->find($data['affaire'.$increment]);
         $fee = $this->_em->getRepository('CoyoteSiteBundle:Fee')->find($data['article'.$increment]);
-        $user_fee = $this->_em->getRepository('CoyoteSiteBundle:UserFees')->find($user_fee_id);
-
+        
         $expense = new Expense();
-        $expense->setUserFees($user_fee);
+        $expense->setUser($user);
         $expense->setFee($fee);
         $expense->setBusiness($business);
         $expense->setCurrency($currency);
@@ -230,17 +229,17 @@ class ExpenseRepository extends EntityRepository
     }
 
     /**
-     * findAllOrderByUserFeesID function.
+     * findAllOrderByUserID function.
      * function to find all entity Expense
      *
      * @access public
      * @param status = 1
-     * @param order by userfeess, id ASC
+     * @param order by user, id ASC
      * @return array Business
      */
     public function findAllOrderByUserFeesID()
     {
-        return $this->findBy(array('status' => 1), array('userfees' => 'ASC', 'id' => 'ASC'));
+        return $this->findBy(array('status' => 1), array('user' => 'ASC', 'id' => 'ASC'));
     }
     
     /**
@@ -261,6 +260,26 @@ class ExpenseRepository extends EntityRepository
          
         $q->setFirstResult(($page-1) * $maxperpage)
         ->setMaxResults($maxperpage);
+        return new Paginator($q);
+    }
+    
+    /**
+     * Get the paginated list of absences in Schedule Entity.
+     *
+     * @param int $page
+     * @param int $maxperpage
+     * @param string $sortby
+     * @return Paginator
+     */
+    public function getListExpenseUser($user, $date, $page=1, $maxperpage=10)
+    {
+        $q = $this->_em->createQueryBuilder()
+                  ->select('e')
+                  ->from('CoyoteSiteBundle:Expense','e')
+                  ->where('e.user = :user and e.date = :date')
+                  ->setParameters(array('user' => $user, 'date' => $date ));
+        $q->setFirstResult(($page-1) * $maxperpage)
+          ->setMaxResults($maxperpage);
         return new Paginator($q);
     }
 }

@@ -56,12 +56,11 @@ class ExpenseController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->get('security.context')->getToken()->getUser();
-        $session = new Session();
         if ($user == "anon.")
         {
             return $this->redirect($this->generateUrl('fos_user_security_login'));
         }
-        if ($session->get('userfeesid') == null)
+        if (!$this->getUser()->getUserfees())
         {
             return $this->redirect($this->generateUrl('main_menu'));
         }
@@ -81,8 +80,7 @@ class ExpenseController extends Controller
      */
     public function indexshowAction()
     {
-        $session = new Session();
-        if ($session->get('userfeesid') == null)
+        if (!$this->getUser()->getUserfees())
         {
             return $this->redirect($this->generateUrl('main_menu'));
         }
@@ -108,7 +106,7 @@ class ExpenseController extends Controller
         {
             return $this->redirect($this->generateUrl('fos_user_security_login'));
         }
-        if ($session->get('userfeesid') == null)
+        if (!$this->getUser()->getUserfees())
         {
             return $this->redirect($this->generateUrl('main_menu'));
         }
@@ -140,15 +138,14 @@ class ExpenseController extends Controller
      * @param string $month
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function showparametersAction($year, $month)
+    public function showparametersAction($year, $month, $page)
     {
-        $session = new Session();
         $user = $this->get('security.context')->getToken()->getUser();
         if ($user == "anon.")
         {
             return $this->redirect($this->generateUrl('fos_user_security_login'));
         }
-        if ($session->get('userfeesid') == null)
+        if (!$this->getUser()->getUserfees())
         {
             return $this->redirect($this->generateUrl('main_menu'));
         }
@@ -160,9 +157,23 @@ class ExpenseController extends Controller
         {
             $em = $this->getDoctrine()->getManager();
             $date = $year.'-'.$month.'%';
-            $data_expense = $em->getRepository('CoyoteSiteBundle:Expense')->findExpense($date,
-                $session->get('userfeesid'));
-            return $this->render('CoyoteSiteBundle:Expense:show.html.twig', array('data' => $data_expense));
+            
+            $maxItems = 10;
+            $expenses = $this->getDoctrine()->getRepository('CoyoteSiteBundle:Expense')
+                ->getListExpenseUser($this->getUser(), $date, $page, $maxItems);
+            $entities = $em->getRepository('CoyoteSiteBundle:Expense')->findExpense($date,
+                $this->getUser());
+            $expenses_count = count($expenses);
+            $pagination = array(
+                            'page' => $page,
+                            'route' => 'absence',
+                            'pages_count' => ceil($expenses_count / $maxItems),
+                            'route_params' => array()
+            );
+            
+            return $this->render('CoyoteSiteBundle:Expense:show.html.twig', array(
+                            'data' => $entities,
+                            'pagination' => $pagination));
         }
     }
 
@@ -178,7 +189,7 @@ class ExpenseController extends Controller
         {
             return $this->redirect($this->generateUrl('fos_user_security_login'));
         }
-        if ($session->get('userfeesid') == null)
+        if (!$this->getUser()->getUserfees())
         {
             return $this->redirect($this->generateUrl('main_menu'));
         }
@@ -194,8 +205,7 @@ class ExpenseController extends Controller
                     && !empty($data_request['devise'.$i]) && !empty($data_request['qte'.$i])
                 && !empty($data_request['site'.$i]) && !empty($data_request['ttc'.$i]))
                 {
-                    $user_fee_id = $session->get('userfeesid');
-                    $expense = $em->getRepository('CoyoteSiteBundle:Expense')->saveExpense($user_fee_id,
+                    $expense = $em->getRepository('CoyoteSiteBundle:Expense')->saveExpense($this->getUser(),
                         $data_request, $i);
                     $em->persist($expense);
                     $em->flush();
@@ -231,8 +241,7 @@ class ExpenseController extends Controller
      */
     public function editAction($id)
     {
-        $session = new Session();
-        if ($session->get('userfeesid') == null)
+        if (!$this->getUser()->getUserfees())
         {
             return $this->redirect($this->generateUrl('main_menu'));
         }
@@ -292,8 +301,7 @@ class ExpenseController extends Controller
      */
     public function updateAction(Request $request, $id)
     {
-        $session = new Session();
-        if($session->get('userfeesid') == null)
+        if (!$this->getUser()->getUserfees())
             return $this->redirect($this->generateUrl('main_menu'));
         $em = $this->getDoctrine()->getManager();
 
@@ -315,6 +323,8 @@ class ExpenseController extends Controller
                 $date = $em->getRepository('CoyoteSiteBundle:Expense')->formDate($date);
                 $entity->setDate($date);
             }
+            $site = $em->getRepository('CoyoteSiteBundle:Site')->findOneById(9);
+            $entity->setSite($site);
             $taux = $entity->getFee()->getRate();
             $ttc = $entity->getAmountTTC();
             $tva = $em->getRepository('CoyoteSiteBundle:Expense')->calculTVA($taux, $ttc);
@@ -341,8 +351,7 @@ class ExpenseController extends Controller
      */
     public function deleteAction(Request $request, $id)
     {
-        $session = new Session();
-        if($session->get('userfeesid') == null)
+        if(!$this->getUser()->getUserfees())
             return $this->redirect($this->generateUrl('main_menu'));
         $form = $this->createDeleteForm($id);
         $form->handleRequest($request);
@@ -406,7 +415,7 @@ class ExpenseController extends Controller
             $date = $year.'-'.$month.'%';
             /** @var $data_expense entity Expense */
             $data_expense = $em->getRepository('CoyoteSiteBundle:Expense')->findExpense($date,
-                $session->get('userfeesid'));
+                $this->getUser());
             /** @var $data_user entity User */
             $data_user = $em->getRepository('CoyoteSiteBundle:User')->find($session->get('userid'));
             /** @var $page view Expense:print */

@@ -45,7 +45,9 @@
         </table>
     </div><br>
     
-    {{ include('CoyoteSiteBundle:Base:pagination.html.twig') }}
+{% if pagination.page > 1 %}
+{{ include('CoyoteSiteBundle:Base:pagination.html.twig') }}
+{% endif %}
 {% else %}
     <p id="titreconfig">{{'expense.message'|trans}}</p>
 {% endif %}

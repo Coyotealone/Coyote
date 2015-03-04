@@ -54,6 +54,9 @@
         {% endfor %}
     </table>
 </div><br>
+{% if pagination.page > 1 %}
+{{ include('CoyoteSiteBundle:Base:pagination.html.twig') }}
+{% endif %}
 {% else %}
 <p id="titreconfig">{{'expense.message'|trans}}</p>
 {% endif %}

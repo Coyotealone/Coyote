@@ -50,7 +50,9 @@
 </div><br>
 </form>
 
+{% if pagination.page > 1 %}
 {{ include('CoyoteSiteBundle:Base:pagination.html.twig') }}
+{% endif %}
 
 <form role="form" action="{{ path('absence_create') }}" method='post'>
 <div class='table-responsive'>

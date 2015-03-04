@@ -97,7 +97,7 @@ class User extends BaseUser
     * @ORM\JoinColumn(nullable=true)
     */
     private $userfees;
-
+    
     /**
      * Constructor
      */

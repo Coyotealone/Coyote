@@ -10,7 +10,6 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Entity(repositoryClass="Coyote\SiteBundle\Entity\ExpenseRepository");
  * @ORM\HasLifecycleCallbacks
- *
  */
 class Expense
 {
@@ -95,10 +94,10 @@ class Expense
     private $fee;
 
     /**
-     * @ORM\ManyToOne(targetEntity="UserFees", inversedBy="expenses")
-     * @ORM\JoinColumn(name="userfees_id", referencedColumnName="id", nullable=false)
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
      */
-    private $userfees;
+    private $user;
 
     /**
      * Constructor
@@ -427,53 +426,7 @@ class Expense
         return $this->fee;
     }
 
-    /**
-     * Set userfeess
-     *
-     * @param \Coyote\SiteBundle\Entity\UserFees $userfeess
-     * @return Expense
-     */
-    public function setUserfeess(\Coyote\SiteBundle\Entity\UserFees $userfeess = null)
-    {
-        $this->userfeess = $userfeess;
-
-        return $this;
-    }
-
-    /**
-     * Get userfeess
-     *
-     * @return \Coyote\SiteBundle\Entity\UserFees
-     */
-    public function getUserfeess()
-    {
-        return $this->userfeess;
-    }
-
-    /**
-     * Set userfees
-     *
-     * @param \Coyote\SiteBundle\Entity\UserFees $userfees
-     * @return Expense
-     */
-    public function setUserfees(\Coyote\SiteBundle\Entity\UserFees $userfees = null)
-    {
-        $this->userfees = $userfees;
-
-        return $this;
-    }
-
-    /**
-     * Get userfees
-     *
-     * @return \Coyote\SiteBundle\Entity\UserFees
-     */
-    public function getUserfees()
-    {
-        return $this->userfees;
-    }
-
-    /**
+   /**
      * Set amount_TVA
      *
      * @param float $amountTVA
@@ -494,5 +447,28 @@ class Expense
     public function getAmountTVA()
     {
         return $this->amount_TVA;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \Coyote\SiteBundle\Entity\User $user
+     * @return Expense
+     */
+    public function setUser(\Coyote\SiteBundle\Entity\User $user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Coyote\SiteBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

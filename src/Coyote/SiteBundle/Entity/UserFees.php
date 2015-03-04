@@ -38,11 +38,6 @@ class UserFees
     private $service;
     
     /**
-     * @ORM\OneToMany(targetEntity="Expense", mappedBy="userfees", cascade={"persist", "merge"})
-     */
-    private $expenses;
-    
-    /**
      * @ORM\ManyToOne(targetEntity="Car", inversedBy="userfeess")
      * @ORM\JoinColumn(name="car_id", referencedColumnName="id")
      */
