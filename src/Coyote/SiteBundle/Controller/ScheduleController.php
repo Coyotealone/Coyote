@@ -16,7 +16,6 @@ use Coyote\SiteBundle\Entity\User;
 use Coyote\SiteBundle\Entity\Data;
 
 use Doctrine\ORM\EntityRepository;
-use Symfony\Component\HttpFoundation\Symfony\Component\HttpFoundation;
 
 /**
  * Schedule controller.

@@ -1,5 +1,4 @@
 {% extends 'CoyoteSiteBundle:Base:base.html.twig' %}
-
 {% block nav %}
 
     <!--[if lt IE 9]>
@@ -50,6 +49,9 @@
     </table>
 </div><br>
 </form>
+
+{{ include('CoyoteSiteBundle:Base:pagination.html.twig') }}
+
 <form role="form" action="{{ path('absence_create') }}" method='post'>
 <div class='table-responsive'>
     <p>{{ 'absence.title.create' | trans }}</p>

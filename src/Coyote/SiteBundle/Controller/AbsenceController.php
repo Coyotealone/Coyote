@@ -15,24 +15,36 @@ use Coyote\SiteBundle\Form\AbsenceType;
  */
 class AbsenceController extends Controller
 {
-
     /**
-     * Lists all Schedule entities.
-     *
+     * Function to list Absence about Schedule Entity.
+     * @access public
+     * @param integer $page
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function indexAction()
+    public function indexAction($page)
     {
         $em = $this->getDoctrine()->getManager();
-
-        $entities = $em->getRepository('CoyoteSiteBundle:Schedule')->absenceByUser($this->getUser());
-
+        $maxItems = 10;
+        $absences = $em->getRepository('CoyoteSiteBundle:Schedule')->absenceByUser($this->getUser());
+        $absences_count = count($absences);
+        $pagination = array(
+            'page' => $page,
+            'route' => 'absence',
+            'pages_count' => ceil($absences_count / $maxItems),
+            'route_params' => array()
+        );
+        $entities = $this->getDoctrine()->getRepository('CoyoteSiteBundle:Schedule')
+        ->getListAbsenceUser($this->getUser(), $page, $maxItems);
         return $this->render('CoyoteSiteBundle:Absence:index.html.twig', array(
-            'entities' => $entities,
-        ));
+                        'entities' => $entities,
+                        'pagination' => $pagination));
     }
+   
     /**
      * Creates a new Schedule entity.
-     *
+     * @access public
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function createAction(Request $request)
     {
@@ -63,9 +75,8 @@ class AbsenceController extends Controller
 
     /**
      * Creates a form to create a Schedule entity.
-     *
+     * @access private
      * @param Schedule $entity The entity
-     *
      * @return \Symfony\Component\Form\Form The form
      */
     private function createCreateForm(Schedule $entity)
@@ -82,7 +93,8 @@ class AbsenceController extends Controller
 
     /**
      * Displays a form to create a new Schedule entity.
-     *
+     * @access public
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function newAction()
     {
@@ -97,7 +109,9 @@ class AbsenceController extends Controller
 
     /**
      * Finds and displays a Schedule entity.
-     *
+     * @access public
+     * @param mixed $id The entity id
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function showAction($id)
     {
@@ -125,7 +139,9 @@ class AbsenceController extends Controller
 
     /**
      * Displays a form to edit an existing Schedule entity.
-     *
+     * @access public
+     * @param mixed $id The entity id
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function editAction($id)
     {
@@ -138,20 +154,16 @@ class AbsenceController extends Controller
         }
 
         $editForm = $this->createEditForm($entity);
-        //$deleteForm = $this->createDeleteForm($id);
-
         return $this->render('CoyoteSiteBundle:Absence:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
-            //'delete_form' => $deleteForm->createView(),
         ));
     }
 
     /**
     * Creates a form to edit a Schedule entity.
-    *
+    * @access private
     * @param Schedule $entity The entity
-    *
     * @return \Symfony\Component\Form\Form The form
     */
     private function createEditForm(Schedule $entity)
@@ -160,43 +172,41 @@ class AbsenceController extends Controller
             'action' => $this->generateUrl('absence_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
-
-        //$form->add('submit', 'submit', array('label' => 'Update'));
-
         return $form;
     }
+
     /**
      * Edits an existing Schedule entity.
-     *
+     * @access public
+     * @param Request $request
+     * @param mixed $id The entity id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
-
         $entity = $em->getRepository('CoyoteSiteBundle:Schedule')->find($id);
-
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Schedule entity.');
         }
-
-        //$deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createEditForm($entity);
         $editForm->handleRequest($request);
-
         if ($editForm->isValid()) {
             $em->flush();
             return $this->redirect($this->generateUrl('absence'));
         }
-
         return $this->render('CoyoteSiteBundle:Absence:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
-            //'delete_form' => $deleteForm->createView(),
         ));
     }
+
     /**
      * Deletes a Schedule entity.
-     *
+     * @access public
+     * @param Request $request
+     * @param mixed $id The entity id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function deleteAction(Request $request, $id)
     {
@@ -220,9 +230,8 @@ class AbsenceController extends Controller
 
     /**
      * Creates a form to delete a Schedule entity by id.
-     *
+     * @access private
      * @param mixed $id The entity id
-     *
      * @return \Symfony\Component\Form\Form The form
      */
     private function createDeleteForm($id)
@@ -234,4 +243,16 @@ class AbsenceController extends Controller
             ->getForm()
         ;
     }
+
+    /*****************************************************************/
+    /***********************Fonctions En cours************************/
+    /*****************************************************************/
+    
+    
+    
+    
+    
+    /*****************************************************************/
+    /***********************Fonctions Erronées************************/
+    /*****************************************************************/
 }

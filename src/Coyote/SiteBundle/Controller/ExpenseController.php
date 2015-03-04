@@ -583,7 +583,7 @@ class ExpenseController extends Controller
      * @access public
      * @return showparameters
      */
-    public function showadminAction()
+    public function showadminAction($page)
     {
         if($this->get('security.context')->isGranted('ROLE_COMPTA'))
         {
@@ -595,17 +595,23 @@ class ExpenseController extends Controller
             if($user == "anon.")
                 return $this->redirect($this->generateUrl('fos_user_security_login'));
             /** check @var $session 'userfeesid' */
-
-
             else
             {
-                /** @var $em object doctrine request */
                 $em = $this->getDoctrine()->getManager();
-                /** @var $data_expense object Expense*/
+                $maxItems = 10;//$this->container->getParameter('max_articles_per_page');
                 $data_expense = $em->getRepository('CoyoteSiteBundle:Expense')->findAllOrderByUserFeesID();
-                /** show view */
-                //return new Response($data_expense[0]->getStatus()->getString());
-                return $this->render('CoyoteSiteBundle:Expense:showadmin.html.twig', array('data' => $data_expense));
+                $expenses_count = count($data_expense);
+                $pagination = array(
+                                'page' => $page,
+                                'route' => 'admin_showadmin',
+                                'pages_count' => ceil($expenses_count / $maxItems),
+                                'route_params' => array()
+                );
+                $entities = $this->getDoctrine()->getRepository('CoyoteSiteBundle:Expense')
+                                 ->getListExpenseUsers($page, $maxItems);
+                return $this->render('CoyoteSiteBundle:Expense:showadmin.html.twig', array(
+                                'data' => $entities,
+                                'pagination' => $pagination));
             }
         }
         else

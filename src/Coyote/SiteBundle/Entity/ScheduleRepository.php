@@ -4,6 +4,7 @@ namespace Coyote\SiteBundle\Entity;
 
 use Coyote\SiteBundle\Entity\Timetable;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
  * ScheduleRepository
@@ -45,7 +46,7 @@ class ScheduleRepository extends EntityRepository
     }
     
     /**
-     * Function to find data about user and timetable
+     * Function to find data about user and timetable.
      * @access public
      * @param Timetable $timetable
      * @param User $user
@@ -75,7 +76,7 @@ class ScheduleRepository extends EntityRepository
     /******************weeklessAction**weekmoreAction******************/
     
     /**
-     * Function to update week and period
+     * Function to update week and period.
      * @access public
      * @param string $value "less" or "more"
      */
@@ -404,7 +405,7 @@ class ScheduleRepository extends EntityRepository
     }
     
     /**
-     * Function to count working hours in period
+     * Function to count working hours in period.
      * @access public
      * @param mixed $period
      * @param mixed $user
@@ -429,7 +430,7 @@ class ScheduleRepository extends EntityRepository
     }
     
     /**
-     * Function to calculate working time by week
+     * Function to calculate working time by week.
      * @access public
      * @param Schedule $dataschedule
      * @return string $timeweek if $dataschedule is empty $timeweek = ''
@@ -545,6 +546,48 @@ class ScheduleRepository extends EntityRepository
         $dataschedule =  $qb->getQuery()
                             ->getResult();
         return $dataschedule;
+    }
+    
+    /************************Absence:indexAction***********************/
+    
+    /**
+     * Get the paginated list of absences in Schedule Entity.
+     *
+     * @param int $page
+     * @param int $maxperpage
+     * @param string $sortby
+     * @return Paginator
+     */
+    public function getListAbsenceUser($user, $page=1, $maxperpage=10)
+    {
+        $q = $this->_em->createQueryBuilder()
+                  ->select('s')
+                  ->from('CoyoteSiteBundle:Schedule','s')
+                  ->where('s.user = :user and not s.absence_name =:absence')
+                  ->setParameters(array('user' => $user, 'absence' => 'Aucune' ));
+         
+        $q->setFirstResult(($page-1) * $maxperpage)
+          ->setMaxResults($maxperpage);
+        return new Paginator($q);
+    }
+    
+    /**
+     * Function to find absence by User.
+     * @param User $user
+     * @return Schedule $entities
+     */
+    public function absenceByUser($user)
+    {
+        $qb = $this->_em->createQueryBuilder();
+        $qb->select('s')
+        ->from('CoyoteSiteBundle:Schedule', 's')
+        ->where('s.user = :user and not s.absence_name = :absence')
+        ->setParameters(array(
+                        'user' => $user,
+                        'absence'  => 'Aucune',
+        ));
+        $entities = $qb->getQuery()->getResult();
+        return $entities;
     }
     
     /*****************************Commun****************************/
@@ -857,19 +900,7 @@ class ScheduleRepository extends EntityRepository
         return $result;
     }
 
-    public function absenceByUser($user)
-    {
-        $qb = $this->_em->createQueryBuilder();
-        $qb->select('s')
-               ->from('CoyoteSiteBundle:Schedule', 's')
-               ->where('s.user = :user and not s.absence_name = :absence')
-               ->setParameters(array(
-               'user' => $user,
-               'absence'  => 'Aucune',
-               ));
-        $entities = $qb->getQuery()->getResult();
-        return $entities;
-    }
+    
 
     public function calculOvertimeTech($user, $count_time, $count_absence)
     {

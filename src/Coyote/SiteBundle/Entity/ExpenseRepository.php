@@ -7,6 +7,7 @@ use Coyote\SiteBundle\Entity\Currency;
 use Coyote\SiteBundle\Entity\Business;
 use Coyote\SiteBundle\Entity\Fee;
 use Coyote\SiteBundle\Entity\UserFees;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 use Doctrine\ORM\EntityRepository;
 
@@ -167,7 +168,7 @@ class ExpenseRepository extends EntityRepository
         $fee = $this->_em->getRepository('CoyoteSiteBundle:Fee')->find($data['article'.$increment]);
         $user_fee = $this->_em->getRepository('CoyoteSiteBundle:UserFees')->find($user_fee_id);
 
-        $expense = new expense();
+        $expense = new Expense();
         $expense->setUserFees($user_fee);
         $expense->setFee($fee);
         $expense->setBusiness($business);
@@ -240,5 +241,26 @@ class ExpenseRepository extends EntityRepository
     public function findAllOrderByUserFeesID()
     {
         return $this->findBy(array('status' => 1), array('userfees' => 'ASC', 'id' => 'ASC'));
+    }
+    
+    /**
+     * Get the paginated list of published articles
+     *
+     * @param int $page
+     * @param int $maxperpage
+     * @param string $sortby
+     * @return Paginator
+     */
+    public function getListExpenseUsers($page=1, $maxperpage=10)
+    {
+        $q = $this->_em->createQueryBuilder()
+        ->select('e')
+        ->from('CoyoteSiteBundle:Expense','e')
+        ->where('e.status = :status')
+        ->setParameters(array('status' => 1));
+         
+        $q->setFirstResult(($page-1) * $maxperpage)
+        ->setMaxResults($maxperpage);
+        return new Paginator($q);
     }
 }

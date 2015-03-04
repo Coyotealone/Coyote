@@ -106,6 +106,7 @@ class Expense
     public function __construct()
     {
         $this->expenses = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->site = 9;
     }
 
     /**
