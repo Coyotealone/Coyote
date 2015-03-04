@@ -323,6 +323,7 @@ absence:
     title:
         show: Liste des absences
         create: Ajouter une absence
+        empty: Aucune absence enregistrée
 
 holiday:
     title:

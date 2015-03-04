@@ -417,7 +417,7 @@ class ExpenseController extends Controller
             $data_expense = $em->getRepository('CoyoteSiteBundle:Expense')->findExpense($date,
                 $this->getUser());
             /** @var $data_user entity User */
-            $data_user = $em->getRepository('CoyoteSiteBundle:User')->find($session->get('userid'));
+            $data_user = $em->getRepository('CoyoteSiteBundle:User')->find($this->getUser());
             /** @var $page view Expense:print */
             $page = $this->render('CoyoteSiteBundle:Expense:print.html.twig', array('data' => $data_expense));
             /** @var $filename string filename PDF */

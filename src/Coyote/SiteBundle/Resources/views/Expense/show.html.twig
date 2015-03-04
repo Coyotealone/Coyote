@@ -13,7 +13,7 @@
 {% endfor %}
 <p id="titreconfig">{{'expense.title.show'|trans}}</p>
 
-{% if data %}
+{% if data|length > 0 %}
 <div class='table-responsive'>
     <table class='table' id='tab_expense'>
     	<tr>
@@ -54,11 +54,11 @@
         {% endfor %}
     </table>
 </div><br>
-{% if pagination.page > 1 %}
-{{ include('CoyoteSiteBundle:Base:pagination.html.twig') }}
+{% if pagination.pages_count > 1 %}
+    {{ include('CoyoteSiteBundle:Base:pagination.html.twig') }}
 {% endif %}
 {% else %}
-<p id="titreconfig">{{'expense.message'|trans}}</p>
+    <p id="titreconfig">{{'expense.message'|trans}}</p>
 {% endif %}
 
 {% endblock %}

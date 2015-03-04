@@ -14,7 +14,7 @@
 
 <p id="titreconfig">{{'absence.title.show'|trans}} </p>
 
-{% if entities %}
+{% if entities|length > 0 %}
 <form role="form" action="{{ path('absence') }}" method='post'>
 <div class='table-responsive'>
     <table class='table' id='tab_expense'>
@@ -49,8 +49,7 @@
     </table>
 </div><br>
 </form>
-
-{% if pagination.page > 1 %}
+{% if pagination.pages_count > 1 %}
 {{ include('CoyoteSiteBundle:Base:pagination.html.twig') }}
 {% endif %}
 

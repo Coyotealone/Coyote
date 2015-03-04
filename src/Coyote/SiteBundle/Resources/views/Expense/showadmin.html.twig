@@ -45,7 +45,7 @@
         </table>
     </div><br>
     
-{% if pagination.page > 1 %}
+{% if pagination.pages_count > 1 %}
 {{ include('CoyoteSiteBundle:Base:pagination.html.twig') }}
 {% endif %}
 {% else %}

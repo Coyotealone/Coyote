@@ -162,10 +162,17 @@ class ScheduleRepository extends EntityRepository
                 $time_travel = 0;
             $schedule->setTravel($time_travel);
             $schedule->setAbsenceName($time_absence);
-            if ($time_absenceday == "0.5" || $time_absenceday == "1")
-                $schedule->setAbsenceDuration($time_absenceday);
-            if ($time_absenceday == "empty")
-                $schedule->setAbsenceDuration($time_absencetime);
+            if ($time_absence == "Aucune")
+            {
+                $schedule->setAbsenceDuration("");
+            }
+            else
+            {
+                if ($time_absenceday == "0.5" || $time_absenceday == "1")
+                    $schedule->setAbsenceDuration($time_absenceday);
+                if ($time_absenceday == "empty")
+                    $schedule->setAbsenceDuration($time_absencetime);
+            }
             $schedule->setComment($time_comment);
             return $schedule;
         }
@@ -208,10 +215,17 @@ class ScheduleRepository extends EntityRepository
             $time_travel = 0;
         $schedule->setTravel($time_travel);
         $schedule->setAbsenceName($time_absence);
-        if ($time_absenceday == "0.5" || $time_absenceday == "1")
-            $schedule->setAbsenceDuration($time_absenceday);
-        if ($time_absenceday == "empty")
-            $schedule->setAbsenceDuration($time_absencetime);
+        if ($time_absence == "Aucune")
+        {
+            $schedule->setAbsenceDuration("");
+        }
+        else
+        {
+            if ($time_absenceday == "0.5" || $time_absenceday == "1")
+                $schedule->setAbsenceDuration($time_absenceday);
+            if ($time_absenceday == "empty")
+                $schedule->setAbsenceDuration($time_absencetime);
+        }
         $schedule->setComment($time_comment);
         return $schedule;
     }
