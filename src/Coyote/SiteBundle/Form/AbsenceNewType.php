@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class AbsenceType extends AbstractType
+class AbsenceNewType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -31,13 +31,12 @@ class AbsenceType extends AbstractType
                                     '1' => '1',
                     ),))
             ->add('comment', 'text', array('required'  => false))
-            /*->add('timetable', 'date', array(
-                            'empty_data' => new \DateTime('now'),
+            ->add('timetable', 'date', array(
+                            'data' => new \DateTime('now'),
                             'widget' => 'single_text',
                             'input' => 'datetime',
                             'format' => 'yyyy-MM-dd',
-                            'attr' => array('class' => 'date'),))*/
-           ->add('timetable')
+                            'attr' => array('class' => 'date'),))
         ;
     }
 

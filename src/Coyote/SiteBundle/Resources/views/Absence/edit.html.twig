@@ -12,45 +12,38 @@
 {% endblock %}
 
 {% block content -%}
-    <p>{{ 'absence.edit' | trans }}</p>
-
+<p id="titreconfig">{{'absence.title.edit'|trans}} </p>
 
     {{ form_start(edit_form) }}
-        {{ form_errors(edit_form) }}
+    {{ form_errors(edit_form) }}
+<div class='table-responsive'>
+    <table class='table' id='tab_expense'>
+    	<tr>
+    		<th>{{ form_label(edit_form.travel, 'absence.travel'|trans) }}</th>
+    		<th>{{ form_label(edit_form.absence_name, 'absence.absence_name'|trans) }}</th>
+    		<th>{{ form_label(edit_form.absence_duration, 'absence.absence_duration'|trans) }}</th>
+    		<th>{{ form_label(edit_form.comment, 'absence.comment'|trans) }}</th>
+    		<th>{{ form_label(edit_form.timetable, 'absence.timetable'|trans) }}</th>
+    	</tr>
+    	<td>
+        {{ form_widget(edit_form.travel) }}
+    		</td>
+    		<td>
+    		    {{ form_widget(edit_form.absence_name) }}
+    		</td>
+    		<td>
+    		    {{ form_widget(edit_form.absence_duration) }}
+    		</td>
+    		<td>
+    		    {{ form_widget(edit_form.comment) }}
+    		</td>
+    		<td>
+    		    {{ form_widget(edit_form.timetable) }}
+    		</td>
+    </table>
+</div><br>
+<input type="submit" value={{'absence.update'|trans}} />
 
-        <div>
-            {{ form_label(edit_form.travel, 'absence.travel'|trans) }}
-            {{ form_errors(edit_form.travel) }}
-            {{ form_widget(edit_form.travel) }}
-        </div>
-
-        <div>
-            {{ form_label(edit_form.absence_name, 'absence.absence_name'|trans) }}
-            {{ form_errors(edit_form.absence_name) }}
-            {{ form_widget(edit_form.absence_name) }}
-        </div>
-
-        <div>
-            {{ form_label(edit_form.absence_duration, 'absence.absence_duration'|trans) }}
-            {{ form_errors(edit_form.absence_duration) }}
-            {{ form_widget(edit_form.absence_duration) }}
-        </div>
-
-        <div>
-            {{ form_label(edit_form.comment, 'absence.comment'|trans) }}
-            {{ form_errors(edit_form.comment) }}
-            {{ form_widget(edit_form.comment) }}
-        </div>
-
-        <div>
-            {{ form_label(edit_form.timetable, 'absence.timetable'|trans) }}
-            {{ form_errors(edit_form.timetable) }}
-            {{ form_widget(edit_form.timetable) }}
-        </div>
-
-        <input type="submit" value={{'absence.update'|trans}} />
-
-    {{ form_end(edit_form) }}
-
+{{ form_end(edit_form) }}
 
 {% endblock %}

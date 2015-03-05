@@ -8,6 +8,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Coyote\SiteBundle\Entity\Schedule;
 use Coyote\SiteBundle\Form\AbsenceType;
+use Coyote\SiteBundle\Form\AbsenceNewType;
+use Coyote\SiteBundle\Entity\Timetable;
 
 /**
  * Absence controller.
@@ -48,11 +50,18 @@ class AbsenceController extends Controller
      */
     public function createAction(Request $request)
     {
-        $entity = new Schedule();
-        $form = $this->createCreateForm($entity);
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
+        $em = $this->getDoctrine()->getManager();
+        $data = $this->getRequest()->request->get('coyote_sitebundle_schedule');
+        $timetable = $em->getRepository('CoyoteSiteBundle:Timetable')->findOneByDate(new \DateTime($data['timetable']));
+        $data['timetable'] = $timetable->getId();
+        $this->getRequest()->request->set('coyote_sitebundle_schedule', $data);
+        
+        $schedule = $em->getRepository('CoyoteSiteBundle:Schedule')->findOneBy(
+                array('user' => $this->getUser(), 'timetable' => $timetable));
+        if (empty($schedule))
+        {
+            $entity = new Schedule();
+            $data = $this->getRequest()->request->get('coyote_sitebundle_schedule');
             $em = $this->getDoctrine()->getManager();
             $entity->setUser($this->getUser());
             $entity->setStart('0:00');
@@ -60,7 +69,40 @@ class AbsenceController extends Controller
             $entity->setEnd('0:00');
             $entity->setWorkingTime('0:00');
             $entity->setWorkingHours('0');
-            $entity->setComment("");
+            $entity->setTimetable($timetable);
+            $entity->setAbsenceName($data['absence_name']);
+            $entity->setAbsenceDuration($data['absence_duration']);
+            if (isset($data['travel']))
+            {
+                $entity->setTravel($data['travel']);
+            }
+            else 
+            {
+                $entity->setTravel('0');
+            }
+            $entity->setComment($data['comment']);
+            $em->persist($entity);
+            $em->flush();
+            
+            return $this->redirect($this->generateUrl('absence'));
+        }
+        else
+        {
+            $entity = $schedule;
+        }
+        
+        $form = $this->createCreateForm($entity);
+        $form->handleRequest($request);
+        
+        if ($request->getMethod() == "POST")
+        {
+            $entity->setUser($this->getUser());
+            $entity->setStart('0:00');
+            $entity->setBreak('0:00');
+            $entity->setEnd('0:00');
+            $entity->setWorkingTime('0:00');
+            $entity->setWorkingHours('0');
+            $entity->setTimetable($timetable);
             $em->persist($entity);
             $em->flush();
 
@@ -81,13 +123,10 @@ class AbsenceController extends Controller
      */
     private function createCreateForm(Schedule $entity)
     {
-        $form = $this->createForm(new AbsenceType(), $entity, array(
+        $form = $this->createForm(new AbsenceNewType(), $entity, array(
             'action' => $this->generateUrl('absence_create'),
             'method' => 'POST',
         ));
-
-        $form->add('submit', 'submit', array('label' => 'Create'));
-
         return $form;
     }
 
@@ -239,9 +278,6 @@ class AbsenceController extends Controller
     /*****************************************************************/
     /***********************Fonctions En cours************************/
     /*****************************************************************/
-    
-    
-    
     
     
     /*****************************************************************/

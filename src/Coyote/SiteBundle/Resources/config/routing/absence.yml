@@ -1,6 +1,8 @@
 absence:
-    path:     /show/{page}
+    path:     /{page}
     defaults: { _controller: "CoyoteSiteBundle:Absence:index", page: 1 }
+    requirements:
+        page:  \d+
 
 absence_show:
     path:     /{id}/show

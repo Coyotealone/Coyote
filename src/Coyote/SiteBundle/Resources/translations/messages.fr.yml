@@ -320,6 +320,7 @@ absence:
     show: Afficher
     create: Ajouter
     update: Enregistrer
+    new: Créer
     title:
         show: Liste des absences
         create: Ajouter une absence

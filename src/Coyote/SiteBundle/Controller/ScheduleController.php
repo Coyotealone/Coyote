@@ -433,12 +433,9 @@ class ScheduleController extends Controller
     {
         if ($this->getUser()->getId() == 2)
         {
-            $request = $this->getRequest();
-            $session = $request->getSession();
             $doctrine = $this->getDoctrine();
             $em = $doctrine->getManager();
-            $request = Request::createFromGlobals();
-
+            
             $date = "2014-06-%";
             $date_count_absence = "2014-06-0%";
             $working_day = $em->getRepository('CoyoteSiteBundle:Timetable')->findworkingday($date, $this->getUser());
@@ -509,11 +506,8 @@ class ScheduleController extends Controller
      */
     public function printyearAction()
     {
-        $request = $this->getRequest();
-        $session = $request->getSession();
         $doctrine = $this->getDoctrine();
         $em = $doctrine->getManager();
-        $request = Request::createFromGlobals();
         $period = $_GET['pay_period'];
         if (empty($period))
         {
@@ -572,7 +566,7 @@ class ScheduleController extends Controller
             }
             $date = date("Ymd");
             $heure = date("His");
-            $filename = $user->getName()."_presence".$date."-".$heure.".pdf";
+            $filename = $this->getUser()->getName()."_presence".$date."-".$heure.".pdf";
             $html = $page->getContent();
             $html2pdf = new \Html2Pdf_Html2Pdf('P', 'A4', 'fr');
             $html2pdf->pdf->SetDisplayMode('real');

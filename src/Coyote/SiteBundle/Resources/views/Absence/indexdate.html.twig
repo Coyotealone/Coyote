@@ -1,0 +1,41 @@
+{% extends 'CoyoteSiteBundle:Base:base.html.twig' %}
+
+{% block javascripts %}
+    <script src="{{ asset('bundles/coyotesite/js/jquery-min.js') }}"/></script>
+    <script src="{{ asset('bundles/coyotesite/js/jquery-1.10.2.js') }}"/></script>
+    <script src="{{ asset('bundles/coyotesite/js/jquery-ui.js') }}"/></script>
+    <script src="{{ asset('bundles/coyotesite/js/script_absence.js') }}"/></script>
+{% endblock %}
+
+{% block nav %}
+
+    <!--[if lt IE 9]>
+        {{ include('CoyoteSiteBundle:Base:navigation_ie.html.twig') }}
+    <![endif]-->
+    <!--[if !IE]><!-->
+        {{ include('CoyoteSiteBundle:Base:navigation.html.twig') }}
+    <!--<![endif]-->
+
+{% endblock %}
+
+{% block content %}
+
+<p>Date Absence</p>
+<form role="form" action="{{ path('absence_date') }}" method='post'>
+    <div class='table-responsive'>
+        <table class='table' id='tab_expense'>
+            <tr>
+                <th>{{ 'absence.datestart'|trans }}</th>
+                <th>{{ 'absence.dateend'|trans }}</th>
+            </tr>
+            <td>
+                <input type='text' name='datestart' id='datestart' >
+            </td>
+            <td>
+                <input type='text' name='dateend' id='dateend' >
+            </td>
+        </table>
+    </div><br>
+<button class='btnsave' type="submit" value="Enregistrer" id="enregistrer">{{ 'absence.submit.date'|trans }}</button>
+</form>
+{% endblock %}

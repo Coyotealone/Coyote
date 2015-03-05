@@ -596,6 +596,7 @@ class ScheduleRepository extends EntityRepository
         $qb->select('s')
         ->from('CoyoteSiteBundle:Schedule', 's')
         ->where('s.user = :user and not s.absence_name = :absence')
+        ->orderBy('s.timetable', 'ASC')
         ->setParameters(array(
                         'user' => $user,
                         'absence'  => 'Aucune',

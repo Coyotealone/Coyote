@@ -28,7 +28,9 @@ expense_show:
 expense_showparameters:
     pattern:    /show/{year}/{month}/{page}
     defaults:   { _controller: "CoyoteSiteBundle:Expense:showparameters", page: 1}
-    requirements: { _method: get }
+    requirements: 
+        _method: get
+        page:  \d+
 
 expense_indexprint:
     pattern:    /indexprint

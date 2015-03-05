@@ -25,3 +25,5 @@ admin_choicesroles:
 admin_showadmin:
     pattern:    /showadmin/{page}
     defaults:   { _controller: "CoyoteSiteBundle:Expense:showadmin", page: 1 }
+    requirements:
+        page:  \d+
