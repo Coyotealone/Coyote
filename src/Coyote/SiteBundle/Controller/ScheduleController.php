@@ -7,7 +7,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Session\Session;
 
-use Coyote\SiteBundle\Form\UserType;
 use Coyote\SiteBundle\Form\ScheduleType;
 
 use Coyote\SiteBundle\Entity\Schedule;
@@ -467,16 +466,9 @@ class ScheduleController extends Controller
         }
     }
 
-
-
-
     /*****************************************************************/
     /***********************Fonctions Erronées************************/
     /*****************************************************************/
-
-
-
-
 
     /**
      * affichage de la page avant d'obtenir un fichier pdf de l'année.
@@ -700,8 +692,5 @@ class ScheduleController extends Controller
             return $this->redirect($this->generateUrl('schedule_indexexportprintyear'));
         }
     }
-
-
-
 
 }

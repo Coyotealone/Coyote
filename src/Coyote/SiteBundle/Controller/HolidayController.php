@@ -30,6 +30,7 @@ class HolidayController extends Controller
             'holiday' => $entities,
         ));
     }
+
     /**
      * Creates a new Holiday entity.
      *
@@ -152,6 +153,7 @@ class HolidayController extends Controller
 
         return $form;
     }
+
     /**
      * Edits an existing Holiday entity.
      *
@@ -183,6 +185,7 @@ class HolidayController extends Controller
             //'delete_form' => $deleteForm->createView(),
         ));
     }
+
     /**
      * Deletes a Holiday entity.
      *

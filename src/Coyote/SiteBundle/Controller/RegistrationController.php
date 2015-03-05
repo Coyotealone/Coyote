@@ -64,19 +64,15 @@ class RegistrationController extends ContainerAware
             $userManager->updateUser($user);
 
             if (null === $response = $event->getResponse()) {
-                //$url = $this->container->generateUrl('fos_user_registration_confirmed');
-                //$response = new RedirectResponse($url); // A Modifier pour ne pas se connecter sur le nouveau compte créé
                 $message = 'registration.flash.user_created';
             }
             if($message  == null)
                 $message = 'registration.flash.no_save';
             $session = new Session();
             $session->getFlashBag()->set('save_registration', $message);
-            //$dispatcher->dispatch(FOSUserEvents::REGISTRATION_COMPLETED, new FilterUserResponseEvent($user, $request, $response));
             return $this->container->get('templating')->renderResponse('FOSUserBundle:Registration:register.html.twig', array(
                 'form' => $form->createView(),
             ));
-            //return $response;
         }
         return $this->container->get('templating')->renderResponse('FOSUserBundle:Registration:register.html.twig', array(
             'form' => $form->createView(),

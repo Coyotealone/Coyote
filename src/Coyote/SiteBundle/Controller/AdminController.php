@@ -5,15 +5,12 @@ namespace Coyote\SiteBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Compenent\Form\FormBuilder;
 use Symfony\Component\HttpFoundation\Session\Session;
-use Symfony\Component\Console\Helper\ProgressBar;
 
 use Doctrine\ORM\EntityRepository;
 
 use Coyote\SiteBundle\Entity\Schedule;
 use Coyote\SiteBundle\Entity\Timetable;
-use Coyote\SiteBundle\Entity\UserInfo;
 use Coyote\SiteBundle\Entity\User;
 use Coyote\SiteBundle\Entity\Data;
 
@@ -23,12 +20,10 @@ use Coyote\SiteBundle\Entity\Data;
  */
 class AdminController extends Controller
 {
-
     /**
-     * export expense for X3 in text file
-     *
+     * Export expense for X3 in text file.
      * @access public
-     * @return void
+     * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function exportExpenseAction()
     {
@@ -54,10 +49,9 @@ class AdminController extends Controller
     }
 
     /**
-     * redirect to function fos_user_change_password.
-     *
+     * Redirect to function fos_user_change_password.
      * @access public
-     * @return void
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function changePasswordAction()
     {
@@ -66,10 +60,9 @@ class AdminController extends Controller
     }
 
     /**
-     * redirect to function fos_user_resetting_request.
-     *
+     * Redirect to function fos_user_resetting_request.
      * @access public
-     * @return void
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function resettingAction()
     {
@@ -78,10 +71,9 @@ class AdminController extends Controller
     }
 
     /**
-     * show profil user connected.
-     *
+     * Show profil user connected.
      * @access public
-     * @return void
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function profilAction()
     {
@@ -92,10 +84,9 @@ class AdminController extends Controller
     }
 
     /**
-     * redirect to accueil if user want edit.
-     *
+     * Redirect to accueil if user want edit.
      * @access public
-     * @return void
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function profileditAction()
     {
@@ -104,10 +95,9 @@ class AdminController extends Controller
     }
 
     /**
-     * show index to choose month and year to extract data design office users.
-     *
+     * Show index to choose month and year to extract data design office users.
      * @access public
-     * @return void
+     * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function showexportAction()
     {
@@ -126,15 +116,14 @@ class AdminController extends Controller
     }
 
     /**
-     * export data design office users.
-     *
+     * Export data design office users.
      * @access public
-     * @return void
+     * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function exportDataUserAction()
     {
         /** check role */
-        if($this->get('security.context')->isGranted('ROLE_CHEF_BE'))
+        if ($this->get('security.context')->isGranted('ROLE_CHEF_BE'))
         {
             /** @var $em object doctrine request */
             $em = $this->getDoctrine()->getManager();
@@ -143,9 +132,11 @@ class AdminController extends Controller
             /** @var $data array data request */
             $data_request = $request->request->all();
             /** check @var data */
-            if($data_request == null)
+            if ($data_request == null)
+            {
                 /** show view */
                 return $this->render('CoyoteSiteBundle:Admin:index_export.html.twig');
+            }
             else
             {
                 /** @var $data object Entity Data */
@@ -162,16 +153,17 @@ class AdminController extends Controller
             }
         }
         else
+        {
             /** redirect MainController:indexAction */
             return $this->redirect($this->generateUrl('main_menu'));
+        }
     }
 
     /**
-     * function registrer user.
-     *
+     * Registrer user.
      * @access public
      * @param Request $request
-     * @return void
+     * @return \Coyote\SiteBundle\Controller\RedirectResponse|\Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function registerAction(Request $request)
     {
@@ -226,34 +218,29 @@ class AdminController extends Controller
              return $this->redirect($this->generateUrl('main_menu'));
     }
 
-
     /**
-     * indexchoicesuserAction function.
-     * function to choose user
-     *
+     * Function to choose user.
      * @access public
-     * @return void
+     * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function indexchoicesuserAction()
     {
-        if($this->get('security.context')->isGranted('ROLE_ADMIN'))
+        if ($this->get('security.context')->isGranted('ROLE_ADMIN'))
         {
             $em = $this->getDoctrine()->getManager();
-            $request = $this->getRequest();
             $users = $em->getRepository('CoyoteSiteBundle:User')->findAllOrderById();
             return $this->render('CoyoteSiteBundle:Admin:index_choicesuser.html.twig', array('users' => $users));
         }
         else
+        {
             return $this->redirect($this->generateUrl('main_menu'));
+        }
     }
 
-
     /**
-     * choicesrolesAction function.
-     * function to choose roles user
-     *
+     * Function to choose roles user.
      * @access public
-     * @return void
+     * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function choicesrolesAction()
     {
@@ -265,11 +252,12 @@ class AdminController extends Controller
             $request = Request::createFromGlobals();
             /** @var $data array data request */
             $data_request = $request->request->all();
-
             /** check @var data */
-            if($data_request == null)
+            if ($data_request == null)
+            {
                 /** show view */
                 return $this->render('CoyoteSiteBundle:Admin:index_choicesroles.html.twig');
+            }
             else
             {
                 $request = $this->getRequest();
@@ -280,33 +268,28 @@ class AdminController extends Controller
             }
         }
         else
+        {
             return $this->redirect($this->generateUrl('main_menu'));
+        }
     }
 
-
     /**
-     * updaterolesAction function.
-     * function to update roles user
-     *
+     * Function to update roles user.
      * @access public
-     * @return void
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function updaterolesAction()
     {
-        if($this->get('security.context')->isGranted('ROLE_ADMIN'))
+        if ($this->get('security.context')->isGranted('ROLE_ADMIN'))
         {
-            $em = $this->getDoctrine()->getManager();
             /** @var $request object request */
             $request = Request::createFromGlobals();
             /** @var $data array data request */
             $data_request = $request->request->all();
-
+            
             if(isset($data_request['add']))
             {
                 $request = $this->getRequest();
-                $session = $request->getSession();
-                $user = $em->getRepository('CoyoteSiteBundle:User')->find($session->get('choicesroles'));
-                $result = $em->getRepository('CoyoteSiteBundle:User')->updateRole($user, $data_request, "add");
                 $message = 'admin.updaterole.flash.add';
                 $this->get('session')->getFlashBag()->set('admin_updaterole', $message);
                 return $this->redirect($this->generateUrl('admin_indexchoicesuser'));
@@ -314,18 +297,19 @@ class AdminController extends Controller
             if(isset($data_request['remove']))
             {
                 $request = $this->getRequest();
-                $session = $request->getSession();
-                $user = $em->getRepository('CoyoteSiteBundle:User')->find($session->get('choicesroles'));
-                $result = $em->getRepository('CoyoteSiteBundle:User')->updateRole($user, $data_request, "remove");
                 $message = 'admin.updaterole.flash.remove';
                 $this->get('session')->getFlashBag()->set('admin_updaterole', $message);
                 return $this->redirect($this->generateUrl('admin_indexchoicesuser'));
             }
             else
+            {
                 return $this->redirect($this->generateUrl('main_menu'));
+            }
         }
         else
+        {
             return $this->redirect($this->generateUrl('main_menu'));
+        }
     }
 
 }
