@@ -705,91 +705,103 @@ class ScheduleRepository extends EntityRepository
         return $heures.'h'.$minutes;
     }
     
-    /******************************************************************/
-    /***********************Fonctions en cours*************************/
-    /******************************************************************/
+    /**********************putAbsenceWeekAction*********************/
     
+    /**
+     * Function to save absence into Schedule entity. 
+     * @param string $date_start
+     * @param string $date_end
+     * @param User $user
+     * @param array $data
+     * @return number Number schedule save
+     */
     public function postAbsenceWeek($date_start, $date_end, $user, $data)
     {
         $date_start = new \DateTime($date_start);
         $date_end = new \DateTime($date_end);
-        
+    
         $qb = $this->_em->createQueryBuilder();
         $qb->select('t')
-           ->from('CoyoteSiteBundle:Timetable', 't')
-           ->where('t.date between :date_start and :date_end')
-           ->setParameters(array(
-                           'date_start' => $date_start->format('Y-m-d'),
-                           'date_end' => $date_end->format('Y-m-d')
-           ));
+        ->from('CoyoteSiteBundle:Timetable', 't')
+        ->where('t.date between :date_start and :date_end')
+        ->setParameters(array(
+                        'date_start' => $date_start->format('Y-m-d'),
+                        'date_end' => $date_end->format('Y-m-d')
+        ));
         $timetables = $qb->getQuery()->getResult();
         $countsave = 0;
         for($i=0; $i<count($timetables);$i++)
         {
-            $qb = $this->_em->createQueryBuilder();
-            $timetable = $timetables[$i];
-            
-            if (($timetable->getDate()->format('l') != "Sunday") and ($timetable->getDate()->format('l') != "Saturday"))
-            {
-                $countsave++;
-                $qb->select('s')
-                ->from('CoyoteSiteBundle:Schedule', 's')
-                ->where('s.user = :user and s.timetable = :timetable')
+        $qb = $this->_em->createQueryBuilder();
+        $timetable = $timetables[$i];
+    
+        if (($timetable->getDate()->format('l') != "Sunday") and ($timetable->getDate()->format('l') != "Saturday"))
+        {
+        $countsave++;
+        $qb->select('s')
+        ->from('CoyoteSiteBundle:Schedule', 's')
+        ->where('s.user = :user and s.timetable = :timetable')
                 ->setParameters(array(
-                                'user' => $user,
-                                'timetable' => $timetable
-                ));
+                                    'user' => $user,
+                                    'timetable' => $timetable
+                    ));
                 $schedule = $qb->getQuery()->getOneOrNullResult();
-                
+    
                 if ($schedule == null)
                 {
-                    $schedule = new Schedule();
-                    $schedule->setUser($user);
-                    $schedule->setStart('0:00');
-                    $schedule->setBreak('0:00');
-                    $schedule->setEnd('0:00');
-                    $schedule->setWorkingTime('0:00');
-                    $schedule->setWorkingHours('0');
-                    $schedule->setTimetable($timetable);
-                    $schedule->setAbsenceName($data['absence_name']);
-                    $schedule->setAbsenceDuration($data['absence_duration']);
-                    if (isset($data['travel']))
-                    {
-                        $schedule->setTravel($data['travel']);
-                    }
-                    else 
-                    {
+                $schedule = new Schedule();
+                $schedule->setUser($user);
+                $schedule->setStart('0:00');
+                $schedule->setBreak('0:00');
+                $schedule->setEnd('0:00');
+                $schedule->setWorkingTime('0:00');
+                $schedule->setWorkingHours('0');
+                $schedule->setTimetable($timetable);
+                $schedule->setAbsenceName($data['absence_name']);
+                $schedule->setAbsenceDuration($data['absence_duration']);
+                if (isset($data['travel']))
+                {
+                $schedule->setTravel($data['travel']);
+                }
+                        else
+                        {
                         $schedule->setTravel('0');
-                    }
-                    $schedule->setComment($data['comment']);
+                }
+                $schedule->setComment($data['comment']);
                     $this->_em->persist($schedule);
                 }
-                else 
+                else
                 {
-                    $schedule->setStart('0:00');
+                $schedule->setStart('0:00');
                     $schedule->setBreak('0:00');
                     $schedule->setEnd('0:00');
                     $schedule->setWorkingTime('0:00');
                     $schedule->setWorkingHours('0');
                     $schedule->setAbsenceName($data['absence_name']);
-                    $schedule->setAbsenceDuration($data['absence_duration']);
-                    if (isset($data['travel']))
-                    {
+                        $schedule->setAbsenceDuration($data['absence_duration']);
+                        if (isset($data['travel']))
+                        {
                         $schedule->setTravel($data['travel']);
                     }
                     else
                     {
-                        $schedule->setTravel('0');
+                    $schedule->setTravel('0');
                     }
                     $schedule->setComment($data['comment']);
-                    $this->_em->persist($schedule);
-                }
-            }
-            $qb = null;
+        $this->_em->persist($schedule);
+                    }
+                    }
+                        $qb = null;
+                    }
+                    $this->_em->flush();
+                    return $countsave;
         }
-        $this->_em->flush();
-        return $countsave;
-    }
+    
+    /******************************************************************/
+    /***********************Fonctions en cours*************************/
+    /******************************************************************/
+    
+    
     
     /******************************************************************/
     /***********************Anciennes Fonctions************************/
