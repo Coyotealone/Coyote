@@ -10,7 +10,7 @@
 	},
 	"require" : {
 		"php" : ">=5.3.3",
-		"symfony/symfony" : "2.3.*",
+		"symfony/symfony" : "2.6.*",
 		"doctrine/orm" : "~2.2,>=2.2.3,<2.5",
 		"doctrine/dbal" : "<2.5",
 		"doctrine/doctrine-bundle" : "~1.2",
@@ -30,7 +30,8 @@
 		"sonata-project/timeline-bundle" : "~2.2@dev",
 		"sonata-project/block-bundle" : "2.2.13",
 		"friendsofsymfony/rest-bundle" : "1.6.*@dev",
-		"jms/serializer-bundle": "0.13.*@dev"
+		"jms/serializer-bundle" : "0.13.*@dev",
+		"nelmio/api-doc-bundle" : "2.7.*@dev"
 	},
 	"scripts" : {
 		"post-install-cmd" : [
