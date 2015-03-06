@@ -5,10 +5,10 @@ $(function() {
 
 $(function() {
     var pickerOpts = { dateFormat:"yy-mm-dd" };
-    $( "#datestart" ).datepicker(pickerOpts);
+    $( "#date_start" ).datepicker(pickerOpts);
 });
 
 $(function() {
     var pickerOpts = { dateFormat:"yy-mm-dd" };
-    $( "#dateend" ).datepicker(pickerOpts);
+    $( "#date_end" ).datepicker(pickerOpts);
 });

@@ -28,7 +28,7 @@ class ScheduleController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function getScheduleUserAction()
+    public function getScheduleUserWeekAction()
     {
         $em = $this->getDoctrine()->getManager();
         $request = $this->getRequest();
@@ -49,34 +49,19 @@ class ScheduleController extends Controller
                 array('data_timetable' => $data_timetable, 'time' => $time, 'duration' => $duration));
     }
 
-    /**
-     * Function that redirect to getScheduleUserAction().
-     * indexAction()
-     * @access public
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     */
-    public function indexAction()
-    {
-        if($this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED') == false)
-        {
-            return $this->redirect($this->generateUrl('fos_user_security_login'));
-        }
-        return $this->redirect($this->generateUrl('schedule_getscheduleuser'));
-    }
-
-    /**
+        /**
      * Function to return to the previous week, set week and period into session.
      * weeklessAction()
      * @access public
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function weeklessAction()
+    public function postWeekLessAction()
     {
         $em = $this->getDoctrine()->getManager();
         $request = $this->getRequest();
         $session = $request->getSession();
         $em->getRepository("CoyoteSiteBundle:Schedule")->updateWeek("less", $session);
-        return $this->redirect($this->generateUrl('schedule_index'));
+        return $this->redirect($this->generateUrl('schedule_getscheduleuserweek'));
     }
 
     /**
@@ -85,13 +70,13 @@ class ScheduleController extends Controller
      * @access public
      * @return void
      */
-    public function weekmoreAction()
+    public function postWeekMoreAction()
     {
         $em = $this->getDoctrine()->getManager();
         $request = $this->getRequest();
         $session = $request->getSession();
         $em->getRepository("CoyoteSiteBundle:Schedule")->updateWeek("more", $session);
-        return $this->redirect($this->generateUrl('schedule_index'));
+        return $this->redirect($this->generateUrl('schedule_getscheduleuserweek'));
     }
 
     /**
@@ -100,7 +85,7 @@ class ScheduleController extends Controller
      * @access public
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function postScheduleUserAction()
+    public function postScheduleUserWeekAction()
     {
         $user = $this->get('security.context')->getToken()->getUser();
         if ($user == "anon.")
@@ -170,7 +155,7 @@ class ScheduleController extends Controller
                     $message = 'schedule.flash.no_save';
             }
             $this->get('session')->getFlashBag()->set('save_schedule', $message);
-            return $this->redirect($this->generateUrl('schedule_index'));
+            return $this->redirect($this->generateUrl('schedule_getscheduleuserweek'));
         }
         if ($this->get('security.context')->isGranted('ROLE_CADRE'))
         {
@@ -232,22 +217,8 @@ class ScheduleController extends Controller
                     $message = 'schedule.flash.no_save';
             }
             $this->get('session')->getFlashBag()->set('save_schedule', $message);
-            return $this->redirect($this->generateUrl('schedule_index'));
+            return $this->redirect($this->generateUrl('schedule_getscheduleuserweek'));
         }
-    }
-
-    /**
-     * Function to show page selection month and year to show time attendance.
-     * indexshowAction()
-     * @access public
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function indexshowAction()
-    {
-        $data = new Data();
-        return $this->render('CoyoteSiteBundle:Schedule:indexshow.html.twig', array('month' => date('n'),
-            'year' => date('Y'), 'tab_mois' => $data->getTabMonth(), 'tab_num_mois' => $data->getTabNumMonth(),
-            'tab_annee' => $data->getTabYear()));
     }
 
     /**
@@ -256,76 +227,71 @@ class ScheduleController extends Controller
      * @access public
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function getScheduleAction()
-    {
-        $doctrine = $this->getDoctrine();
-        $em = $doctrine->getManager();
-        $year = $_GET['year'];
-        $month = $_GET['month'];
-        if (empty($year) && empty($month))
-        {
-            return $this->redirect($this->generateUrl('schedule_indexshow'));
-        }
-        else
-        {
-            if(empty($year) && empty($month))
-                return $this->render('CoyoteSiteBundle:Schedule:indexshow.html.twig');
-            $user = $this->getUser();
-            $period = $em->getRepository('CoyoteSiteBundle:Schedule')->findPeriod($month, $year);
-            $date = $year."-".$month."-%";
-            $absenceca = $em->getRepository('CoyoteSiteBundle:Schedule')->absenceMonth($date, $user->getId(), "CA");
-            $absencecp = $em->getRepository('CoyoteSiteBundle:Schedule')->absenceMonth($date, $user->getId(), "CP");
-            $absencertt = $em->getRepository('CoyoteSiteBundle:Schedule')->absenceMonth($date, $user->getId(), "RTT");
-            $absencerttyear = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsenceYear($period, $user, "RTT");
-            $absencecayear = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsenceYear($period, $user, "CA");
-            $absencecpyear = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsenceYear($period, $user, "CP");
-            if ($this->get('security.context')->isGranted('ROLE_CADRE'))
-            {
-                $daymonth = $em->getRepository('CoyoteSiteBundle:Schedule')->findDayMonth($date, $user);
-                $dayyear = $em->getRepository('CoyoteSiteBundle:Schedule')->findDayYear($period, $user);
-                $dataschedule = $em->getRepository('CoyoteSiteBundle:Schedule')->dataScheduleFM($user, $date);
-                return $this->render('CoyoteSiteBundle:Schedule:showfm.html.twig', array(
-                    'dataschedule' => $dataschedule,
-                    'absencertt' => $absencertt,
-                    'absenceca' => $absenceca,
-                    'absencecp' => $absencecp,
-                    'rttyear' => $absencerttyear,
-                    'cpyear' => $absencecpyear,
-                    'cayear' => $absencecayear,
-                    'dayyear' => $dayyear,
-                    'daymonth' => $daymonth,
-                    ));
-            }
-            if ($this->get('security.context')->isGranted('ROLE_TECH'))
-            {
-                $dataschedule = $em->getRepository('CoyoteSiteBundle:Schedule')->dataSchedule($user, $date);
-                $timeweek = $em->getRepository('CoyoteSiteBundle:Schedule')->timeWeek($dataschedule);
-                $timemonth = $em->getRepository('CoyoteSiteBundle:Schedule')->findTimeMonth($year.'-'.$month.'-%', $user);
-
-                return $this->render('CoyoteSiteBundle:Schedule:show.html.twig', array(
-                    'dataschedule' => $dataschedule,
-                    'absenceca' => $absenceca,
-                    'absencecp' => $absencecp,
-                    'absencertt' => $absencertt,
-                    'time' => $timemonth,
-                    'rttyear' => $absencerttyear,
-                    'cpyear' => $absencecpyear,
-                    'cayear' => $absencecayear,
-                    'timeweek' => $timeweek,
-                    ));
-            }
-        }
-    }
-
-    /**
-     * Function to show page selection month and year to print time attendance.
-     * @access public
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function indexprintAction()
+    public function getScheduleUserMonthAction(Request $request)
     {
         $data = new Data();
-        return $this->render('CoyoteSiteBundle:Schedule:indexprint.html.twig', array('month' => date('n'),
+        
+        if ($request->getMethod() == 'GET' && isset($_GET['year']) && isset($_GET['month']))
+        {
+            $doctrine = $this->getDoctrine();
+            $em = $doctrine->getManager();
+            $year = $_GET['year'];
+            $month = $_GET['month'];
+            if (empty($year) && empty($month))
+            {
+                return $this->redirect($this->generateUrl('schedule_indexshow'));
+            }
+            else
+            {
+                if(empty($year) && empty($month))
+                    return $this->render('CoyoteSiteBundle:Schedule:indexshow.html.twig');
+                $user = $this->getUser();
+                $period = $em->getRepository('CoyoteSiteBundle:Schedule')->findPeriod($month, $year);
+                $date = $year."-".$month."-%";
+                $absenceca = $em->getRepository('CoyoteSiteBundle:Schedule')->absenceMonth($date, $user->getId(), "CA");
+                $absencecp = $em->getRepository('CoyoteSiteBundle:Schedule')->absenceMonth($date, $user->getId(), "CP");
+                $absencertt = $em->getRepository('CoyoteSiteBundle:Schedule')->absenceMonth($date, $user->getId(), "RTT");
+                $absencerttyear = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsenceYear($period, $user, "RTT");
+                $absencecayear = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsenceYear($period, $user, "CA");
+                $absencecpyear = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsenceYear($period, $user, "CP");
+                if ($this->get('security.context')->isGranted('ROLE_CADRE'))
+                {
+                    $daymonth = $em->getRepository('CoyoteSiteBundle:Schedule')->findDayMonth($date, $user);
+                    $dayyear = $em->getRepository('CoyoteSiteBundle:Schedule')->findDayYear($period, $user);
+                    $dataschedule = $em->getRepository('CoyoteSiteBundle:Schedule')->dataScheduleFM($user, $date);
+                    return $this->render('CoyoteSiteBundle:Schedule:showfm.html.twig', array(
+                        'dataschedule' => $dataschedule,
+                        'absencertt' => $absencertt,
+                        'absenceca' => $absenceca,
+                        'absencecp' => $absencecp,
+                        'rttyear' => $absencerttyear,
+                        'cpyear' => $absencecpyear,
+                        'cayear' => $absencecayear,
+                        'dayyear' => $dayyear,
+                        'daymonth' => $daymonth,
+                        ));
+                }
+                if ($this->get('security.context')->isGranted('ROLE_TECH'))
+                {
+                    $dataschedule = $em->getRepository('CoyoteSiteBundle:Schedule')->dataSchedule($user, $date);
+                    $timeweek = $em->getRepository('CoyoteSiteBundle:Schedule')->timeWeek($dataschedule);
+                    $timemonth = $em->getRepository('CoyoteSiteBundle:Schedule')->findTimeMonth($year.'-'.$month.'-%', $user);
+    
+                    return $this->render('CoyoteSiteBundle:Schedule:show.html.twig', array(
+                        'dataschedule' => $dataschedule,
+                        'absenceca' => $absenceca,
+                        'absencecp' => $absencecp,
+                        'absencertt' => $absencertt,
+                        'time' => $timemonth,
+                        'rttyear' => $absencerttyear,
+                        'cpyear' => $absencecpyear,
+                        'cayear' => $absencecayear,
+                        'timeweek' => $timeweek,
+                        ));
+                }
+            }
+        }
+        return $this->render('CoyoteSiteBundle:Schedule:indexshow.html.twig', array('month' => date('n'),
                         'year' => date('Y'), 'tab_mois' => $data->getTabMonth(), 'tab_num_mois' => $data->getTabNumMonth(),
                         'tab_annee' => $data->getTabYear()));
     }
@@ -335,22 +301,15 @@ class ScheduleController extends Controller
      * @access public
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function printAction()
+    public function getScheduleUserPrintMonthAction(Request $request)
     {
-        $doctrine = $this->getDoctrine();
-        $em = $doctrine->getManager();
-        $year = $_GET['year'];
-        $month = $_GET['month'];
-        if (empty($year) && empty($month))
+        $data = new Data();
+        if ($request->getMethod() == 'GET' && isset($_GET['year']) && isset($_GET['month']))
         {
-            return $this->redirect($this->generateUrl('schedule_indexprint'));
-        }
-        else
-        {
-            if (empty($year) && empty($month))
-            {
-                return $this->render('CoyoteSiteBundle:Schedule:indexprint.html.twig');
-            }
+            $doctrine = $this->getDoctrine();
+            $em = $doctrine->getManager();
+            $year = $_GET['year'];
+            $month = $_GET['month'];
             $user = $this->getUser();
             $period = $em->getRepository('CoyoteSiteBundle:Schedule')->findPeriod($month, $year);
             $date = $year."-".$month."-%";
@@ -416,6 +375,9 @@ class ScheduleController extends Controller
             $html2pdf->Output($filename, 'D');
             return new Response('PDF réalisé');
         }
+        return $this->render('CoyoteSiteBundle:Schedule:indexprint.html.twig', array('month' => date('n'),
+                        'year' => date('Y'), 'tab_mois' => $data->getTabMonth(), 'tab_num_mois' => $data->getTabNumMonth(),
+                        'tab_annee' => $data->getTabYear()));
     }
 
     /*****************************************************************/
@@ -466,6 +428,10 @@ class ScheduleController extends Controller
         }
     }
 
+    
+    
+    
+    
     /*****************************************************************/
     /***********************Fonctions Erronées************************/
     /*****************************************************************/
@@ -693,4 +659,18 @@ class ScheduleController extends Controller
         }
     }
 
+    /**
+     * Function that redirect to getScheduleUserAction().
+     * indexAction()
+     * @access public
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function indexAction()
+    {
+        if($this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED') == false)
+        {
+            return $this->redirect($this->generateUrl('fos_user_security_login'));
+        }
+        return $this->redirect($this->generateUrl('schedule_getscheduleuser'));
+    }
 }

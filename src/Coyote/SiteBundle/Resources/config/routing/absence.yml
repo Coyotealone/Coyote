@@ -25,6 +25,15 @@ absence_update:
     path:     /{id}/update
     defaults: { _controller: "CoyoteSiteBundle:Absence:update" }
     requirements: { _method: post|put }
+    
+absence_putweek:
+    path:     /absence_week
+    defaults: { _controller: "CoyoteSiteBundle:Absence:putAbsenceWeek" }
+    
+absence_newweek:
+    path:     /new_week
+    defaults: { _controller: "CoyoteSiteBundle:Absence:newAbsenceWeek" }
+
 
 #absence_delete:
 #    path:     /{id}/delete

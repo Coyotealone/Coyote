@@ -1,0 +1,50 @@
+{% extends 'CoyoteSiteBundle:Base:base.html.twig' %}
+
+{% block javascripts %}
+    <script src="{{ asset('bundles/coyotesite/js/jquery-min.js') }}"/></script>
+    <script src="{{ asset('bundles/coyotesite/js/jquery-1.10.2.js') }}"/></script>
+    <script src="{{ asset('bundles/coyotesite/js/jquery-ui.js') }}"/></script>
+    <script src="{{ asset('bundles/coyotesite/js/script_absence.js') }}"/></script>
+{% endblock %}
+
+{% block nav %}
+
+    <!--[if lt IE 9]>
+        {{ include('CoyoteSiteBundle:Base:navigation_ie.html.twig') }}
+    <![endif]-->
+    <!--[if !IE]><!-->
+        {{ include('CoyoteSiteBundle:Base:navigation.html.twig') }}
+	<!--<![endif]-->
+
+{% endblock %}
+
+{% block content %}
+
+<p id="titreconfig">{{'absence.title.create'|trans}} </p>
+
+{{ form_start(form) }}
+<div class='table-responsive'>
+    <table class='table' id='tab_expense'>
+    	<tr>
+    		<th>{{ 'absence.travel'|trans }}</th>
+    		<th>{{ 'absence.absence_name'|trans }}</th>
+    		<th>{{ 'absence.absence_duration'|trans }}</th>
+    		<th>{{ 'absence.comment'|trans }}</th>
+    	</tr>
+    	<td>
+    	    {{ form_widget(form.travel) }}
+    		</td>
+    		<td>
+    		    {{ form_widget(form.absence_name) }}
+    		</td>
+    		<td>
+    		    {{ form_widget(form.absence_duration) }}
+    		</td>
+    		<td>
+    		    {{ form_widget(form.comment) }}
+    		</td>
+    </table>
+</div><br>
+<input type="submit" value={{'absence.new'|trans}} />
+{{ form_end(form) }}
+{% endblock %}

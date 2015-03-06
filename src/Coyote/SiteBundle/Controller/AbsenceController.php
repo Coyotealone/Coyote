@@ -10,6 +10,9 @@ use Coyote\SiteBundle\Entity\Schedule;
 use Coyote\SiteBundle\Form\AbsenceType;
 use Coyote\SiteBundle\Form\AbsenceNewType;
 use Coyote\SiteBundle\Entity\Timetable;
+use Coyote\SiteBundle\Entity\Data;
+use Coyote\SiteBundle\Form\AbsenceNewWeekType;
+use Coyote\SiteBundle\Entity\Coyote\SiteBundle\Entity;
 
 /**
  * Absence controller.
@@ -275,9 +278,74 @@ class AbsenceController extends Controller
         ;
     }
 
+    /**
+     * Function to save Schedule.
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function putAbsenceWeekAction(Request $request)
+    {
+        $entity = new Schedule();
+        $form = $this->createCreateWeekForm($entity);
+        $form->handleRequest($request);
+        $session = $request->getSession();
+        $date_start = $session->get("date_start");
+        $date_end = $session->get("date_end");
+        if ($request->getMethod() == 'POST' && isset($date_start) && isset($date_end))
+        {
+            $data = $this->getRequest()->request->get('coyote_sitebundle_schedule');
+            $em = $this->getDoctrine()->getManager();
+            $em->getRepository('CoyoteSiteBundle:Schedule')->postAbsenceWeek(
+                    $date_start, $date_end, $this->getUser(), $data);
+            return $this->redirect($this->generateUrl('absence'));
+        }
+    
+        return $this->redirect($this->generateUrl('absence'));
+    }
+    
+    /**
+     * Function to create a form Schedule entity.
+     * @param Schedule $entity
+     * @return \Symfony\Component\Form\Form
+     */
+    private function createCreateWeekForm(Schedule $entity)
+    {
+        $form = $this->createForm(new AbsenceNewWeekType(), $entity, array(
+                        'action' => $this->generateUrl('absence_putweek'),
+                        'method' => 'POST',
+        ));
+        return $form;
+    }
+    
+    /**
+     * Displays a form to create a new Schedule entity.
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function newAbsenceWeekAction(Request $request)
+    {
+        $session = $request->getSession();
+        if ($request->getMethod() == 'POST' && isset($_POST['date_start']) && isset($_POST['date_end']))
+        {
+            $entity = new Schedule();
+            $form   = $this->createCreateWeekForm($entity);
+            $session->set('date_start', $_POST['date_start']);
+            $session->set('date_end', $_POST['date_end']);
+            return $this->render('CoyoteSiteBundle:Absence:newweek.html.twig', array(
+                            'entity' => $entity,
+                            'form'   => $form->createView(),
+            ));
+        }
+        $session->set('date_start', null);
+        $session->set('date_end', null);
+        return $this->render('CoyoteSiteBundle:Absence:indexputweek.html.twig');
+    
+    }
+    
     /*****************************************************************/
     /***********************Fonctions En cours************************/
     /*****************************************************************/
+    
     
     
     /*****************************************************************/

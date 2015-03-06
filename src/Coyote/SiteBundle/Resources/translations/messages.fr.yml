@@ -321,6 +321,10 @@ absence:
     create: Ajouter
     update: Enregistrer
     new: Créer
+    date_start: Début des congés
+    date_end: Fin des congés
+    submit:
+        date: Ajout des congés
     title:
         show: Liste des absences
         create: Ajouter une absence

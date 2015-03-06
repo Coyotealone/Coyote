@@ -3,11 +3,11 @@
     <li style="margin-left:2px; float:left; /*pour IE*/" class="active"><a href="{{ path('main_index') }}">{{'Accueil'|trans}}</a></li>
 
 	<li id="frais" class="dropdown" style="margin: 0px 10px; float:left; /*pour IE*/">
-      <a href="{{ path('schedule_index') }}" class="dropdown-toggle" data-toggle="dropdown">{{'Présence'|trans}}<b class="caret"></b></a>
+      <a href="{{ path('schedule_getscheduleuserweek') }}" class="dropdown-toggle" data-toggle="dropdown">{{'Présence'|trans}}<b class="caret"></b></a>
       <ul class="dropdown-menu">
-        <li><a href="{{ path('schedule_index') }}">{{'Saisie'|trans}}</a></li>
-        <li><a href="{{ path('schedule_indexshow') }}">{{'Consultation'|trans}}</a></li>
-        <li><a href="{{ path('schedule_indexprint') }}">{{'Impression PDF'|trans}}</a></li>
+        <li><a href="{{ path('schedule_getscheduleuserweek') }}">{{'Saisie'|trans}}</a></li>
+        <li><a href="{{ path('schedule_getscheduleusermonth') }}">{{'Consultation'|trans}}</a></li>
+        <li><a href="{{ path('schedule_getscheduleuserprintmonth') }}">{{'Impression PDF'|trans}}</a></li>
       </ul>
     </li>
 

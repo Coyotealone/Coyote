@@ -21,18 +21,18 @@
 {% block content %}
 
 <p>Date Absence</p>
-<form role="form" action="{{ path('absence_date') }}" method='post'>
+<form role="form" action="{{ path('absence_newweek') }}" method='post'>
     <div class='table-responsive'>
         <table class='table' id='tab_expense'>
             <tr>
-                <th>{{ 'absence.datestart'|trans }}</th>
-                <th>{{ 'absence.dateend'|trans }}</th>
+                <th>{{ 'absence.date_start'|trans }}</th>
+                <th>{{ 'absence.date_end'|trans }}</th>
             </tr>
             <td>
-                <input type='text' name='datestart' id='datestart' >
+                <input type='text' name='date_start' id='date_start' >
             </td>
             <td>
-                <input type='text' name='dateend' id='dateend' >
+                <input type='text' name='date_end' id='date_end' >
             </td>
         </table>
     </div><br>

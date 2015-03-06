@@ -3,11 +3,11 @@
 
     {% if is_granted('ROLE_TECH') or is_granted('ROLE_CADRE') %}
 	<li id="presence" class="dropdown">
-      <a href="{{ path('schedule_index') }}" class="dropdown-toggle" data-toggle="dropdown">{{'base.nav.schedule.name'|trans}}<b class="caret"></b></a>
+      <a href="{{ path('schedule_getscheduleuserweek') }}" class="dropdown-toggle" data-toggle="dropdown">{{'base.nav.schedule.name'|trans}}<b class="caret"></b></a>
       <ul class="dropdown-menu">
-        <li><a href="{{ path('schedule_index') }}">{{'base.nav.schedule.index'|trans}}</a></li>
-        <li><a href="{{ path('schedule_indexshow') }}">{{'base.nav.schedule.indexshow'|trans}}</a></li>
-        <li><a href="{{ path('schedule_indexprint') }}">{{'base.nav.schedule.indexprint'|trans}}</a></li>
+        <li><a href="{{ path('schedule_getscheduleuserweek') }}">{{'base.nav.schedule.index'|trans}}</a></li>
+        <li><a href="{{ path('schedule_getscheduleusermonth') }}">{{'base.nav.schedule.indexshow'|trans}}</a></li>
+        <li><a href="{{ path('schedule_getscheduleuserprintmonth') }}">{{'base.nav.schedule.indexprint'|trans}}</a></li>
        {# <li><a href="{{ path('schedule_indexprintyear') }}">{{'base.nav.schedule.indexprintyear'|trans}}</a></li>#}
         <li><a href="{{ path('absence') }}">{{'base.nav.schedule.absence'|trans}}</a></li>
             <li><a href="{{ path('schedule_overtime') }}">{{'base.nav.schedule.overtime'|trans}}</a></li>
