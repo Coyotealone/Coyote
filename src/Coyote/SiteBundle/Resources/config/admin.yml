@@ -23,12 +23,6 @@ services:
         tags:
             - {name: sonata.admin, manager_type: orm, group: Divers, label: Monnaie}
 
-    coyote_site.admin.expense:
-        class: Coyote\SiteBundle\Admin\ExpenseAdmin
-        arguments: [~, Coyote\SiteBundle\Entity\Expense, CoyoteSiteBundle:ExpenseAdmin]
-        tags:
-            - {name: sonata.admin, manager_type: orm, group: Notes de frais, label: Notes de frais}
-
     coyote_site.admin.fee:
         class: Coyote\SiteBundle\Admin\FeeAdmin
         arguments: [~, Coyote\SiteBundle\Entity\Fee, CoyoteSiteBundle:FeeAdmin]
@@ -76,3 +70,9 @@ services:
         arguments: [~, Coyote\SiteBundle\Entity\Holiday, CoyoteSiteBundle:HolidayAdmin]
         tags:
             - {name: sonata.admin, manager_type: orm, group: Temps de présence, label: Congés}
+
+    coyote_site.admin.expense:
+        class: Coyote\SiteBundle\Admin\ExpenseAdmin
+        arguments: [~, Coyote\SiteBundle\Entity\Expense, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Notes de frais, label: Notes de frais}

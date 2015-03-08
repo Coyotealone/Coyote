@@ -20,6 +20,7 @@
 	<buildpathentry kind="src" path="vendor/willdurand/jsonp-callback-validator/src"/>
 	<buildpathentry kind="src" path="vendor/swiftmailer/swiftmailer/lib"/>
 	<buildpathentry kind="src" path="vendor/symfony/symfony/src/Symfony/Component/HttpFoundation/Resources/stubs"/>
+	<buildpathentry kind="src" path="vendor/michelf/php-markdown"/>
 	<buildpathentry kind="src" path="vendor/symfony/assetic-bundle"/>
 	<buildpathentry kind="src" path="vendor/doctrine/orm/lib"/>
 	<buildpathentry kind="src" path="vendor/kriswallsmith/assetic/src"/>
@@ -46,6 +47,7 @@
 	<buildpathentry kind="src" path="vendor/sonata-project/exporter/lib"/>
 	<buildpathentry kind="src" path="vendor/symfony/symfony/src/Symfony/Component/Intl/Resources/stubs"/>
 	<buildpathentry kind="src" path="vendor/jms/parser-lib/src"/>
+	<buildpathentry kind="src" path="vendor/nelmio/api-doc-bundle"/>
 	<buildpathentry kind="src" path="vendor/sonata-project/cache/test"/>
 	<buildpathentry kind="src" path="vendor/doctrine/common/lib"/>
 	<buildpathentry kind="src" path="vendor/sonata-project/timeline-bundle"/>
