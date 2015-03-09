@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Class Schedule
  * @author Coyote
  * @ORM\Entity
+ * @ORM\Table(name="schedule")
  * @ORM\Entity(repositoryClass="Coyote\SiteBundle\Entity\ScheduleRepository");
  * @ORM\HasLifecycleCallbacks
  */

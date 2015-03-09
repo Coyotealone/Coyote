@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Class Timetable
  * @author Coyote
  * @ORM\Entity
+ * @ORM\Table(name="timetable")
  * @ORM\Entity(repositoryClass="Coyote\SiteBundle\Entity\TimetableRepository");
  */
 class Timetable

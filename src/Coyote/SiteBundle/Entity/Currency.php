@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Class Currency
  * @author Coyote
  * @ORM\Entity
+ * @ORM\Table(name="currency")
  * @ORM\Entity(repositoryClass="Coyote\SiteBundle\Entity\CurrencyRepository");
  */
 class Currency

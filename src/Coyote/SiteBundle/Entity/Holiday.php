@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Class Holiday
  * @author Coyote
  * @ORM\Entity
- *
+ * @ORM\Table(name="holiday")
  */
 class Holiday
 {

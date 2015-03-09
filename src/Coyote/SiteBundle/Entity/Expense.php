@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Class Expense
  * @author Coyote
  * @ORM\Entity
+ * @ORM\Table(name="expense")
  * @ORM\Entity(repositoryClass="Coyote\SiteBundle\Entity\ExpenseRepository");
  * @ORM\HasLifecycleCallbacks
  */

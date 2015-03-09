@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Class Business
  * @author Coyote
  * @ORM\Entity
+ * @ORM\Table(name="business")
  * @ORM\Entity(repositoryClass="Coyote\SiteBundle\Entity\BusinessRepository");
  */
 class Business

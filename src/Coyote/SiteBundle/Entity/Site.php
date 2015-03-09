@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Class Site
  * @author Coyote
  * @ORM\Entity
+ * @ORM\Table(name="site")
  */
 class Site
 {

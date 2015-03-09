@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Class Quote
  * @author Coyote
  * @ORM\Entity
- *
+ * @ORM\Table(name="quote")
  */
 class Quote
 {

@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Class Country
  * @author Coyote
  * @ORM\Entity
- *
+ * @ORM\Table(name="country")
  */
 class Country
 {

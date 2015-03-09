@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Class UserFees
  * @author Coyote
  * @ORM\Entity
+ * @ORM\Table(name="userfees")
  */
 class UserFees
 {
