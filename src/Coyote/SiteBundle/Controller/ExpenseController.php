@@ -5,13 +5,9 @@ namespace Coyote\SiteBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Compenent\Form\FormBuilder;
 use Symfony\Component\HttpFoundation\Session\Session;
 
-use Spraed\PDFGeneratorBundle\PDFGenerator\PDFGenerator;
-
 use Coyote\SiteBundle\Entity\User;
-use Coyote\SiteBundle\Entity\UserInfo;
 use Coyote\SiteBundle\Entity\Expense;
 use Coyote\SiteBundle\Entity\Site;
 use Coyote\SiteBundle\Entity\Currency;
@@ -19,7 +15,6 @@ use Coyote\SiteBundle\Entity\Data;
 
 use Doctrine\ORM\EntityRepository;
 
-use Coyote\SiteBundle\Form\UserType;
 use Coyote\SiteBundle\Form\ExpenseType;
 
 
@@ -30,85 +25,67 @@ use Coyote\SiteBundle\Form\ExpenseType;
 class ExpenseController extends Controller
 {
     /**
-     * redirect to new expense.
-     *
+     * Function to redirect to new Expense.
      * @access public
-     * @return view index
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function indexAction()
     {
-        /** @var $user object data user connected */
         $user = $this->get('security.context')->getToken()->getUser();
-        /** @var $session new object Session */
-        $session = new Session();
-        /** check @var $user */
-        if($user == "anon.")
+        if ($user == "anon.")
+        {
             return $this->redirect($this->generateUrl('fos_user_security_login'));
-        /** check object session userfeesid */
-        if($this->get('security.context')->isGranted('ROLE_TRADE'))
-            /** show view */
+        }
+        if ($this->get('security.context')->isGranted('ROLE_TRADE'))
+        {
             return $this->render('CoyoteSiteBundle:Expense:index.html.twig');
+        }
         else
-            /** redirect MainController:indexAction */
+        {
             return $this->redirect($this->generateUrl('main_menu'));
+        }
     }
 
     /**
-     * new expense.
-     *
+     * Creates a new Expense entity.
      * @access public
-     * @return view create
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function createAction()
     {
-        /** @var $em object doctrine request */
         $em = $this->getDoctrine()->getManager();
-        /** @var $user object data user connected */
         $user = $this->get('security.context')->getToken()->getUser();
-        /** @var $session new object Session */
-        $session = new Session();
-        /** check @var $user */
-        if($user == "anon.")
-            /** redirect \FOS\UserBundle\Controller\SecurityController */
+        if ($user == "anon.")
+        {
             return $this->redirect($this->generateUrl('fos_user_security_login'));
-        /** check object session userfeesid */
-        if($session->get('userfeesid') == null)
-            /** redirect MainController:indexAction */
+        }
+        if (!$this->getUser()->getUserfees())
+        {
             return $this->redirect($this->generateUrl('main_menu'));
+        }
         else
         {
-            /** @var $currency object currency all data from Currency */
             $currency = $em->getRepository('CoyoteSiteBundle:Currency')->findAllOrderByCode();
-            /** @var $business object business all data from Business */
             $business = $em->getRepository('CoyoteSiteBundle:Business')->findAllOrderByName();
-            /** @var $fee object fee all data from Fee */
             $fee = $em->getRepository('CoyoteSiteBundle:Fee')->findAll();
-            /** show view */
             return $this->render('CoyoteSiteBundle:Expense:create.html.twig',
                 array('currency' => $currency, 'business' => $business, 'fee' => $fee));
         }
     }
 
     /**
-     * index to show expense save.
-     *
-     * @access public
-     * @return index show
+     * Function to show index page to show Expense save.
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function indexshowAction()
     {
-        /** @var $session new object Session */
-        $session = new Session();
-        /** @var $em object doctrine request */
-        $em = $this->getDoctrine()->getManager();
-        /** check object session userfeesid */
-        if($session->get('userfeesid') == null)
-            /** redirect MainController:indexAction */
+        if (!$this->getUser()->getUserfees())
+        {
             return $this->redirect($this->generateUrl('main_menu'));
+        }
         else
         {
             $data = new Data();
-            /** show view */
             return $this->render('CoyoteSiteBundle:Expense:indexshow.html.twig', array('month' => date('n'),
                 'year' => date('Y'), 'tab_mois' => $data->getTabMonth(), 'tab_num_mois' => $data->getTabNumMonth(),
                 'tab_annee' => $data->getTabYear(), 'tab_num_annee' => $data->getTabNumYear()));
@@ -116,38 +93,37 @@ class ExpenseController extends Controller
     }
 
     /**
-     * show expense save.
-     *
+     * Function to show Expense save by User.
      * @access public
-     * @return showparameters
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function showAction()
     {
-        /** @var $session new object Session */
         $session = new Session();
-        /** @var $user object data user connected */
         $user = $this->get('security.context')->getToken()->getUser();
-        /** check @var $user */
-        if($user == "anon.")
+        if ($user == "anon.")
+        {
             return $this->redirect($this->generateUrl('fos_user_security_login'));
-        /** check @var $session 'userfeesid' */
-        if($session->get('userfeesid') == null)
+        }
+        if (!$this->getUser()->getUserfees())
+        {
             return $this->redirect($this->generateUrl('main_menu'));
-
-        if (array_key_exists('year', $_GET)) {
-                $year = $_GET['year'];
-            }
-        if (array_key_exists('month', $_GET)) {
-                $month = $_GET['month'];
-            }
-
-        if(empty($year) && empty($month))
+        }
+        if (array_key_exists('year', $_GET))
+        {
+            $year = $_GET['year'];
+        }
+        if (array_key_exists('month', $_GET))
+        {
+            $month = $_GET['month'];
+        }
+        if (empty($year) && empty($month))
+        {
             return $this->redirect($this->generateUrl('expense_indexshow'));
+        }
         else
         {
-            /** set @var $session 'year_expense' */
             $session->set('year_expense', $year);
-            /** set @var $session 'month_expense' */
             $session->set('month_expense', $month);
             return $this->redirect($this->generateUrl('expense_showparameters', array('year' => $year,
                 'month' => $month)));
@@ -155,154 +131,127 @@ class ExpenseController extends Controller
     }
 
     /**
-     * show expense save.
-     *
+     * Function to show Expense save.
      * @access public
-     * @param mixed $year
-     * @param mixed $month
-     * @return view show
+     * @param string $year
+     * @param string $month
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function showparametersAction($year, $month)
+    public function showparametersAction($year, $month, $page)
     {
-        /** @var $session new object Session */
-        $session = new Session();
-        /** @var $user object data user connected */
         $user = $this->get('security.context')->getToken()->getUser();
-        /** check @var $user */
-        if($user == "anon.")
+        if ($user == "anon.")
+        {
             return $this->redirect($this->generateUrl('fos_user_security_login'));
-        /** check @var $session 'userfeesid' */
-        if($session->get('userfeesid') == null)
+        }
+        if (!$this->getUser()->getUserfees())
+        {
             return $this->redirect($this->generateUrl('main_menu'));
-        if(empty($year) && empty($month))
-            /** show view */
+        }
+        if (empty($year) && empty($month))
+        {
             return $this->redirect($this->generateUrl('expense_indexshow'));
+        }
         else
         {
-            /** @var $em object doctrine request */
             $em = $this->getDoctrine()->getManager();
-            /** @var $date string mm/yyyy */
             $date = $year.'-'.$month.'%';
-            /** @var $data_expense object Expense*/
-            $data_expense = $em->getRepository('CoyoteSiteBundle:Expense')->findExpense($date,
-                $session->get('userfeesid'));
-            /** show view */
-            return $this->render('CoyoteSiteBundle:Expense:show.html.twig', array('data' => $data_expense));
+            
+            $maxItems = 10;
+            $expenses = $this->getDoctrine()->getRepository('CoyoteSiteBundle:Expense')
+                ->getListExpenseUser($this->getUser(), $date, $page, $maxItems);
+            $entities = $em->getRepository('CoyoteSiteBundle:Expense')->findExpense($date,
+                $this->getUser());
+            $expenses_count = count($expenses);
+            $pagination = array(
+                            'page' => $page,
+                            'route' => 'absence',
+                            'pages_count' => ceil($expenses_count / $maxItems),
+                            'route_params' => array()
+            );
+            
+            return $this->render('CoyoteSiteBundle:Expense:show.html.twig', array(
+                            'data' => $entities,
+                            'pagination' => $pagination));
         }
     }
 
     /**
-     * save expense.
-     *
-     * @access public
-     * @return createAction
+     * Function to save Expense.
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function saveAction()
     {
-        /** @var $session new object Session */
         $session = new Session();
-        /** @var $user object data user connected */
         $user = $this->get('security.context')->getToken()->getUser();
-        /** check $user */
-        if($user == "anon.")
-            /** redirect \FOS\UserBundle\Controller\SecurityController */
+        if ($user == "anon.")
+        {
             return $this->redirect($this->generateUrl('fos_user_security_login'));
-        /** check $session 'userfeesid' */
-        if($session->get('userfeesid') == null)
-            /** redirect MainController:indexAction */
+        }
+        if (!$this->getUser()->getUserfees())
+        {
             return $this->redirect($this->generateUrl('main_menu'));
+        }
         else
         {
             $count_expense = 0;
-            /** @var $em object doctrine request */
             $em = $this->getDoctrine()->getManager();
-            /** @var $request */
             $request = Request::createFromGlobals();
-            /** @var $data_request all data request */
             $data_request = $request->request->all();
-            /** loop */
             for($i=0;$i<6;$i++)
             {
-                /** check $data_request */
-                if(!empty($data_request['article'.$i]) && !empty($data_request['date'.$i])
+                if (!empty($data_request['article'.$i]) && !empty($data_request['date'.$i])
                     && !empty($data_request['devise'.$i]) && !empty($data_request['qte'.$i])
                 && !empty($data_request['site'.$i]) && !empty($data_request['ttc'.$i]))
                 {
-                    /** @var $user_fee_id string $session 'userfeessid' */
-                    $user_fee_id = $session->get('userfeesid');
-                    /** @var $expense object expense */
-                    $expense = $em->getRepository('CoyoteSiteBundle:Expense')->saveExpense($user_fee_id,
+                    $expense = $em->getRepository('CoyoteSiteBundle:Expense')->saveExpense($this->getUser(),
                         $data_request, $i);
-                    /** persist $expense */
                     $em->persist($expense);
-                    /** add data in db */
                     $em->flush();
                     $count_expense ++;
                 }
-                /** check $expense */
-                if(isset($expense))
-                    /** @var $tab_id array int expense id */
-                    $tab_id[$i] = $expense->getId();
-
             }
-            /** check $count_expense */
-            if($count_expense >= 1 )
+            if ($count_expense >= 1 )
             {
-                /** check $count_expense */
-                if($count_expense > 1)
+                if ($count_expense > 1)
                 {
-                    /** @var $message string */
-                    //$message = $count_expense.' enregistrement effectués';
                     $message = 'expense.flash.save_multiple';
                     $session->set('countExpense', $count_expense);
                 }
                 else
                 {
-                    /** @var $message string */
-                    //$message = '1 enregistrement effectué';
                     $message = 'expense.flash.save';
                 }
             }
             else
-                /** @var $message string */
-                //$message = 'Aucun enregistrement effectué';
+            {
                 $message = 'expense.flash.no_save';
-            /** set $message in flashbag */
+            }
             $this->get('session')->getFlashBag()->set('save_expense', $message);
-
-            /** redirect ExpenseController:createAction */
             return $this->redirect($this->generateUrl('expense_create'));
         }
     }
 
     /**
-     * edit expense.
-     *
+     * Displays a form to edit an existing Expense entity.
      * @access public
-     * @param mixed $id
-     * @return view edit
+     * @param mixed $id The entity id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function editAction($id)
     {
-        /** @var $session new object Session */
-        $session = new Session();
-        /** check $session 'userfeesid' */
-        if($session->get('userfeesid') == null)
-            /** redirect MainController:indexAction */
+        if (!$this->getUser()->getUserfees())
+        {
             return $this->redirect($this->generateUrl('main_menu'));
-        /** @var $em object doctrine request */
+        }
         $em = $this->getDoctrine()->getManager();
-        /** @var $entity entity Expense */
         $entity = $em->getRepository('CoyoteSiteBundle:Expense')->find($id);
-        /** check $entity */
-        if (!$entity) {
+        if (!$entity) 
+        {
             throw $this->createNotFoundException('Unable to find Expense entity.');
         }
-        /** @var $editForm form Edit */
         $editForm = $this->createEditForm($entity);
-        /** @var $deleteForm form Delete */
         $deleteForm = $this->createDeleteForm($id);
-        /** show view*/
         return $this->render('CoyoteSiteBundle:Expense:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
@@ -311,30 +260,26 @@ class ExpenseController extends Controller
     }
 
     /**
-     * generate view to edit expense.
-     *
-     * @access private
-     * @param Expense $entity
-     * @return Form
-     */
+    * Creates a form to edit a Expense entity.
+    * @access private
+    * @param Expense $entity The entity
+    * @return \Symfony\Component\Form\Form The form
+    */
     private function createEditForm(Expense $entity)
     {
         $form = $this->createForm(new ExpenseType(), $entity, array(
             'action' => $this->generateUrl('expense_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
-
         $form->add('submit', 'submit', array('label' => 'Update'));
-
         return $form;
     }
 
     /**
-     * generate view to delete expense.
-     *
+     * Creates a form to delete a Expense entity by id.
      * @access private
-     * @param mixed $id
-     * @return Form
+     * @param mixed $id The entity id
+     * @return \Symfony\Component\Form\Form The form
      */
     private function createDeleteForm($id)
     {
@@ -347,17 +292,15 @@ class ExpenseController extends Controller
     }
 
     /**
-     * update expense.
-     *
+     * Edits an existing Expense entity.
      * @access public
      * @param Request $request
-     * @param mixed $id
-     * @return editAction
+     * @param mixed $id The entity id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function updateAction(Request $request, $id)
     {
-        $session = new Session();
-        if($session->get('userfeesid') == null)
+        if (!$this->getUser()->getUserfees())
             return $this->redirect($this->generateUrl('main_menu'));
         $em = $this->getDoctrine()->getManager();
 
@@ -377,8 +320,10 @@ class ExpenseController extends Controller
             if(is_numeric($date))
             {
                 $date = $em->getRepository('CoyoteSiteBundle:Expense')->formDate($date);
-                $expense->setDate($date);
+                $entity->setDate($date);
             }
+            $site = $em->getRepository('CoyoteSiteBundle:Site')->findOneById(9);
+            $entity->setSite($site);
             $taux = $entity->getFee()->getRate();
             $ttc = $entity->getAmountTTC();
             $tva = $em->getRepository('CoyoteSiteBundle:Expense')->calculTVA($taux, $ttc);
@@ -397,17 +342,15 @@ class ExpenseController extends Controller
     }
 
     /**
-     * delete expense.
-     *
+     * Deletes a Expense entity.
      * @access public
      * @param Request $request
-     * @param mixed $id
-     * @return indexAction
+     * @param mixed $id The entity id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function deleteAction(Request $request, $id)
     {
-        $session = new Session();
-        if($session->get('userfeesid') == null)
+        if(!$this->getUser()->getUserfees())
             return $this->redirect($this->generateUrl('main_menu'));
         $form = $this->createDeleteForm($id);
         $form->handleRequest($request);
@@ -428,110 +371,82 @@ class ExpenseController extends Controller
     }
 
     /**
-     * index to print expense.
-     *
+     * Index to print Expense.
      * @access public
-     * @return printAction
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexprintAction()
     {
         $data = new Data();
-        /** show view */
         return $this->render('CoyoteSiteBundle:Expense:indexprint.html.twig', array('month' => date('n'),
             'year' => date('Y'), 'tab_mois' => $data->getTabMonth(), 'tab_num_mois' => $data->getTabNumMonth(),
             'tab_annee' => $data->getTabYear(), 'tab_num_annee' => $data->getTabNumYear()));
     }
 
     /**
-     * print expense PDF
-     *
+     * Function to download Expense PDF.
      * @access public
-     * @return PDF
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function printAction()
     {
-        $request = $this->getRequest();
-        $session = $request->getSession();
-        /** @var $em object doctrine request */
         $em = $this->getDoctrine()->getManager();
-        $request = Request::createFromGlobals();
-        /** @var $year string yyyy */
         $year = $_GET['year'];
-        /** @var $month string mm */
         $month = $_GET['month'];
-        /** check $year and $month */
-        if(empty($year) && empty($month))
+        if (empty($year) && empty($month))
         {
-            /** redirect ExpenseController:indexprintAction */
             return $this->redirect($this->generateUrl('expense_indexprint'));
         }
         else
         {
-            /** @var $date string mm/yyyy */
             $date = $year.'-'.$month.'%';
-            /** @var $data_expense entity Expense */
             $data_expense = $em->getRepository('CoyoteSiteBundle:Expense')->findExpense($date,
-                $session->get('userfeesid'));
-            /** @var $data_user entity User */
-            $data_user = $em->getRepository('CoyoteSiteBundle:User')->find($session->get('userid'));
-            /** @var $page view Expense:print */
+                $this->getUser());
+            $data_user = $em->getRepository('CoyoteSiteBundle:User')->find($this->getUser());
             $page = $this->render('CoyoteSiteBundle:Expense:print.html.twig', array('data' => $data_expense));
-            /** @var $filename string filename PDF */
             $filename = $data_user->getName()."_expense".date("Ymd-His").".pdf";
-            /** prepare pdf */
             $html = $page->getContent();
             $html2pdf = new \Html2Pdf_Html2Pdf('P', 'A4', 'fr');
             $html2pdf->pdf->SetDisplayMode('real');
             $html2pdf->writeHTML($html);
-            /** download pdf */
             $html2pdf->Output($filename, 'D');
             return new Response('PDF réalisé');
         }
     }
 
-
     /**
-     * indexupdatestatusAction function.
-     * index to update status expense
-     *
+     * Index to update status Expense.
      * @access public
-     * @return void
+     * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function indexupdatestatusAction()
     {
-        if($this->get('security.context')->isGranted('ROLE_ADMIN'))
-            /** show view updatestatus */
+        if ($this->get('security.context')->isGranted('ROLE_ADMIN'))
+        {
             return $this->render('CoyoteSiteBundle:Expense:updatestatus.html.twig');
+        }
         else
-            /** redirect MainController:indexAction */
+        {
             return $this->redirect($this->generateUrl('main_menu'));
+        }
     }
 
-
     /**
-     * updatestatusAction function.
-     * update status by expense id
-     *
+     * Function to update status by Expense id.
      * @access public
-     * @return void
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function updatestatusAction()
     {
-        if($this->get('security.context')->isGranted('ROLE_ADMIN'))
+        if ($this->get('security.context')->isGranted('ROLE_ADMIN'))
         {
-            $request = $this->getRequest();
-            $session = $request->getSession();
-            /** @var $em object doctrine request */
             $em = $this->getDoctrine()->getManager();
-            $request = Request::createFromGlobals();
             $id_start = $_GET['id_start'];
             $id_end = $_GET['id_end'];
-            /** check $year and $month */
-            if(empty($id_start) && empty($id_end))
+            if (empty($id_start) && empty($id_end))
             {
                 $message = 'expense.flash.no_update';
                 $this->get('session')->getFlashBag()->set('updatestatus', $message);
-                /** redirect ExpenseController:indexprintAction */
                 return $this->redirect($this->generateUrl('expense_indexupdatestatus'));
             }
             else
@@ -544,14 +459,11 @@ class ExpenseController extends Controller
                         if($data_expense != null)
                         {
                             $data_expense->setStatus(1);
-                        /** persist $expense */
                             $em->persist($data_expense);
                         }
-                        /** add data in db */
                         $em->flush();
                     }
                     $message = 'expense.flash.update';
-                    //alert($message);
                     $this->get('session')->getFlashBag()->set('updatestatus', $message);
                 }
                 if($id_start > $id_end)
@@ -560,9 +472,7 @@ class ExpenseController extends Controller
                     {
                         $data_expense = $em->getRepository('CoyoteSiteBundle:Expense')->find($i);
                         $data_expense->setStatus(1);
-                        /** persist $expense */
                         $em->persist($data_expense);
-                        /** add data in db */
                         $em->flush();
                     }
                     $message = 'expense.flash.update';
@@ -573,44 +483,48 @@ class ExpenseController extends Controller
             return $this->redirect($this->generateUrl('expense_indexupdatestatus'));
         }
         else
-            /** redirect MainController:indexAction */
             return $this->redirect($this->generateUrl('main_menu'));
     }
 
     /**
-     * show expense save.
-     *
+     * Function to show Expense save.
      * @access public
-     * @return showparameters
+     * @param integer $page
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function showadminAction()
+    public function showadminAction($page)
     {
         if($this->get('security.context')->isGranted('ROLE_COMPTA'))
         {
-            /** @var $session new object Session */
-            $session = new Session();
-            /** @var $user object data user connected */
             $user = $this->get('security.context')->getToken()->getUser();
-            /** check @var $user */
-            if($user == "anon.")
+            if ($user == "anon.")
+            {
                 return $this->redirect($this->generateUrl('fos_user_security_login'));
-            /** check @var $session 'userfeesid' */
-
-
+            }
             else
             {
-                /** @var $em object doctrine request */
                 $em = $this->getDoctrine()->getManager();
-                /** @var $data_expense object Expense*/
+                $maxItems = 10;
                 $data_expense = $em->getRepository('CoyoteSiteBundle:Expense')->findAllOrderByUserFeesID();
-                /** show view */
-                //return new Response($data_expense[0]->getStatus()->getString());
-                return $this->render('CoyoteSiteBundle:Expense:showadmin.html.twig', array('data' => $data_expense));
+                $expenses_count = count($data_expense);
+                $pagination = array(
+                                'page' => $page,
+                                'route' => 'admin_showadmin',
+                                'pages_count' => ceil($expenses_count / $maxItems),
+                                'route_params' => array()
+                );
+                $entities = $this->getDoctrine()->getRepository('CoyoteSiteBundle:Expense')
+                                 ->getListExpenseUsers($page, $maxItems);
+                
+                return $this->render('CoyoteSiteBundle:Expense:showadmin.html.twig', array(
+                                'data' => $entities,
+                                'pagination' => $pagination));
             }
         }
         else
-            /** redirect MainController:indexAction */
+        {
             return $this->redirect($this->generateUrl('main_menu'));
+        }
     }
 }
 

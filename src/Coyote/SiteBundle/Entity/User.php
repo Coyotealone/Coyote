@@ -3,86 +3,102 @@
 namespace Coyote\SiteBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
 use FOS\UserBundle\Model\User as BaseUser;
 
-use Symfony\Component\Validator\Constraints as Assert;
-
 /**
- * User
+ * Class User
+ * @author Coyote
+ * @ORM\Entity
+ * @ORM\Table(name="user")
+ * @ORM\Entity(repositoryClass="Coyote\SiteBundle\Entity\UserRepository");
  */
 class User extends BaseUser
 {
     /**
      * @var integer
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
 
     /**
      * @var string
+     * @ORM\Column(name="name", type="string", length=80)
      */
     private $name;
 
     /**
      * @var string
+     * @ORM\Column(name="address1", type="string", length=45)
      */
-    private $adress1;
+    private $address1;
 
     /**
      * @var string
+     * @ORM\Column(name="address2", type="string", length=45, nullable=true)
      */
-    private $adress2;
+    private $address2;
 
     /**
      * @var string
+     * @ORM\Column(name="zip_code", type="string", length=10)
      */
     private $zip_code;
 
     /**
      * @var string
+     * @ORM\Column(name="postal_box", type="string", length=10, nullable=true)
      */
     private $postal_box;
 
     /**
      * @var string
+     * @ORM\Column(name="city", type="string", length=80)
      */
     private $city;
 
     /**
      * @var string
+     * @ORM\Column(name="country", type="string", length=45)
      */
     private $country;
 
     /**
      * @var string
+     * @ORM\Column(name="phone", type="string", length=20)
      */
     private $phone;
 
     /**
      * @var string
+     * @ORM\Column(name="cell", type="string", length=20, nullable=true)
      */
     private $cell;
 
     /**
      * @var string
+     * @ORM\Column(name="fax", type="string", length=20, nullable=true)
      */
     private $fax;
 
     /**
      * @var string
+     * @ORM\Column(name="website", type="string", length=100, nullable=true)
      */
     private $website;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
+     * @ORM\OneToMany(targetEntity="Schedule", mappedBy="user", cascade={"persist", "merge"})
      */
     private $schedules;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $userfeess;
-
+    * @ORM\OneToOne(targetEntity="UserFees", cascade={"persist"})
+    * @ORM\JoinColumn(nullable=true)
+    */
+    private $userfees;
+    
     /**
      * Constructor
      */
@@ -90,8 +106,6 @@ class User extends BaseUser
     {
         parent::__construct();
         $this->schedules = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->userfeess = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->roles = array('ROLE_USER');
     }
 
     /**
@@ -128,51 +142,51 @@ class User extends BaseUser
     }
 
     /**
-     * Set adress1
+     * Set address1
      *
-     * @param string $adress1
+     * @param string $address1
      * @return User
      */
-    public function setAdress1($adress1)
+    public function setAddress1($address1)
     {
-        $this->adress1 = $adress1;
+        $this->address1 = $address1;
 
         return $this;
     }
 
     /**
-     * Get adress1
+     * Get address1
      *
      * @return string
      */
-    public function getAdress1()
+    public function getAddress1()
     {
-        return $this->adress1;
+        return $this->address1;
     }
 
     /**
-     * Set adress2
+     * Set address2
      *
-     * @param string $adress2
+     * @param string $address2
      * @return User
      */
-    public function setAdress2($adress2)
+    public function setAddress2($address2)
     {
-        $this->adress2 = $adress2;
+        $this->address2 = $address2;
 
         return $this;
     }
 
     /**
-     * Get adress2
+     * Get address2
      *
      * @return string
      */
-    public function getAdress2()
+    public function getAddress2()
     {
-        return $this->adress2;
+        return $this->address2;
     }
-
+    
     /**
      * Set zip_code
      *
@@ -266,29 +280,6 @@ class User extends BaseUser
     }
 
     /**
-     * Set phone
-     *
-     * @param string $phone
-     * @return User
-     */
-    public function setPhone($phone)
-    {
-        $this->phone = $phone;
-
-        return $this;
-    }
-
-    /**
-     * Get phone
-     *
-     * @return string
-     */
-    public function getPhone()
-    {
-        return $this->phone;
-    }
-
-    /**
      * Set cell
      *
      * @param string $cell
@@ -335,29 +326,6 @@ class User extends BaseUser
     }
 
     /**
-     * Set website
-     *
-     * @param string $website
-     * @return User
-     */
-    public function setWebsite($website)
-    {
-        $this->website = $website;
-
-        return $this;
-    }
-
-    /**
-     * Get website
-     *
-     * @return string
-     */
-    public function getWebsite()
-    {
-        return $this->website;
-    }
-
-    /**
      * Add schedules
      *
      * @param \Coyote\SiteBundle\Entity\Schedule $schedules
@@ -391,35 +359,71 @@ class User extends BaseUser
     }
 
     /**
-     * Add userfeess
+     * Set website
      *
-     * @param \Coyote\SiteBundle\Entity\UserFees $userfeess
+     * @param string $website
      * @return User
      */
-    public function addUserfeess(\Coyote\SiteBundle\Entity\UserFees $userfeess)
+    public function setWebsite($website)
     {
-        $this->userfeess[] = $userfeess;
+        $this->website = $website;
 
         return $this;
     }
 
     /**
-     * Remove userfeess
+     * Get website
      *
-     * @param \Coyote\SiteBundle\Entity\UserFees $userfeess
+     * @return string
      */
-    public function removeUserfeess(\Coyote\SiteBundle\Entity\UserFees $userfeess)
+    public function getWebsite()
     {
-        $this->userfeess->removeElement($userfeess);
+        return $this->website;
     }
 
     /**
-     * Get userfeess
+     * Set phone
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @param string $phone
+     * @return User
      */
-    public function getUserfeess()
+    public function setPhone($phone)
     {
-        return $this->userfeess;
+        $this->phone = $phone;
+
+        return $this;
+    }
+
+    /**
+     * Get phone
+     *
+     * @return string
+     */
+    public function getPhone()
+    {
+        return $this->phone;
+    }
+
+    /**
+     * Set userfees
+     *
+     * @param \Coyote\SiteBundle\Entity\UserFees $userfees
+     * @return User
+     */
+    public function setUserfees(\Coyote\SiteBundle\Entity\UserFees $userfees = null)
+    {
+        $this->userfees = $userfees;
+
+        return $this;
+    }
+
+    /**
+     * Get userfees
+     *
+     * @return \Coyote\SiteBundle\Entity\UserFees 
+     */
+    public function getUserfees()
+    {
+        return $this->userfees;
     }
 }

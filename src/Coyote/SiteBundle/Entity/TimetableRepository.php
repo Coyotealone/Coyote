@@ -3,6 +3,7 @@
 namespace Coyote\SiteBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * TimetableRepository
@@ -12,6 +13,70 @@ use Doctrine\ORM\EntityRepository;
  */
 class TimetableRepository extends EntityRepository
 {
+    /******************************Commun*****************************/
+    
+                /* getScheduleUserAction / postScheduleUser */
+    /**
+     * Function to create datetime about week and year
+     * @access public
+     * @param string $year
+     * @param string $week
+     * @return DateTime
+     */
+    public function createDateYearWeek($year, $week)
+    {
+        if(strlen($week) == 1)
+            $week = "0".$week;
+        $date = date( "Y-m-d", strtotime($year."W".$week."1") );
+        return $date;
+    }
+    
+    /**
+     * Function search Timetable about a date.
+     * @access public
+     * @param DateTime $date
+     * @return 7 days of Timetable if found date
+     */
+    public function searchIdDate($date)
+    {
+        $date = new \DateTime($date);
+        $result = $date->format('N');
+        if ($result > 1)
+        {
+            $result--;
+            $date->modify("-".$result." day");
+        }
+    
+        $qb = $this->_em->createQueryBuilder();
+        $qb->select('t')
+        ->from('CoyoteSiteBundle:Timetable', 't')
+        ->where('t.date >= :date')
+        ->setParameters(array('date' => $date->format('Y-m-d')));
+        $data_timetable = $qb->getQuery()
+        ->setMaxResults(7)
+        ->getResult();
+        return $data_timetable;
+    }
+    
+    /*************************postScheduleUser*************************/
+    
+    /**
+     * Function to create datetime about string format dd/mm/yyyy
+     * @param string $datestring
+     * @return \DateTime
+     */
+    public function createDateString($datestring)
+    {
+        $dateexplode = explode('/', $datestring);
+        $datecompose = date($dateexplode[2]).'-'.date($dateexplode[1]).'-'.date($dateexplode[0]);
+        $date = (new \DateTime($datecompose));
+        return $date;
+    }
+    
+    /*****************************************************************/
+    /***********************Anciennes Fonctions***********************/
+    /*****************************************************************/
+    
     /**
      * find shedule id
      *
@@ -43,13 +108,13 @@ class TimetableRepository extends EntityRepository
      * @param mixed $year
      * @return array timetable id
      */
-    public function myFindTimetableId($no_week, $pay_period)
+    public function myFindTimetableId($no_week, $period)
     {
         $qb = $this->_em->createQueryBuilder();
         $qb->select('t.id')
            ->from('CoyoteSiteBundle:Timetable', 't')
-           ->where('t.no_week = :no_week and t.pay_period = :pay_period')
-           ->setParameters(array('no_week' => $no_week, 'pay_period' => $pay_period));
+           ->where('t.week = :week and t.period = :period')
+           ->setParameters(array('week' => $week, 'period' => $period));
         $timetable_id =  $qb->getQuery()
                             ->getResult();
 
@@ -73,17 +138,47 @@ class TimetableRepository extends EntityRepository
         return $qb->getQuery()->getSingleScalarResult();
     }
 
-    public function findworkingday($date, $user)
+    public function findworkingday($user)
     {
+        $date = new \DateTime();
+
+        $qb = $this->_em->createQueryBuilder();
+        $qb->select('t')
+            ->from('CoyoteSiteBundle:Timetable', 't')
+            ->where('t.date = :date')
+            ->setParameters(array('date' => $date->format('Y-m-d')));
+        $data_date = $qb->getQuery()->getOneOrNullResult();
+
+        $qb = $this->_em->createQueryBuilder();
+        $qb->select('t')
+            ->from('CoyoteSiteBundle:Timetable', 't')
+            ->where('t.period = :period')
+            ->orderBy('t.id', 'ASC')
+            ->setParameters(array('period' => $data_date->getPeriod()));
+        $data_date = $qb->getQuery()->getResult();
+
         $datefin = date("Y-m-d H:i:s", mktime(23,59,59,date("m"),0,date("Y")));
         $qb = $this->_em->createQueryBuilder();
         $qb->select('t')
            ->from('CoyoteSiteBundle:Timetable', 't')
-           ->where('t.date > :date and t.date < :datefin and t.holiday = :holiday and t.day != :day1 and t.day != :day2')
-           ->setParameters(array('date' => $date, 'datefin' => $datefin, 'holiday' => '0', 'day1' => 'samedi', 'day2' => 'dimanche'));
+           ->where('t.date > :date and t.date < :datefin and t.holiday = :holiday ')
+           ->setParameters(array('date' => $data_date[0]->getDate()->format('Y-m-d'), 'datefin' => $datefin, 'holiday' => '0'));
         $timetable =  $qb->getQuery()
                          ->getResult();
 
+        $count = 0;
+        foreach($timetable as $data)
+        {
+            if($data->getDate()->format('l') != "Sunday" and $data->getDate()->format('l') != "Saturday")
+                $count++;
+        }
+        return $count;
         return count($timetable);
     }
+
+    
+
+    
+
+    
 }

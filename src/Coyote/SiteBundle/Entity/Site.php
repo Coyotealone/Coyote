@@ -5,27 +5,35 @@ namespace Coyote\SiteBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Site
+ * Class Site
+ * @author Coyote
+ * @ORM\Entity
+ * @ORM\Table(name="site")
  */
 class Site
 {
     /**
      * @var integer
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @var string
+     * @ORM\Column(name="code", type="string", length=3)
      */
     private $code;
 
     /**
      * @var string
+     * @ORM\Column(name="name", type="string", length=45)
      */
     private $name;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
+     * @ORM\OneToMany(targetEntity="Expense", mappedBy="site", cascade={"persist", "merge"})
      */
     private $expenses;
 
@@ -40,7 +48,7 @@ class Site
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -63,7 +71,7 @@ class Site
     /**
      * Get code
      *
-     * @return string 
+     * @return string
      */
     public function getCode()
     {
@@ -86,7 +94,7 @@ class Site
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -119,15 +127,15 @@ class Site
     /**
      * Get expenses
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getExpenses()
     {
         return $this->expenses;
     }
-    
+
     public function __toString()
     {
-        return $this->code;
+        return $this->name;
     }
 }

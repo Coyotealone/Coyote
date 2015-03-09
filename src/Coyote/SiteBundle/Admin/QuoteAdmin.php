@@ -3,37 +3,20 @@
 namespace Coyote\SiteBundle\Admin;
 
 use Sonata\AdminBundle\Admin\Admin;
-use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Show\ShowMapper;
 
 class QuoteAdmin extends Admin
 {
-    // setup the default sort column and order
-    protected $datagridValues = array(
-        '_sort_order' => 'ASC',
-        '_sort_by' => 'id'
-    );
-
-    // Fields to be shown on create/edit forms
-    protected function configureFormFields(FormMapper $formMapper)
-    {
-        //$tokenGenerator = $this->container->('fos_user.util.token_generator');
-        //$user->setConfirmationToken($tokenGenerator->generateToken());
-        $salt = base_convert(sha1(uniqid(mt_rand(), true)), 16, 36);
-        $formMapper
-            //->add('id')
-            ->add('citation')
-            ->add('author')
-            ->add('week')
-            ->add('year')
-        ;
-    }
-
-    // Fields to be shown on filter forms
+    /**
+     * @param DatagridMapper $datagridMapper
+     */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
+            ->add('id')
             ->add('citation')
             ->add('author')
             ->add('week')
@@ -41,11 +24,48 @@ class QuoteAdmin extends Admin
         ;
     }
 
-    // Fields to be shown on lists
+    /**
+     * @param ListMapper $listMapper
+     */
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->addIdentifier('id')
+            ->add('id')
+            ->add('citation')
+            ->add('author')
+            ->add('week')
+            ->add('year')
+            ->add('_action', 'actions', array(
+                'actions' => array(
+                    'show' => array(),
+                    'edit' => array(),
+                    'delete' => array(),
+                )
+            ))
+        ;
+    }
+
+    /**
+     * @param FormMapper $formMapper
+     */
+    protected function configureFormFields(FormMapper $formMapper)
+    {
+        $formMapper
+            ->add('id')
+            ->add('citation')
+            ->add('author')
+            ->add('week')
+            ->add('year')
+        ;
+    }
+
+    /**
+     * @param ShowMapper $showMapper
+     */
+    protected function configureShowFields(ShowMapper $showMapper)
+    {
+        $showMapper
+            ->add('id')
             ->add('citation')
             ->add('author')
             ->add('week')

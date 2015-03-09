@@ -5,28 +5,37 @@ namespace Coyote\SiteBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Business
+ * Class Business
+ * @author Coyote
+ * @ORM\Entity
+ * @ORM\Table(name="business")
+ * @ORM\Entity(repositoryClass="Coyote\SiteBundle\Entity\BusinessRepository");
  */
 class Business
 {
     /**
      * @var integer
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @var string
+     * @ORM\Column(name="code", type="string", length=10, unique=true)
      */
     private $code;
 
     /**
      * @var string
+     * @ORM\Column(name="name", type="string", length=45)
      */
     private $name;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
+    * @ORM\OneToMany(targetEntity="Expense", mappedBy="business", cascade={"persist", "merge"})
+    */
     private $expenses;
 
     /**

@@ -5,38 +5,52 @@ namespace Coyote\SiteBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Fee
+ * Class Fee
+ * @author Coyote
+ * @ORM\Entity
+ * @ORM\Table(name="fee")
  */
 class Fee
 {
     /**
      * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
+     *
      * @var string
+     *
+     * @ORM\Column(name="code", type="string", length=6, unique=true)
      */
     private $code;
 
     /**
+     *
      * @var string
+     * @ORM\Column(name="name", type="string", length=45, unique=true)
      */
     private $name;
 
     /**
      * @var float
+     * @ORM\Column(name="rate", type="float")
      */
     private $rate;
 
     /**
      * @var string
+     * @ORM\Column(name="code_rate", type="string", length=4)
      */
     private $code_rate;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
+    * @ORM\OneToMany(targetEntity="Expense", mappedBy="fee", cascade={"persist", "merge"})
+    */
     private $expenses;
 
     /**
@@ -50,7 +64,7 @@ class Fee
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -73,7 +87,7 @@ class Fee
     /**
      * Get code
      *
-     * @return string 
+     * @return string
      */
     public function getCode()
     {
@@ -96,7 +110,7 @@ class Fee
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -119,7 +133,7 @@ class Fee
     /**
      * Get rate
      *
-     * @return float 
+     * @return float
      */
     public function getRate()
     {
@@ -142,7 +156,7 @@ class Fee
     /**
      * Get code_rate
      *
-     * @return string 
+     * @return string
      */
     public function getCodeRate()
     {
@@ -175,16 +189,15 @@ class Fee
     /**
      * Get expenses
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getExpenses()
     {
         return $this->expenses;
     }
-    
+
     public function __toString()
     {
-        $data = $this->code.' : '.$this->name;
-        return $data;
+        return $this->code." : ".$this->name;
     }
 }

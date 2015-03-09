@@ -23,3 +23,4 @@ composer.phar
 
 # Data
 src/Coyote/SiteBundle/DataFixtures/*
+/vendor/

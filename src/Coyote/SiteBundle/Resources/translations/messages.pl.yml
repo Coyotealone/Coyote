@@ -9,7 +9,8 @@ base:
     welcome: Witamy na stronie internetowej Pichon
     nav:
         accueil: Strona główna
-        contact: kontakt
+        signin: Zaloguj się
+        contact: Kontakt
         site: Strona internetowa PICHON
         schedule:
             index: Nagrywanie
@@ -18,6 +19,8 @@ base:
             name: Czas Frekwencja
             overtime: Dogrywka
             indexexportprintyear: Eksport Roku w PDF
+            indexprintyear: Drukuj z lat PDF
+            absence: Zarządzanie brak
         expense:
             name: Sprawozdanie z wydatków
             create: Nagrywanie
@@ -29,6 +32,7 @@ base:
             name: Profil
             profile: Informacje Profil
             changepassword: Zmień hasło
+            holiday: Pozostawić zarządzanie
         schedule_admin:
             name: Eksport rejestracji czasu
             indexexport: Eksport danych działu badań
@@ -39,6 +43,14 @@ base:
             name: Administrator
             register: Dodawanie użytkownika
             indexchoicesuser: Role Aktualizacja użytkownika
+
+security:
+    username: Nazwa użytkownika
+    password: Hasło
+    remember_me: Nie wylogowuj mnie
+    submit:
+        connexion: Związek
+        resetting: Hasło zapominać
 
 accueil:
     menu:
@@ -71,8 +83,6 @@ admin:
     title:
         indexchoicesuser: Wybór użytkownika
         choicesroles: Dodaj / Usuń role
-    title:
-        indexchoicesuser: Wybór użytkownika
     submit:
         download: Pobierz
         display: Wystawa
@@ -160,6 +170,14 @@ schedule:
         no_save: Wystąpił błąd!
         save: Rejestracja zrealizowanych danych
 
+schedule1: Poniedziałek
+schedule2: wtorek
+schedule3: Środa
+schedule4: czwartek
+schedule5: piątek
+schedule6: Sobota
+schedule7: niedziela
+
 expense:
     title:
         create: Dodaj raportów wydatków
@@ -206,53 +224,44 @@ expense:
 
 # FOSUserBundle Translation #
 
-# Group
-group:
-    edit:
-        submit: Edytuj grupę
-    show:
-        name: Nazwa grupy
-    new:
-        submit: Utwórz grupę
-    flash:
-        updated: Grupa została zaktualizowana
-        created: Grupa została utworzona
-        deleted: Grupa została usunięta
-
-# Security
-#security:
-#    login:
-#        username: "Nazwa użytkownika:"
-#        password: "Hasło:"
-#        remember_me: Nie wylogowuj mnie
-#    submit: Zaloguj
-security:
-    username: "Nazwa użytkownika:"
-    password: "Hasło:"
-    remember_me: Nie wylogowuj mnie
-    submit:
-        connexion: Zaloguj
-        resetting: Hasło zapominać
-
-
 # Profile:
 profile:
+    title:
+        show: Informacje o profilu
     show:
         username: Nazwa użytkownika
         email: E-mail
-    edit:
-        submit: Edytuj użytkownika
-    flash:
-        updated: Zapisano zmiany w profilu
-    title:
-        show: Informacje o profilu
+        name: Name
+        phone: Phone
+        cell: Cell
+        message: If you encounter an error on your profile, contact your administrator.
 
-# Password change:
-change_password:
-    submit: Zmień hasło
-    flash:
-        success: Hasło zostało zmienione
-    title: Change your password
+# Form field labels:
+form:
+    group_name: "Nazwa grupy"
+    username: "Nazwa użytkownika"
+    email: E-mail
+    current_password: "Obecne hasło"
+    password: "Hasło"
+    password_confirmation: "Powtórz hasło"
+    new_password: "Nowe hasło"
+    new_password_confirmation: "Powtórz hasło"
+    name: NAZWA
+    adress1: Adres
+    adress2: Adres (cd)
+    zip_code: Kod pocztowy
+    postal_box: Postal Box
+    city: Miasto
+    country: Kraj
+    phone: Telefon
+    cell: komórki
+    website: Strona WWW
+    roles: Role
+    fax: Faks
+    choices:
+        technician: Technik
+        business: Biznes
+        trade: Handel
 
 # Registration:
 registration:
@@ -263,6 +272,7 @@ registration:
     submit: Zarejestruj
     flash:
         user_created: Stworzono użytkownika
+        no_save: Wystąpił błąd
     email:
         subject: Witaj %username%!
         message: |
@@ -302,35 +312,65 @@ layout:
     register: Zarejestruj
     logged_in_as: Zalogowano jako %username%
 
-# Form field labels:
-form:
-    group_name: "Nazwa grupy"
-    username: "Nazwa użytkownika"
-    email: E-mail
-    current_password: "Obecne hasło"
-    password: "Hasło"
-    password_confirmation: "Powtórz hasło"
-    new_password: "Nowe hasło"
-    new_password_confirmation: "Powtórz hasło"
-    name: NAZWA
-    adress1: Adres
-    adress2: Adres (cd)
-    zip_code: Kod pocztowy
-    postal_box: Postal Box
-    city: Miasto
-    country: Kraj
-    phone: Telefon
-    cell: komórki
-    website: Strona WWW
-    roles: Role
-    fax: Faks
-    choices:
-        technician: Technik
-        business: Biznes
-        trade: Handel
+# Password change:
+change_password:
+    submit: Zmień hasło
+    flash:
+        success: Hasło zostało zmienione
+    title: Change your password
+
+# Absence
+absence:
+    travel: Podróż
+    absence_name: Brak
+    absence_duration: Czas trwania nieobecności
+    comment: Komentarz
+    timetable: Data
+    edit: Edycja
+    show: Pokaż
+    create: Dodaj
+    update: Aktualizacja
+    new: Tworzenie
+    date_start: Początek wakacji
+    date_end: Koniec wakacji
+    createweek: Dodaj
+    submit:
+        date: Dodawanie dni wolnych
+    title:
+        show: Lista nieobecności
+        create: Dodaj nieobecności
+        empty: Nie zarejestrowany brak
+        createweek: Dodaj tydzień z dala
+
+# Holiday
+holiday:
+    title:
+        show: Podsumowanie wakacji
+    ca: Zostaw stażu pracy
+    cp: Płatny urlop
+    rtt: Zmniejszenie czasu pracy
+    hs: Raz na tydzień pracy
+    edit: Edycja
+    update: Aktualizacja
+    create: Utworzyć
+    empty: Nie zarejestrowany danych
+
+# Days
+Monday: Poniedziałek
+Tuesday: wtorek
+Wednesday: Środa
+Thurday: czwartek
+Friday: piątek
+Saturday: Sobota
+Sunday: niedziela
+
+# Contact
+contact:
+    message: Dziękujemy za skontaktowanie się z nami, a my odpowiemy na Twoje pytania jak najszybciej.
+
+# Supplements
 
 # Month:
-
 Janvier: Styczeń
 Février: luty
 Mars: marzec
@@ -344,18 +384,7 @@ Octobre: Październik
 Novembre: listopad
 Décembre: Grudzień
 
-# Day:
-
-Lundi: Poniedziałek
-Mardi: wtorek
-Mercredi: Środa
-Jeudi: czwartek
-Vendredi: piątek
-Samedi: Sobota
-Dimanche: niedziela
-
-# Absence:
-
+# Holiday
 RTT: Zmniejszenie czasu pracy
 CP: Płatny urlop
 CA: Zostaw staż
@@ -366,8 +395,7 @@ Recup: Odzyskiwanie / Praca w godzinach nadliczbowych
 Various: Różne
 Aucune: Nie
 
-# Item:
-
+# Item
 Carburant sans TVA: Bezpłatne wartość opałowa podatku VAT
 Carburant Camion Fourgon: Furgonetka paliwa
 Carburant Voiture: samochód paliwa

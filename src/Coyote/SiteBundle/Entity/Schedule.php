@@ -5,62 +5,126 @@ namespace Coyote\SiteBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Schedule
+ * Class Schedule
+ * @author Coyote
+ * @ORM\Entity
+ * @ORM\Table(name="schedule")
+ * @ORM\Entity(repositoryClass="Coyote\SiteBundle\Entity\ScheduleRepository");
+ * @ORM\HasLifecycleCallbacks
  */
 class Schedule
 {
     /**
      * @var integer
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @var string
+     * @ORM\Column(name="start", type="string", length=5)
      */
     private $start;
 
     /**
      * @var string
+     * @ORM\Column(name="end", type="string", length=5)
      */
     private $end;
 
     /**
      * @var string
+     * @ORM\Column(name="break", type="string", length=5)
      */
     private $break;
 
     /**
      * @var string
+     * @ORM\Column(name="working_time", type="string", length=5)
      */
     private $working_time;
 
     /**
      * @var float
+     * @ORM\Column(name="working_hours", type="float")
      */
     private $working_hours;
 
     /**
      * @var boolean
+     * @ORM\Column(name="travel", type="boolean")
      */
     private $travel;
 
     /**
      * @var string
+     * @ORM\Column(name="absence_name", type="string", length=20)
      */
-    private $absence;
+    private $absence_name;
 
     /**
      * @var string
+     * @ORM\Column(name="absence_duration", type="string", length=5)
+     */
+    private $absence_duration;
+
+    /**
+     * @var string
+     * @ORM\Column(name="comment", type="string", length=255)
      */
     private $comment;
 
     /**
-     * @var \Coyote\SiteBundle\Entity\User
+     * @var boolean
+     * @ORM\Column(name="locked", type="boolean")
+     */
+    private $locked;
+
+    /**
+     * @var string
+     * @ORM\Column(name="locked_by", type="string", length=50, nullable=true)
+     */
+    private $locked_by;
+
+    /**
+     * @var string
+     * @ORM\Column(name="validated_by", type="string", length=50, nullable=true)
+     */
+    private $validated_by;
+
+    /**
+     * @var \DateTime
+     * @ORM\Column(name="created_at", type="datetime")
+     */
+    private $created_at;
+
+    /**
+     * @var \DateTime
+     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
+     */
+    private $updated_at;
+
+    /**
+     * @var \DateTime
+     * @ORM\Column(name="locked_at", type="datetime", nullable=true)
+     */
+    private $locked_at;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="schedules")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;
 
+    /*
+     *
+     * @ORM\ManyToMany(targetEntity="Timetable")
+     */
     /**
-     * @var \Coyote\SiteBundle\Entity\Timetable
+     * @ORM\ManyToOne(targetEntity="Timetable")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $timetable;
 
@@ -68,7 +132,7 @@ class Schedule
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -91,7 +155,7 @@ class Schedule
     /**
      * Get start
      *
-     * @return string 
+     * @return string
      */
     public function getStart()
     {
@@ -114,7 +178,7 @@ class Schedule
     /**
      * Get end
      *
-     * @return string 
+     * @return string
      */
     public function getEnd()
     {
@@ -137,7 +201,7 @@ class Schedule
     /**
      * Get break
      *
-     * @return string 
+     * @return string
      */
     public function getBreak()
     {
@@ -160,7 +224,7 @@ class Schedule
     /**
      * Get working_time
      *
-     * @return string 
+     * @return string
      */
     public function getWorkingTime()
     {
@@ -183,7 +247,7 @@ class Schedule
     /**
      * Get working_hours
      *
-     * @return float 
+     * @return float
      */
     public function getWorkingHours()
     {
@@ -206,114 +270,12 @@ class Schedule
     /**
      * Get travel
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getTravel()
     {
         return $this->travel;
     }
-
-    /**
-     * Set absence
-     *
-     * @param string $absence
-     * @return Schedule
-     */
-    public function setAbsence($absence)
-    {
-        $this->absence = $absence;
-
-        return $this;
-    }
-
-    /**
-     * Get absence
-     *
-     * @return string 
-     */
-    public function getAbsence()
-    {
-        return $this->absence;
-    }
-
-    /**
-     * Set comment
-     *
-     * @param string $comment
-     * @return Schedule
-     */
-    public function setComment($comment)
-    {
-        $this->comment = $comment;
-
-        return $this;
-    }
-
-    /**
-     * Get comment
-     *
-     * @return string 
-     */
-    public function getComment()
-    {
-        return $this->comment;
-    }
-
-    /**
-     * Set user
-     *
-     * @param \Coyote\SiteBundle\Entity\User $user
-     * @return Schedule
-     */
-    public function setUser(\Coyote\SiteBundle\Entity\User $user = null)
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    /**
-     * Get user
-     *
-     * @return \Coyote\SiteBundle\Entity\User 
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
-
-    /**
-     * Set timetable
-     *
-     * @param \Coyote\SiteBundle\Entity\Timetable $timetable
-     * @return Schedule
-     */
-    public function setTimetable(\Coyote\SiteBundle\Entity\Timetable $timetable = null)
-    {
-        $this->timetable = $timetable;
-
-        return $this;
-    }
-
-    /**
-     * Get timetable
-     *
-     * @return \Coyote\SiteBundle\Entity\Timetable 
-     */
-    public function getTimetable()
-    {
-        return $this->timetable;
-    }
-    /**
-     * @var string
-     */
-    private $absence_name;
-
-    /**
-     * @var string
-     */
-    private $absence_duration;
-
 
     /**
      * Set absence_name
@@ -331,7 +293,7 @@ class Schedule
     /**
      * Get absence_name
      *
-     * @return string 
+     * @return string
      */
     public function getAbsenceName()
     {
@@ -354,10 +316,247 @@ class Schedule
     /**
      * Get absence_duration
      *
-     * @return string 
+     * @return string
      */
     public function getAbsenceDuration()
     {
         return $this->absence_duration;
+    }
+
+    /**
+     * Set comment
+     *
+     * @param string $comment
+     * @return Schedule
+     */
+    public function setComment($comment)
+    {
+        $this->comment = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Get comment
+     *
+     * @return string
+     */
+    public function getComment()
+    {
+        return $this->comment;
+    }
+
+    /**
+     * Set created_at
+     * @ORM\PrePersist
+     * @param \DateTime $createdAt
+     * @return Expense
+     */
+    public function setCreatedAt($createdAt)
+    {
+        if(!$this->getCreatedAt())
+        {
+            $this->created_at = new \DateTime();
+        }
+    }
+
+    /**
+     * Get created_at
+     *
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->created_at;
+    }
+
+    /**
+     * Set updated_at
+     * @ORM\PreUpdate
+     * @param \DateTime $updatedAt
+     * @return Expense
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updated_at = new \DateTime();
+    }
+
+    /**
+     * Get updated_at
+     *
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updated_at;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \Coyote\SiteBundle\Entity\User $user
+     * @return Schedule
+     */
+    public function setUser(\Coyote\SiteBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Coyote\SiteBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Set timetable
+     *
+     * @param \Coyote\SiteBundle\Entity\Timetable $timetable
+     * @return Schedule
+     */
+    public function setTimetable(\Coyote\SiteBundle\Entity\Timetable $timetable = null)
+    {
+        $this->timetable = $timetable;
+
+        return $this;
+    }
+
+    /**
+     * Get timetable
+     *
+     * @return \Coyote\SiteBundle\Entity\Timetable
+     */
+    public function getTimetable()
+    {
+        return $this->timetable;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->timetable = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->locked = 0;
+    }
+
+    /**
+     * Add timetable
+     *
+     * @param \Coyote\SiteBundle\Entity\Timetable $timetable
+     * @return Schedule
+     */
+    public function addTimetable(\Coyote\SiteBundle\Entity\Timetable $timetable)
+    {
+        $this->timetable[] = $timetable;
+
+        return $this;
+    }
+
+    /**
+     * Remove timetable
+     *
+     * @param \Coyote\SiteBundle\Entity\Timetable $timetable
+     */
+    public function removeTimetable(\Coyote\SiteBundle\Entity\Timetable $timetable)
+    {
+        $this->timetable->removeElement($timetable);
+    }
+
+    /**
+     * Set locked
+     *
+     * @param boolean $locked
+     * @return Schedule
+     */
+    public function setLocked($locked)
+    {
+        $this->locked = $locked;
+
+        return $this;
+    }
+
+    /**
+     * Get locked
+     *
+     * @return boolean
+     */
+    public function getLocked()
+    {
+        return $this->locked;
+    }
+
+    /**
+     * Set locked_by
+     *
+     * @param string $lockedBy
+     * @return Schedule
+     */
+    public function setLockedBy($lockedBy)
+    {
+        $this->locked_by = $lockedBy;
+
+        return $this;
+    }
+
+    /**
+     * Get locked_by
+     *
+     * @return string
+     */
+    public function getLockedBy()
+    {
+        return $this->locked_by;
+    }
+
+    /**
+     * Set validated_by
+     *
+     * @param string $validatedBy
+     * @return Schedule
+     */
+    public function setValidatedBy($validatedBy)
+    {
+        $this->validated_by = $validatedBy;
+
+        return $this;
+    }
+
+    /**
+     * Get validated_by
+     *
+     * @return string
+     */
+    public function getValidatedBy()
+    {
+        return $this->validated_by;
+    }
+
+    /**
+     * Set locked_at
+     *
+     * @param \DateTime $lockedAt
+     * @return Schedule
+     */
+    public function setLockedAt($lockedAt)
+    {
+        $this->locked_at = $lockedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get locked_at
+     *
+     * @return \DateTime
+     */
+    public function getLockedAt()
+    {
+        return $this->locked_at;
     }
 }

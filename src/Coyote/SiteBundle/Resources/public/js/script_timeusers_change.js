@@ -1,437 +1,435 @@
 $(document).ready(function()
 {
-    //document.getElementById("absencedayselectlundi").style.visibility = "hidden";
-    //document.getElementById("absencedayinputlundi").style.visibility = "hidden";
-    $("#absencelundi").change(function()
+    $("#absence1").change(function()
     {
-        var absencelundi = document.getElementById("absencelundi").value;
-        visibilityAbsenceTime(absencelundi, "lundi");
+        var absence1 = document.getElementById("absence1").value;
+        visibilityAbsenceTime(absence1, 1);
     })
 
-    $("#absencemardi").change(function()
+    $("#absence2").change(function()
     {
-        var absencemardi = document.getElementById("absencemardi").value;
-        visibilityAbsenceTime(absencemardi, "mardi");
+        var absence2 = document.getElementById("absence2").value;
+        visibilityAbsenceTime(absence2, 2);
     })
 
-    $("#absencemercredi").change(function()
+    $("#absence3").change(function()
     {
-        var absencemercredi = document.getElementById("absencemercredi").value;
-        visibilityAbsenceTime(absencemercredi, "mercredi");
+        var absence3 = document.getElementById("absence3").value;
+        visibilityAbsenceTime(absence3, 3);
     })
 
-    $("#absencejeudi").change(function()
+    $("#absence4").change(function()
     {
-        var absencejeudi = document.getElementById("absencejeudi").value;
-        visibilityAbsenceTime(absencejeudi, "jeudi");
+        var absence4 = document.getElementById("absence4").value;
+        visibilityAbsenceTime(absence4, 4);
     })
 
-    $("#absencevendredi").change(function()
+    $("#absence5").change(function()
     {
-        var absencevendredi = document.getElementById("absencevendredi").value;
-        visibilityAbsenceTime(absencevendredi, "vendredi");
+        var absence5 = document.getElementById("absence5").value;
+        visibilityAbsenceTime(absence5, 5);
     })
 
-    $("#absencesamedi").change(function()
+    $("#absence6").change(function()
     {
-        var absencesamedi = document.getElementById("absencesamedi").value;
-        visibilityAbsenceTime(absencesamedi, "samedi");
+        var absence6 = document.getElementById("absence6").value;
+        visibilityAbsenceTime(absence6, 6);
     })
 
-    $("#absencedimanche").change(function()
+    $("#absence7").change(function()
     {
-        var absencedimanche = document.getElementById("absencedimanche").value;
-        visibilityAbsenceTime(absencedimanche, "dimanche");
+        var absence7 = document.getElementById("absence7").value;
+        visibilityAbsenceTime(absence7, 7);
     })
 
-    $("#absencetimelundi").change(function()
+    $("#absencetime1").change(function()
     {
-        var absencetimelundi = document.getElementById("absencetimelundi").value;
-        absencetimelundi = splitformatTime(absencetimelundi);
-        absencetimelundi = formatTime(absencetimelundi);
-        document.getElementById("absencetimelundi").value = absencetimelundi;
-        visibilityAbsenceTime(absencetimelundi, "lundi");
+        var absencetime1 = document.getElementById("absencetime1").value;
+        absencetime1 = splitformatTime(absencetime1);
+        absencetime1 = formatTime(absencetime1);
+        document.getElementById("absencetime1").value = absencetime1;
+        visibilityAbsenceTime(absencetime1, 1);
     })
 
-    $("#absencetimemardi").change(function()
+    $("#absencetime2").change(function()
     {
-        var absencetimemardi = document.getElementById("absencetimemardi").value;
-        absencetimemardi = splitformatTime(absencetimemardi);
-        absencetimemardi = formatTime(absencetimemardi);
-        document.getElementById("absencetimemardi").value = absencetimemardi;
-        visibilityAbsenceTime(absencetimemardi, "mardi");
+        var absencetime2 = document.getElementById("absencetime2").value;
+        absencetime2 = splitformatTime(absencetime2);
+        absencetime2 = formatTime(absencetime2);
+        document.getElementById("absencetime2").value = absencetime2;
+        visibilityAbsenceTime(absencetime2, 2);
     })
 
-    $("#absencetimemercredi").change(function()
+    $("#absencetime3").change(function()
     {
-        var absencetimemercredi = document.getElementById("absencetimemercredi").value;
-        absencetimemercredi = splitformatTime(absencetimemercredi);
-        absencetimemercredi = formatTime(absencetimemercredi);
-        document.getElementById("absencetimemercredi").value = absencetimemercredi;
-        visibilityAbsenceTime(absencetimemercredi, "mercredi");
+        var absencetime3 = document.getElementById("absencetime3").value;
+        absencetime3 = splitformatTime(absencetime3);
+        absencetime3 = formatTime(absencetime3);
+        document.getElementById("absencetime3").value = absencetime3;
+        visibilityAbsenceTime(absencetime3, 3);
     })
 
-    $("#absencetimejeudi").change(function()
+    $("#absencetime4").change(function()
     {
-        var absencetimejeudi = document.getElementById("absencetimejeudi").value;
-        absencetimejeudi = splitformatTime(absencetimejeudi);
-        absencetimejeudi = formatTime(absencetimejeudi);
-        document.getElementById("absencetimejeudi").value = absencetimejeudi;
-        visibilityAbsenceTime(absencetimejeudi, "jeudi");
+        var absencetime4 = document.getElementById("absencetime4").value;
+        absencetime4 = splitformatTime(absencetime4);
+        absencetime4 = formatTime(absencetime4);
+        document.getElementById("absencetime4").value = absencetime4;
+        visibilityAbsenceTime(absencetime4, 4);
     })
 
-    $("#absencetimevendredi").change(function()
+    $("#absencetime5").change(function()
     {
-        var absencetimevendredi = document.getElementById("absencetimevendredi").value;
-        absencetimevendredi = splitformatTime(absencetimevendredi);
-        absencetimevendredi = formatTime(absencetimevendredi);
-        document.getElementById("absencetimevendredi").value = absencetimevendredi;
-        visibilityAbsenceTime(absencetimevendredi, "vendredi");
+        var absencetime5 = document.getElementById("absencetime5").value;
+        absencetime5 = splitformatTime(absencetime5);
+        absencetime5 = formatTime(absencetime5);
+        document.getElementById("absencetime5").value = absencetime5;
+        visibilityAbsenceTime(absencetime5, 5);
     })
 
-    $("#absencetimesamedi").change(function()
+    $("#absencetime6").change(function()
     {
-        var absencetimesamedi = document.getElementById("absencetimesamedi").value;
-        absencetimesamedi = splitformatTime(absencetimesamedi);
-        absencetimesamedi = formatTime(absencetimesamedi);
-        document.getElementById("absencetimesamedi").value = absencetimesamedi;
-        visibilityAbsenceTime(absencetimesamedi, "samedi");
+        var absencetime6 = document.getElementById("absencetime6").value;
+        absencetime6 = splitformatTime(absencetime6);
+        absencetime6 = formatTime(absencetime6);
+        document.getElementById("absencetime6").value = absencetime6;
+        visibilityAbsenceTime(absencetime6, 6);
     })
 
-    $("#absencetimedimanche").change(function()
+    $("#absencetime7").change(function()
     {
-        var absencetimedimanche = document.getElementById("absencetimedimanche").value;
-        absencetimedimanche = splitformatTime(absencetimedimanche);
-        absencetimedimanche = formatTime(absencetimedimanche);
-        document.getElementById("absencetimedimanche").value = absencetimedimanche;
-        visibilityAbsenceTime(absencetimedimanche, "dimanche");
+        var absencetime7 = document.getElementById("absencetime7").value;
+        absencetime7 = splitformatTime(absencetime7);
+        absencetime7 = formatTime(absencetime7);
+        document.getElementById("absencetime7").value = absencetime7;
+        visibilityAbsenceTime(absencetime7, 7);
     })
 
-    $("#debutlundi").change(function()
+    $("#debut1").change(function()
     {
-        var startlundi = document.getElementById("debutlundi").value;
-        startlundi = splitformatTime(startlundi);
-        startlundi = formatTime(startlundi);
-        document.getElementById("debutlundi").value = startlundi;
-        var endlundi = document.getElementById("finlundi").value;
-        var breaklundi = document.getElementById("pauselundi").value;
+        var start1 = document.getElementById("debut1").value;
+        start1 = splitformatTime(start1);
+        start1 = formatTime(start1);
+        document.getElementById("debut1").value = start1;
+        var end1 = document.getElementById("fin1").value;
+        var break1 = document.getElementById("pause1").value;
 
-        var timelundi = calculWorkingTime(startlundi, endlundi, breaklundi);
-        var daylundi = calculWorkingDay(timelundi);
-        if(timelundi != null)
-            document.getElementById("tpslundi").value = timelundi;
-        if(daylundi != null)
-            document.getElementById("jourlundi").value = daylundi;
+        var time1 = calculWorkingTime(start1, end1, break1);
+        var day1 = calculWorkingDay(time1);
+        if(time1 != null)
+            document.getElementById("tps1").value = time1;
+        if(day1 != null)
+            document.getElementById("jour1").value = day1;
     })
 
-    $("#pauselundi").change(function()
+    $("#pause1").change(function()
     {
-        var startlundi = document.getElementById("debutlundi").value;
-        var endlundi = document.getElementById("finlundi").value;
-        var breaklundi = document.getElementById("pauselundi").value;
-        breaklundi = splitformatTime(breaklundi);
-        breaklundi = formatTime(breaklundi);
-        document.getElementById("pauselundi").value = breaklundi;
+        var start1 = document.getElementById("debut1").value;
+        var end1 = document.getElementById("fin1").value;
+        var break1 = document.getElementById("pause1").value;
+        break1 = splitformatTime(break1);
+        break1 = formatTime(break1);
+        document.getElementById("pause1").value = break1;
 
-        var timelundi = calculWorkingTime(startlundi, endlundi, breaklundi);
-        var daylundi = calculWorkingDay(timelundi);
-        if(timelundi != null)
-            document.getElementById("tpslundi").value = timelundi;
-        if(daylundi != null)
-            document.getElementById("jourlundi").value = daylundi;
+        var time1 = calculWorkingTime(start1, end1, break1);
+        var day1 = calculWorkingDay(time1);
+        if(time1 != null)
+            document.getElementById("tps1").value = time1;
+        if(day1 != null)
+            document.getElementById("jour1").value = day1;
     })
 
-    $("#finlundi").change(function()
+    $("#fin1").change(function()
     {
-        var startlundi = document.getElementById("debutlundi").value;
-        var endlundi = document.getElementById("finlundi").value;
-        endlundi = splitformatTime(endlundi);
-        endlundi = formatTime(endlundi);
-        document.getElementById("finlundi").value = endlundi;
-        var breaklundi = document.getElementById("pauselundi").value;
+        var start1 = document.getElementById("debut1").value;
+        var end1 = document.getElementById("fin1").value;
+        end1 = splitformatTime(end1);
+        end1 = formatTime(end1);
+        document.getElementById("fin1").value = end1;
+        var break1 = document.getElementById("pause1").value;
 
-        var timelundi = calculWorkingTime(startlundi, endlundi, breaklundi);
-        var daylundi = calculWorkingDay(timelundi);
-        if(timelundi != null)
-            document.getElementById("tpslundi").value = timelundi;
-        if(daylundi != null)
-            document.getElementById("jourlundi").value = daylundi;
-    })
-
-
-    $("#debutmardi").change(function()
-    {
-        var startmardi = document.getElementById("debutmardi").value;
-        startmardi = splitformatTime(startmardi);
-        startmardi = formatTime(startmardi);
-        document.getElementById("debutmardi").value = startmardi;
-        var endmardi = document.getElementById("finmardi").value;
-        var breakmardi = document.getElementById("pausemardi").value;
-
-        var timemardi = calculWorkingTime(startmardi, endmardi, breakmardi);
-        var daymardi = calculWorkingDay(timemardi);
-        if(timemardi != null)
-            document.getElementById("tpsmardi").value = timemardi;
-    })
-
-    $("#pausemardi").change(function()
-    {
-        var startmardi = document.getElementById("debutmardi").value;
-        var endmardi = document.getElementById("finmardi").value;
-        var breakmardi = document.getElementById("pausemardi").value;
-        breakmardi = splitformatTime(breakmardi);
-        breakmardi = formatTime(breakmardi);
-        document.getElementById("pausemardi").value = breakmardi;
-
-        var timemardi = calculWorkingTime(startmardi, endmardi, breakmardi);
-        var daymardi = calculWorkingDay(timemardi);
-        if(timemardi != null)
-            document.getElementById("tpsmardi").value = timemardi;
-    })
-
-    $("#finmardi").change(function()
-    {
-        var startmardi = document.getElementById("debutmardi").value;
-        var endmardi = document.getElementById("finmardi").value;
-        endmardi = splitformatTime(endmardi);
-        endmardi = formatTime(endmardi);
-        document.getElementById("finmardi").value = endmardi;
-        var breakmardi = document.getElementById("pausemardi").value;
-
-        var timemardi = calculWorkingTime(startmardi, endmardi, breakmardi);
-        var daymardi = calculWorkingDay(timemardi);
-        if(timemardi != null)
-            document.getElementById("tpsmardi").value = timemardi;
+        var time1 = calculWorkingTime(start1, end1, break1);
+        var day1 = calculWorkingDay(time1);
+        if(time1 != null)
+            document.getElementById("tps1").value = time1;
+        if(day1 != null)
+            document.getElementById("jour1").value = day1;
     })
 
 
-    $("#debutmercredi").change(function()
+    $("#debut2").change(function()
     {
-        var startmercredi = document.getElementById("debutmercredi").value;
-        startmercredi = splitformatTime(startmercredi);
-        startmercredi = formatTime(startmercredi);
-        document.getElementById("debutmercredi").value = startmercredi;
-        var endmercredi = document.getElementById("finmercredi").value;
-        var breakmercredi = document.getElementById("pausemercredi").value;
+        var start2 = document.getElementById("debut2").value;
+        start2 = splitformatTime(start2);
+        start2 = formatTime(start2);
+        document.getElementById("debut2").value = start2;
+        var end2 = document.getElementById("fin2").value;
+        var break2 = document.getElementById("pause2").value;
 
-        var timemercredi = calculWorkingTime(startmercredi, endmercredi, breakmercredi);
-        var daymercredi = calculWorkingDay(timemercredi);
-        if(timemercredi != null)
-            document.getElementById("tpsmercredi").value = timemercredi;
+        var time2 = calculWorkingTime(start2, end2, break2);
+        var day2 = calculWorkingDay(time2);
+        if(time2 != null)
+            document.getElementById("tps2").value = time2;
     })
 
-    $("#pausemercredi").change(function()
+    $("#pause2").change(function()
     {
-        var startmercredi = document.getElementById("debutmercredi").value;
-        var endmercredi = document.getElementById("finmercredi").value;
-        var breakmercredi = document.getElementById("pausemercredi").value;
-        breakmercredi = splitformatTime(breakmercredi);
-        breakmercredi = formatTime(breakmercredi);
-        document.getElementById("pausemercredi").value = breakmercredi;
+        var start2 = document.getElementById("debut2").value;
+        var end2 = document.getElementById("fin2").value;
+        var break2 = document.getElementById("pause2").value;
+        break2 = splitformatTime(break2);
+        break2 = formatTime(break2);
+        document.getElementById("pause2").value = break2;
 
-        var timemercredi = calculWorkingTime(startmercredi, endmercredi, breakmercredi);
-        var daymercredi = calculWorkingDay(timemercredi);
-        if(timemercredi != null)
-            document.getElementById("tpsmercredi").value = timemercredi;
+        var time2 = calculWorkingTime(start2, end2, break2);
+        var day2 = calculWorkingDay(time2);
+        if(time2 != null)
+            document.getElementById("tps2").value = time2;
     })
 
-    $("#finmercredi").change(function()
+    $("#fin2").change(function()
     {
-        var startmercredi = document.getElementById("debutmercredi").value;
-        var endmercredi = document.getElementById("finmercredi").value;
-        endmercredi = splitformatTime(endmercredi);
-        endmercredi = formatTime(endmercredi);
-        document.getElementById("finmercredi").value = endmercredi;
-        var breakmercredi = document.getElementById("pausemercredi").value;
+        var start2 = document.getElementById("debut2").value;
+        var end2 = document.getElementById("fin2").value;
+        end2 = splitformatTime(end2);
+        end2 = formatTime(end2);
+        document.getElementById("fin2").value = end2;
+        var break2 = document.getElementById("pause2").value;
 
-        var timemercredi = calculWorkingTime(startmercredi, endmercredi, breakmercredi);
-        var daymercredi = calculWorkingDay(timemercredi);
-        if(timemercredi != null)
-            document.getElementById("tpsmercredi").value = timemercredi;
-    })
-
-
-    $("#debutjeudi").change(function()
-    {
-        var startjeudi = document.getElementById("debutjeudi").value;
-        startjeudi = splitformatTime(startjeudi);
-        startjeudi = formatTime(startjeudi);
-        document.getElementById("debutjeudi").value = startjeudi;
-        var endjeudi = document.getElementById("finjeudi").value;
-        var breakjeudi = document.getElementById("pausejeudi").value;
-
-        var timejeudi = calculWorkingTime(startjeudi, endjeudi, breakjeudi);
-        var dayjeudi = calculWorkingDay(timejeudi);
-        if(timejeudi != null)
-            document.getElementById("tpsjeudi").value = timejeudi;
-    })
-
-    $("#pausejeudi").change(function()
-    {
-        var startjeudi = document.getElementById("debutjeudi").value;
-        var endjeudi = document.getElementById("finjeudi").value;
-        var breakjeudi = document.getElementById("pausejeudi").value;
-        breakjeudi = splitformatTime(breakjeudi);
-        breakjeudi = formatTime(breakjeudi);
-        document.getElementById("pausejeudi").value = breakjeudi;
-
-        var timejeudi = calculWorkingTime(startjeudi, endjeudi, breakjeudi);
-        var dayjeudi = calculWorkingDay(timejeudi);
-        if(timejeudi != null)
-            document.getElementById("tpsjeudi").value = timejeudi;
-    })
-
-    $("#finjeudi").change(function()
-    {
-        var startjeudi = document.getElementById("debutjeudi").value;
-        var endjeudi = document.getElementById("finjeudi").value;
-        endjeudi = splitformatTime(endjeudi);
-        endjeudi = formatTime(endjeudi);
-        document.getElementById("finjeudi").value = endjeudi;
-        var breakjeudi = document.getElementById("pausejeudi").value;
-
-        var timejeudi = calculWorkingTime(startjeudi, endjeudi, breakjeudi);
-        var dayjeudi = calculWorkingDay(timejeudi);
-        if(timejeudi != null)
-            document.getElementById("tpsjeudi").value = timejeudi;
+        var time2 = calculWorkingTime(start2, end2, break2);
+        var day2 = calculWorkingDay(time2);
+        if(time2 != null)
+            document.getElementById("tps2").value = time2;
     })
 
 
-    $("#debutvendredi").change(function()
+    $("#debut3").change(function()
     {
-        var startvendredi = document.getElementById("debutvendredi").value;
-        startvendredi = splitformatTime(startvendredi);
-        startvendredi = formatTime(startvendredi);
-        document.getElementById("debutvendredi").value = startvendredi;
-        var endvendredi = document.getElementById("finvendredi").value;
-        var breakvendredi = document.getElementById("pausevendredi").value;
+        var start3 = document.getElementById("debut3").value;
+        start3 = splitformatTime(start3);
+        start3 = formatTime(start3);
+        document.getElementById("debut3").value = start3;
+        var end3 = document.getElementById("fin3").value;
+        var break3 = document.getElementById("pause3").value;
 
-        var timevendredi = calculWorkingTime(startvendredi, endvendredi, breakvendredi);
-        var dayvendredi = calculWorkingDay(timevendredi);
-        if(timevendredi != null)
-            document.getElementById("tpsvendredi").value = timevendredi;
+        var time3 = calculWorkingTime(start3, end3, break3);
+        var day3 = calculWorkingDay(time3);
+        if(time3 != null)
+            document.getElementById("tps3").value = time3;
     })
 
-    $("#pausevendredi").change(function()
+    $("#pause3").change(function()
     {
-        var startvendredi = document.getElementById("debutvendredi").value;
-        var endvendredi = document.getElementById("finvendredi").value;
-        var breakvendredi = document.getElementById("pausevendredi").value;
-        breakvendredi = splitformatTime(breakvendredi);
-        breakvendredi = formatTime(breakvendredi);
-        document.getElementById("pausevendredi").value = breakvendredi;
+        var start3 = document.getElementById("debut3").value;
+        var end3 = document.getElementById("fin3").value;
+        var break3 = document.getElementById("pause3").value;
+        break3 = splitformatTime(break3);
+        break3 = formatTime(break3);
+        document.getElementById("pause3").value = break3;
 
-        var timevendredi = calculWorkingTime(startvendredi, endvendredi, breakvendredi);
-        var dayvendredi = calculWorkingDay(timevendredi);
-        if(timevendredi != null)
-            document.getElementById("tpsvendredi").value = timevendredi;
+        var time3 = calculWorkingTime(start3, end3, break3);
+        var day3 = calculWorkingDay(time3);
+        if(time3 != null)
+            document.getElementById("tps3").value = time3;
     })
 
-    $("#finvendredi").change(function()
+    $("#fin3").change(function()
     {
-        var startvendredi = document.getElementById("debutvendredi").value;
-        var endvendredi = document.getElementById("finvendredi").value;
-        endvendredi = splitformatTime(endvendredi);
-        endvendredi = formatTime(endvendredi);
-        document.getElementById("finvendredi").value = endvendredi;
-        var breakvendredi = document.getElementById("pausevendredi").value;
+        var start3 = document.getElementById("debut3").value;
+        var end3 = document.getElementById("fin3").value;
+        end3 = splitformatTime(end3);
+        end3 = formatTime(end3);
+        document.getElementById("fin3").value = end3;
+        var break3 = document.getElementById("pause3").value;
 
-        var timevendredi = calculWorkingTime(startvendredi, endvendredi, breakvendredi);
-        var dayvendredi = calculWorkingDay(timevendredi);
-        if(timevendredi != null)
-            document.getElementById("tpsvendredi").value = timevendredi;
-    })
-
-
-    $("#debutsamedi").change(function()
-    {
-        var startsamedi = document.getElementById("debutsamedi").value;
-        startsamedi = splitformatTime(startsamedi);
-        startsamedi = formatTime(startsamedi);
-        document.getElementById("debutsamedi").value = startsamedi;
-        var endsamedi = document.getElementById("finsamedi").value;
-        var breaksamedi = document.getElementById("pausesamedi").value;
-
-        var timesamedi = calculWorkingTime(startsamedi, endsamedi, breaksamedi);
-        var daysamedi = calculWorkingDay(timesamedi);
-        if(timesamedi != null)
-            document.getElementById("tpssamedi").value = timesamedi;
-    })
-
-    $("#pausesamedi").change(function()
-    {
-        var startsamedi = document.getElementById("debutsamedi").value;
-        var endsamedi = document.getElementById("finsamedi").value;
-        var breaksamedi = document.getElementById("pausesamedi").value;
-        breaksamedi = splitformatTime(breaksamedi);
-        breaksamedi = formatTime(breaksamedi);
-        document.getElementById("pausesamedi").value = breaksamedi;
-
-        var timesamedi = calculWorkingTime(startsamedi, endsamedi, breaksamedi);
-        var daysamedi = calculWorkingDay(timesamedi);
-        if(timesamedi != null)
-            document.getElementById("tpssamedi").value = timesamedi;
-    })
-
-    $("#finsamedi").change(function()
-    {
-        var startsamedi = document.getElementById("debutsamedi").value;
-        var endsamedi = document.getElementById("finsamedi").value;
-        endsamedi = splitformatTime(endsamedi);
-        endsamedi = formatTime(endsamedi);
-        document.getElementById("finsamedi").value = endsamedi;
-        var breaksamedi = document.getElementById("pausesamedi").value;
-
-        var timesamedi = calculWorkingTime(startsamedi, endsamedi, breaksamedi);
-        var daysamedi = calculWorkingDay(timesamedi);
-        if(timesamedi != null)
-            document.getElementById("tpssamedi").value = timesamedi;
+        var time3 = calculWorkingTime(start3, end3, break3);
+        var day3 = calculWorkingDay(time3);
+        if(time3 != null)
+            document.getElementById("tps3").value = time3;
     })
 
 
-    $("#debutdimanche").change(function()
+    $("#debut4").change(function()
     {
-        var startdimanche = document.getElementById("debutdimanche").value;
-        startdimanche = splitformatTime(startdimanche);
-        startdimanche = formatTime(startdimanche);
-        document.getElementById("debutdimanche").value = startdimanche;
-        var enddimanche = document.getElementById("findimanche").value;
-        var breakdimanche = document.getElementById("pausedimanche").value;
+        var start4 = document.getElementById("debut4").value;
+        start4 = splitformatTime(start4);
+        start4 = formatTime(start4);
+        document.getElementById("debut4").value = start4;
+        var end4 = document.getElementById("fin4").value;
+        var break4 = document.getElementById("pause4").value;
 
-        var timedimanche = calculWorkingTime(startdimanche, enddimanche, breakdimanche);
-        var daydimanche = calculWorkingDay(timedimanche);
-        if(timedimanche != null)
-            document.getElementById("tpsdimanche").value = timedimanche;
+        var time4 = calculWorkingTime(start4, end4, break4);
+        var day4 = calculWorkingDay(time4);
+        if(time4 != null)
+            document.getElementById("tps4").value = time4;
     })
 
-    $("#pausedimanche").change(function()
+    $("#pause4").change(function()
     {
-        var startdimanche = document.getElementById("debutdimanche").value;
-        var enddimanche = document.getElementById("findimanche").value;
-        var breakdimanche = document.getElementById("pausedimanche").value;
-        breakdimanche = splitformatTime(breakdimanche);
-        breakdimanche = formatTime(breakdimanche);
-        document.getElementById("pausedimanche").value = breakdimanche;
+        var start4 = document.getElementById("debut4").value;
+        var end4 = document.getElementById("fin4").value;
+        var break4 = document.getElementById("pause4").value;
+        break4 = splitformatTime(break4);
+        break4 = formatTime(break4);
+        document.getElementById("pause4").value = break4;
 
-        var timedimanche = calculWorkingTime(startdimanche, enddimanche, breakdimanche);
-        var daydimanche = calculWorkingDay(timedimanche);
-        if(timedimanche != null)
-            document.getElementById("tpsdimanche").value = timedimanche;
+        var time4 = calculWorkingTime(start4, end4, break4);
+        var day4 = calculWorkingDay(time4);
+        if(time4 != null)
+            document.getElementById("tps4").value = time4;
     })
 
-    $("#findimanche").change(function()
+    $("#fin4").change(function()
     {
-        var startdimanche = document.getElementById("debutdimanche").value;
-        var enddimanche = document.getElementById("findimanche").value;
-        enddimanche = splitformatTime(enddimanche);
-        enddimanche = formatTime(enddimanche);
-        document.getElementById("findimanche").value = enddimanche;
-        var breakdimanche = document.getElementById("pausedimanche").value;
+        var start4 = document.getElementById("debut4").value;
+        var end4 = document.getElementById("fin4").value;
+        end4 = splitformatTime(end4);
+        end4 = formatTime(end4);
+        document.getElementById("fin4").value = end4;
+        var break4 = document.getElementById("pause4").value;
 
-        var timedimanche = calculWorkingTime(startdimanche, enddimanche, breakdimanche);
-        var daydimanche = calculWorkingDay(timedimanche);
-        if(timedimanche != null)
-            document.getElementById("tpsdimanche").value = timedimanche;
+        var time4 = calculWorkingTime(start4, end4, break4);
+        var day4 = calculWorkingDay(time4);
+        if(time4 != null)
+            document.getElementById("tps4").value = time4;
+    })
+
+
+    $("#debut5").change(function()
+    {
+        var start5 = document.getElementById("debut5").value;
+        start5 = splitformatTime(start5);
+        start5 = formatTime(start5);
+        document.getElementById("debut5").value = start5;
+        var end5 = document.getElementById("fin5").value;
+        var break5 = document.getElementById("pause5").value;
+
+        var time5 = calculWorkingTime(start5, end5, break5);
+        var day5 = calculWorkingDay(time5);
+        if(time5 != null)
+            document.getElementById("tps5").value = time5;
+    })
+
+    $("#pause5").change(function()
+    {
+        var start5 = document.getElementById("debut5").value;
+        var end5 = document.getElementById("fin5").value;
+        var break5 = document.getElementById("pause5").value;
+        break5 = splitformatTime(break5);
+        break5 = formatTime(break5);
+        document.getElementById("pause5").value = break5;
+
+        var time5 = calculWorkingTime(start5, end5, break5);
+        var day5 = calculWorkingDay(time5);
+        if(time5 != null)
+            document.getElementById("tps5").value = time5;
+    })
+
+    $("#fin5").change(function()
+    {
+        var start5 = document.getElementById("debut5").value;
+        var end5 = document.getElementById("fin5").value;
+        end5 = splitformatTime(end5);
+        end5 = formatTime(end5);
+        document.getElementById("fin5").value = end5;
+        var break5 = document.getElementById("pause5").value;
+
+        var time5 = calculWorkingTime(start5, end5, break5);
+        var day5 = calculWorkingDay(time5);
+        if(time5 != null)
+            document.getElementById("tps5").value = time5;
+    })
+
+
+    $("#debut6").change(function()
+    {
+        var start6 = document.getElementById("debut6").value;
+        start6 = splitformatTime(start6);
+        start6 = formatTime(start6);
+        document.getElementById("debut6").value = start6;
+        var end6 = document.getElementById("fin6").value;
+        var break6 = document.getElementById("pause6").value;
+
+        var time6 = calculWorkingTime(start6, end6, break6);
+        var day6 = calculWorkingDay(time6);
+        if(time6 != null)
+            document.getElementById("tps6").value = time6;
+    })
+
+    $("#pause6").change(function()
+    {
+        var start6 = document.getElementById("debut6").value;
+        var end6 = document.getElementById("fin6").value;
+        var break6 = document.getElementById("pause6").value;
+        break6 = splitformatTime(break6);
+        break6 = formatTime(break6);
+        document.getElementById("pause6").value = break6;
+
+        var time6 = calculWorkingTime(start6, end6, break6);
+        var day6 = calculWorkingDay(time6);
+        if(time6 != null)
+            document.getElementById("tps6").value = time6;
+    })
+
+    $("#fin6").change(function()
+    {
+        var start6 = document.getElementById("debut6").value;
+        var end6 = document.getElementById("fin6").value;
+        end6 = splitformatTime(end6);
+        end6 = formatTime(end6);
+        document.getElementById("fin6").value = end6;
+        var break6 = document.getElementById("pause6").value;
+
+        var time6 = calculWorkingTime(start6, end6, break6);
+        var day6 = calculWorkingDay(time6);
+        if(time6 != null)
+            document.getElementById("tps6").value = time6;
+    })
+
+
+    $("#debut7").change(function()
+    {
+        var start7 = document.getElementById("debut7").value;
+        start7 = splitformatTime(start7);
+        start7 = formatTime(start7);
+        document.getElementById("debut7").value = start7;
+        var end7 = document.getElementById("fin7").value;
+        var break7 = document.getElementById("pause7").value;
+
+        var time7 = calculWorkingTime(start7, end7, break7);
+        var day7 = calculWorkingDay(time7);
+        if(time7 != null)
+            document.getElementById("tps7").value = time7;
+    })
+
+    $("#pause7").change(function()
+    {
+        var start7 = document.getElementById("debut7").value;
+        var end7 = document.getElementById("fin7").value;
+        var break7 = document.getElementById("pause7").value;
+        break7 = splitformatTime(break7);
+        break7 = formatTime(break7);
+        document.getElementById("pause7").value = break7;
+
+        var time7 = calculWorkingTime(start7, end7, break7);
+        var day7 = calculWorkingDay(time7);
+        if(time7 != null)
+            document.getElementById("tps7").value = time7;
+    })
+
+    $("#fin7").change(function()
+    {
+        var start7 = document.getElementById("debut7").value;
+        var end7 = document.getElementById("fin7").value;
+        end7 = splitformatTime(end7);
+        end7 = formatTime(end7);
+        document.getElementById("fin7").value = end7;
+        var break7 = document.getElementById("pause7").value;
+
+        var time7 = calculWorkingTime(start7, end7, break7);
+        var day7 = calculWorkingDay(time7);
+        if(time7 != null)
+            document.getElementById("tps7").value = time7;
     })
 
     $("#debutauto").change(function()
@@ -461,8 +459,8 @@ $(document).ready(function()
 
     $("#saisie_auto").click(function()
     {
-    	var check = 'check_lundi;check_mardi;check_mercredi;check_jeudi;check_vendredi;check_samedi;check_dimanche';
-    	var jour = 'lundi;mardi;mercredi;jeudi;vendredi;samedi;dimanche';
+    	var check = 'check_1;check_2;check_3;check_4;check_5;check_6;check_7';
+    	var jour = '1;2;3;4;5;6;7';
     	check = check.split(';');
     	jour = jour.split(';');
     	var boucle = 0;
@@ -482,8 +480,8 @@ $(document).ready(function()
 
 function saisie_auto()
 {
-	var check = 'check_lundi;check_mardi;check_mercredi;check_jeudi;check_vendredi;check_samedi;check_dimanche';
-	var jour = 'lundi;mardi;mercredi;jeudi;vendredi;samedi;dimanche';
+	var check = 'check_1;check_2;check_3;check_4;check_5;check_6;check_7';
+	var jour = '1;2;3;4;5;6;7';
 	check = check.split(';');
 	jour = jour.split(';');
 	var boucle = 0;

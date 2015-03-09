@@ -1,6 +1,6 @@
 {% extends 'CoyoteSiteBundle:Expense:index.html.twig' %}
 
-{% block link %}
+{% block nav %}
 
     <!--[if lt IE 9]>
         {{ include('CoyoteSiteBundle:Base:navigation_ie.html.twig') }}
@@ -9,10 +9,6 @@
         {{ include('CoyoteSiteBundle:Base:navigation.html.twig') }}
 	<!--<![endif]-->
 
-{% endblock %}
-
-{% block stylesheets %}
-   {{ include('CoyoteSiteBundle:Base:css.html.twig') }}
 {% endblock %}
 
 {% block content %}

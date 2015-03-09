@@ -19,7 +19,7 @@ class ScheduleControllerTest extends WebTestCase
 
         // Fill in the form and submit it
         $form = $crawler->selectButton('Create')->form(array(
-            'coyote_sitebundle_scheduletype[field_name]'  => 'Test',
+            'coyote_sitebundle_schedule[field_name]'  => 'Test',
             // ... other fields to fill
         ));
 
@@ -32,8 +32,8 @@ class ScheduleControllerTest extends WebTestCase
         // Edit the entity
         $crawler = $client->click($crawler->selectLink('Edit')->link());
 
-        $form = $crawler->selectButton('Edit')->form(array(
-            'coyote_sitebundle_scheduletype[field_name]'  => 'Foo',
+        $form = $crawler->selectButton('Update')->form(array(
+            'coyote_sitebundle_schedule[field_name]'  => 'Foo',
             // ... other fields to fill
         ));
 

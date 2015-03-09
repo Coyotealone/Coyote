@@ -1,0 +1,42 @@
+absence:
+    path:     /{page}
+    defaults: { _controller: "CoyoteSiteBundle:Absence:index", page: 1 }
+    requirements:
+        page:  \d+
+
+absence_show:
+    path:     /{id}/show
+    defaults: { _controller: "CoyoteSiteBundle:Absence:show" }
+
+absence_new:
+    path:     /new
+    defaults: { _controller: "CoyoteSiteBundle:Absence:new" }
+
+absence_create:
+    path:     /create
+    defaults: { _controller: "CoyoteSiteBundle:Absence:create" }
+    requirements: { _method: post }
+
+absence_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "CoyoteSiteBundle:Absence:edit" }
+
+absence_update:
+    path:     /{id}/update
+    defaults: { _controller: "CoyoteSiteBundle:Absence:update" }
+    requirements: { _method: post|put }
+    
+absence_putweek:
+    path:     /absence_week
+    defaults: { _controller: "CoyoteSiteBundle:Absence:putAbsenceWeek" }
+    
+absence_newweek:
+    path:     /new_week
+    defaults: { _controller: "CoyoteSiteBundle:Absence:newAbsenceWeek" }
+
+
+#absence_delete:
+#    path:     /{id}/delete
+#    defaults: { _controller: "CoyoteSiteBundle:Absence:delete" }
+#    requirements: { _method: post|delete }
+

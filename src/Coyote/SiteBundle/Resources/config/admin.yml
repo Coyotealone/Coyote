@@ -1,121 +1,78 @@
 services:
-    sonata.admin.userfees:
-        class: Coyote\SiteBundle\Admin\UserFeesAdmin
-        tags:
-            - { name: sonata.admin, manager_type: orm, group: "Utilisateur", label: "Informations Utilisateurs Notes de frais" }
-        arguments:
-            - ~
-            - Coyote\SiteBundle\Entity\UserFees
-            - ~
-        calls:
-            - [ setTranslationDomain, [CoyoteSiteBundle]]
-    sonata.admin.fosuser:
-        class: Coyote\SiteBundle\Admin\FosUserAdmin
-        tags:
-            - { name: sonata.admin, manager_type: orm, group: "Utilisateur", label: "Comptes utilisateurs" }
-        arguments:
-            - ~
-            - Coyote\SiteBundle\Entity\User
-            - ~
-        calls:
-            - [ setTranslationDomain, [CoyoteSiteBundle]]
-    sonata.admin.business:
+    coyote_site.admin.business:
         class: Coyote\SiteBundle\Admin\BusinessAdmin
+        arguments: [~, Coyote\SiteBundle\Entity\Business, CoyoteSiteBundle:BusinessAdmin]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Notes de frais", label: "Affaire" }
-        arguments:
-            - ~
-            - Coyote\SiteBundle\Entity\Business
-            - ~
-        calls:
-            - [ setTranslationDomain, [CoyoteSiteBundle]]
-    sonata.admin.country:
-        class: Coyote\SiteBundle\Admin\CountryAdmin
-        tags:
-            - { name: sonata.admin, manager_type: orm, group: "Divers", label: "Pays" }
-        arguments:
-            - ~
-            - Coyote\SiteBundle\Entity\Country
-            - ~
-        calls:
-            - [ setTranslationDomain, [CoyoteSiteBundle]]
-    sonata.admin.currency:
-        class: Coyote\SiteBundle\Admin\CurrencyAdmin
-        tags:
-            - { name: sonata.admin, manager_type: orm, group: "Divers", label: "Monnaie" }
-        arguments:
-            - ~
-            - Coyote\SiteBundle\Entity\Currency
-            - ~
-        calls:
-            - [ setTranslationDomain, [CoyoteSiteBundle]]
-    sonata.admin.expense:
-        class: Coyote\SiteBundle\Admin\ExpenseAdmin
-        tags:
-            - { name: sonata.admin, manager_type: orm, group: "Notes de frais", label: "Notes de frais" }
-        arguments:
-            - ~
-            - Coyote\SiteBundle\Entity\Expense
-            - ~
-        calls:
-            - [ setTranslationDomain, [CoyoteSiteBundle]]
-    sonata.admin.fee:
-        class: Coyote\SiteBundle\Admin\FeeAdmin
-        tags:
-            - { name: sonata.admin, manager_type: orm, group: "Notes de frais", label: "Articles" }
-        arguments:
-            - ~
-            - Coyote\SiteBundle\Entity\Fee
-            - ~
-        calls:
-            - [ setTranslationDomain, [CoyoteSiteBundle]]
-    sonata.admin.schedule:
-        class: Coyote\SiteBundle\Admin\ScheduleAdmin
-        tags:
-            - { name: sonata.admin, manager_type: orm, group: "Présence", label: "Temps de présence" }
-        arguments:
-            - ~
-            - Coyote\SiteBundle\Entity\Schedule
-            - ~
-        calls:
-            - [ setTranslationDomain, [CoyoteSiteBundle]]
-    sonata.admin.site:
-        class: Coyote\SiteBundle\Admin\SiteAdmin
-        tags:
-            - { name: sonata.admin, manager_type: orm, group: "Notes de frais", label: "Site" }
-        arguments:
-            - ~
-            - Coyote\SiteBundle\Entity\Site
-            - ~
-        calls:
-            - [ setTranslationDomain, [CoyoteSiteBundle]]
-    sonata.admin.timetable:
-        class: Coyote\SiteBundle\Admin\TimetableAdmin
-        tags:
-            - { name: sonata.admin, manager_type: orm, group: "Présence", label: "Calendrier" }
-        arguments:
-            - ~
-            - Coyote\SiteBundle\Entity\Timetable
-            - ~
-        calls:
-            - [ setTranslationDomain, [CoyoteSiteBundle]]
-    sonata.admin.quote:
-        class: Coyote\SiteBundle\Admin\QuoteAdmin
-        tags:
-            - { name: sonata.admin, manager_type: orm, group: "Citations", label: "Citations" }
-        arguments:
-            - ~
-            - Coyote\SiteBundle\Entity\Quote
-            - ~
-        calls:
-            - [ setTranslationDomain, [CoyoteSiteBundle]]
-    sonata.admin.car:
+            - {name: sonata.admin, manager_type: orm, group: Notes de frais, label: Affaire}
+
+    coyote_site.admin.car:
         class: Coyote\SiteBundle\Admin\CarAdmin
+        arguments: [~, Coyote\SiteBundle\Entity\Car, CoyoteSiteBundle:CarAdmin]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Notes de frais", label: "Voiture" }
-        arguments:
-            - ~
-            - Coyote\SiteBundle\Entity\Car
-            - ~
-        calls:
-            - [ setTranslationDomain, [CoyoteSiteBundle]]
+            - {name: sonata.admin, manager_type: orm, group: Notes de frais, label: Voitures}
+
+    coyote_site.admin.country:
+        class: Coyote\SiteBundle\Admin\CountryAdmin
+        arguments: [~, Coyote\SiteBundle\Entity\Country, CoyoteSiteBundle:CountryAdmin]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Divers, label: Pays}
+
+    coyote_site.admin.currency:
+        class: Coyote\SiteBundle\Admin\CurrencyAdmin
+        arguments: [~, Coyote\SiteBundle\Entity\Currency, CoyoteSiteBundle:CurrencyAdmin]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Divers, label: Monnaie}
+
+    coyote_site.admin.fee:
+        class: Coyote\SiteBundle\Admin\FeeAdmin
+        arguments: [~, Coyote\SiteBundle\Entity\Fee, CoyoteSiteBundle:FeeAdmin]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Notes de frais, label: Articles}
+
+    coyote_site.admin.quote:
+        class: Coyote\SiteBundle\Admin\QuoteAdmin
+        arguments: [~, Coyote\SiteBundle\Entity\Quote, CoyoteSiteBundle:QuoteAdmin]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Citations, label: Citations}
+
+    coyote_site.admin.schedule:
+        class: Coyote\SiteBundle\Admin\ScheduleAdmin
+        arguments: [~, Coyote\SiteBundle\Entity\Schedule, CoyoteSiteBundle:ScheduleAdmin]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Temps de présence, label: Présence}
+
+    coyote_site.admin.site:
+        class: Coyote\SiteBundle\Admin\SiteAdmin
+        arguments: [~, Coyote\SiteBundle\Entity\Site, CoyoteSiteBundle:SiteAdmin]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Notes de frais, label: Site}
+
+    coyote_site.admin.timetable:
+        class: Coyote\SiteBundle\Admin\TimetableAdmin
+        arguments: [~, Coyote\SiteBundle\Entity\Timetable, CoyoteSiteBundle:TimetableAdmin]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Temps de présence, label: Calendrier}
+
+    coyote_site.admin.user:
+        class: Coyote\SiteBundle\Admin\UserAdmin
+        arguments: [~, Coyote\SiteBundle\Entity\User, CoyoteSiteBundle:UserAdmin]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Utilisateur, label: Comptes utilisateurs }
+
+    coyote_site.admin.user_fees:
+        class: Coyote\SiteBundle\Admin\UserFeesAdmin
+        arguments: [~, Coyote\SiteBundle\Entity\UserFees, CoyoteSiteBundle:UserFeesAdmin]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Utilisateur, label: Comptes commerciaux}
+
+    coyote_site.admin.holiday:
+        class: Coyote\SiteBundle\Admin\HolidayAdmin
+        arguments: [~, Coyote\SiteBundle\Entity\Holiday, CoyoteSiteBundle:HolidayAdmin]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Temps de présence, label: Congés}
+
+    coyote_site.admin.expense:
+        class: Coyote\SiteBundle\Admin\ExpenseAdmin
+        arguments: [~, Coyote\SiteBundle\Entity\Expense, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Notes de frais, label: Notes de frais}

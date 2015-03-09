@@ -10,7 +10,7 @@ header, footer, section, hgroup, aside, nav, article, figure, figcaption, time, 
 /* Configurateur */
 /* line 7, ../scss/styles.sass */
 #bloc_page {
-  max-width: 1000px;
+  max-width: 1170px;
   margin: auto;
 }
 
@@ -92,7 +92,7 @@ html, body {
 
 /* line 59, ../scss/styles.sass */
 #bloc {
-  padding-bottom: 50px;
+  /*padding-bottom: 50px;*/
 }
 
 /* line 62, ../scss/styles.sass */
@@ -137,7 +137,7 @@ footer {
 footer p {
   text-align: center;
   margin: auto;
-  max-width: 1000px;
+  /*max-width: 1170px;*/
   background-color: #515151;
 }
 
@@ -683,4 +683,65 @@ tbody {
   margin-left: auto;
   margin-right: auto;
   width: 40%;
+}
+
+/* Page Index tuiles */
+
+#site
+{
+    display: box; /* not supported by IE9, use table if we want IE support */
+    box-orient:horizontal;
+    box-pack:left;
+    box-align:top;
+
+    /* Firefox */
+    display:-moz-box;
+    -moz-box-orient:horizontal;
+    -moz-box-pack:left;
+    -moz-box-align:top;
+
+    /* Safari and Chrome */
+    display:-webkit-box;
+    -webkit-box-orient:horizontal;
+    -webkit-box-pack:left;
+    -webkit-box-align:top;
+
+    /* futur IE10, that's sucks */
+    display: -ms-box;
+}
+.tilt {
+    -webkit-transition: -webkit-transform 0.1s linear;
+    -webkit-transform: rotate3d(20, 100, 0, -20deg);
+    -moz-transition: -moz-transform 0.1s linear;
+    -moz-transform: rotate3d(20, 100, 0, -20deg);
+    -o-transition: -o-transform 0.1s linear;
+    -o-transform: rotate3d(20, 100, 0, -20deg);
+    -ms-transition: -ms-transform 0.1s linear;
+    -ms-transform: rotate3d(20, 100, 0, -20deg);
+    transition: transform 0.1s linear;
+    transform: rotate3d(20, 100, 0, -20deg);
+}
+#box1 {
+    -moz-box-ordinal-group: 1;
+}
+
+.firstnavitems > ul {
+}
+.navitems > ul {
+    display: table;
+    list-style: outside none none;
+    margin: 0;
+    padding: 10px 0 0;
+    width: 400px;
+}
+.navitems > ul > li {
+    display: table-cell;
+    padding-bottom: 10px;
+    padding-right: 10px;
+}
+.box > .image {
+    clip: rect(15px, auto, auto, auto);
+    height: 80px;
+    margin: auto;
+    width: 80px;
 }

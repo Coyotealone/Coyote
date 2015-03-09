@@ -1,0 +1,30 @@
+test_car:
+    path:     /
+    defaults: { _controller: "CoyoteSiteBundle:Car:index" }
+
+test_car_show:
+    path:     /{id}/show
+    defaults: { _controller: "CoyoteSiteBundle:Car:show" }
+
+test_car_new:
+    path:     /new
+    defaults: { _controller: "CoyoteSiteBundle:Car:new" }
+
+test_car_create:
+    path:     /create
+    defaults: { _controller: "CoyoteSiteBundle:Car:create" }
+    requirements: { _method: post }
+
+test_car_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "CoyoteSiteBundle:Car:edit" }
+
+test_car_update:
+    path:     /{id}/update
+    defaults: { _controller: "CoyoteSiteBundle:Car:update" }
+    requirements: { _method: post|put }
+
+test_car_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "CoyoteSiteBundle:Car:delete" }
+    requirements: { _method: post|delete }

@@ -1,314 +1,342 @@
 $(document).ready(function()
 {
-	var lundi = document.getElementById("debutlundi");
+	var lundi = document.getElementById("debut1");
 	if(lundi != null)
 	{
     	var startlundi = lundi.dataset.value;
 
-    	lundi = document.getElementById("finlundi");
+    	lundi = document.getElementById("fin1");
     	var endlundi = lundi.dataset.value;
 
-    	lundi = document.getElementById("pauselundi");
+    	lundi = document.getElementById("pause1");
     	var breaklundi = lundi.dataset.value;
 
-    	lundi = document.getElementById("deplacementlundi");
+    	lundi = document.getElementById("deplacement1");
     	var deplundi = lundi.dataset.value;
 
-    	lundi = document.getElementById("tpslundi");
+    	lundi = document.getElementById("tps1");
     	var workingtimelundi = lundi.dataset.value;
 
-    	lundi = document.getElementById("commentairelundi");
+    	lundi = document.getElementById("commentaire1");
     	var commentlundi = lundi.dataset.value;
 
-    	lundi = document.getElementById("absencelundi");
+    	lundi = document.getElementById("absence1");
     	var abslundi = lundi.dataset.value;
+    	if(abslundi == null)
+        {
+            visibilityAbsenceTime("", 1, absdaylundi);
+        }
 
-    	lundi = document.getElementById("absencedaylundi");
+    	lundi = document.getElementById("absenceday1");
     	var absdaylundi = lundi.dataset.value;
 
-    	timeAbsence("", absdaylundi, "lundi");
+    	timeAbsence("", absdaylundi, "1");
     }
 
-    var mardi = document.getElementById("debutmardi");
+    var mardi = document.getElementById("debut2");
 	if(mardi!= null)
 	{
     	var startmardi = mardi.dataset.value;
 
-    	mardi = document.getElementById("finmardi");
+    	mardi = document.getElementById("fin2");
     	var endmardi = mardi.dataset.value;
 
-    	mardi = document.getElementById("pausemardi");
+    	mardi = document.getElementById("pause2");
     	var breakmardi = mardi.dataset.value;
 
-    	mardi = document.getElementById("deplacementmardi");
+    	mardi = document.getElementById("deplacement2");
     	var depmardi = mardi.dataset.value;
 
-    	mardi = document.getElementById("tpsmardi");
+    	mardi = document.getElementById("tps2");
     	var workingtimemardi = mardi.dataset.value;
 
-    	mardi = document.getElementById("commentairemardi");
+    	mardi = document.getElementById("commentaire2");
     	var commentmardi = mardi.dataset.value;
 
-    	mardi = document.getElementById("absencemardi");
+    	mardi = document.getElementById("absence2");
     	var absmardi = mardi.dataset.value;
+    	if(absmardi == null)
+        {
+            visibilityAbsenceTime("", 2, absdaymardi);
+        }
 
-    	mardi = document.getElementById("absencedaymardi");
+    	mardi = document.getElementById("absenceday2");
     	var absdaymardi = mardi.dataset.value;
 
-    	timeAbsence("", absdaymardi, "mardi");
+    	timeAbsence("", absdaymardi, "2");
 	}
 
-	var mercredi = document.getElementById("debutmercredi");
+	var mercredi = document.getElementById("debut3");
 	if(mercredi != null)
 	{
     	var startmercredi = mercredi.dataset.value;
 
-    	mercredi = document.getElementById("finmercredi");
+    	mercredi = document.getElementById("fin3");
     	var endmercredi = mercredi.dataset.value;
 
-    	mercredi = document.getElementById("pausemercredi");
+    	mercredi = document.getElementById("pause3");
     	var breakmercredi = mercredi.dataset.value;
 
-    	mercredi = document.getElementById("deplacementmercredi");
+    	mercredi = document.getElementById("deplacement3");
     	var depmercredi = mercredi.dataset.value;
 
-    	mercredi = document.getElementById("tpsmercredi");
+    	mercredi = document.getElementById("tps3");
     	var workingtimemercredi = mercredi.dataset.value;
 
-    	mercredi = document.getElementById("commentairemercredi");
+    	mercredi = document.getElementById("commentaire3");
     	var commentmercredi = mercredi.dataset.value;
 
-    	mercredi = document.getElementById("absencemercredi");
+    	mercredi = document.getElementById("absence3");
     	var absmercredi = mercredi.dataset.value;
+    	if(absmercredi == null)
+        {
+            visibilityAbsenceTime("", 3, absdaymercredi);
+        }
 
-    	mercredi = document.getElementById("absencedaymercredi");
+    	mercredi = document.getElementById("absenceday3");
     	var absdaymercredi = mercredi.dataset.value;
 
-    	timeAbsence("", absdaymercredi, "mercredi");
+    	timeAbsence("", absdaymercredi, "3");
     }
 
-    var jeudi = document.getElementById("debutjeudi");
+    var jeudi = document.getElementById("debut4");
 	if(jeudi != null)
 	{
     	var startjeudi = jeudi.dataset.value;
 
-    	jeudi = document.getElementById("finjeudi");
+    	jeudi = document.getElementById("fin4");
     	var endjeudi = jeudi.dataset.value;
 
-    	jeudi = document.getElementById("pausejeudi");
+    	jeudi = document.getElementById("pause4");
     	var breakjeudi = jeudi.dataset.value;
 
-    	jeudi = document.getElementById("deplacementjeudi");
+    	jeudi = document.getElementById("deplacement4");
     	var depjeudi = jeudi.dataset.value;
 
-    	jeudi = document.getElementById("tpsjeudi");
+    	jeudi = document.getElementById("tps4");
     	var workingtimejeudi = jeudi.dataset.value;
 
-    	jeudi = document.getElementById("commentairejeudi");
+    	jeudi = document.getElementById("commentaire4");
     	var commentjeudi = jeudi.dataset.value;
 
-    	jeudi = document.getElementById("absencejeudi");
+    	jeudi = document.getElementById("absence4");
     	var absjeudi = jeudi.dataset.value;
+    	if(absjeudi == null)
+        {
+            visibilityAbsenceTime("", 4, absdayjeudi);
+        }
 
-    	jeudi = document.getElementById("absencedayjeudi");
+    	jeudi = document.getElementById("absenceday4");
     	var absdayjeudi = jeudi.dataset.value;
 
-    	timeAbsence("", absdayjeudi, "jeudi");
+    	timeAbsence("", absdayjeudi, "4");
     }
 
-	var vendredi = document.getElementById("debutvendredi");
+	var vendredi = document.getElementById("debut5");
 	if(vendredi != null)
 	{
     	var startvendredi = vendredi.dataset.value;
 
-        vendredi = document.getElementById("finvendredi");
+        vendredi = document.getElementById("fin5");
     	var endvendredi = vendredi.dataset.value;
 
-    	vendredi = document.getElementById("pausevendredi");
+    	vendredi = document.getElementById("pause5");
     	var breakvendredi = vendredi.dataset.value;
 
-    	vendredi = document.getElementById("deplacementvendredi");
+    	vendredi = document.getElementById("deplacement5");
     	var depvendredi = vendredi.dataset.value;
 
-    	vendredi = document.getElementById("tpsvendredi");
+    	vendredi = document.getElementById("tps5");
     	var workingtimevendredi = vendredi.dataset.value;
 
-    	vendredi = document.getElementById("commentairevendredi");
+    	vendredi = document.getElementById("commentaire5");
     	var commentvendredi = vendredi.dataset.value;
 
-    	vendredi = document.getElementById("absencevendredi");
+    	vendredi = document.getElementById("absence5");
     	var absvendredi = vendredi.dataset.value;
+    	if(absvendredi == null)
+        {
+            visibilityAbsenceTime("", 5, absdayvendredi);
+        }
 
-    	vendredi = document.getElementById("absencedayvendredi");
+    	vendredi = document.getElementById("absenceday5");
     	var absdayvendredi = vendredi.dataset.value;
 
-    	timeAbsence("", absdayvendredi, "vendredi");
+    	timeAbsence("", absdayvendredi, "5");
 	}
 
-	var samedi = document.getElementById("debutsamedi");
+	var samedi = document.getElementById("debut6");
 	if(samedi != null)
 	{
     	var startsamedi = samedi.dataset.value;
 
-    	samedi = document.getElementById("finsamedi");
+    	samedi = document.getElementById("fin6");
     	var endsamedi = samedi.dataset.value;
 
-    	samedi = document.getElementById("pausesamedi");
+    	samedi = document.getElementById("pause6");
     	var breaksamedi = samedi.dataset.value;
 
-    	samedi = document.getElementById("deplacementsamedi");
+    	samedi = document.getElementById("deplacement6");
     	var depsamedi = samedi.dataset.value;
 
-    	samedi = document.getElementById("tpssamedi");
+    	samedi = document.getElementById("tps6");
     	var workingtimesamedi = samedi.dataset.value;
 
-    	samedi = document.getElementById("commentairesamedi");
+    	samedi = document.getElementById("commentaire6");
     	var commentsamedi = samedi.dataset.value;
 
-    	samedi = document.getElementById("absencesamedi");
+    	samedi = document.getElementById("absence6");
     	var abssamedi = samedi.dataset.value;
+        if(abssamedi == null)
+        {
+            visibilityAbsenceTime("", 6, absdaysamedi);
+        }
 
-    	samedi = document.getElementById("absencedaysamedi");
+    	samedi = document.getElementById("absenceday6");
     	var absdaysamedi = samedi.dataset.value;
 
-    	timeAbsence("", absdaysamedi, "samedi");
+    	timeAbsence("", absdaysamedi, "6");
     }
 
 
-	var dimanche = document.getElementById("debutdimanche");
+	var dimanche = document.getElementById("debut7");
 	if(dimanche != null)
 	{
     	var startdimanche = dimanche.dataset.value;
 
-    	dimanche = document.getElementById("findimanche");
+    	dimanche = document.getElementById("fin7");
     	var enddimanche = dimanche.dataset.value;
 
-    	dimanche = document.getElementById("pausedimanche");
+    	dimanche = document.getElementById("pause7");
     	var breakdimanche = dimanche.dataset.value;
 
-    	dimanche = document.getElementById("deplacementdimanche");
+    	dimanche = document.getElementById("deplacement7");
     	var depdimanche = dimanche.dataset.value;
 
-    	dimanche = document.getElementById("tpsdimanche");
+    	dimanche = document.getElementById("tps7");
     	var workingtimedimanche = dimanche.dataset.value;
 
-    	dimanche = document.getElementById("commentairedimanche");
+    	dimanche = document.getElementById("commentaire7");
     	var commentdimanche = dimanche.dataset.value;
 
-    	dimanche = document.getElementById("absencedimanche");
+    	dimanche = document.getElementById("absence7");
     	var absdimanche = dimanche.dataset.value;
+        if(absdimanche == null)
+        {
+            visibilityAbsenceTime("", 7, absdaydimanche);
+        }
 
-    	dimanche = document.getElementById("absencedaydimanche");
+    	dimanche = document.getElementById("absenceday7");
     	var absdaydimanche = dimanche.dataset.value;
 
-    	timeAbsence("", absdaydimanche, "dimanche");
+    	timeAbsence("", absdaydimanche, "7");
     }
 
     if(startlundi == 'null' | startlundi == '')
-        document.getElementById("debutlundi").value = "00:00";
+        document.getElementById("debut1").value = "00:00";
     if(breaklundi == 'null' | breaklundi == '')
-        document.getElementById("pauselundi").value = "00:00";
+        document.getElementById("pause1").value = "00:00";
     if(endlundi == 'null' | endlundi == '')
-        document.getElementById("finlundi").value = "00:00";
+        document.getElementById("fin1").value = "00:00";
     if(commentlundi == 'null' | commentlundi == '')
-        document.getElementById("commentairelundi").value = "";
+        document.getElementById("commentaire1").value = "";
 
     if(startmardi == 'null' | startmardi == '')
-        document.getElementById("debutmardi").value = "00:00";
+        document.getElementById("debut2").value = "00:00";
     if(breakmardi == 'null' | breakmardi == '')
-        document.getElementById("pausemardi").value = "00:00";
+        document.getElementById("pause2").value = "00:00";
     if(endmardi == 'null' | endmardi == '')
-        document.getElementById("finmardi").value = "00:00";
+        document.getElementById("fin2").value = "00:00";
     if(commentmardi == 'null' | commentmardi == '')
-        document.getElementById("commentairemardi").value = "";
+        document.getElementById("commentaire2").value = "";
 
     if(startmercredi == 'null' | startmercredi == '')
-        document.getElementById("debutmercredi").value = "00:00";
+        document.getElementById("debut3").value = "00:00";
     if(breakmercredi == 'null' | breakmercredi == '')
-        document.getElementById("pausemercredi").value = "00:00";
+        document.getElementById("pause3").value = "00:00";
     if(endmercredi == 'null' | endmercredi == '')
-        document.getElementById("finmercredi").value = "00:00";
+        document.getElementById("fin3").value = "00:00";
     if(commentmercredi == 'null' | commentmercredi == '')
-        document.getElementById("commentairemercredi").value = "";
+        document.getElementById("commentaire3").value = "";
 
     if(startjeudi == 'null' | startjeudi == '')
-        document.getElementById("debutjeudi").value = "00:00";
+        document.getElementById("debut4").value = "00:00";
     if(breakjeudi == 'null' | breakjeudi == '')
-        document.getElementById("pausejeudi").value = "00:00";
+        document.getElementById("pause4").value = "00:00";
     if(endjeudi == 'null' | endjeudi == '')
-        document.getElementById("finjeudi").value = "00:00";
+        document.getElementById("fin4").value = "00:00";
     if(commentjeudi == 'null' | commentjeudi == '')
-        document.getElementById("commentairejeudi").value = "";
+        document.getElementById("commentaire4").value = "";
 
     if(startvendredi == 'null' | startvendredi == '')
-        document.getElementById("debutvendredi").value = "00:00";
+        document.getElementById("debut5").value = "00:00";
     if(breakvendredi == 'null' | breakvendredi == '')
-        document.getElementById("pausevendredi").value = "00:00";
+        document.getElementById("pause5").value = "00:00";
     if(endvendredi == 'null' | endvendredi == '')
-        document.getElementById("finvendredi").value = "00:00";
+        document.getElementById("fin5").value = "00:00";
     if(commentvendredi == 'null' | commentvendredi == '')
-        document.getElementById("commentairevendredi").value = "";
+        document.getElementById("commentaire5").value = "";
 
     if(startsamedi == 'null' | startsamedi == '')
-        document.getElementById("debutsamedi").value = "00:00";
+        document.getElementById("debut6").value = "00:00";
     if(breaksamedi == 'null' | breaksamedi == '')
-        document.getElementById("pausesamedi").value = "00:00";
+        document.getElementById("pause6").value = "00:00";
     if(endsamedi == 'null' | endsamedi == '')
-        document.getElementById("finsamedi").value = "00:00";
+        document.getElementById("fin6").value = "00:00";
     if(commentsamedi == 'null' | commentsamedi == '')
-        document.getElementById("commentairesamedi").value = "";
+        document.getElementById("commentaire6").value = "";
 
     if(startdimanche == 'null' | startdimanche == '')
-        document.getElementById("debutdimanche").value = "00:00";
+        document.getElementById("debut7").value = "00:00";
     if(breakdimanche == 'null' | breakdimanche == '')
-        document.getElementById("pausedimanche").value = "00:00";
+        document.getElementById("pause7").value = "00:00";
     if(enddimanche == 'null' | enddimanche == '')
-        document.getElementById("findimanche").value = "00:00";
+        document.getElementById("fin7").value = "00:00";
     if(commentdimanche == 'null' | commentdimanche == '')
-        document.getElementById("commentairedimanche").value = "";
+        document.getElementById("commentaire7").value = "";
 
-    visibilityAbsenceTime(abslundi, "lundi", absdaylundi);
-    visibilityAbsenceTime(absmardi, "mardi", absdaymardi);
-    visibilityAbsenceTime(absmercredi, "mercredi", absdaymercredi);
-    visibilityAbsenceTime(absjeudi, "jeudi", absdayjeudi);
-    visibilityAbsenceTime(absvendredi, "vendredi", absdayvendredi);
-    visibilityAbsenceTime(abssamedi, "samedi", absdaysamedi);
-    visibilityAbsenceTime(absdimanche, "dimanche", absdaydimanche);
+    visibilityAbsenceTime(abslundi, 1, absdaylundi);
+    visibilityAbsenceTime(absmardi, 2, absdaymardi);
+    visibilityAbsenceTime(absmercredi, 3, absdaymercredi);
+    visibilityAbsenceTime(absjeudi, 4, absdayjeudi);
+    visibilityAbsenceTime(absvendredi, 5, absdayvendredi);
+    visibilityAbsenceTime(abssamedi, 6, absdaysamedi);
+    visibilityAbsenceTime(absdimanche, 7, absdaydimanche);
 
 	if(deplundi == 0 | deplundi == "")
-		document.getElementById('deplacementlundi').checked = false;
+		document.getElementById('deplacement1').checked = false;
 	if(deplundi == 1)
-		document.getElementById('deplacementlundi').checked = true;
+		document.getElementById('deplacement1').checked = true;
 
     if(depmardi == 0 | depmardi == "")
-    	document.getElementById('deplacementmardi').checked = false;
+    	document.getElementById('deplacement2').checked = false;
     if(depmardi == 1)
-    	document.getElementById('deplacementmardi').checked = true;
+    	document.getElementById('deplacement2').checked = true;
 
     if(depmercredi == 0 | depmercredi == "")
-    	document.getElementById('deplacementmercredi').checked = false;
+    	document.getElementById('deplacement3').checked = false;
     if(depmercredi == 1)
-    	document.getElementById('deplacementmercredi').checked = true;
+    	document.getElementById('deplacement3').checked = true;
 
     if(depjeudi == 0 | depjeudi == "")
-    	document.getElementById('deplacementjeudi').checked = false;
+    	document.getElementById('deplacement4').checked = false;
     if(depjeudi == 1)
-    	document.getElementById('deplacementjeudi').checked = true;
+    	document.getElementById('deplacement4').checked = true;
 
     if(depvendredi == 0 | depvendredi == "")
-    	document.getElementById('deplacementvendredi').checked = false;
+    	document.getElementById('deplacement5').checked = false;
     if(depvendredi == 1)
-    	document.getElementById('deplacementvendredi').checked = true;
+    	document.getElementById('deplacement5').checked = true;
 
     if(depsamedi == 0 | depsamedi == "")
-    	document.getElementById('deplacementsamedi').checked = false;
+    	document.getElementById('deplacement6').checked = false;
     if(depsamedi == 1)
-    	document.getElementById('deplacementsamedi').checked = true;
+    	document.getElementById('deplacement6').checked = true;
 
     if(depdimanche == 0 | depdimanche == "")
-    	document.getElementById('deplacementdimanche').checked = false;
+    	document.getElementById('deplacement7').checked = false;
     if(depdimanche == 1)
-    	document.getElementById('deplacementdimanche').checked = true;
+    	document.getElementById('deplacement7').checked = true;
 
     var res = timeweek(workingtimelundi, workingtimemardi, workingtimemercredi, workingtimejeudi, workingtimevendredi, workingtimesamedi, workingtimedimanche);
     if(document.getElementById('timeweek') != null)
@@ -317,13 +345,35 @@ $(document).ready(function()
 
 function timeweek(timemonday, timetuesday, timewednesday, timethursday, timefriday, timesunday, timesaturday)
 {
-    var monday = new Number(timeinminutes(timemonday));
-    var tuesday = new Number(timeinminutes(timetuesday));
-    var wednesday = new Number(timeinminutes(timewednesday));
-    var thursday = new Number(timeinminutes(timethursday));
-    var friday = new Number(timeinminutes(timefriday));
-    var sunday = new Number(timeinminutes(timesunday));
-    var saturday = new Number(timeinminutes(timesaturday));
+    if(timemonday != null)
+        var monday = new Number(timeinminutes(timemonday));
+    if (timemonday == null)
+        var monday = new Number(0);
+    if (timetuesday != null)
+        var tuesday = new Number(timeinminutes(timetuesday));
+    if (timetuesday == null)
+        var tuesday = new Number(0);
+    if (timewednesday != null)
+        var wednesday = new Number(timeinminutes(timewednesday));
+    if (timewednesday == null)
+        var wednesday = new Number(0);
+    if (timethursday != null)
+        var thursday = new Number(timeinminutes(timethursday));
+    if (timethursday == null)
+        var thursday = new Number(0);
+    if (timefriday != null)
+        var friday = new Number(timeinminutes(timefriday));
+    if (timefriday == null)
+        var friday = new Number(0);
+    if (timesunday != null)
+        var sunday = new Number(timeinminutes(timesunday));
+    if (timesunday == null)
+        var sunday = new Number(0);
+    if (timesaturday != null)
+        var saturday = new Number(timeinminutes(timesaturday));
+    if (timesaturday == null)
+        var saturday = new Number(0);
+
 
     var timetotal = new Number(monday+tuesday+wednesday+thursday+friday+sunday+saturday);
     return timeinhours(timetotal);
@@ -433,6 +483,7 @@ function timeAbsence(absence, absenceday, jour)
 	//}
 	else
 	{
-    	document.getElementById("absencetime"+jour).value = absenceday;
+    	if(absenceday != null)
+    	    document.getElementById("absencetime"+jour).value = absenceday;
 	}
 }

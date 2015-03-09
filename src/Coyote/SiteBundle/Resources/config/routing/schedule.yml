@@ -2,49 +2,31 @@ schedule_overtime:
     pattern:    /overtime
     defaults:   { _controller: "CoyoteSiteBundle:Schedule:showovertime"}
 
-schedule_savetime:
-    pattern:    /scheduleusers/save
-    defaults:   { _controller: "CoyoteSiteBundle:Schedule:savetime"}
+schedule_getscheduleuserweek:
+    pattern:    /time_attendance
+    defaults:   { _controller: "CoyoteSiteBundle:Schedule:getScheduleUserWeek"}
 
-schedule_savetimefm:
-    pattern:    /scheduleframes/save
-    defaults:   { _controller: "CoyoteSiteBundle:Schedule:savetimefm"}
+schedule_postscheduleuserweek:
+    pattern:    /time_attendance_save
+    defaults:   { _controller: "CoyoteSiteBundle:Schedule:postScheduleUserWeek"}
 
-schedule_workmore:
-    pattern:    /scheduleusers/workmore
-    defaults:   { _controller: "CoyoteSiteBundle:Schedule:workmore"}
+schedule_postweekless:
+    pattern:    /time_attendance/weekless
+    defaults:   { _controller: "CoyoteSiteBundle:Schedule:postWeekLess"}
+    
+schedule_postweekmore:
+    pattern:    /time_attendance/weekmore
+    defaults:   { _controller: "CoyoteSiteBundle:Schedule:postWeekMore"}
 
-schedule_workless:
-    pattern:    /scheduleusers/workless
-    defaults:   { _controller: "CoyoteSiteBundle:Schedule:workless"}
+schedule_getscheduleusermonth:
+    pattern:    /time_attendance_month
+    defaults:   { _controller: "CoyoteSiteBundle:Schedule:getScheduleUserMonth"}
 
-schedule_index:
-    pattern:    /
-    defaults:   { _controller: "CoyoteSiteBundle:Schedule:index"}
+schedule_getscheduleuserprintmonth:
+    pattern:    /time_attendance_print_month
+    defaults:   { _controller: "CoyoteSiteBundle:Schedule:getScheduleUserPrintMonth"}
 
-schedule_show:
-    pattern:    /show
-    defaults:   { _controller: "CoyoteSiteBundle:Schedule:show"}
 
-schedule_indexshow:
-    pattern:    /indexshow
-    defaults:   { _controller: "CoyoteSiteBundle:Schedule:indexshow"}
-
-schedule_print:
-    pattern:    /print
-    defaults:   { _controller: "CoyoteSiteBundle:Schedule:print"}
-
-schedule_indexprint:
-    pattern:    /indexprint
-    defaults:   { _controller: "CoyoteSiteBundle:Schedule:indexprint"}
-
-schedule_new:
-    pattern:    /schedulecreate
-    defaults:   { _controller: "CoyoteSiteBundle:Schedule:new"}
-
-schedule_edit:
-    pattern:    /scheduleedit
-    defaults:   { _controller: "CoyoteSiteBundle:Schedule:edit"}
 
 schedule_indexprintyear:
     pattern:    /indexprintyear
@@ -61,3 +43,7 @@ schedule_indexexportprintyear:
 schedule_exportprintyear:
     pattern:    /exportscheduleyear
     defaults:   { _controller: "CoyoteSiteBundle:Schedule:exportprintyear"}
+
+#schedule_absenceday:
+#    pattern:    /absenceday
+#    defaults:   { _controller: "CoyoteSiteBundle:Schedule:absenceday"}

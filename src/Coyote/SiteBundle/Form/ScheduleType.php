@@ -8,16 +8,12 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class ScheduleType extends AbstractType
 {
-        /**
+    /**
      * @param FormBuilderInterface $builder
      * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        /*$builder->add('start', 'time', array(
-                    'input'  => 'timestamp',
-                    'widget' => 'choice',
-                    ));*/
         $builder
             ->add('start')
             ->add('end')
@@ -25,11 +21,14 @@ class ScheduleType extends AbstractType
             ->add('working_time')
             ->add('working_hours')
             ->add('travel')
-            ->add('absence')
+            ->add('absence_name')
+            ->add('absence_duration')
             ->add('comment')
-            //->add('user')
+            ->add('created_at')
+            ->add('updated_at')
+            ->add('user')
             ->add('timetable')
-            ;
+        ;
     }
     
     /**

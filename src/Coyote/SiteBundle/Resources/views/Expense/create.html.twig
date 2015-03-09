@@ -8,7 +8,7 @@
     <script src="{{ asset('bundles/coyotesite/js/script_expense.js') }}"/></script>
 {% endblock %}
 
-{% block link %}
+{% block nav %}
     <!--[if lt IE 9]>
         {{ include('CoyoteSiteBundle:Base:navigation_ie.html.twig') }}
     <![endif]-->
@@ -16,19 +16,6 @@
         {{ include('CoyoteSiteBundle:Base:navigation.html.twig') }}
 	<!--<![endif]-->
 {% endblock %}
-
-{% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/styles.css') }}" type="text/css" media="all" />
-    <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/jquery-ui.css') }}" type="text/css" media="all" />
-    <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/bootstrap.css') }}" type="text/css" media="all" />
-    <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/justified-nav.css') }}" type="text/css" media="all" />
-    <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/signin.css') }}" type="text/css" media="all" />
-    <!--[if lt IE 9]>
-      <script src="{{ asset('bundles/coyotesite/js/html5shiv.min.js') }}"></script>
-      <script src="{{ asset('bundles/coyotesite/js/respond.min.js') }}"></script>
-    <![endif]-->
-{% endblock %}
-
 
 {% block content %}
 
@@ -43,7 +30,6 @@
     {% if message == 'expense.flash.save_multiple' %}
         <p id="flashmessage_valid">{{ flashMessage|trans({'%count%': app.session.get('countExpense') }) }}</p>
     {% endif %}
-
 {% endfor %}
 
 <p id="titreconfig">{{'expense.title.create'|trans}} </p>
@@ -84,26 +70,26 @@
     			<select name='devise{{i}}' id='devise{{i}}'>
     			    {% if app.session.get('lang') == "en" %}
         			    {% for datacurrency in currency %}
-        			        {% if datacurrency == "GBP" %}
-        			            <option value={{ datacurrency.id }} selected>{{ datacurrency }}</option>
+        			        {% if datacurrency.code == "GBP" %}
+        			            <option value={{ datacurrency.id }} selected>{{ datacurrency.code }}</option>
         			        {% else %}
-                                <option value={{ datacurrency.id }} >{{ datacurrency }}</option>
+                                <option value={{ datacurrency.id }} >{{ datacurrency.code }}</option>
         			        {% endif %}
     			        {% endfor %}
     			    {% elseif app.session.get('lang') == "pl" %}
         			    {% for datacurrency in currency %}
-        			        {% if datacurrency == "PLN" %}
-        			            <option value={{ datacurrency.id }} selected>{{ datacurrency }}</option>
+        			        {% if datacurrency.code == "PLN" %}
+        			            <option value={{ datacurrency.id }} selected>{{ datacurrency.code }}</option>
         			        {% else %}
-                                <option value={{ datacurrency.id }} >{{ datacurrency }}</option>
+                                <option value={{ datacurrency.id }} >{{ datacurrency.code }}</option>
         			        {% endif %}
     			        {% endfor %}
     			    {% else %}
         			    {% for datacurrency in currency %}
-        			        {% if datacurrency == "EUR" %}
-        			            <option value={{ datacurrency.id }} selected>{{ datacurrency }}</option>
+        			        {% if datacurrency.code == "EUR" %}
+        			            <option value={{ datacurrency.id }} selected>{{ datacurrency.code }}</option>
         			        {% else %}
-                                <option value={{ datacurrency.id }} >{{ datacurrency }}</option>
+                                <option value={{ datacurrency.id }} >{{ datacurrency.code }}</option>
         			        {% endif %}
     			        {% endfor %}
     			    {% endif %}

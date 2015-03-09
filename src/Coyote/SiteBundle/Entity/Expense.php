@@ -5,80 +5,114 @@ namespace Coyote\SiteBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Expense
+ * Class Expense
+ * @author Coyote
+ * @ORM\Entity
+ * @ORM\Table(name="expense")
+ * @ORM\Entity(repositoryClass="Coyote\SiteBundle\Entity\ExpenseRepository");
+ * @ORM\HasLifecycleCallbacks
  */
 class Expense
 {
     /**
      * @var integer
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
-     * @var string
+     * @var datetime
+     * @ORM\Column(name="date", type="datetime")
      */
     private $date;
 
     /**
      * @var boolean
+     * @ORM\Column(name="status", type="boolean")
      */
     private $status;
 
     /**
      * @var float
+     * @ORM\Column(name="amount", type="float")
      */
     private $amount;
 
     /**
      * @var float
-     */
-    private $actual_amount;
-
-    /**
-     * @var float
+     * @ORM\Column(name="amount_TTC", type="float")
      */
     private $amount_TTC;
 
     /**
      * @var float
+     * @ORM\Column(name="amount_TVA", type="float")
      */
     private $amount_TVA;
 
     /**
      * @var string
+     * @ORM\Column(name="comment", type="string", length=255, nullable=true)
      */
     private $comment;
 
     /**
-     * @var \Coyote\SiteBundle\Entity\Site
+     * @var \DateTime
+     * @ORM\Column(name="created_at", type="datetime")
+     */
+    private $created_at;
+
+    /**
+     * @var \DateTime
+     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
+     */
+    private $updated_at;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Site", inversedBy="expenses")
+     * @ORM\JoinColumn(name="site_id", referencedColumnName="id", nullable=false)
      */
     private $site;
 
     /**
-     * @var \Coyote\SiteBundle\Entity\Currency
+     * @ORM\ManyToOne(targetEntity="Currency", inversedBy="expenses")
+     * @ORM\JoinColumn(name="currency_id", referencedColumnName="id", nullable=false)
      */
     private $currency;
 
     /**
-     * @var \Coyote\SiteBundle\Entity\Business
+     * @ORM\ManyToOne(targetEntity="Business", inversedBy="expenses")
+     * @ORM\JoinColumn(name="business_id", referencedColumnName="id", nullable=false)
      */
     private $business;
 
     /**
-     * @var \Coyote\SiteBundle\Entity\Fee
+     * @ORM\ManyToOne(targetEntity="Fee", inversedBy="expenses")
+     * @ORM\JoinColumn(name="fee_id", referencedColumnName="id", nullable=false)
      */
     private $fee;
 
     /**
-     * @var \Coyote\SiteBundle\Entity\UserFees
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
      */
-    private $userfees;
+    private $user;
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->expenses = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->site = 9;
+    }
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -88,7 +122,7 @@ class Expense
     /**
      * Set date
      *
-     * @param string $date
+     * @param \DateTime $date
      * @return Expense
      */
     public function setDate($date)
@@ -101,7 +135,7 @@ class Expense
     /**
      * Get date
      *
-     * @return string 
+     * @return \DateTime
      */
     public function getDate()
     {
@@ -124,7 +158,7 @@ class Expense
     /**
      * Get status
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getStatus()
     {
@@ -147,34 +181,11 @@ class Expense
     /**
      * Get amount
      *
-     * @return float 
+     * @return float
      */
     public function getAmount()
     {
         return $this->amount;
-    }
-
-    /**
-     * Set actual_amount
-     *
-     * @param float $actualAmount
-     * @return Expense
-     */
-    public function setActualAmount($actualAmount)
-    {
-        $this->actual_amount = $actualAmount;
-
-        return $this;
-    }
-
-    /**
-     * Get actual_amount
-     *
-     * @return float 
-     */
-    public function getActualAmount()
-    {
-        return $this->actual_amount;
     }
 
     /**
@@ -193,7 +204,7 @@ class Expense
     /**
      * Get amount_TTC
      *
-     * @return float 
+     * @return float
      */
     public function getAmountTTC()
     {
@@ -201,26 +212,26 @@ class Expense
     }
 
     /**
-     * Set amount_TVA
+     * Set amount_HT
      *
-     * @param float $amountTVA
+     * @param float $amountHT
      * @return Expense
      */
-    public function setAmountTVA($amountTVA)
+    public function setAmountHT($amountHT)
     {
-        $this->amount_TVA = $amountTVA;
+        $this->amount_HT = $amountHT;
 
         return $this;
     }
 
     /**
-     * Get amount_TVA
+     * Get amount_HT
      *
-     * @return float 
+     * @return float
      */
-    public function getAmountTVA()
+    public function getAmountHT()
     {
-        return $this->amount_TVA;
+        return $this->amount_HT;
     }
 
     /**
@@ -239,11 +250,89 @@ class Expense
     /**
      * Get comment
      *
-     * @return string 
+     * @return string
      */
     public function getComment()
     {
         return $this->comment;
+    }
+
+    /**
+     * Set created_at
+     * @ORM\PrePersist
+     * @param \DateTime $createdAt
+     * @return Expense
+     */
+    public function setCreatedAt($createdAt)
+    {
+        if(!$this->getCreatedAt())
+        {
+            $this->created_at = new \DateTime();
+        }
+    }
+
+    /**
+     * Get created_at
+     *
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->created_at;
+    }
+
+    /**
+     * Set updated_at
+     * @ORM\PreUpdate
+     * @param \DateTime $updatedAt
+     * @return Expense
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updated_at = new \DateTime();
+    }
+
+    /**
+     * Get updated_at
+     *
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updated_at;
+    }
+
+    /**
+     * Add expenses
+     *
+     * @param \Coyote\SiteBundle\Entity\UserFees $expenses
+     * @return Expense
+     */
+    public function addExpense(\Coyote\SiteBundle\Entity\UserFees $expenses)
+    {
+        $this->expenses[] = $expenses;
+
+        return $this;
+    }
+
+    /**
+     * Remove expenses
+     *
+     * @param \Coyote\SiteBundle\Entity\UserFees $expenses
+     */
+    public function removeExpense(\Coyote\SiteBundle\Entity\UserFees $expenses)
+    {
+        $this->expenses->removeElement($expenses);
+    }
+
+    /**
+     * Get expenses
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getExpenses()
+    {
+        return $this->expenses;
     }
 
     /**
@@ -262,7 +351,7 @@ class Expense
     /**
      * Get site
      *
-     * @return \Coyote\SiteBundle\Entity\Site 
+     * @return \Coyote\SiteBundle\Entity\Site
      */
     public function getSite()
     {
@@ -285,7 +374,7 @@ class Expense
     /**
      * Get currency
      *
-     * @return \Coyote\SiteBundle\Entity\Currency 
+     * @return \Coyote\SiteBundle\Entity\Currency
      */
     public function getCurrency()
     {
@@ -308,7 +397,7 @@ class Expense
     /**
      * Get business
      *
-     * @return \Coyote\SiteBundle\Entity\Business 
+     * @return \Coyote\SiteBundle\Entity\Business
      */
     public function getBusiness()
     {
@@ -331,33 +420,56 @@ class Expense
     /**
      * Get fee
      *
-     * @return \Coyote\SiteBundle\Entity\Fee 
+     * @return \Coyote\SiteBundle\Entity\Fee
      */
     public function getFee()
     {
         return $this->fee;
     }
 
-    /**
-     * Set userfees
+   /**
+     * Set amount_TVA
      *
-     * @param \Coyote\SiteBundle\Entity\UserFees $userfees
+     * @param float $amountTVA
      * @return Expense
      */
-    public function setUserfees(\Coyote\SiteBundle\Entity\UserFees $userfees = null)
+    public function setAmountTVA($amountTVA)
     {
-        $this->userfees = $userfees;
+        $this->amount_TVA = $amountTVA;
 
         return $this;
     }
 
     /**
-     * Get userfees
+     * Get amount_TVA
      *
-     * @return \Coyote\SiteBundle\Entity\UserFees 
+     * @return float
      */
-    public function getUserfees()
+    public function getAmountTVA()
     {
-        return $this->userfees;
+        return $this->amount_TVA;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \Coyote\SiteBundle\Entity\User $user
+     * @return Expense
+     */
+    public function setUser(\Coyote\SiteBundle\Entity\User $user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Coyote\SiteBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

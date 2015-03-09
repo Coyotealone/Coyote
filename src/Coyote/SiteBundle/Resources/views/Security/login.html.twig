@@ -1,13 +1,12 @@
-{% extends "CoyoteSiteBundle:Base:layout.html.twig" %}
+{% extends "CoyoteSiteBundle:Base:base.html.twig" %}
 
-{% block link %}
+{% block nav %}
 
     {{ include('CoyoteSiteBundle:Base:navigation_login.html.twig') }}
 
-{% endblock %}
+{% endblock nav %}
 
-{% block fos_user_content %}
-
+{% block content %}
 {% if error %}
     <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 {% endif %}
@@ -33,5 +32,4 @@
     <button class="btn btn-danger btn-default" type="submit" id="_submit" name="_submit">{{ 'security.submit.connexion'|trans }}</button>
 </form>
 <a class="btn btn-primary btn-default" href="{{ path('resetting_request') }}">{{"security.submit.resetting"|trans}} ?</a>
-
-{% endblock fos_user_content %}
+{% endblock %}

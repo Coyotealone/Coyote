@@ -5,7 +5,7 @@ namespace Coyote\SiteBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-
+use Coyote\SiteBundle\Form\UserFeesType;
 
 class RegistrationFormType extends AbstractType
 {
@@ -20,8 +20,8 @@ class RegistrationFormType extends AbstractType
                 'second_options' => array('label' => 'form.password_confirmation'),
                 'invalid_message' => 'fos_user.password.mismatch',))
             ->add('name', null, array('label' => 'form.name',  'translation_domain' => 'messages'))
-            ->add('adress1', null, array('label' => 'form.adress1',  'translation_domain' => 'messages', 'data' => 'ZI de Lavallot'))
-            ->add('adress2', null, array('required' => false, 'label' => 'form.adress2',  'translation_domain' => 'messages'))
+            ->add('address1', null, array('label' => 'form.adress1',  'translation_domain' => 'messages', 'data' => 'ZI de Lavallot'))
+            ->add('address2', null, array('required' => false, 'label' => 'form.adress2',  'translation_domain' => 'messages'))
             ->add('zip_code', null, array('label' => 'form.zip_code',  'translation_domain' => 'messages', 'data' => '29490'))
             ->add('postal_box', null, array('label' => 'form.postal_box',  'translation_domain' => 'messages', 'data' => 'BP21'))
             ->add('city', null, array('label' => 'form.city',  'translation_domain' => 'messages', 'data' => 'Guipavas'))
@@ -32,17 +32,18 @@ class RegistrationFormType extends AbstractType
             ->add('fax', null, array('label' => 'form.fax',  'translation_domain' => 'messages', 'data' => '(+33) 02 98 344 120'))
             ->add('website', null, array('label' => 'form.website',  'translation_domain' => 'messages', 'data' => 'www.pichonindustries.com'))
             ->add('roles', 'choice',  array( 'label' => 'form.roles','choices' => array('ROLE_TECH' => 'form.choices.technician',
-                'ROLE_CADRE' => 'form.choices.business', 'ROLE_TRADE' => 'form.choices.trade'),'multiple'  => true));
+                'ROLE_CADRE' => 'form.choices.business', 'ROLE_TRADE' => 'form.choices.trade'),'multiple'  => true))
+            ->add('userfees', new UserFeesType(), array('required' => false));
     }
 
-    public function getParent()
+    /*public function getParent()
     {
         return 'fos_user_registration';
-    }
+    }*/
 
     public function getName()
     {
-        return 'coyote_site_registration_type';
+        return 'coyote_site_registration';
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

@@ -3,43 +3,20 @@
 namespace Coyote\SiteBundle\Admin;
 
 use Sonata\AdminBundle\Admin\Admin;
-use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Show\ShowMapper;
 
 class ScheduleAdmin extends Admin
 {
-    // setup the default sort column and order
-    protected $datagridValues = array(
-        '_sort_order' => 'ASC',
-        '_sort_by' => 'id'
-    );
-
-    // Fields to be shown on create/edit forms
-    protected function configureFormFields(FormMapper $formMapper)
-    {
-        $formMapper
-            ->add('user')
-            ->add('timetable')
-            ->add('start')
-            ->add('end')
-            ->add('break')
-            ->add('working_time')
-            ->add('working_hours')
-            ->add('travel')
-            ->add('absence_name')
-            ->add('absence_duration')
-            ->add('comment')
-        ;
-    }
-
-    // Fields to be shown on filter forms
+    /**
+     * @param DatagridMapper $datagridMapper
+     */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
             ->add('id')
-            ->add('user')
-            ->add('timetable')
             ->add('start')
             ->add('end')
             ->add('break')
@@ -49,16 +26,18 @@ class ScheduleAdmin extends Admin
             ->add('absence_name')
             ->add('absence_duration')
             ->add('comment')
+            ->add('created_at')
+            ->add('updated_at')
         ;
     }
 
-    // Fields to be shown on lists
+    /**
+     * @param ListMapper $listMapper
+     */
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->addIdentifier('id')
-            ->add('user')
-            ->add('timetable')
+            ->add('id')
             ->add('start')
             ->add('end')
             ->add('break')
@@ -68,6 +47,57 @@ class ScheduleAdmin extends Admin
             ->add('absence_name')
             ->add('absence_duration')
             ->add('comment')
+            ->add('created_at')
+            ->add('updated_at')
+            ->add('_action', 'actions', array(
+                'actions' => array(
+                    'show' => array(),
+                    'edit' => array(),
+                    'delete' => array(),
+                )
+            ))
+        ;
+    }
+
+    /**
+     * @param FormMapper $formMapper
+     */
+    protected function configureFormFields(FormMapper $formMapper)
+    {
+        $formMapper
+            ->add('id')
+            ->add('start')
+            ->add('end')
+            ->add('break')
+            ->add('working_time')
+            ->add('working_hours')
+            ->add('travel')
+            ->add('absence_name')
+            ->add('absence_duration')
+            ->add('comment')
+            ->add('created_at')
+            ->add('updated_at')
+        ;
+    }
+
+    /**
+     * @param ShowMapper $showMapper
+     */
+    protected function configureShowFields(ShowMapper $showMapper)
+    {
+        $showMapper
+            ->add('id')
+            ->add('start')
+            ->add('end')
+            ->add('break')
+            ->add('working_time')
+            ->add('working_hours')
+            ->add('travel')
+            ->add('absence_name')
+            ->add('absence_duration')
+            ->add('comment')
+            ->add('created_at')
+            ->add('updated_at')
         ;
     }
 }

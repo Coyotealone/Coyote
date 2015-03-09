@@ -3,51 +3,69 @@
 namespace Coyote\SiteBundle\Admin;
 
 use Sonata\AdminBundle\Admin\Admin;
-use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Show\ShowMapper;
 
 class UserFeesAdmin extends Admin
 {
-    // setup the default sort column and order
-    protected $datagridValues = array(
-        '_sort_order' => 'ASC',
-        '_sort_by' => 'login',
-    );
-
-    // Fields to be shown on create/edit forms
-    protected function configureFormFields(FormMapper $formMapper)
-    {
-        $formMapper
-            ->add('login')
-            ->add('code')
-            ->add('service')
-            ->add('user')
-            ->add('car')
-        ;
-    }
-
-    // Fields to be shown on filter forms
+    /**
+     * @param DatagridMapper $datagridMapper
+     */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
+            ->add('id')
             ->add('login')
             ->add('code')
             ->add('service')
-            ->add('car.code')
         ;
     }
 
-    // Fields to be shown on lists
+    /**
+     * @param ListMapper $listMapper
+     */
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->addIdentifier('id')
-            ->addIdentifier('login')
-            ->addIdentifier('code')
-            ->addIdentifier('service')
-            ->add('user.username')
-            ->add('car.code')
+            ->add('id')
+            ->add('login')
+            ->add('code')
+            ->add('service')
+            ->add('_action', 'actions', array(
+                'actions' => array(
+                    'show' => array(),
+                    'edit' => array(),
+                    'delete' => array(),
+                )
+            ))
+        ;
+    }
+
+    /**
+     * @param FormMapper $formMapper
+     */
+    protected function configureFormFields(FormMapper $formMapper)
+    {
+        $formMapper
+            ->add('id')
+            ->add('login')
+            ->add('code')
+            ->add('service')
+        ;
+    }
+
+    /**
+     * @param ShowMapper $showMapper
+     */
+    protected function configureShowFields(ShowMapper $showMapper)
+    {
+        $showMapper
+            ->add('id')
+            ->add('login')
+            ->add('code')
+            ->add('service')
         ;
     }
 }

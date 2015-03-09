@@ -1,23 +1,23 @@
 $(document).ready(function()
 {
-    document.getElementById("absencedaylundi").style.visibility = "hidden";
-	document.getElementById("absencetimelundi").style.visibility = "hidden";
+    document.getElementById("absenceday1").style.visibility = "hidden";
+	document.getElementById("absencetime1").style.visibility = "hidden";
 
-	document.getElementById("absencedaymardi").style.visibility = "hidden";
-	document.getElementById("absencetimemardi").style.visibility = "hidden";
+	document.getElementById("absenceday2").style.visibility = "hidden";
+	document.getElementById("absencetime2").style.visibility = "hidden";
 
-	document.getElementById("absencedaymercredi").style.visibility = "hidden";
-	document.getElementById("absencetimemercredi").style.visibility = "hidden";
+	document.getElementById("absenceday3").style.visibility = "hidden";
+	document.getElementById("absencetime3").style.visibility = "hidden";
 
-	document.getElementById("absencedayjeudi").style.visibility = "hidden";
-	document.getElementById("absencetimejeudi").style.visibility = "hidden";
+	document.getElementById("absenceday4").style.visibility = "hidden";
+	document.getElementById("absencetime4").style.visibility = "hidden";
 
-	document.getElementById("absencedayvendredi").style.visibility = "hidden";
-	document.getElementById("absencetimevendredi").style.visibility = "hidden";
+	document.getElementById("absenceday5").style.visibility = "hidden";
+	document.getElementById("absencetime5").style.visibility = "hidden";
 
-	document.getElementById("absencedaysamedi").style.visibility = "hidden";
-	document.getElementById("absencetimesamedi").style.visibility = "hidden";
+	document.getElementById("absenceday6").style.visibility = "hidden";
+	document.getElementById("absencetime6").style.visibility = "hidden";
 
-	document.getElementById("absencedaydimanche").style.visibility = "hidden";
-	document.getElementById("absencetimedimanche").style.visibility = "hidden";
+	document.getElementById("absenceday7").style.visibility = "hidden";
+	document.getElementById("absencetime7").style.visibility = "hidden";
 });

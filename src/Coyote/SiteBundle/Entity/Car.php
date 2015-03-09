@@ -5,28 +5,40 @@ namespace Coyote\SiteBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Car
+ * Class Car
+ * @author Coyote
+ * @ORM\Entity
+ * @ORM\Table(name="car")
  */
 class Car
 {
     /**
      * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
+     * 
      * @var integer
+     * 
+     * @ORM\Column(name="code", type="integer", unique=true, options={"unsigned":true})
      */
     private $code;
 
     /**
+     * 
      * @var string
+     * @ORM\Column(name="registration", type="string", length=10, unique=true, nullable=true)
      */
     private $registration;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
+    * @ORM\OneToMany(targetEntity="UserFees", mappedBy="car", cascade={"persist", "merge"})
+    */
     private $userfeess;
 
     /**
@@ -40,7 +52,7 @@ class Car
     /**
      * Get id
      *
-     * @return integer
+     * @return integer 
      */
     public function getId()
     {
@@ -63,7 +75,7 @@ class Car
     /**
      * Get code
      *
-     * @return integer
+     * @return integer 
      */
     public function getCode()
     {
@@ -86,7 +98,7 @@ class Car
     /**
      * Get registration
      *
-     * @return string
+     * @return string 
      */
     public function getRegistration()
     {
@@ -119,15 +131,15 @@ class Car
     /**
      * Get userfeess
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \Doctrine\Common\Collections\Collection 
      */
     public function getUserfeess()
     {
         return $this->userfeess;
     }
-
+    
     public function __toString()
     {
-        return $this->code;
+        return $this->registration;
     }
 }
