@@ -5,9 +5,7 @@ namespace Coyote\SiteBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Coyote\SiteBundle\Entity\UserFees;
 use Coyote\SiteBundle\Form\UserFeesType;
-
 
 class RegistrationFormType extends AbstractType
 {
@@ -38,14 +36,14 @@ class RegistrationFormType extends AbstractType
             ->add('userfees', new UserFeesType(), array('required' => false));
     }
 
-    public function getParent()
+    /*public function getParent()
     {
         return 'fos_user_registration';
-    }
+    }*/
 
     public function getName()
     {
-        return 'coyote_site_registration_type';
+        return 'coyote_site_registration';
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

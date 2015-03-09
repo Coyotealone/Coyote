@@ -1,9 +1,8 @@
 services:
     coyote_site.registration.form.type:
         class: Coyote\SiteBundle\Form\Type\RegistrationFormType
-        arguments: [%fos_user.model.user.class%]
         tags:
-            - { name: form.type, alias: coyote_site_registration_type }
-    coyote_site.registration.form.factory:
-        class: Coyote\SiteBundle\Form\Factory\FormFactory
-        arguments: ["@form.factory", "%fos_user.profile.form.name%", "%fos_user.profile.form.type%", "%fos_user.profile.form.validation_groups%"]
+            - { name: form.type, alias: coyote_site_registration }
+#    coyote_site.registration.form.factory:
+#        class: Coyote\SiteBundle\Form\Factory\FormFactory
+#        arguments: ["@form.factory", "%fos_user.profile.form.name%", "%fos_user.profile.form.type%", "%fos_user.profile.form.validation_groups%"]

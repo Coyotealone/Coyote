@@ -273,12 +273,23 @@ class ScheduleController extends Controller
                 }
                 if ($this->get('security.context')->isGranted('ROLE_TECH'))
                 {
-                    $dataschedule = $em->getRepository('CoyoteSiteBundle:Schedule')->dataSchedule($user, $date);
-                    $timeweek = $em->getRepository('CoyoteSiteBundle:Schedule')->timeWeek($dataschedule);
+                    $data_schedule = $em->getRepository('CoyoteSiteBundle:Schedule')->dataSchedule($user, $date);
+                    $timeweek = $em->getRepository('CoyoteSiteBundle:Schedule')->timeWeek($data_schedule);
                     $timemonth = $em->getRepository('CoyoteSiteBundle:Schedule')->findTimeMonth($year.'-'.$month.'-%', $user);
-    
+                    $date = '';
+                    $day = '';
+                    $week = '';
+                    for ($i=0;$i<count($data_schedule);$i++)
+                    {
+                        $day[$i] = $data_schedule[$i]['date']->format('l');
+                        $date[$i] = $data_schedule[$i]['date']->format('d/m/Y');
+                        $week[$i] = $data_schedule[$i]['date']->format('W');
+                    }
                     return $this->render('CoyoteSiteBundle:Schedule:show.html.twig', array(
-                        'dataschedule' => $dataschedule,
+                        'day' => $day,
+                        'date' => $date,
+                        'week' => $week,
+                        'dataschedule' => $data_schedule,
                         'absenceca' => $absenceca,
                         'absencecp' => $absencecp,
                         'absencertt' => $absencertt,

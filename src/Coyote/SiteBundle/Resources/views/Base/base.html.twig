@@ -29,7 +29,7 @@
         {% endblock %}
         <link rel="shortcut icon" href="{{ asset('bundles/coyotesite/images/pichonicon.ico') }}" />
     </head>
-    <nav class="navbar navbar-default ">
+    <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
           <a class="navbar-brand" href="{{path('main_index')}}">
@@ -55,7 +55,7 @@
                     </article>
                 </section>
             </div>
-            <footer>
+            <footer >
                 <p>{{'base.copyright'|trans}} | {{'base.version'|trans}}</p>
             </footer>
         </body>
