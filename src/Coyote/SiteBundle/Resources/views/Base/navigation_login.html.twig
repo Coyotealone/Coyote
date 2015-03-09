@@ -12,5 +12,9 @@
     <li><a href="{{ path('main_language', {'_locale' : 'pl'}) }}">
         <img src="{{ asset('bundles/coyotesite/images/flag_pologne.jpg') }}" alt="flag_pologne" id="flag_pologne"/>
     </a></li>
+    <li>
+    <form role="form" action="{{ path('main_index') }}" method='post'>
+        <input type="submit" class="btn btn-default navbar-btn" value="{{'base.nav.signin'|trans}}"></input>
+    </form>
+    </li>
 </ul>
-<button type="button" class="btn btn-default navbar-btn">Sign in</button>

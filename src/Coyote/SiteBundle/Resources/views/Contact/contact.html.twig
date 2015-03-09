@@ -1,6 +1,6 @@
-{% extends "CoyoteSiteBundle:Base:layout.html.twig" %}
+{% extends "CoyoteSiteBundle:Base:base.html.twig" %}
 
-{% block link %}
+{% block nav %}
     {{ include('CoyoteSiteBundle:Base:navigation_login.html.twig') }}
 {% endblock %}
 
@@ -9,7 +9,7 @@
     {% for flashMessage in app.session.flashbag.get('sendmessage') %}
 
         <p id="flashmessage">{{ flashMessage|trans }}</p>
-        
+
     {% endfor %}
     <div id="contenu-contact">
         <p id="titreconfig"><b>{{'contact.title'|trans}}</b></p>

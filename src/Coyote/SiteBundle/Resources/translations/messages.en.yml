@@ -2,13 +2,14 @@ user_block_logout: Logout
 
 base:
     copyright: Copyright ©2015 PICHON - All rights reserved
-    version: Version 1.15.0
+    version: Version 2.0.0
     title: Pichon - WebSite
     link: http://www.pichonindustries.com
     choose_language: Choose your country
     welcome: Welcome to the website Pichon
     nav:
         accueil: Home
+        signin: Sign in
         contact: Contact
         site: Website Pichon
         schedule:
@@ -18,6 +19,8 @@ base:
             name: Time Attendance
             overtime: Overtime
             indexexportprintyear: Export of the Year in PDF
+            indexprintyear: Print of the year PDF
+            absence: Absence management
         expense:
             name: Expense report
             create: Recording
@@ -29,6 +32,7 @@ base:
             name: Profile
             profile: Profile Information
             changepassword: Password change
+            holiday: Leave Management
         schedule_admin:
             name: Export of time attendance
             indexexport: Export of data research department
@@ -39,6 +43,14 @@ base:
             name: Administrator
             register: Adding a user
             indexchoicesuser: Update User Roles
+
+security:
+    username: Login
+    password: Password
+    remember_me: Remember me
+    submit:
+        connexion: Connexion
+        resetting: Password forget
 
 accueil:
     menu:
@@ -71,8 +83,6 @@ admin:
     title:
         indexchoicesuser: User choice
         choicesroles: Add / Remove Roles
-    title:
-        indexchoicesuser: User choice
     submit:
         download: Download
         display: Afficher
@@ -160,6 +170,14 @@ schedule:
         no_save: An error has occurred!
         save: Registration of completed data
 
+schedule1: Monday
+schedule2: Tuesday
+schedule3: Wednesday
+schedule4: Thursday
+schedule5: Friday
+schedule6: Saturday
+schedule7: Sunday
+
 expense:
     title:
         create: Add expense reports
@@ -206,30 +224,10 @@ expense:
 
 # FOSUserBundle Translation #
 
-# Group
-group:
-    edit:
-        submit: Update group
-    show:
-        name: Group name
-    new:
-        submit: Create group
-    flash:
-        updated: The group has been updated
-        created: The group has been created
-        deleted: The group has been deleted
-
-# Security
-security:
-    username: "Username"
-    password: "Password"
-    remember_me: Remember me
-    submit:
-        connexion: Connexion
-        resetting: Password forget
-
 # Profile
 profile:
+    title:
+        show: Information on your profile
     show:
         username: Username
         email: Email
@@ -237,19 +235,33 @@ profile:
         phone: Phone
         cell: Cell
         message: If you encounter an error on your profile, contact your administrator.
-    edit:
-        submit: Update
-    flash:
-        updated: The profile has been updated
-    title:
-        show: Information on your profile
 
-# Password change
-change_password:
-    submit: Change password
-    flash:
-        success: The password has been changed
-    title: Change your password
+# Form field labels
+form:
+    group_name: "Group name:"
+    username: "Username:"
+    email: "Email:"
+    current_password: "Current password:"
+    password: "Password:"
+    password_confirmation: "Repeat password:"
+    new_password: "New password:"
+    new_password_confirmation: "Repeat new password:"
+    name: NAME
+    adress1: Address
+    adress2: Address(continued)
+    zip_code: Zip Code
+    postal_box: Postal Box
+    city: City
+    country: Country
+    phone: Phone
+    cell: Cell
+    website: Website
+    roles: Roles
+    fax: Fax
+    choices:
+        technician: Technician
+        business: Business
+        trade: Trade
 
 # Registration
 registration:
@@ -260,6 +272,7 @@ registration:
     submit: Register
     flash:
         user_created: The user has been created successfully
+        no_save: An error has occured
     email:
         subject: Welcome %username%!
         message: |
@@ -299,35 +312,65 @@ layout:
     register: Register
     logged_in_as: Logged in as %username%
 
-# Form field labels
-form:
-    group_name: "Group name:"
-    username: "Username:"
-    email: "Email:"
-    current_password: "Current password:"
-    password: "Password:"
-    password_confirmation: "Repeat password:"
-    new_password: "New password:"
-    new_password_confirmation: "Repeat new password:"
-    name: NAME
-    adress1: Address
-    adress2: Address(continued)
-    zip_code: Zip Code
-    postal_box: Postal Box
-    city: City
-    country: Country
-    phone: Phone
-    cell: Cell
-    website: Website
-    roles: Roles
-    fax: Fax
-    choices:
-        technician: Technician
-        business: Business
-        trade: Trade
+# Password change
+change_password:
+    submit: Change password
+    flash:
+        success: The password has been changed
+    title: Change your password
 
-# Month
+# Absence
+absence:
+    travel: Travel
+    absence_name: Absence
+    absence_duration: Duration of absence
+    comment: Comment
+    timetable: Date
+    edit: Edit
+    show: Show
+    create: Add
+    update: Update
+    new: Create
+    date_start: Start of holidays
+    date_end: End of holidays
+    createweek: Add
+    submit:
+        date: Adding holidays
+    title:
+        show: List of absences
+        create: Add an absence
+        empty: No registered absence
+        createweek: Add a week away
 
+# Holiday
+holiday:
+    title:
+        show: Summary of holidays
+    ca: Leave seniority
+    cp: Paid leave
+    rtt: Reduction of working time
+    hs: Working time per week
+    edit: Edit
+    update: Update
+    create: Create
+    empty: No registered data
+
+# Days
+Monday: Monday
+Tuesday: Tuesday
+Wednesday: Wednesday
+Thursday: Thursday
+Friday: Friday
+Saturday: Saturday
+Sunday: Sunday
+
+# Contact
+contact:
+    message: Thank you for contacting us, we will answer your questions as soon as possible.
+
+#  Supplements
+
+# Month:
 Janvier: January
 Février: February
 Mars: March
@@ -341,21 +384,10 @@ Octobre: October
 Novembre: November
 Décembre: December
 
-# Day
-
-Lundi: Monday
-Mardi: Tuesday
-Mercredi: Wednesday
-Jeudi: Thursday
-Vendredi: Friday
-Samedi: Saturday
-Dimanche: Sunday
-
-# Absence
-
-RTT: Reduction of working time
-CP: Paid leave
+# Holiday
 CA: Leave seniority
+CP: Paid leave
+RTT: Reduction of working time
 CSS: Unpaid leave
 AT: Work stoppage
 MP: Maternity/Paternity
@@ -364,7 +396,6 @@ Various: Various
 Aucune: No
 
 # Item
-
 Carburant sans TVA: Free fuel value added tax
 Carburant Camion Fourgon: Van Truck Fuel
 Carburant Voiture: Car Fuel

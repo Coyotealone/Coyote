@@ -33,7 +33,7 @@
         {% for entity in entities %}
         	<tr>
         	    <td>{{ entity.travel }}</td>
-    		    <td>{{ entity.absencename }}</td>
+    		    <td>{{ entity.absencename | trans }}</td>
     		    <td>{{ entity.absenceduration }}</td>
     		    <td>{{ entity.comment }}</td>
     		    <td>{{ entity.timetable }}</td>
@@ -58,7 +58,7 @@
     <p>{{ 'absence.title.create' | trans }}</p>
     <p><a href="{{ path('absence_new') }}">{{ 'absence.create' | trans }}</a></p>
     <p>{{ 'absence.title.createweek' | trans }}</p>
-    <p><a href="{{ path('absence_putweek') }}">{{ 'absence.createweek' | trans }}</a></p>
+    <p><a href="{{ path('absence_newweek') }}">{{ 'absence.createweek' | trans }}</a></p>
 </div>
 </form>
 {% else %}
@@ -66,6 +66,8 @@
 <div class='table-responsive'>
     <p>{{ 'absence.title.empty' | trans }}</p>
     <p><a href="{{ path('absence_new') }}">{{ 'absence.create' | trans }}</a></p>
+    <p>{{ 'absence.title.createweek' | trans }}</p>
+    <p><a href="{{ path('absence_newweek') }}">{{ 'absence.createweek' | trans }}</a></p>
 </div>
 </form>
 {% endif %}

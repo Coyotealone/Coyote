@@ -11,8 +11,8 @@ class Data
 {
     private $tab_month = array( 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre',
                 'Octobre', 'Novembre', 'Décembre' );
-    private $tab_year = array( '2013', '2014', '2015');
-    private $tab_num_year = array( '2013', '2014', '2015');
+    private $tab_year = array( '2013', '2014', '2015', '2016');
+    private $tab_num_year = array( '2013', '2014', '2015', '2016');
     private $tab_num_month = array( '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12' );
     private $tab_user_id_BE = array(14, 17, 41, 44, 45, 46, 49, 50, 52, 54, 62, 70);
     private $tab_period = array('2014/2015', '2015/2016', '2016/2017');

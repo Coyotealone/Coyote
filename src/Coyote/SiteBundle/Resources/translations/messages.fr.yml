@@ -2,13 +2,14 @@ user_block_logout: Deconnexion
 
 base:
     copyright: Copyright ©2015 PICHON - Tous droits réservés
-    version: Version 1.15.0
+    version: Version 2.0.0
     title: Pichon - WebSite
     link: http://www.pichonindustries.fr
     choose_language: Choisissez votre pays
     welcome: Bienvenue sur le site Pichon
     nav:
         accueil: Accueil
+        signin: Se connecter
         contact: Contact
         site: Site Pichon
         schedule:
@@ -223,6 +224,7 @@ expense:
 
 # FOSUserBundle Translation #
 
+# Profile
 profile:
     title:
         show: Information sur votre profil
@@ -234,6 +236,7 @@ profile:
         cell: N° Portable
         message: Si vous rencontrez une erreur sur votre profil, merci de contacter votre administrateur
 
+# Form field labels
 form:
     group_name: "Nom du groupe :"
     username: "Nom d'utilisateur :"
@@ -260,6 +263,7 @@ form:
         business: Cadre
         trade: Commercial
 
+# Registration
 registration:
     title: "Création d'un compte utilisateur"
     check_email: "Un e-mail a été envoyé à l'adresse %email%. Il contient un lien d'activation sur lequel il vous faudra cliquer afin d'activer votre compte."
@@ -279,6 +283,7 @@ registration:
             Cordialement,
             L'équipe.
 
+# Password restting
 resetting:
     password_already_requested: Un nouveau mot de passe a déjà été demandé pour cet utilisateur dans les dernières 24 heures.
     check_email: "Un e-mail a été envoyé à l'adresse %email%. Il contient un lien sur lequel il vous faudra cliquer afin de réinitialiser votre mot de passe."
@@ -300,16 +305,21 @@ resetting:
             Cordialement,
             L'équipe.
 
+# Global strings
 layout:
     logout: Déconnexion
     login: Connexion
     register: Inscription
     logged_in_as: Connecté en tant que %username%
 
+# Password change
 change_password:
     submit: Modifier le mot de passe
+    flash:
+        success: Le mot de passe a été changé
     title: Changement de votre mot de passe
 
+# Absence
 absence:
     travel: Déplacement
     absence_name: Absence
@@ -323,13 +333,16 @@ absence:
     new: Créer
     date_start: Début des congés
     date_end: Fin des congés
+    createweek: Ajouter
     submit:
         date: Ajout des congés
     title:
         show: Liste des absences
         create: Ajouter une absence
         empty: Aucune absence enregistrée
+        createweek: "Ajouter une semaine d'absence"
 
+# Holiday
 holiday:
     title:
         show: Récapitulatif des congés
@@ -342,6 +355,7 @@ holiday:
     create: Nouveau
     empty: Aucune donnée enregistré
 
+# Days
 Monday: Lundi
 Tuesday: Mardi
 Wednesday: Mercredi
@@ -350,5 +364,6 @@ Friday: Vendredi
 Saturday: Samedi
 Sunday: Dimanche
 
+# Contact
 contact:
     message: Merci de nous avoir contacté, nous répondrons à vos questions dans les plus brefs délais.
