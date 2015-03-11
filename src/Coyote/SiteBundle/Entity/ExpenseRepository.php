@@ -7,6 +7,7 @@ use Coyote\SiteBundle\Entity\Currency;
 use Coyote\SiteBundle\Entity\Business;
 use Coyote\SiteBundle\Entity\Fee;
 use Coyote\SiteBundle\Entity\UserFees;
+use Coyote\SiteBundle\Entity\User;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
 use Doctrine\ORM\EntityRepository;
@@ -68,7 +69,7 @@ class ExpenseRepository extends EntityRepository
         $query = $this->getEntityManager()
                       ->createQuery("
                         SELECT e FROM CoyoteSiteBundle:Expense e
-                        WHERE e.status = 1 ORDER BY e.userfees "
+                        WHERE e.status = 1 ORDER BY e.user "
                         );
         $res = $query->getResult();
 
@@ -76,14 +77,14 @@ class ExpenseRepository extends EntityRepository
         $userfees = '';
         foreach($res as $data)
         {
-            if($data->getUserFees()->getLogin() != $userfees)
+            if($data->getUser()->getUserFees()->getLogin() != $userfees)
             {
-                $userfees = $data->getUserFees()->getLogin();
-                $result .= "H;".$data->getUserFees()->getLogin()."\r\n";
+                $userfees = $data->getUser()->getUserFees()->getLogin();
+                $result .= "H;".$data->getUser()->getUserFees()->getLogin()."\r\n";
             }
             $result .= "D;";
-            $result .= $data->getUserFees()->getLogin().";";//En majuscule
-            $result .= $data->getSite().";";
+            $result .= $data->getUser()->getUserFees()->getLogin().";";//En majuscule
+            $result .= $data->getSite()->getCode().";";
             $result .= $data->getDate()->format('dmy').";";
             $result .= $data->getFee()->getCode().";";
             $result .= $data->getCurrency()->getCode().";";
@@ -94,11 +95,22 @@ class ExpenseRepository extends EntityRepository
             $result .= $data->getAmountTVA().";";
             $result .= $data->getAmountTVA().";";
             if($data->getFee()->getCode() == "ENTRE1")
-                $result .= $data->getUserFees()->getCar()->getCode().";;";
+            {
+                if ($data->getUser()->getUserFees()->getCar()->getCode() != 0)
+                {
+                    $result .= $data->getUser()->getUserFees()->getCar()->getCode().";;";
+                }
+                else
+                {
+                    $result .= ";;";
+                }
+            }
             else
-                $result .= $data->getUserFees()->getCode().";;";
+            {
+                $result .= $data->getUser()->getUserFees()->getCode().";;";
+            }
             $result .= $data->getBusiness()->getCode().";";
-            $result .= $data->getUserFees()->getService().";";
+            $result .= $data->getUser()->getUserFees()->getService().";";
             $result .= $data->getComment().";\r\n";
 
         }
@@ -166,7 +178,7 @@ class ExpenseRepository extends EntityRepository
         $currency = $this->_em->getRepository('CoyoteSiteBundle:Currency')->find($data['devise'.$increment]);
         $business = $this->_em->getRepository('CoyoteSiteBundle:Business')->find($data['affaire'.$increment]);
         $fee = $this->_em->getRepository('CoyoteSiteBundle:Fee')->find($data['article'.$increment]);
-        
+
         $expense = new Expense();
         $expense->setUser($user);
         $expense->setFee($fee);
@@ -241,7 +253,7 @@ class ExpenseRepository extends EntityRepository
     {
         return $this->findBy(array('status' => 1), array('user' => 'ASC', 'id' => 'ASC'));
     }
-    
+
     /**
      * Get the paginated list of published articles
      *
@@ -257,12 +269,12 @@ class ExpenseRepository extends EntityRepository
         ->from('CoyoteSiteBundle:Expense','e')
         ->where('e.status = :status')
         ->setParameters(array('status' => 1));
-         
+
         $q->setFirstResult(($page-1) * $maxperpage)
         ->setMaxResults($maxperpage);
         return new Paginator($q);
     }
-    
+
     /**
      * Get the paginated list of absences in Schedule Entity.
      *

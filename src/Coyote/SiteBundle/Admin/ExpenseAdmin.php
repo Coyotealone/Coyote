@@ -61,7 +61,7 @@ class ExpenseAdmin extends Admin
         $formMapper
             ->add('id')
             ->add('date')
-            ->add('status')
+            ->add('status', 'checkbox', array('required' => false))
             ->add('amount')
             ->add('amount_TTC')
             ->add('amount_TVA')
