@@ -1,10 +1,12 @@
 {% extends "CoyoteSiteBundle:Base:base.html.twig" %}
 
 {% block nav %}
-
     {{ include('CoyoteSiteBundle:Base:navigation_login.html.twig') }}
-
 {% endblock nav %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/style_login.css') }}" type="text/css" media="all" />
+{% endblock %}
 
 {% block content %}
 {% if error %}
@@ -24,12 +26,18 @@
             <th><label for="password">{{ 'security.password'|trans }} :</label></th>
             <td><input type="password" id="password" name="_password" required="required" /></td>
         </tr>
+        <tr>
+            <td colspan="2" class="center"><input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+            <label for="remember_me">{{ 'security.remember_me'|trans }}</label></td>
+        </tr>
+        <tr>
+            <td colspan="2" class="center"><button class="btn btn-danger btn-default" type="submit" id="_submit" name="_submit">{{ 'security.submit.connexion'|trans }}</button></td>
+        </tr>
+        <tr>
+            <td colspan="2" class="center"><a class="btn btn-primary btn-default" href="{{ path('resetting_request') }}">{{"security.submit.resetting"|trans}} ?</a></td>
+        </tr>
     </table>
     </div>
-    <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
-    <label for="remember_me">{{ 'security.remember_me'|trans }}</label><br>
 
-    <button class="btn btn-danger btn-default" type="submit" id="_submit" name="_submit">{{ 'security.submit.connexion'|trans }}</button>
 </form>
-<a class="btn btn-primary btn-default" href="{{ path('resetting_request') }}">{{"security.submit.resetting"|trans}} ?</a>
 {% endblock %}

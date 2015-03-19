@@ -14,10 +14,8 @@
     <form role="form" action="{{ path('admin_choicesroles') }}" method='post'>
         <table class='table' id='tab_expense'>
         	<tr>
-        	    <th>{{'admin.title.indexchoicesuser'|trans}}</th>
-        	</tr>
-            <tr>
-                <td>
+        	    <th class="center">{{'admin.title.indexchoicesuser'|trans}}</th>
+        	    <td class="center">
                     <select name='user' id='user' >
                     {% for user in users %}
                         <option value={{user.id}}>{{user.name|trans}}</option>
@@ -26,6 +24,6 @@
                 </td>
             </tr>
         </table>
-        <button class='btnsave' type="submit" value="Telecharger" id="telecharger">{{'admin.submit.display'|trans}}</button>
+        <button class='btn_red' type="submit" value="Telecharger" id="telecharger">{{'admin.submit.display'|trans}}</button>
     </form>
 {% endblock %}

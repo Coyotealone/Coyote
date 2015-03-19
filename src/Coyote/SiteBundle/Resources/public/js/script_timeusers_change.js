@@ -118,8 +118,6 @@ $(document).ready(function()
         var day1 = calculWorkingDay(time1);
         if(time1 != null)
             document.getElementById("tps1").value = time1;
-        if(day1 != null)
-            document.getElementById("jour1").value = day1;
     })
 
     $("#pause1").change(function()
@@ -135,8 +133,6 @@ $(document).ready(function()
         var day1 = calculWorkingDay(time1);
         if(time1 != null)
             document.getElementById("tps1").value = time1;
-        if(day1 != null)
-            document.getElementById("jour1").value = day1;
     })
 
     $("#fin1").change(function()
@@ -152,8 +148,6 @@ $(document).ready(function()
         var day1 = calculWorkingDay(time1);
         if(time1 != null)
             document.getElementById("tps1").value = time1;
-        if(day1 != null)
-            document.getElementById("jour1").value = day1;
     })
 
 

@@ -156,7 +156,7 @@ class ExpenseController extends Controller
         {
             $em = $this->getDoctrine()->getManager();
             $date = $year.'-'.$month.'%';
-            
+
             $maxItems = 10;
             $expenses = $this->getDoctrine()->getRepository('CoyoteSiteBundle:Expense')
                 ->getListExpenseUser($this->getUser(), $date, $page, $maxItems);
@@ -169,7 +169,7 @@ class ExpenseController extends Controller
                             'pages_count' => ceil($expenses_count / $maxItems),
                             'route_params' => array()
             );
-            
+
             return $this->render('CoyoteSiteBundle:Expense:show.html.twig', array(
                             'data' => $entities,
                             'pagination' => $pagination));
@@ -246,7 +246,7 @@ class ExpenseController extends Controller
         }
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('CoyoteSiteBundle:Expense')->find($id);
-        if (!$entity) 
+        if (!$entity)
         {
             throw $this->createNotFoundException('Unable to find Expense entity.');
         }
@@ -317,11 +317,12 @@ class ExpenseController extends Controller
         if ($editForm->isValid())
         {
             $date = $entity->getDate();
-            if(is_numeric($date))
+            $entity->setDate($date);
+            /*if(is_numeric($date))
             {
                 $date = $em->getRepository('CoyoteSiteBundle:Expense')->formDate($date);
                 $entity->setDate($date);
-            }
+            }*/
             $site = $em->getRepository('CoyoteSiteBundle:Site')->findOneById(9);
             $entity->setSite($site);
             $taux = $entity->getFee()->getRate();
@@ -515,7 +516,7 @@ class ExpenseController extends Controller
                 );
                 $entities = $this->getDoctrine()->getRepository('CoyoteSiteBundle:Expense')
                                  ->getListExpenseUsers($page, $maxItems);
-                
+
                 return $this->render('CoyoteSiteBundle:Expense:showadmin.html.twig', array(
                                 'data' => $entities,
                                 'pagination' => $pagination));

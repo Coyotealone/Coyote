@@ -1,8 +1,14 @@
 {% extends 'CoyoteSiteBundle:Expense:index.html.twig' %}
 
 {% block javascripts %}
-    <script src="{{ asset('bundles/coyotesite/js/jquery-min.js') }}"/></script>
     <script src="{{ asset('bundles/coyotesite/js/script_expense_edit.js') }}"/></script>
+    <script src="{{ asset('bundles/coyotesite/js/jquery-1.10.2.js') }}"/></script>
+    <script src="{{ asset('bundles/coyotesite/js/jquery-ui.js') }}"/></script>
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/jquery-ui.css') }}" type="text/css" media="all" />
+    <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/style_expense.css') }}" type="text/css" media="all" />
 {% endblock %}
 
 {% block content %}
@@ -38,7 +44,7 @@
         <button type="submit" class="btn btn-success">{{ 'expense.submit.update'|trans }}</button>
     </p>
 </form>
-    <a class='btnpage' href="{{ path('expense_showparameters', {'year': app.session.get('year_expense'), 'month': app.session.get('month_expense')} ) }}">
+    <a class='btn_white' href="{{ path('expense_showparameters', {'year': app.session.get('year_expense'), 'month': app.session.get('month_expense')} ) }}">
         {{ 'expense.submit.back'|trans }}
     </a>
 

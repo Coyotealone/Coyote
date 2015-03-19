@@ -21,13 +21,13 @@
         <p id="flashmessage_warning">{{ flashMessage|trans }}</p>
     {% endif %}
 {% endfor %}
-<p id="titreconfig">{{'expense.title.updatestatus'|trans}} </p>
+<p id="title">{{'expense.title.updatestatus'|trans}} </p>
 
 <form role="form" action="{{ path('expense_updatestatus') }}" method='get'>
     <table class='table' id='tab_expense'>
     	<tr>
-    	    <th>{{'expense.id_start'|trans}}</th>
-    		<th>{{'expense.id_end'|trans}}</th>
+    	    <th class="center">{{'expense.id_start'|trans}}</th>
+    		<th class="center">{{'expense.id_end'|trans}}</th>
     	</tr>
         <tr>
             <td>
@@ -38,6 +38,6 @@
             </td>
         </tr>
     </table>
-    <button class='btnsave' type="submit" value="Afficher" id="afficher">{{ 'expense.submit.update'|trans }}</button>
+    <button class='btn_red' type="submit" value="Afficher" id="afficher">{{ 'expense.submit.update'|trans }}</button>
 </form>
 {% endblock %}

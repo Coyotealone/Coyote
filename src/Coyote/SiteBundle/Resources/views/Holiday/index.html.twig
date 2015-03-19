@@ -13,7 +13,7 @@
 
 {% block content %}
 
-<p id="titreconfig">{{'holiday.title.show'|trans}} </p>
+<p id="title">{{'holiday.title.show'|trans}} </p>
 
 {% if holiday %}
 <form role="form" action="{{ path('holiday') }}" method='post'>
@@ -41,7 +41,7 @@
 <form role="form" action="{{ path('holiday_create') }}" method='post'>
 <div class='table-responsive'>
     <p>{{ 'holiday.empty' | trans }}</p>
-    <p><a href="{{ path('holiday_new') }}">{{ 'holiday.create' | trans }}</a></p>
+    <p><a class="btn_grey" href="{{ path('holiday_new') }}">{{ 'holiday.create' | trans }}</a></p>
 </div>
 {% endif %}
 {% endblock %}

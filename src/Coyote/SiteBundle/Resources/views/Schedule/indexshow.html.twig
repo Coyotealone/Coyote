@@ -11,14 +11,13 @@
 
 {% endblock %}
 
-
 {% block content %}
-<p id="titreconfig">{{'schedule.title.indexshow'|trans}} </p>
+<p id="title">{{'schedule.title.indexshow'|trans}} </p>
 <form role="form" action="{{ path('schedule_getscheduleusermonth') }}" method='get'>
     <table class='table'>
     	<tr>
-    	    <th>{{'schedule.month'|trans}}</th>
-    		<th>{{'schedule.year'|trans}}</th>
+    	    <th class="center">{{'schedule.month'|trans}}</th>
+    		<th class="center">{{'schedule.year'|trans}}</th>
     	</tr>
         <tr>
             <td>
@@ -47,6 +46,6 @@
             </td>
         </tr>
     </table>
-    <button class='btnsave' type="submit" value="Afficher" id="afficher">{{'schedule.submit.indexshow'|trans }}</button>
+    <button class='btn_red' type="submit" value="Afficher" id="afficher">{{'schedule.submit.indexshow'|trans }}</button>
 </form>
 {% endblock %}

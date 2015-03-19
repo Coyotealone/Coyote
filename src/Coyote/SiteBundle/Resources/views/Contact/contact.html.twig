@@ -12,7 +12,7 @@
 
     {% endfor %}
     <div id="contenu-contact">
-        <p id="titreconfig"><b>{{'contact.title'|trans}}</b></p>
+        <p id="title"><b>{{'contact.title'|trans}}</b></p>
         <form action="{{ path('contact_index') }}" method="post" {{ form_enctype(form) }}>
             <input id="contact_email" type="email" required="required" name="contact[email]" class="form-control" placeholder="{{"contact.email"|trans}}" >
             <input id="contact_subject" type="text" class="form-control" placeholder="{{"contact.subject"|trans}}" required="required" name="contact[subject]">

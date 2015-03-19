@@ -1,11 +1,15 @@
 {% extends 'CoyoteSiteBundle:Expense:index.html.twig' %}
 
 {% block javascripts %}
-    <script src="{{ asset('bundles/coyotesite/js/jquery-min.js') }}"/></script>
     <script src="{{ asset('bundles/coyotesite/js/script_expense_change.js') }}"/></script>
     <script src="{{ asset('bundles/coyotesite/js/jquery-1.10.2.js') }}"/></script>
     <script src="{{ asset('bundles/coyotesite/js/jquery-ui.js') }}"/></script>
     <script src="{{ asset('bundles/coyotesite/js/script_expense.js') }}"/></script>
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/jquery-ui.css') }}" type="text/css" media="all" />
+    <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/style_expense.css') }}" type="text/css" media="all" />
 {% endblock %}
 
 {% block nav %}
@@ -32,7 +36,7 @@
     {% endif %}
 {% endfor %}
 
-<p id="titreconfig">{{'expense.title.create'|trans}} </p>
+<p id="title">{{'expense.title.create'|trans}} </p>
 
 <form role="form" action="{{ path('expense_save') }}" method='post'>
 <div class='table-responsive'>
@@ -112,7 +116,7 @@
 </div><br>
 
 
-<button class='btnsave' type="submit" value="Enregistrer" id="enregistrer">{{ 'expense.submit.save'|trans }}</button>
+<button class='btn_red' type="submit" value="Enregistrer" id="enregistrer">{{ 'expense.submit.save'|trans }}</button>
 </form>
 
 {% endblock %}

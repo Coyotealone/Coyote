@@ -1,10 +1,13 @@
 {% extends 'CoyoteSiteBundle:Base:base.html.twig' %}
 
 {% block javascripts %}
-    <script src="{{ asset('bundles/coyotesite/js/jquery-min.js') }}"/></script>
     <script src="{{ asset('bundles/coyotesite/js/jquery-1.10.2.js') }}"/></script>
     <script src="{{ asset('bundles/coyotesite/js/jquery-ui.js') }}"/></script>
     <script src="{{ asset('bundles/coyotesite/js/script_absence.js') }}"/></script>
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/jquery-ui.css') }}" type="text/css" media="all" />
 {% endblock %}
 
 {% block nav %}
@@ -20,13 +23,13 @@
 
 {% block content %}
 
-<p id="titreconfig">{{'absence.title.createweek'|trans}} </p>
+<p id="title">{{'absence.title.createweek'|trans}} </p>
 <form role="form" action="{{ path('absence_newweek') }}" method='post'>
     <div class='table-responsive'>
         <table class='table' id='tab_expense'>
             <tr>
-                <th>{{ 'absence.date_start'|trans }}</th>
-                <th>{{ 'absence.date_end'|trans }}</th>
+                <th class="center">{{ 'absence.date_start'|trans }}</th>
+                <th class="center">{{ 'absence.date_end'|trans }}</th>
             </tr>
             <td>
                 <input type='text' name='date_start' id='date_start' >
@@ -36,6 +39,6 @@
             </td>
         </table>
     </div><br>
-<button class='btnsave' type="submit" value="Enregistrer" id="enregistrer">{{ 'absence.submit.date'|trans }}</button>
+<button class='btn_red' type="submit" value="Enregistrer" id="enregistrer">{{ 'absence.submit.date'|trans }}</button>
 </form>
 {% endblock %}

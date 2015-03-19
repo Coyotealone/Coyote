@@ -12,7 +12,7 @@
 {% endblock %}
 
 {% block content %}
-<p id="titreconfig">{{"schedule.title.indexexportprintyear"|trans}} </p>
+<p id="title">{{"schedule.title.indexexportprintyear"|trans}} </p>
 <form role="form" action="{{ path('schedule_exportprintyear') }}" method='get'>
     <table class='table'>
     	<tr>
@@ -32,6 +32,6 @@
             </td>
         </tr>
     </table>
-    <button class='btnsave' type="submit" value="Afficher" id="afficher">{{'schedule.submit.indexexportprintyear'|trans }}</button>
+    <button class='btn_red' type="submit" value="Afficher" id="afficher">{{'schedule.submit.indexexportprintyear'|trans }}</button>
 </form>
 {% endblock %}

@@ -1,10 +1,13 @@
 {% extends 'CoyoteSiteBundle:Base:base.html.twig' %}
 
 {% block javascripts %}
-    <script src="{{ asset('bundles/coyotesite/js/jquery-min.js') }}"/></script>
     <script src="{{ asset('bundles/coyotesite/js/jquery-1.10.2.js') }}"/></script>
     <script src="{{ asset('bundles/coyotesite/js/jquery-ui.js') }}"/></script>
     <script src="{{ asset('bundles/coyotesite/js/script_absence.js') }}"/></script>
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/jquery-ui.css') }}" type="text/css" media="all" />
 {% endblock %}
 
 {% block nav %}
@@ -20,7 +23,7 @@
 
 {% block content %}
 
-<p id="titreconfig">{{'absence.title.create'|trans}} </p>
+<p id="title">{{'absence.title.create'|trans}} </p>
 
 {{ form_start(form) }}
 <div class='table-responsive'>
@@ -45,6 +48,6 @@
     		</td>
     </table>
 </div><br>
-<input type="submit" value={{'absence.new'|trans}} />
+<input class="btn_red" type="submit" value={{'absence.new'|trans}} />
 {{ form_end(form) }}
 {% endblock %}

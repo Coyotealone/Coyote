@@ -1,3 +1,8 @@
+$(function() {
+    var pickerOpts = { dateFormat:"dd/mm/y" };
+    $( "#coyote_sitebundle_expense_date" ).datepicker(pickerOpts);
+});
+
 $(document).ready(function()
 {
     $("#coyote_sitebundle_expense_actual_amount").change(function()

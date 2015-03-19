@@ -1,63 +1,78 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>
-            {{'base.title'|trans}}
-        </title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!--[if lt IE 9]>
-            <script src="{{ asset('bundles/coyotesite/js/html5.js') }}"></script>
-            <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/styles.css') }}" type="text/css" media="all" />
-            <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/bootstrap.css') }}" type="text/css" media="all" />
-            <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/justified-nav.css') }}" type="text/css" media="all" />
-            <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/signin.css') }}" type="text/css" media="all" />
-        <![endif]-->
-        <!--[if IE 9]>
-          <script src="{{ asset('bundles/coyotesite/js/html5shiv.min.js') }}"></script>
-          <script src="{{ asset('bundles/coyotesite/js/respond.min.js') }}"></script>
-        <![endif]-->
-        <!--[if !IE]><!-->
-             <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/jquery-ui.css') }}" type="text/css" media="all" />
-            <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/styles.css') }}" type="text/css" media="all" />
-            <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/bootstrap.css') }}" type="text/css" media="all" />
-            <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/justified-nav.css') }}" type="text/css" media="all" />
-            <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/signin.css') }}" type="text/css" media="all" />
-        <!--<![endif]-->
-        {% block stylesheets %}
-        {% endblock %}
-        {% block javascripts %}
-        {% endblock %}
-        <link rel="shortcut icon" href="{{ asset('bundles/coyotesite/images/pichonicon.ico') }}" />
-    </head>
-    <nav class="navbar navbar-default navbar-fixed-top">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Pichon-Website">
+    <meta name="author" content="Coyote">
+    <link rel="shortcut icon" href="{{ asset('bundles/coyotesite/images/pichonicon.ico') }}" />
+
+    <title>{{'base.title'|trans}}</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/bootstrap.min.css') }}" type="text/css" media="all" />
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/navbar-fixed-top.css') }}" type="text/css" media="all" />
+    <!--[if lt IE 9]>
+    <script src="{{ asset('bundles/coyotesite/js/ie8-responsive-file-warning.js') }}"></script><![endif]-->
+    <script src="{{ asset('bundles/coyotesite/js/ie-emulation-modes-warning.js') }}"></script>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="{{ asset('bundles/coyotesite/js/html5shiv.min.js') }}"></script>
+      <script src="{{ asset('bundles/coyotesite/js/respond.min.js') }}"></script>
+    <![endif]-->
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/sticky-footer-navbar.css') }}" type="text/css" media="all" />
+    <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/style.css') }}" type="text/css" media="all" />
+    <!-- Bootstrap core JavaScript -->
+    <script src="{{ asset('bundles/coyotesite/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('bundles/coyotesite/js/bootstrap.min.js') }}"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="{{ asset('bundles/coyotesite/js/ie10-viewport-bug-workaround.js') }}"></script>
+    {% block stylesheets %}
+    {% endblock %}
+    {% block javascripts %}
+    {% endblock %}
+  </head>
+  <body>
+   <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
-          <a class="navbar-brand" href="{{path('main_index')}}">
-            <img alt="Pichon" src="{{ asset('bundles/coyotesite/images/Logo-PICHON_80.png') }}">
-          </a>
-          {% block nav %}
-          {% endblock nav %}
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="{{path('main_index')}}"><img alt="Pichon" src="{{ asset('bundles/coyotesite/images/Logo-PICHON_80.png') }}"></a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            {% block nav %}
+            {% endblock nav %}
+          </ul>
         </div>
       </div>
     </nav>
-
-    <div id="page">
-        <body>
-            <div id="bloc">
-                <header>
-                    {% block header %}
-                    {% endblock header %}
-                </header>
-                <section>
-                    <article>
-                        {% block content %}
-                        {% endblock content %}
-                    </article>
-                </section>
-            </div>
-            <footer >
-                <p>{{'base.copyright'|trans}} | {{'base.version'|trans}}</p>
-            </footer>
-        </body>
+    <div class="container">
+      <div class="jumbotron">
+        <header>
+            {% block header %}
+            {% endblock header %}
+        </header>
+        <section>
+            <article>
+                {% block content %}
+                {% endblock content %}
+            </article>
+        </section>
+      </div>
     </div>
+    <footer class="footer">
+      <div class="container">
+        <p class="text-muted">{{'base.copyright'|trans}} | {{'base.version'|trans}}</p>
+      </div>
+    </footer>
+  </body>
 </html>

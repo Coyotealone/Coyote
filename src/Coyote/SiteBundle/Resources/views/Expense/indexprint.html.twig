@@ -12,13 +12,13 @@
 {% endblock %}
 
 {% block content %}
-<p id="titreconfig">{{'expense.title.indexprint'|trans}} </p>
+<p id="title">{{'expense.title.indexprint'|trans}} </p>
 
 <form role="form" action="{{ path('expense_print') }}" method='get'>
     <table class='table'>
     	<tr>
-    	    <th>{{'expense.month'|trans}}</th>
-    		<th>{{'expense.year'|trans}}</th>
+    	    <th class="center">{{'expense.month'|trans}}</th>
+    		<th class="center">{{'expense.year'|trans}}</th>
     	</tr>
         <tr>
             <td>
@@ -49,6 +49,6 @@
             </td>
         </tr>
     </table>
-    <button class='btnsave' type="submit" value="Afficher" id="afficher">{{'expense.submit.download'|trans }}</button>
+    <button class='btn_red' type="submit" value="Afficher" id="afficher">{{'expense.submit.download'|trans }}</button>
 </form>
 {% endblock %}

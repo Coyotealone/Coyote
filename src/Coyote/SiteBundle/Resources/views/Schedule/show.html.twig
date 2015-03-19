@@ -1,11 +1,7 @@
 {% extends 'CoyoteSiteBundle:Schedule:index.html.twig' %}
 
-{% block javascripts %}
-    <script src="{{ asset('bundles/coyotesite/js/jquery-min.js') }}"/></script>
-{% endblock %}
-
 {% block content %}
-<p id="titreconfig">{{'schedule.title.summary'|trans}}</p>
+<p id="title">{{'schedule.title.summary'|trans}}</p>
 
 {% if dataschedule %}
 <table>
@@ -33,7 +29,7 @@
     	{% set counter = 0 %}
 		{% set week_ = week[0] %}
 		{% set index = -1 %}
-    	
+
 		{% for data in dataschedule %}
 		    {% set index = index + 1 %}
             <tr>

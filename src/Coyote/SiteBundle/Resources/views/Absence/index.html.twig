@@ -12,7 +12,7 @@
 
 {% block content %}
 
-<p id="titreconfig">{{'absence.title.show'|trans}} </p>
+<p id="title">{{'absence.title.show'|trans}} </p>
 
 {% if entities|length > 0 %}
 <form role="form" action="{{ path('absence') }}" method='post'>
@@ -55,10 +55,8 @@
 
 <form role="form" action="{{ path('absence_create') }}" method='post'>
 <div class='table-responsive'>
-    <p>{{ 'absence.title.create' | trans }}</p>
-    <p><a href="{{ path('absence_new') }}">{{ 'absence.create' | trans }}</a></p>
-    <p>{{ 'absence.title.createweek' | trans }}</p>
-    <p><a href="{{ path('absence_newweek') }}">{{ 'absence.createweek' | trans }}</a></p>
+    <p><a href="{{ path('absence_new') }}">{{ 'absence.title.create' | trans }}</a> |
+    <a href="{{ path('absence_newweek') }}">{{ 'absence.title.createweek' | trans }}</a></p>
 </div>
 </form>
 {% else %}
