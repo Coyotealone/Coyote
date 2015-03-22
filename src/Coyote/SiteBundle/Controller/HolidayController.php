@@ -20,12 +20,10 @@ class HolidayController extends Controller
      * Lists all Holiday entities.
      *
      */
-    public function indexAction()
+    public function getHolidaysAction()
     {
         $em = $this->getDoctrine()->getManager();
-
         $entities = $em->getRepository('CoyoteSiteBundle:Holiday')->findOneByUser($this->getUser());
-
         return $this->render('CoyoteSiteBundle:Holiday:index.html.twig', array(
             'holiday' => $entities,
         ));
@@ -35,7 +33,7 @@ class HolidayController extends Controller
      * Creates a new Holiday entity.
      *
      */
-    public function createAction(Request $request)
+    public function putcreateHolidayAction(Request $request)
     {
         $entity = new Holiday();
 
@@ -81,7 +79,7 @@ class HolidayController extends Controller
      * Displays a form to create a new Holiday entity.
      *
      */
-    public function newAction()
+    public function putnewHolidayAction()
     {
         $entity = new Holiday();
         $form   = $this->createCreateForm($entity);
@@ -96,7 +94,7 @@ class HolidayController extends Controller
      * Finds and displays a Holiday entity.
      *
      */
-    public function showAction()
+    public function getHolidayAction()
     {
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('CoyoteSiteBundle:Holiday')->findOneByUser($this->getUser());
@@ -104,12 +102,8 @@ class HolidayController extends Controller
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Holiday entity.');
         }
-
-        //$deleteForm = $this->createDeleteForm($id);
-
         return $this->render('CoyoteSiteBundle:Holiday:show.html.twig', array(
             'holiday'      => $entity,
-            //'delete_form' => $deleteForm->createView(),
         ));
     }
 
@@ -117,23 +111,17 @@ class HolidayController extends Controller
      * Displays a form to edit an existing Holiday entity.
      *
      */
-    public function editAction()
+    public function posteditHolidayAction()
     {
         $em = $this->getDoctrine()->getManager();
-
         $entity = $em->getRepository('CoyoteSiteBundle:Holiday')->findOneByUser($this->getUser());
-
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Holiday entity.');
         }
-
         $editForm = $this->createEditForm($entity);
-        //$deleteForm = $this->createDeleteForm($id);
-
         return $this->render('CoyoteSiteBundle:Holiday:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
-            //'delete_form' => $deleteForm->createView(),
         ));
     }
 
@@ -158,7 +146,7 @@ class HolidayController extends Controller
      * Edits an existing Holiday entity.
      *
      */
-    public function updateAction(Request $request)
+    public function postupdateHolidayAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -186,11 +174,15 @@ class HolidayController extends Controller
         ));
     }
 
+    /*****************************************************************/
+    /***********************Fonctions Erronées************************/
+    /*****************************************************************/
+    
     /**
      * Deletes a Holiday entity.
      *
      */
-    public function deleteAction(Request $request, $id)
+    /*public function deleteAction(Request $request, $id)
     {
         $form = $this->createDeleteForm($id);
         $form->handleRequest($request);
@@ -208,7 +200,7 @@ class HolidayController extends Controller
         }
 
         return $this->redirect($this->generateUrl('holiday'));
-    }
+    }*/
 
     /**
      * Creates a form to delete a Holiday entity by id.
@@ -217,7 +209,7 @@ class HolidayController extends Controller
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createDeleteForm($id)
+    /*private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('holiday_delete', array('id' => $id)))
@@ -225,5 +217,5 @@ class HolidayController extends Controller
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()
         ;
-    }
+    }*/
 }

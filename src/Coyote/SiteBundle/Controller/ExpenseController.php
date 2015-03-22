@@ -29,7 +29,7 @@ class ExpenseController extends Controller
      * @access public
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function indexAction()
+    public function getIndexAction()
     {
         $user = $this->get('security.context')->getToken()->getUser();
         if ($user == "anon.")
@@ -51,7 +51,7 @@ class ExpenseController extends Controller
      * @access public
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function createAction()
+    public function putcreateExpenseAction()
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->get('security.context')->getToken()->getUser();
@@ -74,113 +74,10 @@ class ExpenseController extends Controller
     }
 
     /**
-     * Function to show index page to show Expense save.
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
-     */
-    public function indexshowAction()
-    {
-        if (!$this->getUser()->getUserfees())
-        {
-            return $this->redirect($this->generateUrl('main_menu'));
-        }
-        else
-        {
-            $data = new Data();
-            return $this->render('CoyoteSiteBundle:Expense:indexshow.html.twig', array('month' => date('n'),
-                'year' => date('Y'), 'tab_mois' => $data->getTabMonth(), 'tab_num_mois' => $data->getTabNumMonth(),
-                'tab_annee' => $data->getTabYear(), 'tab_num_annee' => $data->getTabNumYear()));
-        }
-    }
-
-    /**
-     * Function to show Expense save by User.
-     * @access public
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     */
-    public function showAction()
-    {
-        $session = new Session();
-        $user = $this->get('security.context')->getToken()->getUser();
-        if ($user == "anon.")
-        {
-            return $this->redirect($this->generateUrl('fos_user_security_login'));
-        }
-        if (!$this->getUser()->getUserfees())
-        {
-            return $this->redirect($this->generateUrl('main_menu'));
-        }
-        if (array_key_exists('year', $_GET))
-        {
-            $year = $_GET['year'];
-        }
-        if (array_key_exists('month', $_GET))
-        {
-            $month = $_GET['month'];
-        }
-        if (empty($year) && empty($month))
-        {
-            return $this->redirect($this->generateUrl('expense_indexshow'));
-        }
-        else
-        {
-            $session->set('year_expense', $year);
-            $session->set('month_expense', $month);
-            return $this->redirect($this->generateUrl('expense_showparameters', array('year' => $year,
-                'month' => $month)));
-        }
-    }
-
-    /**
-     * Function to show Expense save.
-     * @access public
-     * @param string $year
-     * @param string $month
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
-     */
-    public function showparametersAction($year, $month, $page)
-    {
-        $user = $this->get('security.context')->getToken()->getUser();
-        if ($user == "anon.")
-        {
-            return $this->redirect($this->generateUrl('fos_user_security_login'));
-        }
-        if (!$this->getUser()->getUserfees())
-        {
-            return $this->redirect($this->generateUrl('main_menu'));
-        }
-        if (empty($year) && empty($month))
-        {
-            return $this->redirect($this->generateUrl('expense_indexshow'));
-        }
-        else
-        {
-            $em = $this->getDoctrine()->getManager();
-            $date = $year.'-'.$month.'%';
-
-            $maxItems = 10;
-            $expenses = $this->getDoctrine()->getRepository('CoyoteSiteBundle:Expense')
-                ->getListExpenseUser($this->getUser(), $date, $page, $maxItems);
-            $entities = $em->getRepository('CoyoteSiteBundle:Expense')->findExpense($date,
-                $this->getUser());
-            $expenses_count = count($expenses);
-            $pagination = array(
-                            'page' => $page,
-                            'route' => 'absence',
-                            'pages_count' => ceil($expenses_count / $maxItems),
-                            'route_params' => array()
-            );
-
-            return $this->render('CoyoteSiteBundle:Expense:show.html.twig', array(
-                            'data' => $entities,
-                            'pagination' => $pagination));
-        }
-    }
-
-    /**
      * Function to save Expense.
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function saveAction()
+    public function putExpensesAction()
     {
         $session = new Session();
         $user = $this->get('security.context')->getToken()->getUser();
@@ -238,7 +135,7 @@ class ExpenseController extends Controller
      * @param mixed $id The entity id
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function editAction($id)
+    public function posteditExpenseAction($id)
     {
         if (!$this->getUser()->getUserfees())
         {
@@ -298,7 +195,7 @@ class ExpenseController extends Controller
      * @param mixed $id The entity id
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function updateAction(Request $request, $id)
+    public function postupdateExpenseAction(Request $request, $id)
     {
         if (!$this->getUser()->getUserfees())
             return $this->redirect($this->generateUrl('main_menu'));
@@ -349,7 +246,7 @@ class ExpenseController extends Controller
      * @param mixed $id The entity id
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function deleteAction(Request $request, $id)
+    public function deleteExpenseAction(Request $request, $id)
     {
         if(!$this->getUser()->getUserfees())
             return $this->redirect($this->generateUrl('main_menu'));
@@ -372,160 +269,151 @@ class ExpenseController extends Controller
     }
 
     /**
-     * Index to print Expense.
-     * @access public
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function indexprintAction()
-    {
-        $data = new Data();
-        return $this->render('CoyoteSiteBundle:Expense:indexprint.html.twig', array('month' => date('n'),
-            'year' => date('Y'), 'tab_mois' => $data->getTabMonth(), 'tab_num_mois' => $data->getTabNumMonth(),
-            'tab_annee' => $data->getTabYear(), 'tab_num_annee' => $data->getTabNumYear()));
-    }
-
-    /**
-     * Function to download Expense PDF.
-     * @access public
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
-     */
-    public function printAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-        $year = $_GET['year'];
-        $month = $_GET['month'];
-        if (empty($year) && empty($month))
-        {
-            return $this->redirect($this->generateUrl('expense_indexprint'));
-        }
-        else
-        {
-            $date = $year.'-'.$month.'%';
-            $data_expense = $em->getRepository('CoyoteSiteBundle:Expense')->findExpense($date,
-                $this->getUser());
-            $data_user = $em->getRepository('CoyoteSiteBundle:User')->find($this->getUser());
-            $page = $this->render('CoyoteSiteBundle:Expense:print.html.twig', array('data' => $data_expense));
-            $filename = $data_user->getName()."_expense".date("Ymd-His").".pdf";
-            $html = $page->getContent();
-            $html2pdf = new \Html2Pdf_Html2Pdf('P', 'A4', 'fr');
-            $html2pdf->pdf->SetDisplayMode('real');
-            $html2pdf->writeHTML($html);
-            $html2pdf->Output($filename, 'D');
-            return new Response('PDF réalisé');
-        }
-    }
-
-    /**
-     * Index to update status Expense.
-     * @access public
-     * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\RedirectResponse
-     */
-    public function indexupdatestatusAction()
-    {
-        if ($this->get('security.context')->isGranted('ROLE_ADMIN'))
-        {
-            return $this->render('CoyoteSiteBundle:Expense:updatestatus.html.twig');
-        }
-        else
-        {
-            return $this->redirect($this->generateUrl('main_menu'));
-        }
-    }
-
-    /**
      * Function to update status by Expense id.
      * @access public
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function updatestatusAction()
+    public function poststatusExpensesAction()
     {
         if ($this->get('security.context')->isGranted('ROLE_ADMIN'))
         {
-            $em = $this->getDoctrine()->getManager();
-            $id_start = $_GET['id_start'];
-            $id_end = $_GET['id_end'];
-            if (empty($id_start) && empty($id_end))
-            {
-                $message = 'expense.flash.no_update';
-                $this->get('session')->getFlashBag()->set('updatestatus', $message);
-                return $this->redirect($this->generateUrl('expense_indexupdatestatus'));
-            }
-            else
-            {
-                if($id_end > $id_start)
-                {
-                    for($i = $id_start; $i<=$id_end; $i++)
-                    {
-                        $data_expense = $em->getRepository('CoyoteSiteBundle:Expense')->find($i);
-                        if($data_expense != null)
-                        {
-                            $data_expense->setStatus(1);
-                            $em->persist($data_expense);
-                        }
-                        $em->flush();
-                    }
-                    $message = 'expense.flash.update';
-                    $this->get('session')->getFlashBag()->set('updatestatus', $message);
-                }
-                if($id_start > $id_end)
-                {
-                    for($i = $id_end; $i<=$id_start; $i++)
-                    {
-                        $data_expense = $em->getRepository('CoyoteSiteBundle:Expense')->find($i);
-                        $data_expense->setStatus(1);
-                        $em->persist($data_expense);
-                        $em->flush();
-                    }
-                    $message = 'expense.flash.update';
-                    alert($message);
-                    $this->get('session')->getFlashBag()->set('updatestatus', $message);
-                }
-            }
-            return $this->redirect($this->generateUrl('expense_indexupdatestatus'));
+        	if (array_key_exists('id_start', $_GET) && array_key_exists('id_end', $_GET))
+        	{
+	        	if (!empty($_GET['id_start'] && !empty($_GET['id_end'])))
+	        	{
+		            $em = $this->getDoctrine()->getManager();
+		            $id_start = $_GET['id_start'];
+		            $id_end = $_GET['id_end'];
+		            if (empty($id_start) && empty($id_end))
+		            {
+		                $message = 'expense.flash.no_update';
+		                $this->get('session')->getFlashBag()->set('updatestatus', $message);
+		                return $this->render('CoyoteSiteBundle:Expense:updatestatus.html.twig');
+		            }
+		            else
+		            {
+		                if($id_end > $id_start)
+		                {
+		                    for($i = $id_start; $i<=$id_end; $i++)
+		                    {
+		                        $data_expense = $em->getRepository('CoyoteSiteBundle:Expense')->find($i);
+		                        if($data_expense != null)
+		                        {
+		                            $data_expense->setStatus(1);
+		                            $em->persist($data_expense);
+		                        }
+		                        $em->flush();
+		                    }
+		                    $message = 'expense.flash.update';
+		                    $this->get('session')->getFlashBag()->set('updatestatus', $message);
+		                }
+		                if($id_start > $id_end)
+		                {
+		                    for($i = $id_end; $i<=$id_start; $i++)
+		                    {
+		                        $data_expense = $em->getRepository('CoyoteSiteBundle:Expense')->find($i);
+		                        $data_expense->setStatus(1);
+		                        $em->persist($data_expense);
+		                        $em->flush();
+		                    }
+		                    $message = 'expense.flash.update';
+		                    alert($message);
+		                    $this->get('session')->getFlashBag()->set('updatestatus', $message);
+		                }
+		                else
+		                {
+		                	return $this->render('CoyoteSiteBundle:Expense:updatestatus.html.twig');
+		                }
+		            }
+	        	}
+	        	else
+	        	{
+	        		return $this->render('CoyoteSiteBundle:Expense:updatestatus.html.twig');
+	        	}
+        	}
+        	else 
+        	{
+        		return $this->render('CoyoteSiteBundle:Expense:updatestatus.html.twig');
+        	}
         }
         else
-            return $this->redirect($this->generateUrl('main_menu'));
+        {
+            return $this->render('CoyoteSiteBundle:Expense:updatestatus.html.twig');
+        }
     }
 
     /**
-     * Function to show Expense save.
-     * @access public
+     * Function to show Expense save by user about a month and a year.
      * @param integer $page
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function showadminAction($page)
-    {
-        if($this->get('security.context')->isGranted('ROLE_COMPTA'))
-        {
-            $user = $this->get('security.context')->getToken()->getUser();
-            if ($user == "anon.")
-            {
-                return $this->redirect($this->generateUrl('fos_user_security_login'));
-            }
-            else
-            {
-                $em = $this->getDoctrine()->getManager();
-                $maxItems = 10;
-                $data_expense = $em->getRepository('CoyoteSiteBundle:Expense')->findAllOrderByUserFeesID();
-                $expenses_count = count($data_expense);
-                $pagination = array(
-                                'page' => $page,
-                                'route' => 'admin_showadmin',
-                                'pages_count' => ceil($expenses_count / $maxItems),
-                                'route_params' => array()
-                );
-                $entities = $this->getDoctrine()->getRepository('CoyoteSiteBundle:Expense')
-                                 ->getListExpenseUsers($page, $maxItems);
+	public function getExpensesAction($page)
+	{
+		if (!$this->getUser()->getUserfees())
+		{
+			return $this->redirect($this->generateUrl('main_menu'));
+		}
+		if (!empty($_GET['month']) && empty(!$_GET['year']))
+		{
+			$em = $this->getDoctrine()->getManager();
+			$date = $_GET['year'].'-'.$_GET['month'].'%';
+			$maxItems = 10;
+			$expenses = $this->getDoctrine()->getRepository('CoyoteSiteBundle:Expense')
+				->getListExpenseUser($this->getUser(), $date, $page, $maxItems);
+			$entities = $em->getRepository('CoyoteSiteBundle:Expense')->findExpense($date,
+					$this->getUser());
+			$expenses_count = count($expenses);
+			$pagination = array(
+					'page' => $page,
+					'route' => 'absence',
+					'pages_count' => ceil($expenses_count / $maxItems),
+					'route_params' => array()
+			);
+		
+			return $this->render('CoyoteSiteBundle:Expense:show.html.twig', array(
+					'data' => $entities,
+					'pagination' => $pagination));
+		}
+		else
+		{
+			$data = new Data();
+			return $this->render('CoyoteSiteBundle:Expense:indexshow.html.twig', array('month' => date('n'),
+					'year' => date('Y'), 'tab_mois' => $data->getTabMonth(), 'tab_num_mois' => $data->getTabNumMonth(),
+					'tab_annee' => $data->getTabYear(), 'tab_num_annee' => $data->getTabNumYear()));
+		}
+	}
 
-                return $this->render('CoyoteSiteBundle:Expense:showadmin.html.twig', array(
-                                'data' => $entities,
-                                'pagination' => $pagination));
-            }
-        }
-        else
-        {
-            return $this->redirect($this->generateUrl('main_menu'));
-        }
-    }
+	/**
+	 * Function to download Expense in PDF by user about a month and a year.
+	 * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+	 */
+	public function getprintExpensesAction()
+	{
+		$em = $this->getDoctrine()->getManager();
+		if (!empty($_GET['year']) && !empty($_GET['month']))
+		{
+			$date = $_GET['year'].'-'.$_GET['month'].'%';
+			$data_expense = $em->getRepository('CoyoteSiteBundle:Expense')->findExpense($date,
+					$this->getUser());
+			$data_user = $em->getRepository('CoyoteSiteBundle:User')->find($this->getUser());
+			$page = $this->render('CoyoteSiteBundle:Expense:print.html.twig', array('data' => $data_expense));
+			$filename = $data_user->getName()."_expense".date("Ymd-His").".pdf";
+			$html = $page->getContent();
+			$html2pdf = new \Html2Pdf_Html2Pdf('P', 'A4', 'fr');
+			$html2pdf->pdf->SetDisplayMode('real');
+			$html2pdf->writeHTML($html);
+			$html2pdf->Output($filename, 'D');
+			return $this->redirect($this->generateUrl('expense_printexpenses'));
+		}
+		else
+		{
+			$data = new Data();
+			return $this->render('CoyoteSiteBundle:Expense:indexprint.html.twig', array('month' => date('n'),
+					'year' => date('Y'), 'tab_mois' => $data->getTabMonth(), 'tab_num_mois' => $data->getTabNumMonth(),
+					'tab_annee' => $data->getTabYear(), 'tab_num_annee' => $data->getTabNumYear()));
+			
+		}
+	}
+	
 }
 

@@ -454,7 +454,7 @@ class ScheduleController extends Controller
      * @access public
      * @return void
      */
-    public function indexprintyearAction()
+    /*public function indexprintyearAction()
     {
         $data = new Data();
         $date = date('Y-m-d');
@@ -463,7 +463,7 @@ class ScheduleController extends Controller
         $period = $em->getRepository('CoyoteSiteBundle:Timetable')->findPeriodByDate($date);
         return $this->render('CoyoteSiteBundle:Schedule:indexprintyear.html.twig', array(
             'period' => $period, 'tab_period' => $data->getTabPeriod()));
-    }
+    }*/
 
 
     /**
@@ -473,7 +473,7 @@ class ScheduleController extends Controller
      * @access public
      * @return void
      */
-    public function printyearAction()
+    /*public function printyearAction()
     {
         $doctrine = $this->getDoctrine();
         $em = $doctrine->getManager();
@@ -543,7 +543,7 @@ class ScheduleController extends Controller
             $html2pdf->Output($filename, 'D');
             return new Response('PDF réalisé');
         }
-    }
+    }*/
 
 
     /**
@@ -554,7 +554,7 @@ class ScheduleController extends Controller
      * @access public
      * @return void
      */
-    public function indexexportprintyearAction()
+    /*public function indexexportprintyearAction()
     {
         return new Response("En mainteance");
         $date = date('Y-m-d');
@@ -564,7 +564,7 @@ class ScheduleController extends Controller
         $data = new Data();
         return $this->render('CoyoteSiteBundle:Schedule:indexexportprintyear.html.twig', array(
             'period' => $period, 'tab_period' => $data->getTabPeriod()));
-    }
+    }*/
 
 
     /**
@@ -574,7 +574,7 @@ class ScheduleController extends Controller
      * @access public
      * @return void
      */
-    public function exportprintyearAction()
+    /*public function exportprintyearAction()
     {
         return new Response("En mainteance");
         $doctrine = $this->getDoctrine();
@@ -668,7 +668,7 @@ class ScheduleController extends Controller
             }
             return $this->redirect($this->generateUrl('schedule_indexexportprintyear'));
         }
-    }
+    }*/
 
     /**
      * Function that redirect to getScheduleUserAction().
@@ -676,12 +676,12 @@ class ScheduleController extends Controller
      * @access public
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function indexAction()
+    /*public function indexAction()
     {
         if($this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED') == false)
         {
             return $this->redirect($this->generateUrl('fos_user_security_login'));
         }
         return $this->redirect($this->generateUrl('schedule_getscheduleuser'));
-    }
+    }*/
 }

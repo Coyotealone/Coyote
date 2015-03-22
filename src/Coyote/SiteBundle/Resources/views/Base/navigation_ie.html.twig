@@ -1,5 +1,5 @@
 <ul style="padding:0; margin: 0; list-style-type:none;">
-    <li style="margin-left:2px; float:left; /*pour IE*/" class="active"><a href="{{ path('main_index') }}">{{'base.bav.accueil'|trans}}</a></li>
+    <li style="margin-left:2px; float:left; /*pour IE*/" class="active"><a href="{{ path('main_menu') }}">{{'base.bav.accueil'|trans}}</a></li>
 
     {% if is_granted('ROLE_TECH') or is_granted('ROLE_CADRE') %}
 	<li id="presence" class="dropdown" style="margin: 0px 10px; float:left; ">
@@ -19,8 +19,8 @@
       <a href="{{ path('expense_create') }}" class="dropdown-toggle" data-toggle="dropdown">{{'base.nav.expense.name'|trans}}<b class="caret"></b></a>
       <ul class="dropdown-menu">
         <li><a href="{{ path('expense_create') }}">{{'base.nav.expense.create'|trans}}</a></li>
-        <li><a href="{{ path('expense_indexshow') }}">{{'base.nav.expense.indexshow'|trans}}</a></li>
-        <li><a href="{{ path('expense_indexprint') }}">{{'base.nav.expense.indexprint'|trans}}</a></li>
+        <li><a href="{{ path('expense_indexshowexpenses') }}">{{'base.nav.expense.indexshow'|trans}}</a></li>
+        <li><a href="{{ path('expense_printexpenses') }}">{{'base.nav.expense.indexprint'|trans}}</a></li>
       </ul>
     </li>
     {% endif %}
@@ -38,7 +38,7 @@
 	<li id="presence_admin" class="dropdown" style="margin: 0px 10px; float:left; ">
       <a href=# class="dropdown-toggle" data-toggle="dropdown">{{'base.nav.schedule_admin.name'|trans}}<b class="caret"></b></a>
       <ul class="dropdown-menu">
-        <li><a href="{{ path('admin_export_index')}}">{{'base.nav.schedule_admin.indexexport'|trans}}</a></li>
+        <li><a href="{{ path('admin_exportdatauser')}}">{{'base.nav.schedule_admin.indexexport'|trans}}</a></li>
       </ul>
     </li>
     {% endif %}
@@ -59,7 +59,7 @@
         <ul class="dropdown-menu">
             <li><a href="{{ path('registration_register') }}">{{'base.nav.profile_admin.register'|trans}}</a></li>
             <li><a href="{{ path('admin_indexchoicesuser') }}">{{'base.nav.profile_admin.indexchoicesuser'|trans}}</a></li>
-            <li><a href="{{ path('expense_indexupdatestatus') }}">{{'base.nav.expense.indexupdatestatus'|trans}}</a></li>
+            <li><a href="{{ path('expense_updatestatus') }}">{{'base.nav.expense.indexupdatestatus'|trans}}</a></li>
         </ul>
     </li>
     {% endif %}

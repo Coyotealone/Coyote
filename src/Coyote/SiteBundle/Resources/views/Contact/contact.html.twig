@@ -13,7 +13,7 @@
     {% endfor %}
     <div id="contenu-contact">
         <p id="title"><b>{{'contact.title'|trans}}</b></p>
-        <form action="{{ path('contact_index') }}" method="post" {{ form_enctype(form) }}>
+        <form action="{{ path('contact') }}" method="post" {{ form_enctype(form) }}>
             <input id="contact_email" type="email" required="required" name="contact[email]" class="form-control" placeholder="{{"contact.email"|trans}}" >
             <input id="contact_subject" type="text" class="form-control" placeholder="{{"contact.subject"|trans}}" required="required" name="contact[subject]">
             <textarea class="form-control" rows="5" placeholder="{{"contact.content"|trans}}" id="contact_content" required="required" name="contact[content]"></textarea>

@@ -14,7 +14,7 @@
 {% block content %}
 <p id="title">{{'expense.title.indexshow'|trans}} </p>
 
-<form role="form" action="{{ path('expense_show') }}" method='get'>
+<form role="form" action="{{ path('expense_showexpenses', { 'month': 'month', 'year': 'year' }) }}" method='get'>
     <table class='table' id='tab_expense'>
     	<tr>
     	    <th class="center">{{'expense.month'|trans}}</th>

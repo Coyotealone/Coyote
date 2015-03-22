@@ -1,29 +1,25 @@
 admin_exportexpense:
     pattern:    /exportexpense
-    defaults:   { _controller: "CoyoteSiteBundle:Admin:exportExpense" }
-
-admin_export_index:
-    pattern:    /index
-    defaults:   { _controller: "CoyoteSiteBundle:Admin:showexport" }
+    defaults:   { _controller: "CoyoteSiteBundle:Admin:getexportExpense" }
 
 admin_exportdatauser:
     pattern:    /exportdatauser
-    defaults:   { _controller: "CoyoteSiteBundle:Admin:exportDataUser" }
+    defaults:   { _controller: "CoyoteSiteBundle:Admin:getexportDataUser" }
 
 admin_updateroles:
     pattern:    /updateroles
-    defaults:   { _controller: "CoyoteSiteBundle:Admin:updateroles" }
+    defaults:   { _controller: "CoyoteSiteBundle:Admin:postrolesUser" }
 
 admin_indexchoicesuser:
     pattern:    /indexchoicesuser
-    defaults:   { _controller: "CoyoteSiteBundle:Admin:indexchoicesuser" }
+    defaults:   { _controller: "CoyoteSiteBundle:Admin:getchoicesUser" }
 
 admin_choicesroles:
     pattern:    /choicesroles
-    defaults:   { _controller: "CoyoteSiteBundle:Admin:choicesroles" }
+    defaults:   { _controller: "CoyoteSiteBundle:Admin:postchoicesrolesUser" }
 
 admin_showadmin:
     pattern:    /showadmin/{page}
-    defaults:   { _controller: "CoyoteSiteBundle:Expense:showadmin", page: 1 }
+    defaults:   { _controller: "CoyoteSiteBundle:Admin:getExpenses", page: 1 }
     requirements:
         page:  \d+
