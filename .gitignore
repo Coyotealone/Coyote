@@ -24,3 +24,5 @@ composer.phar
 # Data
 src/Coyote/SiteBundle/DataFixtures/*
 /vendor/
+
+.settings/org.eclipse.wst.common.project.facet.core.xml
