@@ -210,7 +210,6 @@ class AdminController extends Controller
         }
     }
 
-    
     /**
      * Function to update roles user.
      * @access public
@@ -249,8 +248,7 @@ class AdminController extends Controller
             return $this->redirect($this->generateUrl('main_menu'));
         }
     }
-    
-    
+
     /**
      * Function to show Expense save.
      * @access public

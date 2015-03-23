@@ -109,6 +109,7 @@ schedule:
         indexshow: czas Konsultacje i uczestnictwo
         summary: Podsumowanie miesiąca
         overtime: Liczba godzin nadliczbowych w roku
+        schedules_locked: Blokada czasu i obecności.
     holiday: wakacje
     weekend: Weekend
     message_week: Tutaj tydzień %no_week% %year% wyświetlona
@@ -156,6 +157,7 @@ schedule:
     number_rtt_year: Ilość skróceniem czasu pracy w roku
     number_cp_year: Ilość płatnego urlopu w roku używany
     number_ca_year: Ilość stażu urlopu wykorzystane w roku
+    schedules_lock_message: Wszystkie dane przed tą datą będą blokowane.
     submit:
         save: Zapisz
         indexexportprintyear: Pokaż
@@ -164,11 +166,14 @@ schedule:
         indexshow: Pokaż
         previous_week: Poprzedni tydzień
         next_week: W przyszłym tygodniu
+        update: Aktualizacja
     message: Autouzupełnianie godzin (sprawdź dni, które chcesz wypełnić i wprowadź wartości w polach Początek Koniec przerwy poniżej)
     write_auto: Autouzupełnianie
     flash:
         no_save: Wystąpił błąd!
         save: Rejestracja zrealizowanych danych
+        locked: Prywatna poczta, skontaktuj się z administratorem, aby uzyskać więcej informacji.
+        schedules_locked: Frekwencja czas zablokowana.
 
 schedule1: Poniedziałek
 schedule2: wtorek

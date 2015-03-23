@@ -30,26 +30,26 @@ class ScheduleController extends Controller
      */
     public function getScheduleUserWeekAction()
     {
-        $em = $this->getDoctrine()->getManager();
-        $request = $this->getRequest();
-        $session = $request->getSession();
-
-        $date = $em->getRepository('CoyoteSiteBundle:Timetable')->createDateYearWeek(
-                $session->get('year'), $session->get('week'));
-
-        $data_timetable = $em->getRepository('CoyoteSiteBundle:Timetable')->searchIdDate($date);
-
-        $time = $em->getRepository('CoyoteSiteBundle:Schedule')->timeData(
-                $data_timetable, $this->getUser());
-
-        $duration = $em->getRepository('CoyoteSiteBundle:Schedule')->initGetSchedule(
-                $time, $data_timetable, $session);
-
-        return $this->render('CoyoteSiteBundle:Schedule:postschedule.html.twig',
-                array('data_timetable' => $data_timetable, 'time' => $time, 'duration' => $duration));
+    	$em = $this->getDoctrine()->getManager();
+    	$request = $this->getRequest();
+    	$session = $request->getSession();
+    
+    	$date = $em->getRepository('CoyoteSiteBundle:Timetable')->createDateYearWeek(
+    			$session->get('year'), $session->get('week'));
+    
+    	$data_timetable = $em->getRepository('CoyoteSiteBundle:Timetable')->searchIdDate($date);
+    
+    	$time = $em->getRepository('CoyoteSiteBundle:Schedule')->timeData(
+    			$data_timetable, $this->getUser());
+    
+    	$duration = $em->getRepository('CoyoteSiteBundle:Schedule')->initGetSchedule(
+    			$time, $data_timetable, $session);
+    
+    	return $this->render('CoyoteSiteBundle:Schedule:postschedule.html.twig',
+    			array('data_timetable' => $data_timetable, 'time' => $time, 'duration' => $duration));
     }
 
-        /**
+    /**
      * Function to return to the previous week, set week and period into session.
      * weeklessAction()
      * @access public
@@ -154,6 +154,8 @@ class ScheduleController extends Controller
                 else
                     $message = 'schedule.flash.no_save';
             }
+            if (empty($message))
+            	$message = 'schedule.flash.locked';
             $this->get('session')->getFlashBag()->set('save_schedule', $message);
             return $this->redirect($this->generateUrl('schedule_getscheduleuserweek'));
         }
@@ -439,7 +441,26 @@ class ScheduleController extends Controller
         }
     }
 
-    
+    public function postSchedulesLockedAction()
+    {
+    	$request = $this->getRequest();
+    	if ($request->getMethod() == 'POST' && isset($_POST['date']) )
+    	{
+    		$em = $this->getDoctrine()->getManager();
+    		$date = new \DateTime($_POST['date']);
+    		$schedules_lock = $em->getRepository("CoyoteSiteBundle:Schedule")->postScheduleLocked($date, $this->getUser());
+    		if ($schedules_lock == "OK")
+    		{
+    			$message = 'schedule.flash.schedules_locked';
+    		}
+    		$this->get('session')->getFlashBag()->set('schedules_locked', $message);
+    		return $this->redirect($this->generateUrl('schedule_postschedules_locked'));
+    	}
+    	else 
+    	{
+    		return $this->render('CoyoteSiteBundle:Schedule:scheduleslocked.html.twig');
+    	}
+    }
     
     
     
