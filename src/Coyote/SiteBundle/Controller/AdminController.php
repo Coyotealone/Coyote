@@ -25,7 +25,7 @@ class AdminController extends Controller
      * @access public
      * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function exportExpenseAction()
+    public function getexportExpenseAction()
     {
         if($this->get('security.context')->isGranted('ROLE_COMPTA'))
         {
@@ -49,78 +49,11 @@ class AdminController extends Controller
     }
 
     /**
-     * Redirect to function fos_user_change_password.
-     * @access public
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     */
-    public function changePasswordAction()
-    {
-        /** redirect \FOS\UserBundle\Controller\ChangePasswordController */
-        return $this->redirect($this->generateUrl('fos_user_change_password'));
-    }
-
-    /**
-     * Redirect to function fos_user_resetting_request.
-     * @access public
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     */
-    public function resettingAction()
-    {
-        /** redirect \FOS\UserBundle\Controller\ResettingController */
-        return $this->redirect($this->generateUrl('fos_user_resetting_request'));
-    }
-
-    /**
-     * Show profil user connected.
-     * @access public
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function profilAction()
-    {
-        /** @var object user */
-        $user = $this->container->get('security.context')->getToken()->getUser();
-        /** show view */
-        return $this->render('CoyoteSiteBundle:Profile:show.html.twig', array('user' => $user));
-    }
-
-    /**
-     * Redirect to accueil if user want edit.
-     * @access public
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     */
-    public function profileditAction()
-    {
-        /** redirect MainController:indexAction */
-        return $this->redirect($this->generateUrl('main_menu'));
-    }
-
-    /**
-     * Show index to choose month and year to extract data design office users.
-     * @access public
-     * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\RedirectResponse
-     */
-    public function showexportAction()
-    {
-        if($this->get('security.context')->isGranted('ROLE_CHEF_BE'))
-        {
-            /** @var $data object Data */
-            $data = new Data();
-            /** show view */
-            return $this->render('CoyoteSiteBundle:Admin:index_export.html.twig', array('month' => date('n'),
-                'year' => date('Y'), 'tab_mois' => $data->getTabMonth(), 'tab_num_mois' => $data->getTabNumMonth(),
-                'tab_annee' => $data->getTabYear()));
-        }
-        else
-        /** redirect MainController:IndexAction */
-            return $this->redirect($this->generateUrl('main_menu'));
-    }
-
-    /**
      * Export data design office users.
      * @access public
      * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function exportDataUserAction()
+    public function getexportDataUserAction()
     {
         /** check role */
         if ($this->get('security.context')->isGranted('ROLE_CHEF_BE'))
@@ -134,8 +67,12 @@ class AdminController extends Controller
             /** check @var data */
             if ($data_request == null)
             {
-                /** show view */
-                return $this->render('CoyoteSiteBundle:Admin:index_export.html.twig');
+                /** @var $data object Data */
+	            $data = new Data();
+	            /** show view */
+	            return $this->render('CoyoteSiteBundle:Admin:index_export.html.twig', array('month' => date('n'),
+	                'year' => date('Y'), 'tab_mois' => $data->getTabMonth(), 'tab_num_mois' => $data->getTabNumMonth(),
+	                'tab_annee' => $data->getTabYear()));
             }
             else
             {
@@ -223,7 +160,7 @@ class AdminController extends Controller
      * @access public
      * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function indexchoicesuserAction()
+    public function getchoicesUserAction()
     {
         if ($this->get('security.context')->isGranted('ROLE_ADMIN'))
         {
@@ -242,7 +179,7 @@ class AdminController extends Controller
      * @access public
      * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function choicesrolesAction()
+    public function postchoicesrolesUserAction()
     {
         if($this->get('security.context')->isGranted('ROLE_ADMIN'))
         {
@@ -278,7 +215,7 @@ class AdminController extends Controller
      * @access public
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function updaterolesAction()
+    public function postrolesUserAction()
     {
         if ($this->get('security.context')->isGranted('ROLE_ADMIN'))
         {
@@ -310,6 +247,47 @@ class AdminController extends Controller
         {
             return $this->redirect($this->generateUrl('main_menu'));
         }
+    }
+
+    /**
+     * Function to show Expense save.
+     * @access public
+     * @param integer $page
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    public function getExpensesAction($page)
+    {
+    	if($this->get('security.context')->isGranted('ROLE_COMPTA'))
+    	{
+    		$user = $this->get('security.context')->getToken()->getUser();
+    		if ($user == "anon.")
+    		{
+    			return $this->redirect($this->generateUrl('fos_user_security_login'));
+    		}
+    		else
+    		{
+    			$em = $this->getDoctrine()->getManager();
+    			$maxItems = 10;
+    			$data_expense = $em->getRepository('CoyoteSiteBundle:Expense')->findAllOrderByUserFeesID();
+    			$expenses_count = count($data_expense);
+    			$pagination = array(
+    					'page' => $page,
+    					'route' => 'admin_showadmin',
+    					'pages_count' => ceil($expenses_count / $maxItems),
+    					'route_params' => array()
+    			);
+    			$entities = $this->getDoctrine()->getRepository('CoyoteSiteBundle:Expense')
+    			->getListExpenseUsers($page, $maxItems);
+    
+    			return $this->render('CoyoteSiteBundle:Expense:showadmin.html.twig', array(
+    					'data' => $entities,
+    					'pagination' => $pagination));
+    		}
+    	}
+    	else
+    	{
+    		return $this->redirect($this->generateUrl('main_menu'));
+    	}
     }
 
 }

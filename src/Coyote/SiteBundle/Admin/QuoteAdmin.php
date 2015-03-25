@@ -51,7 +51,6 @@ class QuoteAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('id')
             ->add('citation')
             ->add('author')
             ->add('week')

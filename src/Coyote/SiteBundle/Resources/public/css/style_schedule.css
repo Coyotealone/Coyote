@@ -38,8 +38,17 @@ input#txt_timemonth2 {
     width: 130px;
 }
 
+.input_travel {
+	width: 50px;
+}
 
+.input_absencename {
+	width: 75px;
+}
 
+.input_absencetime {
+	width: 30px;
+}
 
 
 thead {

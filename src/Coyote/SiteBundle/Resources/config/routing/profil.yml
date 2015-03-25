@@ -4,15 +4,15 @@ profil_changepassword:
 
 profil_profile:
     pattern:    /
-    defaults:   { _controller: "CoyoteSiteBundle:Admin:profil" }
+    defaults:   { _controller: "CoyoteSiteBundle:Profile:getprofilUser" }
 
 profil_resetting:
     pattern:    /resetting
-    defaults:   { _controller: "CoyoteSiteBundle:Admin:resetting"}
+    defaults:   { _controller: "CoyoteSiteBundle:Profile:resetting"}
 
 profil_profile_edit:
     pattern:    /edit
-    defaults:   { _controller: "CoyoteSiteBundle:Admin:profiledit"}
+    defaults:   { _controller: "CoyoteSiteBundle:Profile:profiledit"}
 
 profil_register:
     pattern:    /register

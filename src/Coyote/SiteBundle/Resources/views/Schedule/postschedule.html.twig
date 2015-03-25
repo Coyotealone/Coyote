@@ -27,6 +27,8 @@
             <p id="flashmessage_valid">{{ flashMessage|trans }}</p>
         {% elseif message == "schedule.flash.no_save" %}
             <p id="flashmessage_error">{{ flashMessage|trans }}</p>
+        {% elseif message == "schedule.flash.locked" %}
+            <p id="flashmessage_warning">{{ flashMessage|trans }}</p>
         {% endif %}
     {% endfor %}
 
@@ -60,7 +62,7 @@
             				    <input class='input_day' type='text' readonly name="date{{loop.index}}" id="date{{loop.index}}" value={{ date.date|date("d/m/Y") }} />
             				</td>
             				<td>
-            				    {% if attribute(time,loop.index0) is not empty and attribute(time,loop.index0).start %}
+            					{% if attribute(time,loop.index0) is not empty and attribute(time,loop.index0).start %}
             				        <input class='input_time' type='time' name="debut{{loop.index}}" id="debut{{loop.index}}" maxlength='5'
             				        data-value={{ attribute(time,loop.index0).start }} value={{ attribute(time,loop.index0).start }} />
             				    {% else %}
@@ -68,7 +70,7 @@
             				    {% endif %}
             				</td>
             				<td>
-            				    {% if attribute(time,loop.index0) is not empty and attribute(time,loop.index0).end %}
+            					{% if attribute(time,loop.index0) is not empty and attribute(time,loop.index0).end %}
             				        <input class='input_time' type='time' name='fin{{loop.index}}' id='fin{{loop.index}}' maxlength='5'
             				        data-value={{ attribute(time,loop.index0).end }} value={{ attribute(time,loop.index0).end }} />
             				    {% else %}
@@ -76,7 +78,7 @@
             				    {% endif %}
             				</td>
             				<td>
-            				    {% if attribute(time,loop.index0) is not empty and attribute(time,loop.index0).break %}
+            					{% if attribute(time,loop.index0) is not empty and attribute(time,loop.index0).break %}
             				        <input class='input_time' type='time' name='pause{{loop.index}}' id='pause{{loop.index}}' maxlength='5'
             				        data-value={{ attribute(time,loop.index0).break }} value={{ attribute(time,loop.index0).break }} />
             				    {% else %}
@@ -84,7 +86,7 @@
             				    {% endif %}
             				</td>
             				<td>
-            				    {% if attribute(time,loop.index0) is not empty and attribute(time,loop.index0).workingtime %}
+            					{% if attribute(time,loop.index0) is not empty and attribute(time,loop.index0).workingtime %}
             				        <input class='input_time' type='text' name='tps{{loop.index}}' id='tps{{loop.index}}' disabled
             				        data-value={{ attribute(time,loop.index0).workingtime }} value={{ attribute(time,loop.index0).workingtime }} />
             				    {% else %}
@@ -92,7 +94,7 @@
             				    {% endif %}
             				</td>
             				<td>
-            				    {% if attribute(time,loop.index0) is not empty and attribute(time,loop.index0).travel %}
+            					{% if attribute(time,loop.index0) is not empty and attribute(time,loop.index0).travel %}
             				        <input type="checkbox" name='deplacement{{loop.index}}' id='deplacement{{loop.index}}'
             				        data-value={{ attribute(time,loop.index0).travel }} >
             				    {% else %}
@@ -100,7 +102,7 @@
             				    {% endif %}
             				</td>
             				<td class="select_absence">
-            				    {% if attribute(time,loop.index0) is not empty and attribute(time,loop.index0).absencename %}
+            					{% if attribute(time,loop.index0) is not empty and attribute(time,loop.index0).absencename %}
             				        <select name='absence{{loop.index}}' id='absence{{loop.index}}' data-value={{ attribute(time,loop.index0).absencename }} >
             				    {% else %}
             					   <select name="absence{{loop.index}}" id="absence{{loop.index}}" >
@@ -117,7 +119,7 @@
             					</select>
             				</td>
             				<td class='absence_day' >
-            				    {% if attribute(time,loop.index0) is not empty and attribute(time,loop.index0).absenceduration %}
+            					{% if attribute(time,loop.index0) is not empty and attribute(time,loop.index0).absenceduration %}
             				        <select name='absenceday{{loop.index}}' id='absenceday{{loop.index}}' data-value={{attribute(time,loop.index0).absenceduration}} >
             				    {% else %}
             					   <select name="absenceday{{loop.index}}" id="absenceday{{loop.index}}" >
@@ -129,7 +131,7 @@
             					<input class='input_time' type='text' name="absencetime{{loop.index}}" id="absencetime{{loop.index}}" maxlength='5' />
             				</td>
             				<td>
-            				    {% if attribute(time,loop.index0) is not empty and attribute(time,loop.index0).comment %}
+            					{% if attribute(time,loop.index0) is not empty and attribute(time,loop.index0).comment %}
             				        <input type='text' name='commentaire{{loop.index}}' id='commentaire{{loop.index}}' placeholder="{{'schedule.write_comment'|trans}}"
             				        data-value={{ attribute(time,loop.index0).comment }} value="{{ attribute(time,loop.index0).comment }}" />
             				    {% else %}
@@ -142,7 +144,7 @@
                 </table>
             </div>
             <div>
-                {{'schedule.message'|trans}}
+            	{{'schedule.message'|trans}}
         		<br>
         		<input type='checkbox' name='lundi' id='check_1'> {{ 'schedule.monday'|trans }}
         		<input type='checkbox' name='mardi' id='check_2'> {{ 'schedule.tuesday'|trans }}
@@ -154,9 +156,10 @@
         		{{ 'schedule.start'|trans }} <input class='input_time' type='text' id='debutauto'>
         		{{ 'schedule.end'|trans }} <input class='input_time' type='text' id='finauto'>
         		{{ 'schedule.break'|trans }} <input class='input_time' type='text' id='pauseauto'>
-        	</div><br>
+        	</div>
+        	<br>
         	<a id='work_less' class='btn_white' href="{{ path('schedule_postweekless')}}" >{{'schedule.submit.previous_week'|trans}}</a>
-            <a id='saisie_auto' class='btn_grey' onclick='saisie_auto()'>{{'schedule.write_auto'|trans}}</a>
+            	<a id='saisie_auto' class='btn_grey' onclick='saisie_auto()'>{{'schedule.write_auto'|trans}}</a>
             <a id='work_more' class='btn_white' href="{{ path('schedule_postweekmore')}}" >{{'schedule.submit.next_week'|trans}}</a>
         </form>
         <br>{{'schedule.working_time_week'|trans}} <input readonly type="text" id="timeweek"></input>

@@ -1,59 +1,51 @@
 expense_updatestatus:
     pattern:    /updatestatus
-    defaults:   { _controller: "CoyoteSiteBundle:Expense:updatestatus"}
-
-expense_indexupdatestatus:
-    pattern:    /indexupdatestatus
-    defaults:   { _controller: "CoyoteSiteBundle:Expense:indexupdatestatus"}
+    defaults:   { _controller: "CoyoteSiteBundle:Expense:poststatusExpenses"}
 
 expense_index:
     pattern:    /
-    defaults:   { _controller: "CoyoteSiteBundle:Expense:index"}
+    defaults:   { _controller: "CoyoteSiteBundle:Expense:getIndex"}
 
 expense_create:
     pattern:    /create
-    defaults:   { _controller: "CoyoteSiteBundle:Expense:create"}
+    defaults:   { _controller: "CoyoteSiteBundle:Expense:putcreateExpense"}
 
 expense_save:
     pattern:    /save
-    defaults:   { _controller: "CoyoteSiteBundle:Expense:save"}
+    defaults:   { _controller: "CoyoteSiteBundle:Expense:putExpenses"}
     requirements:
         _method:    POST
 
-expense_show:
-    pattern:    /show
-    defaults:   { _controller: "CoyoteSiteBundle:Expense:show"}
-    requirements: { _method: get }
-
-expense_showparameters:
-    pattern:    /show/{year}/{month}/{page}
-    defaults:   { _controller: "CoyoteSiteBundle:Expense:showparameters", page: 1}
-    requirements: 
-        _method: get
-        page:  \d+
-
-expense_indexprint:
-    pattern:    /indexprint
-    defaults:   { _controller: "CoyoteSiteBundle:Expense:indexprint"}
-
-expense_print:
-    pattern:    /print
-    defaults:   { _controller: "CoyoteSiteBundle:Expense:print"}
-
-expense_indexshow:
-    pattern:    /indexshow
-    defaults:   { _controller: "CoyoteSiteBundle:Expense:indexshow"}
-
 expense_edit:
     pattern:  /{id}/edit
-    defaults: { _controller: "CoyoteSiteBundle:Expense:edit" }
+    defaults: { _controller: "CoyoteSiteBundle:Expense:posteditExpense" }
 
 expense_update:
     pattern:  /{id}/update
-    defaults: { _controller: "CoyoteSiteBundle:Expense:update" }
+    defaults: { _controller: "CoyoteSiteBundle:Expense:postupdateExpense" }
     requirements: { _method: post|put }
 
 expense_delete:
     pattern:  /{id}/delete
-    defaults: { _controller: "CoyoteSiteBundle:Expense:delete" }
+    defaults: { _controller: "CoyoteSiteBundle:Expense:deleteExpense" }
     requirements: { _method: post|delete }
+
+expense_indexshowexpenses:
+    pattern:  /show_expenses/{page}
+    defaults: { _controller: "CoyoteSiteBundle:Expense:getExpenses", page: 1}
+    requirements: 
+        _method: get
+        page:  \d+
+
+expense_showexpenses:
+    pattern:  /show_expenses/{page}
+    defaults: { _controller: "CoyoteSiteBundle:Expense:getExpenses", page: 1}
+    requirements: 
+        _method: get
+        page:  \d+
+        
+expense_printexpenses:
+    pattern:  /print_expenses
+    defaults: { _controller: "CoyoteSiteBundle:Expense:getprintExpenses" }
+    requirements: 
+        _method: get

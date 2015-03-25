@@ -6,10 +6,6 @@ CoyoteSiteBundle_holiday:
     resource: "@CoyoteSiteBundle/Resources/config/routing/holiday.yml"
     prefix:   /{_locale}/profile/holiday
 
-CoyoteSiteBundle_accueil:
-    path:     /
-    defaults: { _controller: CoyoteSiteBundle:Main:redirect }
-
 CoyoteSiteBundle_register:
     resource: "@CoyoteSiteBundle/Resources/config/routing/register.yml"
     prefix:    /{_locale}/register
@@ -57,3 +53,7 @@ CoyoteSiteBundle_schedule:
     prefix:   /{_locale}/schedule
     requirements:
         _locale: fr|en|pl
+        
+CoyoteSiteBundle_accueil:
+    path:     /
+    defaults: { _controller: CoyoteSiteBundle:Main:redirect }

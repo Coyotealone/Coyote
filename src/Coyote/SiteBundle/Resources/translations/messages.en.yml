@@ -2,7 +2,7 @@ user_block_logout: Logout
 
 base:
     copyright: Copyright ©2015 PICHON - All rights reserved
-    version: Version 2.0.2
+    version: Version 2.2.0
     title: Pichon - WebSite
     link: http://www.pichonindustries.com
     choose_language: Choose your country
@@ -36,6 +36,7 @@ base:
         schedule_admin:
             name: Export of time attendance
             indexexport: Export of data research department
+            schedules_locked: Lock time and attendance
         expense_admin:
             name: Expense Report Management
             exportexpense: Export of data expense
@@ -109,6 +110,7 @@ schedule:
         indexshow: Consultation time and attendance
         summary: Summary of the month
         overtime: Number of overtime in the year
+        schedules_locked: Lock time and attendance.
     holiday: Holiday
     weekend: Weekend
     message_week: Here week %no_week% of %year% displayed
@@ -156,6 +158,7 @@ schedule:
     number_rtt_year: Number of reduction of working time in the year
     number_cp_year: Number of paid leave used in the year
     number_ca_year: Number of seniority leave used in the year
+    schedules_lock_message: All data prior to that date will be blocked.
     submit:
         save: Save
         indexexportprintyear: Display
@@ -164,11 +167,14 @@ schedule:
         indexshow: Display
         previous_week: Previous week
         next_week: Next week
+        update: Update
     message: AutoFill hours (check the days you want to fill and enter the values in the fields start end break below)
     write_auto: AutoFill
     flash:
         no_save: An error has occurred!
         save: Registration of completed data
+        locked: Private post, contact your administrator for more information.
+        schedules_locked: Time Attendance locked.
 
 schedule1: Monday
 schedule2: Tuesday

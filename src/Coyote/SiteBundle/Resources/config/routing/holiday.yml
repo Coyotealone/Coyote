@@ -1,27 +1,27 @@
 holiday:
     path:     /
-    defaults: { _controller: "CoyoteSiteBundle:Holiday:index" }
+    defaults: { _controller: "CoyoteSiteBundle:Holiday:getHolidays" }
 
 holiday_show:
     path:     /show
-    defaults: { _controller: "CoyoteSiteBundle:Holiday:show" }
+    defaults: { _controller: "CoyoteSiteBundle:Holiday:getHoliday" }
 
 holiday_new:
     path:     /new
-    defaults: { _controller: "CoyoteSiteBundle:Holiday:new" }
+    defaults: { _controller: "CoyoteSiteBundle:Holiday:putnewtHoliday" }
 
 holiday_create:
     path:     /create
-    defaults: { _controller: "CoyoteSiteBundle:Holiday:create" }
+    defaults: { _controller: "CoyoteSiteBundle:Holiday:putcreateHoliday" }
     requirements: { _method: post }
 
 holiday_edit:
     path:     /edit
-    defaults: { _controller: "CoyoteSiteBundle:Holiday:edit" }
+    defaults: { _controller: "CoyoteSiteBundle:Holiday:posteditHoliday" }
 
 holiday_update:
     path:     /update
-    defaults: { _controller: "CoyoteSiteBundle:Holiday:update" }
+    defaults: { _controller: "CoyoteSiteBundle:Holiday:postupdateHoliday" }
     requirements: { _method: post|put }
 
 #holiday_delete:

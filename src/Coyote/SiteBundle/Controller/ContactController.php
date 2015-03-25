@@ -21,7 +21,7 @@ class ContactController extends Controller
      * @access public
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function indexAction()
+    public function putContactAction()
     {
         $form = $this->get('form.factory')->create(new ContactType());
         $request = $this->get('request');

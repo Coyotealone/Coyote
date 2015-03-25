@@ -2,7 +2,7 @@ user_block_logout: Deconnexion
 
 base:
     copyright: Copyright ©2015 PICHON - Tous droits réservés
-    version: Version 2.0.2
+    version: Version 2.2.0
     title: Pichon - WebSite
     link: http://www.pichonindustries.fr
     choose_language: Choisissez votre pays
@@ -36,6 +36,7 @@ base:
         schedule_admin:
             name: Export présence
             indexexport: Export données BE
+            schedules_locked: Verrouillage des temps de présence
         expense_admin:
             name: Gestion des Notes de frais
             exportexpense: Export données notes de frais
@@ -109,6 +110,7 @@ schedule:
         indexshow: Consultation des temps de présence
         summary: Récapitulatif du mois
         overtime: "Nombre d'heures supplémentaires sur l'année"
+        schedules_locked: Verrouillage des temps de présence.
     holiday: Jour férié
     weekend: Weekend
     message_week: "Voici la semaine %no_week% affichée de l'année %year%"
@@ -156,6 +158,7 @@ schedule:
     number_rtt_year: "Nombre de RTT utilisé dans l'année"
     number_cp_year: "Nombre de congés payés (CP) utilisé dans l'année"
     number_ca_year: "Nombre de congés d'anciennetés (CA) utilisé dans l'année"
+    schedules_lock_message: Toutes les données avant cette date seront bloquées.
     submit:
         save: Enregistrer
         indexexportprintyear: Afficher
@@ -164,11 +167,14 @@ schedule:
         indexshow: Afficher
         previous_week: Semaine Précédente
         next_week: Semaine Suivante
+        update: Mise à jour
     message: "Saisie automatique des heures (Cochez les jours que vous souhaitez remplir et saisissez les valeurs dans les champs début fin pause ci-dessous)"
     write_auto: Saisie Automatique
     flash:
         no_save: "Une erreur s'est produite !"
         save: Enregistrement terminé
+        locked: Enregistrement fermé, contactez votre administrateur pour plus de renseignement.
+        schedules_locked: Temps de présence verrouillés.
 
 schedule1: Lundi
 schedule2: Mardi

@@ -194,40 +194,43 @@ class ScheduleRepository extends EntityRepository
     public function updateSchedule($schedule, $time_start, $time_end, $time_break, $time_travel, $time_absence,
             $time_absenceday, $time_absencetime, $time_comment)
     {
-        $timetable = new Timetable();
-        if (empty($time_start))
-            $time_start = '0:00';
-        if (empty($time_end))
-            $time_end = '0:00';
-        if (empty($time_break))
-            $time_break = '0:00';
-        $schedule->setBreak($time_break);
-        $schedule->setStart($time_start);
-        $schedule->setEnd($time_end);
-        $schedule->setBreak($time_break);
-        $working_time_day = $timetable->working_time_day($time_start, $time_end, $time_break);
-        $schedule->setWorkingTime($working_time_day);
-        $working_hours_day = $timetable->working_hours_day($working_time_day);
-        $schedule->setWorkingHours($working_hours_day);
-        if ($time_travel == "on")
-            $time_travel = 1;
-        else
-            $time_travel = 0;
-        $schedule->setTravel($time_travel);
-        $schedule->setAbsenceName($time_absence);
-        if ($time_absence == "Aucune")
-        {
-            $schedule->setAbsenceDuration("");
-        }
-        else
-        {
-            if ($time_absenceday == "0.5" || $time_absenceday == "1")
-                $schedule->setAbsenceDuration($time_absenceday);
-            if ($time_absenceday == "empty")
-                $schedule->setAbsenceDuration($time_absencetime);
-        }
-        $schedule->setComment($time_comment);
-        return $schedule;
+    	if ($schedule->getLocked() == 0)
+    	{
+	        $timetable = new Timetable();
+	        if (empty($time_start))
+	            $time_start = '0:00';
+	        if (empty($time_end))
+	            $time_end = '0:00';
+	        if (empty($time_break))
+	            $time_break = '0:00';
+	        $schedule->setBreak($time_break);
+	        $schedule->setStart($time_start);
+	        $schedule->setEnd($time_end);
+	        $schedule->setBreak($time_break);
+	        $working_time_day = $timetable->working_time_day($time_start, $time_end, $time_break);
+	        $schedule->setWorkingTime($working_time_day);
+	        $working_hours_day = $timetable->working_hours_day($working_time_day);
+	        $schedule->setWorkingHours($working_hours_day);
+	        if ($time_travel == "on")
+	            $time_travel = 1;
+	        else
+	            $time_travel = 0;
+	        $schedule->setTravel($time_travel);
+	        $schedule->setAbsenceName($time_absence);
+	        if ($time_absence == "Aucune")
+	        {
+	            $schedule->setAbsenceDuration("");
+	        }
+	        else
+	        {
+	            if ($time_absenceday == "0.5" || $time_absenceday == "1")
+	                $schedule->setAbsenceDuration($time_absenceday);
+	            if ($time_absenceday == "empty")
+	                $schedule->setAbsenceDuration($time_absencetime);
+	        }
+	        $schedule->setComment($time_comment);
+	        return $schedule;
+    	}
     }
     
     /**
@@ -801,7 +804,29 @@ class ScheduleRepository extends EntityRepository
     /***********************Fonctions en cours*************************/
     /******************************************************************/
     
-    
+    /**
+     * Function to lock Schedule
+     * @param DateTime $date
+     */
+    public function postScheduleLocked($date, $user)
+    {
+    	$qb = $this->_em->createQueryBuilder();
+    	$qb->select('s')
+	    	->from('CoyoteSiteBundle:Schedule', 's')
+	    	->innerJoin('CoyoteSiteBundle:Timetable', 't', 'WITH', 't.id = s.timetable')
+	    	->where('t.date < :date and s.locked != 1')
+	    	->setParameters(array('date' => $date));
+    	$schedule =  $qb->getQuery()->getResult();
+    	foreach($schedule as $data)
+    	{
+    		$data->setLocked(1);
+    		$data->setLockedAt(new \DateTime());
+    		$data->setLockedBy($user->getName());
+    		$this->_em->persist($data);
+    	}
+    	$this->_em->flush();
+    	return "OK";
+    }
     
     /******************************************************************/
     /***********************Anciennes Fonctions************************/
