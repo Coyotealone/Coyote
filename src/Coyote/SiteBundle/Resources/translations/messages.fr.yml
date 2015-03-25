@@ -36,6 +36,7 @@ base:
         schedule_admin:
             name: Export présence
             indexexport: Export données BE
+            schedules_locked: Verrouillage des temps de présence
         expense_admin:
             name: Gestion des Notes de frais
             exportexpense: Export données notes de frais

@@ -36,6 +36,7 @@ base:
         schedule_admin:
             name: Eksport rejestracji czasu
             indexexport: Eksport danych działu badań
+            schedules_locked: Blokada czasu i obecności
         expense_admin:
             name: Sprawozdanie z wydatków
             exportexpense: Eksport koszt danych

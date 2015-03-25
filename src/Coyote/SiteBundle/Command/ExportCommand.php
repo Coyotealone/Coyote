@@ -14,7 +14,7 @@ class ExportCommand extends ContainerAwareCommand
     {
         $this
             ->setName('export:expense')
-            ->setDescription('Export expense');
+            ->setDescription('Export expense for X3');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)

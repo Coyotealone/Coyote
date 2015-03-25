@@ -36,6 +36,7 @@ base:
         schedule_admin:
             name: Export of time attendance
             indexexport: Export of data research department
+            schedules_locked: Lock time and attendance
         expense_admin:
             name: Expense Report Management
             exportexpense: Export of data expense
