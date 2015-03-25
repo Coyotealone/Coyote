@@ -21,6 +21,7 @@ class ExportCommand extends ContainerAwareCommand
     {
     	$em = $this->getContainer()->get('doctrine')->getManager();
     	$dataexpense = $em->getRepository('CoyoteSiteBundle:Expense')->fileDataExpenseCompta();
+    	$em->getRepository('CoyoteSiteBundle:Expense')->updateStatus($em);
     	$output->writeln($dataexpense);
     }
 }
