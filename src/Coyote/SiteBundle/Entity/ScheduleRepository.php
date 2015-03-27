@@ -800,32 +800,63 @@ class ScheduleRepository extends EntityRepository
                     return $countsave;
         }
     
+    /********************postScheduleLockedAction*******************/
+        
+        /**
+         * Function to lock Schedule
+         * @param DateTime $date
+         */
+        public function postScheduleLocked($date, $user)
+        {
+        	$qb = $this->_em->createQueryBuilder();
+        	$qb->select('s')
+        	->from('CoyoteSiteBundle:Schedule', 's')
+        	->innerJoin('CoyoteSiteBundle:Timetable', 't', 'WITH', 't.id = s.timetable')
+        	->where('t.date < :date and s.locked != 1')
+        	->setParameters(array('date' => $date));
+        	$schedule =  $qb->getQuery()->getResult();
+        	foreach($schedule as $data)
+        	{
+        		$data->setLocked(1);
+        		$data->setLockedAt(new \DateTime());
+        		$data->setLockedBy($user->getName());
+        		$this->_em->persist($data);
+        	}
+        	$this->_em->flush();
+        	return "OK";
+        }
+    
     /******************************************************************/
     /***********************Fonctions en cours*************************/
     /******************************************************************/
     
-    /**
-     * Function to lock Schedule
-     * @param DateTime $date
-     */
-    public function postScheduleLocked($date, $user)
+    public function countOvertime($user, $working_time_week)
     {
-    	$qb = $this->_em->createQueryBuilder();
-    	$qb->select('s')
-	    	->from('CoyoteSiteBundle:Schedule', 's')
-	    	->innerJoin('CoyoteSiteBundle:Timetable', 't', 'WITH', 't.id = s.timetable')
-	    	->where('t.date < :date and s.locked != 1')
-	    	->setParameters(array('date' => $date));
-    	$schedule =  $qb->getQuery()->getResult();
-    	foreach($schedule as $data)
+    	$query = $this->_em->createQuery(
+    			"SELECT s FROM CoyoteSiteBundle:Schedule s WHERE s.timetable IN 
+    			(SELECT t.id FROM CoyoteSiteBundle:Timetable t WHERE t.period = :period 
+    			and DAYOFWEEK(t.date) != 1 and DAYOFWEEK(t.date) != 7 and t.holiday = 0)
+    			and s.user = :user and s.comment != :comment and s.absence_duration != 1")
+    				->setParameters(array(
+    			'user' => $user,
+    			'period'  => '2014/2015',
+    			'comment' => 'IMIE'
+    	));
+    	
+    	$schedules = $query->getResult();
+    	$res = 0;
+    	foreach($schedules as $data)
     	{
-    		$data->setLocked(1);
-    		$data->setLockedAt(new \DateTime());
-    		$data->setLockedBy($user->getName());
-    		$this->_em->persist($data);
+    		$workingtime = $data->getWorkingTime();
+    		$res += $this->calculTime($workingtime);
     	}
-    	$this->_em->flush();
-    	return "OK";
+    	$hour = 7;
+    	if ($working_time_week != 0)
+    		$hour = $working_time_week / 5;
+    	$time = count($schedules)*$hour*60;
+    	$hs = $res - $time;
+		return $this->formatTime($hs);
+    	
     }
     
     /******************************************************************/
