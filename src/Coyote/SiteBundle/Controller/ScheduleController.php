@@ -15,6 +15,7 @@ use Coyote\SiteBundle\Entity\User;
 use Coyote\SiteBundle\Entity\Data;
 
 use Doctrine\ORM\EntityRepository;
+use Coyote\SiteBundle\Entity\Holiday;
 
 /**
  * Schedule controller.
@@ -405,38 +406,14 @@ class ScheduleController extends Controller
      */
     public function showovertimeAction()
     {
-        if ($this->getUser()->getId() == 2)
+        if ($this->get('security.context')->isGranted('ROLE_TECH'))
         {
-            $doctrine = $this->getDoctrine();
-            $em = $doctrine->getManager();
-            
-            $date = "2014-06-%";
-            $date_count_absence = "2014-06-0%";
-            $working_day = $em->getRepository('CoyoteSiteBundle:Timetable')->findworkingday($date, $this->getUser());
-            $sum_working_time = $em->getRepository('CoyoteSiteBundle:Schedule')->sumWorkingTimeMonth($date, $this->getUser());
-            $count_absence = $em->getRepository('CoyoteSiteBundle:Schedule')->countAbsence($date_count_absence, $this->getUser());
-            $overtime = $em->getRepository('CoyoteSiteBundle:Schedule')->calculOvertime($working_day, $sum_working_time,
-                    $count_absence);
-            return $this->render('CoyoteSiteBundle:Schedule:showovertime.html.twig', array('overtime' => $overtime));
-        }
-        else
-        {
-            $doctrine = $this->getDoctrine();
-            $em = $doctrine->getManager();
-            //$test = $em->getRepository("CoyoteSiteBundle:Schedule")->calculOvertimeTech($this->getUser(),1);
-            $count_time = $em->getRepository('CoyoteSiteBundle:Timetable')->findworkingday($this->getUser());
-            $count_absence = $em->getRepository('CoyoteSiteBundle:Schedule')->countAbsence($this->getUser());
-            $test = $em->getRepository("CoyoteSiteBundle:Schedule")->calculOvertimeTech($this->getUser(), $count_time, $count_absence);
-            //return new Response($test);
-            /*$request = Request::createFromGlobals();
-             $date = "2014-06-%";
-             $date_count_absence = "2014-06-0%";
-             $working_day = $em->getRepository('CoyoteSiteBundle:Timetable')->findworkingday($this->getUser());
-             $sum_working_time = $em->getRepository('CoyoteSiteBundle:Schedule')->sumWorkingTimeMonth($date, $user_id);
-             //$count_absence = $em->getRepository('CoyoteSiteBundle:Schedule')->countAbsence($date_count_absence, $user_id);
-             $overtime = $em->getRepository('CoyoteSiteBundle:Schedule')->calculOvertime($working_day, $sum_working_time,
-             $count_absence);*/
-            $overtime = "0";
+        	$em = $this->getDoctrine()->getManager();
+        	$holiday = $em->getRepository('CoyoteSiteBundle:Holiday')->findOneByUser($this->getUser());
+        	$working_time_week = 0;
+        	if ($holiday != null)
+        		$working_time_week = $holiday->getHs();
+            $overtime = $em->getRepository('CoyoteSiteBundle:Schedule')->countOvertime($this->getUser(), $working_time_week);
             return $this->render('CoyoteSiteBundle:Schedule:showovertime.html.twig', array('overtime' => $overtime));
         }
     }
