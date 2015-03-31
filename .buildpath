@@ -9,6 +9,7 @@
 	<buildpathentry kind="src" path="vendor/sonata-project/core-bundle"/>
 	<buildpathentry kind="src" path="src"/>
 	<buildpathentry kind="src" path="vendor/sensio/distribution-bundle"/>
+	<buildpathentry kind="src" path="vendor/oro/doctrine-extensions/src"/>
 	<buildpathentry kind="src" path="vendor/sensio/framework-extra-bundle"/>
 	<buildpathentry kind="src" path="vendor/symfony/monolog-bundle"/>
 	<buildpathentry kind="src" path="vendor/stephpy/timeline/src"/>
