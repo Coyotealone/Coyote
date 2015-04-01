@@ -29,7 +29,7 @@ class RestController extends FOSRestController
      */
     public function getAllAbsenceByUserAction($user)
     {
-        $em = $this->getDoctrine()->getManager();
+        /*$em = $this->getDoctrine()->getManager();
         $user = $em->getRepository("CoyoteSiteBundle:User")->findOneBy($user);
         $entity = $em->getRepository("CoyoteSiteBundle:Schedule")->absenceByUser($user);
         if (count($entity) > 0)
@@ -38,10 +38,10 @@ class RestController extends FOSRestController
                             "Absence" => $entity
             ),200);
         }
-        else
+        else*/
         {
             $view = $this->view(array(
-                            "No absence" => $entity
+                            "No absence" => "Empty"
             ),204);
         }
         return $this->handleView($view);
@@ -64,7 +64,7 @@ class RestController extends FOSRestController
      */
     public function getAllUserAction()
     {
-        $em = $this->getDoctrine()->getManager();
+        /*$em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository("CoyoteSiteBundle:User")->findAll();
         if (count($entity) > 0)
         {
@@ -72,10 +72,10 @@ class RestController extends FOSRestController
                             "Users" => $entity
             ),200);
         }
-        else
+        else*/
         {
             $view = $this->view(array(
-                            "No Users" => $entity
+                            "No Users" => "Empty"
             ),204);
         }
         return $this->handleView($view);
