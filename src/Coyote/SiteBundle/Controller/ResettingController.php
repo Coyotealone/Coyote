@@ -107,8 +107,10 @@ class ResettingController extends ContainerAware
         $user = $userManager->findUserByConfirmationToken($token);
 
         if (null === $user) {
-            throw new NotFoundHttpException(sprintf('The user with "confirmation token" does not exist for value "%s"',
-                $token));
+            $url = $this->container->get('router')->generate('main_menu');
+            return new RedirectResponse($url);
+            //throw new NotFoundHttpException(sprintf('The user with "confirmation token" does not exist for value "%s"',
+            //    $token));
         }
 
         $event = new GetResponseUserEvent($user, $request);
@@ -131,7 +133,7 @@ class ResettingController extends ContainerAware
                 $userManager->updateUser($user);
 
                 if (null === $response = $event->getResponse()) {
-                    $url = $this->container->get('router')->generate('main_accueil');
+                    $url = $this->container->get('router')->generate('main_menu');
                     $response = new RedirectResponse($url);
                 }
 
