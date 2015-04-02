@@ -2,7 +2,7 @@ user_block_logout: Logout
 
 base:
     copyright: Copyright ©2015 PICHON - All rights reserved
-    version: Version 2.2.5
+    version: Version 2.2.6
     title: Pichon - WebSite
     link: http://www.pichonindustries.com
     choose_language: Choose your country
