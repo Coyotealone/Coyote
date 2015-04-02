@@ -2,7 +2,7 @@ user_block_logout: Wyloguj
 
 base:
     copyright: Copyright © 2015 PICHON - Wszystkie prawa zastrzeżone
-    version: Wersja 2.2.5
+    version: Wersja 2.3.0
     title: Pichon - WebSite
     link: www.pichonindustries.com
     choose_language: Wybierz swój kraj
@@ -310,6 +310,12 @@ resetting:
 
             Pozdrawiamy,
             Zespół.
+
+# Exception error
+error:
+    menu:
+        message: Błąd obciążenia.
+    message: Wystąpił błąd, jeśli problem będzie się powtarzał, dziękuję skontaktować się wykonawczej wydziału.
 
 # Global strings:
 layout:

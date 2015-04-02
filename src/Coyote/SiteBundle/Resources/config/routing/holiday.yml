@@ -8,7 +8,7 @@ holiday_show:
 
 holiday_new:
     path:     /new
-    defaults: { _controller: "CoyoteSiteBundle:Holiday:putnewtHoliday" }
+    defaults: { _controller: "CoyoteSiteBundle:Holiday:putnewHoliday" }
 
 holiday_create:
     path:     /create

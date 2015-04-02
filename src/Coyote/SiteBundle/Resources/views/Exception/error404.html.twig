@@ -1,0 +1,18 @@
+{% extends 'CoyoteSiteBundle:Base:base.html.twig' %}
+
+{% block nav %}
+    <!--[if lt IE 9]>
+        {{ include('CoyoteSiteBundle:Base:navigation_ie.html.twig') }}
+    <![endif]-->
+    <!--[if !IE]><!-->
+        {{ include('CoyoteSiteBundle:Base:navigation.html.twig') }}
+	<!--<![endif]-->
+{% endblock nav %}
+
+{% block content %}
+    <div class="jumbotron">
+        <p class="lead">{{'error.menu.message'|trans }}<br>
+        	
+        </p>
+    </div>
+{% endblock %}
