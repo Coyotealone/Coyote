@@ -32,7 +32,7 @@
 		"friendsofsymfony/rest-bundle" : "1.6.*@dev",
 		"jms/serializer-bundle" : "0.13.*@dev",
 		"nelmio/api-doc-bundle" : "2.7.*@dev",
-		"oro/doctrine-extensions": "dev-master"
+		"oro/doctrine-extensions" : "dev-master"
 	},
 	"scripts" : {
 		"post-install-cmd" : [

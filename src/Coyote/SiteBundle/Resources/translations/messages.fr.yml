@@ -2,7 +2,7 @@ user_block_logout: Deconnexion
 
 base:
     copyright: Copyright ©2015 PICHON - Tous droits réservés
-    version: Version 2.2.6
+    version: Version 2.3.0
     title: Pichon - WebSite
     link: http://www.pichonindustries.fr
     choose_language: Choisissez votre pays
@@ -310,6 +310,12 @@ resetting:
 
             Cordialement,
             L'équipe.
+
+# Exception error
+error:
+    menu:
+        message: Erreur lors du chargement de la page.
+    message: Une erreur est survenue, si le problème persiste, merci de contacter votre administateur.
 
 # Global strings
 layout:
