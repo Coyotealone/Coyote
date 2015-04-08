@@ -270,14 +270,18 @@ class ScheduleRepository extends EntityRepository
                 $time_travel = 0;
             $schedule->setTravel($time_travel);
             $schedule->setAbsenceName($time_absence);
-            if($time_absenceday == "0.5" || $time_absenceday == "1")
+            if ($time_absenceday == "0.5" || $time_absenceday == "1")
                 $schedule->setAbsenceDuration($time_absenceday);
             if ($time_absenceday == "empty")
             {
-                if($time_absencetime == "undef")
+                if ($time_absencetime == "undef")
                     $schedule->setAbsenceDuration('');
                 else
                     $schedule->setAbsenceDuration($time_absencetime);
+            }
+            if ($time_absence == "Aucune")
+            {
+            	$schedule->setAbsenceDuration('');
             }
             $schedule->setComment($time_comment);
             return $schedule;
@@ -314,6 +318,10 @@ class ScheduleRepository extends EntityRepository
                 $schedule->setAbsenceDuration('');
             else
                 $schedule->setAbsenceDuration($time_absencetime);
+        }
+        if ($time_absence == "Aucune")
+        {
+        	$schedule->setAbsenceDuration('');
         }
         $schedule->setComment($time_comment);
         return $schedule;

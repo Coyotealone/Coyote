@@ -31,6 +31,7 @@ class ExpenseAdmin extends Admin
             ->add('comment')
             ->add('created_at')
             ->add('updated_at')
+            ->add('user')
         ;
     }
 
@@ -49,6 +50,7 @@ class ExpenseAdmin extends Admin
             ->add('comment')
             ->add('created_at')
             ->add('updated_at')
+            ->add('user')
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'show' => array(),
