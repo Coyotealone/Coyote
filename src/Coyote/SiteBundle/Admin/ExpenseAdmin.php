@@ -10,6 +10,12 @@ use Sonata\AdminBundle\Show\ShowMapper;
 
 class ExpenseAdmin extends Admin
 {
+	protected $datagridValues = array(
+			'_page' => 1,
+			'_sort_order' => 'DESC',
+			'_sort_by' => 'id'
+	);
+	
     /**
      * @param DatagridMapper $datagridMapper
      */
