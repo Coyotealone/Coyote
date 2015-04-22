@@ -218,6 +218,8 @@ expense:
     id_start: Identyfikator start
     id_end: Identyfikator Koniec
     treated: Traktowane
+    id: Id
+    username: Nazwa użytkownika
     status:
         yes: Tak
         no: Nie

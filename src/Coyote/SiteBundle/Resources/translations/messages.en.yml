@@ -218,6 +218,8 @@ expense:
     id_start: ID Start
     id_end: ID End
     treated: Treated
+    id: Id
+    username: Username
     status:
         yes: Yes
         no: No

@@ -13,7 +13,8 @@
     <div class='table-responsive'>
         <table class='table' id='tab_expense'>
         	<tr>
-        	    <th>Id</th>
+        	    <th>{{ 'expense.id'|trans }}</th>
+        	    <th>{{ 'expense.username'|trans }}</th>
         		<th id='tab_expense_site'>{{ 'expense.site'|trans}}</th>
         		<th id='tab_expense_date'>{{ 'expense.date'|trans}}</th>
         		<th id='tab_expense_item'>{{ 'expense.item'|trans}}</th>
@@ -27,6 +28,7 @@
         	{% for entity in data %}
                 <tr>
                     <td>{{ entity.id }}</a></td>
+                    <td>{{ entity.user.username }}</td>
                     <td>{{ entity.site.code }}</td>
                     <td>{{ entity.date|date("d/m/y") }}</td>
                     <td>{{ entity.fee.code }}</td>

@@ -44,8 +44,6 @@
     	<script src="{{ asset('bundles/coyotesite/js/html5shiv.min.js') }}"></script>
         <script src="{{ asset('bundles/coyotesite/js/respond.min.js') }}"></script>
     <![endif]-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-  	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 
 </head>
 
@@ -60,6 +58,7 @@
                     <a class="navbar-brand" href="{{path('main_menu')}}"><img alt="Pichon" src="{{ asset('bundles/coyotesite/images/Logo-PICHON_80.png') }}"></a>
                 </li>
                 {% block nav %}
+                	{{ include('CoyoteSiteBundle:Base:nav.html.twig') }}
             	{% endblock nav %}
             </ul>
         </div>

@@ -218,6 +218,8 @@ expense:
     id_start: ID Start
     id_end: ID End
     treated: Traité
+    id: Id
+    username: Nom d'utilisateur
     status:
         yes: Oui
         no: Non
