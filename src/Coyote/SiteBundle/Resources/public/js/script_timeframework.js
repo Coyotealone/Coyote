@@ -5,8 +5,7 @@ $(document).ready(function()
 
 function visibilityAbsenceTime(absence, jour, absenceday)
 {
-	alert("jour : "+jour+"absence : "+absence+"absenceday : "+absenceday);
-    if(absence == "Aucune" | absence == "")
+	if(absence == "Aucune" | absence == "")
 	{
 		document.getElementById("absence"+jour).selectedIndex = 0;
 		document.getElementById("absenceday"+jour).style.visibility = "hidden";
@@ -17,61 +16,52 @@ function visibilityAbsenceTime(absence, jour, absenceday)
 		document.getElementById("absence"+jour).selectedIndex = 1;
 		document.getElementById("absenceday"+jour).style.visibility = "visible";
 		document.getElementById("absencetime"+jour).style.visibility = "hidden";
-
-		timeAbsence(0, absenceday, jour);
     }
 	if(absence == "CP")
 	{
 		document.getElementById("absence"+jour).selectedIndex = 2;
 		document.getElementById("absenceday"+jour).style.visibility = "visible";
 		document.getElementById("absencetime"+jour).style.visibility = "hidden";
-		timeAbsence(0, absenceday, jour);
 	}
 	if(absence == "CA")
 	{
 		document.getElementById("absence"+jour).selectedIndex = 3;
 		document.getElementById("absenceday"+jour).style.visibility = "visible";
 		document.getElementById("absencetime"+jour).style.visibility = "hidden";
-		timeAbsence(0, absenceday, jour);
 	}
 	if(absence == "CSS")
 	{
 		document.getElementById("absence"+jour).selectedIndex = 4;
 		document.getElementById("absenceday"+jour).style.visibility = "visible";
 		document.getElementById("absencetime"+jour).style.visibility = "hidden";
-		timeAbsence(0, absenceday, jour);
     }
     if(absence == "AT")
 	{
     	document.getElementById("absence"+jour).selectedIndex = 5;
     	document.getElementById("absenceday"+jour).style.visibility = "visible";
 		document.getElementById("absencetime"+jour).style.visibility = "hidden";
-		timeAbsence(0, absenceday, jour);
 	}
 	if(absence == "MP")
 	{
     	document.getElementById("absence"+jour).selectedIndex = 6;
     	document.getElementById("absenceday"+jour).style.visibility = "visible";
 		document.getElementById("absencetime"+jour).style.visibility = "hidden";
-		timeAbsence(0, absenceday, jour);
 	}
 	if(absence == "Recup")
 	{
     	document.getElementById("absence"+jour).selectedIndex = 7;
     	document.getElementById("absenceday"+jour).style.visibility = "hidden";
 		document.getElementById("absencetime"+jour).style.visibility = "visible";
-		timeAbsence(2, absenceday, jour);
     }
     if(absence == "Autre")
 	{
     	document.getElementById("absence"+jour).selectedIndex = 8;
     	document.getElementById("absenceday"+jour).style.visibility = "hidden";
 		document.getElementById("absencetime"+jour).style.visibility = "visible";
-		timeAbsence(2, absenceday, jour);
     }
 }
 
-function timeAbsence(absence, absenceday, jour)
+function timeAbsence(absenceday, jour)
 {
 	if(absenceday == "0.5")
     {
@@ -115,13 +105,12 @@ function initvalue()
 	var value = null;
 	for(i=1; i<8; i++)
 	{
-		value = document.getElementById("deplacement"+i);
+		value = document.getElementById("travel"+i);
 		travel[i] = value.dataset.value;
-		value = document.getElementById("commentaire"+i);
+		value = document.getElementById("comment"+i);
     	comment[i] = value.dataset.value;
     	value = document.getElementById("absenceday"+i);
     	absenceday[i] = value.dataset.value;
-    	//alert(absenceday[i]);
     	value = document.getElementById("absence"+i);
     	absence[i] = value.dataset.value;
     	if (absence[i] == null)
@@ -130,11 +119,11 @@ function initvalue()
         }
     	if (absence[i] != null)
     		visibilityAbsenceTime(absence[i], i, absenceday[i]);
-    	value = document.getElementById("jour"+i);
+    	value = document.getElementById("day"+i);
     	workingday[i] = value.dataset.value;
     	if (workingday[i] != null)
-    		workingday(workingday[i], "jour"+i);
-    	timeAbsence("", absenceday[i], "1");
+    		workingday(workingday[i], "day"+i);
+    	timeAbsence(absenceday[i], i);
 	}
 	inittravel(travel);
 	initcomment(comment);
@@ -146,9 +135,9 @@ function inittravel(travel)
 	for(i=1;i<8;i++)
 	{
 		if(travel[i] == 0 | travel[i] == "")
-			document.getElementById("deplacement"+i).checked = false;
+			document.getElementById("travel"+i).checked = false;
 		if(travel[i] == 1)
-			document.getElementById("deplacement"+i).checked = true;
+			document.getElementById("travel"+i).checked = true;
 	}
 }
 
@@ -158,6 +147,6 @@ function initcomment(comment)
 	for(i=1;i<8;i++)
 	{
 		if(comment[i] == 'null' | comment[i] == '')
-		    document.getElementById("commentaire"+i).value = "";
+		    document.getElementById("comment"+i).value = "";
 	}
 }

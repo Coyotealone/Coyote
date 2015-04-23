@@ -226,7 +226,7 @@ expense:
     flash:
         save: 1 enregistrement effectué
         save_multiple: %count% enregistrement effectués
-        no_save: Aucune enregistrement effectué
+        no_save: Aucun enregistrement effectué
         no_update: Aucune donnée mise à jour
         update: Mise à jour effectuée
 

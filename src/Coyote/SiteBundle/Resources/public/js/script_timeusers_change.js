@@ -105,349 +105,349 @@ $(document).ready(function()
         visibilityAbsenceTime(absencetime7, 7);
     })
 
-    $("#debut1").change(function()
+    $("#start1").change(function()
     {
-        var start1 = document.getElementById("debut1").value;
+        var start1 = document.getElementById("start1").value;
         start1 = splitformatTime(start1);
         start1 = formatTime(start1);
-        document.getElementById("debut1").value = start1;
-        var end1 = document.getElementById("fin1").value;
-        var break1 = document.getElementById("pause1").value;
+        document.getElementById("start1").value = start1;
+        var end1 = document.getElementById("end1").value;
+        var break1 = document.getElementById("break1").value;
 
         var time1 = calculWorkingTime(start1, end1, break1);
         var day1 = calculWorkingDay(time1);
         if(time1 != null)
-            document.getElementById("tps1").value = time1;
+            document.getElementById("workingtime1").value = time1;
     })
 
-    $("#pause1").change(function()
+    $("#break1").change(function()
     {
-        var start1 = document.getElementById("debut1").value;
-        var end1 = document.getElementById("fin1").value;
-        var break1 = document.getElementById("pause1").value;
+        var start1 = document.getElementById("start1").value;
+        var end1 = document.getElementById("end1").value;
+        var break1 = document.getElementById("break1").value;
         break1 = splitformatTime(break1);
         break1 = formatTime(break1);
-        document.getElementById("pause1").value = break1;
+        document.getElementById("break1").value = break1;
 
         var time1 = calculWorkingTime(start1, end1, break1);
         var day1 = calculWorkingDay(time1);
         if(time1 != null)
-            document.getElementById("tps1").value = time1;
+            document.getElementById("workingtime1").value = time1;
     })
 
-    $("#fin1").change(function()
+    $("#end1").change(function()
     {
-        var start1 = document.getElementById("debut1").value;
-        var end1 = document.getElementById("fin1").value;
+        var start1 = document.getElementById("start1").value;
+        var end1 = document.getElementById("end1").value;
         end1 = splitformatTime(end1);
         end1 = formatTime(end1);
-        document.getElementById("fin1").value = end1;
-        var break1 = document.getElementById("pause1").value;
+        document.getElementById("end1").value = end1;
+        var break1 = document.getElementById("break1").value;
 
         var time1 = calculWorkingTime(start1, end1, break1);
         var day1 = calculWorkingDay(time1);
         if(time1 != null)
-            document.getElementById("tps1").value = time1;
+            document.getElementById("workingtime1").value = time1;
     })
 
 
-    $("#debut2").change(function()
+    $("#start2").change(function()
     {
-        var start2 = document.getElementById("debut2").value;
+        var start2 = document.getElementById("start2").value;
         start2 = splitformatTime(start2);
         start2 = formatTime(start2);
-        document.getElementById("debut2").value = start2;
-        var end2 = document.getElementById("fin2").value;
-        var break2 = document.getElementById("pause2").value;
+        document.getElementById("start2").value = start2;
+        var end2 = document.getElementById("end2").value;
+        var break2 = document.getElementById("break2").value;
 
         var time2 = calculWorkingTime(start2, end2, break2);
         var day2 = calculWorkingDay(time2);
         if(time2 != null)
-            document.getElementById("tps2").value = time2;
+            document.getElementById("workingtime2").value = time2;
     })
 
-    $("#pause2").change(function()
+    $("#break2").change(function()
     {
-        var start2 = document.getElementById("debut2").value;
-        var end2 = document.getElementById("fin2").value;
-        var break2 = document.getElementById("pause2").value;
+        var start2 = document.getElementById("start2").value;
+        var end2 = document.getElementById("end2").value;
+        var break2 = document.getElementById("break2").value;
         break2 = splitformatTime(break2);
         break2 = formatTime(break2);
-        document.getElementById("pause2").value = break2;
+        document.getElementById("break2").value = break2;
 
         var time2 = calculWorkingTime(start2, end2, break2);
         var day2 = calculWorkingDay(time2);
         if(time2 != null)
-            document.getElementById("tps2").value = time2;
+            document.getElementById("workingtime2").value = time2;
     })
 
-    $("#fin2").change(function()
+    $("#end2").change(function()
     {
-        var start2 = document.getElementById("debut2").value;
-        var end2 = document.getElementById("fin2").value;
+        var start2 = document.getElementById("start2").value;
+        var end2 = document.getElementById("end2").value;
         end2 = splitformatTime(end2);
         end2 = formatTime(end2);
-        document.getElementById("fin2").value = end2;
-        var break2 = document.getElementById("pause2").value;
+        document.getElementById("end2").value = end2;
+        var break2 = document.getElementById("break2").value;
 
         var time2 = calculWorkingTime(start2, end2, break2);
         var day2 = calculWorkingDay(time2);
         if(time2 != null)
-            document.getElementById("tps2").value = time2;
+            document.getElementById("workingtime2").value = time2;
     })
 
 
-    $("#debut3").change(function()
+    $("#start3").change(function()
     {
-        var start3 = document.getElementById("debut3").value;
+        var start3 = document.getElementById("start3").value;
         start3 = splitformatTime(start3);
         start3 = formatTime(start3);
-        document.getElementById("debut3").value = start3;
-        var end3 = document.getElementById("fin3").value;
-        var break3 = document.getElementById("pause3").value;
+        document.getElementById("start3").value = start3;
+        var end3 = document.getElementById("end3").value;
+        var break3 = document.getElementById("break3").value;
 
         var time3 = calculWorkingTime(start3, end3, break3);
         var day3 = calculWorkingDay(time3);
         if(time3 != null)
-            document.getElementById("tps3").value = time3;
+            document.getElementById("workingtime3").value = time3;
     })
 
-    $("#pause3").change(function()
+    $("#break3").change(function()
     {
-        var start3 = document.getElementById("debut3").value;
-        var end3 = document.getElementById("fin3").value;
-        var break3 = document.getElementById("pause3").value;
+        var start3 = document.getElementById("start3").value;
+        var end3 = document.getElementById("end3").value;
+        var break3 = document.getElementById("break3").value;
         break3 = splitformatTime(break3);
         break3 = formatTime(break3);
-        document.getElementById("pause3").value = break3;
+        document.getElementById("break3").value = break3;
 
         var time3 = calculWorkingTime(start3, end3, break3);
         var day3 = calculWorkingDay(time3);
         if(time3 != null)
-            document.getElementById("tps3").value = time3;
+            document.getElementById("workingtime3").value = time3;
     })
 
-    $("#fin3").change(function()
+    $("#end3").change(function()
     {
-        var start3 = document.getElementById("debut3").value;
-        var end3 = document.getElementById("fin3").value;
+        var start3 = document.getElementById("start3").value;
+        var end3 = document.getElementById("end3").value;
         end3 = splitformatTime(end3);
         end3 = formatTime(end3);
-        document.getElementById("fin3").value = end3;
-        var break3 = document.getElementById("pause3").value;
+        document.getElementById("end3").value = end3;
+        var break3 = document.getElementById("break3").value;
 
         var time3 = calculWorkingTime(start3, end3, break3);
         var day3 = calculWorkingDay(time3);
         if(time3 != null)
-            document.getElementById("tps3").value = time3;
+            document.getElementById("workingtime3").value = time3;
     })
 
 
-    $("#debut4").change(function()
+    $("#start4").change(function()
     {
-        var start4 = document.getElementById("debut4").value;
+        var start4 = document.getElementById("start4").value;
         start4 = splitformatTime(start4);
         start4 = formatTime(start4);
-        document.getElementById("debut4").value = start4;
-        var end4 = document.getElementById("fin4").value;
-        var break4 = document.getElementById("pause4").value;
+        document.getElementById("start4").value = start4;
+        var end4 = document.getElementById("end4").value;
+        var break4 = document.getElementById("break4").value;
 
         var time4 = calculWorkingTime(start4, end4, break4);
         var day4 = calculWorkingDay(time4);
         if(time4 != null)
-            document.getElementById("tps4").value = time4;
+            document.getElementById("workingtime4").value = time4;
     })
 
-    $("#pause4").change(function()
+    $("#break4").change(function()
     {
-        var start4 = document.getElementById("debut4").value;
-        var end4 = document.getElementById("fin4").value;
-        var break4 = document.getElementById("pause4").value;
+        var start4 = document.getElementById("start4").value;
+        var end4 = document.getElementById("end4").value;
+        var break4 = document.getElementById("break4").value;
         break4 = splitformatTime(break4);
         break4 = formatTime(break4);
-        document.getElementById("pause4").value = break4;
+        document.getElementById("break4").value = break4;
 
         var time4 = calculWorkingTime(start4, end4, break4);
         var day4 = calculWorkingDay(time4);
         if(time4 != null)
-            document.getElementById("tps4").value = time4;
+            document.getElementById("workingtime4").value = time4;
     })
 
-    $("#fin4").change(function()
+    $("#end4").change(function()
     {
-        var start4 = document.getElementById("debut4").value;
-        var end4 = document.getElementById("fin4").value;
+        var start4 = document.getElementById("start4").value;
+        var end4 = document.getElementById("end4").value;
         end4 = splitformatTime(end4);
         end4 = formatTime(end4);
-        document.getElementById("fin4").value = end4;
-        var break4 = document.getElementById("pause4").value;
+        document.getElementById("end4").value = end4;
+        var break4 = document.getElementById("break4").value;
 
         var time4 = calculWorkingTime(start4, end4, break4);
         var day4 = calculWorkingDay(time4);
         if(time4 != null)
-            document.getElementById("tps4").value = time4;
+            document.getElementById("workingtime4").value = time4;
     })
 
 
-    $("#debut5").change(function()
+    $("#start5").change(function()
     {
-        var start5 = document.getElementById("debut5").value;
+        var start5 = document.getElementById("start5").value;
         start5 = splitformatTime(start5);
         start5 = formatTime(start5);
-        document.getElementById("debut5").value = start5;
-        var end5 = document.getElementById("fin5").value;
-        var break5 = document.getElementById("pause5").value;
+        document.getElementById("start5").value = start5;
+        var end5 = document.getElementById("end5").value;
+        var break5 = document.getElementById("break5").value;
 
         var time5 = calculWorkingTime(start5, end5, break5);
         var day5 = calculWorkingDay(time5);
         if(time5 != null)
-            document.getElementById("tps5").value = time5;
+            document.getElementById("workingtime5").value = time5;
     })
 
-    $("#pause5").change(function()
+    $("#break5").change(function()
     {
-        var start5 = document.getElementById("debut5").value;
-        var end5 = document.getElementById("fin5").value;
-        var break5 = document.getElementById("pause5").value;
+        var start5 = document.getElementById("start5").value;
+        var end5 = document.getElementById("end5").value;
+        var break5 = document.getElementById("break5").value;
         break5 = splitformatTime(break5);
         break5 = formatTime(break5);
-        document.getElementById("pause5").value = break5;
+        document.getElementById("break5").value = break5;
 
         var time5 = calculWorkingTime(start5, end5, break5);
         var day5 = calculWorkingDay(time5);
         if(time5 != null)
-            document.getElementById("tps5").value = time5;
+            document.getElementById("workingtime5").value = time5;
     })
 
-    $("#fin5").change(function()
+    $("#end5").change(function()
     {
-        var start5 = document.getElementById("debut5").value;
-        var end5 = document.getElementById("fin5").value;
+        var start5 = document.getElementById("start5").value;
+        var end5 = document.getElementById("end5").value;
         end5 = splitformatTime(end5);
         end5 = formatTime(end5);
-        document.getElementById("fin5").value = end5;
-        var break5 = document.getElementById("pause5").value;
+        document.getElementById("end5").value = end5;
+        var break5 = document.getElementById("break5").value;
 
         var time5 = calculWorkingTime(start5, end5, break5);
         var day5 = calculWorkingDay(time5);
         if(time5 != null)
-            document.getElementById("tps5").value = time5;
+            document.getElementById("workingtime5").value = time5;
     })
 
 
-    $("#debut6").change(function()
+    $("#start6").change(function()
     {
-        var start6 = document.getElementById("debut6").value;
+        var start6 = document.getElementById("start6").value;
         start6 = splitformatTime(start6);
         start6 = formatTime(start6);
-        document.getElementById("debut6").value = start6;
-        var end6 = document.getElementById("fin6").value;
-        var break6 = document.getElementById("pause6").value;
+        document.getElementById("start6").value = start6;
+        var end6 = document.getElementById("end6").value;
+        var break6 = document.getElementById("break6").value;
 
         var time6 = calculWorkingTime(start6, end6, break6);
         var day6 = calculWorkingDay(time6);
         if(time6 != null)
-            document.getElementById("tps6").value = time6;
+            document.getElementById("workingtime6").value = time6;
     })
 
-    $("#pause6").change(function()
+    $("#break6").change(function()
     {
-        var start6 = document.getElementById("debut6").value;
-        var end6 = document.getElementById("fin6").value;
-        var break6 = document.getElementById("pause6").value;
+        var start6 = document.getElementById("start6").value;
+        var end6 = document.getElementById("end6").value;
+        var break6 = document.getElementById("break6").value;
         break6 = splitformatTime(break6);
         break6 = formatTime(break6);
-        document.getElementById("pause6").value = break6;
+        document.getElementById("break6").value = break6;
 
         var time6 = calculWorkingTime(start6, end6, break6);
         var day6 = calculWorkingDay(time6);
         if(time6 != null)
-            document.getElementById("tps6").value = time6;
+            document.getElementById("workingtime6").value = time6;
     })
 
-    $("#fin6").change(function()
+    $("#end6").change(function()
     {
-        var start6 = document.getElementById("debut6").value;
-        var end6 = document.getElementById("fin6").value;
+        var start6 = document.getElementById("start6").value;
+        var end6 = document.getElementById("end6").value;
         end6 = splitformatTime(end6);
         end6 = formatTime(end6);
-        document.getElementById("fin6").value = end6;
-        var break6 = document.getElementById("pause6").value;
+        document.getElementById("end6").value = end6;
+        var break6 = document.getElementById("break6").value;
 
         var time6 = calculWorkingTime(start6, end6, break6);
         var day6 = calculWorkingDay(time6);
         if(time6 != null)
-            document.getElementById("tps6").value = time6;
+            document.getElementById("workingtime6").value = time6;
     })
 
 
-    $("#debut7").change(function()
+    $("#start7").change(function()
     {
-        var start7 = document.getElementById("debut7").value;
+        var start7 = document.getElementById("start7").value;
         start7 = splitformatTime(start7);
         start7 = formatTime(start7);
-        document.getElementById("debut7").value = start7;
-        var end7 = document.getElementById("fin7").value;
-        var break7 = document.getElementById("pause7").value;
+        document.getElementById("start7").value = start7;
+        var end7 = document.getElementById("end7").value;
+        var break7 = document.getElementById("break7").value;
 
         var time7 = calculWorkingTime(start7, end7, break7);
         var day7 = calculWorkingDay(time7);
         if(time7 != null)
-            document.getElementById("tps7").value = time7;
+            document.getElementById("workingtime7").value = time7;
     })
 
-    $("#pause7").change(function()
+    $("#break7").change(function()
     {
-        var start7 = document.getElementById("debut7").value;
-        var end7 = document.getElementById("fin7").value;
-        var break7 = document.getElementById("pause7").value;
+        var start7 = document.getElementById("start7").value;
+        var end7 = document.getElementById("end7").value;
+        var break7 = document.getElementById("break7").value;
         break7 = splitformatTime(break7);
         break7 = formatTime(break7);
-        document.getElementById("pause7").value = break7;
+        document.getElementById("break7").value = break7;
 
         var time7 = calculWorkingTime(start7, end7, break7);
         var day7 = calculWorkingDay(time7);
         if(time7 != null)
-            document.getElementById("tps7").value = time7;
+            document.getElementById("workingtime7").value = time7;
     })
 
-    $("#fin7").change(function()
+    $("#end7").change(function()
     {
-        var start7 = document.getElementById("debut7").value;
-        var end7 = document.getElementById("fin7").value;
+        var start7 = document.getElementById("start7").value;
+        var end7 = document.getElementById("end7").value;
         end7 = splitformatTime(end7);
         end7 = formatTime(end7);
-        document.getElementById("fin7").value = end7;
-        var break7 = document.getElementById("pause7").value;
+        document.getElementById("end7").value = end7;
+        var break7 = document.getElementById("break7").value;
 
         var time7 = calculWorkingTime(start7, end7, break7);
         var day7 = calculWorkingDay(time7);
         if(time7 != null)
-            document.getElementById("tps7").value = time7;
+            document.getElementById("workingtime7").value = time7;
     })
 
-    $("#debutauto").change(function()
+    $("#startauto").change(function()
     {
-        var startauto = document.getElementById("debutauto").value;
+        var startauto = document.getElementById("startauto").value;
         startauto = splitformatTime(startauto);
         startauto = formatTime(startauto);
-        document.getElementById("debutauto").value = startauto;
+        document.getElementById("startauto").value = startauto;
     })
 
-    $("#pauseauto").change(function()
+    $("#breakauto").change(function()
     {
-        var breakauto = document.getElementById("pauseauto").value;
+        var breakauto = document.getElementById("breakauto").value;
         breakauto = splitformatTime(breakauto);
         breakauto = formatTime(breakauto);
-        document.getElementById("pauseauto").value = breakauto;
+        document.getElementById("breakauto").value = breakauto;
     })
 
-    $("#finauto").change(function()
+    $("#endauto").change(function()
     {
-        var endauto = document.getElementById("finauto").value;
+        var endauto = document.getElementById("endauto").value;
         endauto = splitformatTime(endauto);
         endauto = formatTime(endauto);
-        document.getElementById("finauto").value = endauto;
+        document.getElementById("endauto").value = endauto;
     })
 
 
@@ -462,9 +462,9 @@ $(document).ready(function()
     	{
     		if(document.getElementById(check[boucle]).checked == true)
     		{
-    			document.getElementById('debut'+jour[boucle]).value = document.getElementById('debutauto').value;
-    			document.getElementById('fin'+jour[boucle]).value = document.getElementById('finauto').value;
-    			document.getElementById('pause'+jour[boucle]).value = document.getElementById('pauseauto').value;
+    			document.getElementById('start'+jour[boucle]).value = document.getElementById('debutauto').value;
+    			document.getElementById('end'+jour[boucle]).value = document.getElementById('finauto').value;
+    			document.getElementById('break'+jour[boucle]).value = document.getElementById('pauseauto').value;
     		}
     		boucle++;
     	}
@@ -483,9 +483,9 @@ function saisie_auto()
 	{
 		if(document.getElementById(check[boucle]).checked == true)
 		{
-			document.getElementById('debut'+jour[boucle]).value = document.getElementById('debutauto').value;
-			document.getElementById('fin'+jour[boucle]).value = document.getElementById('finauto').value;
-			document.getElementById('pause'+jour[boucle]).value = document.getElementById('pauseauto').value;
+			document.getElementById('start'+jour[boucle]).value = document.getElementById('debutauto').value;
+			document.getElementById('end'+jour[boucle]).value = document.getElementById('finauto').value;
+			document.getElementById('break'+jour[boucle]).value = document.getElementById('pauseauto').value;
 		}
 		boucle++;
 	}

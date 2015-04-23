@@ -249,7 +249,7 @@ class ScheduleRepository extends EntityRepository
     public function saveSchedulefm($user, $timetable, $time_travel, $time_absence, $time_absenceday,
             $time_absencetime, $time_comment, $day)
     {
-        if (empty($day) && empty($time_travel) && empty($time_comment)
+        if ($day == "empty" && empty($time_travel) && empty($time_comment)
                 && ($time_absence == "Aucune"))
         {
             return null;

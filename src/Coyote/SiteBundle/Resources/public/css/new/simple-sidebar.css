@@ -62,12 +62,14 @@
 .sidebar-nav li {
     text-indent: 20px;
     line-height: 40px;
+    width: auto;
 }
 
 .sidebar-nav li a {
     display: block;
     text-decoration: none;
     color: #999999;
+    width: auto;
 }
 
 .sidebar-nav li a:hover {
