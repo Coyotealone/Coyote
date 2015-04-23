@@ -63,26 +63,26 @@
             				</td>
             				<td>
             					{% if attribute(time,loop.index0) is not empty and attribute(time,loop.index0).start %}
-            				        <input class='input_time' type='time' name="start{{loop.index}}" id="start{{loop.index}}" maxlength='5'
+            				        <input class='input_time' type='text' name="start{{loop.index}}" id="start{{loop.index}}" maxlength='5'
             				        data-value={{ attribute(time,loop.index0).start }} value={{ attribute(time,loop.index0).start }} />
             				    {% else %}
-            				        <input class='input_time' type='time' name="start{{loop.index}}" id="start{{loop.index}}" maxlength='5'>
+            				        <input class='input_time' type='text' name="start{{loop.index}}" id="start{{loop.index}}" maxlength='5'>
             				    {% endif %}
             				</td>
             				<td>
             					{% if attribute(time,loop.index0) is not empty and attribute(time,loop.index0).end %}
-            				        <input class='input_time' type='time' name="end{{loop.index}}" id="end{{loop.index}}" maxlength='5'
+            				        <input class='input_time' type='text' name="end{{loop.index}}" id="end{{loop.index}}" maxlength='5'
             				        data-value={{ attribute(time,loop.index0).end }} value={{ attribute(time,loop.index0).end }} />
             				    {% else %}
-            				        <input class='input_time' type='time' name="end{{loop.index}}" id="end{{loop.index}}" maxlength='5' />
+            				        <input class='input_time' type='text' name="end{{loop.index}}" id="end{{loop.index}}" maxlength='5' />
             				    {% endif %}
             				</td>
             				<td>
             					{% if attribute(time,loop.index0) is not empty and attribute(time,loop.index0).break %}
-            				        <input class='input_time' type='time' name="break{{loop.index}}" id="break{{loop.index}}" maxlength='5'
+            				        <input class='input_time' type='text' name="break{{loop.index}}" id="break{{loop.index}}" maxlength='5'
             				        data-value={{ attribute(time,loop.index0).break }} value={{ attribute(time,loop.index0).break }} />
             				    {% else %}
-            				        <input class='input_time' type='time' name="break{{loop.index}}" id="break{{loop.index}}" maxlength='5' />
+            				        <input class='input_time' type='text' name="break{{loop.index}}" id="break{{loop.index}}" maxlength='5' />
             				    {% endif %}
             				</td>
             				<td>
