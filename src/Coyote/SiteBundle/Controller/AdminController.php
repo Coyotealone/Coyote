@@ -224,17 +224,30 @@ class AdminController extends Controller
             /** @var $data array data request */
             $data_request = $request->request->all();
             
+            $res = null;
+            $session = $this->getRequest()->getSession();
+            
             if(isset($data_request['add']))
             {
-                $request = $this->getRequest();
-                $message = 'admin.updaterole.flash.add';
+            	$request = $this->getRequest();
+            	$em = $this->getDoctrine()->getManager();
+            	$user_choice = $em->getRepository("CoyoteSiteBundle:User")->findOneById($session->get("choicesroles"));
+                $res = $em->getRepository("CoyoteSiteBundle:User")->updateRole(
+                		$user_choice, $data_request, "add");
+                if ($res == "OK")
+                	$message = 'admin.updaterole.flash.add';
                 $this->get('session')->getFlashBag()->set('admin_updaterole', $message);
                 return $this->redirect($this->generateUrl('admin_indexchoicesuser'));
             }
             if(isset($data_request['remove']))
             {
                 $request = $this->getRequest();
-                $message = 'admin.updaterole.flash.remove';
+                $em = $this->getDoctrine()->getManager();
+                $user_choice = $em->getRepository("CoyoteSiteBundle:User")->findOneById($session->get("choicesroles"));
+                $res = $em->getRepository("CoyoteSiteBundle:User")->updateRole(
+                		$user_choice, $data_request, "remove");
+                if($res == "OK")
+                	$message = 'admin.updaterole.flash.remove';
                 $this->get('session')->getFlashBag()->set('admin_updaterole', $message);
                 return $this->redirect($this->generateUrl('admin_indexchoicesuser'));
             }
