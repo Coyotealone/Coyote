@@ -12,7 +12,8 @@
     {% endfor %}
 
     <form role="form" action="{{ path('admin_choicesroles') }}" method='post'>
-        <table class='table' id='tab_expense'>
+    	<p id="title">{{ 'base.nav.profile_admin.indexchoicesuser'|trans }}</p>
+	        <table class='table' id='tab_expense'>
         	<tr>
         	    <th class="center">{{'admin.title.indexchoicesuser'|trans}}</th>
         	    <td class="center">

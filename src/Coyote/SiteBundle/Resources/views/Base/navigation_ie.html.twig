@@ -1,5 +1,4 @@
-<ul style="padding:0; margin: 0; list-style-type:none;">
-    <li style="margin-left:2px; float:left; /*pour IE*/" class="active"><a href="{{ path('main_menu') }}">{{'base.bav.accueil'|trans}}</a></li>
+    <li style="margin-left:2px; float:left; /*pour IE*/" class="active"><a href="{{ path('main_menu') }}">{{'base.nav.accueil'|trans}}</a></li>
 
     {% if is_granted('ROLE_TECH') or is_granted('ROLE_CADRE') %}
 	<li id="presence" class="dropdown" style="margin: 0px 10px; float:left; ">
@@ -66,6 +65,7 @@
         </ul>
     </li>
     {% endif %}
-</ul>
-<button type="button" class="btn btn-default navbar-btn" onclick="window.location.href='{{ path('fos_user_security_logout') }}'">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
-</button>
+<li>
+	<button type="button" class="btn btn-default navbar-btn" onclick="window.location.href='{{ path('fos_user_security_logout') }}'">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+	</button>
+</li>

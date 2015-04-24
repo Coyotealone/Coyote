@@ -10,6 +10,12 @@ use Sonata\AdminBundle\Show\ShowMapper;
 
 class ScheduleAdmin extends Admin
 {
+	protected $datagridValues = array(
+			'_page' => 1,
+			'_sort_order' => 'DESC',
+			'_sort_by' => 'id'
+	);
+	
     /**
      * @param DatagridMapper $datagridMapper
      */
@@ -49,6 +55,7 @@ class ScheduleAdmin extends Admin
             ->add('comment')
             ->add('created_at')
             ->add('updated_at')
+            ->add('user')
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'show' => array(),

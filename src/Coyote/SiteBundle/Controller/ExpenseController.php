@@ -357,6 +357,10 @@ class ExpenseController extends Controller
 		{
 			$em = $this->getDoctrine()->getManager();
 			$date = $_GET['year'].'-'.$_GET['month'].'%';
+			$request = $this->getRequest();
+			$session = $request->getSession();
+			$session->set('year_expense', $_GET['year']);
+			$session->set('month_expense', $_GET['month']);
 			$maxItems = 10;
 			$expenses = $this->getDoctrine()->getRepository('CoyoteSiteBundle:Expense')
 				->getListExpenseUser($this->getUser(), $date, $page, $maxItems);

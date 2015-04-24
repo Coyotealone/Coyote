@@ -185,4 +185,9 @@ class MainController extends Controller
         $request = $this->getRequest();
         return $this->forward('CoyoteSiteBundle:Main:getMenu', array('_locale' => $request->getLocale()));
     }
+    
+    public function indexAction()
+    {
+    	return $this->render('CoyoteSiteBundle:Base:index.html.twig');
+    }
 }

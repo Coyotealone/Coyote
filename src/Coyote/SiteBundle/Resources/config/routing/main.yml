@@ -10,7 +10,9 @@ main_language:
     pattern:    /language
     defaults:   { _controller: "CoyoteSiteBundle:Main:postLanguage"}
 
-
+main_index:
+    pattern:    /index
+    defaults:   { _controller: "CoyoteSiteBundle:Main:index"}
 
 main_test:
     pattern:    /test

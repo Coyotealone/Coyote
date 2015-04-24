@@ -2,7 +2,7 @@ user_block_logout: Wyloguj
 
 base:
     copyright: Copyright © 2015 PICHON - Wszystkie prawa zastrzeżone
-    version: Wersja 2.3.0
+    version: Wersja 2.3.3
     title: Pichon - WebSite
     link: www.pichonindustries.com
     choose_language: Wybierz swój kraj
@@ -218,6 +218,8 @@ expense:
     id_start: Identyfikator start
     id_end: Identyfikator Koniec
     treated: Traktowane
+    id: Id
+    username: Nazwa użytkownika
     status:
         yes: Tak
         no: Nie

@@ -106,9 +106,9 @@ class ScheduleController extends Controller
             $schedule = null;
             for($i=1;$i<8;$i++)
             {
-                if (array_key_exists('deplacement'.$i, $data))
-                    $deplacement[$i] = $data['deplacement'.$i];
-                if (!array_key_exists('deplacement'.$i, $data))
+                if (array_key_exists('travel'.$i, $data))
+                    $deplacement[$i] = $data['travel'.$i];
+                if (!array_key_exists('travel'.$i, $data))
                     $deplacement[$i] = "";
                 $date = $em->getRepository('CoyoteSiteBundle:Timetable')->createDateString($data['date'.$i]);
                 $timetable[$i] = $em->getRepository('CoyoteSiteBundle:Timetable')->findByDate($date);
@@ -127,16 +127,16 @@ class ScheduleController extends Controller
                     $timetable_id = $em->getRepository('CoyoteSiteBundle:TimeTable')->findOneById(
                             $timetable_ids[($i-1)]->getId());
                     $schedule[$i] = $em->getRepository('CoyoteSiteBundle:Schedule')->saveSchedule(
-                        $user, $timetable_id, $data['debut'.$i], $data['fin'.$i], $data['pause'.$i],
+                        $user, $timetable_id, $data['start'.$i], $data['end'.$i], $data['break'.$i],
                         $deplacement[$i], $data['absence'.$i], $data['absenceday'.$i], $data['absencetime'.$i],
-                        $data['commentaire'.$i]);
+                        $data['comment'.$i]);
                 }
                 else
                 {
                     $schedule[$i] = $em->getRepository('CoyoteSiteBundle:Schedule')->updateSchedule(
-                    $schedule[$i], $data['debut'.$i], $data['fin'.$i], $data['pause'.$i], $deplacement[$i],
+                    $schedule[$i], $data['start'.$i], $data['end'.$i], $data['break'.$i], $deplacement[$i],
                     $data['absence'.$i], $data['absenceday'.$i], $data['absencetime'.$i],
-                    $data['commentaire'.$i]);
+                    $data['comment'.$i]);
                 }
                 if ($schedule[$i] != null)
                 {
@@ -173,9 +173,9 @@ class ScheduleController extends Controller
             $schedule = null;
             for($i=1;$i<8;$i++)
             {
-                if (array_key_exists('deplacement'.$i, $data))
-                    $deplacement[$i] = $data['deplacement'.$i];
-                if (!array_key_exists('deplacement'.$i, $data))
+                if (array_key_exists('travel'.$i, $data))
+                    $deplacement[$i] = $data['travel'.$i];
+                if (!array_key_exists('travel'.$i, $data))
                     $deplacement[$i] = "";
                 $date = $em->getRepository('CoyoteSiteBundle:Timetable')->createDateString($data['date'.$i]);
                 $timetable[$i] = $em->getRepository('CoyoteSiteBundle:Timetable')->findByDate($date);
@@ -189,18 +189,18 @@ class ScheduleController extends Controller
             $list_id = "";
             for ($i=1;$i<8;$i++)
             {
-                if(empty($schedule[$i]))
+            	if(empty($schedule[$i]))
                 {
                     $timetable_id = $em->getRepository('CoyoteSiteBundle:TimeTable')->findOneById($timetable_ids[($i-1)]->getId());
                     $schedule[$i] = $em->getRepository('CoyoteSiteBundle:Schedule')->saveSchedulefm(
                         $user, $timetable_id, $deplacement[$i], $data['absence'.$i], $data['absenceday'.$i], $data['absencetime'.$i],
-                        $data['commentaire'.$i], $data['jour'.$i]);
+                        $data['comment'.$i], $data['day'.$i]);
                 }
                 else
                 {
                     $schedule[$i] = $em->getRepository('CoyoteSiteBundle:Schedule')->updateSchedulefm(
                         $schedule[$i], $deplacement[$i], $data['absence'.$i], $data['absenceday'.$i], $data['absencetime'.$i],
-                        $data['commentaire'.$i], floatval($data['jour'.$i]));
+                        $data['comment'.$i], floatval($data['day'.$i]));
                 }
                 if($schedule[$i] != null)
                 {

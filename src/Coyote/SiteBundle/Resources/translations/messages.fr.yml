@@ -2,7 +2,7 @@ user_block_logout: Deconnexion
 
 base:
     copyright: Copyright ©2015 PICHON - Tous droits réservés
-    version: Version 2.3.0
+    version: Version 2.3.3
     title: Pichon - WebSite
     link: http://www.pichonindustries.fr
     choose_language: Choisissez votre pays
@@ -218,13 +218,15 @@ expense:
     id_start: ID Start
     id_end: ID End
     treated: Traité
+    id: Id
+    username: Nom d'utilisateur
     status:
         yes: Oui
         no: Non
     flash:
         save: 1 enregistrement effectué
         save_multiple: %count% enregistrement effectués
-        no_save: Aucune enregistrement effectué
+        no_save: Aucun enregistrement effectué
         no_update: Aucune donnée mise à jour
         update: Mise à jour effectuée
 

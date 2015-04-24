@@ -65,7 +65,5 @@
         </ul>
     </li>
     {% endif %}
-<li>
-	<button type="button" class="btn btn-default navbar-btn" onclick="window.location.href='{{ path('fos_user_security_logout') }}'">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
-	</button>
-</li>
+<button type="button" class="btn btn-default navbar-btn" onclick="window.location.href='{{ path('fos_user_security_logout') }}'">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+</button>

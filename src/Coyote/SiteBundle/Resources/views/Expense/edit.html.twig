@@ -44,7 +44,7 @@
         <button type="submit" class="btn btn-success">{{ 'expense.submit.update'|trans }}</button>
     </p>
 </form>
-    <a class='btn_white' href="{{ path('expense_showparameters', {'year': app.session.get('year_expense'), 'month': app.session.get('month_expense')} ) }}">
+    <a class='btn_white' href="{{ path('expense_showexpenses', {'year': app.session.get('year_expense'), 'month': app.session.get('month_expense')} ) }}">
         {{ 'expense.submit.back'|trans }}
     </a>
 
