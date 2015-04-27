@@ -9,7 +9,7 @@
     <link rel="shortcut icon" href="{{ asset('bundles/coyotesite/images/pichonicon.ico') }}" />
 
     <title>{{'base.title'|trans}}</title>
-
+	
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/bootstrap.min.css') }}" type="text/css" media="all" />
     <!--[if lt IE 9]>
@@ -33,18 +33,9 @@
     {% block javascripts %}
     {% endblock %}
 
-    <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/new/bootstrap.min.css') }}" type="text/css" media="all" />
     <!-- Custom CSS -->
     <link href="{{ asset('bundles/coyotesite/css/new/simple-sidebar.css') }}" rel="stylesheet" type="text/css" media="all" />
     
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    	<script src="{{ asset('bundles/coyotesite/js/html5shiv.min.js') }}"></script>
-        <script src="{{ asset('bundles/coyotesite/js/respond.min.js') }}"></script>
-    <![endif]-->
-
 </head>
 
 <body>
@@ -58,7 +49,6 @@
                     <a class="navbar-brand" href="{{path('main_menu')}}"><img alt="Pichon" src="{{ asset('bundles/coyotesite/images/Logo-PICHON_80.png') }}"></a>
                 </li>
                 {% block nav %}
-                	{{ include('CoyoteSiteBundle:Base:nav.html.twig') }}
             	{% endblock nav %}
             </ul>
         </div>
@@ -86,21 +76,6 @@
         <!-- /#page-content-wrapper -->
 
     </div>
-    <!-- /#wrapper -->
-
-    <!-- jQuery -->
-    <script src="{{ asset('bundles/coyotesite/js/jquery.js') }}"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="{{ asset('bundles/coyotesite/js/bootstrap.min.js') }}"></script>
-
-    <!-- Menu Toggle Script -->
-    <script>
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-    });
-    </script>
 
 </body>
 

@@ -146,16 +146,16 @@
             <div>
             	{{'schedule.message'|trans}}
         		<br>
-        		<input type='checkbox' name='lundi' id='check_1'> {{ 'schedule.monday'|trans }}
-        		<input type='checkbox' name='mardi' id='check_2'> {{ 'schedule.tuesday'|trans }}
-        		<input type='checkbox' name='mercredi' id='check_3'> {{ 'schedule.wednesday'|trans }}
-        		<input type='checkbox' name='jeudi' id='check_4'> {{ 'schedule.thursday'|trans }}
-        		<input type='checkbox' name='vendredi' id='check_5'> {{ 'schedule.friday'|trans }}
-        		<input type='checkbox' name='samedi' id='check_6'> {{ 'schedule.saturday'|trans }}
-        		<input type='checkbox' name='dimanche' id='check_7'> {{ 'schedule.sunday'|trans }} |
-        		{{ 'schedule.start'|trans }} <input class='input_time' type='text' id='debutauto'>
-        		{{ 'schedule.end'|trans }} <input class='input_time' type='text' id='finauto'>
-        		{{ 'schedule.break'|trans }} <input class='input_time' type='text' id='pauseauto'>
+        		<input type='checkbox' name='check_1' id='check_1'> {{ 'schedule.monday'|trans }}
+        		<input type='checkbox' name='check_2' id='check_2'> {{ 'schedule.tuesday'|trans }}
+        		<input type='checkbox' name='check_3' id='check_3'> {{ 'schedule.wednesday'|trans }}
+        		<input type='checkbox' name='check_4' id='check_4'> {{ 'schedule.thursday'|trans }}
+        		<input type='checkbox' name='check_5' id='check_5'> {{ 'schedule.friday'|trans }}
+        		<input type='checkbox' name='check_6' id='check_6'> {{ 'schedule.saturday'|trans }}
+        		<input type='checkbox' name='check_7' id='check_7'> {{ 'schedule.sunday'|trans }} |
+        		{{ 'schedule.start'|trans }} <input class='input_time' type='text' id='startauto'>
+        		{{ 'schedule.end'|trans }} <input class='input_time' type='text' id='endauto'>
+        		{{ 'schedule.break'|trans }} <input class='input_time' type='text' id='breakauto'>
         	</div>
         	<br>
         	<a id='work_less' class='btn_white' href="{{ path('schedule_postweekless')}}" >{{'schedule.submit.previous_week'|trans}}</a>
