@@ -8,7 +8,9 @@
 	<buildpathentry kind="src" path="vendor/doctrine/doctrine-bundle"/>
 	<buildpathentry kind="src" path="vendor/sonata-project/core-bundle"/>
 	<buildpathentry kind="src" path="src"/>
+	<buildpathentry kind="src" path="vendor/phing/phing/classes/phing"/>
 	<buildpathentry kind="src" path="vendor/sensio/distribution-bundle"/>
+	<buildpathentry kind="src" path="vendor/willdurand/propel-typehintable-behavior/src"/>
 	<buildpathentry kind="src" path="vendor/oro/doctrine-extensions/src"/>
 	<buildpathentry kind="src" path="vendor/sensio/framework-extra-bundle"/>
 	<buildpathentry kind="src" path="vendor/symfony/monolog-bundle"/>
@@ -30,8 +32,12 @@
 	<buildpathentry kind="src" path="vendor/doctrine/dbal/lib"/>
 	<buildpathentry kind="src" path="vendor/twig/extensions/lib"/>
 	<buildpathentry kind="src" path="vendor/jms/serializer/src"/>
+	<buildpathentry kind="src" path="vendor/propel/propel1/runtime/lib"/>
+	<buildpathentry kind="src" path="vendor/propel/propel1/generator/lib"/>
 	<buildpathentry kind="src" path="vendor/sonata-project/admin-bundle"/>
 	<buildpathentry kind="src" path="vendor/psr/log"/>
+	<buildpathentry kind="src" path="vendor/friendsofsymfony/oauth-server-bundle"/>
+	<buildpathentry kind="src" path="vendor/friendsofsymfony/oauth2-php/lib"/>
 	<buildpathentry kind="src" path="vendor/sonata-project/doctrine-orm-admin-bundle"/>
 	<buildpathentry kind="src" path="vendor/jdorn/sql-formatter/lib"/>
 	<buildpathentry kind="src" path="vendor/doctrine/annotations/lib"/>

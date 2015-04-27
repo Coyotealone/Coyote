@@ -439,7 +439,77 @@ class ScheduleController extends Controller
     	}
     }
     
-    
+    /**
+     * Function to print time attendance by year
+     * @access public
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    public function getScheduleUserPrintYearAction(Request $request)
+    {
+    	$data = new Data();
+    	if ($request->getMethod() == 'GET' && isset($_GET['pay_period']))
+    	{
+    		$doctrine = $this->getDoctrine();
+    		$em = $doctrine->getManager();
+    		$period = $_GET['pay_period'];
+    		$user = $this->getUser();
+    		$dayyear = $em->getRepository('CoyoteSiteBundle:Schedule')->findDayYear($period, $user);
+    		$absencerttyear = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsenceYear($period, $user, "RTT");
+    		$absencecayear = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsenceYear($period, $user, "CA");
+    		$absencecpyear = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsenceYear($period, $user, "CP");
+    		if ($this->get('security.context')->isGranted('ROLE_CADRE'))
+    		{
+    			$data_schedule = $em->getRepository('CoyoteSiteBundle:Schedule')->dataScheduleFMYear($user, $period);
+    			$page = $this->render('CoyoteSiteBundle:Schedule:printfmpayperiod.html.twig', array(
+    					'dataschedule' => $data_schedule,
+    					'rttyear' => $absencerttyear,
+    					'cpyear' => $absencecpyear,
+    					'cayear' => $absencecayear,
+    					'dayyear' => $dayyear,
+    			));
+    		}
+    		if ($this->get('security.context')->isGranted('ROLE_TECH'))
+    		{
+    			$data_schedule = $em->getRepository('CoyoteSiteBundle:Schedule')->dataScheduleYear($user, $period);
+    			$timeweek = $em->getRepository('CoyoteSiteBundle:Schedule')->timeWeek($data_schedule);
+    			$date = '';
+    			$day = '';
+    			$week = '';
+    			for ($i=0;$i<count($data_schedule);$i++)
+    			{
+    				$day[$i] = $data_schedule[$i]['date']->format('l');
+    				$date[$i] = $data_schedule[$i]['date']->format('d/m/Y');
+    				$week[$i] = $data_schedule[$i]['date']->format('W');
+    			}
+    			$page = $this->render('CoyoteSiteBundle:Schedule:printpayperiod.html.twig', array(
+    				'day' => $day,
+    				'date' => $date,
+    				'week' => $week,
+    				'dataschedule' => $data_schedule,
+    				'rttyear' => $absencerttyear,
+    				'cpyear' => $absencecpyear,
+    				'cayear' => $absencecayear,
+    				'timeweek' => $timeweek,));
+    		}
+    		$date = date("Ymd");
+    		$heure = date("His");
+    		$html = $page->getContent();
+    		$filename = $user->getName()."_presence".$date."-".$heure.".pdf";
+    		$html = $page->getContent();
+    		$html2pdf = new \Html2Pdf_Html2Pdf('P', 'A4', 'fr');
+    		$html2pdf->pdf->SetDisplayMode('real');
+    		$html2pdf->writeHTML($html);
+    		$html2pdf->Output($filename, 'D');
+    		return new Response('PDF réalisé');
+    	}
+    	$data = new Data();
+    	$date = date('Y-m-d');
+    	$doctrine = $this->getDoctrine();
+    	$em = $doctrine->getManager();
+    	$period = $em->getRepository('CoyoteSiteBundle:Timetable')->findPeriodByDate($date);
+        return $this->render('CoyoteSiteBundle:Schedule:indexprintyear.html.twig', array(
+            'period' => $period, 'tab_period' => $data->getTabPeriod()));
+    	}
     
     /*****************************************************************/
     /***********************Fonctions Erronées************************/

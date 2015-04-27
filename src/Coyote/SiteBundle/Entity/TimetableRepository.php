@@ -131,7 +131,7 @@ class TimetableRepository extends EntityRepository
     public function findPeriodByDate($date)
     {
         $qb = $this->_em->createQueryBuilder();
-        $qb->select('t.pay_period')
+        $qb->select('t.period')
            ->from('CoyoteSiteBundle:Timetable', 't')
            ->where('t.date = :date')
            ->setParameters(array('date' => $date));

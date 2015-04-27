@@ -25,6 +25,10 @@ schedule_getscheduleusermonth:
 schedule_getscheduleuserprintmonth:
     pattern:    /time_attendance_print_month
     defaults:   { _controller: "CoyoteSiteBundle:Schedule:getScheduleUserPrintMonth"}
+    
+schedule_getscheduleuserprintyear:
+    pattern:    /time_attendance_print_year
+    defaults:   { _controller: "CoyoteSiteBundle:Schedule:getScheduleUserPrintYear"}
 
 schedule_postschedules_locked:
     pattern:    /schedules_locked
