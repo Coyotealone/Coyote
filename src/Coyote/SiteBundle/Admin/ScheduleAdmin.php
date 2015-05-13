@@ -15,7 +15,7 @@ class ScheduleAdmin extends Admin
 			'_sort_order' => 'DESC',
 			'_sort_by' => 'id'
 	);
-	
+
     /**
      * @param DatagridMapper $datagridMapper
      */
@@ -34,6 +34,8 @@ class ScheduleAdmin extends Admin
             ->add('comment')
             ->add('created_at')
             ->add('updated_at')
+            ->add('user')
+            ->add('timetable')
         ;
     }
 
@@ -78,10 +80,10 @@ class ScheduleAdmin extends Admin
             ->add('break')
             ->add('working_time')
             ->add('working_hours')
-            ->add('travel')
+            ->add('travel', 'checkbox', array('required' => false))
             ->add('absence_name')
-            ->add('absence_duration')
-            ->add('comment')
+            ->add('absence_duration', 'text', array('required' => false))
+            ->add('comment', 'text', array('required' => false))
             ->add('created_at')
             ->add('updated_at')
         ;
