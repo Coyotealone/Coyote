@@ -19,7 +19,7 @@ use Coyote\SiteBundle\Form\ExpenseType;
 
 
 /**
- * Main controller.
+ * Expense controller.
  *
  */
 class ExpenseController extends Controller
@@ -99,7 +99,7 @@ class ExpenseController extends Controller
             {
                 if (!empty($data_request['article'.$i]) && !empty($data_request['date'.$i])
                     && !empty($data_request['devise'.$i]) && !empty($data_request['qte'.$i])
-                && !empty($data_request['site'.$i]) && !empty($data_request['ttc'.$i]))
+                	&& !empty($data_request['site'.$i]) && !empty($data_request['ttc'.$i]))
                 {
                     $expense = $em->getRepository('CoyoteSiteBundle:Expense')->saveExpense($this->getUser(),
                         $data_request, $i);
@@ -200,9 +200,7 @@ class ExpenseController extends Controller
         if (!$this->getUser()->getUserfees())
             return $this->redirect($this->generateUrl('main_menu'));
         $em = $this->getDoctrine()->getManager();
-
         $entity = $em->getRepository('CoyoteSiteBundle:Expense')->find($id);
-
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Expense entity.');
         }
@@ -215,11 +213,6 @@ class ExpenseController extends Controller
         {
             $date = $entity->getDate();
             $entity->setDate($date);
-            /*if(is_numeric($date))
-            {
-                $date = $em->getRepository('CoyoteSiteBundle:Expense')->formDate($date);
-                $entity->setDate($date);
-            }*/
             $site = $em->getRepository('CoyoteSiteBundle:Site')->findOneById(9);
             $entity->setSite($site);
             $taux = $entity->getFee()->getRate();
@@ -248,23 +241,22 @@ class ExpenseController extends Controller
      */
     public function deleteExpenseAction(Request $request, $id)
     {
-        if(!$this->getUser()->getUserfees())
+        if (!$this->getUser()->getUserfees())
             return $this->redirect($this->generateUrl('main_menu'));
         $form = $this->createDeleteForm($id);
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isValid()) 
+        {
             $em = $this->getDoctrine()->getManager();
             $entity = $em->getRepository('CoyoteSiteBundle:Expense')->find($id);
-
-            if (!$entity) {
+            if (!$entity) 
+            {
                 throw $this->createNotFoundException('Unable to find Expense entity.');
             }
-
             $em->remove($entity);
             $em->flush();
         }
-
         return $this->redirect($this->generateUrl('expense_index'));
     }
 
@@ -292,12 +284,12 @@ class ExpenseController extends Controller
 		            }
 		            else
 		            {
-		                if($id_end > $id_start)
+		                if ($id_end > $id_start)
 		                {
 		                    for($i = $id_start; $i<=$id_end; $i++)
 		                    {
 		                        $data_expense = $em->getRepository('CoyoteSiteBundle:Expense')->find($i);
-		                        if($data_expense != null)
+		                        if ($data_expense != null)
 		                        {
 		                            $data_expense->setStatus(1);
 		                            $em->persist($data_expense);
@@ -307,7 +299,7 @@ class ExpenseController extends Controller
 		                    $message = 'expense.flash.update';
 		                    $this->get('session')->getFlashBag()->set('updatestatus', $message);
 		                }
-		                if($id_start > $id_end)
+		                if ($id_start > $id_end)
 		                {
 		                    for($i = $id_end; $i<=$id_start; $i++)
 		                    {

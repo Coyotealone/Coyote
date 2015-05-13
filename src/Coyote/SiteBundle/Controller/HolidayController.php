@@ -156,7 +156,6 @@ class HolidayController extends Controller
             throw $this->createNotFoundException('Unable to find Holiday entity.');
         }
 
-        //$deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createEditForm($entity);
         $editForm->handleRequest($request);
 
@@ -164,13 +163,11 @@ class HolidayController extends Controller
             $em->flush();
 
             return $this->redirect($this->generateUrl('holiday'));
-            //return $this->redirect($this->generateUrl('holiday_edit', array('id' => $id)));
         }
 
         return $this->render('CoyoteSiteBundle:Holiday:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
-            //'delete_form' => $deleteForm->createView(),
         ));
     }
 

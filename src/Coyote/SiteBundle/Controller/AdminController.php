@@ -27,7 +27,7 @@ class AdminController extends Controller
      */
     public function getexportExpenseAction()
     {
-        if($this->get('security.context')->isGranted('ROLE_COMPTA'))
+        if ($this->get('security.context')->isGranted('ROLE_COMPTA'))
         {
             /** @var $filename string */
             $filename = "export".date("Ymd")."-".date("His").".txt";
@@ -44,8 +44,10 @@ class AdminController extends Controller
             ));
         }
         else
+        {
             /** redirect MainController:indexAction */
             return $this->redirect($this->generateUrl('main_menu'));
+        }
     }
 
     /**
@@ -152,7 +154,9 @@ class AdminController extends Controller
             ));
         }
         else
+        {
              return $this->redirect($this->generateUrl('main_menu'));
+        }
     }
 
     /**
@@ -232,10 +236,11 @@ class AdminController extends Controller
             	$request = $this->getRequest();
             	$em = $this->getDoctrine()->getManager();
             	$user_choice = $em->getRepository("CoyoteSiteBundle:User")->findOneById($session->get("choicesroles"));
-                $res = $em->getRepository("CoyoteSiteBundle:User")->updateRole(
-                		$user_choice, $data_request, "add");
+                $res = $em->getRepository("CoyoteSiteBundle:User")->updateRole($user_choice, $data_request, "add");
                 if ($res == "OK")
+                {
                 	$message = 'admin.updaterole.flash.add';
+                }
                 $this->get('session')->getFlashBag()->set('admin_updaterole', $message);
                 return $this->redirect($this->generateUrl('admin_indexchoicesuser'));
             }
@@ -244,10 +249,11 @@ class AdminController extends Controller
                 $request = $this->getRequest();
                 $em = $this->getDoctrine()->getManager();
                 $user_choice = $em->getRepository("CoyoteSiteBundle:User")->findOneById($session->get("choicesroles"));
-                $res = $em->getRepository("CoyoteSiteBundle:User")->updateRole(
-                		$user_choice, $data_request, "remove");
-                if($res == "OK")
+                $res = $em->getRepository("CoyoteSiteBundle:User")->updateRole($user_choice, $data_request, "remove");
+                if ($res == "OK")
+                {
                 	$message = 'admin.updaterole.flash.remove';
+                }
                 $this->get('session')->getFlashBag()->set('admin_updaterole', $message);
                 return $this->redirect($this->generateUrl('admin_indexchoicesuser'));
             }
@@ -270,7 +276,7 @@ class AdminController extends Controller
      */
     public function getExpensesAction($page)
     {
-    	if($this->get('security.context')->isGranted('ROLE_COMPTA'))
+    	if ($this->get('security.context')->isGranted('ROLE_COMPTA'))
     	{
     		$user = $this->get('security.context')->getToken()->getUser();
     		if ($user == "anon.")
@@ -290,7 +296,7 @@ class AdminController extends Controller
     					'route_params' => array()
     			);
     			$entities = $this->getDoctrine()->getRepository('CoyoteSiteBundle:Expense')
-    			->getListExpenseUsers($page, $maxItems);
+    				->getListExpenseUsers($page, $maxItems);
     
     			return $this->render('CoyoteSiteBundle:Expense:showadmin.html.twig', array(
     					'data' => $entities,

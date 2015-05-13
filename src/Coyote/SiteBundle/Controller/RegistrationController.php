@@ -66,16 +66,18 @@ class RegistrationController extends ContainerAware
             if (null === $response = $event->getResponse()) {
                 $message = 'registration.flash.user_created';
             }
-            if($message  == null)
+            if ($message  == null)
+            {
                 $message = 'registration.flash.no_save';
+            }
             $session = new Session();
             $session->getFlashBag()->set('save_registration', $message);
-            return $this->container->get('templating')->renderResponse('FOSUserBundle:Registration:register.html.twig', array(
-                'form' => $form->createView(),
+            return $this->container->get('templating')->renderResponse('FOSUserBundle:Registration:register.html.twig',
+            		 array('form' => $form->createView(),
             ));
         }
-        return $this->container->get('templating')->renderResponse('FOSUserBundle:Registration:register.html.twig', array(
-            'form' => $form->createView(),
+        return $this->container->get('templating')->renderResponse('FOSUserBundle:Registration:register.html.twig', 
+        		array('form' => $form->createView(),
         ));
     }
 

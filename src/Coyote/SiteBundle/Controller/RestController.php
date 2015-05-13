@@ -100,13 +100,13 @@ class RestController extends FOSRestController
     {
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository("CoyoteSiteBundle:Car")->findAll();
-        if (count($entity) > 0)
+        /*if (count($entity) > 0)
         {
             $view = $this->view(array(
                             "Cars" => $entity
             ),200);
         }
-        else
+        else*/
         {
             $view = $this->view(array(
                             "No Cars" => $entity

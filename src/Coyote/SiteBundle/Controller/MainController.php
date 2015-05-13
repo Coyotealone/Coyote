@@ -166,6 +166,26 @@ class MainController extends Controller
 		throw new \RuntimeException('You must activate the logout in your security firewall configuration.');
 	}
 	
+	/**
+	 * Function to redirect to index.
+	 * @access public
+	 * @return \Symfony\Component\HttpFoundation\Response
+	 */
+	public function redirectAction()
+	{
+		$request = $this->getRequest();
+		return $this->forward('CoyoteSiteBundle:Main:getMenu', array('_locale' => $request->getLocale()));
+	}
+	
+	/**
+	 * Function to show index page.
+	 * @return \Symfony\Component\HttpFoundation\Response
+	 */
+	public function indexAction()
+	{
+		return $this->render('CoyoteSiteBundle:Base:index.html.twig');
+	}
+	
 	/*****************************************************************/
 	/***********************Fonctions En cours************************/
 	/*****************************************************************/
@@ -175,19 +195,5 @@ class MainController extends Controller
 	/***********************Fonctions Erronées************************/
 	/*****************************************************************/
 	
-	/**
-     * Function to redirect to index.
-     * @access public
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function redirectAction()
-    {
-        $request = $this->getRequest();
-        return $this->forward('CoyoteSiteBundle:Main:getMenu', array('_locale' => $request->getLocale()));
-    }
-    
-    public function indexAction()
-    {
-    	return $this->render('CoyoteSiteBundle:Base:index.html.twig');
-    }
+
 }
