@@ -10,6 +10,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class ExportCommand extends ContainerAwareCommand
 {
+	
     protected function configure()
     {
         $this
