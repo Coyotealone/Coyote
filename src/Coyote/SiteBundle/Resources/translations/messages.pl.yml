@@ -21,6 +21,7 @@ base:
             indexexportprintyear: Eksport Roku w PDF
             indexprintyear: Drukuj z lat PDF
             absence: Zarządzanie brak
+            scheduleuserexcel: Druk roku w programie Excel
         expense:
             name: Sprawozdanie z wydatków
             create: Nagrywanie
@@ -37,6 +38,7 @@ base:
             name: Eksport rejestracji czasu
             indexexport: Eksport danych działu badań
             schedules_locked: Blokada czasu i obecności
+            scheduleuserexcel: Druk roku od użytkownika w programie Excel
         expense_admin:
             name: Sprawozdanie z wydatków
             exportexpense: Eksport koszt danych
@@ -68,6 +70,7 @@ admin:
     month: Miesiąc
     year: Rok
     user: Użytkownik
+    period: Okres
     schedule:
         title: Uczęszcza
         technician: Technik (wejście na godzinę)
@@ -84,6 +87,7 @@ admin:
     title:
         indexchoicesuser: Wybór użytkownika
         choicesroles: Dodaj / Usuń role
+        indexscheduleuserexcel: Pobierz razy obecności roku do programu Excel
     submit:
         download: Pobierz
         display: Wystawa
@@ -111,6 +115,7 @@ schedule:
         summary: Podsumowanie miesiąca
         overtime: Liczba godzin nadliczbowych w roku
         schedules_locked: Blokada czasu i obecności.
+        indexscheduleuserexcel: Pobierz razy obecności roku do programu Excel
     holiday: wakacje
     weekend: Weekend
     message_week: Tutaj tydzień %no_week% %year% wyświetlona
@@ -160,6 +165,7 @@ schedule:
     number_ca_year: Ilość stażu urlopu wykorzystane w roku
     schedules_lock_message: Wszystkie dane przed tą datą będą blokowane.
     submit:
+        download: Pobierz
         save: Zapisz
         indexexportprintyear: Pokaż
         indexprint: Pobierz

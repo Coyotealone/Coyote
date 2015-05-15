@@ -21,6 +21,7 @@ base:
             indexexportprintyear: Export of the Year in PDF
             indexprintyear: Print of the year PDF
             absence: Absence management
+            scheduleuserexcel: Printing of the year in Excel
         expense:
             name: Expense report
             create: Recording
@@ -37,6 +38,7 @@ base:
             name: Export of time attendance
             indexexport: Export of data research department
             schedules_locked: Lock time and attendance
+            scheduleuserexcel: Printing of the year from an user in Excel
         expense_admin:
             name: Expense Report Management
             exportexpense: Export of data expense
@@ -68,6 +70,7 @@ admin:
     month: Month
     year: Year
     user: User
+    period: Period
     schedule:
         title: Time attendance
         technician: Technician (entry per hour)
@@ -84,6 +87,7 @@ admin:
     title:
         indexchoicesuser: User choice
         choicesroles: Add / Remove Roles
+        indexscheduleuserexcel: Download presence times of the year to Excel
     submit:
         download: Download
         display: Afficher
@@ -111,6 +115,7 @@ schedule:
         summary: Summary of the month
         overtime: Number of overtime in the year
         schedules_locked: Lock time and attendance.
+        indexscheduleuserexcel: Download presence times of the year to Excel
     holiday: Holiday
     weekend: Weekend
     message_week: Here week %no_week% of %year% displayed
@@ -160,6 +165,7 @@ schedule:
     number_ca_year: Number of seniority leave used in the year
     schedules_lock_message: All data prior to that date will be blocked.
     submit:
+        download: Download
         save: Save
         indexexportprintyear: Display
         indexprint: Download

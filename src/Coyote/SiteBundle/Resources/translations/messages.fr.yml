@@ -21,6 +21,7 @@ base:
             indexexportprintyear: "Export de l'année en PDF"
             indexprintyear: "Impression de l'année en PDF"
             absence: Gestion des absences
+            scheduleuserexcel: "Impression de l'année en Excel"
         expense:
             name: Note de frais
             create: Saisie
@@ -37,6 +38,7 @@ base:
             name: Export présence
             indexexport: Export données BE
             schedules_locked: Verrouillage des temps de présence
+            scheduleuserexcel: "Impression de l'année d'un utilisateur en Excel"
         expense_admin:
             name: Gestion des Notes de frais
             exportexpense: Export données notes de frais
@@ -68,6 +70,7 @@ admin:
     month: Mois
     year: Année
     user: Utilisateur
+    period: Période
     schedule:
         title: Temps de présence
         technician: Technicien (saisie par heure)
@@ -84,6 +87,7 @@ admin:
     title:
         indexchoicesuser: "Choix de l'utilisateur"
         choicesroles: Ajout/Suppression de rôles
+        indexscheduleuserexcel: "Téléchargement des temps de présence de l'année au format Excel"
     submit:
         download: Télécharger
         display: Afficher
@@ -111,6 +115,7 @@ schedule:
         summary: Récapitulatif du mois
         overtime: "Nombre d'heures supplémentaires sur l'année"
         schedules_locked: Verrouillage des temps de présence.
+        indexscheduleuserexcel: "Téléchargement des temps de présence de l'année au format Excel"
     holiday: Jour férié
     weekend: Weekend
     message_week: "Voici la semaine %no_week% affichée de l'année %year%"
@@ -160,6 +165,7 @@ schedule:
     number_ca_year: "Nombre de congés d'anciennetés (CA) utilisé dans l'année"
     schedules_lock_message: Toutes les données avant cette date seront bloquées.
     submit:
+        download: Télécharger
         save: Enregistrer
         indexexportprintyear: Afficher
         indexprint: Télécharger

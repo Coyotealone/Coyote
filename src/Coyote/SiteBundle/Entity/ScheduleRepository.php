@@ -15,7 +15,7 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 class ScheduleRepository extends EntityRepository
 {
     /***********************getScheduleUserAction**********************/
-    
+
     /**
      * Function to synchronize id Timetable about a same id array time.
      * @param array $time Array data Schedule
@@ -44,7 +44,7 @@ class ScheduleRepository extends EntityRepository
         }
         return $duration;
     }
-    
+
     /**
      * Function to find data about user and timetable.
      * @access public
@@ -72,9 +72,9 @@ class ScheduleRepository extends EntityRepository
         }
         return $time;
     }
-    
+
     /******************weeklessAction**weekmoreAction******************/
-    
+
     /**
      * Function to update week and period.
      * @access public
@@ -111,9 +111,9 @@ class ScheduleRepository extends EntityRepository
         $session->set('week', $week);
         $session->set('year', $year);
     }
-    
+
     /**********************postScheduleUserAction**********************/
-    
+
     /**
      * Function to save Schedule for technician user.
      * @access public
@@ -137,7 +137,7 @@ class ScheduleRepository extends EntityRepository
         {
             return null;
         }
-        else 
+        else
         {
             $schedule = new Schedule();
             $schedule->setUser($user);
@@ -177,7 +177,7 @@ class ScheduleRepository extends EntityRepository
             return $schedule;
         }
     }
-    
+
     /**
      * Function to update Schedule for techician user.
      * @param Schedule $schedule
@@ -232,7 +232,7 @@ class ScheduleRepository extends EntityRepository
 	        return $schedule;
     	}
     }
-    
+
     /**
      * Function to save Schedule for framework user.
      * @access public
@@ -254,7 +254,7 @@ class ScheduleRepository extends EntityRepository
         {
             return null;
         }
-        else 
+        else
         {
             $schedule = new Schedule();
             $schedule->setUser($user);
@@ -287,7 +287,7 @@ class ScheduleRepository extends EntityRepository
             return $schedule;
         }
     }
-    
+
     /**
      * Function to update Schedule for framework user.
      * @access public
@@ -326,9 +326,9 @@ class ScheduleRepository extends EntityRepository
         $schedule->setComment($time_comment);
         return $schedule;
     }
-    
+
     /*************************getScheduleAction************************/
-    
+
     /**
      * Function to find period about month and year.
      * @param string $month
@@ -350,7 +350,7 @@ class ScheduleRepository extends EntityRepository
         }
         return $period;
     }
-    
+
     /**
      * Function to count number absence.
      * @access public
@@ -376,7 +376,7 @@ class ScheduleRepository extends EntityRepository
         }
         return $count_absence;
     }
-    
+
     /**
      * Function to count number absence about a period by user and specific absence.
      * @access public
@@ -400,10 +400,10 @@ class ScheduleRepository extends EntityRepository
         {
             $count_absence += $data_absence_duration[$i]['absence_duration'];
         }
-    
+
         return $count_absence;
     }
-    
+
     /**
      * Function to count working hours in month.
      * @access public
@@ -428,7 +428,7 @@ class ScheduleRepository extends EntityRepository
         }
         return $working_day;
     }
-    
+
     /**
      * Function to count working hours in period.
      * @access public
@@ -453,7 +453,7 @@ class ScheduleRepository extends EntityRepository
         }
         return $working_day;
     }
-    
+
     /**
      * Function to calculate working time by week.
      * @access public
@@ -501,7 +501,7 @@ class ScheduleRepository extends EntityRepository
         }
         return $timeweek;
     }
-    
+
     /**
      * Function to count working time by month.
      * @access public
@@ -527,7 +527,7 @@ class ScheduleRepository extends EntityRepository
         $time = $this->formatTime($timeend);
         return $time;
     }
-    
+
     /**
      * Function to find data schedule for technician user by month.
      * @access public
@@ -550,7 +550,7 @@ class ScheduleRepository extends EntityRepository
                             ->getResult();
         return $dataschedule;
     }
-    
+
     /**
      * Function to find data schedule for framework user by month.
      * @access public
@@ -572,9 +572,9 @@ class ScheduleRepository extends EntityRepository
                             ->getResult();
         return $dataschedule;
     }
-    
+
     /************************Absence:indexAction***********************/
-    
+
     /**
      * Get the paginated list of absences in Schedule Entity.
      *
@@ -590,12 +590,12 @@ class ScheduleRepository extends EntityRepository
                   ->from('CoyoteSiteBundle:Schedule','s')
                   ->where('s.user = :user and not s.absence_name =:absence')
                   ->setParameters(array('user' => $user, 'absence' => 'Aucune' ));
-         
+
         $q->setFirstResult(($page-1) * $maxperpage)
           ->setMaxResults($maxperpage);
         return new Paginator($q);
     }
-    
+
     /**
      * Function to find absence by User.
      * @param User $user
@@ -615,9 +615,9 @@ class ScheduleRepository extends EntityRepository
         $entities = $qb->getQuery()->getResult();
         return $entities;
     }
-    
-    /*******************Admin:exportDataUserAction******************/    
-    
+
+    /*******************Admin:exportDataUserAction******************/
+
     /**
      * Function to retrieve data user about a date.
      * @param User $user
@@ -636,7 +636,7 @@ class ScheduleRepository extends EntityRepository
         $timetableschedule = $qb->getQuery()->getResult();
         return $timetableschedule;
     }
-    
+
     /**
      * Function to generate file for Chef_BE with data users.
      * @param array $tab_user_id Id User who work to Chef_BE
@@ -676,9 +676,9 @@ class ScheduleRepository extends EntityRepository
         }
         return $result;
     }
-    
+
     /*****************************Commun****************************/
-    
+
     /**
      * Function to convert time in minutes.
      * @access public
@@ -695,7 +695,7 @@ class ScheduleRepository extends EntityRepository
         $timefinal = $heure * 60 + $minute;
         return $timefinal;
     }
-    
+
     /**
      * Function to convert time in hours.
      *
@@ -715,11 +715,11 @@ class ScheduleRepository extends EntityRepository
         }
         return $heures.'h'.$minutes;
     }
-    
+
     /**********************putAbsenceWeekAction*********************/
-    
+
     /**
-     * Function to save absence into Schedule entity. 
+     * Function to save absence into Schedule entity.
      * @param string $date_start
      * @param string $date_end
      * @param User $user
@@ -730,7 +730,7 @@ class ScheduleRepository extends EntityRepository
     {
         $date_start = new \DateTime($date_start);
         $date_end = new \DateTime($date_end);
-    
+
         $qb = $this->_em->createQueryBuilder();
         $qb->select('t')
         ->from('CoyoteSiteBundle:Timetable', 't')
@@ -745,7 +745,7 @@ class ScheduleRepository extends EntityRepository
         {
         $qb = $this->_em->createQueryBuilder();
         $timetable = $timetables[$i];
-    
+
         if (($timetable->getDate()->format('l') != "Sunday") and ($timetable->getDate()->format('l') != "Saturday"))
         {
         $countsave++;
@@ -757,7 +757,7 @@ class ScheduleRepository extends EntityRepository
                                     'timetable' => $timetable
                     ));
                 $schedule = $qb->getQuery()->getOneOrNullResult();
-    
+
                 if ($schedule == null)
                 {
                 $schedule = new Schedule();
@@ -807,9 +807,9 @@ class ScheduleRepository extends EntityRepository
                     $this->_em->flush();
                     return $countsave;
         }
-    
+
     /********************postScheduleLockedAction*******************/
-        
+
         /**
          * Function to lock Schedule
          * @param DateTime $date
@@ -833,16 +833,16 @@ class ScheduleRepository extends EntityRepository
         	$this->_em->flush();
         	return "OK";
         }
-    
+
     /******************************************************************/
     /***********************Fonctions en cours*************************/
     /******************************************************************/
-    
+
     public function countOvertime($user, $working_time_week)
     {
     	$query = $this->_em->createQuery(
-    			"SELECT s FROM CoyoteSiteBundle:Schedule s WHERE s.timetable IN 
-    			(SELECT t.id FROM CoyoteSiteBundle:Timetable t WHERE t.period = :period 
+    			"SELECT s FROM CoyoteSiteBundle:Schedule s WHERE s.timetable IN
+    			(SELECT t.id FROM CoyoteSiteBundle:Timetable t WHERE t.period = :period
     			and DAYOFWEEK(t.date) != 1 and DAYOFWEEK(t.date) != 7 and t.holiday = 0)
     			and s.user = :user and s.comment != :comment and s.absence_duration != 1")
     				->setParameters(array(
@@ -850,7 +850,7 @@ class ScheduleRepository extends EntityRepository
     			'period'  => '2014/2015',
     			'comment' => 'IMIE'
     	));
-    	
+
     	$schedules = $query->getResult();
     	$res = 0;
     	foreach($schedules as $data)
@@ -864,16 +864,16 @@ class ScheduleRepository extends EntityRepository
     	$time = count($schedules)*$hour*60;
     	$hs = $res - $time;
 		return $this->formatTime($hs);
-    	
+
     }
-    
+
     /******************************************************************/
     /***********************Anciennes Fonctions************************/
     /******************************************************************/
-    
-    
 
-    
+
+
+
 
     /**
      * find week and year.
@@ -1055,7 +1055,7 @@ class ScheduleRepository extends EntityRepository
         return count($timetable);
     }
 
-    
+
 
     /**
      * nameUser function.
@@ -1152,5 +1152,43 @@ class ScheduleRepository extends EntityRepository
         $time_work = $this->calculTime($working_time_month);
         $difference = $time_work - $time_month;
         return $this->formatTime($difference);
+    }
+
+    public function fileDataScheduleUser($user, $date_start, $date_end)
+    {
+        $qb = $this->_em->createQueryBuilder();
+        $qb->select('t.date, s.start, s.end, s.break, s.working_time, s.working_hours, s.comment,
+            s.travel, s.absence_name, s.absence_duration')
+                ->from('CoyoteSiteBundle:Timetable', 't')
+                ->innerJoin('CoyoteSiteBundle:Schedule', 's', 'WITH', 't.id = s.timetable')
+                ->where('s.user = :user and t.date BETWEEN :date_start and :date_end')
+                ->orderBy('s.timetable')
+                ->setParameters(array('date_start' => $date_start, 'date_end' => $date_end, 'user' => $user));
+        $timetableschedule = $qb->getQuery()->getResult();
+
+        $result = "Jour;Date;Debut;Fin;Pause;Temps de travail;Jour travaille;Déplacement;Absence;Duree de l'absence;Commentaire;\r\n";
+        $week = 0;
+        $timeres = 0;
+            foreach($timetableschedule as $data)
+            {
+                if($week != 0 && $data['date']->format('W') != $week)
+                {
+                    $result .= "Temps de travail de la semaine :;;;".$this->formatTime($timeres).";\r\n\r\n";
+                    $timeres = 0;
+                }
+                $week = $data['date']->format('W');
+                $result .= $data['date']->format('l').';'.$data['date']->format('Y-m-d').';';
+                $result .= $data['start'].";".$data['end'].";".$data['break'].";".$data['working_time'].";";
+                $result .= $data['working_hours'].";";
+                $result .= $data['travel'].";".$data['absence_name'].";".$data['absence_duration'].";".$data['comment'].";\r\n";
+                $timeres += $this->calculTime($data['working_time']).";\r\n";
+                if ($data === end($timetableschedule))
+                {
+                    $result .= "Temps de travail de la semaine :;;;".$this->formatTime($timeres).";\r\n\r\n";
+                    $timeres = 0;
+                }
+            }
+        //$result = iconv('Windows-1252', 'UTF-8//TRANSLIT', $result);
+        return $result;
     }
 }

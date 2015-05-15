@@ -12,14 +12,12 @@
 {% endblock %}
 
 {% block content %}
-<p id="title">{{"schedule.title.indexexportprintyear"|trans}} </p>
-<form role="form" action="{{ path('schedule_exportprintyear') }}" method='get'>
+<p id="title">{{"schedule.title.indexscheduleuserexcel"|trans}} </p>
+<form role="form" action="{{ path('schedule_getscheduleuser') }}" method='get'>
     <table class='table'>
     	<tr>
     		<th>{{'schedule.period'|trans}}</th>
-    	</tr>
-    	<tr>
-            <td>
+    	    <td>
                 <select name='pay_period' id='pay_period' >
                 {% for pay_period in tab_period %}
                     {% if pay_period == period %}
@@ -32,6 +30,6 @@
             </td>
         </tr>
     </table>
-    <button class='btn_red' type="submit" value="Afficher" id="afficher">{{'schedule.submit.indexexportprintyear'|trans }}</button>
+    <button class='btn_red' type="submit" value="Afficher" id="afficher">{{'schedule.submit.download'|trans }}</button>
 </form>
 {% endblock %}

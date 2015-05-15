@@ -1,4 +1,4 @@
-{% extends 'CoyoteSiteBundle:Schedule:index.html.twig' %}
+{% extends 'CoyoteSiteBundle:Admin:index.html.twig' %}
 
 {% block link %}
 
@@ -12,14 +12,12 @@
 {% endblock %}
 
 {% block content %}
-<p id="title">{{"schedule.title.indexexportprintyear"|trans}} </p>
-<form role="form" action="{{ path('schedule_exportprintyear') }}" method='get'>
+<p id="title">{{"admin.title.indexscheduleuserexcel"|trans}} </p>
+<form role="form" action="{{ path('admin_getscheduleuser') }}" method='get'>
     <table class='table'>
     	<tr>
-    		<th>{{'schedule.period'|trans}}</th>
-    	</tr>
-    	<tr>
-            <td>
+    		<th>{{'admin.period'|trans}}</th>
+    	    <td>
                 <select name='pay_period' id='pay_period' >
                 {% for pay_period in tab_period %}
                     {% if pay_period == period %}
@@ -31,7 +29,17 @@
                 </select>
             </td>
         </tr>
+        <tr>
+            <th>{{'admin.user'|trans}}</th>
+            <td>
+                <select name='user' id='user' >
+                {% for user in tab_user %}
+                    <option value={{user.id}}>{{user.name|trans}}</option>
+                {% endfor %}
+                </select>
+            </td>
+        </tr>
     </table>
-    <button class='btn_red' type="submit" value="Afficher" id="afficher">{{'schedule.submit.indexexportprintyear'|trans }}</button>
+    <button class='btn_red' type="submit" value="Afficher" id="afficher">{{'admin.submit.download'|trans }}</button>
 </form>
 {% endblock %}
