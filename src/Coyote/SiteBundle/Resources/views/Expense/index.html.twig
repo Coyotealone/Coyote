@@ -1,4 +1,4 @@
-{% extends 'CoyoteSiteBundle:Base:base.html.twig' %}
+{% extends 'CoyoteSiteBundle:Base:index.html.twig' %}
 
 {% block nav %}
     <!--[if lt IE 9]>
@@ -7,6 +7,18 @@
     <!--[if !IE]><!-->
         {{ include('CoyoteSiteBundle:Base:navigation.html.twig') }}
 	<!--<![endif]-->
+{% endblock %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/jquery-ui.css') }}" type="text/css" media="all" />
+    <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/style_expense.css') }}" type="text/css" media="all" />
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('bundles/coyotesite/js/jquery-1.10.2.js') }}"/></script>
+    <script src="{{ asset('bundles/coyotesite/js/jquery-ui.js') }}"/></script>
+    <script src="{{ asset('bundles/coyotesite/js/script_expense.js') }}"/></script>
+    <script src="{{ asset('bundles/coyotesite/js/script_expense_change.js') }}"/></script>
 {% endblock %}
 
 {% block content %}

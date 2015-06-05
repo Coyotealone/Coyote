@@ -11,6 +11,10 @@
 
 {% endblock %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/style_holiday.css') }}" type="text/css" media="all" />
+{% endblock %}
+
 {% block content %}
 
 <p id="title">{{'holiday.title.show'|trans}} </p>
@@ -40,8 +44,10 @@
 {% else %}
 <form role="form" action="{{ path('holiday_create') }}" method='post'>
 <div class='table-responsive'>
-    <p>{{ 'holiday.empty' | trans }}</p>
-    <p><a class="btn_grey" href="{{ path('holiday_new') }}">{{ 'holiday.create' | trans }}</a></p>
+    <p class="center">{{ 'holiday.empty' | trans }}</p>
+</div>
+<div id="btn_new">
+    <p><a class="btn btn-primary" href="{{ path('holiday_new') }}">{{ 'holiday.create' | trans }}</a></p>
 </div>
 {% endif %}
 {% endblock %}

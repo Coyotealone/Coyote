@@ -16,7 +16,7 @@
 <form role="form" action="{{ path('schedule_getscheduleuser') }}" method='get'>
     <table class='table'>
     	<tr>
-    		<th>{{'schedule.period'|trans}}</th>
+    		<th class="center">{{'schedule.period'|trans}}</th>
     	    <td>
                 <select name='pay_period' id='pay_period' >
                 {% for pay_period in tab_period %}
@@ -30,6 +30,8 @@
             </td>
         </tr>
     </table>
-    <button class='btn_red' type="submit" value="Afficher" id="afficher">{{'schedule.submit.download'|trans }}</button>
+    <div id="btn_show">
+        <button class='btn btn-primary' type="submit" value="Afficher" id="afficher">{{'schedule.submit.download'|trans }}</button>
+    </div>
 </form>
 {% endblock %}

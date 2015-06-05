@@ -1,3 +1,19 @@
+#btn_show {
+    text-align: center;
+}
+
+article {
+    text-align: center;
+}
+
+#title {
+    text-align: center;
+}
+
+.center {
+    text-align: center;
+}
+
 #tab_expense {
   min-width: 900px;
   margin-left: auto;

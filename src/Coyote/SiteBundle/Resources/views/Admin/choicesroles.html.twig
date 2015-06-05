@@ -17,11 +17,23 @@
                     <tbody>
                       <tr>
                         <td>{{'admin.schedule.technician'|trans}}</td>
-                        <td><input type="checkbox" name="checkBoxTech" id="checkBoxTech" value="Tech"></td>
+                        <td>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="checkBoxTech" id="checkBoxTech" value="Tech">
+                                </label>
+                            </div>
+                        </td>
                       </tr>
                       <tr>
                         <td>{{'admin.schedule.business'|trans}}</td>
-                        <td><input type="checkbox" name="checkBoxCadre" id="checkBoxCadre" value="Cadre"></td>
+                        <td>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="checkBoxCadre" id="checkBoxCadre" value="Cadre">
+                                </label>
+                            </div>
+                        </td>
                       </tr>
                     </tbody>
                     <thead>
@@ -32,7 +44,13 @@
                     <tbody>
                       <tr>
                         <td>{{'admin.expense.trade'|trans}}</td>
-                        <td><input type="checkbox" name="checkBoxTrade" id="checkBoxTrade" value="Trade"></td>
+                        <td>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="checkBoxTrade" id="checkBoxTrade" value="Trade">
+                                </label>
+                            </div>
+                        </td>
                       </tr>
                     </tbody>
                     <thead>
@@ -43,7 +61,13 @@
                     <tbody>
                       <tr>
                         <td>{{'admin.accounting.accountant'|trans}}</td>
-                        <td><input type="checkbox" name="checkBoxCompta" id="checkBoxCompta" value="Compta"></td>
+                        <td>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="checkBoxCompta" id="checkBoxCompta" value="Compta">
+                                </label>
+                            </div>
+                        </td>
                       </tr>
                     </tbody>
                     <thead>
@@ -54,13 +78,21 @@
                     <tbody>
                       <tr>
                         <td>{{'admin.designoffice.responsible'|trans}}</td>
-                        <td><input type="checkbox" name="checkBoxBE" id="checkBoxBE" value="BE"></td>
+                        <td>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="checkBoxBE" id="checkBoxBE" value="BE">
+                                </label>
+                            </div>
+                        </td>
                       </tr>
                     </tbody>
                 </table>
             <div>
-        <button class='btn_red' type="submit" value="Add" id='add' name='add' >{{ 'admin.submit.add'|trans }}</button>
-        <button class='btn_red' type="submit" value="Remove" id='remove' name='remove' >{{ 'admin.submit.remove'|trans }}</button>
+        <div id="btn_submit">
+            <button class='btn btn-primary' type="submit" value="Add" id='add' name='add' >{{ 'admin.submit.add'|trans }}</button>
+            <button class='btn btn-danger' type="submit" value="Remove" id='remove' name='remove' >{{ 'admin.submit.remove'|trans }}</button>
+        </div>
     </form>
 
 {% endblock content %}

@@ -22,7 +22,7 @@ input#txt_timemonth2 {
 }
 
 .date .input_day {
-  width: 80px;
+  width: 85px;
   text-align: center;
 }
 
@@ -60,7 +60,21 @@ tbody {
   text-align: center;
 }
 
+#title {
+    text-align: center;
+}
 
+#write_auto{
+    text-align: center;
+}
+
+#buttons{
+    text-align: center;
+}
+
+#timeweek{
+    text-align: center;
+}
 
 #resultat {
   width: 100%;
@@ -72,3 +86,12 @@ tbody {
   margin-right: auto;
 }
 /* Fin Tableau Saisie des temps */
+
+/* Time Attendance Month */
+.center {
+    text-align: center;
+}
+
+#btn_show {
+    text-align: center;
+}

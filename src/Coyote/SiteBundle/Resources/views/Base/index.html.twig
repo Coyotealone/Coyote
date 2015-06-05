@@ -1,82 +1,60 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Pichon-Website">
-    <meta name="author" content="Coyote">
-    <link rel="shortcut icon" href="{{ asset('bundles/coyotesite/images/pichonicon.ico') }}" />
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Pichon-Website">
+        <meta name="author" content="Coyote">
+        <link rel="shortcut icon" href="{{ asset('bundles/coyotesite/images/pichonicon.ico') }}" />
+        <title>{{'base.title'|trans}}</title>
 
-    <title>{{'base.title'|trans}}</title>
-	
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/bootstrap.min.css') }}" type="text/css" media="all" />
-    <!--[if lt IE 9]>
-    <script src="{{ asset('bundles/coyotesite/js/ie8-responsive-file-warning.js') }}"></script><![endif]-->
-    <script src="{{ asset('bundles/coyotesite/js/ie-emulation-modes-warning.js') }}"></script>
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="{{ asset('bundles/coyotesite/js/html5shiv.min.js') }}"></script>
-      <script src="{{ asset('bundles/coyotesite/js/respond.min.js') }}"></script>
-    <![endif]-->
-    <!-- Custom styles for this template -->
-    <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/sticky-footer-navbar.css') }}" type="text/css" media="all" />
-    <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/style.css') }}" type="text/css" media="all" />
-    <!-- Bootstrap core JavaScript -->
-    <script src="{{ asset('bundles/coyotesite/js/jquery.min.js') }}"></script>
-    <script src="{{ asset('bundles/coyotesite/js/bootstrap.min.js') }}"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="{{ asset('bundles/coyotesite/js/ie10-viewport-bug-workaround.js') }}"></script>
-    {% block stylesheets %}
-    {% endblock %}
-    {% block javascripts %}
-    {% endblock %}
+        <link href="{{ asset('bundles/coyotesite/css/bootstrap.min.css')}}" rel="stylesheet">
+        <link href="{{ asset('bundles/coyotesite/css/material_design/roboto.min.css')}}" rel="stylesheet">
+        <link href="{{ asset('bundles/coyotesite/css/material_design/material-fullpalette.min.css')}}" rel="stylesheet">
+        <link href="{{ asset('bundles/coyotesite/css/material_design/ripples.min.css')}}" rel="stylesheet">
+        <link href="{{ asset('bundles/coyotesite/css/material_design/snackbar.min.css')}}" rel="stylesheet">
+        <link href="{{ asset('bundles/coyotesite/css/bootstrap-elements.css')}}" rel="stylesheet">
 
-    <!-- Custom CSS -->
-    <link href="{{ asset('bundles/coyotesite/css/new/simple-sidebar.css') }}" rel="stylesheet" type="text/css" media="all" />
-    
-</head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        {% block stylesheets %}
+        {% endblock %}
+        {% block javascripts %}
+        {% endblock %}
+    </head>
+    <body>
+        {% block nav %}
+        {% endblock nav %}
 
-<body>
-
-    <div id="wrapper">
-
-        <!-- Sidebar -->
-        <div id="sidebar-wrapper">
-            <ul class="sidebar-nav">
-                <li class="sidebar-brand">
-                    <a class="navbar-brand" href="{{path('main_menu')}}"><img alt="Pichon" src="{{ asset('bundles/coyotesite/images/Logo-PICHON_80.png') }}"></a>
-                </li>
-                {% block nav %}
-            	{% endblock nav %}
-            </ul>
-        </div>
-        <!-- /#sidebar-wrapper -->
-
-        <!-- Page Content -->
-        <div id="page-content-wrapper">
-            <div class="container-fluid">
-                <div class="row">
-                	
+        <div id="wrapper">
+            <!-- Page Content -->
+            <div id="page-content-wrapper">
+                <div class="container-fluid">
+                    <div class="row">
+                    </div>
+                    <header>
+                        {% block header %}
+                        {% endblock header %}
+                    </header>
+                    <section>
+                        <article>
+                            {% block content %}
+                            {% endblock content %}
+                        </article>
+                    </section>
                 </div>
-                <header>
-		            {% block header %}
-		            {% endblock header %}
-		        </header>
-		        <section>
-		            <article>
-		                {% block content %}
-		                {% endblock content %}
-		            </article>
-		        </section>
             </div>
         </div>
-        
-        <!-- /#page-content-wrapper -->
-
-    </div>
-
-</body>
-
+        <!--<script src="{{ asset('bundles/coyotesite/js/jquery-1.10.2.js') }}"></script>
+        <script src="{{ asset('bundles/coyotesite/js/jquery-ui.js') }}"></script>
+        <script src="{{ asset('bundles/coyotesite/js/jquery.min.js') }}"></script>-->
+        <script src="{{ asset('bundles/coyotesite/js/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('bundles/coyotesite/js/base_1.js') }}"></script>
+        <script src="{{ asset('bundles/coyotesite/js/ripples.min.js') }}"></script>
+        <script src="{{ asset('bundles/coyotesite/js/material.min.js') }}"></script>
+        <script src="{{ asset('bundles/coyotesite/js/snackbar.min.js') }}"></script>
+        <script src="{{ asset('bundles/coyotesite/js/jquery.nouislider.min.js') }}"></script>
+        <script src="{{ asset('bundles/coyotesite/js/base_2.js') }}"></script>
+        <script src="{{ asset('bundles/coyotesite/js/google_analytics.js') }}"></script>
+    </body>
 </html>

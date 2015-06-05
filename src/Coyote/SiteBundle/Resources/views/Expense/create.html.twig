@@ -1,15 +1,10 @@
 {% extends 'CoyoteSiteBundle:Expense:index.html.twig' %}
 
 {% block javascripts %}
-    <script src="{{ asset('bundles/coyotesite/js/script_expense_change.js') }}"/></script>
     <script src="{{ asset('bundles/coyotesite/js/jquery-1.10.2.js') }}"/></script>
     <script src="{{ asset('bundles/coyotesite/js/jquery-ui.js') }}"/></script>
     <script src="{{ asset('bundles/coyotesite/js/script_expense.js') }}"/></script>
-{% endblock %}
-
-{% block stylesheets %}
-	<link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/jquery-ui.css') }}" type="text/css" media="all" />
-    <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/style_expense.css') }}" type="text/css" media="all" />
+    <script src="{{ asset('bundles/coyotesite/js/script_expense_change.js') }}"/></script>
 {% endblock %}
 
 {% block nav %}
@@ -42,13 +37,13 @@
 <div class='table-responsive'>
     <table class='table' id='tab_expense'>
     	<tr>
-    		<th id='tab_expense_site'>{{ 'expense.site'|trans }}</th>
-    		<th id='tab_expense_date'>{{ 'expense.date'|trans }}</th>
-    		<th id='tab_expense_item'>{{ 'expense.item'|trans }}</th>
-    		<th id='tab_expense_devise'>{{ 'expense.currency'|trans }}</th>
-    		<th id='tab_expense_qte'>{{ 'expense.amount'|trans }}</th>
-    		<th id='tab_expense_amountttc'>{{ 'expense.amountttc'|trans }}</th>
-    		<th id='tab_expense_amounttva'>{{ 'expense.amounttva'|trans }}</th>
+    		<th id='tab_expense_site'>{{ 'expense.site'|trans }}<sup>1</sup></th>
+    		<th id='tab_expense_date'>{{ 'expense.date'|trans }}<SUP>1</SUP> <SUP>2</SUP></th>
+    		<th id='tab_expense_item'>{{ 'expense.item'|trans }}<sup>1</sup></th>
+    		<th id='tab_expense_devise'>{{ 'expense.currency'|trans }}  </th>
+    		<th id='tab_expense_qte'>{{ 'expense.amount'|trans }}<sup>1</sup></th>
+    		<th id='tab_expense_amountttc'>{{ 'expense.amountttc'|trans }}<sup>1</sup></th>
+    		<th id='tab_expense_amounttva'>{{ 'expense.amounttva'|trans }}<sup>1</sup></th>
     		<th id='tab_expense_business'>{{ 'expense.business'|trans }}</th>
     		<th id='tab_expense_comment'>{{ 'expense.comment'|trans }}</th>
     	</tr>
@@ -115,8 +110,11 @@
     </table>
 </div><br>
 
-
-<button class='btn_red' type="submit" value="Enregistrer" id="enregistrer">{{ 'expense.submit.save'|trans }}</button>
+<p><sup>1</sup> {{'base.required'|trans}}</p>
+<p><sup>2</sup> {{'base.date'|trans}}</p>
+<div id="btn_save">
+    <button class='btn btn-primary' type="submit" value="Enregistrer" id="enregistrer">{{ 'expense.submit.save'|trans }}</button>
+</div>
 </form>
 
 {% endblock %}

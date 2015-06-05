@@ -7,6 +7,8 @@ base:
     link: www.pichonindustries.com
     choose_language: Wybierz swój kraj
     welcome: Witamy na stronie internetowej Pichon
+    required: Wymagane pola
+    date: Format Daty 31/12/14
     nav:
         accueil: Strona główna
         signin: Zaloguj się
@@ -88,6 +90,7 @@ admin:
         indexchoicesuser: Wybór użytkownika
         choicesroles: Dodaj / Usuń role
         indexscheduleuserexcel: Pobierz razy obecności roku do programu Excel
+        exportbe: Eksport Czas Udział biurze projektowym
     submit:
         download: Pobierz
         display: Wystawa
@@ -361,11 +364,13 @@ absence:
         create: Dodaj nieobecności
         empty: Nie zarejestrowany brak
         createweek: Dodaj tydzień z dala
+        edit: Edycja brak
 
 # Holiday
 holiday:
     title:
         show: Podsumowanie wakacji
+        create: Dodanie wakacje
     ca: Zostaw stażu pracy
     cp: Płatny urlop
     rtt: Zmniejszenie czasu pracy

@@ -7,6 +7,8 @@ base:
     link: http://www.pichonindustries.com
     choose_language: Choose your country
     welcome: Welcome to the website Pichon
+    required: Required fields
+    date: Date Format 31/12/14
     nav:
         accueil: Home
         signin: Sign in
@@ -88,6 +90,7 @@ admin:
         indexchoicesuser: User choice
         choicesroles: Add / Remove Roles
         indexscheduleuserexcel: Download presence times of the year to Excel
+        exportbe: Export Time Attendance of design office
     submit:
         download: Download
         display: Afficher
@@ -361,11 +364,13 @@ absence:
         create: Add an absence
         empty: No registered absence
         createweek: Add a week away
+        edit: Edit absence
 
 # Holiday
 holiday:
     title:
         show: Summary of holidays
+        create: Adding holidays
     ca: Leave seniority
     cp: Paid leave
     rtt: Reduction of working time

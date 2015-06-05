@@ -7,11 +7,13 @@
     <!--[if !IE]><!-->
         {{ include('CoyoteSiteBundle:Base:navigation.html.twig') }}
 	<!--<![endif]-->
+{% endblock %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/style_absence.css') }}" type="text/css" media="all" />
 {% endblock %}
 
 {% block content %}
-
 <p id="title">{{'absence.title.show'|trans}} </p>
 
 {% if entities|length > 0 %}
@@ -54,14 +56,14 @@
 {% endif %}
 
 <form role="form" action="{{ path('absence_create') }}" method='post'>
-<div class='table-responsive'>
+<div class='table-responsive' id="add_absence">
     <p><a href="{{ path('absence_new') }}">{{ 'absence.title.create' | trans }}</a> |
     <a href="{{ path('absence_newweek') }}">{{ 'absence.title.createweek' | trans }}</a></p>
 </div>
 </form>
 {% else %}
 <form role="form" action="{{ path('absence_create') }}" method='post'>
-<div class='table-responsive'>
+<div class='table-responsive' id="add_absence">
     <p>{{ 'absence.title.empty' | trans }}</p>
     <p><a href="{{ path('absence_new') }}">{{ 'absence.create' | trans }}</a></p>
     <p>{{ 'absence.title.createweek' | trans }}</p>

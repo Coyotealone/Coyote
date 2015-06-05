@@ -1,6 +1,9 @@
 {% extends 'CoyoteSiteBundle:Admin:index.html.twig' %}
 
 {% block content %}
+
+    <p id="title">{{"admin.title.exportbe"|trans}}</p>
+
     <form role="form" action="{{ path('admin_exportdatauser') }}" method='post'>
         <table class='table' id='tab_expense'>
         	<tr>
@@ -8,7 +11,7 @@
         		<th class="center">{{'admin.year'|trans}}</th>
         	</tr>
             <tr>
-                <td>
+                <td class="center">
                     {% set counter = 0 %}
                     <select name='month' id='month' >
                     {% for mois in tab_num_mois %}
@@ -21,7 +24,7 @@
                     {% endfor %}
                     </select>
                 </td>
-                <td>
+                <td class="center">
                     <select name='year' id='year' >
                     {% for annee in tab_annee %}
                         {% if annee == year %}
@@ -34,6 +37,8 @@
                 </td>
             </tr>
         </table>
-        <button class='btn_red' type="submit" value="Telecharger" id="telecharger">{{'admin.submit.download'|trans}}</button>
+        <div id="btn_dl">
+            <button class='btn btn-primary' type="submit" value="Telecharger" id="telecharger">{{'admin.submit.download'|trans}}</button>
+        </div>
     </form>
 {% endblock %}

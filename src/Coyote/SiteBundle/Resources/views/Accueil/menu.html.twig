@@ -14,9 +14,10 @@
         <p class="lead">{{'accueil.menu.message'|trans }}<br>
         {% if quote %}
             {% if app.request.locale == "fr" %}
-                <br><br>
-                "{{quote.0.citation}}"<br>
-                {{quote.0.author}}
+                <blockquote>
+                    <p>"{{quote.0.citation}}"</p>
+                    <small><cite title="Source Title">{{quote.0.author}}</cite></small>
+                </blockquote>
             {% endif %}
         {% endif %}
         </p>

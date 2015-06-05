@@ -16,8 +16,8 @@
 <form role="form" action="{{ path('admin_getscheduleuser') }}" method='get'>
     <table class='table'>
     	<tr>
-    		<th>{{'admin.period'|trans}}</th>
-    	    <td>
+    		<th class="center">{{'admin.period'|trans}}</th>
+    	    <td class="center">
                 <select name='pay_period' id='pay_period' >
                 {% for pay_period in tab_period %}
                     {% if pay_period == period %}
@@ -30,8 +30,8 @@
             </td>
         </tr>
         <tr>
-            <th>{{'admin.user'|trans}}</th>
-            <td>
+            <th class="center">{{'admin.user'|trans}}</th>
+            <td class="center">
                 <select name='user' id='user' >
                 {% for user in tab_user %}
                     <option value={{user.id}}>{{user.name|trans}}</option>
@@ -40,6 +40,8 @@
             </td>
         </tr>
     </table>
-    <button class='btn_red' type="submit" value="Afficher" id="afficher">{{'admin.submit.download'|trans }}</button>
+    <div id="btn_dl">
+        <button class='btn btn-primary' type="submit" value="Afficher" id="afficher">{{'admin.submit.download'|trans }}</button>
+    </div>
 </form>
 {% endblock %}

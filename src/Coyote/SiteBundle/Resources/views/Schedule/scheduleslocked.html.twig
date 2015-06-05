@@ -1,4 +1,4 @@
-{% extends 'CoyoteSiteBundle:Base:base.html.twig' %}
+{% extends 'CoyoteSiteBundle:Base:index.html.twig' %}
 
 {% block javascripts %}
     <script src="{{ asset('bundles/coyotesite/js/jquery-1.10.2.js') }}"/></script>
@@ -42,7 +42,9 @@
                 <input type='text' name='date' id='date' >
             </td>
         </table>
-    </div><br>
-<button class='btn_red' type="submit" value="Enregistrer" id="enregistrer">{{ 'schedule.submit.update'|trans }}</button>
+    </div>
+    <div id="btn_submit">
+        <button class='btn btn-primary' type="submit" value="Enregistrer" id="enregistrer">{{ 'schedule.submit.update'|trans }}</button>
+    </div>
 </form>
 {% endblock %}
