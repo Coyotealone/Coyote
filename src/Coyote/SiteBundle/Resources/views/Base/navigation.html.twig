@@ -49,6 +49,22 @@
               </ul>
             </li>
 
+            <li id="directory" class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown">{{'base.nav.directory.title'|trans}}<b class="caret"></b></a>
+
+              <ul class="dropdown-menu">
+                <li><a href="{{ path('directory_showdirectorybyfirstname', { 'country': 'FRANCE' }) }}">{{'base.nav.directory.showfirstnameFrance'|trans}}</a></li>
+                <li><a href="{{ path('directory_showdirectorybyfirstname', { 'country': 'POLOGNE' }) }}">{{'base.nav.directory.showfirstnamePologne'|trans}}</a></li>
+                <li><a href="{{ path('directory_showdirectorybyfunctionservice', { 'country': 'FRANCE' }) }}">{{'base.nav.directory.showfunctionFrance'|trans}}</a></li>
+                <li><a href="{{ path('directory_showdirectorybyfunctionservice', { 'country': 'POLOGNE' }) }}">{{'base.nav.directory.showfunctionPologne'|trans}}</a></li>
+                {% if is_granted('ROLE_DIRECTORY') %}
+                    <li class="divider"></li>
+                    <li><a href="{{ path('directory') }}">{{'base.nav.directory.index'|trans}}</a></li>
+                    <li><a href="{{ path('directory_new') }}">{{'base.nav.directory.add_user'|trans}}</a></li>
+                {% endif %}
+              </ul>
+            </li>
+
             {% if is_granted('ROLE_CHEF_BE') %}
         	<li id="presence_admin" class="dropdown">
               <a href=# class="dropdown-toggle" data-toggle="dropdown">{{'base.nav.schedule_admin.name'|trans}}<b class="caret"></b></a>

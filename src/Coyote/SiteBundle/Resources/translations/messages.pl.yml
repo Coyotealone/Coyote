@@ -1,5 +1,32 @@
 user_block_logout: Wyloguj
 
+directory:
+    title:
+        index: Książka telefoniczna
+        edit: Edycja kontaktów
+        show: Pokaż kontakt
+        new: Dodawanie kontaktu
+    back: Powrót do listy
+    add_user: Dodawanie kontaktu
+    actions:
+        title: Akcje
+        show: Pokaż
+        edit: Edycja
+    country: Kraj
+    mail: Adres e-mail
+    functionservice: Funkcja / usługi
+    cellphonenumber: Cellphonenumber
+    quickphonenumber: Szybkie numer telefonu
+    jobphonenumber: Numer telefonu Praca
+    firstname: Imię
+    name: Nazwa
+    submit:
+        update: Aktualizacja
+        delete: Usuwanie
+        create: Tworzenie
+    empty: Brak danych do wyświetlenia
+    required: Pole wymagane
+
 base:
     copyright: Copyright © 2015 PICHON - Wszystkie prawa zastrzeżone
     version: Wersja 2.3.3
@@ -48,6 +75,14 @@ base:
             name: Administrator
             register: Dodawanie użytkownika
             indexchoicesuser: Role Aktualizacja użytkownika
+        directory:
+            title: Katalog
+            showfirstnameFrance: Katalog alfabetyczny Francja
+            showfirstnamePologne: Katalog alfabetyczny Pologne
+            showfunctionFrance: Katalog Usług Francji
+            showfunctionPologne: Katalog Usług Pologne
+            index: Administracja katalog
+            add_user: Dodawanie kontaktu
 
 security:
     username: Nazwa użytkownika

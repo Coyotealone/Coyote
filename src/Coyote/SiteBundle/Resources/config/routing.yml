@@ -1,3 +1,7 @@
+coyote_site_directory:
+    resource: "@CoyoteSiteBundle/Resources/config/routing/directory.yml"
+    prefix:   /{_locale}/directory
+
 CoyoteSiteBundle_absence:
     resource: "@CoyoteSiteBundle/Resources/config/routing/absence.yml"
     prefix:   /{_locale}/absence
@@ -53,7 +57,7 @@ CoyoteSiteBundle_schedule:
     prefix:   /{_locale}/schedule
     requirements:
         _locale: fr|en|pl
-        
+
 CoyoteSiteBundle_accueil:
     path:     /
     defaults: { _controller: CoyoteSiteBundle:Main:redirect }

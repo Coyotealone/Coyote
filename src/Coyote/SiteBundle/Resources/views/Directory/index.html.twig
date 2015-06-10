@@ -1,0 +1,72 @@
+{% extends 'CoyoteSiteBundle:Base:base.html.twig' %}
+
+{% block nav %}
+
+    <!--[if lt IE 9]>
+        {{ include('CoyoteSiteBundle:Base:navigation_ie.html.twig') }}
+    <![endif]-->
+    <!--[if !IE]><!-->
+        {{ include('CoyoteSiteBundle:Base:navigation.html.twig') }}
+	<!--<![endif]-->
+
+{% endblock %}
+
+{% block content %}
+
+    <p id="title">{{'directory.title.index'|trans}} </p>
+
+    <table class="table table-striped table-hover ">
+    <tr>
+        <th>
+            <a class="btn btn-primary" href="{{ path('directory_new') }}">{{'directory.add_user'|trans}}</a>
+        </th>
+        <th>
+            <a class="btn btn-primary" href="{{ path('directory_showdirectorybyfirstname', { 'country': 'FRANCE' }) }}">Liste par prénom FRANCE</a>
+        </th>
+        <th>
+            <a class="btn btn-primary" href="{{ path('directory_showdirectorybyfunctionservice', { 'country': 'FRANCE' }) }}">Liste par service FRANCE</a>
+        </th>
+        <th>
+            <a class="btn btn-primary" href="{{ path('directory_showdirectorybyfirstname', { 'country': 'POLOGNE' }) }}">Liste par prénom POLOGNE</a>
+        </th>
+        <th>
+            <a class="btn btn-primary" href="{{ path('directory_showdirectorybyfunctionservice', { 'country': 'POLOGNE' }) }}">Liste par service POLOGNE</a>
+        </th>
+    </tr>
+    </table>
+
+    <table class="table table-striped table-hover ">
+        <thead>
+            <tr>
+                <th>{{'directory.firstname'|trans}}</th>
+                <th>{{'directory.name'|trans}}</th>
+                <th>{{'directory.jobphonenumber'|trans}}</th>
+                <th>{{'directory.quickphonenumber'|trans}}</th>
+                <th>{{'directory.cellphonenumber'|trans}}</th>
+                <th>{{'directory.functionservice'|trans}}</th>
+                <th>{{'directory.mail'|trans}}</th>
+                <th>{{'directory.country'|trans}}</th>
+                <th>{{'directory.actions.title'|trans}}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entity in entities %}
+                <tr>
+                    <td>{{ entity.firstname }}</td>
+                    <td>{{ entity.name }}</td>
+                    <td>{{ entity.jobphonenumber }}</td>
+                    <td>{{ entity.quickphonenumber }}</td>
+                    <td>{{ entity.cellphonenumber }}</td>
+                    <td>{{ entity.functionservice }}</td>
+                    <td>{{ entity.mail }}</td>
+                    <td>{{ entity.country }}</td>
+                    <td>
+                        <a href="{{ path('directory_edit', { 'id': entity.id }) }}">{{'directory.actions.edit'|trans}}</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+{% endblock %}

@@ -1,0 +1,38 @@
+directory:
+    path:     /admindirectory/
+    defaults: { _controller: "CoyoteSiteBundle:Directory:index" }
+
+directory_show:
+    path:     /admindirectory/{id}/show
+    defaults: { _controller: "CoyoteSiteBundle:Directory:show" }
+
+directory_new:
+    path:     /admindirectory/new
+    defaults: { _controller: "CoyoteSiteBundle:Directory:new" }
+
+directory_create:
+    path:     /admindirectory/create
+    defaults: { _controller: "CoyoteSiteBundle:Directory:create" }
+    methods:  POST
+
+directory_edit:
+    path:     /admindirectory/{id}/edit
+    defaults: { _controller: "CoyoteSiteBundle:Directory:edit" }
+
+directory_update:
+    path:     /admindirectory/{id}/update
+    defaults: { _controller: "CoyoteSiteBundle:Directory:update" }
+    methods:  [POST, PUT]
+
+directory_delete:
+    path:     /admindirectory/{id}/delete
+    defaults: { _controller: "CoyoteSiteBundle:Directory:delete" }
+    methods:  [POST, DELETE]
+
+directory_showdirectorybyfirstname:
+    path:     /showdirectorybyfirstname/{country}
+    defaults: { _controller: "CoyoteSiteBundle:Directory:showDirectoryByFirstname" }
+
+directory_showdirectorybyfunctionservice:
+    path:     /showdirectorybyfunctionservice/{country}
+    defaults: { _controller: "CoyoteSiteBundle:Directory:showDirectoryByFunctionService" }

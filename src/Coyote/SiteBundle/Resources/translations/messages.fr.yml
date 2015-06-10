@@ -1,5 +1,32 @@
 user_block_logout: Deconnexion
 
+directory:
+    title:
+        index: Annuaire Téléphonique
+        edit: "Modification d'un contact"
+        show: "Affichage d'un contact"
+        new: "Ajout d'un contact"
+    back: Retourner à la liste
+    add_user: "Ajouter un contact"
+    actions:
+        title: Actions
+        show: Affichage
+        edit: Edition
+    country: Pays
+    mail: Email
+    functionservice: Fonction / Service
+    cellphonenumber: Téléphone portable
+    quickphonenumber: Numéro rapide
+    jobphonenumber: Numéro de poste
+    firstname: Prénom
+    name: Nom
+    submit:
+        update: Mise à jour
+        delete: Supprimer
+        create: Créer
+    empty: Aucun donnée à afficher
+    required: Champs obligatoire
+
 base:
     copyright: Copyright ©2015 PICHON - Tous droits réservés
     version: Version 2.3.3
@@ -48,6 +75,14 @@ base:
             name: Administrateur
             register: "Ajout d'un utilisateur"
             indexchoicesuser: Mise à jour des rôles utilisateurs
+        directory:
+            title: Annuaire
+            showfirstnameFrance: Annuaire alphabétique France
+            showfirstnamePologne: Annuaire alphabétique Pologne
+            showfunctionFrance: Annuaire des services France
+            showfunctionPologne: Annuaire des services Pologne
+            index: Administration annuaire
+            add_user: "Ajout d'un contact"
 
 security:
     username: Identifiant

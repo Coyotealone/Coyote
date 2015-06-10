@@ -1,5 +1,32 @@
 user_block_logout: Logout
 
+directory:
+    title:
+        index: Telephone directory
+        edit: Editing a contact
+        show: Show a contact
+        new: Add a contact
+    back: Back to list
+    add_user: Add a contact
+    actions:
+        title: Actions
+        show: Show
+        edit: Edit
+    country: Country
+    mail: Email
+    functionservice: Function / Service
+    cellphonenumber: Cell phone number
+    quickphonenumber: Quick phone number
+    jobphonenumber: Job phone number
+    firstname: Firstname
+    name: Name
+    submit:
+        update: Update
+        delete: Delete
+        create: Create
+    empty: No data to display
+    required: Required field
+
 base:
     copyright: Copyright ©2015 PICHON - All rights reserved
     version: Version 2.3.3
@@ -48,6 +75,14 @@ base:
             name: Administrator
             register: Adding a user
             indexchoicesuser: Update User Roles
+        directory:
+            title: Directory
+            showfirstnameFrance: Alphabetical directory France
+            showfirstnamePologne: Alphabetical directory Pologne
+            showfunctionFrance: Directory of Services France
+            showfunctionPologne: Directory of Services Pologne
+            index: Directory administration
+            add_user: Add a contact
 
 security:
     username: Login
