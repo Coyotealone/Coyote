@@ -228,7 +228,7 @@ class DirectoryController extends Controller
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('CoyoteSiteBundle:Directory')->showDirectoryByFirstname($country);
         return $this->render('CoyoteSiteBundle:Directory:showdirectorybyfirstname.html.twig',
-                array('entity' => $entity));
+                array('entity' => $entity, 'country' => $country));
     }
 
     public function showDirectoryByFunctionServiceAction($country)
@@ -236,6 +236,44 @@ class DirectoryController extends Controller
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('CoyoteSiteBundle:Directory')->showDirectoryByFunctionService($country);
         return $this->render('CoyoteSiteBundle:Directory:showdirectorybyfunctionservice.html.twig',
-                array('entity' => $entity));
+                array('entity' => $entity, 'country' => $country));
+    }
+
+    public function printDirectoryByFirstnameAction($country)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('CoyoteSiteBundle:Directory')->showDirectoryByFirstname($country);
+        $update = $em->getRepository('CoyoteSiteBundle:Directory')->update_directory($country);
+        $page = $this->render('CoyoteSiteBundle:Directory:pdfdirectorybyfirstname.html.twig',
+                array('entity' => $entity, 'update' => $update));
+        $date = date("Ymd");
+        $heure = date("His");
+        $html = $page->getContent();
+        $filename = "annuaire".$date."-".$heure.".pdf";
+        $html = $page->getContent();
+        $html2pdf = new \Html2Pdf_Html2Pdf('P', 'A4', 'fr');
+        $html2pdf->pdf->SetDisplayMode('real');
+        $html2pdf->writeHTML($html);
+        $html2pdf->Output($filename, 'D');
+        return new Response('PDF réalisé');
+    }
+
+    public function printDirectoryByFunctionServiceAction($country)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('CoyoteSiteBundle:Directory')->showDirectoryByFunctionService($country);
+        $update = $em->getRepository('CoyoteSiteBundle:Directory')->update_directory($country);
+        $page = $this->render('CoyoteSiteBundle:Directory:pdfdirectorybyfunctionservice.html.twig',
+                array('entity' => $entity, 'update' => $update));
+        $date = date("Ymd");
+        $heure = date("His");
+        $html = $page->getContent();
+        $filename = "annuaire".$date."-".$heure.".pdf";
+        $html = $page->getContent();
+        $html2pdf = new \Html2Pdf_Html2Pdf('P', 'A4', 'fr');
+        $html2pdf->pdf->SetDisplayMode('real');
+        $html2pdf->writeHTML($html);
+        $html2pdf->Output($filename, 'D');
+        return new Response('PDF réalisé');
     }
 }

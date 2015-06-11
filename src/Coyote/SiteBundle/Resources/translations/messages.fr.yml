@@ -6,6 +6,16 @@ directory:
         edit: "Modification d'un contact"
         show: "Affichage d'un contact"
         new: "Ajout d'un contact"
+        directorybyfirstname: Annuaire Téléphonique Alphabétique
+        directorybyfunctionservice: Annuaire Téléphonique par Services
+        directorypdf_services_french: PDF Annuaire France par services
+        directorypdf_services_poland: PDF Annuaire Pologne par services
+        directorypdf_user_french: PDF Annuaire Alphabétique France
+        directorypdf_user_poland: PDF Annuaire Alphabétique Pologne
+        directory_services_french: Annuaire France par services
+        directory_services_poland: Annuaire Pologne par services
+        directory_user_french: Annuaire Alphabétique France
+        directory_user_poland: Annuaire Alphabétique Pologne
     back: Retourner à la liste
     add_user: "Ajouter un contact"
     actions:
@@ -26,6 +36,12 @@ directory:
         create: Créer
     empty: Aucun donnée à afficher
     required: Champs obligatoire
+    update: Mise à jour
+    print: Imprimer en PDF
+    nav:
+        jobphonenumber: N° Poste
+        quickphonenumber: N° Rapide
+        cellphonenumber: N° Portable
 
 base:
     copyright: Copyright ©2015 PICHON - Tous droits réservés

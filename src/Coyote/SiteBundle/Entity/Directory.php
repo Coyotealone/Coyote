@@ -35,8 +35,8 @@ class Directory
     private $firstname;
 
     /**
-     * @var integer
-     * @ORM\Column(name="job_phone_number", type="integer", unique=true, options={"unsigned":true})
+     * @var string
+     * @ORM\Column(name="job_phone_number", type="string", unique=true, nullable=true)
      */
     private $job_phone_number;
 
@@ -69,6 +69,12 @@ class Directory
      * @ORM\Column(name="function_service", type="string", length=200)
      */
     private $function_service;
+
+    /**
+     * @var boolean
+     * @ORM\Column(name="leader", type="boolean", nullable=true)
+     */
+    private $leader;
 
     /**
      * @var \DateTime
@@ -324,5 +330,28 @@ class Directory
     public function getUpdatedAt()
     {
         return $this->updated_at;
+    }
+
+    /**
+     * Set leader
+     *
+     * @param boolean $leader
+     * @return Directory
+     */
+    public function setLeader($leader)
+    {
+        $this->leader = $leader;
+
+        return $this;
+    }
+
+    /**
+     * Get leader
+     *
+     * @return boolean
+     */
+    public function getLeader()
+    {
+        return $this->leader;
     }
 }

@@ -63,6 +63,7 @@ class DirectoryType extends AbstractType
                     ),
                     'label' => 'directory.functionservice', 'translation_domain' => 'messages'
                     ))
+            ->add('leader')
         ;
     }
 

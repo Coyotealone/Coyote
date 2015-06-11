@@ -6,6 +6,16 @@ directory:
         edit: Edycja kontaktów
         show: Pokaż kontakt
         new: Dodawanie kontaktu
+        directorybyfirstname: Telefon Katalogi Alfabetycznie
+        directorybyfunctionservice: Katalogi telefoniczne przez służby
+        directorypdf_services_french: Usługi Francja PDF
+        directorypdf_services_poland: Polska Usługi katalog PDF
+        directorypdf_user_french: PDF katalog alfabetyczny Francja
+        directorypdf_user_poland: PDF katalog alfabetyczny Polska
+        directory_services_french: Katalog Usługi Francja
+        directory_services_poland: Katalog Usługi Polska
+        directory_user_french: Katalog alfabetyczny Francja
+        directory_user_poland: Katalog alfabetyczny Polska
     back: Powrót do listy
     add_user: Dodawanie kontaktu
     actions:
@@ -26,6 +36,12 @@ directory:
         create: Tworzenie
     empty: Brak danych do wyświetlenia
     required: Pole wymagane
+    update: Aktualizacja
+    print: Drukuj pDF
+    nav:
+        jobphonenumber: Numer Workstation
+        quickphonenumber: Szybkie wybieranie numeru
+        cellphonenumber: Numer Telefonu
 
 base:
     copyright: Copyright © 2015 PICHON - Wszystkie prawa zastrzeżone

@@ -19,11 +19,38 @@ class DirectoryRepository extends EntityRepository
 
     public function showDirectoryByFunctionService($country)
     {
-        return $this->findBy(array('country' => $country), array('function_service' => 'ASC', 'firstname' => 'ASC'));
+        return $this->findBy(array('country' => $country), array('function_service' => 'ASC', 'leader' => 'DESC', 'firstname' => 'ASC'));
     }
 
     public function findAll()
     {
         return $this->findBy(array(), array('firstname' => 'ASC'));
+    }
+
+    public function update_directory($country)
+    {
+        $qb = $this->_em->createQueryBuilder();
+        $qb->select('d')
+           ->from('CoyoteSiteBundle:Directory', 'd')
+           ->where('d.country = :country')
+           ->orderBy('d.created_at', 'DESC')
+           ->setParameters(array('country' => $country));
+        $result_createdat = $qb->getQuery()->getResult();
+
+        $qb = $this->_em->createQueryBuilder();
+        $qb->select('d')
+           ->from('CoyoteSiteBundle:Directory', 'd')
+           ->where('d.country = :country')
+           ->orderBy('d.updated_at', 'DESC')
+           ->setParameters(array('country' => $country));
+        $result_updatedat = $qb->getQuery()->getResult();
+
+        $date_createdat = $result_createdat[0]->getCreatedAt();
+        $date_updatedat = $result_updatedat[0]->getUpdatedAt();
+
+        if($date_createdat > $date_updatedat)
+            return $date_createdat->format('Y-m-d H:i');
+        else
+            return $date_updatedat->format('Y-m-d H:i');
     }
 }

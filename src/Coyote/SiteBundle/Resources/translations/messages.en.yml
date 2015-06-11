@@ -6,7 +6,17 @@ directory:
         edit: Editing a contact
         show: Show a contact
         new: Add a contact
-    back: Back to list
+        directorybyfirstname: Telephone Directories Alphabetical
+        directorybyfunctionservice: Telephone Directories by Services
+        directorypdf_services_french: PDF Services directory France
+        directorypdf_services_poland: PDF Services directory Poland
+        directorypdf_user_french: PDF Directory Alphabetical France
+        directorypdf_user_poland: PDF Directory Alphabetical Poland
+        directory_services_french: Services directory France
+        directory_services_poland: Services directory Poland
+        directory_user_french: Directory Alphabetical France
+        directory_user_poland: Directory Alphabetical Poland
+        back: Back to list
     add_user: Add a contact
     actions:
         title: Actions
@@ -26,6 +36,12 @@ directory:
         create: Create
     empty: No data to display
     required: Required field
+    update: Update
+    print: Print PDF
+    nav:
+        jobphonenumber: Workstation number
+        quickphonenumber: Speed dial number
+        cellphonenumber: Phone Number
 
 base:
     copyright: Copyright ©2015 PICHON - All rights reserved
