@@ -1,0 +1,29 @@
+{% extends "CoyoteSiteBundle:Base:base.html.twig" %}
+
+{% block nav %}
+
+    <!--[if lt IE 9]>
+        {{ include('CoyoteSiteBundle:Base:navigation_ie.html.twig') }}
+    <![endif]-->
+    <!--[if !IE]><!-->
+        {{ include('CoyoteSiteBundle:Base:navigation.html.twig') }}
+	<!--<![endif]-->
+
+{% endblock %}
+
+{% if is_granted('ROLE_ADMIN') %}
+    {% block content %}
+        {% for flashMessage in app.session.flashbag.get('save_registration') %}
+            {% set message = flashMessage %}
+            {% if message == "registration.flash.user_created" %}
+                <p id="flashmessage_valid">{{ flashMessage|trans }}</p>
+            {% endif %}
+            {% if message == "schedule.flash.no_save" %}
+                <p id="flashmessage_error">{{ flashMessage|trans }}</p>
+            {% endif %}
+        {% endfor %}
+
+        <p class="lead">{{ "registration.title"|trans }}</p>
+        {% include "CoyoteSiteBundle:Registration:register_content.html.twig" %}
+    {% endblock content %}
+{% endif %}

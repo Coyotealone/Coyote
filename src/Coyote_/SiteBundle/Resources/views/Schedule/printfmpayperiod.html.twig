@@ -1,0 +1,74 @@
+<page>
+<div id="lien">
+    <img src="./bundles/coyotesite/images/logo1.jpg" alt="PICHON" id="logo"/>
+</div>
+
+<p style="text-align:center">{{"schedule.title.summary"|trans}}</p>
+
+{% if dataschedule %}
+
+<table>
+    <tr>
+        <td style="background:#7FC6BC; color:white">{{'schedule.holiday'|trans}}</td>
+        <td style="background:#01B0F0; color:white">{{'schedule.weekend'|trans}}</td>
+    </tr>
+</table>
+
+<table class='table' id='tab_expense' style="width:900px;">
+    <tr style="width:900px;">
+	    <th style="width: 80px; text-align:center">{{'schedule.dayofweek'|trans}}</th>
+	    <th style="width: 85px; text-align:center" id='tab_time_date'>{{'schedule.date'|trans}}</th>
+		<th style="width: 60px; text-align:center" id='tab_time_workinghours'>{{'schedule.working_hours'|trans}}</th>
+		<th style="text-align:center" id='tab_time_travel'>{{'schedule.travel'|trans}}</th>
+		<th style="text-align:center" id='tab_time_absence'>{{'schedule.absence'|trans}}</th>
+		<th style="width: 60px; text-align:center" id='tab_time_workingtime'>{{'schedule.absence_time'|trans}}</th>
+		<th style="width: 20%; text-align:center" id='tab_time_comment'>{{'schedule.comment'|trans}}</th>
+	</tr>
+	{% for entity in dataschedule %}
+        <tr>
+            {% if entity.holiday == "1" %}
+                <td style="background:#7FC6BC; color:white; text-align:center">{{ entity.date|date("l")|trans}}</td>
+                <td style="background:#7FC6BC; color:white; text-align:center">{{ entity.date|date("d/m/Y")}}</td>
+                <td style="background:#7FC6BC; color:white; text-align:center">{{ entity.working_hours }}</td>
+                <td style="background:#7FC6BC; color:white; text-align:center">{{ entity.travel }}</td>
+                <td style="background:#7FC6BC; color:white; text-align:center">{{ entity.absence_name|trans }}</td>
+                <td style="background:#7FC6BC; color:white; text-align:center">{{ entity.absence_duration|trans }}</td>
+                <td style="width: 20%; background:#7FC6BC; color:white; text-align:center">{{ entity.comment }}</td>
+            {% elseif entity.date|date("l") == "Saturday" %}
+                <td style="background:#01B0F0; color:white; text-align:center">{{ entity.date|date("l")|trans}}</td>
+                <td style="background:#01B0F0; color:white; text-align:center">{{ entity.date|date("d/m/Y")}}</td>
+                <td style="background:#01B0F0; color:white; text-align:center">{{ entity.working_hours }}</td>
+                <td style="background:#01B0F0; color:white; text-align:center">{{ entity.travel }}</td>
+                <td style="background:#01B0F0; color:white; text-align:center">{{ entity.absence_name|trans }}</td>
+                <td style="background:#01B0F0; color:white; text-align:center">{{ entity.absence_duration|trans }}</td>
+                <td style="width: 20%; background:#01B0F0; color:white; text-align:center">{{ entity.comment }}</td>
+            {% elseif entity.date|date("l") == "Sunday" %}
+                <td style="background:#01B0F0; color:white; text-align:center">{{ entity.date|date("l")|trans}}</td>
+                <td style="background:#01B0F0; color:white; text-align:center">{{ entity.date|date("d/m/Y")}}</td>
+                <td style="background:#01B0F0; color:white; text-align:center">{{ entity.working_hours }}</td>
+                <td style="background:#01B0F0; color:white; text-align:center">{{ entity.travel }}</td>
+                <td style="background:#01B0F0; color:white; text-align:center">{{ entity.absence_name|trans }}</td>
+                <td style="background:#01B0F0; color:white; text-align:center">{{ entity.absence_duration|trans }}</td>
+                <td style="width: 20%; background:#01B0F0; color:white; text-align:center">{{ entity.comment }}</td>
+            {% else %}
+                <td style="text-align:center">{{ entity.date|date("l")|trans}}</td>
+                <td style="text-align:center">{{ entity.date|date("d/m/Y")}}</td>
+                <td style="text-align:center">{{ entity.working_hours }}</td>
+                <td style="text-align:center">{{ entity.travel }}</td>
+                <td style="text-align:center">{{ entity.absence_name|trans }}</td>
+                <td style="text-align:center">{{ entity.absence_duration|trans }}</td>
+                <td style="width: 20%;">{{ entity.comment }}</td>
+            {% endif %}
+        </tr>
+    {% endfor %}
+</table>
+<p style="text-align:center">
+    {{'schedule.working_day_month_year'|trans }} : {{dayyear}}<br>
+    {{'schedule.number_rtt_month_year'|trans}} : {{rttyear}}<br>
+    {{'schedule.number_cp_month_year' | trans }} : {{cpyear}} <br>
+    {{"schedule.number_ca_month_year" | trans }} : {{cayear}}
+</p>
+{% else %}
+<p style="text-align:center">{{'schedule.no_data_found'|trans}}</p>
+{% endif %}
+</page>

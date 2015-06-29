@@ -1,0 +1,97 @@
+/* Saisi des temps  Augmentation des cellules des heures */
+input#txt_timemonth {
+  width: 160px;
+}
+
+input#txt_timemonth2 {
+  width: 160px;
+}
+
+/* Mise en forme des boutons Site_Cadre */
+#save {
+  text-align: center;
+}
+
+
+
+
+/* Tableau Saisie des temps */
+.date {
+  width: 200px;
+  text-align: right;
+}
+
+.date .input_day {
+  width: 85px;
+  text-align: center;
+}
+
+.input_time {
+  width: 50px;
+}
+
+.select_absence > select {
+    width: 100px;
+}
+
+.absence_day {
+    width: 130px;
+}
+
+.input_travel {
+	width: 50px;
+}
+
+.input_absencename {
+	width: 75px;
+}
+
+.input_absencetime {
+	width: 30px;
+}
+
+
+thead {
+  text-align: center;
+  width: 120px;
+}
+
+tbody {
+  text-align: center;
+}
+
+#title {
+    text-align: center;
+}
+
+#write_auto{
+    text-align: center;
+}
+
+#buttons{
+    text-align: center;
+}
+
+#timeweek{
+    text-align: center;
+}
+
+#resultat {
+  width: 100%;
+}
+
+#time_table {
+  min-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+/* Fin Tableau Saisie des temps */
+
+/* Time Attendance Month */
+.center {
+    text-align: center;
+}
+
+#btn_show {
+    text-align: center;
+}

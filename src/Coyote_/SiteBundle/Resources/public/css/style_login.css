@@ -1,0 +1,8 @@
+#flag {
+	list-style: none;
+	margin: 0;	
+}
+
+#flag a {
+	display: table-cell;
+}

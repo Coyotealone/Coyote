@@ -1,0 +1,33 @@
+{% extends 'CoyoteSiteBundle:Base:base.html.twig' %}
+
+{% block nav %}
+    {{ include('CoyoteSiteBundle:Base:navigation_login.html.twig') }}
+{% endblock nav %}
+
+{% block content %}
+
+<div id="site">
+    <div id="box1">
+        <nav class="navitems , firstnavitems">
+            <header class="headerclass">{{'welcome'|trans}}</header>
+            <ul>
+                <li>
+                    <div class="box .tilt">
+                        <div class="image">
+                            <a class="navbar-brand" href="http://172.16.0.225/glpi">
+                            <img src="{{ asset('bundles/coyotesite/images/glpi.jpg') }}" alt="" /></a>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="box">
+                        <div class="image">
+                            <a class="navbar-brand" href="http://www.pichonindustries.com">
+                            <img src="{{ asset('bundles/coyotesite/images/Logo_PICHON.jpg') }}" alt="" /></a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </div>
+{% endblock %}

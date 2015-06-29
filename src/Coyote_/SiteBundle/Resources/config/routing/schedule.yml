@@ -1,0 +1,61 @@
+schedule_overtime:
+    pattern:    /overtime
+    defaults:   { _controller: "CoyoteSiteBundle:Schedule:showovertime"}
+
+schedule_getscheduleuserweek:
+    pattern:    /time_attendance
+    defaults:   { _controller: "CoyoteSiteBundle:Schedule:getScheduleUserWeek"}
+
+schedule_postscheduleuserweek:
+    pattern:    /time_attendance_save
+    defaults:   { _controller: "CoyoteSiteBundle:Schedule:postScheduleUserWeek"}
+
+schedule_postweekless:
+    pattern:    /time_attendance/weekless
+    defaults:   { _controller: "CoyoteSiteBundle:Schedule:postWeekLess"}
+
+schedule_postweekmore:
+    pattern:    /time_attendance/weekmore
+    defaults:   { _controller: "CoyoteSiteBundle:Schedule:postWeekMore"}
+
+schedule_getscheduleusermonth:
+    pattern:    /time_attendance_month
+    defaults:   { _controller: "CoyoteSiteBundle:Schedule:getScheduleUserMonth"}
+
+schedule_getscheduleuserprintmonth:
+    pattern:    /time_attendance_print_month
+    defaults:   { _controller: "CoyoteSiteBundle:Schedule:getScheduleUserPrintMonth"}
+
+schedule_getscheduleuserprintyear:
+    pattern:    /time_attendance_print_year
+    defaults:   { _controller: "CoyoteSiteBundle:Schedule:getScheduleUserPrintYear"}
+
+schedule_postschedules_locked:
+    pattern:    /schedules_locked
+    defaults:   { _controller: "CoyoteSiteBundle:Schedule:postSchedulesLocked" }
+
+schedule_getscheduleuser:
+    pattern:    /getscheduleuser
+    defaults:   { _controller: "CoyoteSiteBundle:Schedule:getScheduleUser" }
+
+
+
+schedule_indexprintyear:
+    pattern:    /indexprintyear
+    defaults:   { _controller: "CoyoteSiteBundle:Schedule:indexprintyear"}
+
+schedule_printyear:
+    pattern:    /scheduleyear
+    defaults:   { _controller: "CoyoteSiteBundle:Schedule:printyear"}
+
+schedule_indexexportprintyear:
+    pattern:    /indexexportprintyear
+    defaults:   { _controller: "CoyoteSiteBundle:Schedule:indexexportprintyear"}
+
+schedule_exportprintyear:
+    pattern:    /exportscheduleyear
+    defaults:   { _controller: "CoyoteSiteBundle:Schedule:exportprintyear"}
+
+#schedule_absenceday:
+#    pattern:    /absenceday
+#    defaults:   { _controller: "CoyoteSiteBundle:Schedule:absenceday"}

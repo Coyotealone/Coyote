@@ -842,12 +842,12 @@ class ScheduleRepository extends EntityRepository
     {
     	$query = $this->_em->createQuery(
     			"SELECT s FROM CoyoteSiteBundle:Schedule s WHERE s.timetable IN
-    			(SELECT t.id FROM CoyoteSiteBundle:Timetable t WHERE t.period = :period
-    			and DAYOFWEEK(t.date) != 1 and DAYOFWEEK(t.date) != 7 and t.holiday = 0)
+    			(SELECT t.id FROM CoyoteSiteBundle:Timetable t WHERE
+    			 DAYOFWEEK(t.date) != 1 and DAYOFWEEK(t.date) != 7 and t.holiday = 0)
     			and s.user = :user and s.comment != :comment and s.absence_duration != 1")
     				->setParameters(array(
     			'user' => $user,
-    			'period'  => '2014/2015',
+    			//'period'  => '2014/2015',
     			'comment' => 'IMIE'
     	));
 

@@ -1,0 +1,19 @@
+resetting_request:
+    pattern:    /request
+    defaults:   { _controller: "CoyoteSiteBundle:Resetting:request" }
+    requirements: { _method: get }
+
+resetting_send_email:
+    pattern:    /send-email
+    defaults:   { _controller: "CoyoteSiteBundle:Resetting:sendEmail" }
+    requirements: { _method: post }
+
+resetting_check_email:
+    pattern:    /check-email
+    defaults:   { _controller: "CoyoteSiteBundle:Resetting:checkEmail" }
+    requirements: { _method: get }
+
+resetting_reset:
+    pattern:    /reset/{token}
+    defaults:   { _controller: "CoyoteSiteBundle:Resetting:reset" }
+    requirements: { _method: get|post }

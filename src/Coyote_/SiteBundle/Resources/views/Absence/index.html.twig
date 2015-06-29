@@ -1,0 +1,74 @@
+{% extends 'CoyoteSiteBundle:Base:base.html.twig' %}
+{% block nav %}
+
+    <!--[if lt IE 9]>
+        {{ include('CoyoteSiteBundle:Base:navigation_ie.html.twig') }}
+    <![endif]-->
+    <!--[if !IE]><!-->
+        {{ include('CoyoteSiteBundle:Base:navigation.html.twig') }}
+	<!--<![endif]-->
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/style_absence.css') }}" type="text/css" media="all" />
+{% endblock %}
+
+{% block content %}
+<p id="title">{{'absence.title.show'|trans}} </p>
+
+{% if entities|length > 0 %}
+<form role="form" action="{{ path('absence') }}" method='post'>
+<div class='table-responsive'>
+    <table class='table' id='tab_expense'>
+        <thead>
+        	<tr>
+        		<th>{{ 'absence.travel'|trans }}</th>
+        		<th>{{ 'absence.absence_name'|trans }}</th>
+        		<th>{{ 'absence.absence_duration'|trans }}</th>
+        		<th>{{ 'absence.comment'|trans }}</th>
+        		<th>{{ 'absence.timetable'|trans }}</th>
+        		<th>{{ 'absence.edit' | trans }}</th>
+        		<th>{{ 'absence.show' | trans }}</th>
+        	</tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+        	<tr>
+        	    <td>{{ entity.travel }}</td>
+    		    <td>{{ entity.absencename | trans }}</td>
+    		    <td>{{ entity.absenceduration }}</td>
+    		    <td>{{ entity.comment }}</td>
+    		    <td>{{ entity.timetable }}</td>
+                <td>
+        		    <a href="{{ path('absence_edit', { 'id': entity.id }) }}">{{ 'absence.edit' | trans }}</a>
+                </td>
+                <td>
+                    <a href="{{ path('absence_show', { 'id': entity.id }) }}">{{ 'absence.show' | trans }}</a>
+                </td>
+        	</tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div><br>
+</form>
+{% if pagination.pages_count > 1 %}
+{{ include('CoyoteSiteBundle:Base:pagination.html.twig') }}
+{% endif %}
+
+<form role="form" action="{{ path('absence_create') }}" method='post'>
+<div class='table-responsive' id="add_absence">
+    <p><a href="{{ path('absence_new') }}">{{ 'absence.title.create' | trans }}</a> |
+    <a href="{{ path('absence_newweek') }}">{{ 'absence.title.createweek' | trans }}</a></p>
+</div>
+</form>
+{% else %}
+<form role="form" action="{{ path('absence_create') }}" method='post'>
+<div class='table-responsive' id="add_absence">
+    <p>{{ 'absence.title.empty' | trans }}</p>
+    <p><a href="{{ path('absence_new') }}">{{ 'absence.create' | trans }}</a></p>
+    <p>{{ 'absence.title.createweek' | trans }}</p>
+    <p><a href="{{ path('absence_newweek') }}">{{ 'absence.createweek' | trans }}</a></p>
+</div>
+</form>
+{% endif %}
+{% endblock %}

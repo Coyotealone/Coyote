@@ -1,0 +1,12 @@
+{% extends 'CoyoteSiteBundle:Schedule:index.html.twig' %}
+
+{% block content %}
+    <blockquote>
+        <p>
+            {{ "schedule.title.overtime"|trans }} :
+            {% if overtime %}
+                {{overtime}}
+            {% endif %}
+        </p>
+    </blockquote>
+{% endblock %}

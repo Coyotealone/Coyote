@@ -1,0 +1,30 @@
+timetable:
+    pattern:  /
+    defaults: { _controller: "CoyoteSiteBundle:Timetable:index" }
+
+timetable_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "CoyoteSiteBundle:Timetable:show" }
+
+timetable_new:
+    pattern:  /new
+    defaults: { _controller: "CoyoteSiteBundle:Timetable:new" }
+
+timetable_create:
+    pattern:  /create
+    defaults: { _controller: "CoyoteSiteBundle:Timetable:create" }
+    requirements: { _method: post }
+
+timetable_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "CoyoteSiteBundle:Timetable:edit" }
+
+timetable_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "CoyoteSiteBundle:Timetable:update" }
+    requirements: { _method: post|put }
+
+timetable_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "CoyoteSiteBundle:Timetable:delete" }
+    requirements: { _method: post|delete }

@@ -1,0 +1,22 @@
+{% extends 'CoyoteSiteBundle:Base:base.html.twig' %}
+
+{% block content %}
+{% include "FOSUserBundle:Profile:edit_content.html.twig" %}
+{% endblock content %}
+
+{% block nav %}
+
+    {% if is_granted('ROLE_CHEF_BE') %}
+	    {{ include('CoyoteSiteBundle:Base:navigation_admin.html.twig') }}
+    {% elseif is_granted('ROLE_COMPTA') %}
+	    {{ include('CoyoteSiteBundle:Base:navigation_admin.html.twig') }}
+    {% else %}
+    <!--[if lt IE 9]>
+        {{ include('CoyoteSiteBundle:Base:navigation_ie.html.twig') }}
+    <![endif]-->
+    <!--[if !IE]><!-->
+        {{ include('CoyoteSiteBundle:Base:navigation.html.twig') }}
+	<!--<![endif]-->
+	{% endif %}
+
+{% endblock %}
