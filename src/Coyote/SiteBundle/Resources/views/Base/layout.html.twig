@@ -14,10 +14,6 @@
     </div>
 {% endblock %}
 
-{% block stylesheets %}
-   {{ include('CoyoteSiteBundle:Base:css.html.twig') }}
-{% endblock %}
-
 {% block content %}
         {% for type, messages in app.session.flashbag.all() %}
             {% for message in messages %}

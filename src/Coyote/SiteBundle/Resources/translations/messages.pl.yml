@@ -99,6 +99,10 @@ base:
             showfunctionPologne: Katalog Usług Pologne
             index: Administracja katalog
             add_user: Dodawanie kontaktu
+        flag:
+            french: Francuski
+            english: Angielski
+            polish: Polski
 
 security:
     username: Nazwa użytkownika
@@ -154,6 +158,7 @@ contact:
     email: E-mail
     subject: Temat
     content: Treść
+    message: E-mail wysłany
 
 schedule:
     title:

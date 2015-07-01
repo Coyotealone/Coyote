@@ -99,6 +99,10 @@ base:
             showfunctionPologne: Directory of Services Pologne
             index: Directory administration
             add_user: Add a contact
+        flag:
+            french: French
+            english: English
+            polish: Polish
 
 security:
     username: Login
@@ -154,6 +158,7 @@ contact:
     email: Email
     subject: Subject
     content: Content
+    message: Email sent
 
 schedule:
     title:
@@ -486,7 +491,7 @@ Fournitures sans TVA: Supplies without VAT
 Fournitures: Supplies
 Fourniture 5,5%: Supplies 5.5%
 stationary UK fourniture: Supplies UK
-Hotel: Hostal
+Hotel: Hostel
 Hotel UK 20%: Hostel UK 20%
 Location vehicules: Rent Car
 Telephone sans TVA: Phone without VAT

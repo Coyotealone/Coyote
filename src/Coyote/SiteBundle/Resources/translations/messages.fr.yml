@@ -99,6 +99,10 @@ base:
             showfunctionPologne: Annuaire des services Pologne
             index: Administration annuaire
             add_user: "Ajout d'un contact"
+        flag:
+            french: Français
+            english: Anglais
+            polish: Polonais
 
 security:
     username: Identifiant
@@ -154,6 +158,7 @@ contact:
     email: Email
     subject: Sujet
     content: Contenu
+    message: Mail envoyé
 
 schedule:
     title:
