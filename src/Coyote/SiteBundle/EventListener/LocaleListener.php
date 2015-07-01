@@ -1,4 +1,4 @@
-<?
+<?php
 
 namespace Coyote\SiteBundle\EventListener;
 

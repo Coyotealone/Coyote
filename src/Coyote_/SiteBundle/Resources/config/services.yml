@@ -1,5 +1,0 @@
-services:
-    coyote_site.registration.form.type:
-        class: Coyote\SiteBundle\Form\Type\RegistrationFormType
-        tags:
-            - { name: form.type, alias: coyote_site_registration }
