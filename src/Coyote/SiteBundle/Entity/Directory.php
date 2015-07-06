@@ -36,19 +36,19 @@ class Directory
 
     /**
      * @var string
-     * @ORM\Column(name="job_phone_number", type="string", unique=true, nullable=true)
+     * @ORM\Column(name="job_phone_number", type="string", nullable=true)
      */
     private $job_phone_number;
 
     /**
      * @var integer
-     * @ORM\Column(name="quick_phone_number", type="integer", unique=true, nullable=true, options={"unsigned":true})
+     * @ORM\Column(name="quick_phone_number", type="integer", nullable=true, options={"unsigned":true})
      */
     private $quick_phone_number;
 
     /**
      * @var string
-     * @ORM\Column(name="cellphone_number", type="string", length=20, nullable=true, unique=true)
+     * @ORM\Column(name="cellphone_number", type="string", length=20, nullable=true)
      */
     private $cellphone_number;
 
@@ -60,7 +60,7 @@ class Directory
 
     /**
      * @var string
-     * @ORM\Column(name="mail", type="string", length=100, nullable=true, unique=true)
+     * @ORM\Column(name="mail", type="string", length=100, nullable=true)
      */
     private $mail;
 
