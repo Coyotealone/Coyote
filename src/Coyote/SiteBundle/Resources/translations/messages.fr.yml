@@ -335,6 +335,7 @@ form:
         technician: Technicien
         business: Cadre
         trade: Commercial
+        directory: Annuaire
 
 # Registration
 registration:

@@ -25,16 +25,16 @@
       </ul>
     </li>
     {% endif %}
-
+    {% if not is_granted('ROLE_VISU') %}
     <li id="profil" class="dropdown" style="margin: 0px 10px; float:left;">
       <a href="{{ path('profil_profile') }}" class="dropdown-toggle" data-toggle="dropdown">{{'base.nav.profile.name'|trans}}<b class="caret"></b></a>
       <ul class="dropdown-menu">
         <li><a href="{{ path('profil_profile') }}">{{'base.nav.profile.profile'|trans}}</a></li>
         <li><a href="{{ path('profil_changepassword') }}"><li><a href="{{ path('holiday') }}">{{'base.nav.profile.holiday'|trans}}</a></li>
-        <li><a href="{{ path('holiday') }}">{{'base.nav.profile.holiday'|trans}}</a></li>
+        {#<li><a href="{{ path('holiday') }}">{{'base.nav.profile.holiday'|trans}}</a></li>#}
       </ul>
     </li>
-
+    {% endif %}
     {% if is_granted('ROLE_CHEF_BE') %}
 	<li id="presence_admin" class="dropdown" style="margin: 0px 10px; float:left; ">
       <a href=# class="dropdown-toggle" data-toggle="dropdown">{{'base.nav.schedule_admin.name'|trans}}<b class="caret"></b></a>

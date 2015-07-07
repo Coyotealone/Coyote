@@ -335,6 +335,7 @@ form:
         technician: Technik
         business: Biznes
         trade: Handel
+        directory: Książka telefoniczna
 
 # Registration:
 registration:

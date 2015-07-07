@@ -4,6 +4,7 @@ security:
     access_denied_url:                      main_menu
 
     role_hierarchy:
+        ROLE_VISU:          ROLE_VISU
         ROLE_USER:          ROLE_USER
         ROLE_TECH:          ROLE_TECH
         ROLE_CADRE:         ROLE_CADRE

@@ -335,6 +335,7 @@ form:
         technician: Technician
         business: Business
         trade: Trade
+        directory: Phone Book
 
 # Registration
 registration:
