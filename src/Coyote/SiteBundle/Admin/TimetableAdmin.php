@@ -51,7 +51,7 @@ class TimetableAdmin extends Admin
         $formMapper
             ->add('id')
             ->add('date')
-            ->add('holiday')
+            ->add('holiday', 'checkbox', array('required' => false))
             ->add('period')
         ;
     }

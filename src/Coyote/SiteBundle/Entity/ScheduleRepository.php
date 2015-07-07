@@ -88,7 +88,7 @@ class ScheduleRepository extends EntityRepository
         {
             if ($week == 1)
             {
-                $week = 52;
+                $week = 53;
                 $year--;
             }
             else
@@ -98,7 +98,7 @@ class ScheduleRepository extends EntityRepository
         }
         if ($value == "more")
         {
-            if ($week == 52)
+            if ($week == 53)
             {
                 $week = 1;
                 $year++;
