@@ -25,10 +25,9 @@ class MainController extends Controller
 	 * @access public
 	 * @return \Symfony\Component\HttpFoundation\RedirectResponse
 	 */
-	public function getMenuAction()
+	public function getMenuAction(Request $request)
 	{
 		$user = $this->get('security.context')->getToken()->getUser();
-		$request = $this->getRequest();
 		$session = $request->getSession();
 		$locale = $request->getLocale();
 		if ($user == "anon.")
@@ -67,9 +66,8 @@ class MainController extends Controller
 	 * @param mixed $_locale
 	 * @return \Symfony\Component\HttpFoundation\RedirectResponse
 	 */
-	public function postLanguageAction($_locale)
+	public function postLanguageAction(Request $request, $_locale)
 	{
-		$request = $this->getRequest();
 		$session = $request->getSession();
 		$session->set('lang', $_locale);
 		$user = $this->get('security.context')->getToken()->getUser();
@@ -90,9 +88,8 @@ class MainController extends Controller
 	 * @access public
 	 * @return \Symfony\Component\HttpFoundation\Response
 	 */
-	public function loginAction()
+	public function loginAction(Request $request)
 	{
-		$request = $this->getRequest();
 		$session = $request->getSession();
 		$_locale = $session->get('lang');
 
@@ -170,9 +167,8 @@ class MainController extends Controller
 	 * @access public
 	 * @return \Symfony\Component\HttpFoundation\Response
 	 */
-	public function redirectAction()
+	public function redirectAction(Request $request)
 	{
-		$request = $this->getRequest();
 		return $this->forward('CoyoteSiteBundle:Main:getMenu', array('_locale' => $request->getLocale()));
 	}
 
