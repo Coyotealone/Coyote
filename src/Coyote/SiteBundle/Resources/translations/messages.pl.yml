@@ -34,6 +34,7 @@ directory:
         update: Aktualizacja
         delete: Usuwanie
         create: Tworzenie
+        enabled: Umożliwiać
     empty: Brak danych do wyświetlenia
     required: Pole wymagane
     update: Aktualizacja

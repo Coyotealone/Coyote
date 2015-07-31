@@ -34,6 +34,7 @@ directory:
         update: Update
         delete: Delete
         create: Create
+        enabled: Enable
     empty: No data to display
     required: Required field
     update: Update
