@@ -14,17 +14,23 @@ class DirectoryRepository extends EntityRepository
 {
     public function showDirectoryByFirstname($country)
     {
-        return $this->findBy(array('country' => $country), array('firstname' => 'ASC'));
+        return $this->findBy(array('country' => $country, 'enabled' => 1), array('firstname' => 'ASC'));
     }
 
     public function showDirectoryByFunctionService($country)
     {
-        return $this->findBy(array('country' => $country), array('function_service' => 'ASC', 'leader' => 'DESC', 'firstname' => 'ASC'));
+        return $this->findBy(array('country' => $country, 'enabled' => 1), array('function_service' => 'ASC', 'leader' => 'DESC', 'firstname' => 'ASC'));
     }
 
     public function findAll()
     {
-        return $this->findBy(array(), array('firstname' => 'ASC'));
+        return $this->findBy(array('enabled' => 1), array('firstname' => 'ASC'));
+    }
+
+    public function disabled_user($directory)
+    {
+	    $directory->setEnabled(0);
+	    return $directory;
     }
 
     public function update_directory($country)

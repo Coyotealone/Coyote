@@ -44,3 +44,8 @@ directory_pdfdirectorybyfirstname:
 directory_pdfdirectorybyfunctionservice:
     path:     /pdfdirectorybyfunctionservice/{country}
     defaults: { _controller: "CoyoteSiteBundle:Directory:printDirectoryByFunctionService" }
+
+directory_enabled:
+    path:     /directory_enabled/{id}
+    defaults: { _controller: "CoyoteSiteBundle:Directory:setEnabledDirectory" }
+    methods:  [POST, PUT]

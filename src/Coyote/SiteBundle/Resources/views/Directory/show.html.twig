@@ -48,5 +48,7 @@
 <a class='btn btn-primary' href="{{ path('directory_edit', { 'id': entity.id }) }}">
     {{'directory.actions.edit'|trans}}
 </a>
-    {{ form(delete_form) }}
+<form action="{{ path('directory_enabled', { 'id': entity.id }) }}" method="post" >
+	<button type="submit" class="btn btn-danger">{{ 'directory.submit.enabled'|trans }}</button>
+</form>
 {% endblock %}

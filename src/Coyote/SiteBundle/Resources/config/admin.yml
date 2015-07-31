@@ -11,12 +11,6 @@ services:
         tags:
             - {name: sonata.admin, manager_type: orm, group: Notes de frais, label: Voitures}
 
-    coyote_site.admin.country:
-        class: Coyote\SiteBundle\Admin\CountryAdmin
-        arguments: [~, Coyote\SiteBundle\Entity\Country, CoyoteSiteBundle:CountryAdmin]
-        tags:
-            - {name: sonata.admin, manager_type: orm, group: Divers, label: Pays}
-
     coyote_site.admin.currency:
         class: Coyote\SiteBundle\Admin\CurrencyAdmin
         arguments: [~, Coyote\SiteBundle\Entity\Currency, CoyoteSiteBundle:CurrencyAdmin]
@@ -76,3 +70,9 @@ services:
         arguments: [~, Coyote\SiteBundle\Entity\Expense, SonataAdminBundle:CRUD]
         tags:
             - {name: sonata.admin, manager_type: orm, group: Notes de frais, label: Notes de frais}
+
+    coyote_site.admin.directory:
+        class: Coyote\SiteBundle\Admin\DirectoryAdmin
+        arguments: [~, Coyote\SiteBundle\Entity\Directory, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Annuaire, label: Annuaire}

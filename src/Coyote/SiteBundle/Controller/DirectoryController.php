@@ -42,6 +42,7 @@ class DirectoryController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $entity->setEnabled(1);
             $em->persist($entity);
             $em->flush();
 
@@ -275,5 +276,15 @@ class DirectoryController extends Controller
         $html2pdf->writeHTML($html);
         $html2pdf->Output($filename, 'D');
         return new Response('PDF réalisé');
+    }
+
+    public function setEnabledDirectoryAction($id)
+    {
+	    $em = $this->getDoctrine()->getManager();
+	    $entity = $em->getRepository('CoyoteSiteBundle:Directory')->findOneById($id);
+	    $update = $em->getRepository('CoyoteSiteBundle:Directory')->disabled_user($entity);
+	    $em->persist($entity);
+	    $em->flush();
+	    return $this->redirect($this->generateUrl('directory'));
     }
 }

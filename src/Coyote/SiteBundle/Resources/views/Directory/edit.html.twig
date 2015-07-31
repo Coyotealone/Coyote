@@ -61,9 +61,11 @@
         <button type="submit" class="btn btn-success">{{ 'directory.submit.update'|trans }}</button>
     </p>
 </form>
+<form action="{{ path('directory_enabled', { 'id': entity.id }) }}" method="post" >
+	<button type="submit" class="btn btn-danger">{{ 'directory.submit.enabled'|trans }}</button>
+</form>
 <a class='btn btn-info' href="{{ path('directory') }}">
     {{ 'directory.back'|trans }}
 </a>
-{{ form(delete_form) }}
 
 {% endblock %}

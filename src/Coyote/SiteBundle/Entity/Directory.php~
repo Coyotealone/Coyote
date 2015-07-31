@@ -366,48 +366,4 @@ class Directory
     {
         return $this->leader;
     }
-
-    /**
-     * Set enabled
-     *
-     * @param boolean $enabled
-     * @return Directory
-     */
-    public function setEnabled($enabled)
-    {
-        $this->enabled = $enabled;
-		$this->setEnabledAt();
-        return $this;
-    }
-
-    /**
-     * Get enabled
-     *
-     * @return boolean
-     */
-    public function getEnabled()
-    {
-        return $this->enabled;
-    }
-
-    /**
-     * Set enabled_at
-     *
-     * @param \DateTime $enabledAt
-     * @return Directory
-     */
-    public function setEnabledAt()
-    {
-        $this->enabled_at = new \DateTime();
-    }
-
-    /**
-     * Get enabled_at
-     *
-     * @return \DateTime
-     */
-    public function getEnabledAt()
-    {
-        return $this->enabled_at;
-    }
 }
