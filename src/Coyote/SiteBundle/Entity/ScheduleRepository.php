@@ -589,6 +589,7 @@ class ScheduleRepository extends EntityRepository
                   ->select('s')
                   ->from('CoyoteSiteBundle:Schedule','s')
                   ->where('s.user = :user and not s.absence_name =:absence')
+                  ->orderBy('s.timetable', 'DESC')
                   ->setParameters(array('user' => $user, 'absence' => 'Aucune' ));
 
         $q->setFirstResult(($page-1) * $maxperpage)
@@ -605,10 +606,10 @@ class ScheduleRepository extends EntityRepository
     {
         $qb = $this->_em->createQueryBuilder();
         $qb->select('s')
-        ->from('CoyoteSiteBundle:Schedule', 's')
-        ->where('s.user = :user and not s.absence_name = :absence')
-        ->orderBy('s.timetable', 'ASC')
-        ->setParameters(array(
+            ->from('CoyoteSiteBundle:Schedule', 's')
+            ->where('s.user = :user and not s.absence_name = :absence')
+            ->orderBy('s.timetable', 'ASC')
+            ->setParameters(array(
                         'user' => $user,
                         'absence'  => 'Aucune',
         ));

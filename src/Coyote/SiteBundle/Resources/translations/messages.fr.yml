@@ -1,5 +1,13 @@
 user_block_logout: Deconnexion
 
+RTT: RTT
+CP: Congés payés
+CA: Congés ancienneté
+CSS: Congés sans solde
+AT: Arrêt de travail
+MP: Maternité/Paternité
+Recup: Récup/Heures supp
+
 directory:
     title:
         index: Annuaire Téléphonique

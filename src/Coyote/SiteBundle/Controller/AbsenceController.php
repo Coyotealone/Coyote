@@ -38,12 +38,12 @@ class AbsenceController extends Controller
             'route_params' => array()
         );
         $entities = $this->getDoctrine()->getRepository('CoyoteSiteBundle:Schedule')
-            ->getListAbsenceUser($this->getUser(), $page, $maxItems);
+                         ->getListAbsenceUser($this->getUser(), $page, $maxItems);
         return $this->render('CoyoteSiteBundle:Absence:index.html.twig', array(
                         'entities' => $entities,
                         'pagination' => $pagination));
     }
-   
+
     /**
      * Creates a new Schedule entity.
      * @access public
@@ -77,7 +77,7 @@ class AbsenceController extends Controller
             {
                 $entity->setTravel($data['travel']);
             }
-            else 
+            else
             {
                 $entity->setTravel('0');
             }
@@ -90,10 +90,10 @@ class AbsenceController extends Controller
         {
             $entity = $schedule;
         }
-        
+
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
-        
+
         if ($request->getMethod() == "POST")
         {
             $entity->setUser($this->getUser());
@@ -244,7 +244,7 @@ class AbsenceController extends Controller
         {
             $em = $this->getDoctrine()->getManager();
             $entity = $em->getRepository('CoyoteSiteBundle:Schedule')->find($id);
-            if (!$entity) 
+            if (!$entity)
             {
                 throw $this->createNotFoundException('Unable to find Schedule entity.');
             }
@@ -293,7 +293,7 @@ class AbsenceController extends Controller
         }
         return $this->redirect($this->generateUrl('absence'));
     }
-    
+
     /**
      * Function to create a form Schedule entity.
      * @param Schedule $entity
@@ -307,7 +307,7 @@ class AbsenceController extends Controller
         ));
         return $form;
     }
-    
+
     /**
      * Displays a form to create a new Schedule entity.
      * @param Request $request
@@ -330,15 +330,15 @@ class AbsenceController extends Controller
         $session->set('date_start', null);
         $session->set('date_end', null);
         return $this->render('CoyoteSiteBundle:Absence:indexputweek.html.twig');
-    
+
     }
-    
+
     /*****************************************************************/
     /***********************Fonctions En cours************************/
     /*****************************************************************/
-    
-    
-    
+
+
+
     /*****************************************************************/
     /***********************Fonctions Erronées************************/
     /*****************************************************************/

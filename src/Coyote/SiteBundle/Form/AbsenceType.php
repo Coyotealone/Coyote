@@ -18,7 +18,7 @@ class AbsenceType extends AbstractType
             ->add('travel','checkbox', array('required'  => false))
             ->add('absence_name', 'choice', array(
                     'choices'   => array(
-                                    'RTT' => 'schedule.rtt', 
+                                    'RTT' => 'schedule.rtt',
                                     'CP' => 'schedule.cp',
                                     'CA' => 'schedule.ca',
                                     'CSS' => 'schedule.css',
@@ -27,17 +27,11 @@ class AbsenceType extends AbstractType
                     ),))
             ->add('absence_duration', 'choice', array(
                     'choices'   => array(
-                                    '0.5' => '0,5', 
+                                    '0.5' => '0,5',
                                     '1' => '1',
                     ),))
             ->add('comment', 'text', array('required'  => false))
-            /*->add('timetable', 'date', array(
-                            'empty_data' => new \DateTime('now'),
-                            'widget' => 'single_text',
-                            'input' => 'datetime',
-                            'format' => 'yyyy-MM-dd',
-                            'attr' => array('class' => 'date'),))*/
-           ->add('timetable')
+            ->add('timetable')
         ;
     }
 

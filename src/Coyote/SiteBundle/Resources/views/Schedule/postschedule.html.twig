@@ -59,7 +59,11 @@
                     {% for key,date in data_timetable %}
                         <tr>
             				<td class='date'>{{ "schedule#{loop.index}"|trans }} :
-            				    <input class='input_day' type='text' readonly name="date{{loop.index}}" id="date{{loop.index}}" value={{ date.date|date("d/m/Y") }} />
+            				    {% if date.holiday == 1 %}
+            				        <input class='input_day' id="holiday" type='text' readonly name="date{{loop.index}}" id="date{{loop.index}}" value={{ date.date|date("d/m/Y") }} />
+            				    {% else %}
+            				        <input class='input_day' type='text' readonly name="date{{loop.index}}" id="date{{loop.index}}" value={{ date.date|date("d/m/Y") }} />
+            				    {% endif %}
             				</td>
             				<td>
             					{% if attribute(time,loop.index0) is not empty and attribute(time,loop.index0).start %}
@@ -236,7 +240,6 @@
                 					<option value='CSS'>{{'schedule.css'|trans}}</option>
                 					<option value="AT">{{'schedule.at'|trans}}</option>
                 					<option value="MP">{{'schedule.mp'|trans}}</option>
-                					<option value="Recup">{{'schedule.recup'|trans}}</option>
                 					<option value="Autre">{{'schedule.various'|trans}}</option>
             					</select>
             				</td>

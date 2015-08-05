@@ -1,5 +1,13 @@
 user_block_logout: Logout
 
+RTT: Reduction of working time
+CP: Paid leave
+CA: Leave seniority
+CSS: Unpaid leave
+AT: Work stoppage
+MP: Maternity/Paternity
+Recup: Recovery/Overtime
+
 directory:
     title:
         index: Telephone directory
