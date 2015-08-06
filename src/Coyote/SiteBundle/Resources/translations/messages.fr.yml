@@ -1,3 +1,9 @@
+#Exception
+exception:
+    error_404: "Oups! La page n'existe pas."
+    error_back: Merci de cliquer sur le bouton "Accueil".
+    error: "Oups! Une erreur est survenue"
+
 user_block_logout: Deconnexion
 
 RTT: RTT

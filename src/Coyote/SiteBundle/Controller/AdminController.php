@@ -331,7 +331,6 @@ class AdminController extends Controller
         }
         else
         {
-            //return new Response($data_request['pay_period']);
             $data = new Data();
         	$date = date('Y-m-d');
         	$doctrine = $this->getDoctrine();

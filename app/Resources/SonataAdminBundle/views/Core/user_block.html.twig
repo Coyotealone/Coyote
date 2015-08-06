@@ -6,6 +6,6 @@
             <a href="{{ url(sonata_user.impersonating.route, sonata_user.impersonating.parameters| merge({'_switch_user': '_exit'})) }}">(exit)</a>
         {% endif %}
 
-        - <a href="{{ url('fos_user_security_logout') }}">{{ 'user_block_logout'|trans }}</a>
+        - <a href="{{ url('fos_user_security_logout') }}">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a>
     {% endif %}
 {% endblock %}

@@ -65,9 +65,6 @@ security:
             pattern: ^/
             anonymous: true
             provider: main
-        #    form_login:
-        #        login_path: fos_user_security_login
-        #        check_path: fos_user_security_check
             logout:
                 path:   fos_user_security_logout
                 target: /
