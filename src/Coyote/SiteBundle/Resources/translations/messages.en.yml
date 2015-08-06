@@ -1,5 +1,5 @@
 exception:
-    error_404: "Oups! The page can not be found"
+    error_404: "Oops! The page can not be found"
     error_back: Please click on button Home.
     error: Oops! An Error Occurred
 

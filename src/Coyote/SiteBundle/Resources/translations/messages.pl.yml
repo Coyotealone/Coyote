@@ -1,3 +1,8 @@
+exception:
+    error_404: "Ups! Strona nie może zostać znaleziona"
+    error_back: Proszę kliknąć na przycisk Strona główna.
+    error: Ups! Wystąpił błąd
+
 user_block_logout: Wyloguj
 
 RTT: Zmniejszenie czasu pracy
