@@ -1,4 +1,3 @@
-#Exception
 exception:
     error_404: "Oups! La page n'existe pas."
     error_back: Merci de cliquer sur le bouton "Accueil".
@@ -44,6 +43,7 @@ directory:
     jobphonenumber: Numéro de poste
     firstname: Prénom
     name: Nom
+    leader: Responsable
     submit:
         update: Mise à jour
         delete: Supprimer

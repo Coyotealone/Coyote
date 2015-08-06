@@ -43,6 +43,7 @@ directory:
     jobphonenumber: Job phone number
     firstname: Firstname
     name: Name
+    leader: Leader
     submit:
         update: Update
         delete: Delete

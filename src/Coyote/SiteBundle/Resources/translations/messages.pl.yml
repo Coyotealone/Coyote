@@ -43,6 +43,7 @@ directory:
     jobphonenumber: Numer telefonu Praca
     firstname: Imię
     name: Nazwa
+    leader: Szef
     submit:
         update: Aktualizacja
         delete: Usuwanie
