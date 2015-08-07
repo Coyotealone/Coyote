@@ -47,7 +47,6 @@ class ChangePasswordController extends Controller
         {
             return $event->getResponse();
         }
-
         /** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */
         $formFactory = $this->container->get('fos_user.change_password.form.factory');
         $form = $formFactory->createForm();
@@ -55,7 +54,7 @@ class ChangePasswordController extends Controller
         $form->handleRequest($request);
         if ($form->isValid())
         {
-        /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
+        	/** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
             $userManager = $this->container->get('fos_user.user_manager');
             $event = new FormEvent($form, $request);
             $dispatcher->dispatch(FOSUserEvents::CHANGE_PASSWORD_SUCCESS, $event);

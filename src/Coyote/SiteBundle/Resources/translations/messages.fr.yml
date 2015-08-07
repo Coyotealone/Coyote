@@ -1,4 +1,62 @@
+exception:
+    error_404: "Oups! La page n'existe pas."
+    error_back: Merci de cliquer sur le bouton "Accueil".
+    error: "Oups! Une erreur est survenue"
+
 user_block_logout: Deconnexion
+
+RTT: RTT
+CP: Congés payés
+CA: Congés ancienneté
+CSS: Congés sans solde
+AT: Arrêt de travail
+MP: Maternité/Paternité
+Recup: Récup/Heures supp
+
+directory:
+    title:
+        index: Annuaire Téléphonique
+        edit: "Modification d'un contact"
+        show: "Affichage d'un contact"
+        new: "Ajout d'un contact"
+        directorybyfirstname: Annuaire Téléphonique Alphabétique
+        directorybyfunctionservice: Annuaire Téléphonique par Services
+        directorypdf_services_french: PDF Annuaire France par services
+        directorypdf_services_poland: PDF Annuaire Pologne par services
+        directorypdf_user_french: PDF Annuaire Alphabétique France
+        directorypdf_user_poland: PDF Annuaire Alphabétique Pologne
+        directory_services_french: Annuaire France par services
+        directory_services_poland: Annuaire Pologne par services
+        directory_user_french: Annuaire Alphabétique France
+        directory_user_poland: Annuaire Alphabétique Pologne
+    back: Retourner à la liste
+    add_user: "Ajouter un contact"
+    actions:
+        title: Actions
+        show: Affichage
+        edit: Edition
+    country: Pays
+    mail: Email
+    functionservice: Fonction / Service
+    cellphonenumber: Téléphone portable
+    quickphonenumber: Numéro rapide
+    jobphonenumber: Numéro de poste
+    firstname: Prénom
+    name: Nom
+    leader: Responsable
+    submit:
+        update: Mise à jour
+        delete: Supprimer
+        create: Créer
+        enabled: Désactiver
+    empty: Aucun donnée à afficher
+    required: Champs obligatoire
+    update: Mise à jour
+    print: Imprimer en PDF
+    nav:
+        jobphonenumber: N° Poste
+        quickphonenumber: N° Rapide
+        cellphonenumber: N° Portable
 
 base:
     copyright: Copyright ©2015 PICHON - Tous droits réservés
@@ -7,6 +65,8 @@ base:
     link: http://www.pichonindustries.fr
     choose_language: Choisissez votre pays
     welcome: Bienvenue sur le site Pichon
+    required: Champs Obligatoire
+    date: Format date 31/12/14
     nav:
         accueil: Accueil
         signin: Se connecter
@@ -21,6 +81,7 @@ base:
             indexexportprintyear: "Export de l'année en PDF"
             indexprintyear: "Impression de l'année en PDF"
             absence: Gestion des absences
+            scheduleuserexcel: "Impression de l'année en Excel"
         expense:
             name: Note de frais
             create: Saisie
@@ -37,6 +98,7 @@ base:
             name: Export présence
             indexexport: Export données BE
             schedules_locked: Verrouillage des temps de présence
+            scheduleuserexcel: "Impression de l'année d'un utilisateur en Excel"
         expense_admin:
             name: Gestion des Notes de frais
             exportexpense: Export données notes de frais
@@ -44,6 +106,18 @@ base:
             name: Administrateur
             register: "Ajout d'un utilisateur"
             indexchoicesuser: Mise à jour des rôles utilisateurs
+        directory:
+            title: Annuaire
+            showfirstnameFrance: Annuaire alphabétique France
+            showfirstnamePologne: Annuaire alphabétique Pologne
+            showfunctionFrance: Annuaire des services France
+            showfunctionPologne: Annuaire des services Pologne
+            index: Administration annuaire
+            add_user: "Ajout d'un contact"
+        flag:
+            french: Français
+            english: Anglais
+            polish: Polonais
 
 security:
     username: Identifiant
@@ -68,6 +142,7 @@ admin:
     month: Mois
     year: Année
     user: Utilisateur
+    period: Période
     schedule:
         title: Temps de présence
         technician: Technicien (saisie par heure)
@@ -84,6 +159,8 @@ admin:
     title:
         indexchoicesuser: "Choix de l'utilisateur"
         choicesroles: Ajout/Suppression de rôles
+        indexscheduleuserexcel: "Téléchargement des temps de présence de l'année au format Excel"
+        exportbe: "Export des Temps de présence BE"
     submit:
         download: Télécharger
         display: Afficher
@@ -96,6 +173,7 @@ contact:
     email: Email
     subject: Sujet
     content: Contenu
+    message: Mail envoyé
 
 schedule:
     title:
@@ -111,6 +189,7 @@ schedule:
         summary: Récapitulatif du mois
         overtime: "Nombre d'heures supplémentaires sur l'année"
         schedules_locked: Verrouillage des temps de présence.
+        indexscheduleuserexcel: "Téléchargement des temps de présence de l'année au format Excel"
     holiday: Jour férié
     weekend: Weekend
     message_week: "Voici la semaine %no_week% affichée de l'année %year%"
@@ -160,6 +239,7 @@ schedule:
     number_ca_year: "Nombre de congés d'anciennetés (CA) utilisé dans l'année"
     schedules_lock_message: Toutes les données avant cette date seront bloquées.
     submit:
+        download: Télécharger
         save: Enregistrer
         indexexportprintyear: Afficher
         indexprint: Télécharger
@@ -219,7 +299,7 @@ expense:
     id_end: ID End
     treated: Traité
     id: Id
-    username: Nom d'utilisateur
+    username: "Nom d'utilisateur"
     status:
         yes: Oui
         no: Non
@@ -254,22 +334,23 @@ form:
     password_confirmation: "Vérification :"
     new_password: "Nouveau mot de passe :"
     new_password_confirmation: "Vérification :"
-    name: NOM Prénom
-    adress1: Adresse
-    adress2: Adresse(suite)
-    zip_code: Code Postal
-    postal_box: Boite Postal
-    city: Ville
-    country: Pays
-    phone: N° Téléphone
-    cell: N° Portable
-    website: Site Web
-    roles: Rôles
-    fax: Fax
+    name: NOM Prénom :
+    adress1: Adresse :
+    adress2: Adresse(suite) :
+    zip_code: Code Postal :
+    postal_box: Boite Postal :
+    city: Ville :
+    country: Pays :
+    phone: N° Téléphone :
+    cell: N° Portable :
+    website: Site Web :
+    roles: Rôles :
+    fax: Fax :
     choices:
         technician: Technicien
         business: Cadre
         trade: Commercial
+        directory: Annuaire
 
 # Registration
 registration:
@@ -355,11 +436,13 @@ absence:
         create: Ajouter une absence
         empty: Aucune absence enregistrée
         createweek: "Ajouter une semaine d'absence"
+        edit: Editer une absence
 
 # Holiday
 holiday:
     title:
         show: Récapitulatif des congés
+        create: Ajout des congés
     ca: Congés anciennetés
     cp: Congés payés
     rtt: Réduction du temps de travail

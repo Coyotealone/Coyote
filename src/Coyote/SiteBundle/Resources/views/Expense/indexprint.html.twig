@@ -1,5 +1,12 @@
 {% extends 'CoyoteSiteBundle:Expense:index.html.twig' %}
 
+{% block javascripts %}
+    <script src="{{ asset('bundles/coyotesite/js/jquery-1.10.2.js') }}"/></script>
+    <script src="{{ asset('bundles/coyotesite/js/jquery-ui.js') }}"/></script>
+    <script src="{{ asset('bundles/coyotesite/js/script_expense.js') }}"/></script>
+    <script src="{{ asset('bundles/coyotesite/js/script_expense_change.js') }}"/></script>
+{% endblock %}
+
 {% block nav %}
 
     <!--[if lt IE 9]>
@@ -49,6 +56,6 @@
             </td>
         </tr>
     </table>
-    <button class='btn_red' type="submit" value="Afficher" id="afficher">{{'expense.submit.download'|trans }}</button>
+    <button class='btn btn-primary' type="submit" value="Afficher" id="afficher">{{'expense.submit.download'|trans }}</button>
 </form>
 {% endblock %}

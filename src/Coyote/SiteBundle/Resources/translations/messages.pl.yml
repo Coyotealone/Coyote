@@ -1,4 +1,62 @@
+exception:
+    error_404: "Ups! Strona nie może zostać znaleziona"
+    error_back: Proszę kliknąć na przycisk Strona główna.
+    error: Ups! Wystąpił błąd
+
 user_block_logout: Wyloguj
+
+RTT: Zmniejszenie czasu pracy
+CP: Płatny urlop
+CA: Zostaw stażu pracy
+CSS: Urlop bezpłatny
+AT: przerwy w pracy
+MP: Urlop macierzyński / ojcowski
+Recup: Odzyskiwanie / Praca w godzinach nadliczbowych
+
+directory:
+    title:
+        index: Książka telefoniczna
+        edit: Edycja kontaktów
+        show: Pokaż kontakt
+        new: Dodawanie kontaktu
+        directorybyfirstname: Telefon Katalogi Alfabetycznie
+        directorybyfunctionservice: Katalogi telefoniczne przez służby
+        directorypdf_services_french: Usługi Francja PDF
+        directorypdf_services_poland: Polska Usługi katalog PDF
+        directorypdf_user_french: PDF katalog alfabetyczny Francja
+        directorypdf_user_poland: PDF katalog alfabetyczny Polska
+        directory_services_french: Katalog Usługi Francja
+        directory_services_poland: Katalog Usługi Polska
+        directory_user_french: Katalog alfabetyczny Francja
+        directory_user_poland: Katalog alfabetyczny Polska
+    back: Powrót do listy
+    add_user: Dodawanie kontaktu
+    actions:
+        title: Akcje
+        show: Pokaż
+        edit: Edycja
+    country: Kraj
+    mail: Adres e-mail
+    functionservice: Funkcja / usługi
+    cellphonenumber: Cellphonenumber
+    quickphonenumber: Szybkie numer telefonu
+    jobphonenumber: Numer telefonu Praca
+    firstname: Imię
+    name: Nazwa
+    leader: Szef
+    submit:
+        update: Aktualizacja
+        delete: Usuwanie
+        create: Tworzenie
+        enabled: Umożliwiać
+    empty: Brak danych do wyświetlenia
+    required: Pole wymagane
+    update: Aktualizacja
+    print: Drukuj pDF
+    nav:
+        jobphonenumber: Numer Workstation
+        quickphonenumber: Szybkie wybieranie numeru
+        cellphonenumber: Numer Telefonu
 
 base:
     copyright: Copyright © 2015 PICHON - Wszystkie prawa zastrzeżone
@@ -7,6 +65,8 @@ base:
     link: www.pichonindustries.com
     choose_language: Wybierz swój kraj
     welcome: Witamy na stronie internetowej Pichon
+    required: Wymagane pola
+    date: Format Daty 31/12/14
     nav:
         accueil: Strona główna
         signin: Zaloguj się
@@ -21,6 +81,7 @@ base:
             indexexportprintyear: Eksport Roku w PDF
             indexprintyear: Drukuj z lat PDF
             absence: Zarządzanie brak
+            scheduleuserexcel: Druk roku w programie Excel
         expense:
             name: Sprawozdanie z wydatków
             create: Nagrywanie
@@ -37,6 +98,7 @@ base:
             name: Eksport rejestracji czasu
             indexexport: Eksport danych działu badań
             schedules_locked: Blokada czasu i obecności
+            scheduleuserexcel: Druk roku od użytkownika w programie Excel
         expense_admin:
             name: Sprawozdanie z wydatków
             exportexpense: Eksport koszt danych
@@ -44,6 +106,18 @@ base:
             name: Administrator
             register: Dodawanie użytkownika
             indexchoicesuser: Role Aktualizacja użytkownika
+        directory:
+            title: Katalog
+            showfirstnameFrance: Katalog alfabetyczny Francja
+            showfirstnamePologne: Katalog alfabetyczny Pologne
+            showfunctionFrance: Katalog Usług Francji
+            showfunctionPologne: Katalog Usług Pologne
+            index: Administracja katalog
+            add_user: Dodawanie kontaktu
+        flag:
+            french: Francuski
+            english: Angielski
+            polish: Polski
 
 security:
     username: Nazwa użytkownika
@@ -68,6 +142,7 @@ admin:
     month: Miesiąc
     year: Rok
     user: Użytkownik
+    period: Okres
     schedule:
         title: Uczęszcza
         technician: Technik (wejście na godzinę)
@@ -84,6 +159,8 @@ admin:
     title:
         indexchoicesuser: Wybór użytkownika
         choicesroles: Dodaj / Usuń role
+        indexscheduleuserexcel: Pobierz razy obecności roku do programu Excel
+        exportbe: Eksport Czas Udział biurze projektowym
     submit:
         download: Pobierz
         display: Wystawa
@@ -96,6 +173,7 @@ contact:
     email: E-mail
     subject: Temat
     content: Treść
+    message: E-mail wysłany
 
 schedule:
     title:
@@ -111,6 +189,7 @@ schedule:
         summary: Podsumowanie miesiąca
         overtime: Liczba godzin nadliczbowych w roku
         schedules_locked: Blokada czasu i obecności.
+        indexscheduleuserexcel: Pobierz razy obecności roku do programu Excel
     holiday: wakacje
     weekend: Weekend
     message_week: Tutaj tydzień %no_week% %year% wyświetlona
@@ -160,6 +239,7 @@ schedule:
     number_ca_year: Ilość stażu urlopu wykorzystane w roku
     schedules_lock_message: Wszystkie dane przed tą datą będą blokowane.
     submit:
+        download: Pobierz
         save: Zapisz
         indexexportprintyear: Pokaż
         indexprint: Pobierz
@@ -270,6 +350,7 @@ form:
         technician: Technik
         business: Biznes
         trade: Handel
+        directory: Książka telefoniczna
 
 # Registration:
 registration:
@@ -355,11 +436,13 @@ absence:
         create: Dodaj nieobecności
         empty: Nie zarejestrowany brak
         createweek: Dodaj tydzień z dala
+        edit: Edycja brak
 
 # Holiday
 holiday:
     title:
         show: Podsumowanie wakacji
+        create: Dodanie wakacje
     ca: Zostaw stażu pracy
     cp: Płatny urlop
     rtt: Zmniejszenie czasu pracy

@@ -4,14 +4,16 @@ security:
     access_denied_url:                      main_menu
 
     role_hierarchy:
+        ROLE_VISU:          ROLE_VISU
         ROLE_USER:          ROLE_USER
         ROLE_TECH:          ROLE_TECH
         ROLE_CADRE:         ROLE_CADRE
         ROLE_TRADE:         ROLE_TRADE
         ROLE_COMPTA:        ROLE_COMPTA
         ROLE_CHEF_BE:       ROLE_CHEF_BE
+        ROLE_DIRECTORY:     ROLE_DIRECTORY
         ROLE_PICHON:        [ROLE_TECH, ROLE_CADRE, ROLE_ADMIN]
-        ROLE_ADMIN:         [ROLE_ADMIN, ROLE_CHEF_BE, ROLE_COMPTA]
+        ROLE_ADMIN:         [ROLE_ADMIN, ROLE_CHEF_BE, ROLE_COMPTA, ROLE_DIRECTORY]
         ROLE_SUPER_ADMIN:   [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
     providers:
@@ -63,9 +65,6 @@ security:
             pattern: ^/
             anonymous: true
             provider: main
-        #    form_login:
-        #        login_path: fos_user_security_login
-        #        check_path: fos_user_security_check
             logout:
                 path:   fos_user_security_logout
                 target: /
@@ -97,3 +96,4 @@ security:
         - { path: .*/profile/.*, role: [ROLE_TECH, ROLE_CADRE, ROLE_SUPER_ADMIN, ROLE_ADMIN] }
         - { path: .*/admin/.*, role: [ROLE_ADMIN, ROLE_CHEF_BE, ROLE_COMPTA] }
         - { path: .*/absence/.*, role: [ROLE_ADMIN, ROLE_TECH, ROLE_CADRE] }
+        - { path: .*/directory/admindirectory/.*, role: [ROLE_ADMIN, ROLE_DIRECTORY] }

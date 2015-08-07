@@ -25,10 +25,9 @@ class MainController extends Controller
 	 * @access public
 	 * @return \Symfony\Component\HttpFoundation\RedirectResponse
 	 */
-	public function getMenuAction()
+	public function getMenuAction(Request $request)
 	{
 		$user = $this->get('security.context')->getToken()->getUser();
-		$request = $this->getRequest();
 		$session = $request->getSession();
 		$locale = $request->getLocale();
 		if ($user == "anon.")
@@ -50,27 +49,25 @@ class MainController extends Controller
 			$date = $em->getRepository('CoyoteSiteBundle:Timetable')->findOneBy(array('date' => $date));
 			$session->set('period', $date->getPeriod());
 			$session->set('status', $data_user->getRoles());
-			$lang = $session->get('lang');
-			if (empty($lang))
-			{
-				$lang = 'fr';
-			}
+			$locale = $request->getLocale();
 			$data_quote = $em->getRepository('CoyoteSiteBundle:Quote')->findby(array
 					('week' => date('W'), 'year' => date('Y')));
-			return $this->render('CoyoteSiteBundle:Accueil:menu.html.twig', array('quote' => $data_quote,
+
+            //$this->container->get('request')->setLocale($locale);
+
+            return $this->render('CoyoteSiteBundle:Accueil:menu.html.twig', array('quote' => $data_quote,
 					'_locale' => $locale));
 		}
 	}
-	
+
 	/**
 	 * Function to change language website.
 	 * @access public
 	 * @param mixed $_locale
 	 * @return \Symfony\Component\HttpFoundation\RedirectResponse
 	 */
-	public function postLanguageAction($_locale)
+	public function postLanguageAction(Request $request, $_locale)
 	{
-		$request = $this->getRequest();
 		$session = $request->getSession();
 		$session->set('lang', $_locale);
 		$user = $this->get('security.context')->getToken()->getUser();
@@ -83,20 +80,19 @@ class MainController extends Controller
 			return $this->redirect($this->generateUrl('main_menu', array('_locale' => $session->get('lang'))));
 		}
 	}
-	
+
 	/*************************FOS User Bundle*************************/
-	
+
 	/**
 	 * Function login FOS.
 	 * @access public
 	 * @return \Symfony\Component\HttpFoundation\Response
 	 */
-	public function loginAction()
+	public function loginAction(Request $request)
 	{
-		$request = $this->getRequest();
 		$session = $request->getSession();
 		$_locale = $session->get('lang');
-		
+
 		$user = $this->get('security.context')->getToken()->getUser();
 		if ($user != "anon.")
 		{
@@ -124,18 +120,18 @@ class MainController extends Controller
 		}
 		// last username entered by the user
 		$lastUsername = (null === $session) ? '' : $session->get(SecurityContextInterface::LAST_USERNAME);
-	
+
 		$csrfToken = $this->container->has('form.csrf_provider')
 		? $this->container->get('form.csrf_provider')->generateCsrfToken('authenticate')
 		: null;
-	
+
 		return $this->renderLogin(array(
 				'last_username' => $lastUsername,
 				'error'         => $error,
 				'csrf_token' => $csrfToken,
 		));
 	}
-	
+
 	/**
 	 *  Function to show view Login FOS.
 	 * @param array $data
@@ -146,7 +142,7 @@ class MainController extends Controller
 		$template = sprintf('CoyoteSiteBundle:Security:login.html.twig');
 		return $this->container->get('templating')->renderResponse($template, $data);
 	}
-	
+
 	/**
 	 * Function to check login FOS.
 	 * @throws \RuntimeException
@@ -156,7 +152,7 @@ class MainController extends Controller
 		throw new \RuntimeException('You must configure the check path to be handled by the firewall
             using form_login in your security firewall configuration.');
 	}
-	
+
 	/**
 	 * Function logout FOS.
 	 * @throws \RuntimeException
@@ -165,29 +161,34 @@ class MainController extends Controller
 	{
 		throw new \RuntimeException('You must activate the logout in your security firewall configuration.');
 	}
-	
+
+	/**
+	 * Function to redirect to index.
+	 * @access public
+	 * @return \Symfony\Component\HttpFoundation\Response
+	 */
+	public function redirectAction(Request $request)
+	{
+		return $this->forward('CoyoteSiteBundle:Main:getMenu', array('_locale' => $request->getLocale()));
+	}
+
+	/**
+	 * Function to show index page.
+	 * @return \Symfony\Component\HttpFoundation\Response
+	 */
+	public function indexAction()
+	{
+		return $this->render('CoyoteSiteBundle:Base:index.html.twig');
+	}
+
 	/*****************************************************************/
 	/***********************Fonctions En cours************************/
 	/*****************************************************************/
-	
+
 
 	/*****************************************************************/
 	/***********************Fonctions Erronées************************/
 	/*****************************************************************/
-	
-	/**
-     * Function to redirect to index.
-     * @access public
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function redirectAction()
-    {
-        $request = $this->getRequest();
-        return $this->forward('CoyoteSiteBundle:Main:getMenu', array('_locale' => $request->getLocale()));
-    }
-    
-    public function indexAction()
-    {
-    	return $this->render('CoyoteSiteBundle:Base:index.html.twig');
-    }
+
+
 }

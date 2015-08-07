@@ -25,7 +25,7 @@ class ContactController extends Controller
     {
         $form = $this->get('form.factory')->create(new ContactType());
         $request = $this->get('request');
-        if($request->getMethod() == 'POST')
+        if ($request->getMethod() == 'POST')
         {
             $request = Request::createFromGlobals();
             $data = $request->request->all();

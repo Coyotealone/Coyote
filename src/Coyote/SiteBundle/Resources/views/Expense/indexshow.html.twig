@@ -21,7 +21,7 @@
     		<th class="center">{{'expense.year'|trans}}</th>
     	</tr>
         <tr>
-            <td>
+            <td class="center">
                 {% set counter = 0 %}
                 <select name='month' id='month' >
                 {% for mois in tab_num_mois %}
@@ -34,7 +34,7 @@
                 {% endfor %}
                 </select>
             </td>
-            <td>
+            <td class="center">
                 {% set counter = 0 %}
                 <select name='year' id='year' >
                 {% for annee in tab_annee %}
@@ -49,6 +49,8 @@
             </td>
         </tr>
     </table>
-    <button class='btn_red' type="submit" value="Afficher" id="afficher">{{ 'expense.submit.show'|trans }}</button>
+    <div id="btn_show">
+        <button class='btn btn-primary' type="submit" value="Afficher" id="afficher">{{ 'expense.submit.show'|trans }}</button>
+    </div>
 </form>
 {% endblock %}

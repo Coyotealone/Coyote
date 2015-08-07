@@ -13,7 +13,7 @@ schedule_postscheduleuserweek:
 schedule_postweekless:
     pattern:    /time_attendance/weekless
     defaults:   { _controller: "CoyoteSiteBundle:Schedule:postWeekLess"}
-    
+
 schedule_postweekmore:
     pattern:    /time_attendance/weekmore
     defaults:   { _controller: "CoyoteSiteBundle:Schedule:postWeekMore"}
@@ -26,9 +26,17 @@ schedule_getscheduleuserprintmonth:
     pattern:    /time_attendance_print_month
     defaults:   { _controller: "CoyoteSiteBundle:Schedule:getScheduleUserPrintMonth"}
 
+schedule_getscheduleuserprintyear:
+    pattern:    /time_attendance_print_year
+    defaults:   { _controller: "CoyoteSiteBundle:Schedule:getScheduleUserPrintYear"}
+
 schedule_postschedules_locked:
     pattern:    /schedules_locked
     defaults:   { _controller: "CoyoteSiteBundle:Schedule:postSchedulesLocked" }
+
+schedule_getscheduleuser:
+    pattern:    /getscheduleuser
+    defaults:   { _controller: "CoyoteSiteBundle:Schedule:getScheduleUser" }
 
 
 

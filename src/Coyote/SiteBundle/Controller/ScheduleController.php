@@ -34,18 +34,18 @@ class ScheduleController extends Controller
     	$em = $this->getDoctrine()->getManager();
     	$request = $this->getRequest();
     	$session = $request->getSession();
-    
+
     	$date = $em->getRepository('CoyoteSiteBundle:Timetable')->createDateYearWeek(
     			$session->get('year'), $session->get('week'));
-    
+
     	$data_timetable = $em->getRepository('CoyoteSiteBundle:Timetable')->searchIdDate($date);
-    
+
     	$time = $em->getRepository('CoyoteSiteBundle:Schedule')->timeData(
     			$data_timetable, $this->getUser());
-    
+
     	$duration = $em->getRepository('CoyoteSiteBundle:Schedule')->initGetSchedule(
     			$time, $data_timetable, $session);
-    
+
     	return $this->render('CoyoteSiteBundle:Schedule:postschedule.html.twig',
     			array('data_timetable' => $data_timetable, 'time' => $time, 'duration' => $duration));
     }
@@ -233,7 +233,7 @@ class ScheduleController extends Controller
     public function getScheduleUserMonthAction(Request $request)
     {
         $data = new Data();
-        
+
         if ($request->getMethod() == 'GET' && isset($_GET['year']) && isset($_GET['month']))
         {
             $doctrine = $this->getDoctrine();
@@ -398,6 +398,45 @@ class ScheduleController extends Controller
     /***********************Fonctions En cours************************/
     /*****************************************************************/
 
+    public function getScheduleUserAction()
+    {
+        /** @var $em object doctrine request */
+        $em = $this->getDoctrine()->getManager();
+        /** @var $request object request */
+        $request = Request::createFromGlobals();
+        /** @var $dataexpense string data file */
+        $data_request = $request->request->all();
+
+        if ($request->getMethod() == 'GET' && isset($_GET['pay_period']))
+    	{
+        	$year = explode('/', $_GET['pay_period']);
+            $date_start = $year[0]."-06-01";
+            $date_end = $year[1]."-05-31";
+            /** @var $filename string */
+            $filename = "export_period".$date_start."-".$date_end.".csv";
+            $user = $this->getUser();
+            $data_schedule = $em->getRepository('CoyoteSiteBundle:Schedule')->fileDataScheduleUser($user, $date_start,
+                $date_end);
+            /** @return file txt downloaded with data expense */
+            return new Response($data_schedule, 200, array(
+                'Content-Type' => 'application/force-download',
+                'Content-Disposition' => 'attachment; filename="'.$filename.'"'
+            ));
+        }
+        else
+        {
+            //return new Response($data_request['pay_period']);
+            $data = new Data();
+        	$date = date('Y-m-d');
+        	$doctrine = $this->getDoctrine();
+        	$em = $doctrine->getManager();
+        	$period = $em->getRepository('CoyoteSiteBundle:Timetable')->findPeriodByDate($date);
+            /** show view */
+            return $this->render('CoyoteSiteBundle:Schedule:indexscheduleuserexcel.html.twig', array(
+                'period' => $period, 'tab_period' => $data->getTabPeriod()));
+        }
+    }
+
     /**
      * showovertimeAction function.
      * function shows Overtime
@@ -433,14 +472,85 @@ class ScheduleController extends Controller
     		$this->get('session')->getFlashBag()->set('schedules_locked', $message);
     		return $this->redirect($this->generateUrl('schedule_postschedules_locked'));
     	}
-    	else 
+    	else
     	{
     		return $this->render('CoyoteSiteBundle:Schedule:scheduleslocked.html.twig');
     	}
     }
-    
-    
-    
+
+    /**
+     * Function to print time attendance by year
+     * @access public
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    public function getScheduleUserPrintYearAction(Request $request)
+    {
+    	$data = new Data();
+    	if ($request->getMethod() == 'GET' && isset($_GET['pay_period']))
+    	{
+    		$doctrine = $this->getDoctrine();
+    		$em = $doctrine->getManager();
+    		$period = $_GET['pay_period'];
+    		//$user = $em->getRepository('CoyoteSiteBundle:User')->findOneById(46);
+    		$user = $this->getUser();
+    		$absencerttyear = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsenceYear($period, $user, "RTT");
+    		$absencecayear = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsenceYear($period, $user, "CA");
+    		$absencecpyear = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsenceYear($period, $user, "CP");
+    		if ($this->get('security.context')->isGranted('ROLE_CADRE'))
+    		{
+        		$dayyear = $em->getRepository('CoyoteSiteBundle:Schedule')->findDayYear($period, $user);
+    			$data_schedule = $em->getRepository('CoyoteSiteBundle:Schedule')->dataScheduleFMYear($user, $period);
+    			$page = $this->render('CoyoteSiteBundle:Schedule:printfmpayperiod.html.twig', array(
+    					'dataschedule' => $data_schedule,
+    					'rttyear' => $absencerttyear,
+    					'cpyear' => $absencecpyear,
+    					'cayear' => $absencecayear,
+    					'dayyear' => $dayyear,
+    			));
+    		}
+    		if ($this->get('security.context')->isGranted('ROLE_TECH'))
+    		{
+    			$data_schedule = $em->getRepository('CoyoteSiteBundle:Schedule')->dataScheduleYear($user, $period);
+    			$timeweek = $em->getRepository('CoyoteSiteBundle:Schedule')->timeWeek($data_schedule);
+    			$date = '';
+    			$day = '';
+    			$week = '';
+    			for ($i=0;$i<count($data_schedule);$i++)
+    			{
+    				$day[$i] = $data_schedule[$i]['date']->format('l');
+    				$date[$i] = $data_schedule[$i]['date']->format('d/m/Y');
+    				$week[$i] = $data_schedule[$i]['date']->format('W');
+    			}
+    			$page = $this->render('CoyoteSiteBundle:Schedule:printpayperiod.html.twig', array(
+    				'day' => $day,
+    				'date' => $date,
+    				'week' => $week,
+    				'dataschedule' => $data_schedule,
+    				'rttyear' => $absencerttyear,
+    				'cpyear' => $absencecpyear,
+    				'cayear' => $absencecayear,
+    				'timeweek' => $timeweek,));
+    		}
+    		$date = date("Ymd");
+    		$heure = date("His");
+    		$html = $page->getContent();
+    		$filename = $user->getName()."_presence".$date."-".$heure.".pdf";
+    		$html = $page->getContent();
+    		$html2pdf = new \Html2Pdf_Html2Pdf('P', 'A4', 'fr');
+    		$html2pdf->pdf->SetDisplayMode('real');
+    		$html2pdf->writeHTML($html);
+    		$html2pdf->Output($filename, 'D');
+    		return new Response('PDF réalisé');
+    	}
+    	$data = new Data();
+    	$date = date('Y-m-d');
+    	$doctrine = $this->getDoctrine();
+    	$em = $doctrine->getManager();
+    	$period = $em->getRepository('CoyoteSiteBundle:Timetable')->findPeriodByDate($date);
+        return $this->render('CoyoteSiteBundle:Schedule:indexprintyear.html.twig', array(
+            'period' => $period, 'tab_period' => $data->getTabPeriod()));
+    	}
+
     /*****************************************************************/
     /***********************Fonctions Erronées************************/
     /*****************************************************************/

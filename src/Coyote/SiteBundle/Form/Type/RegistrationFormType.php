@@ -32,7 +32,7 @@ class RegistrationFormType extends AbstractType
             ->add('fax', null, array('label' => 'form.fax',  'translation_domain' => 'messages', 'data' => '(+33) 02 98 344 120'))
             ->add('website', null, array('label' => 'form.website',  'translation_domain' => 'messages', 'data' => 'www.pichonindustries.com'))
             ->add('roles', 'choice',  array( 'label' => 'form.roles','choices' => array('ROLE_TECH' => 'form.choices.technician',
-                'ROLE_CADRE' => 'form.choices.business', 'ROLE_TRADE' => 'form.choices.trade'),'multiple'  => true))
+                'ROLE_CADRE' => 'form.choices.business', 'ROLE_TRADE' => 'form.choices.trade', 'ROLE_VISU' => 'form.choices.directory'),'multiple'  => true))
             ->add('userfees', new UserFeesType(), array('required' => false));
     }
 

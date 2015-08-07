@@ -118,10 +118,6 @@ class Schedule
      */
     private $user;
 
-    /*
-     *
-     * @ORM\ManyToMany(targetEntity="Timetable")
-     */
     /**
      * @ORM\ManyToOne(targetEntity="Timetable")
      * @ORM\JoinColumn(nullable=false)

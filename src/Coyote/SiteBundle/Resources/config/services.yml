@@ -3,3 +3,8 @@ services:
         class: Coyote\SiteBundle\Form\Type\RegistrationFormType
         tags:
             - { name: form.type, alias: coyote_site_registration }
+    coyote_site.locale_listener:
+        class: Coyote\SiteBundle\EventListener\LocaleListener
+        arguments: ["%kernel.default_locale%"]
+        tags:
+            - { name: kernel.event_subscriber }

@@ -12,7 +12,6 @@ use Coyote\SiteBundle\Form\AbsenceNewType;
 use Coyote\SiteBundle\Entity\Timetable;
 use Coyote\SiteBundle\Entity\Data;
 use Coyote\SiteBundle\Form\AbsenceNewWeekType;
-use Coyote\SiteBundle\Entity\Coyote\SiteBundle\Entity;
 
 /**
  * Absence controller.
@@ -39,12 +38,12 @@ class AbsenceController extends Controller
             'route_params' => array()
         );
         $entities = $this->getDoctrine()->getRepository('CoyoteSiteBundle:Schedule')
-            ->getListAbsenceUser($this->getUser(), $page, $maxItems);
+                         ->getListAbsenceUser($this->getUser(), $page, $maxItems);
         return $this->render('CoyoteSiteBundle:Absence:index.html.twig', array(
                         'entities' => $entities,
                         'pagination' => $pagination));
     }
-   
+
     /**
      * Creates a new Schedule entity.
      * @access public
@@ -58,7 +57,6 @@ class AbsenceController extends Controller
         $timetable = $em->getRepository('CoyoteSiteBundle:Timetable')->findOneByDate(new \DateTime($data['timetable']));
         $data['timetable'] = $timetable->getId();
         $this->getRequest()->request->set('coyote_sitebundle_schedule', $data);
-        
         $schedule = $em->getRepository('CoyoteSiteBundle:Schedule')->findOneBy(
                 array('user' => $this->getUser(), 'timetable' => $timetable));
         if (empty($schedule))
@@ -79,24 +77,23 @@ class AbsenceController extends Controller
             {
                 $entity->setTravel($data['travel']);
             }
-            else 
+            else
             {
                 $entity->setTravel('0');
             }
             $entity->setComment($data['comment']);
             $em->persist($entity);
             $em->flush();
-            
             return $this->redirect($this->generateUrl('absence'));
         }
         else
         {
             $entity = $schedule;
         }
-        
+
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
-        
+
         if ($request->getMethod() == "POST")
         {
             $entity->setUser($this->getUser());
@@ -108,10 +105,8 @@ class AbsenceController extends Controller
             $entity->setTimetable($timetable);
             $em->persist($entity);
             $em->flush();
-
             return $this->redirect($this->generateUrl('absence'));
         }
-
         return $this->render('CoyoteSiteBundle:Absence:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
@@ -142,7 +137,6 @@ class AbsenceController extends Controller
     {
         $entity = new Schedule();
         $form   = $this->createCreateForm($entity);
-
         return $this->render('CoyoteSiteBundle:Absence:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
@@ -180,13 +174,10 @@ class AbsenceController extends Controller
     public function editAction($id)
     {
         $em = $this->getDoctrine()->getManager();
-
         $entity = $em->getRepository('CoyoteSiteBundle:Schedule')->find($id);
-
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Schedule entity.');
         }
-
         $editForm = $this->createEditForm($entity);
         return $this->render('CoyoteSiteBundle:Absence:edit.html.twig', array(
             'entity'      => $entity,
@@ -220,12 +211,14 @@ class AbsenceController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('CoyoteSiteBundle:Schedule')->find($id);
-        if (!$entity) {
+        if (!$entity)
+        {
             throw $this->createNotFoundException('Unable to find Schedule entity.');
         }
         $editForm = $this->createEditForm($entity);
         $editForm->handleRequest($request);
-        if ($editForm->isValid()) {
+        if ($editForm->isValid())
+        {
             $em->flush();
             return $this->redirect($this->generateUrl('absence'));
         }
@@ -247,18 +240,17 @@ class AbsenceController extends Controller
         $form = $this->createDeleteForm($id);
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isValid())
+        {
             $em = $this->getDoctrine()->getManager();
             $entity = $em->getRepository('CoyoteSiteBundle:Schedule')->find($id);
-
-            if (!$entity) {
+            if (!$entity)
+            {
                 throw $this->createNotFoundException('Unable to find Schedule entity.');
             }
-
             $em->remove($entity);
             $em->flush();
         }
-
         return $this->redirect($this->generateUrl('absence'));
     }
 
@@ -299,10 +291,9 @@ class AbsenceController extends Controller
                     $date_start, $date_end, $this->getUser(), $data);
             return $this->redirect($this->generateUrl('absence'));
         }
-    
         return $this->redirect($this->generateUrl('absence'));
     }
-    
+
     /**
      * Function to create a form Schedule entity.
      * @param Schedule $entity
@@ -316,7 +307,7 @@ class AbsenceController extends Controller
         ));
         return $form;
     }
-    
+
     /**
      * Displays a form to create a new Schedule entity.
      * @param Request $request
@@ -339,15 +330,15 @@ class AbsenceController extends Controller
         $session->set('date_start', null);
         $session->set('date_end', null);
         return $this->render('CoyoteSiteBundle:Absence:indexputweek.html.twig');
-    
+
     }
-    
+
     /*****************************************************************/
     /***********************Fonctions En cours************************/
     /*****************************************************************/
-    
-    
-    
+
+
+
     /*****************************************************************/
     /***********************Fonctions Erronées************************/
     /*****************************************************************/

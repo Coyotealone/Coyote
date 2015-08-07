@@ -9,6 +9,10 @@
 	<!--<![endif]-->
 {% endblock %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/style_admin.css') }}" type="text/css" media="all" />
+{% endblock %}
+
 {% block content %}
     <div class="jumbotron">
         <p class="lead">{{ 'Bienvenue sur le site Pichon'|trans }}

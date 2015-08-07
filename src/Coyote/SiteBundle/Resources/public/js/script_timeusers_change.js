@@ -460,11 +460,14 @@ $(document).ready(function()
     	var boucle = 0;
     	while(boucle < 7)
     	{
-    		if(document.getElementById(check[boucle]).checked == true)
+    		if (document.getElementById(check[boucle]).checked == true)
     		{
-    			document.getElementById('start'+jour[boucle]).value = document.getElementById('debutauto').value;
-    			document.getElementById('end'+jour[boucle]).value = document.getElementById('finauto').value;
-    			document.getElementById('break'+jour[boucle]).value = document.getElementById('pauseauto').value;
+    			if (document.getElementById('startauto').value != "")
+    				document.getElementById('start'+jour[boucle]).value = document.getElementById('startauto').value;
+    			if (document.getElementById('endauto').value != "")
+    				document.getElementById('end'+jour[boucle]).value = document.getElementById('endauto').value;
+    			if (document.getElementById('breakauto').value != "")
+    				document.getElementById('break'+jour[boucle]).value = document.getElementById('breakauto').value;
     		}
     		boucle++;
     	}
@@ -481,11 +484,14 @@ function saisie_auto()
 	var boucle = 0;
 	while(boucle < 7)
 	{
-		if(document.getElementById(check[boucle]).checked == true)
+		if (document.getElementById(check[boucle]).checked == true)
 		{
-			document.getElementById('start'+jour[boucle]).value = document.getElementById('debutauto').value;
-			document.getElementById('end'+jour[boucle]).value = document.getElementById('finauto').value;
-			document.getElementById('break'+jour[boucle]).value = document.getElementById('pauseauto').value;
+			if (document.getElementById('startauto').value != "")
+				document.getElementById('start'+jour[boucle]).value = document.getElementById('startauto').value;
+			if (document.getElementById('endauto').value != "")
+				document.getElementById('end'+jour[boucle]).value = document.getElementById('endauto').value;
+			if (document.getElementById('breakauto').value != "")
+				document.getElementById('break'+jour[boucle]).value = document.getElementById('breakauto').value;
 		}
 		boucle++;
 	}

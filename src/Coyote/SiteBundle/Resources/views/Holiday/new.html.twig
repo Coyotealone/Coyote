@@ -1,4 +1,4 @@
-{% extends 'CoyoteSiteBundle:Base:base.html.twig' %}
+{% extends 'CoyoteSiteBundle:Holiday:index.html.twig' %}
 
 {% block nav %}
 
@@ -37,6 +37,9 @@
 		    {{ form_widget(form.hs) }}
 		</td>
     </table>
-</div><br>
+</div>
+<div>
+    <input class="btn btn-primary" type="submit" value="{{ 'holiday.create.submit'|trans }}" />
+</div>
 {{ form_end(form) }}
 {% endblock %}

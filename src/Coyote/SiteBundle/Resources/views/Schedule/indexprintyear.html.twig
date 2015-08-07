@@ -12,11 +12,11 @@
 {% endblock %}
 
 {% block content %}
-<p id="title">{{"schedule.title.indexprintyear"|trans}} </p>
-<form role="form" action="{{ path('schedule_printyear') }}" method='get'>
+<p id="title">{{"schedule.title.indexprintyear"|trans}}</p>
+<form role="form" action="{{ path('schedule_getscheduleuserprintyear') }}" method='get'>
     <table class='table'>
     	<tr>
-    		<th>{{'Période'|trans}}</th>
+    		<th class="center">{{'schedule.period'|trans}}</th>
     	</tr>
     	<tr>
             <td>
@@ -32,6 +32,8 @@
             </td>
         </tr>
     </table>
-    <button class='btn_red' type="submit" value="Afficher" id="afficher">{{'schedule.submit.indexprintyear'|trans }}</button>
+    <div id="btn_show">
+        <button class="btn btn-primary" type="submit" value="Afficher" id="afficher">{{'schedule.submit.indexprintyear'|trans }}</button>
+    </div>
 </form>
 {% endblock %}

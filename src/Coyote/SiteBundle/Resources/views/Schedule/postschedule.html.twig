@@ -20,7 +20,6 @@
 {% endblock %}
 
 {% block content %}
-</br>
     {% for flashMessage in app.session.flashbag.get('save_schedule') %}
         {% set message = flashMessage %}
         {% if message == "schedule.flash.save" %}
@@ -35,12 +34,13 @@
     {% if is_granted('ROLE_TECH') %}
         <form role="form" action="{{ path('schedule_postscheduleuserweek') }}" method='post'>
             <p id="title">
-            <button class='btn_red' type="submit" value="Save" id="save">{{ 'schedule.submit.save'|trans }}</button>
+            <button class="btn btn-primary" type="submit" value="Save" id="save">{{ 'schedule.submit.save'|trans }}</button>
                 <b>{{'schedule.title.new'|trans}} - </b>
                 {{'schedule.message_week'|trans({'%no_week%': app.session.get('week'), '%year%': app.session.get('year')})}}
             </p>
+
             <div class='table-responsive'>
-        	    <table id='time_table' class='table'>
+        	    <table id="time_table" class="table">
                     <thead>
         		    	<tr>
             				<td>{{'schedule.dayofweek'|trans}}</td>
@@ -59,7 +59,11 @@
                     {% for key,date in data_timetable %}
                         <tr>
             				<td class='date'>{{ "schedule#{loop.index}"|trans }} :
-            				    <input class='input_day' type='text' readonly name="date{{loop.index}}" id="date{{loop.index}}" value={{ date.date|date("d/m/Y") }} />
+            				    {% if date.holiday == 1 %}
+            				        <input class='input_day' id="holiday" type='text' readonly name="date{{loop.index}}" id="date{{loop.index}}" value={{ date.date|date("d/m/Y") }} />
+            				    {% else %}
+            				        <input class='input_day' type='text' readonly name="date{{loop.index}}" id="date{{loop.index}}" value={{ date.date|date("d/m/Y") }} />
+            				    {% endif %}
             				</td>
             				<td>
             					{% if attribute(time,loop.index0) is not empty and attribute(time,loop.index0).start %}
@@ -94,11 +98,15 @@
             				    {% endif %}
             				</td>
             				<td>
-            					{% if attribute(time,loop.index0) is not empty and attribute(time,loop.index0).travel %}
-            				        <input type="checkbox" name="travel{{loop.index}}" id="travel{{loop.index}}"
-            				        data-value={{ attribute(time,loop.index0).travel }} >
-            				    {% else %}
-            				        <input type="checkbox" name="travel{{loop.index}}" id="travel{{loop.index}}">
+            				    <div class="checkbox">
+            				        <label>
+                					{% if attribute(time,loop.index0) is not empty and attribute(time,loop.index0).travel %}
+                				        <input type="checkbox" name="travel{{loop.index}}" id="travel{{loop.index}}"
+                				        data-value={{ attribute(time,loop.index0).travel }} >
+                				    {% else %}
+                				        <input type="checkbox" name="travel{{loop.index}}" id="travel{{loop.index}}">
+                                    </label>
+                                </div>
             				    {% endif %}
             				</td>
             				<td class="select_absence">
@@ -125,8 +133,8 @@
             					   <select name="absenceday{{loop.index}}" id="absenceday{{loop.index}}" >
             				    {% endif %}
             					    <option value="empty"></option>
-            					    <option value='0.5'>{{'0,5'|trans}}</option>
-                                    <option value='1'>{{'1'|trans}}</option>
+            					    <option value='0.5'>0,5</option>
+                                    <option value='1'>1</option>
             					</select>
             					<input class='input_time' type='text' name="absencetime{{loop.index}}" id="absencetime{{loop.index}}" maxlength='5' />
             				</td>
@@ -143,33 +151,36 @@
                     </tbody>
                 </table>
             </div>
-            <div>
+            <div id="write_auto">
             	{{'schedule.message'|trans}}
         		<br>
-        		<input type='checkbox' name='lundi' id='check_1'> {{ 'schedule.monday'|trans }}
-        		<input type='checkbox' name='mardi' id='check_2'> {{ 'schedule.tuesday'|trans }}
-        		<input type='checkbox' name='mercredi' id='check_3'> {{ 'schedule.wednesday'|trans }}
-        		<input type='checkbox' name='jeudi' id='check_4'> {{ 'schedule.thursday'|trans }}
-        		<input type='checkbox' name='vendredi' id='check_5'> {{ 'schedule.friday'|trans }}
-        		<input type='checkbox' name='samedi' id='check_6'> {{ 'schedule.saturday'|trans }}
-        		<input type='checkbox' name='dimanche' id='check_7'> {{ 'schedule.sunday'|trans }} |
-        		{{ 'schedule.start'|trans }} <input class='input_time' type='text' id='debutauto'>
-        		{{ 'schedule.end'|trans }} <input class='input_time' type='text' id='finauto'>
-        		{{ 'schedule.break'|trans }} <input class='input_time' type='text' id='pauseauto'>
+		        <input type='checkbox' name='check_1' id='check_1'> {{ 'schedule.monday'|trans }}
+        		<input type='checkbox' name='check_2' id='check_2'> {{ 'schedule.tuesday'|trans }}
+        		<input type='checkbox' name='check_3' id='check_3'> {{ 'schedule.wednesday'|trans }}
+        		<input type='checkbox' name='check_4' id='check_4'> {{ 'schedule.thursday'|trans }}
+        		<input type='checkbox' name='check_5' id='check_5'> {{ 'schedule.friday'|trans }}
+        		<input type='checkbox' name='check_6' id='check_6'> {{ 'schedule.saturday'|trans }}
+        		<input type='checkbox' name='check_7' id='check_7'> {{ 'schedule.sunday'|trans }} |
+        		{{ 'schedule.start'|trans }} <input class='input_time' type='text' id='startauto'>
+        		{{ 'schedule.end'|trans }} <input class='input_time' type='text' id='endauto'>
+        		{{ 'schedule.break'|trans }} <input class='input_time' type='text' id='breakauto'>
         	</div>
-        	<br>
-        	<a id='work_less' class='btn_white' href="{{ path('schedule_postweekless')}}" >{{'schedule.submit.previous_week'|trans}}</a>
-            <a id='saisie_auto' class='btn_grey' onclick='saisie_auto()'>{{'schedule.write_auto'|trans}}</a>
-            <a id='work_more' class='btn_white' href="{{ path('schedule_postweekmore')}}" >{{'schedule.submit.next_week'|trans}}</a>
+        	<div id="buttons">
+            	<a id='work_less' class="btn btn-info" href="{{ path('schedule_postweekless')}}" >{{'schedule.submit.previous_week'|trans}}</a>
+                <a id='saisie_auto' class="btn btn-success" onclick='saisie_auto()'>{{'schedule.write_auto'|trans}}</a>
+                <a id='work_more' class="btn btn-info" href="{{ path('schedule_postweekmore')}}" >{{'schedule.submit.next_week'|trans}}</a>
+                <br>
+                {{'schedule.working_time_week'|trans}} <input readonly type="text" id="timeweek"></input>
+        	</div>
         </form>
-        <br>{{'schedule.working_time_week'|trans}} <input readonly type="text" id="timeweek"></input>
+
 
     {% endif %}
     {% if is_granted('ROLE_CADRE') %}
     <form role="form" action="{{ path('schedule_postscheduleuserweek') }}" method='post'>
         <div id="contenu">
             <p id="title">
-                <button class='btn_red' type="submit" value="Save" id="save">{{ 'schedule.submit.save'|trans }}</button>
+                <button class='btn btn-primary' type="submit" value="Save" id="save">{{ 'schedule.submit.save'|trans }}</button>
                  <b>{{'schedule.title.new'|trans}} - </b>
                 {{'schedule.message_week'|trans({'%no_week%': app.session.get('week'), '%year%': app.session.get('year')})}}
             </p>
@@ -205,12 +216,16 @@
             					</select>
             				</td>
             				<td>
-            				    {% if attribute(time,loop.index0) is not empty and attribute(time,loop.index0).travel %}
-            				        <input type="checkbox" name="travel{{loop.index}}" id="travel{{loop.index}}"
-            				        data-value={{ attribute(time,loop.index0).travel }} >
-            				    {% else %}
-            				        <input type="checkbox" name="travel{{loop.index}}" id="travel{{loop.index}}">
-            				    {% endif %}
+            				    <div class="checkbox">
+            				        <label>
+                				    {% if attribute(time,loop.index0) is not empty and attribute(time,loop.index0).travel %}
+                				        <input type="checkbox" name="travel{{loop.index}}" id="travel{{loop.index}}"
+                				        data-value={{ attribute(time,loop.index0).travel }} >
+                				    {% else %}
+                				        <input type="checkbox" name="travel{{loop.index}}" id="travel{{loop.index}}">
+                				    {% endif %}
+            				        </label>
+            				    </div>
             				</td>
             				<td class="select_absence">
             				    {% if attribute(time,loop.index0) is not empty and attribute(time,loop.index0).absencename %}
@@ -225,7 +240,6 @@
                 					<option value='CSS'>{{'schedule.css'|trans}}</option>
                 					<option value="AT">{{'schedule.at'|trans}}</option>
                 					<option value="MP">{{'schedule.mp'|trans}}</option>
-                					<option value="Recup">{{'schedule.recup'|trans}}</option>
                 					<option value="Autre">{{'schedule.various'|trans}}</option>
             					</select>
             				</td>
@@ -236,8 +250,8 @@
             					   <select name="absenceday{{loop.index}}" id="absenceday{{loop.index}}" >
             				    {% endif %}
             					    <option value="empty"></option>
-            					    <option value='0.5'>{{'0,5'|trans}}</option>
-                                    <option value='1'>{{'1'|trans}}</option>
+            					    <option value='0.5'>0,5</option>
+                                    <option value='1'>1</option>
             					</select>
             					<input class='input_time' type='text' name="absencetime{{loop.index}}" id="absencetime{{loop.index}}" maxlength='5' />
             				</td>
@@ -254,8 +268,10 @@
                     </tbody>
                 </table>
             </div>
-            <a id='work_less' class='btn_white' href="{{ path('schedule_postweekless')}}" >{{'schedule.submit.previous_week'|trans}}</a>
-            <a id='work_more' class='btn_white' href="{{ path('schedule_postweekmore')}}" >{{'schedule.submit.next_week'|trans}}</a>
+            <div id="buttons">
+                <a id='work_less' class='btn btn-info' href="{{ path('schedule_postweekless')}}" >{{'schedule.submit.previous_week'|trans}}</a>
+                <a id='work_more' class='btn btn-info' href="{{ path('schedule_postweekmore')}}" >{{'schedule.submit.next_week'|trans}}</a>
+            </div>
         </form>
     {% endif %}
 

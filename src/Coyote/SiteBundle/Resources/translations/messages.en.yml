@@ -1,4 +1,62 @@
+exception:
+    error_404: "Oops! The page can not be found"
+    error_back: Please click on button Home.
+    error: Oops! An Error Occurred
+
 user_block_logout: Logout
+
+RTT: Reduction of working time
+CP: Paid leave
+CA: Leave seniority
+CSS: Unpaid leave
+AT: Work stoppage
+MP: Maternity/Paternity
+Recup: Recovery/Overtime
+
+directory:
+    title:
+        index: Telephone directory
+        edit: Editing a contact
+        show: Show a contact
+        new: Add a contact
+        directorybyfirstname: Telephone Directories Alphabetical
+        directorybyfunctionservice: Telephone Directories by Services
+        directorypdf_services_french: PDF Services directory France
+        directorypdf_services_poland: PDF Services directory Poland
+        directorypdf_user_french: PDF Directory Alphabetical France
+        directorypdf_user_poland: PDF Directory Alphabetical Poland
+        directory_services_french: Services directory France
+        directory_services_poland: Services directory Poland
+        directory_user_french: Directory Alphabetical France
+        directory_user_poland: Directory Alphabetical Poland
+        back: Back to list
+    add_user: Add a contact
+    actions:
+        title: Actions
+        show: Show
+        edit: Edit
+    country: Country
+    mail: Email
+    functionservice: Function / Service
+    cellphonenumber: Cell phone number
+    quickphonenumber: Quick phone number
+    jobphonenumber: Job phone number
+    firstname: Firstname
+    name: Name
+    leader: Leader
+    submit:
+        update: Update
+        delete: Delete
+        create: Create
+        enabled: Enable
+    empty: No data to display
+    required: Required field
+    update: Update
+    print: Print PDF
+    nav:
+        jobphonenumber: Workstation number
+        quickphonenumber: Speed dial number
+        cellphonenumber: Phone Number
 
 base:
     copyright: Copyright ©2015 PICHON - All rights reserved
@@ -7,6 +65,8 @@ base:
     link: http://www.pichonindustries.com
     choose_language: Choose your country
     welcome: Welcome to the website Pichon
+    required: Required fields
+    date: Date Format 31/12/14
     nav:
         accueil: Home
         signin: Sign in
@@ -21,6 +81,7 @@ base:
             indexexportprintyear: Export of the Year in PDF
             indexprintyear: Print of the year PDF
             absence: Absence management
+            scheduleuserexcel: Printing of the year in Excel
         expense:
             name: Expense report
             create: Recording
@@ -37,6 +98,7 @@ base:
             name: Export of time attendance
             indexexport: Export of data research department
             schedules_locked: Lock time and attendance
+            scheduleuserexcel: Printing of the year from an user in Excel
         expense_admin:
             name: Expense Report Management
             exportexpense: Export of data expense
@@ -44,6 +106,18 @@ base:
             name: Administrator
             register: Adding a user
             indexchoicesuser: Update User Roles
+        directory:
+            title: Directory
+            showfirstnameFrance: Alphabetical directory France
+            showfirstnamePologne: Alphabetical directory Pologne
+            showfunctionFrance: Directory of Services France
+            showfunctionPologne: Directory of Services Pologne
+            index: Directory administration
+            add_user: Add a contact
+        flag:
+            french: French
+            english: English
+            polish: Polish
 
 security:
     username: Login
@@ -68,6 +142,7 @@ admin:
     month: Month
     year: Year
     user: User
+    period: Period
     schedule:
         title: Time attendance
         technician: Technician (entry per hour)
@@ -84,6 +159,8 @@ admin:
     title:
         indexchoicesuser: User choice
         choicesroles: Add / Remove Roles
+        indexscheduleuserexcel: Download presence times of the year to Excel
+        exportbe: Export Time Attendance of design office
     submit:
         download: Download
         display: Afficher
@@ -96,6 +173,7 @@ contact:
     email: Email
     subject: Subject
     content: Content
+    message: Email sent
 
 schedule:
     title:
@@ -111,6 +189,7 @@ schedule:
         summary: Summary of the month
         overtime: Number of overtime in the year
         schedules_locked: Lock time and attendance.
+        indexscheduleuserexcel: Download presence times of the year to Excel
     holiday: Holiday
     weekend: Weekend
     message_week: Here week %no_week% of %year% displayed
@@ -160,6 +239,7 @@ schedule:
     number_ca_year: Number of seniority leave used in the year
     schedules_lock_message: All data prior to that date will be blocked.
     submit:
+        download: Download
         save: Save
         indexexportprintyear: Display
         indexprint: Download
@@ -270,6 +350,7 @@ form:
         technician: Technician
         business: Business
         trade: Trade
+        directory: Phone Book
 
 # Registration
 registration:
@@ -355,11 +436,13 @@ absence:
         create: Add an absence
         empty: No registered absence
         createweek: Add a week away
+        edit: Edit absence
 
 # Holiday
 holiday:
     title:
         show: Summary of holidays
+        create: Adding holidays
     ca: Leave seniority
     cp: Paid leave
     rtt: Reduction of working time
@@ -424,7 +507,7 @@ Fournitures sans TVA: Supplies without VAT
 Fournitures: Supplies
 Fourniture 5,5%: Supplies 5.5%
 stationary UK fourniture: Supplies UK
-Hotel: Hostal
+Hotel: Hostel
 Hotel UK 20%: Hostel UK 20%
 Location vehicules: Rent Car
 Telephone sans TVA: Phone without VAT

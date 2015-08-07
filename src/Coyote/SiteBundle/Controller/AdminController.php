@@ -223,10 +223,10 @@ class AdminController extends Controller
             $request = Request::createFromGlobals();
             /** @var $data array data request */
             $data_request = $request->request->all();
-            
+
             $res = null;
             $session = $this->getRequest()->getSession();
-            
+
             if(isset($data_request['add']))
             {
             	$request = $this->getRequest();
@@ -291,7 +291,7 @@ class AdminController extends Controller
     			);
     			$entities = $this->getDoctrine()->getRepository('CoyoteSiteBundle:Expense')
     			->getListExpenseUsers($page, $maxItems);
-    
+
     			return $this->render('CoyoteSiteBundle:Expense:showadmin.html.twig', array(
     					'data' => $entities,
     					'pagination' => $pagination));
@@ -301,6 +301,46 @@ class AdminController extends Controller
     	{
     		return $this->redirect($this->generateUrl('main_menu'));
     	}
+    }
+
+    public function getScheduleUserAction()
+    {
+        /** @var $em object doctrine request */
+        $em = $this->getDoctrine()->getManager();
+        /** @var $request object request */
+        $request = Request::createFromGlobals();
+        /** @var $dataexpense string data file */
+        $data_request = $request->request->all();
+
+        if ($request->getMethod() == 'GET' && isset($_GET['pay_period']))
+    	{
+            $year = explode('/', $_GET['pay_period']);
+            $date_start = $year[0]."-06-01";
+            $date_end = $year[1]."-05-31";
+            $user = $em->getRepository('CoyoteSiteBundle:User')->findOneById($_GET['user']);
+            /** @var $filename string */
+            $filename = "export_period".$date_start."-".$date_end.$user->getName().".csv";
+
+            $data_schedule = $em->getRepository('CoyoteSiteBundle:Schedule')->fileDataScheduleUser($user, $date_start,
+                $date_end);
+            /** @return file txt downloaded with data expense */
+            return new Response($data_schedule, 200, array(
+                'Content-Type' => 'application/force-download',
+                'Content-Disposition' => 'attachment; filename="'.$filename.'"'
+            ));
+        }
+        else
+        {
+            $data = new Data();
+        	$date = date('Y-m-d');
+        	$doctrine = $this->getDoctrine();
+        	$em = $doctrine->getManager();
+        	$period = $em->getRepository('CoyoteSiteBundle:Timetable')->findPeriodByDate($date);
+        	$tab_user = $em->getRepository('CoyoteSiteBundle:User')->findAllOrderById();
+            /** show view */
+            return $this->render('CoyoteSiteBundle:Admin:indexscheduleuserexcel.html.twig', array(
+                'period' => $period, 'tab_period' => $data->getTabPeriod(), 'tab_user' => $tab_user));
+        }
     }
 
 }
