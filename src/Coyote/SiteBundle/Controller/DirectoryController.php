@@ -227,7 +227,7 @@ class DirectoryController extends Controller
     public function showDirectoryByFirstnameAction($country)
     {
         $em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository('CoyoteSiteBundle:Directory')->showDirectoryByFirstname($country);
+        $entity = $em->getRepository('CoyoteSiteBundle:Directory')->findAllByFirstname($country);
         return $this->render('CoyoteSiteBundle:Directory:showdirectorybyfirstname.html.twig',
                 array('entity' => $entity, 'country' => $country));
     }
@@ -235,7 +235,7 @@ class DirectoryController extends Controller
     public function showDirectoryByFunctionServiceAction($country)
     {
         $em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository('CoyoteSiteBundle:Directory')->showDirectoryByFunctionService($country);
+        $entity = $em->getRepository('CoyoteSiteBundle:Directory')->findAllByFunctionService($country);
         return $this->render('CoyoteSiteBundle:Directory:showdirectorybyfunctionservice.html.twig',
                 array('entity' => $entity, 'country' => $country));
     }
@@ -243,8 +243,8 @@ class DirectoryController extends Controller
     public function printDirectoryByFirstnameAction($country)
     {
         $em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository('CoyoteSiteBundle:Directory')->showDirectoryByFirstname($country);
-        $update = $em->getRepository('CoyoteSiteBundle:Directory')->update_directory($country);
+        $entity = $em->getRepository('CoyoteSiteBundle:Directory')->findAllByFirstname($country);
+        $update = $em->getRepository('CoyoteSiteBundle:Directory')->updateDate($country);
         $page = $this->render('CoyoteSiteBundle:Directory:pdfdirectorybyfirstname.html.twig',
                 array('entity' => $entity, 'update' => $update));
         $date = date("Ymd");
@@ -262,8 +262,8 @@ class DirectoryController extends Controller
     public function printDirectoryByFunctionServiceAction($country)
     {
         $em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository('CoyoteSiteBundle:Directory')->showDirectoryByFunctionService($country);
-        $update = $em->getRepository('CoyoteSiteBundle:Directory')->update_directory($country);
+        $entity = $em->getRepository('CoyoteSiteBundle:Directory')->findAllByFunctionService($country);
+        $update = $em->getRepository('CoyoteSiteBundle:Directory')->udpateDate($country);
         $page = $this->render('CoyoteSiteBundle:Directory:pdfdirectorybyfunctionservice.html.twig',
                 array('entity' => $entity, 'update' => $update));
         $date = date("Ymd");
@@ -282,7 +282,7 @@ class DirectoryController extends Controller
     {
 	    $em = $this->getDoctrine()->getManager();
 	    $entity = $em->getRepository('CoyoteSiteBundle:Directory')->findOneById($id);
-	    $update = $em->getRepository('CoyoteSiteBundle:Directory')->disabled_user($entity);
+	    $em->getRepository('CoyoteSiteBundle:Directory')->updateEnable($entity);
 	    $em->persist($entity);
 	    $em->flush();
 	    return $this->redirect($this->generateUrl('directory'));

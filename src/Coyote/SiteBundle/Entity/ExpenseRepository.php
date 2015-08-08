@@ -28,7 +28,7 @@ class ExpenseRepository extends EntityRepository
      * @param mixed $id
      * @return array Expense
      */
-    public function findExpense($date, $user)
+    public function findAllByDateUser($date, $user)
     {
         $query = $this->getEntityManager()
                         ->createQuery("
@@ -46,13 +46,12 @@ class ExpenseRepository extends EntityRepository
      * @param mixed $em
      * @return "OK"
      */
-    public function updateStatus()
+    public function updateStatusTo0()
     {
         $query = $this->getEntityManager()
         			  ->createQuery("
                         SELECT e FROM CoyoteSiteBundle:Expense e
-                        WHERE e.status = 1 "
-        );
+                        WHERE e.status = 1 ");
         $expense = $query->getResult();
         foreach($expense as $data)
         {
@@ -69,20 +68,19 @@ class ExpenseRepository extends EntityRepository
      * @access public
      * @return string
      */
-    public function fileDataExpenseCompta()
+    public function createFileExpense()
     {
         $query = $this->getEntityManager()
                       ->createQuery("
                         SELECT e FROM CoyoteSiteBundle:Expense e
-                        WHERE e.status = 1 ORDER BY e.user "
-                        );
+                        WHERE e.status = 1 ORDER BY e.user ");
         $res = $query->getResult();
 
         $result = '';
         $userfees = '';
         foreach($res as $data)
         {
-            if($data->getUser()->getUserFees()->getLogin() != $userfees)
+            if ($data->getUser()->getUserFees()->getLogin() != $userfees)
             {
                 $userfees = $data->getUser()->getUserFees()->getLogin();
                 $result .= "H;".$data->getUser()->getUserFees()->getLogin()."\r\n";
@@ -119,7 +117,6 @@ class ExpenseRepository extends EntityRepository
             $result .= $data->getComment().";\r\n";
 
         }
-
         return $result;
     }
 
@@ -144,7 +141,7 @@ class ExpenseRepository extends EntityRepository
      * @param mixed $date
      * @return string
      */
-    public function formDate($date)
+    public function createDate($date)
     {
         if(is_numeric($date))
         {
@@ -158,11 +155,11 @@ class ExpenseRepository extends EntityRepository
         return $datetime;
     }
 
-    public function checkDate($date)
+    private function checkDate($date)
     {
-        if(is_numeric($date))
+        if (is_numeric($date))
         {
-            return $this->formDate($date);
+            return $this->createDate($date);
         }
         else
             return $date;
@@ -177,7 +174,7 @@ class ExpenseRepository extends EntityRepository
      * @param mixed $increment
      * @return array Expense
      */
-    public function saveExpense($user, $data, $increment)
+    public function createExpense($user, $data, $increment)
     {
         $site = $this->_em->getRepository('CoyoteSiteBundle:Site')->find(9);//$data['site'.$increment]);
         $currency = $this->_em->getRepository('CoyoteSiteBundle:Currency')->find($data['devise'.$increment]);
@@ -211,17 +208,15 @@ class ExpenseRepository extends EntityRepository
      *
      * @access public
      * @param integer $id_start
-     * @param integer $id_end
      * @return array Expense
      */
-    public function findExpenseById($id_start, $id_end)
+    public function findAllByIdStart($id_start)
     {
         $query = $this->getEntityManager()
                       ->createQuery("
         	            SELECT e FROM CoyoteSiteBundle:Expense e
-        	            WHERE e.id = :idstart "
-                        );
-        $query->setParameters(array('idstart' => $id_start, 'idend' => $id_end));
+        	            WHERE e.id = :idstart ");
+        $query->setParameters(array('idstart' => $id_start));
         return $query->getResult();
     }
 
@@ -234,14 +229,14 @@ class ExpenseRepository extends EntityRepository
      * @param mixed $expense
      * @return 'OK'
      */
-    public function updateStatusExense($em, $expense)
+    public function updateStatusTo1($expenses)
     {
-        foreach($expense as $data)
+        foreach($expenses as $expense)
         {
-            $data->setStatus(1);
-            $em->persist($data);
+            $expense->setStatus(1);
+            $this->_em->persist($expense);
         }
-        $em->flush();
+        $this->_em->flush();
         return "OK";
     }
 
@@ -254,7 +249,7 @@ class ExpenseRepository extends EntityRepository
      * @param order by user, id ASC
      * @return array Business
      */
-    public function findAllOrderByUserFeesID()
+    public function findAllAboutStatus()
     {
         return $this->findBy(array('status' => 1), array('user' => 'ASC', 'id' => 'ASC'));
     }
@@ -267,16 +262,15 @@ class ExpenseRepository extends EntityRepository
      * @param string $sortby
      * @return Paginator
      */
-    public function getListExpenseUsers($page=1, $maxperpage=10)
+    public function getListAboutStatus($page=1, $maxperpage=10)
     {
         $q = $this->_em->createQueryBuilder()
-        ->select('e')
-        ->from('CoyoteSiteBundle:Expense','e')
-        ->where('e.status = :status')
-        ->setParameters(array('status' => 1));
-
+        		  ->select('e')
+		          ->from('CoyoteSiteBundle:Expense','e')
+		          ->where('e.status = :status')
+		          ->setParameters(array('status' => 1));
         $q->setFirstResult(($page-1) * $maxperpage)
-        ->setMaxResults($maxperpage);
+          ->setMaxResults($maxperpage);
         return new Paginator($q);
     }
 
@@ -288,7 +282,7 @@ class ExpenseRepository extends EntityRepository
      * @param string $sortby
      * @return Paginator
      */
-    public function getListExpenseUser($user, $date, $page=1, $maxperpage=10)
+    public function getListAboutUserDate($user, $date, $page=1, $maxperpage=10)
     {
         $q = $this->_em->createQueryBuilder()
                   ->select('e')

@@ -59,12 +59,6 @@ services:
         tags:
             - {name: sonata.admin, manager_type: orm, group: Utilisateur, label: Comptes commerciaux}
 
-    coyote_site.admin.holiday:
-        class: Coyote\SiteBundle\Admin\HolidayAdmin
-        arguments: [~, Coyote\SiteBundle\Entity\Holiday, CoyoteSiteBundle:HolidayAdmin]
-        tags:
-            - {name: sonata.admin, manager_type: orm, group: Temps de présence, label: Congés}
-
     coyote_site.admin.expense:
         class: Coyote\SiteBundle\Admin\ExpenseAdmin
         arguments: [~, Coyote\SiteBundle\Entity\Expense, SonataAdminBundle:CRUD]

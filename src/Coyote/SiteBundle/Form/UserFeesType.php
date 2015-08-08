@@ -15,10 +15,10 @@ class UserFeesType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('login')
-            ->add('code')
-            ->add('service')
-            ->add('car')
+            ->add('login', null, array('label' => 'userfees.login', 'translation_domain' => 'messages'))
+            ->add('code', null, array('label' => 'userfees.code', 'translation_domain' => 'messages'))
+            ->add('service', null, array('label' => 'userfees.service', 'translation_domain' => 'messages'))
+            ->add('car', null, array('label' => 'userfees.car', 'translation_domain' => 'messages'))
         ;
     }
     

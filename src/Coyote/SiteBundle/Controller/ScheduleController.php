@@ -38,12 +38,12 @@ class ScheduleController extends Controller
     	$date = $em->getRepository('CoyoteSiteBundle:Timetable')->createDateYearWeek(
     			$session->get('year'), $session->get('week'));
 
-    	$data_timetable = $em->getRepository('CoyoteSiteBundle:Timetable')->searchIdDate($date);
+    	$data_timetable = $em->getRepository('CoyoteSiteBundle:Timetable')->findIdDate($date);
 
-    	$time = $em->getRepository('CoyoteSiteBundle:Schedule')->timeData(
+    	$time = $em->getRepository('CoyoteSiteBundle:Schedule')->findAllAboutTimetableUser(
     			$data_timetable, $this->getUser());
 
-    	$duration = $em->getRepository('CoyoteSiteBundle:Schedule')->initGetSchedule(
+    	$duration = $em->getRepository('CoyoteSiteBundle:Schedule')->createIdTimetableSession(
     			$time, $data_timetable, $session);
 
     	return $this->render('CoyoteSiteBundle:Schedule:postschedule.html.twig',
@@ -118,18 +118,17 @@ class ScheduleController extends Controller
             }
             $date = $em->getRepository('CoyoteSiteBundle:Timetable')->createDateYearWeek(
             $session->get('year'), $session->get('week'));
-            $timetable_ids = $em->getRepository('CoyoteSiteBundle:Timetable')->searchIdDate($date);
+            $timetable_ids = $em->getRepository('CoyoteSiteBundle:Timetable')->findIdDate($date);
             $list_id = "";
             for ($i=1;$i<8;$i++)
             {
                 if (empty($schedule[$i]))
                 {
-                    $timetable_id = $em->getRepository('CoyoteSiteBundle:TimeTable')->findOneById(
+                    $timetable_id = $em->getRepository('CoyoteSiteBundle:Timetable')->findOneById(
                             $timetable_ids[($i-1)]->getId());
-                    $schedule[$i] = $em->getRepository('CoyoteSiteBundle:Schedule')->saveSchedule(
-                        $user, $timetable_id, $data['start'.$i], $data['end'.$i], $data['break'.$i],
-                        $deplacement[$i], $data['absence'.$i], $data['absenceday'.$i], $data['absencetime'.$i],
-                        $data['comment'.$i]);
+                    $schedule[$i] = $em->getRepository('CoyoteSiteBundle:Schedule')->createSchedule($user, 
+                    		$timetable_id, $data['start'.$i], $data['end'.$i], $data['break'.$i], $deplacement[$i], 
+                    		$data['absence'.$i], $data['absenceday'.$i], $data['absencetime'.$i], $data['comment'.$i]);
                 }
                 else
                 {
@@ -144,6 +143,7 @@ class ScheduleController extends Controller
                     $list_id .= $i.';';
                 }
             }
+            
             $em->flush();
             $tab_id = explode(";", $list_id);
             $index = 0;
@@ -184,23 +184,24 @@ class ScheduleController extends Controller
             }
             $date = $em->getRepository('CoyoteSiteBundle:Timetable')->createDateYearWeek(
             $session->get('year'), $session->get('week'));
-            $timetable_ids = $em->getRepository('CoyoteSiteBundle:Timetable')->searchIdDate($date);
+            $timetable_ids = $em->getRepository('CoyoteSiteBundle:Timetable')->findIdDate($date);
             $user = $this->getUser();
             $list_id = "";
             for ($i=1;$i<8;$i++)
             {
             	if(empty($schedule[$i]))
                 {
-                    $timetable_id = $em->getRepository('CoyoteSiteBundle:TimeTable')->findOneById($timetable_ids[($i-1)]->getId());
-                    $schedule[$i] = $em->getRepository('CoyoteSiteBundle:Schedule')->saveSchedulefm(
-                        $user, $timetable_id, $deplacement[$i], $data['absence'.$i], $data['absenceday'.$i], $data['absencetime'.$i],
-                        $data['comment'.$i], $data['day'.$i]);
+                    $timetable_id = $em->getRepository('CoyoteSiteBundle:TimeTable')->findOneById(
+                    		$timetable_ids[($i-1)]->getId());
+                    $schedule[$i] = $em->getRepository('CoyoteSiteBundle:Schedule')->createSchedulefm($user, 
+                    		$timetable_id, $deplacement[$i], $data['absence'.$i], $data['absenceday'.$i], 
+                    		$data['absencetime'.$i], $data['comment'.$i], $data['day'.$i]);
                 }
                 else
                 {
-                    $schedule[$i] = $em->getRepository('CoyoteSiteBundle:Schedule')->updateSchedulefm(
-                        $schedule[$i], $deplacement[$i], $data['absence'.$i], $data['absenceday'.$i], $data['absencetime'.$i],
-                        $data['comment'.$i], floatval($data['day'.$i]));
+                    $schedule[$i] = $em->getRepository('CoyoteSiteBundle:Schedule')->updateSchedulefm($schedule[$i], 
+                    		$deplacement[$i], $data['absence'.$i], $data['absenceday'.$i], $data['absencetime'.$i],
+                        	$data['comment'.$i], floatval($data['day'.$i]));
                 }
                 if($schedule[$i] != null)
                 {
@@ -251,9 +252,9 @@ class ScheduleController extends Controller
                 $user = $this->getUser();
                 $period = $em->getRepository('CoyoteSiteBundle:Schedule')->findPeriod($month, $year);
                 $date = $year."-".$month."-%";
-                $absenceca = $em->getRepository('CoyoteSiteBundle:Schedule')->absenceMonth($date, $user->getId(), "CA");
-                $absencecp = $em->getRepository('CoyoteSiteBundle:Schedule')->absenceMonth($date, $user->getId(), "CP");
-                $absencertt = $em->getRepository('CoyoteSiteBundle:Schedule')->absenceMonth($date, $user->getId(), "RTT");
+                $absenceca = $em->getRepository('CoyoteSiteBundle:Schedule')->countAbsenceMonth($date, $user->getId(), "CA");
+                $absencecp = $em->getRepository('CoyoteSiteBundle:Schedule')->countAbsenceMonth($date, $user->getId(), "CP");
+                $absencertt = $em->getRepository('CoyoteSiteBundle:Schedule')->countAbsenceMonth($date, $user->getId(), "RTT");
                 $absencerttyear = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsenceYear($period, $user, "RTT");
                 $absencecayear = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsenceYear($period, $user, "CA");
                 $absencecpyear = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsenceYear($period, $user, "CP");
@@ -261,7 +262,7 @@ class ScheduleController extends Controller
                 {
                     $daymonth = $em->getRepository('CoyoteSiteBundle:Schedule')->findDayMonth($date, $user);
                     $dayyear = $em->getRepository('CoyoteSiteBundle:Schedule')->findDayYear($period, $user);
-                    $dataschedule = $em->getRepository('CoyoteSiteBundle:Schedule')->dataScheduleFM($user, $date);
+                    $dataschedule = $em->getRepository('CoyoteSiteBundle:Schedule')->findAboutDateUserFM($user, $date);
                     return $this->render('CoyoteSiteBundle:Schedule:showfm.html.twig', array(
                         'dataschedule' => $dataschedule,
                         'absencertt' => $absencertt,
@@ -276,9 +277,10 @@ class ScheduleController extends Controller
                 }
                 if ($this->get('security.context')->isGranted('ROLE_TECH'))
                 {
-                    $data_schedule = $em->getRepository('CoyoteSiteBundle:Schedule')->dataSchedule($user, $date);
-                    $timeweek = $em->getRepository('CoyoteSiteBundle:Schedule')->timeWeek($data_schedule);
-                    $timemonth = $em->getRepository('CoyoteSiteBundle:Schedule')->findTimeMonth($year.'-'.$month.'-%', $user);
+                    $data_schedule = $em->getRepository('CoyoteSiteBundle:Schedule')->findAboutDateUser($user, $date);
+                    $timeweek = $em->getRepository('CoyoteSiteBundle:Schedule')->countTimeWeek($data_schedule);
+                    $timemonth = $em->getRepository('CoyoteSiteBundle:Schedule')->findTimeMonth($year.'-'.$month.'-%', 
+                    		$user);
                     $date = '';
                     $day = '';
                     $week = '';
@@ -305,9 +307,9 @@ class ScheduleController extends Controller
                 }
             }
         }
-        return $this->render('CoyoteSiteBundle:Schedule:indexshow.html.twig', array('month' => date('n'),
-                        'year' => date('Y'), 'tab_mois' => $data->getTabMonth(), 'tab_num_mois' => $data->getTabNumMonth(),
-                        'tab_annee' => $data->getTabYear()));
+        return $this->render('CoyoteSiteBundle:Schedule:indexshow.html.twig', array('month' => date('n'), 
+        		'year' => date('Y'), 'tab_mois' => $data->getTabMonth(), 'tab_num_mois' => $data->getTabNumMonth(),
+                'tab_annee' => $data->getTabYear()));
     }
 
     /**
@@ -327,9 +329,9 @@ class ScheduleController extends Controller
             $user = $this->getUser();
             $period = $em->getRepository('CoyoteSiteBundle:Schedule')->findPeriod($month, $year);
             $date = $year."-".$month."-%";
-            $absenceca = $em->getRepository('CoyoteSiteBundle:Schedule')->absenceMonth($date, $user->getId(), "CA");
-            $absencecp = $em->getRepository('CoyoteSiteBundle:Schedule')->absenceMonth($date, $user->getId(), "CP");
-            $absencertt = $em->getRepository('CoyoteSiteBundle:Schedule')->absenceMonth($date, $user->getId(), "RTT");
+            $absenceca = $em->getRepository('CoyoteSiteBundle:Schedule')->countAbsenceMonth($date, $user->getId(), "CA");
+            $absencecp = $em->getRepository('CoyoteSiteBundle:Schedule')->countAbsenceMonth($date, $user->getId(), "CP");
+            $absencertt = $em->getRepository('CoyoteSiteBundle:Schedule')->countAbsenceMonth($date, $user->getId(), "RTT");
             $absencerttyear = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsenceYear($period, $user, "RTT");
             $absencecayear = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsenceYear($period, $user, "CA");
             $absencecpyear = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsenceYear($period, $user, "CP");
@@ -337,7 +339,7 @@ class ScheduleController extends Controller
             {
                 $daymonth = $em->getRepository('CoyoteSiteBundle:Schedule')->findDayMonth($date, $user);
                 $dayyear = $em->getRepository('CoyoteSiteBundle:Schedule')->findDayYear($period, $user);
-                $dataschedule = $em->getRepository('CoyoteSiteBundle:Schedule')->dataScheduleFM($user, $date);
+                $dataschedule = $em->getRepository('CoyoteSiteBundle:Schedule')->findAboutDateUserFM($user, $date);
                 $page = $this->render('CoyoteSiteBundle:Schedule:printfm.html.twig', array(
                                 'dataschedule' => $dataschedule,
                                 'absencertt' => $absencertt,
@@ -352,9 +354,10 @@ class ScheduleController extends Controller
             }
             if ($this->get('security.context')->isGranted('ROLE_TECH'))
             {
-                $data_schedule = $em->getRepository('CoyoteSiteBundle:Schedule')->dataSchedule($user, $date);
-                $timeweek = $em->getRepository('CoyoteSiteBundle:Schedule')->timeWeek($data_schedule);
-                $timemonth = $em->getRepository('CoyoteSiteBundle:Schedule')->findTimeMonth($year.'-'.$month.'-%', $user);
+                $data_schedule = $em->getRepository('CoyoteSiteBundle:Schedule')->findAboutDateUser($user, $date);
+                $timeweek = $em->getRepository('CoyoteSiteBundle:Schedule')->countTimeWeek($data_schedule);
+                $timemonth = $em->getRepository('CoyoteSiteBundle:Schedule')->findTimeMonth($year.'-'.$month.'-%', 
+                		$user);
                 $date = '';
                 $day = '';
                 $week = '';
@@ -389,9 +392,9 @@ class ScheduleController extends Controller
             $html2pdf->Output($filename, 'D');
             return new Response('PDF réalisé');
         }
-        return $this->render('CoyoteSiteBundle:Schedule:indexprint.html.twig', array('month' => date('n'),
-                        'year' => date('Y'), 'tab_mois' => $data->getTabMonth(), 'tab_num_mois' => $data->getTabNumMonth(),
-                        'tab_annee' => $data->getTabYear()));
+        return $this->render('CoyoteSiteBundle:Schedule:indexprint.html.twig', array('month' => date('n'), 
+        		'year' => date('Y'), 'tab_mois' => $data->getTabMonth(), 'tab_num_mois' => $data->getTabNumMonth(),
+                'tab_annee' => $data->getTabYear()));
     }
 
     /*****************************************************************/
@@ -405,7 +408,7 @@ class ScheduleController extends Controller
         /** @var $request object request */
         $request = Request::createFromGlobals();
         /** @var $dataexpense string data file */
-        $data_request = $request->request->all();
+        //$data_request = $request->request->all();
 
         if ($request->getMethod() == 'GET' && isset($_GET['pay_period']))
     	{
@@ -415,7 +418,7 @@ class ScheduleController extends Controller
             /** @var $filename string */
             $filename = "export_period".$date_start."-".$date_end.".csv";
             $user = $this->getUser();
-            $data_schedule = $em->getRepository('CoyoteSiteBundle:Schedule')->fileDataScheduleUser($user, $date_start,
+            $data_schedule = $em->getRepository('CoyoteSiteBundle:Schedule')->createFileUser($user, $date_start,
                 $date_end);
             /** @return file txt downloaded with data expense */
             return new Response($data_schedule, 200, array(
@@ -452,7 +455,8 @@ class ScheduleController extends Controller
         	$working_time_week = 0;
         	if ($holiday != null)
         		$working_time_week = $holiday->getHs();
-            $overtime = $em->getRepository('CoyoteSiteBundle:Schedule')->countOvertime($this->getUser(), $working_time_week);
+            $overtime = $em->getRepository('CoyoteSiteBundle:Schedule')->countOvertime($this->getUser(), 
+            		$working_time_week);
             return $this->render('CoyoteSiteBundle:Schedule:showovertime.html.twig', array('overtime' => $overtime));
         }
     }
@@ -464,7 +468,8 @@ class ScheduleController extends Controller
     	{
     		$em = $this->getDoctrine()->getManager();
     		$date = new \DateTime($_POST['date']);
-    		$schedules_lock = $em->getRepository("CoyoteSiteBundle:Schedule")->postScheduleLocked($date, $this->getUser());
+    		$schedules_lock = $em->getRepository("CoyoteSiteBundle:Schedule")->postScheduleLocked($date, 
+    				$this->getUser());
     		if ($schedules_lock == "OK")
     		{
     			$message = 'schedule.flash.schedules_locked';
@@ -554,242 +559,4 @@ class ScheduleController extends Controller
     /*****************************************************************/
     /***********************Fonctions Erronées************************/
     /*****************************************************************/
-
-    /**
-     * affichage de la page avant d'obtenir un fichier pdf de l'année.
-     * show page selection period to print PDF
-     *
-     * @access public
-     * @return void
-     */
-    /*public function indexprintyearAction()
-    {
-        $data = new Data();
-        $date = date('Y-m-d');
-        $doctrine = $this->getDoctrine();
-        $em = $doctrine->getManager();
-        $period = $em->getRepository('CoyoteSiteBundle:Timetable')->findPeriodByDate($date);
-        return $this->render('CoyoteSiteBundle:Schedule:indexprintyear.html.twig', array(
-            'period' => $period, 'tab_period' => $data->getTabPeriod()));
-    }*/
-
-
-    /**
-     * génération d'un fichier pdf de l'année de l'user.
-     * export data time attendance in PDF by working period
-     *
-     * @access public
-     * @return void
-     */
-    /*public function printyearAction()
-    {
-        $doctrine = $this->getDoctrine();
-        $em = $doctrine->getManager();
-        $period = $_GET['pay_period'];
-        if (empty($period))
-        {
-            return $this->redirect($this->generateUrl('schedule_indexprintyear'));
-        }
-        else
-        {
-            return new Response("En mainteance");
-            if(empty($period))
-                return $this->render('CoyoteSiteBundle:Schedule:indexprint.html.twig');
-            $absencerttyear = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsenceYear($period, $this->getUser(), "RTT");
-            $absencecayear = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsenceYear($period, $this->getUser(), "CA");
-            $absencecpyear = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsenceYear($period, $this->getUser(), "CP");
-            if ($this->get('security.context')->isGranted('ROLE_CADRE'))
-            {
-                $dayyear = $em->getRepository('CoyoteSiteBundle:Schedule')->findDayYear($period, $this->getUser());
-                $dataschedule = $em->getRepository('CoyoteSiteBundle:Schedule')->dataScheduleFMYear($this->getUser(), $period);
-                $page = $this->render('CoyoteSiteBundle:Schedule:printfmpayperiod.html.twig', array(
-                    'dataschedule' => $dataschedule,
-                    'rttyear' => $absencerttyear,
-                    'cpyear' => $absencecpyear,
-                    'cayear' => $absencecayear,
-                    'dayyear' => $dayyear,
-                    ));
-            }
-            if ($this->get('security.context')->isGranted('ROLE_TECH'))
-            {
-                $dataschedule = $em->getRepository('CoyoteSiteBundle:Schedule')->dataScheduleYear($this->getUser(), $period);
-                $index = 0;
-                $value = 0;
-                $timeweek = '';
-                $value_max = count($dataschedule)-1;
-                for($i=0;$i<count($dataschedule);$i++)
-                {
-                    if ($dataschedule[$i]['day'] != "dimanche")
-                        $value += $em->getRepository('CoyoteSiteBundle:Schedule')->calculTime(
-                            $dataschedule[$i]['working_time']);
-                    if ($dataschedule[$i]['day'] == "dimanche" and $i != $value_max)
-                    {
-                        $timeweek[$index] = $em->getRepository('CoyoteSiteBundle:Schedule')->formatTime($value);
-                        $value = 0;
-                        $index++;
-                    }
-                    if ($i == $value_max)
-                    {
-                        $timeweek[$index] = $em->getRepository('CoyoteSiteBundle:Schedule')->formatTime($value);
-                    }
-                }
-                $page = $this->render('CoyoteSiteBundle:Schedule:printpayperiod.html.twig', array(
-                    'dataschedule' => $dataschedule,
-                    'rttyear' => $absencerttyear,
-                    'cpyear' => $absencecpyear,
-                    'cayear' => $absencecayear,
-                    'timeweek' => $timeweek,
-                    ));
-            }
-            $date = date("Ymd");
-            $heure = date("His");
-            $filename = $this->getUser()->getName()."_presence".$date."-".$heure.".pdf";
-            $html = $page->getContent();
-            $html2pdf = new \Html2Pdf_Html2Pdf('P', 'A4', 'fr');
-            $html2pdf->pdf->SetDisplayMode('real');
-            $html2pdf->writeHTML($html);
-            $html2pdf->Output($filename, 'D');
-            return new Response('PDF réalisé');
-        }
-    }*/
-
-
-    /**
-     * indexexportprintyearAction function.
-     * Affichage des choix de période avant impression PDF
-     * show page selection period to print PDF
-     *
-     * @access public
-     * @return void
-     */
-    /*public function indexexportprintyearAction()
-    {
-        return new Response("En mainteance");
-        $date = date('Y-m-d');
-        $doctrine = $this->getDoctrine();
-        $em = $doctrine->getManager();
-        $period = $em->getRepository('CoyoteSiteBundle:Timetable')->findPeriodByDate($date);
-        $data = new Data();
-        return $this->render('CoyoteSiteBundle:Schedule:indexexportprintyear.html.twig', array(
-            'period' => $period, 'tab_period' => $data->getTabPeriod()));
-    }*/
-
-
-    /**
-     * exportprintyearAction function.
-     * export all data time attendance in PDF by working period
-     *
-     * @access public
-     * @return void
-     */
-    /*public function exportprintyearAction()
-    {
-        return new Response("En mainteance");
-        $doctrine = $this->getDoctrine();
-        $em = $doctrine->getManager();
-        $pay_period = $_GET['pay_period'];
-        define("pay_period", $pay_period, true);
-        $data = new Data();
-        $tab_user_id = $data->getTabUserIdSchedulePDF();
-        if (empty($pay_period))
-        {
-            return $this->redirect($this->generateUrl('schedule_indexexportprintyear'));
-        }
-        else
-        {
-            if (empty($pay_period))
-                return $this->render('CoyoteSiteBundle:Schedule:indexexportprintyear.html.twig');
-            foreach($tab_user_id as $datauser)
-            {
-                $user = $em->getRepository('CoyoteSiteBundle:User')->find($datauser);
-                $roles = $user->getRoles();
-                $check_role = '';
-                $role = '';
-                foreach($roles as $datarole)
-                {
-                    $check_role = $datarole;
-                    if ($check_role == "ROLE_CADRE")
-                        $role = 'ROLE_CADRE';
-                    if ($check_role == "ROLE_TECH")
-                        $role = 'ROLE_TECH';
-                }
-                $absencerttyear = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsenceYear(
-                    constant('pay_period'), $user, "RTT");
-                $absencecayear = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsenceYear(
-                    constant('pay_period'), $user, "CA");
-                $absencecpyear = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsenceYear(
-                    constant('pay_period'), $user, "CP");
-                if ($role == 'ROLE_CADRE')
-                {
-                    $dayyear = $em->getRepository('CoyoteSiteBundle:Schedule')->findDayYear(
-                        constant('pay_period'), $user);
-                    $dataschedule = $em->getRepository('CoyoteSiteBundle:Schedule')->dataScheduleFMYear(
-                        $user, constant('pay_period'));
-                    $page = $this->render('CoyoteSiteBundle:Schedule:printfmpayperiod.html.twig', array(
-                        'dataschedule' => $dataschedule,
-                        'rttyear' => $absencerttyear,
-                        'cpyear' => $absencecpyear,
-                        'cayear' => $absencecayear,
-                        'dayyear' => $dayyear,
-                        ));
-                }
-                if ($role == 'ROLE_TECH')
-                {
-                    $dataschedule = $em->getRepository('CoyoteSiteBundle:Schedule')->dataScheduleYear(
-                        $user, constant('pay_period'));
-                    $index = 0;
-                    $value = 0;
-                    $timeweek = '';
-                    $value_max = count($dataschedule)-1;
-                    for($i=0;$i<count($dataschedule);$i++)
-                    {
-                        if ($dataschedule[$i]['day'] != "dimanche")
-                            $value += $em->getRepository('CoyoteSiteBundle:Schedule')->calculTime(
-                                $dataschedule[$i]['working_time']);
-                        if ($dataschedule[$i]['day'] == "dimanche" and $i != $value_max)
-                        {
-                            $timeweek[$index] = $em->getRepository('CoyoteSiteBundle:Schedule')->formatTime($value);
-                            $value = 0;
-                            $index++;
-                        }
-                        if ($i == $value_max)
-                        {
-                            $timeweek[$index] = $em->getRepository('CoyoteSiteBundle:Schedule')->formatTime($value);
-                        }
-                    }
-                    $page = $this->render('CoyoteSiteBundle:Schedule:printpayperiod.html.twig', array(
-                        'dataschedule' => $dataschedule,
-                        'rttyear' => $absencerttyear,
-                        'cpyear' => $absencecpyear,
-                        'cayear' => $absencecayear,
-                        'timeweek' => $timeweek,
-                        ));
-                }
-                $html = $page->getContent();
-                $html2pdf = new \Html2Pdf_Html2Pdf('P', 'A4', 'fr');
-                $html2pdf->pdf->SetDisplayMode('real');
-                $html2pdf->writeHTML($html);
-                $pay_period = explode("/", constant('pay_period'));
-                $pay_period = $pay_period[0].'-'.$pay_period[1];
-                $file_name = $pay_period.'_'.$user->getName().'.pdf';
-                $html2pdf->pdf->Output('./presence/'.$file_name,"F");
-            }
-            return $this->redirect($this->generateUrl('schedule_indexexportprintyear'));
-        }
-    }*/
-
-    /**
-     * Function that redirect to getScheduleUserAction().
-     * indexAction()
-     * @access public
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     */
-    /*public function indexAction()
-    {
-        if($this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED') == false)
-        {
-            return $this->redirect($this->generateUrl('fos_user_security_login'));
-        }
-        return $this->redirect($this->generateUrl('schedule_getscheduleuser'));
-    }*/
 }

@@ -46,9 +46,9 @@
                 <select name='year' id='year' >
                 {% for annee in tab_annee %}
                     {% if annee == year %}
-                    <option value={{tab_num_annee[counter]}} selected>{{annee|trans}}</option>
+                    <option value={{tab_num_annee[counter]}} selected>{{annee}}</option>
                     {% else %}
-                    <option value={{tab_num_annee[counter]}}>{{annee|trans}}</option>
+                    <option value={{tab_num_annee[counter]}}>{{annee}}</option>
                     {% endif %}
                     {% set counter = counter + 1 %}
                 {% endfor %}

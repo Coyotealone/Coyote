@@ -12,14 +12,15 @@ use Doctrine\ORM\EntityRepository;
  */
 class DirectoryRepository extends EntityRepository
 {
-    public function showDirectoryByFirstname($country)
+    public function findAllByFirstname($country)
     {
         return $this->findBy(array('country' => $country, 'enabled' => 1), array('firstname' => 'ASC'));
     }
 
-    public function showDirectoryByFunctionService($country)
+    public function findAllByFunctionService($country)
     {
-        return $this->findBy(array('country' => $country, 'enabled' => 1), array('function_service' => 'ASC', 'leader' => 'DESC', 'firstname' => 'ASC'));
+        return $this->findBy(array('country' => $country, 'enabled' => 1), array('function_service' => 'ASC', 
+        		'leader' => 'DESC', 'firstname' => 'ASC'));
     }
 
     public function findAll()
@@ -27,13 +28,13 @@ class DirectoryRepository extends EntityRepository
         return $this->findBy(array('enabled' => 1), array('firstname' => 'ASC'));
     }
 
-    public function disabled_user($directory)
+    public function updateEnable($directory)
     {
 	    $directory->setEnabled(0);
 	    return $directory;
     }
 
-    public function update_directory($country)
+    public function updateDate($country)
     {
         $qb = $this->_em->createQueryBuilder();
         $qb->select('d')

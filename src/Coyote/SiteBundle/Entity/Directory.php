@@ -100,6 +100,10 @@ class Directory
      */
     private $enabled_at;
 
+    /**
+     * 
+     * @return string name
+     */
     public function __toString()
     {
         return $this->name;

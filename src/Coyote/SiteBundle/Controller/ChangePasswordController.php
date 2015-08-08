@@ -30,7 +30,8 @@ class ChangePasswordController extends Controller
      * @access public
      * @param Request $request
      * @throws AccessDeniedException
-     * @return Ambigous <\Symfony\Component\HttpFoundation\Response, NULL>|\Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @return Ambigous <\Symfony\Component\HttpFoundation\Response, 
+     * NULL>|\Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function changePasswordAction(Request $request)
     {

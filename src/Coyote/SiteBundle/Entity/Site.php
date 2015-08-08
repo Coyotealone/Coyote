@@ -134,6 +134,9 @@ class Site
         return $this->expenses;
     }
 
+    /**
+     * @return String name
+     */
     public function __toString()
     {
         return $this->name;

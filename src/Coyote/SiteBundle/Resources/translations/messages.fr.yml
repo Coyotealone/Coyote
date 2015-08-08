@@ -1,3 +1,54 @@
+userfees:
+    login: Identifiant : 
+    car: Véhicule : 
+    code: Code : 
+    service: Service : 
+    userfees: Commercial
+
+function_service:
+    empty:  " "
+    accueil: 'Accueil/Secrétariat'
+    be: "Bureau d'étude"
+    cantine: 'Cantine'
+    commercial_export: 'Commercial Export'
+    commercial_france: 'Commercial France'
+    delegue_produits: 'Délégué Produits'
+    direction_generale: 'Direction Générale'
+    fabrication: 'Fabrication'
+    gardien: 'Gardien'
+    logistique: 'Logistique'
+    magasin: 'Magasin'
+    maintenance: 'Maintenance'
+    montage: 'Montage'
+    ordonnancement: 'Ordonnancement'
+    organisation_qualite: Organisation/Qualité'
+    rh: "Ressources Humaines"
+    sav: 'S.A.V.'
+    service_achats: 'Service Achats'
+    service_administratif_financier: 'Service Administratif et Financier'
+    service_informatique: 'Service Informatique'
+    pieces_detachees_export: 'Service Pièces Détachées Export'
+    sous_traitance: 'Sous-Traitance'
+    transport: 'Transport'
+    usine: 'Usine'
+
+country:
+    fr: France
+    pl: Pologne
+
+month_01: Janvier
+month_02: Février
+month_03: Mars
+month_04: Avril
+month_05: Mai
+month_06: Juin
+month_07: Juillet
+month_08: Août
+month_09: Septembre
+month_10: Octobre
+month_11: Novembre
+month_12: Décembre
+
 exception:
     error_404: "Oups! La page n'existe pas."
     error_back: Merci de cliquer sur le bouton "Accueil".
