@@ -234,14 +234,14 @@ class ExpenseRepository extends EntityRepository
      * @param mixed $expense
      * @return 'OK'
      */
-    public function updateStatusExense($em, $expense)
+    public function updateStatusExpense($expense)
     {
         foreach($expense as $data)
         {
             $data->setStatus(1);
-            $em->persist($data);
+            $this->_em->persist($data);
         }
-        $em->flush();
+        $this->_em->flush();
         return "OK";
     }
 
