@@ -138,6 +138,9 @@ class Car
         return $this->userfeess;
     }
     
+    /**
+     * @return string registration
+     */
     public function __toString()
     {
         return $this->registration;

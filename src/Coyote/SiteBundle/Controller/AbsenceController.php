@@ -29,7 +29,7 @@ class AbsenceController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $maxItems = 10;
-        $absences = $em->getRepository('CoyoteSiteBundle:Schedule')->absenceByUser($this->getUser());
+        $absences = $em->getRepository('CoyoteSiteBundle:Schedule')->findAllByUserAbsence($this->getUser());
         $absences_count = count($absences);
         $pagination = array(
             'page' => $page,
@@ -287,7 +287,7 @@ class AbsenceController extends Controller
         {
             $data = $this->getRequest()->request->get('coyote_sitebundle_schedule');
             $em = $this->getDoctrine()->getManager();
-            $em->getRepository('CoyoteSiteBundle:Schedule')->postAbsenceWeek(
+            $em->getRepository('CoyoteSiteBundle:Schedule')->putAbsenceWeek(
                     $date_start, $date_end, $this->getUser(), $data);
             return $this->redirect($this->generateUrl('absence'));
         }
@@ -330,7 +330,6 @@ class AbsenceController extends Controller
         $session->set('date_start', null);
         $session->set('date_end', null);
         return $this->render('CoyoteSiteBundle:Absence:indexputweek.html.twig');
-
     }
 
     /*****************************************************************/

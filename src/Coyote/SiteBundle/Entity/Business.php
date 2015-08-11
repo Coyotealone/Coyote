@@ -135,6 +135,10 @@ class Business
         return $this->expenses;
     }
 
+    /**
+     * 
+     * @return string name
+     */
     public function __toString()
     {
         return $this->name;

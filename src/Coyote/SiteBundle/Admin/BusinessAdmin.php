@@ -8,10 +8,21 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 
+
+/**
+ * BusinessAdmin class.
+ * @author Coyote
+ * @extends Admin
+ */
 class BusinessAdmin extends Admin
 {
+
     /**
+     * configureDatagridFilters function.
+     *
+     * @access protected
      * @param DatagridMapper $datagridMapper
+     * @return void
      */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
@@ -23,7 +34,11 @@ class BusinessAdmin extends Admin
     }
 
     /**
+     * configureListFields function.
+     *
+     * @access protected
      * @param ListMapper $listMapper
+     * @return void
      */
     protected function configureListFields(ListMapper $listMapper)
     {
@@ -42,7 +57,11 @@ class BusinessAdmin extends Admin
     }
 
     /**
+     * configureFormFields function.
+     *
+     * @access protected
      * @param FormMapper $formMapper
+     * @return void
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
@@ -54,7 +73,11 @@ class BusinessAdmin extends Admin
     }
 
     /**
+     * configureShowFields function.
+     *
+     * @access protected
      * @param ShowMapper $showMapper
+     * @return void
      */
     protected function configureShowFields(ShowMapper $showMapper)
     {

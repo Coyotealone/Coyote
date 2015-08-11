@@ -196,6 +196,9 @@ class Fee
         return $this->expenses;
     }
 
+    /**
+     * @return String code : name
+     */
     public function __toString()
     {
         return $this->code." : ".$this->name;

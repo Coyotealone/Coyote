@@ -101,7 +101,7 @@ class ExpenseController extends Controller
                     && !empty($data_request['devise'.$i]) && !empty($data_request['qte'.$i])
                 	&& !empty($data_request['site'.$i]) && !empty($data_request['ttc'.$i]))
                 {
-                    $expense = $em->getRepository('CoyoteSiteBundle:Expense')->saveExpense($this->getUser(),
+                    $expense = $em->getRepository('CoyoteSiteBundle:Expense')->createExpense($this->getUser(),
                         $data_request, $i);
                     $em->persist($expense);
                     $em->flush();
@@ -389,7 +389,7 @@ class ExpenseController extends Controller
 		if (!empty($_GET['year']) && !empty($_GET['month']))
 		{
 			$date = $_GET['year'].'-'.$_GET['month'].'%';
-			$data_expense = $em->getRepository('CoyoteSiteBundle:Expense')->findExpense($date,
+			$data_expense = $em->getRepository('CoyoteSiteBundle:Expense')->findAllByDateUser($date,
 					$this->getUser());
 			$data_user = $em->getRepository('CoyoteSiteBundle:User')->find($this->getUser());
 			$page = $this->render('CoyoteSiteBundle:Expense:print.html.twig', array('data' => $data_expense));

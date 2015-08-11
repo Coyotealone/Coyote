@@ -159,50 +159,50 @@ class Timetable
         return $this->schedules;
     }
     
+    /**
+     * @return Date format d/m/Y
+     */
     public function __toString()
     {
         return $this->date->format('d/m/Y');
     }
     
-
     public function second_to_hour($time)// Transformation d'un temps en seconde en H:M
     {
-        if($time == '0')
-            return '0:00';
-        else
-        {
-            $ss = $time % 60;
-            $m = ($time - $ss) / 60;
-            $mm = $m % 60;
-            $hh = ($m - $mm) / 60;
-            if($ss=='0')
-            	$ss = '00';
-            if($mm == '0')
-            	$mm = '00';
-            if($mm < '10' && $mm > '0')
-            	$mm = '0'.$mm;
-            $restime = $hh.':'.$mm;
-            return $restime;
+    	if($time == '0')
+    		return '0:00';
+    	else
+    	{
+    		$ss = $time % 60;
+    		$m = ($time - $ss) / 60;
+    		$mm = $m % 60;
+    		$hh = ($m - $mm) / 60;
+    		if($ss=='0')
+    			$ss = '00';
+    		if($mm == '0')
+    			$mm = '00';
+    		if($mm < '10' && $mm > '0')
+    			$mm = '0'.$mm;
+    		$restime = $hh.':'.$mm;
+    		return $restime;
     	}
     }
-
     public function hour_to_second($time)// Transformation d'un temps en H:M en seconde
     {
     	$timesec = explode(':', $time);
     	if(count($timesec) < 2)
-    	    return "0";
+    		return "0";
     	if(is_numeric($timesec[0]) && is_numeric($timesec[1]))
     	{
-    	    $sec = 3600*$timesec[0] + 60*$timesec[1];
-            return $sec;
-        }
-        else
-            return "0";
+    		$sec = 3600*$timesec[0] + 60*$timesec[1];
+    		return $sec;
+    	}
+    	else
+    		return "0";
     }
-
     public function working_time_day($start, $end, $break)// Calcul du temps de travail
     {
-        if(empty($start) and empty($end) and empty($break))
+    	if(empty($start) and empty($end) and empty($break))
     		return "0:00";
     	if($start == "00:00" and $end == "00:00" and $break == "00:00")
     		return "0:00";
@@ -219,24 +219,20 @@ class Timetable
     		$timestart = $this->hour_to_second($start);
     		$timeend = $this->hour_to_second($end);
     		$timebreak = $this->hour_to_second($break);
-
     		$worktime = $timeend-$timestart;
     		$worktime = $worktime-$timebreak;
     		if($worktime == "0")
-    		    return "0:00";
-            else
-    		    $worktime = $this->second_to_hour($worktime);
+    			return "0:00";
+    		else
+    			$worktime = $this->second_to_hour($worktime);
     		return  $worktime;
     	}
     }
-
     public function working_hours_day($worktime)// Calcul de la journée de travail
     {
     	if($worktime == "00:00" || $worktime == "0:00")
     		return 0;
-
     	$worktime = $this->hour_to_second($worktime);
-
     	$timeday = $worktime;
     	if($timeday <= 0)
     		$timeday = 0;
@@ -246,7 +242,6 @@ class Timetable
     		$timeday = 1;
     	return $timeday;
     }
-
     function working_time_week($time1, $time2, $time3, $time4, $time5, $time6, $time7)
     {
     	$timetotsec = $time1 + $time2 + $time3 + $time4 + $time5 + $time6 + $time7;
@@ -259,5 +254,4 @@ class Timetable
     	$restime = $hh.':'.$mm;
     	return $restime;
     }
-
 }

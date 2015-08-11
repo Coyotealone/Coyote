@@ -32,12 +32,12 @@ class TimetableRepository extends EntityRepository
     }
     
     /**
-     * Function search Timetable about a date.
+     * Function to search Timetable about a date.
      * @access public
      * @param DateTime $date
      * @return 7 days of Timetable if found date
      */
-    public function searchIdDate($date)
+    public function findIdDate($date)
     {
         $date = new \DateTime($date);
         $result = $date->format('N');
@@ -86,7 +86,7 @@ class TimetableRepository extends EntityRepository
      * @param mixed $user_id
      * @return array schedule id
      */
-    public function myFindScheduleId($no_week, $year, $user_id)
+    public function findScheduleId($no_week, $year, $user_id)
     {
         $qb = $this->_em->createQueryBuilder();
         $qb->select('s.id')
@@ -108,13 +108,13 @@ class TimetableRepository extends EntityRepository
      * @param mixed $year
      * @return array timetable id
      */
-    public function myFindTimetableId($no_week, $period)
+    public function findTimetableId($no_week, $period)
     {
         $qb = $this->_em->createQueryBuilder();
         $qb->select('t.id')
            ->from('CoyoteSiteBundle:Timetable', 't')
            ->where('t.week = :week and t.period = :period')
-           ->setParameters(array('week' => $week, 'period' => $period));
+           ->setParameters(array('week' => $no_week, 'period' => $period));
         $timetable_id =  $qb->getQuery()
                             ->getResult();
 
@@ -138,10 +138,9 @@ class TimetableRepository extends EntityRepository
         return $qb->getQuery()->getSingleScalarResult();
     }
 
-    public function findworkingday($user)
+    public function findWorkingDay($user)
     {
         $date = new \DateTime();
-
         $qb = $this->_em->createQueryBuilder();
         $qb->select('t')
             ->from('CoyoteSiteBundle:Timetable', 't')
@@ -162,7 +161,8 @@ class TimetableRepository extends EntityRepository
         $qb->select('t')
            ->from('CoyoteSiteBundle:Timetable', 't')
            ->where('t.date > :date and t.date < :datefin and t.holiday = :holiday ')
-           ->setParameters(array('date' => $data_date[0]->getDate()->format('Y-m-d'), 'datefin' => $datefin, 'holiday' => '0'));
+           ->setParameters(array('date' => $data_date[0]->getDate()->format('Y-m-d'), 'datefin' => 
+           		$datefin, 'holiday' => '0'));
         $timetable =  $qb->getQuery()
                          ->getResult();
 
@@ -174,11 +174,5 @@ class TimetableRepository extends EntityRepository
         }
         return $count;
         return count($timetable);
-    }
-
-    
-
-    
-
-    
+    }    
 }

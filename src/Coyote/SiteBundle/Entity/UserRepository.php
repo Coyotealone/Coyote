@@ -14,7 +14,7 @@ class UserRepository extends EntityRepository
 {
 
     /**
-     * updateRole function.
+     * updateRoles function.
      * function to add or remove roles
      *
      * @access public
@@ -23,7 +23,7 @@ class UserRepository extends EntityRepository
      * @param mixed $option
      * @return void
      */
-    public function updateRole($user, $roles, $option)
+    public function updateRoles($user, $roles, $option)
     {
         if($option == "add")
         {
@@ -75,14 +75,14 @@ class UserRepository extends EntityRepository
     }
 
     /**
-     * findAllOrderByName function.
-     * function to find all entity business order by name
+     * findEnabledOrderByName function.
+     * function to find all entity user order by name
      *
      * @access public
      * @param order by name ASC
-     * @return array Business
+     * @return array User
      */
-    public function findAllOrderById()
+    public function findEnabledOrderByName()
     {
         return $this->findBy(array('enabled' => 1), array('name' => 'ASC'));
     }

@@ -31,7 +31,8 @@
 		"sonata-project/block-bundle" : "2.2.13",
 		"jms/serializer-bundle" : "0.13.*@dev",
 		"oro/doctrine-extensions" : "dev-master",
-		"doctrine/doctrine-fixtures-bundle": "^2.2"
+		"doctrine/doctrine-fixtures-bundle": "^2.2",
+		"phpdocumentor/phpdocumentor": "2.*"
 	},
 	"scripts" : {
 		"post-install-cmd" : [

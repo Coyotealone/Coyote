@@ -1,3 +1,54 @@
+userfees:
+    login: Zaloguj się : 
+    car: Samochód : 
+    code: Kod : 
+    service: Obsługa : 
+    userfees: Handel
+
+function_service:
+    empty:  " "
+    accueil: 'Start / Sekretariat'
+    be: "biuro projektowe"
+    cantine: 'Stołówka'
+    commercial_export: 'sprzedaż eksportowa'
+    commercial_france: 'Francja Sprzedaży'
+    delegue_produits: 'Delegat Produkty'
+    direction_generale: 'Ogólny Zarządzanie'
+    fabrication: 'Produkcja'
+    gardien: 'Opiekun'
+    logistique: 'Logistyka'
+    magasin: 'sklep'
+    maintenance: 'Konserwacja'
+    montage: 'Instalacja'
+    ordonnancement: 'Planowanie'
+    organisation_qualite: Organizacja / Jakość
+    rh: "Zasoby ludzkie"
+    sav: 'S.A.V.'
+    service_achats: 'Departament Zakupów'
+    service_administratif_financier: 'Usługi finansowe i administracyjne'
+    service_informatique: 'serwis komputerowy'
+    pieces_detachees_export: 'Serwis Części Export'
+    sous_traitance: 'podwykonawstwo'
+    transport: 'Transport'
+    usine: 'Fabryka'
+
+country:
+    fr: Francja
+    pl: Polska
+
+month_01: Styczeń
+month_02: luty
+month_03: Marzec
+month_04: Kwiecień
+month_05: Może
+month_06: czerwiec
+month_07: Lipiec
+month_08: sierpień
+month_09: wrzesień
+month_10: Październik
+month_11: Listopad
+month_12: Grudzień
+
 exception:
     error_404: "Ups! Strona nie może zostać znaleziona"
     error_back: Proszę kliknąć na przycisk Strona główna.
@@ -468,18 +519,18 @@ contact:
 # Supplements
 
 # Month:
-Janvier: Styczeń
-Février: luty
-Mars: marzec
-Avril: Kwiecień
-Mai: Może
-Juin: czerwiec
-Juillet: lipiec
-Août: sierpień
-Septembre: wrzesień
-Octobre: Październik
-Novembre: listopad
-Décembre: Grudzień
+month_01: Styczeń
+month_02: luty
+month_03: marzec
+month_04: Kwiecień
+month_05: Może
+month_06: czerwiec
+month_07: lipiec
+month_08: sierpień
+month_09: wrzesień
+month_10: Październik
+month_11: listopad
+month_12: Grudzień
 
 # Holiday
 RTT: Zmniejszenie czasu pracy
@@ -523,3 +574,6 @@ Repas a 19,6% => 20%: mąka 20%
 Repas a 5,5%: 5,5% Meal
 Repas a 7% => 10%: 10% Posiłek
 meal UK 20%: 20% Mąka UK
+Parking,Avion,Train,Taxi sans TVA: parking, Samolot, Pociąg, Taxi bez VAT
+Parking,Taxi,Peages: parking, taksówka, opłaty drogowe
+travel expansive UK: Travel ekspansywnej Wielkiej Brytanii

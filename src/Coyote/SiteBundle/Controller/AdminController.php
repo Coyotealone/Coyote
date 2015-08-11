@@ -34,9 +34,9 @@ class AdminController extends Controller
             /** @var $em object doctrine request */
             $em = $this->getDoctrine()->getManager();
             /** @var $dataexpense string data file */
-            $dataexpense = $em->getRepository('CoyoteSiteBundle:Expense')->fileDataExpenseCompta();
+            $dataexpense = $em->getRepository('CoyoteSiteBundle:Expense')->createFileExpense();
             /** update status from Expense */
-            $em->getRepository('CoyoteSiteBundle:Expense')->updateStatus($em);
+            $em->getRepository('CoyoteSiteBundle:Expense')->updateStatusTo1($em);
             /** @return file txt downloaded with data expense */
             return new Response($dataexpense, 200, array(
                 'Content-Type' => 'application/force-download',
@@ -78,7 +78,7 @@ class AdminController extends Controller
             {
                 /** @var $data object Entity Data */
                 $data = new Data();
-                $filecsv = $em->getRepository('CoyoteSiteBundle:Schedule')->fileDataUserBE($data->getTabUserIdBE(),
+                $filecsv = $em->getRepository('CoyoteSiteBundle:Schedule')->createFileUserBE($data->getTabUserIdBE(),
                     $data_request['month'], $data_request['year']);
                 /** @var $filename string file name CSV */
                 $filename = 'datauser'.$data_request['month'].'/'.$data_request['year'].'.csv';
@@ -100,7 +100,8 @@ class AdminController extends Controller
      * Registrer user.
      * @access public
      * @param Request $request
-     * @return \Coyote\SiteBundle\Controller\RedirectResponse|\Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\RedirectResponse
+     * @return \Coyote\SiteBundle\Controller\RedirectResponse|\Symfony\Component\HttpFoundation\Response|
+     * \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function registerAction(Request $request)
     {
@@ -147,9 +148,8 @@ class AdminController extends Controller
                 }
             }
 
-            return $this->container->get('templating')->renderResponse('FOSUserBundle:Registration:register.html.', array(
-                'form' => $form->createView(),
-            ));
+            return $this->container->get('templating')->renderResponse('FOSUserBundle:Registration:register.html.', 
+            		array('form' => $form->createView(),));
         }
         else
              return $this->redirect($this->generateUrl('main_menu'));
@@ -165,7 +165,7 @@ class AdminController extends Controller
         if ($this->get('security.context')->isGranted('ROLE_ADMIN'))
         {
             $em = $this->getDoctrine()->getManager();
-            $users = $em->getRepository('CoyoteSiteBundle:User')->findAllOrderById();
+            $users = $em->getRepository('CoyoteSiteBundle:User')->findEnabledOrderByName();
             return $this->render('CoyoteSiteBundle:Admin:index_choicesuser.html.twig', array('users' => $users));
         }
         else
@@ -232,7 +232,7 @@ class AdminController extends Controller
             	$request = $this->getRequest();
             	$em = $this->getDoctrine()->getManager();
             	$user_choice = $em->getRepository("CoyoteSiteBundle:User")->findOneById($session->get("choicesroles"));
-                $res = $em->getRepository("CoyoteSiteBundle:User")->updateRole(
+                $res = $em->getRepository("CoyoteSiteBundle:User")->updateRoles(
                 		$user_choice, $data_request, "add");
                 if ($res == "OK")
                 	$message = 'admin.updaterole.flash.add';
@@ -244,7 +244,7 @@ class AdminController extends Controller
                 $request = $this->getRequest();
                 $em = $this->getDoctrine()->getManager();
                 $user_choice = $em->getRepository("CoyoteSiteBundle:User")->findOneById($session->get("choicesroles"));
-                $res = $em->getRepository("CoyoteSiteBundle:User")->updateRole(
+                $res = $em->getRepository("CoyoteSiteBundle:User")->updateRoles(
                 		$user_choice, $data_request, "remove");
                 if($res == "OK")
                 	$message = 'admin.updaterole.flash.remove';
@@ -281,7 +281,7 @@ class AdminController extends Controller
     		{
     			$em = $this->getDoctrine()->getManager();
     			$maxItems = 10;
-    			$data_expense = $em->getRepository('CoyoteSiteBundle:Expense')->findAllOrderByUserFeesID();
+    			$data_expense = $em->getRepository('CoyoteSiteBundle:Expense')->findAllAboutStatus();
     			$expenses_count = count($data_expense);
     			$pagination = array(
     					'page' => $page,
@@ -289,8 +289,8 @@ class AdminController extends Controller
     					'pages_count' => ceil($expenses_count / $maxItems),
     					'route_params' => array()
     			);
-    			$entities = $this->getDoctrine()->getRepository('CoyoteSiteBundle:Expense')
-    			->getListExpenseUsers($page, $maxItems);
+    			$entities = $this->getDoctrine()->getRepository('CoyoteSiteBundle:Expense')->getListAboutStatus(
+    					$page, $maxItems);
 
     			return $this->render('CoyoteSiteBundle:Expense:showadmin.html.twig', array(
     					'data' => $entities,
@@ -321,7 +321,7 @@ class AdminController extends Controller
             /** @var $filename string */
             $filename = "export_period".$date_start."-".$date_end.$user->getName().".csv";
 
-            $data_schedule = $em->getRepository('CoyoteSiteBundle:Schedule')->fileDataScheduleUser($user, $date_start,
+            $data_schedule = $em->getRepository('CoyoteSiteBundle:Schedule')->createFileUser($user, $date_start,
                 $date_end);
             /** @return file txt downloaded with data expense */
             return new Response($data_schedule, 200, array(
@@ -336,7 +336,7 @@ class AdminController extends Controller
         	$doctrine = $this->getDoctrine();
         	$em = $doctrine->getManager();
         	$period = $em->getRepository('CoyoteSiteBundle:Timetable')->findPeriodByDate($date);
-        	$tab_user = $em->getRepository('CoyoteSiteBundle:User')->findAllOrderById();
+        	$tab_user = $em->getRepository('CoyoteSiteBundle:User')->findEnabledOrderByName();
             /** show view */
             return $this->render('CoyoteSiteBundle:Admin:indexscheduleuserexcel.html.twig', array(
                 'period' => $period, 'tab_period' => $data->getTabPeriod(), 'tab_user' => $tab_user));

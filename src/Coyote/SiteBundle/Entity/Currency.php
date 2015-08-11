@@ -164,6 +164,10 @@ class Currency
         return $this->expenses;
     }
 
+    /**
+     * 
+     * @return string code
+     */
     public function __toString()
     {
         return $this->code;
