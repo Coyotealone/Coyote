@@ -1,0 +1,37 @@
+<?php
+
+namespace Coyote\SiteBundle\DataFixtures\ORM;
+
+use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Common\DataFixtures\AbstractFixture;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
+use Coyote\SiteBundle\Entity\Business;
+
+class LoadBusiness extends AbstractFixture implements OrderedFixtureInterface
+{
+    public function load(ObjectManager $em)
+    {
+	    /*************************************************/
+	    /*********************Business********************/
+	    /*************************************************/
+	    
+	    $array_business_code = array("","AFRIQUESUD","AGRITECNIC","AGROSHOW","ALGERIE","ALLEMAGNE","ANDRIEUG","AUSTRALIE","AUTRICHE","BELGIQUE","BIELORUSSI","BIHAN","BPW","BRESIL","BULGARIE","CABOCO","CANADA","CHILI","COFACE","COFACE2","COLOMBIE","COTEIVOIRE","CROATIE","DAIRYEVENT","DANEMARK","DANGREVILL","DUBAI","ECODEFI","ECOEPANDAG","EGYPTE","ESPAGNE","ESTONIE","ETATSUNIS","FINLANDE","GAUGUINS","GRECE","HONGRIE","INDE","INTERAGRO","IRELAND","IRLANDE","ISLANDE","ISRAEL","ITALIE","JAPON","KAZAKHSTAN","KENYA","LARVOR","LEBOULCH","LELAY","LEROTY","LETTONIE","LHERMITTE","LITUANIE","MAROC","MEXIQUE","NCALEDONIE","NORVEGE","NZELANDE","PARIS","PAYS-BAS","PEARSON","POLOGNE","PORTUGAL","PRIXREVIEN","QUEMENER","REUNION","ROUMANIE","ROVERE","ROYAUME","RUBIG","RUSSIE","SDWORX","SERBIE","SLOVAQUIE","SLOVENIE","SUEDE","SUISSE","TANZANIE","THEQUE","TURQUIE","UKRAINE","ZAGRITECNI","ZAGROFARM","ZBARCELONN","ZCHINE","ZCHINE06","ZELEVAGE","ZEVELLE","ZGRASSLAND","ZPROJETZ","ZSIMA2013","ZSIMA2011","ZSPACE","ZTECHAGRO","ZZARAGOZA","URUGUAY","EQUATEUR","PEROU","BOLIVIE","PARAGUAY");
+	    $array_business_name = array("","AFRIQUESUD","AGRITECNICA","AGRO SHOW POLOGNE","ALGERIE","ALLEMAGNE","ANDRIEU Georges","AUSTRALIE","AUTRICHE","BELGIQUE","BIELORUSSIE","BIHAN","ESSIEUX","BRESIL","BULGARIE","CABOCO LAURENT","CANADA","CHILI","COFACE","COFACE-BRESIL-CANADA","COLOMBIE","COTE DIVOIRE","CROATIE","SALON DAIRY EVENT","DANEMARK","DANGREVILLE","DUBAI","ECODEFI","ECOEPANDAGE","EGYPTE","ESPAGNE","ESTONIE","ETATS UNIS","FINLANDE","EARL DES GAUGUINS","GRECE","HONGRIE","INDE","INTERAGRO","IRELAND","IRLANDE","ISLANDE","ISRAEL","ITALIE","JAPON","KAZAKHSTAN","KENYA","LARVOR Ronan","LE BOULCH","LELAY","LE ROTY Je?ro?me","LETTONIE","LHERMITTE Pascal","LITUANIE","MAROC","MEXIQUE","NOUVELLE CALEDONIE","NORVEGE","NOUVELLE ZELANDE","PARIS","PAYS-BAS","PEARSON","POLOGNE","PORTUGAL","Chantier Prix Revient","QUEMENER David","REUNION","ROUMANIE","ROVERE Fabrice","ROYAUME UNIS","RUBIG","RUSSIE","SDWORX","SERBIE","SLOVAQUIE","SLOVENIE","SUEDE","SUISSE","TANZANIE","REPUBLIQUE THEQUE","TURQUIE","UKRAINE","AGRITECHNICA","AGROFARM RUSSIE","ZBARCELONNE32","Frais Chine","Voyage Chine","Sommet de le?levage","GIE DE ZEVELLE","GRASSLAND UK","PROJET Z","SIMA 2013","SIMA","SPACE","TECHAGRO 2010","ZARAGOZA 2012","URUGUAY","EQUATEUR","PEROU","BOLIVIE","PARAGUAY");
+	    
+	    for($i=0; $i<count($array_business_code); $i++)
+	    {
+			$entity = new Business();
+			$entity->setCode($array_business_code[$i]);
+	        $entity->setName($array_business_name[$i]);
+			$em->persist($entity);
+			$em->flush();
+		}
+	    
+    }
+
+    public function getOrder()
+    {
+        return 1; // the order in which fixtures will be loaded
+    }
+
+}

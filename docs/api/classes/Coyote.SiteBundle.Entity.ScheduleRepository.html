@@ -1,0 +1,2043 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta charset="utf-8"/>
+    <title>API Documentation</title>
+    <meta name="author" content=""/>
+    <meta name="description" content=""/>
+
+    <link href="../css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+    <link href="../css/font-awesome.min.css" rel="stylesheet">
+    <link href="../css/prism.css" rel="stylesheet" media="all"/>
+    <link href="../css/template.css" rel="stylesheet" media="all"/>
+    
+    <!--[if lt IE 9]>
+    <script src="../js/html5.js"></script>
+    <![endif]-->
+    <script src="../js/jquery-1.11.0.min.js"></script>
+    <script src="../js/ui/1.10.4/jquery-ui.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/jquery.smooth-scroll.js"></script>
+    <script src="../js/prism.min.js"></script>
+    <!-- TODO: Add http://jscrollpane.kelvinluck.com/ to style the scrollbars for browsers not using webkit-->
+    <script type="text/javascript">
+    function loadExternalCodeSnippets() {
+        Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
+            var src = pre.getAttribute('data-src');
+            var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
+            var language = 'php';
+
+            var code = document.createElement('code');
+            code.className = 'language-' + language;
+
+            pre.textContent = '';
+
+            code.textContent = 'Loading…';
+
+            pre.appendChild(code);
+
+            var xhr = new XMLHttpRequest();
+
+            xhr.open('GET', src, true);
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+
+                    if (xhr.status < 400 && xhr.responseText) {
+                        code.textContent = xhr.responseText;
+
+                        Prism.highlightElement(code);
+                    }
+                    else if (xhr.status >= 400) {
+                        code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                    }
+                    else {
+                        code.textContent = '✖ Error: File does not exist or is empty';
+                    }
+                }
+            };
+
+            xhr.send(null);
+        });
+    }
+
+    $(document).ready(function(){
+        loadExternalCodeSnippets();
+    });
+    $('#source-view').on('shown', function () {
+        loadExternalCodeSnippets();
+    })
+</script>
+
+    <link rel="shortcut icon" href="../images/favicon.ico"/>
+    <link rel="apple-touch-icon" href="../images/apple-touch-icon.png"/>
+    <link rel="apple-touch-icon" sizes="72x72" href="../images/apple-touch-icon-72x72.png"/>
+    <link rel="apple-touch-icon" sizes="114x114" href="../images/apple-touch-icon-114x114.png"/>
+</head>
+<body>
+
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <i class="icon-ellipsis-vertical"></i>
+            </a>
+            <a class="brand" href="../index.html">API Documentation</a>
+
+            <div class="nav-collapse">
+                <ul class="nav pull-right">
+                                        <li class="dropdown">
+                        <a href="../index.html" class="dropdown-toggle" data-toggle="dropdown">
+                            API Documentation <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                                                        <li><a href="../namespaces/Coyote.html">\Coyote</a></li>
+                                                        <li><a href="../namespaces/FOS.html">\FOS</a></li>
+                                                    </ul>
+                    </li>
+                                        <li class="dropdown" id="charts-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Charts <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="../graphs/class.html">
+                                    <i class="icon-list-alt"></i>&#160;Class hierarchy diagram
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown" id="reports-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Reports <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="../reports/errors.html">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">526</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../reports/markers.html">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">1</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../reports/deprecated.html">
+                                                                                                            <i class="icon-list-alt"></i>&#160;Deprecated <span class="label label-info pull-right">0</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--<div class="go_to_top">-->
+    <!--<a href="#___" style="color: inherit">Back to top&#160;&#160;<i class="icon-upload icon-white"></i></a>-->
+    <!--</div>-->
+</div>
+
+<div id="___" class="container-fluid">
+        <section class="row-fluid">
+        <div class="span2 sidebar">
+                                <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-897451734"></a>
+                                <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
+            </div>
+            <div id="namespace-897451734" class="accordion-body collapse in">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-251523808"></a>
+                                <a href="../namespaces/Coyote.html" style="margin-left: 30px; padding-left: 0">Coyote</a>
+            </div>
+            <div id="namespace-251523808" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1493865389"></a>
+                                <a href="../namespaces/Coyote.SiteBundle.html" style="margin-left: 30px; padding-left: 0">SiteBundle</a>
+            </div>
+            <div id="namespace-1493865389" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-358811183"></a>
+                                <a href="../namespaces/Coyote.SiteBundle.Admin.html" style="margin-left: 30px; padding-left: 0">Admin</a>
+            </div>
+            <div id="namespace-358811183" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Admin.BusinessAdmin.html">BusinessAdmin</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Admin.CarAdmin.html">CarAdmin</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Admin.CurrencyAdmin.html">CurrencyAdmin</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Admin.DirectoryAdmin.html">DirectoryAdmin</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Admin.ExpenseAdmin.html">ExpenseAdmin</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Admin.FeeAdmin.html">FeeAdmin</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Admin.QuoteAdmin.html">QuoteAdmin</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Admin.ScheduleAdmin.html">ScheduleAdmin</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Admin.SiteAdmin.html">SiteAdmin</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Admin.TimetableAdmin.html">TimetableAdmin</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Admin.UserAdmin.html">UserAdmin</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Admin.UserFeesAdmin.html">UserFeesAdmin</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1356936867"></a>
+                                <a href="../namespaces/Coyote.SiteBundle.Command.html" style="margin-left: 30px; padding-left: 0">Command</a>
+            </div>
+            <div id="namespace-1356936867" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Command.ExportCommand.html">ExportCommand</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-2141173071"></a>
+                                <a href="../namespaces/Coyote.SiteBundle.Controller.html" style="margin-left: 30px; padding-left: 0">Controller</a>
+            </div>
+            <div id="namespace-2141173071" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Controller.AbsenceController.html">AbsenceController</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Controller.AdminController.html">AdminController</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Controller.BusinessAdminController.html">BusinessAdminController</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Controller.CarAdminController.html">CarAdminController</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Controller.ChangePasswordController.html">ChangePasswordController</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Controller.ContactController.html">ContactController</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Controller.CurrencyAdminController.html">CurrencyAdminController</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Controller.DirectoryAdminController.html">DirectoryAdminController</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Controller.DirectoryController.html">DirectoryController</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Controller.ExpenseAdminController.html">ExpenseAdminController</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Controller.ExpenseController.html">ExpenseController</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Controller.FeeAdminController.html">FeeAdminController</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Controller.MainController.html">MainController</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Controller.ProfileController.html">ProfileController</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Controller.QuoteAdminController.html">QuoteAdminController</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Controller.RegistrationController.html">RegistrationController</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Controller.ResettingController.html">ResettingController</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Controller.ScheduleAdminController.html">ScheduleAdminController</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Controller.ScheduleController.html">ScheduleController</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Controller.SiteAdminController.html">SiteAdminController</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Controller.TimetableAdminController.html">TimetableAdminController</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Controller.UserAdminController.html">UserAdminController</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Controller.UserFeesAdminController.html">UserFeesAdminController</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Controller.UserInfoAdminController.html">UserInfoAdminController</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1194097126"></a>
+                                <a href="../namespaces/Coyote.SiteBundle.DataFixtures.html" style="margin-left: 30px; padding-left: 0">DataFixtures</a>
+            </div>
+            <div id="namespace-1194097126" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1003622023"></a>
+                                <a href="../namespaces/Coyote.SiteBundle.DataFixtures.ORM.html" style="margin-left: 30px; padding-left: 0">ORM</a>
+            </div>
+            <div id="namespace-1003622023" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.DataFixtures.ORM.LoadBusiness.html">LoadBusiness</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.DataFixtures.ORM.LoadCar.html">LoadCar</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.DataFixtures.ORM.LoadCurrency.html">LoadCurrency</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.DataFixtures.ORM.LoadDirectory.html">LoadDirectory</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.DataFixtures.ORM.LoadFee.html">LoadFee</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.DataFixtures.ORM.LoadQuote.html">LoadQuote</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.DataFixtures.ORM.LoadSite.html">LoadSite</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.DataFixtures.ORM.LoadTimetable.html">LoadTimetable</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1117667379"></a>
+                                <a href="../namespaces/Coyote.SiteBundle.DependencyInjection.html" style="margin-left: 30px; padding-left: 0">DependencyInjection</a>
+            </div>
+            <div id="namespace-1117667379" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.DependencyInjection.Configuration.html">Configuration</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.DependencyInjection.CoyoteSiteExtension.html">CoyoteSiteExtension</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-2112829086"></a>
+                                <a href="../namespaces/Coyote.SiteBundle.Entity.html" style="margin-left: 30px; padding-left: 0">Entity</a>
+            </div>
+            <div id="namespace-2112829086" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Entity.Business.html">Business</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Entity.BusinessRepository.html">BusinessRepository</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Entity.Car.html">Car</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Entity.CarRepository.html">CarRepository</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Entity.Currency.html">Currency</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Entity.CurrencyRepository.html">CurrencyRepository</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Entity.Data.html">Data</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Entity.Directory.html">Directory</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Entity.DirectoryRepository.html">DirectoryRepository</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Entity.Expense.html">Expense</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Entity.ExpenseRepository.html">ExpenseRepository</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Entity.Fee.html">Fee</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Entity.FeeRepository.html">FeeRepository</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Entity.Quote.html">Quote</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Entity.QuoteRepository.html">QuoteRepository</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Entity.Schedule.html">Schedule</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Entity.ScheduleRepository.html">ScheduleRepository</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Entity.Site.html">Site</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Entity.SiteRepository.html">SiteRepository</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Entity.Timetable.html">Timetable</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Entity.TimetableRepository.html">TimetableRepository</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Entity.User.html">User</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Entity.UserFees.html">UserFees</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Entity.UserFeesRepository.html">UserFeesRepository</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Entity.UserRepository.html">UserRepository</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-944464139"></a>
+                                <a href="../namespaces/Coyote.SiteBundle.EventListener.html" style="margin-left: 30px; padding-left: 0">EventListener</a>
+            </div>
+            <div id="namespace-944464139" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.EventListener.LocaleListener.html">LocaleListener</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-481442709"></a>
+                                <a href="../namespaces/Coyote.SiteBundle.Form.html" style="margin-left: 30px; padding-left: 0">Form</a>
+            </div>
+            <div id="namespace-481442709" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1292927078"></a>
+                                <a href="../namespaces/Coyote.SiteBundle.Form.Factory.html" style="margin-left: 30px; padding-left: 0">Factory</a>
+            </div>
+            <div id="namespace-1292927078" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                    <li class="interface"><a href="../classes/Coyote.SiteBundle.Form.Factory.FactoryInterface.html">FactoryInterface</a></li>
+                                                                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Form.Factory.FormFactory.html">FormFactory</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-724181325"></a>
+                                <a href="../namespaces/Coyote.SiteBundle.Form.Type.html" style="margin-left: 30px; padding-left: 0">Type</a>
+            </div>
+            <div id="namespace-724181325" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Form.Type.RegistrationFormType.html">RegistrationFormType</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Form.Type.TagType.html">TagType</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Form.AbsenceNewType.html">AbsenceNewType</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Form.AbsenceNewWeekType.html">AbsenceNewWeekType</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Form.AbsenceType.html">AbsenceType</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Form.CarType.html">CarType</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Form.ContactType.html">ContactType</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Form.DirectoryType.html">DirectoryType</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Form.ExpenseType.html">ExpenseType</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Form.HolidayType.html">HolidayType</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Form.ItemType.html">ItemType</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Form.ScheduleShowType.html">ScheduleShowType</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Form.ScheduleType.html">ScheduleType</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Form.TimetableType.html">TimetableType</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Form.UserFeesType.html">UserFeesType</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-2077688429"></a>
+                                <a href="../namespaces/Coyote.SiteBundle.Listener.html" style="margin-left: 30px; padding-left: 0">Listener</a>
+            </div>
+            <div id="namespace-2077688429" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Listener.CustomExceptionListener.html">CustomExceptionListener</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-92313795"></a>
+                                <a href="../namespaces/Coyote.SiteBundle.Tests.html" style="margin-left: 30px; padding-left: 0">Tests</a>
+            </div>
+            <div id="namespace-92313795" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-707079601"></a>
+                                <a href="../namespaces/Coyote.SiteBundle.Tests.Controller.html" style="margin-left: 30px; padding-left: 0">Controller</a>
+            </div>
+            <div id="namespace-707079601" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Tests.Controller.DefaultControllerTest.html">DefaultControllerTest</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.CoyoteSiteBundle.html">CoyoteSiteBundle</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-250817752"></a>
+                                <a href="../namespaces/FOS.html" style="margin-left: 30px; padding-left: 0">FOS</a>
+            </div>
+            <div id="namespace-250817752" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1124606064"></a>
+                                <a href="../namespaces/FOS.UserBundle.html" style="margin-left: 30px; padding-left: 0">UserBundle</a>
+            </div>
+            <div id="namespace-1124606064" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-785570645"></a>
+                                <a href="../namespaces/FOS.UserBundle.Form.html" style="margin-left: 30px; padding-left: 0">Form</a>
+            </div>
+            <div id="namespace-785570645" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-895976373"></a>
+                                <a href="../namespaces/FOS.UserBundle.Form.Type.html" style="margin-left: 30px; padding-left: 0">Type</a>
+            </div>
+            <div id="namespace-895976373" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/FOS.UserBundle.Form.Type.ChangePasswordFormType.html">ChangePasswordFormType</a></li>
+                                                    <li class="class"><a href="../classes/FOS.UserBundle.Form.Type.GroupFormType.html">GroupFormType</a></li>
+                                                    <li class="class"><a href="../classes/FOS.UserBundle.Form.Type.ResettingFormType.html">ResettingFormType</a></li>
+                                                    <li class="class"><a href="../classes/FOS.UserBundle.Form.Type.UsernameFormType.html">UsernameFormType</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        </div>
+    </section>
+    <section class="row-fluid">
+        <div class="span10 offset2">
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <nav>
+                                                <a href="../namespaces/Coyote.SiteBundle.Entity.html">\Coyote\SiteBundle\Entity</a> <i class="icon-level-up"></i>
+                                            </nav>
+                    <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
+
+                    <h1><small>\Coyote\SiteBundle\Entity</small>ScheduleRepository</h1>
+                    <p><em>ScheduleRepository</em></p>
+                    <p>This class was generated by the Doctrine ORM. Add your own custom
+repository methods below.</p>
+                    
+                                        
+                    <section id="summary">
+                        <h2>Summary</h2>
+                        <section class="row-fluid heading">
+                            <section class="span4">
+                                <a href="#methods">Methods</a>
+                            </section>
+                            <section class="span4">
+                                <a href="#properties">Properties</a>
+                            </section>
+                            <section class="span4">
+                                <a href="#constants">Constants</a>
+                            </section>
+                        </section>
+                        <section class="row-fluid public">
+                            <section class="span4">
+                                                                    <a href="../classes/Coyote.SiteBundle.Entity.ScheduleRepository.html#method_createIdTimetableSession" class="">createIdTimetableSession()</a><br />
+                                                                    <a href="../classes/Coyote.SiteBundle.Entity.ScheduleRepository.html#method_findAllAboutTimetableUser" class="">findAllAboutTimetableUser()</a><br />
+                                                                    <a href="../classes/Coyote.SiteBundle.Entity.ScheduleRepository.html#method_updateWeek" class="">updateWeek()</a><br />
+                                                                    <a href="../classes/Coyote.SiteBundle.Entity.ScheduleRepository.html#method_createSchedule" class="">createSchedule()</a><br />
+                                                                    <a href="../classes/Coyote.SiteBundle.Entity.ScheduleRepository.html#method_updateSchedule" class="">updateSchedule()</a><br />
+                                                                    <a href="../classes/Coyote.SiteBundle.Entity.ScheduleRepository.html#method_createSchedulefm" class="">createSchedulefm()</a><br />
+                                                                    <a href="../classes/Coyote.SiteBundle.Entity.ScheduleRepository.html#method_updateSchedulefm" class="">updateSchedulefm()</a><br />
+                                                                    <a href="../classes/Coyote.SiteBundle.Entity.ScheduleRepository.html#method_findPeriod" class="">findPeriod()</a><br />
+                                                                    <a href="../classes/Coyote.SiteBundle.Entity.ScheduleRepository.html#method_countAbsenceMonth" class="">countAbsenceMonth()</a><br />
+                                                                    <a href="../classes/Coyote.SiteBundle.Entity.ScheduleRepository.html#method_findAbsenceYear" class="">findAbsenceYear()</a><br />
+                                                                    <a href="../classes/Coyote.SiteBundle.Entity.ScheduleRepository.html#method_findDayMonth" class="">findDayMonth()</a><br />
+                                                                    <a href="../classes/Coyote.SiteBundle.Entity.ScheduleRepository.html#method_findDayYear" class="">findDayYear()</a><br />
+                                                                    <a href="../classes/Coyote.SiteBundle.Entity.ScheduleRepository.html#method_countTimeWeek" class="">countTimeWeek()</a><br />
+                                                                    <a href="../classes/Coyote.SiteBundle.Entity.ScheduleRepository.html#method_findTimeMonth" class="">findTimeMonth()</a><br />
+                                                                    <a href="../classes/Coyote.SiteBundle.Entity.ScheduleRepository.html#method_findAboutDateUser" class="">findAboutDateUser()</a><br />
+                                                                    <a href="../classes/Coyote.SiteBundle.Entity.ScheduleRepository.html#method_findAboutDateUserFM" class="">findAboutDateUserFM()</a><br />
+                                                                    <a href="../classes/Coyote.SiteBundle.Entity.ScheduleRepository.html#method_getListAbsenceUser" class="">getListAbsenceUser()</a><br />
+                                                                    <a href="../classes/Coyote.SiteBundle.Entity.ScheduleRepository.html#method_findAllByUserAbsence" class="">findAllByUserAbsence()</a><br />
+                                                                    <a href="../classes/Coyote.SiteBundle.Entity.ScheduleRepository.html#method_findAboutUserBE" class="">findAboutUserBE()</a><br />
+                                                                    <a href="../classes/Coyote.SiteBundle.Entity.ScheduleRepository.html#method_createFileUserBE" class="">createFileUserBE()</a><br />
+                                                                    <a href="../classes/Coyote.SiteBundle.Entity.ScheduleRepository.html#method_findNameUser" class="">findNameUser()</a><br />
+                                                                    <a href="../classes/Coyote.SiteBundle.Entity.ScheduleRepository.html#method_putAbsenceWeek" class="">putAbsenceWeek()</a><br />
+                                                                    <a href="../classes/Coyote.SiteBundle.Entity.ScheduleRepository.html#method_postScheduleLocked" class="">postScheduleLocked()</a><br />
+                                                                    <a href="../classes/Coyote.SiteBundle.Entity.ScheduleRepository.html#method_createFileUser" class="">createFileUser()</a><br />
+                                                                    <a href="../classes/Coyote.SiteBundle.Entity.ScheduleRepository.html#method_countOvertime" class="">countOvertime()</a><br />
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No public properties found</em>
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No constants found</em>
+                                                            </section>
+                        </section>
+                        <section class="row-fluid protected">
+                            <section class="span4">
+                                                                    <em>No protected methods found</em>
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No protected properties found</em>
+                                                            </section>
+                            <section class="span4">
+                                <em>N/A</em>
+                            </section>
+                        </section>
+                        <section class="row-fluid private">
+                            <section class="span4">
+                                                                    <a href="../classes/Coyote.SiteBundle.Entity.ScheduleRepository.html#method_convertTimeinMinutes" class="">convertTimeinMinutes()</a><br />
+                                                                    <a href="../classes/Coyote.SiteBundle.Entity.ScheduleRepository.html#method_createFormatTime" class="">createFormatTime()</a><br />
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No private properties found</em>
+                                                            </section>
+                            <section class="span4">
+                                <em>N/A</em>
+                            </section>
+                        </section>
+                    </section>
+                </div>
+                <aside class="span4 detailsbar">
+                                        
+                    
+                    <dl>
+                        <dt>File</dt>
+                            <dd><a href="../files/Entity.ScheduleRepository.html"><div class="path-wrapper">Entity/ScheduleRepository.php</div></a></dd>
+                                                <dt>Package</dt>
+                            <dd><div class="namespace-wrapper">Default</div></dd>
+                                                <dt>Class hierarchy</dt>
+                            <dd class="hierarchy">
+                                                                                                                                                                                                                                                                                                
+                                        <div class="namespace-wrapper">\Doctrine\ORM\EntityRepository</div>
+                                                                                                    <div class="namespace-wrapper">\Coyote\SiteBundle\Entity\ScheduleRepository</div>
+                            </dd>
+
+                        
+                        
+                        
+                        
+                                                                        </dl>
+                    <h2>Tags</h2>
+                    <table class="table table-condensed">
+                                            <tr><td colspan="2"><em>None found</em></td></tr>
+                                        </table>
+                </aside>
+            </div>
+
+                        
+                        
+                                    <a id="methods" name="methods"></a>
+            <div class="row-fluid">
+                <div class="span8 content class"><h2>Methods</h2></div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_createIdTimetableSession" name="method_createIdTimetableSession" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">createIdTimetableSession()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">createIdTimetableSession(array  <span class="argument">$time</span>, array  <span class="argument">$data_timetable</span>,   <span class="argument">$session</span>) : array</pre>
+                <p><em>Function to synchronize id Timetable about a same id array time.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$time </td>
+                                <td><p>Array data Schedule</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$data_timetable </td>
+                                <td><p>Array id Timetable</p></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$session </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    array
+                                            &mdash; <p>$duration Array with absence duration Schedule</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_findAllAboutTimetableUser" name="method_findAllAboutTimetableUser" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">findAllAboutTimetableUser()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">findAllAboutTimetableUser(\Coyote\SiteBundle\Entity\Timetable  <span class="argument">$timetable</span>, \Coyote\SiteBundle\Entity\User  <span class="argument">$user</span>) : null</pre>
+                <p><em>Function to find data about user and timetable.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td><a href="../classes/Coyote.SiteBundle.Entity.Timetable.html">\Coyote\SiteBundle\Entity\Timetable</a></td>
+                                <td>$timetable </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td><a href="../classes/Coyote.SiteBundle.Entity.User.html">\Coyote\SiteBundle\Entity\User</a></td>
+                                <td>$user </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    null
+                                            &mdash; <p>if no data, else array with data schedule</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_updateWeek" name="method_updateWeek" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">updateWeek()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">updateWeek(string  <span class="argument">$value</span>,   <span class="argument">$session</span>) </pre>
+                <p><em>Function to update week and period.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$value </td>
+                                <td><p>&quot;less&quot; or &quot;more&quot;</p></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$session </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_createSchedule" name="method_createSchedule" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">createSchedule()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">createSchedule(\Coyote\SiteBundle\Entity\User  <span class="argument">$user</span>, \Coyote\SiteBundle\Entity\Timetable  <span class="argument">$timetable</span>, string  <span class="argument">$time_start</span>, string  <span class="argument">$time_end</span>, string  <span class="argument">$time_break</span>, boolean  <span class="argument">$time_travel</span>, string  <span class="argument">$time_absence</span>, float  <span class="argument">$time_absenceday</span>, string  <span class="argument">$time_absencetime</span>, string  <span class="argument">$time_comment</span>) : NULL</pre>
+                <p><em>Function to save Schedule for technician user.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td><a href="../classes/Coyote.SiteBundle.Entity.User.html">\Coyote\SiteBundle\Entity\User</a></td>
+                                <td>$user </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td><a href="../classes/Coyote.SiteBundle.Entity.Timetable.html">\Coyote\SiteBundle\Entity\Timetable</a></td>
+                                <td>$timetable </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$time_start </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$time_end </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$time_break </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td>boolean</td>
+                                <td>$time_travel </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$time_absence </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td>float</td>
+                                <td>$time_absenceday </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$time_absencetime </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$time_comment </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    NULL
+                                            &mdash; <p>if you don't need save entity else return entity Schedule</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_updateSchedule" name="method_updateSchedule" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">updateSchedule()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">updateSchedule(\Coyote\SiteBundle\Entity\Schedule  <span class="argument">$schedule</span>, string  <span class="argument">$time_start</span>, string  <span class="argument">$time_end</span>, string  <span class="argument">$time_break</span>, boolean  <span class="argument">$time_travel</span>, string  <span class="argument">$time_absence</span>, float  <span class="argument">$time_absenceday</span>, string  <span class="argument">$time_absencetime</span>, string  <span class="argument">$time_comment</span>) : \Coyote\SiteBundle\Entity\Schedule</pre>
+                <p><em>Function to update Schedule for techician user.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td><a href="../classes/Coyote.SiteBundle.Entity.Schedule.html">\Coyote\SiteBundle\Entity\Schedule</a></td>
+                                <td>$schedule </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$time_start </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$time_end </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$time_break </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td>boolean</td>
+                                <td>$time_travel </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$time_absence </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td>float</td>
+                                <td>$time_absenceday </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$time_absencetime </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$time_comment </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    <a href="../classes/Coyote.SiteBundle.Entity.Schedule.html">\Coyote\SiteBundle\Entity\Schedule</a>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_createSchedulefm" name="method_createSchedulefm" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">createSchedulefm()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">createSchedulefm(\Coyote\SiteBundle\Entity\User  <span class="argument">$user</span>, \Coyote\SiteBundle\Entity\Timetable  <span class="argument">$timetable</span>, boolean  <span class="argument">$time_travel</span>, string  <span class="argument">$time_absence</span>, float  <span class="argument">$time_absenceday</span>, string  <span class="argument">$time_absencetime</span>, string  <span class="argument">$time_comment</span>, float  <span class="argument">$day</span>) : NULL</pre>
+                <p><em>Function to save Schedule for framework user.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td><a href="../classes/Coyote.SiteBundle.Entity.User.html">\Coyote\SiteBundle\Entity\User</a></td>
+                                <td>$user </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td><a href="../classes/Coyote.SiteBundle.Entity.Timetable.html">\Coyote\SiteBundle\Entity\Timetable</a></td>
+                                <td>$timetable </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td>boolean</td>
+                                <td>$time_travel </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$time_absence </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td>float</td>
+                                <td>$time_absenceday </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$time_absencetime </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$time_comment </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td>float</td>
+                                <td>$day </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    NULL
+                                            &mdash; <p>if you don't need save entity else return entity Schedule</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_updateSchedulefm" name="method_updateSchedulefm" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">updateSchedulefm()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">updateSchedulefm(\Coyote\SiteBundle\Entity\Schedule  <span class="argument">$schedule</span>, boolean  <span class="argument">$time_travel</span>, string  <span class="argument">$time_absence</span>, float  <span class="argument">$time_absenceday</span>, string  <span class="argument">$time_absencetime</span>, string  <span class="argument">$time_comment</span>, float  <span class="argument">$day</span>) : \Coyote\SiteBundle\Entity\Schedule</pre>
+                <p><em>Function to update Schedule for framework user.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td><a href="../classes/Coyote.SiteBundle.Entity.Schedule.html">\Coyote\SiteBundle\Entity\Schedule</a></td>
+                                <td>$schedule </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td>boolean</td>
+                                <td>$time_travel </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$time_absence </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td>float</td>
+                                <td>$time_absenceday </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$time_absencetime </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$time_comment </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td>float</td>
+                                <td>$day </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    <a href="../classes/Coyote.SiteBundle.Entity.Schedule.html">\Coyote\SiteBundle\Entity\Schedule</a>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_findPeriod" name="method_findPeriod" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">findPeriod()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">findPeriod(string  <span class="argument">$month</span>, string  <span class="argument">$year</span>) : string</pre>
+                <p><em>Function to find period about month and year.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$month </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$year </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                            &mdash; <p>$period</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_countAbsenceMonth" name="method_countAbsenceMonth" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">countAbsenceMonth()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">countAbsenceMonth(\Coyote\SiteBundle\Entity\datetime  <span class="argument">$date</span>, \Coyote\SiteBundle\Entity\User  <span class="argument">$user</span>, string  <span class="argument">$absence</span>) : \Coyote\SiteBundle\Entity\number</pre>
+                <p><em>Function to count number absence.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\Coyote\SiteBundle\Entity\datetime</td>
+                                <td>$date </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td><a href="../classes/Coyote.SiteBundle.Entity.User.html">\Coyote\SiteBundle\Entity\User</a></td>
+                                <td>$user </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$absence </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    \Coyote\SiteBundle\Entity\number
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_findAbsenceYear" name="method_findAbsenceYear" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">findAbsenceYear()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">findAbsenceYear(string  <span class="argument">$period</span>, \Coyote\SiteBundle\Entity\User  <span class="argument">$user</span>, string  <span class="argument">$absence</span>) : \Coyote\SiteBundle\Entity\number</pre>
+                <p><em>Function to count number absence about a period by user and specific absence.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$period </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td><a href="../classes/Coyote.SiteBundle.Entity.User.html">\Coyote\SiteBundle\Entity\User</a></td>
+                                <td>$user </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$absence </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    \Coyote\SiteBundle\Entity\number
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_findDayMonth" name="method_findDayMonth" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">findDayMonth()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">findDayMonth(string  <span class="argument">$date</span>, \Coyote\SiteBundle\Entity\User  <span class="argument">$user</span>) : float</pre>
+                <p><em>Function to count working hours in month.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$date </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td><a href="../classes/Coyote.SiteBundle.Entity.User.html">\Coyote\SiteBundle\Entity\User</a></td>
+                                <td>$user </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    float
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_findDayYear" name="method_findDayYear" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">findDayYear()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">findDayYear(mixed  <span class="argument">$period</span>, mixed  <span class="argument">$user</span>) : \Coyote\SiteBundle\Entity\number</pre>
+                <p><em>Function to count working hours in period.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>mixed</td>
+                                <td>$period </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td>mixed</td>
+                                <td>$user </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    \Coyote\SiteBundle\Entity\number
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_countTimeWeek" name="method_countTimeWeek" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">countTimeWeek()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">countTimeWeek(\Coyote\SiteBundle\Entity\Schedule  <span class="argument">$dataschedule</span>) : string</pre>
+                <p><em>Function to calculate working time by week.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td><a href="../classes/Coyote.SiteBundle.Entity.Schedule.html">\Coyote\SiteBundle\Entity\Schedule</a></td>
+                                <td>$dataschedule </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                            &mdash; <p>$timeweek if $dataschedule is empty $timeweek = ''
+else $timeweek is string format 'hh:mm'</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_findTimeMonth" name="method_findTimeMonth" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">findTimeMonth()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">findTimeMonth(string  <span class="argument">$date</span>, \Coyote\SiteBundle\Entity\User  <span class="argument">$user</span>) : string</pre>
+                <p><em>Function to count working time by month.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$date </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td><a href="../classes/Coyote.SiteBundle.Entity.User.html">\Coyote\SiteBundle\Entity\User</a></td>
+                                <td>$user </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                            &mdash; <p>total working time</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_findAboutDateUser" name="method_findAboutDateUser" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">findAboutDateUser()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">findAboutDateUser(\Coyote\SiteBundle\Entity\User  <span class="argument">$user</span>, string  <span class="argument">$date</span>) : \Coyote\SiteBundle\Entity\Schedule</pre>
+                <p><em>Function to find data schedule for technician user by month.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td><a href="../classes/Coyote.SiteBundle.Entity.User.html">\Coyote\SiteBundle\Entity\User</a></td>
+                                <td>$user </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$date </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    <a href="../classes/Coyote.SiteBundle.Entity.Schedule.html">\Coyote\SiteBundle\Entity\Schedule</a>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_findAboutDateUserFM" name="method_findAboutDateUserFM" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">findAboutDateUserFM()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">findAboutDateUserFM(\Coyote\SiteBundle\Entity\User  <span class="argument">$user</span>, string  <span class="argument">$date</span>) : \Coyote\SiteBundle\Entity\Schedule</pre>
+                <p><em>Function to find data schedule for framework user by month.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td><a href="../classes/Coyote.SiteBundle.Entity.User.html">\Coyote\SiteBundle\Entity\User</a></td>
+                                <td>$user </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$date </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    <a href="../classes/Coyote.SiteBundle.Entity.Schedule.html">\Coyote\SiteBundle\Entity\Schedule</a>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getListAbsenceUser" name="method_getListAbsenceUser" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getListAbsenceUser()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getListAbsenceUser(  <span class="argument">$user</span>, integer  <span class="argument">$page = 1</span>, integer  <span class="argument">$maxperpage = 10</span>) : \Doctrine\ORM\Tools\Pagination\Paginator</pre>
+                <p><em>Get the paginated list of absences in Schedule Entity.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$user </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$page </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$maxperpage </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    \Doctrine\ORM\Tools\Pagination\Paginator
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_findAllByUserAbsence" name="method_findAllByUserAbsence" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">findAllByUserAbsence()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">findAllByUserAbsence(\Coyote\SiteBundle\Entity\User  <span class="argument">$user</span>) : \Coyote\SiteBundle\Entity\Schedule</pre>
+                <p><em>Function to find absence by User.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td><a href="../classes/Coyote.SiteBundle.Entity.User.html">\Coyote\SiteBundle\Entity\User</a></td>
+                                <td>$user </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    <a href="../classes/Coyote.SiteBundle.Entity.Schedule.html">\Coyote\SiteBundle\Entity\Schedule</a>
+                                            &mdash; <p>$entities</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_findAboutUserBE" name="method_findAboutUserBE" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">findAboutUserBE()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">findAboutUserBE(\Coyote\SiteBundle\Entity\User  <span class="argument">$user</span>, string  <span class="argument">$date</span>) : \Coyote\SiteBundle\Entity\Schedule</pre>
+                <p><em>Function to retrieve data user about a date.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td><a href="../classes/Coyote.SiteBundle.Entity.User.html">\Coyote\SiteBundle\Entity\User</a></td>
+                                <td>$user </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$date </td>
+                                <td><p>date format 'Y-m-%'</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    <a href="../classes/Coyote.SiteBundle.Entity.Schedule.html">\Coyote\SiteBundle\Entity\Schedule</a>
+                                            &mdash; <p>Entity</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_createFileUserBE" name="method_createFileUserBE" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">createFileUserBE()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">createFileUserBE(array  <span class="argument">$tab_user_id</span>, string  <span class="argument">$month</span>, string  <span class="argument">$year</span>) : string</pre>
+                <p><em>Function to generate file for Chef_BE with data users.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$tab_user_id </td>
+                                <td><p>Id User who work to Chef_BE</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$month </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$year </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                            &mdash; <p>data users</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_findNameUser" name="method_findNameUser" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">findNameUser()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">findNameUser(mixed  <span class="argument">$user</span>) : string</pre>
+                <p><em>nameUser function.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>mixed</td>
+                                <td>$user </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_putAbsenceWeek" name="method_putAbsenceWeek" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">putAbsenceWeek()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">putAbsenceWeek(string  <span class="argument">$date_start</span>, string  <span class="argument">$date_end</span>, \Coyote\SiteBundle\Entity\User  <span class="argument">$user</span>, array  <span class="argument">$data</span>) : \Coyote\SiteBundle\Entity\number</pre>
+                <p><em>Function to save absence into Schedule entity.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$date_start </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$date_end </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td><a href="../classes/Coyote.SiteBundle.Entity.User.html">\Coyote\SiteBundle\Entity\User</a></td>
+                                <td>$user </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$data </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    \Coyote\SiteBundle\Entity\number
+                                            &mdash; <p>Number schedule save</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_postScheduleLocked" name="method_postScheduleLocked" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">postScheduleLocked()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">postScheduleLocked(\Coyote\SiteBundle\Entity\DateTime  <span class="argument">$date</span>,   <span class="argument">$user</span>) </pre>
+                <p><em>Function to lock Schedule</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\Coyote\SiteBundle\Entity\DateTime</td>
+                                <td>$date </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$user </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_createFileUser" name="method_createFileUser" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">createFileUser()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">createFileUser(  <span class="argument">$user</span>,   <span class="argument">$date_start</span>,   <span class="argument">$date_end</span>) </pre>
+                <p><em></em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$user </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$date_start </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$date_end </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_countOvertime" name="method_countOvertime" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">countOvertime()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">countOvertime(  <span class="argument">$user</span>,   <span class="argument">$working_time_week</span>) </pre>
+                <p><em></em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$user </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$working_time_week </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_convertTimeinMinutes" name="method_convertTimeinMinutes" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">convertTimeinMinutes()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">convertTimeinMinutes(string  <span class="argument">$time</span>) : \Coyote\SiteBundle\Entity\number</pre>
+                <p><em>Function to convert time in minutes.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$time </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    \Coyote\SiteBundle\Entity\number
+                                            &mdash; <p>integer minutes</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_createFormatTime" name="method_createFormatTime" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">createFormatTime()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">createFormatTime(mixed  <span class="argument">$time</span>) : string</pre>
+                <p><em>Function to convert time in hours.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>mixed</td>
+                                <td>$time </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                            &mdash; <p>format hh:mm</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    </div>
+    </section>
+
+    <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="source-view-label">ScheduleRepository.php</h3>
+        </div>
+        <div class="modal-body">
+            <pre data-src="../files/Entity/ScheduleRepository.php.txt" class="language-php line-numbers"></pre>
+        </div>
+    </div>
+
+    <footer class="row-fluid">
+        <section class="span10 offset2">
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <section class="row-fluid footer-sections">
+                        <section class="span4">
+                                                        <h1><i class="icon-code"></i></h1>
+                            <div>
+                                <ul>
+                                                                            <li><a href="../namespaces/Coyote.html">\Coyote</a></li>
+                                                                            <li><a href="../namespaces/FOS.html">\FOS</a></li>
+                                                                    </ul>
+                            </div>
+                        </section>
+                        <section class="span4">
+                                                        <h1><i class="icon-bar-chart"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="../graphs/class.html">Class Hierarchy Diagram</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                        <section class="span4">
+                                                        <h1><i class="icon-pushpin"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="../reports/errors.html">Errors</a></li>
+                                    <li><a href="../reports/markers.html">Markers</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                    </section>
+                </section>
+            </section>
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <hr />
+                    Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
+                    on 
+Warning: date_default_timezone_get(): It is not safe to rely on the system's timezone settings. You are *required* to use the date.timezone setting or the date_default_timezone_set() function. In case you used any of those methods and you are still getting this warning, you most likely misspelled the timezone identifier. We selected the timezone 'UTC' for now, but please set date.timezone to select your timezone. in /Applications/MAMP/htdocs/Pichon/vendor/twig/twig/lib/Twig/Extension/Core.php on line 89
+August 10th, 2015 at 14:12.
+                </section>
+            </section>
+        </section>
+    </footer>
+</div>
+
+</body>
+</html>

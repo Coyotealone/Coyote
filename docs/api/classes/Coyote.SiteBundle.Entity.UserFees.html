@@ -1,0 +1,1457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta charset="utf-8"/>
+    <title>API Documentation</title>
+    <meta name="author" content=""/>
+    <meta name="description" content=""/>
+
+    <link href="../css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+    <link href="../css/font-awesome.min.css" rel="stylesheet">
+    <link href="../css/prism.css" rel="stylesheet" media="all"/>
+    <link href="../css/template.css" rel="stylesheet" media="all"/>
+    
+    <!--[if lt IE 9]>
+    <script src="../js/html5.js"></script>
+    <![endif]-->
+    <script src="../js/jquery-1.11.0.min.js"></script>
+    <script src="../js/ui/1.10.4/jquery-ui.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/jquery.smooth-scroll.js"></script>
+    <script src="../js/prism.min.js"></script>
+    <!-- TODO: Add http://jscrollpane.kelvinluck.com/ to style the scrollbars for browsers not using webkit-->
+    <script type="text/javascript">
+    function loadExternalCodeSnippets() {
+        Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
+            var src = pre.getAttribute('data-src');
+            var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
+            var language = 'php';
+
+            var code = document.createElement('code');
+            code.className = 'language-' + language;
+
+            pre.textContent = '';
+
+            code.textContent = 'Loading…';
+
+            pre.appendChild(code);
+
+            var xhr = new XMLHttpRequest();
+
+            xhr.open('GET', src, true);
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+
+                    if (xhr.status < 400 && xhr.responseText) {
+                        code.textContent = xhr.responseText;
+
+                        Prism.highlightElement(code);
+                    }
+                    else if (xhr.status >= 400) {
+                        code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                    }
+                    else {
+                        code.textContent = '✖ Error: File does not exist or is empty';
+                    }
+                }
+            };
+
+            xhr.send(null);
+        });
+    }
+
+    $(document).ready(function(){
+        loadExternalCodeSnippets();
+    });
+    $('#source-view').on('shown', function () {
+        loadExternalCodeSnippets();
+    })
+</script>
+
+    <link rel="shortcut icon" href="../images/favicon.ico"/>
+    <link rel="apple-touch-icon" href="../images/apple-touch-icon.png"/>
+    <link rel="apple-touch-icon" sizes="72x72" href="../images/apple-touch-icon-72x72.png"/>
+    <link rel="apple-touch-icon" sizes="114x114" href="../images/apple-touch-icon-114x114.png"/>
+</head>
+<body>
+
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <i class="icon-ellipsis-vertical"></i>
+            </a>
+            <a class="brand" href="../index.html">API Documentation</a>
+
+            <div class="nav-collapse">
+                <ul class="nav pull-right">
+                                        <li class="dropdown">
+                        <a href="../index.html" class="dropdown-toggle" data-toggle="dropdown">
+                            API Documentation <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                                                        <li><a href="../namespaces/Coyote.html">\Coyote</a></li>
+                                                        <li><a href="../namespaces/FOS.html">\FOS</a></li>
+                                                    </ul>
+                    </li>
+                                        <li class="dropdown" id="charts-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Charts <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="../graphs/class.html">
+                                    <i class="icon-list-alt"></i>&#160;Class hierarchy diagram
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown" id="reports-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Reports <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="../reports/errors.html">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">526</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../reports/markers.html">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">1</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../reports/deprecated.html">
+                                                                                                            <i class="icon-list-alt"></i>&#160;Deprecated <span class="label label-info pull-right">0</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--<div class="go_to_top">-->
+    <!--<a href="#___" style="color: inherit">Back to top&#160;&#160;<i class="icon-upload icon-white"></i></a>-->
+    <!--</div>-->
+</div>
+
+<div id="___" class="container-fluid">
+        <section class="row-fluid">
+        <div class="span2 sidebar">
+                                <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-558315822"></a>
+                                <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
+            </div>
+            <div id="namespace-558315822" class="accordion-body collapse in">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-694774630"></a>
+                                <a href="../namespaces/Coyote.html" style="margin-left: 30px; padding-left: 0">Coyote</a>
+            </div>
+            <div id="namespace-694774630" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-768328376"></a>
+                                <a href="../namespaces/Coyote.SiteBundle.html" style="margin-left: 30px; padding-left: 0">SiteBundle</a>
+            </div>
+            <div id="namespace-768328376" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-56178507"></a>
+                                <a href="../namespaces/Coyote.SiteBundle.Admin.html" style="margin-left: 30px; padding-left: 0">Admin</a>
+            </div>
+            <div id="namespace-56178507" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Admin.BusinessAdmin.html">BusinessAdmin</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Admin.CarAdmin.html">CarAdmin</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Admin.CurrencyAdmin.html">CurrencyAdmin</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Admin.DirectoryAdmin.html">DirectoryAdmin</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Admin.ExpenseAdmin.html">ExpenseAdmin</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Admin.FeeAdmin.html">FeeAdmin</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Admin.QuoteAdmin.html">QuoteAdmin</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Admin.ScheduleAdmin.html">ScheduleAdmin</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Admin.SiteAdmin.html">SiteAdmin</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Admin.TimetableAdmin.html">TimetableAdmin</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Admin.UserAdmin.html">UserAdmin</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Admin.UserFeesAdmin.html">UserFeesAdmin</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-2070296059"></a>
+                                <a href="../namespaces/Coyote.SiteBundle.Command.html" style="margin-left: 30px; padding-left: 0">Command</a>
+            </div>
+            <div id="namespace-2070296059" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Command.ExportCommand.html">ExportCommand</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1069636864"></a>
+                                <a href="../namespaces/Coyote.SiteBundle.Controller.html" style="margin-left: 30px; padding-left: 0">Controller</a>
+            </div>
+            <div id="namespace-1069636864" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Controller.AbsenceController.html">AbsenceController</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Controller.AdminController.html">AdminController</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Controller.BusinessAdminController.html">BusinessAdminController</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Controller.CarAdminController.html">CarAdminController</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Controller.ChangePasswordController.html">ChangePasswordController</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Controller.ContactController.html">ContactController</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Controller.CurrencyAdminController.html">CurrencyAdminController</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Controller.DirectoryAdminController.html">DirectoryAdminController</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Controller.DirectoryController.html">DirectoryController</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Controller.ExpenseAdminController.html">ExpenseAdminController</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Controller.ExpenseController.html">ExpenseController</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Controller.FeeAdminController.html">FeeAdminController</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Controller.MainController.html">MainController</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Controller.ProfileController.html">ProfileController</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Controller.QuoteAdminController.html">QuoteAdminController</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Controller.RegistrationController.html">RegistrationController</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Controller.ResettingController.html">ResettingController</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Controller.ScheduleAdminController.html">ScheduleAdminController</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Controller.ScheduleController.html">ScheduleController</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Controller.SiteAdminController.html">SiteAdminController</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Controller.TimetableAdminController.html">TimetableAdminController</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Controller.UserAdminController.html">UserAdminController</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Controller.UserFeesAdminController.html">UserFeesAdminController</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Controller.UserInfoAdminController.html">UserInfoAdminController</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-119718617"></a>
+                                <a href="../namespaces/Coyote.SiteBundle.DataFixtures.html" style="margin-left: 30px; padding-left: 0">DataFixtures</a>
+            </div>
+            <div id="namespace-119718617" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1138366514"></a>
+                                <a href="../namespaces/Coyote.SiteBundle.DataFixtures.ORM.html" style="margin-left: 30px; padding-left: 0">ORM</a>
+            </div>
+            <div id="namespace-1138366514" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.DataFixtures.ORM.LoadBusiness.html">LoadBusiness</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.DataFixtures.ORM.LoadCar.html">LoadCar</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.DataFixtures.ORM.LoadCurrency.html">LoadCurrency</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.DataFixtures.ORM.LoadDirectory.html">LoadDirectory</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.DataFixtures.ORM.LoadFee.html">LoadFee</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.DataFixtures.ORM.LoadQuote.html">LoadQuote</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.DataFixtures.ORM.LoadSite.html">LoadSite</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.DataFixtures.ORM.LoadTimetable.html">LoadTimetable</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-2061132860"></a>
+                                <a href="../namespaces/Coyote.SiteBundle.DependencyInjection.html" style="margin-left: 30px; padding-left: 0">DependencyInjection</a>
+            </div>
+            <div id="namespace-2061132860" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.DependencyInjection.Configuration.html">Configuration</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.DependencyInjection.CoyoteSiteExtension.html">CoyoteSiteExtension</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1112566445"></a>
+                                <a href="../namespaces/Coyote.SiteBundle.Entity.html" style="margin-left: 30px; padding-left: 0">Entity</a>
+            </div>
+            <div id="namespace-1112566445" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Entity.Business.html">Business</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Entity.BusinessRepository.html">BusinessRepository</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Entity.Car.html">Car</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Entity.CarRepository.html">CarRepository</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Entity.Currency.html">Currency</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Entity.CurrencyRepository.html">CurrencyRepository</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Entity.Data.html">Data</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Entity.Directory.html">Directory</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Entity.DirectoryRepository.html">DirectoryRepository</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Entity.Expense.html">Expense</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Entity.ExpenseRepository.html">ExpenseRepository</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Entity.Fee.html">Fee</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Entity.FeeRepository.html">FeeRepository</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Entity.Quote.html">Quote</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Entity.QuoteRepository.html">QuoteRepository</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Entity.Schedule.html">Schedule</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Entity.ScheduleRepository.html">ScheduleRepository</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Entity.Site.html">Site</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Entity.SiteRepository.html">SiteRepository</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Entity.Timetable.html">Timetable</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Entity.TimetableRepository.html">TimetableRepository</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Entity.User.html">User</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Entity.UserFees.html">UserFees</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Entity.UserFeesRepository.html">UserFeesRepository</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Entity.UserRepository.html">UserRepository</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1668812535"></a>
+                                <a href="../namespaces/Coyote.SiteBundle.EventListener.html" style="margin-left: 30px; padding-left: 0">EventListener</a>
+            </div>
+            <div id="namespace-1668812535" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.EventListener.LocaleListener.html">LocaleListener</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-424401162"></a>
+                                <a href="../namespaces/Coyote.SiteBundle.Form.html" style="margin-left: 30px; padding-left: 0">Form</a>
+            </div>
+            <div id="namespace-424401162" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1626982126"></a>
+                                <a href="../namespaces/Coyote.SiteBundle.Form.Factory.html" style="margin-left: 30px; padding-left: 0">Factory</a>
+            </div>
+            <div id="namespace-1626982126" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                    <li class="interface"><a href="../classes/Coyote.SiteBundle.Form.Factory.FactoryInterface.html">FactoryInterface</a></li>
+                                                                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Form.Factory.FormFactory.html">FormFactory</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1738091247"></a>
+                                <a href="../namespaces/Coyote.SiteBundle.Form.Type.html" style="margin-left: 30px; padding-left: 0">Type</a>
+            </div>
+            <div id="namespace-1738091247" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Form.Type.RegistrationFormType.html">RegistrationFormType</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Form.Type.TagType.html">TagType</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Form.AbsenceNewType.html">AbsenceNewType</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Form.AbsenceNewWeekType.html">AbsenceNewWeekType</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Form.AbsenceType.html">AbsenceType</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Form.CarType.html">CarType</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Form.ContactType.html">ContactType</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Form.DirectoryType.html">DirectoryType</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Form.ExpenseType.html">ExpenseType</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Form.HolidayType.html">HolidayType</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Form.ItemType.html">ItemType</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Form.ScheduleShowType.html">ScheduleShowType</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Form.ScheduleType.html">ScheduleType</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Form.TimetableType.html">TimetableType</a></li>
+                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Form.UserFeesType.html">UserFeesType</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-226451768"></a>
+                                <a href="../namespaces/Coyote.SiteBundle.Listener.html" style="margin-left: 30px; padding-left: 0">Listener</a>
+            </div>
+            <div id="namespace-226451768" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Listener.CustomExceptionListener.html">CustomExceptionListener</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1833291970"></a>
+                                <a href="../namespaces/Coyote.SiteBundle.Tests.html" style="margin-left: 30px; padding-left: 0">Tests</a>
+            </div>
+            <div id="namespace-1833291970" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-297670671"></a>
+                                <a href="../namespaces/Coyote.SiteBundle.Tests.Controller.html" style="margin-left: 30px; padding-left: 0">Controller</a>
+            </div>
+            <div id="namespace-297670671" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.Tests.Controller.DefaultControllerTest.html">DefaultControllerTest</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Coyote.SiteBundle.CoyoteSiteBundle.html">CoyoteSiteBundle</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-761000994"></a>
+                                <a href="../namespaces/FOS.html" style="margin-left: 30px; padding-left: 0">FOS</a>
+            </div>
+            <div id="namespace-761000994" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-316703810"></a>
+                                <a href="../namespaces/FOS.UserBundle.html" style="margin-left: 30px; padding-left: 0">UserBundle</a>
+            </div>
+            <div id="namespace-316703810" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-191895122"></a>
+                                <a href="../namespaces/FOS.UserBundle.Form.html" style="margin-left: 30px; padding-left: 0">Form</a>
+            </div>
+            <div id="namespace-191895122" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-593744413"></a>
+                                <a href="../namespaces/FOS.UserBundle.Form.Type.html" style="margin-left: 30px; padding-left: 0">Type</a>
+            </div>
+            <div id="namespace-593744413" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/FOS.UserBundle.Form.Type.ChangePasswordFormType.html">ChangePasswordFormType</a></li>
+                                                    <li class="class"><a href="../classes/FOS.UserBundle.Form.Type.GroupFormType.html">GroupFormType</a></li>
+                                                    <li class="class"><a href="../classes/FOS.UserBundle.Form.Type.ResettingFormType.html">ResettingFormType</a></li>
+                                                    <li class="class"><a href="../classes/FOS.UserBundle.Form.Type.UsernameFormType.html">UsernameFormType</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        </div>
+    </section>
+    <section class="row-fluid">
+        <div class="span10 offset2">
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <nav>
+                                                <a href="../namespaces/Coyote.SiteBundle.Entity.html">\Coyote\SiteBundle\Entity</a> <i class="icon-level-up"></i>
+                                            </nav>
+                    <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
+
+                    <h1><small>\Coyote\SiteBundle\Entity</small>UserFees</h1>
+                    <p><em>Class UserFees</em></p>
+                    
+                    
+                                        
+                    <section id="summary">
+                        <h2>Summary</h2>
+                        <section class="row-fluid heading">
+                            <section class="span4">
+                                <a href="#methods">Methods</a>
+                            </section>
+                            <section class="span4">
+                                <a href="#properties">Properties</a>
+                            </section>
+                            <section class="span4">
+                                <a href="#constants">Constants</a>
+                            </section>
+                        </section>
+                        <section class="row-fluid public">
+                            <section class="span4">
+                                                                    <a href="../classes/Coyote.SiteBundle.Entity.UserFees.html#method___construct" class="">__construct()</a><br />
+                                                                    <a href="../classes/Coyote.SiteBundle.Entity.UserFees.html#method_getId" class="">getId()</a><br />
+                                                                    <a href="../classes/Coyote.SiteBundle.Entity.UserFees.html#method_setLogin" class="">setLogin()</a><br />
+                                                                    <a href="../classes/Coyote.SiteBundle.Entity.UserFees.html#method_getLogin" class="">getLogin()</a><br />
+                                                                    <a href="../classes/Coyote.SiteBundle.Entity.UserFees.html#method_setCode" class="">setCode()</a><br />
+                                                                    <a href="../classes/Coyote.SiteBundle.Entity.UserFees.html#method_getCode" class="">getCode()</a><br />
+                                                                    <a href="../classes/Coyote.SiteBundle.Entity.UserFees.html#method_setService" class="">setService()</a><br />
+                                                                    <a href="../classes/Coyote.SiteBundle.Entity.UserFees.html#method_getService" class="">getService()</a><br />
+                                                                    <a href="../classes/Coyote.SiteBundle.Entity.UserFees.html#method_addExpense" class="">addExpense()</a><br />
+                                                                    <a href="../classes/Coyote.SiteBundle.Entity.UserFees.html#method_removeExpense" class="">removeExpense()</a><br />
+                                                                    <a href="../classes/Coyote.SiteBundle.Entity.UserFees.html#method_getExpenses" class="">getExpenses()</a><br />
+                                                                    <a href="../classes/Coyote.SiteBundle.Entity.UserFees.html#method_setUser" class="">setUser()</a><br />
+                                                                    <a href="../classes/Coyote.SiteBundle.Entity.UserFees.html#method_getUser" class="">getUser()</a><br />
+                                                                    <a href="../classes/Coyote.SiteBundle.Entity.UserFees.html#method_setCar" class="">setCar()</a><br />
+                                                                    <a href="../classes/Coyote.SiteBundle.Entity.UserFees.html#method_getCar" class="">getCar()</a><br />
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No public properties found</em>
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No constants found</em>
+                                                            </section>
+                        </section>
+                        <section class="row-fluid protected">
+                            <section class="span4">
+                                                                    <em>No protected methods found</em>
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No protected properties found</em>
+                                                            </section>
+                            <section class="span4">
+                                <em>N/A</em>
+                            </section>
+                        </section>
+                        <section class="row-fluid private">
+                            <section class="span4">
+                                                                    <em>No private methods found</em>
+                                                            </section>
+                            <section class="span4">
+                                                                    <a href="../classes/Coyote.SiteBundle.Entity.UserFees.html#property_id" class="">$id</a><br />
+                                                                    <a href="../classes/Coyote.SiteBundle.Entity.UserFees.html#property_login" class="">$login</a><br />
+                                                                    <a href="../classes/Coyote.SiteBundle.Entity.UserFees.html#property_code" class="">$code</a><br />
+                                                                    <a href="../classes/Coyote.SiteBundle.Entity.UserFees.html#property_service" class="">$service</a><br />
+                                                                    <a href="../classes/Coyote.SiteBundle.Entity.UserFees.html#property_car" class="">$car</a><br />
+                                                            </section>
+                            <section class="span4">
+                                <em>N/A</em>
+                            </section>
+                        </section>
+                    </section>
+                </div>
+                <aside class="span4 detailsbar">
+                                        
+                    
+                    <dl>
+                        <dt>File</dt>
+                            <dd><a href="../files/Entity.UserFees.html"><div class="path-wrapper">Entity/UserFees.php</div></a></dd>
+                                                <dt>Package</dt>
+                            <dd><div class="namespace-wrapper">Default</div></dd>
+                                                <dt>Class hierarchy</dt>
+                            <dd class="hierarchy">
+                                                                                                                                                                    <div class="namespace-wrapper">\Coyote\SiteBundle\Entity\UserFees</div>
+                            </dd>
+
+                        
+                        
+                        
+                        
+                                                                        </dl>
+                    <h2>Tags</h2>
+                    <table class="table table-condensed">
+                                            <tr>
+                            <th>
+                                author
+                            </th>
+                            <td>
+                                                                    <p>Coyote</p>
+                                                            </td>
+                        </tr>
+                                            <tr>
+                            <th>
+                                ORM\Entity
+                            </th>
+                            <td>
+                                                                    
+                                                            </td>
+                        </tr>
+                                            <tr>
+                            <th>
+                                ORM\Table
+                            </th>
+                            <td>
+                                                                    <p>(name=&quot;userfees&quot;)</p>
+                                                            </td>
+                        </tr>
+                                        </table>
+                </aside>
+            </div>
+
+                        
+                                    <a id="properties" name="properties"></a>
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <h2>Properties</h2>
+                </div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_id" name="property_id" class="anchor"></a>
+            <article class="property">
+                <h3 class="private ">$id</h3>
+                <pre class="signature">$id : integer</pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                integer
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            ORM\Column
+                        </th>
+                        <td>
+                                                            <p>(name=&quot;id&quot;, type=&quot;integer&quot;)</p>
+                                                    </td>
+                    </tr>
+                                    <tr>
+                        <th>
+                            ORM\Id
+                        </th>
+                        <td>
+                                                            
+                                                    </td>
+                    </tr>
+                                    <tr>
+                        <th>
+                            ORM\GeneratedValue
+                        </th>
+                        <td>
+                                                            <p>(strategy=&quot;AUTO&quot;)</p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_login" name="property_login" class="anchor"></a>
+            <article class="property">
+                <h3 class="private ">$login</h3>
+                <pre class="signature">$login : string</pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                string
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            ORM\Column
+                        </th>
+                        <td>
+                                                            <p>(name=&quot;login&quot;, type=&quot;string&quot;, length=45, unique=true)</p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_code" name="property_code" class="anchor"></a>
+            <article class="property">
+                <h3 class="private ">$code</h3>
+                <pre class="signature">$code : integer</pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                integer
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            ORM\Column
+                        </th>
+                        <td>
+                                                            <p>(name=&quot;code&quot;, type=&quot;integer&quot;, unique=true, options={&quot;unsigned&quot;:true})</p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_service" name="property_service" class="anchor"></a>
+            <article class="property">
+                <h3 class="private ">$service</h3>
+                <pre class="signature">$service : string</pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                string
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            ORM\Column
+                        </th>
+                        <td>
+                                                            <p>(name=&quot;service&quot;, type=&quot;string&quot;, length=45)</p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_car" name="property_car" class="anchor"></a>
+            <article class="property">
+                <h3 class="private ">$car</h3>
+                <pre class="signature">$car : </pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            ORM\ManyToOne
+                        </th>
+                        <td>
+                                                            <p>(targetEntity=&quot;Car&quot;, inversedBy=&quot;userfeess&quot;)</p>
+                                                    </td>
+                    </tr>
+                                    <tr>
+                        <th>
+                            ORM\JoinColumn
+                        </th>
+                        <td>
+                                                            <p>(name=&quot;car_id&quot;, referencedColumnName=&quot;id&quot;)</p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                            
+                                    <a id="methods" name="methods"></a>
+            <div class="row-fluid">
+                <div class="span8 content class"><h2>Methods</h2></div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method___construct" name="method___construct" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">__construct()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">__construct() </pre>
+                <p><em>Constructor</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getId" name="method_getId" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getId()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getId() : integer</pre>
+                <p><em>Get id</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    integer
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setLogin" name="method_setLogin" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setLogin()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setLogin(string  <span class="argument">$login</span>) : \Coyote\SiteBundle\Entity\UserFees</pre>
+                <p><em>Set login</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$login </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    <a href="../classes/Coyote.SiteBundle.Entity.UserFees.html">\Coyote\SiteBundle\Entity\UserFees</a>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getLogin" name="method_getLogin" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getLogin()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getLogin() : string</pre>
+                <p><em>Get login</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setCode" name="method_setCode" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setCode()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setCode(integer  <span class="argument">$code</span>) : \Coyote\SiteBundle\Entity\UserFees</pre>
+                <p><em>Set code</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$code </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    <a href="../classes/Coyote.SiteBundle.Entity.UserFees.html">\Coyote\SiteBundle\Entity\UserFees</a>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getCode" name="method_getCode" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getCode()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getCode() : integer</pre>
+                <p><em>Get code</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    integer
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setService" name="method_setService" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setService()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setService(string  <span class="argument">$service</span>) : \Coyote\SiteBundle\Entity\UserFees</pre>
+                <p><em>Set service</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$service </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    <a href="../classes/Coyote.SiteBundle.Entity.UserFees.html">\Coyote\SiteBundle\Entity\UserFees</a>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getService" name="method_getService" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getService()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getService() : string</pre>
+                <p><em>Get service</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_addExpense" name="method_addExpense" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">addExpense()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">addExpense(\Coyote\SiteBundle\Entity\Expense  <span class="argument">$expenses</span>) : \Coyote\SiteBundle\Entity\UserFees</pre>
+                <p><em>Add expenses</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td><a href="../classes/Coyote.SiteBundle.Entity.Expense.html">\Coyote\SiteBundle\Entity\Expense</a></td>
+                                <td>$expenses </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    <a href="../classes/Coyote.SiteBundle.Entity.UserFees.html">\Coyote\SiteBundle\Entity\UserFees</a>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_removeExpense" name="method_removeExpense" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">removeExpense()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">removeExpense(\Coyote\SiteBundle\Entity\Expense  <span class="argument">$expenses</span>) </pre>
+                <p><em>Remove expenses</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td><a href="../classes/Coyote.SiteBundle.Entity.Expense.html">\Coyote\SiteBundle\Entity\Expense</a></td>
+                                <td>$expenses </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getExpenses" name="method_getExpenses" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getExpenses()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getExpenses() : \Doctrine\Common\Collections\Collection</pre>
+                <p><em>Get expenses</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    \Doctrine\Common\Collections\Collection
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setUser" name="method_setUser" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setUser()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setUser(\Coyote\SiteBundle\Entity\User  <span class="argument">$user = null</span>) : \Coyote\SiteBundle\Entity\UserFees</pre>
+                <p><em>Set user</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td><a href="../classes/Coyote.SiteBundle.Entity.User.html">\Coyote\SiteBundle\Entity\User</a></td>
+                                <td>$user </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    <a href="../classes/Coyote.SiteBundle.Entity.UserFees.html">\Coyote\SiteBundle\Entity\UserFees</a>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getUser" name="method_getUser" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getUser()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getUser() : \Coyote\SiteBundle\Entity\User</pre>
+                <p><em>Get user</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    <a href="../classes/Coyote.SiteBundle.Entity.User.html">\Coyote\SiteBundle\Entity\User</a>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setCar" name="method_setCar" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setCar()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setCar(\Coyote\SiteBundle\Entity\Car  <span class="argument">$car = null</span>) : \Coyote\SiteBundle\Entity\UserFees</pre>
+                <p><em>Set car</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td><a href="../classes/Coyote.SiteBundle.Entity.Car.html">\Coyote\SiteBundle\Entity\Car</a></td>
+                                <td>$car </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    <a href="../classes/Coyote.SiteBundle.Entity.UserFees.html">\Coyote\SiteBundle\Entity\UserFees</a>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getCar" name="method_getCar" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getCar()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getCar() : \Coyote\SiteBundle\Entity\Car</pre>
+                <p><em>Get car</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    <a href="../classes/Coyote.SiteBundle.Entity.Car.html">\Coyote\SiteBundle\Entity\Car</a>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                                    </div>
+    </section>
+
+    <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="source-view-label">UserFees.php</h3>
+        </div>
+        <div class="modal-body">
+            <pre data-src="../files/Entity/UserFees.php.txt" class="language-php line-numbers"></pre>
+        </div>
+    </div>
+
+    <footer class="row-fluid">
+        <section class="span10 offset2">
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <section class="row-fluid footer-sections">
+                        <section class="span4">
+                                                        <h1><i class="icon-code"></i></h1>
+                            <div>
+                                <ul>
+                                                                            <li><a href="../namespaces/Coyote.html">\Coyote</a></li>
+                                                                            <li><a href="../namespaces/FOS.html">\FOS</a></li>
+                                                                    </ul>
+                            </div>
+                        </section>
+                        <section class="span4">
+                                                        <h1><i class="icon-bar-chart"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="../graphs/class.html">Class Hierarchy Diagram</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                        <section class="span4">
+                                                        <h1><i class="icon-pushpin"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="../reports/errors.html">Errors</a></li>
+                                    <li><a href="../reports/markers.html">Markers</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                    </section>
+                </section>
+            </section>
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <hr />
+                    Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
+                    on 
+Warning: date_default_timezone_get(): It is not safe to rely on the system's timezone settings. You are *required* to use the date.timezone setting or the date_default_timezone_set() function. In case you used any of those methods and you are still getting this warning, you most likely misspelled the timezone identifier. We selected the timezone 'UTC' for now, but please set date.timezone to select your timezone. in /Applications/MAMP/htdocs/Pichon/vendor/twig/twig/lib/Twig/Extension/Core.php on line 89
+August 10th, 2015 at 14:11.
+                </section>
+            </section>
+        </section>
+    </footer>
+</div>
+
+</body>
+</html>

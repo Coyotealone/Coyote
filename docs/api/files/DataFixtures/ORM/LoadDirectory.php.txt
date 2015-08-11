@@ -1,0 +1,134 @@
+<?php
+
+namespace Coyote\SiteBundle\DataFixtures\ORM;
+
+use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Common\DataFixtures\AbstractFixture;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
+use Coyote\SiteBundle\Entity\Directory;
+
+class LoadDirectory extends AbstractFixture implements OrderedFixtureInterface
+{
+    public function load(ObjectManager $em)
+    {
+
+		$array_directory = array(
+			array('1','.','Gardien','118',NULL,'','France','','Gardien','0000-00-00 00:00:00',NULL,'0'),
+			array('2','ABIVEN','Christophe','146',NULL,'','France','ca@pichonindustries.com','Magasin','0000-00-00 00:00:00',NULL,'0'),
+			array('3','AGUERT','Tom','','8188','06 84 26 96 16','France','fra03@pichonindustries.com','Commercial France','0000-00-00 00:00:00',NULL,'0'),
+			array('4','ANDR…','Ludovic','105 / 130','8191','06 77 97 69 69','FRANCE','la@pichonindustries.com','Administration des ventes','0000-00-00 00:00:00','2015-07-07 10:07:40','1'),
+			array('5','ANQUETIN','Patrick','121','8162','06 08 45 54 35','France','pa@pichonindustries.com','Usine','0000-00-00 00:00:00',NULL,'0'),
+			array('6','ANQUETIN Chine','Patrick','','8116','0086 134 509 699 64','France','pa@pichonindustries.com','Usine','0000-00-00 00:00:00',NULL,'0'),
+			array('7','BALPE-FLOCH','Didier','145',NULL,'','France','db@pichonindustries.com','Magasin','0000-00-00 00:00:00',NULL,'1'),
+			array('8','BERTI','Eric','','8201','06 84 26 96 36','France','fra09@pichonindustries.com','Commercial France','0000-00-00 00:00:00',NULL,'0'),
+			array('9','BESNIER','Guillaume','','8181','06 84 26 97 54','France','fra02@pichonindustries.com','Commercial France','0000-00-00 00:00:00',NULL,'0'),
+			array('10','BIGER','Sylvain','137 / 237',NULL,'','France','sb@pichonindustries.com',"Bureau d'étude",'0000-00-00 00:00:00',NULL,'0'),
+			array('11','BIZIEN','Julien','164','8404','06 85 21 65 04','France','jb@pichonindustries.com',"Bureau d'étude",'0000-00-00 00:00:00',NULL,'0'),
+			array('12','BLIN','Laurent','117 / 177','8487','07 85 17 55 37','France','lb@pichonindustries.com',"Bureau d'étude",'0000-00-00 00:00:00',NULL,'1'),
+			array('14','BROCHARD','Didier','','8189','06 84 26 97 58','France','fra07@pichonindustries.com','Commercial France','0000-00-00 00:00:00',NULL,'0'),
+			array('15','CADEAU','David','134',NULL,'','France','maint@pichonindustries.com','Maintenance','0000-00-00 00:00:00',NULL,'0'),
+			array('16','CARISTE','FABRICATION','162',NULL,'','France','','Fabrication','0000-00-00 00:00:00',NULL,'0'),
+			array('17','CARISTE','MONTAGE','155',NULL,'','France','','Montage','0000-00-00 00:00:00',NULL,'0'),
+			array('18','CARISTE','TRANSPORT','185',NULL,'','','','Transport','0000-00-00 00:00:00',NULL,'0'),
+			array('19','CHETAIL','Ludovic','','8183','06 84 26 97 32','France','fra06@pichonindustries.com','Commercial France','0000-00-00 00:00:00',NULL,'0'),
+			array('20','COLIN','Nolwenn','100',NULL,'','France','ng@pichonindustries.com','Accueil/Secrétariat','0000-00-00 00:00:00',NULL,'0'),
+			array('21','DAUBIGNARD AH 694 SJ','Sébastien','','8496','06 77 09 88  66','France','','Transport','0000-00-00 00:00:00',NULL,'0'),
+			array('22','DENIEL','Jean-Christophe','174',NULL,'','France','jcd@pichonindustries.com',"Bureau d'étude",'0000-00-00 00:00:00',NULL,'0'),
+			array('23','DOR…','Jean-Michel','','8185','06 84 26 96 97','France','fra01@pichonindustries.com','Commercial France','0000-00-00 00:00:00',NULL,'0'),
+			array('24','DORIOT BD 541 GN','Yannick','','8385','06 08 09 74 33','France','','Transport','0000-00-00 00:00:00',NULL,'0'),
+			array('25','DORN DA 787 KW','Yannick','','8406','06 83 28 96 05','France','','Transport','0000-00-00 00:00:00',NULL,'0'),
+			array('26','DUFAU','Jean-Paul','107',NULL,'','France','jpd@pichonindustries.com','Service Administratif et Financier','0000-00-00 00:00:00',NULL,'1'),
+			array('27','DURAND','Cyril','','8477','0055 19 98 17 77 301','France','exp06@pichonindustries.com','Commercial Export','0000-00-00 00:00:00',NULL,'0'),
+			array('28','GELEBART','Cathy','165',NULL,'','France','','Cantine','0000-00-00 00:00:00',NULL,'0'),
+			array('29','GENCOURT','Aurélien','187',NULL,NULL,'FRANCE','ag@pichonindustries.com','S.A.V.','0000-00-00 00:00:00','2015-07-08 08:35:20','0'),
+			array('30','GUENEGUES','Vincent','109',NULL,'','France','vg@pichonindustries.com','Organisation/Qualité','0000-00-00 00:00:00',NULL,'0'),
+			array('31','GUILLOU  AT 884 JA','Yvon','','8384','06 77 69 22 13','France','','Transport','0000-00-00 00:00:00',NULL,'0'),
+			array('32','GUIZIOU','Michel','133',NULL,'','France','maint@pichonindustries.com','Maintenance','0000-00-00 00:00:00',NULL,'0'),
+			array('33','JACOB','Frédéric','138',NULL,'','France','fj@pichonindustries.com','Ordonnancement','0000-00-00 00:00:00',NULL,'0'),
+			array('34','JARDIN','Béatrice','178',NULL,'','France','bj@pichonindustries.com','Service Administratif et Financier','0000-00-00 00:00:00',NULL,'0'),
+			array('35','JOUANNY','GaÎtan','166',NULL,'','France','gj@pichonindustries.com','Fabrication','0000-00-00 00:00:00',NULL,'0'),
+			array('36','KRECH','Alwin','','8490','0049 15 90 44 44 33 ','France','ak@pichonindustries.com','Commercial Export','0000-00-00 00:00:00',NULL,'0'),
+			array('37','LAGADEC DP 379 CG','Gaby','','8255','06 71 50 38 82','France','','Transport','0000-00-00 00:00:00',NULL,'0'),
+			array('38','LAOT','Sébastien','149',NULL,'','France','sl@pichonindustries.com','Magasin','0000-00-00 00:00:00',NULL,'0'),
+			array('39','LARREUR  569 ANW','Philippe','','8123','06 79 93 60 60','France','savphilippe@pichonindustries.com','S.A.V.','0000-00-00 00:00:00',NULL,'0'),
+			array('40','LAURENT','Véronique','160',NULL,'','France','vl@pichonindustries.com','Sous-Traitance','0000-00-00 00:00:00',NULL,'0'),
+			array('41','LE BORGNE','Dominique','180',NULL,'','France','dl@pichonindustries.com','Magasin','0000-00-00 00:00:00',NULL,'0'),
+			array('42','LE DUFF','Didier','124',NULL,NULL,'FRANCE','cae@pichonindustries.com','Montage','0000-00-00 00:00:00','2015-07-06 11:20:15','0'),
+			array('43','LE GALL','Antoine','116',NULL,NULL,'FRANCE','alg@pichonindustries.com',"Bureau d'étude",'0000-00-00 00:00:00','2015-07-07 12:03:42','0'),
+			array('45','LE HIR','MaÎl','143 / 123','8156','06 88 36 54 73','FRANCE','sav@pichonindustries.com','S.A.V.','0000-00-00 00:00:00','2015-07-07 09:44:28','1'),
+			array('46','LE MEZO','Ronan','170 / 188',NULL,'','France','rlm@pichonindustries.com','Service Administratif et Financier','0000-00-00 00:00:00',NULL,'0'),
+			array('47','LE ROUX','Jean-Michel','136 / 238',NULL,'','France','jml@pichonindustries.com','Service Achats','0000-00-00 00:00:00',NULL,'0'),
+			array('48','LE ROUX DM 114 KG','GaÎl','','8386','06 30 12 06 01','France','','Transport','0000-00-00 00:00:00',NULL,'0'),
+			array('49','LE TROADEC','Erwan','139',NULL,NULL,'FRANCE','el@pichonindustries.com','Ressources Humaines','0000-00-00 00:00:00','2015-07-07 09:44:10','0'),
+			array('50','LE VAILLANT','Olivier','167',NULL,'','France','ol@pichonindustries.com',"Bureau d'étude",'0000-00-00 00:00:00',NULL,'0'),
+			array('51','LEPERS','Gauthier','','8184','06 84 26 96 38','France','fra04@pichonindustries.com','Commercial France','0000-00-00 00:00:00',NULL,'0'),
+			array('52','LEPRAT','Wilfrid','','8182','06 84 26 96 75','France','fra08@pichonindustries.com','Commercial France','0000-00-00 00:00:00',NULL,'0'),
+			array('53','LHUISSET','Eric','176',NULL,NULL,'FRANCE','el2@pichonindustries.com',"Bureau d'étude",'0000-00-00 00:00:00','2015-07-07 09:43:27','0'),
+			array('54','LUCAS','Hugo','182',NULL,'','France','exp08@pichonindustries.com','Marketing','0000-00-00 00:00:00',NULL,'0'),
+			array('55','LUCOT','Patrice','','8173','06 72 92 76 97','France','fra05@pichonindustries.com','Commercial France','0000-00-00 00:00:00',NULL,'0'),
+			array('56','MALABOUS','Jean-Paul','102','8199','06 07 95 67 37','France','jpm@pichonindustries.com','Service Achats','0000-00-00 00:00:00',NULL,'0'),
+			array('57','MAO','GaÎlle','103',NULL,'','France','gm@pichonindustries.com','Accueil/Secrétariat','0000-00-00 00:00:00',NULL,'0'),
+			array('58','MARZIN','Christophe','157',NULL,'','France','cm@pichonindustries.com','Délégué Produits','0000-00-00 00:00:00',NULL,'0'),
+			array('59','MARZIN','Frédéric','154',NULL,'','France','fm@pichonindustries.com','Fabrication','0000-00-00 00:00:00',NULL,'0'),
+			array('60','MAZ…','Gilbert','171','8403','06 83 28 29 68','France','mg@pichonindustries.com','Logistique','0000-00-00 00:00:00',NULL,'0'),
+			array('61','MEAR','Marc','147',NULL,NULL,'FRANCE','mm@pichonindustries.com','Montage','0000-00-00 00:00:00','2015-07-07 09:44:46','0'),
+			array('62','MEVEL  CQ 351 CE','Nicolas','','8190','06 77 69 22 05','France','','Transport','0000-00-00 00:00:00',NULL,'0'),
+			array('63','NUCERA','Aurélien','112',NULL,'','France','an@pichonindustries.com','Marketing','0000-00-00 00:00:00',NULL,'1'),
+			array('64','OLLIVIER','Pierre-Baptiste','168',NULL,'','France','pbo@pichonindustries.com',"Bureau d'étude",'0000-00-00 00:00:00',NULL,'0'),
+			array('65','PARQUIC','Serge','113',NULL,'','France','','Magasin','0000-00-00 00:00:00',NULL,'0'),
+			array('66','PATTE','Xavier','115 / 175',NULL,'','France','xp@pichonindustries.com','Service Achats','0000-00-00 00:00:00',NULL,'0'),
+			array('67','PAUL','Julien','161','8394','06 76 22 68 17','France','exp01@pichonindustries.com','Commercial Export','0000-00-00 00:00:00',NULL,'0'),
+			array('68','PEDRONO','Laurine','184',NULL,'','France','lp@pichonindustries.com','Marketing','0000-00-00 00:00:00',NULL,'0'),
+			array('69','PENGLOAN','Johann','128',NULL,'','France','jp2@pichonindustries.com',"Bureau d'étude",'0000-00-00 00:00:00',NULL,'0'),
+			array('70','PERROT','Alexandre','','8473','01 82 88 22 29','France','ap@pichonindustries.com','Commercial Export','0000-00-00 00:00:00',NULL,'0'),
+			array('71','PERROT','Ronan','122 / 222',NULL,'','France','transport@pichonindustries.com','Transport','0000-00-00 00:00:00',NULL,'0'),
+			array('72','PICHON','Philippe','140','8140','06 32 20 99 56','France','pp@pichonindustries.com','Commercial Export','0000-00-00 00:00:00',NULL,'1'),
+			array('73','PICHON','Martine','','8193','06 07 95 67 27','France','','Direction Générale','0000-00-00 00:00:00',NULL,'0'),
+			array('74','PICHON','Michel','106','8200','06 84 26 96 12','France','mp@pichonindustries.com','Direction Générale','0000-00-00 00:00:00',NULL,'1'),
+			array('75','PICHON','Christelle','101','8389','06 76 47 06 43','France','cp@pichonindustries.com','Service Administratif et Financier','0000-00-00 00:00:00',NULL,'0'),
+			array('76','POLEHLA','Petr','','8260','00 420 777 751 100','France','pe@pichonindustries.com','Commercial Export','0000-00-00 00:00:00',NULL,'0'),
+			array('77','PRIGENT','Gérard','153',NULL,'','France','','Fabrication','0000-00-00 00:00:00',NULL,'0'),
+			array('78','PROTOTYPE','','131',NULL,'','France','','Fabrication','0000-00-00 00:00:00',NULL,'0'),
+			array('79','PROVINI','Anthony','152',NULL,'','France','si@pichonindustries.com','Service informatique','0000-00-00 00:00:00',NULL,'0'),
+			array('80','PUBERT','Mathieu','178',NULL,'','France','mpt@pichonindustries.com','Service Administratif et Financier','0000-00-00 00:00:00',NULL,'0'),
+			array('81','ROLLAND','Anne-Marie','104',NULL,'','France','amr@pichonindustries.com','Service Administratif et Financier','0000-00-00 00:00:00',NULL,'0'),
+			array('82','ROUDAUT','Vincent','108 / 181','8397','06 33 97 85 98','France','vr@pichonindustries.com','Commercial France','0000-00-00 00:00:00',NULL,'1'),
+			array('83','SALMON  AD 982 VZ','Armel','','8124','06 77 69 22 49','France','savarmel@pichonindustries.com','S.A.V.','0000-00-00 00:00:00',NULL,'0'),
+			array('84','SALOU','Ludovic','163',NULL,'','France','ls@pichonindustries.com',"Bureau d'étude",'0000-00-00 00:00:00',NULL,'0'),
+			array('85','SALOU','Jean-Luc','148',NULL,'','France','jls@pichonindustries.com','Montage','0000-00-00 00:00:00',NULL,'0'),
+			array('86','SUC','Alexandre','183',NULL,'','France','as@pichonindustries.com','Service informatique','0000-00-00 00:00:00',NULL,'1'),
+			array('87','TUFFREAU  AD 792 DK','Romain','','8197','06 77 69 22 12','France','savromain@pichonindustries.com','S.A.V.','0000-00-00 00:00:00',NULL,'0'),
+			array('301','TRANSPORT','CARISTE','185',NULL,NULL,'France',NULL,'Transport','2015-07-07 09:47:30',NULL,'0'),
+			array('302','TRODAEC','Laurent',NULL,'8399','0645282006','France','savlaurent@pichonindustries.com','S.A.V.','2015-07-07 11:41:58',NULL,'0'),
+			array('303','LEGER','Sylvain',NULL,'8497','0015144248999','France','sle@pichonindustries.com','Commercial Export',
+				'2015-07-07 14:58:27',NULL,'0')
+		);
+
+		foreach($array_directory as $data)
+	    {
+			$entity = new Directory();
+			$entity->setName($data[1]);
+			$entity->setFirstname($data[2]);
+			$entity->setJobPhoneNumber($data[3]);
+			$entity->setQuickPhoneNumber($data[4]);
+			$entity->setCellphoneNumber($data[5]);
+			$entity->setFunctionService($data[8]);
+			$entity->setCountry($data[6]);
+			$entity->setMail($data[7]);
+			$entity->setCreatedAt($data[9]);
+			$entity->setUpdatedAt($data[10]);
+			$entity->setLeader($data[11]);
+
+			$em->persist($entity);
+			$em->flush();
+		}
+
+    }
+
+    public function getOrder()
+
+	{
+        return 9; // the order in which fixtures will be loaded
+    }
+
+}

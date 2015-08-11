@@ -1,0 +1,45 @@
+<?php
+
+namespace Coyote\SiteBundle\DataFixtures\ORM;
+
+use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Common\DataFixtures\AbstractFixture;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
+use Coyote\SiteBundle\Entity\Site;
+
+class LoadSite extends AbstractFixture implements OrderedFixtureInterface
+{
+    public function load(ObjectManager $em)
+    {
+
+		$array_site = array(
+			array('1','C01','SAV GP'),
+			array('2','C02','SAV R'),
+			array('3','C03','SAV F'),
+			array('4','C04','SAV pol'),
+			array('5','C05','SAV pol'),
+			array('6','GLV','Galva'),
+			array('7','POL','Usine'),
+			array('8','TRS','BST'),
+			array('9','USI','USINE'),
+			array('10','ZPI','Chine'),
+		);
+
+		foreach($array_site as $data)
+	    {
+			$entity = new Site();
+			$entity->setCode($data[1]);
+			$entity->setName($data[2]);
+
+			$em->persist($entity);
+			$em->flush();
+		}
+    }
+
+    public function getOrder()
+
+	{
+        return 7; // the order in which fixtures will be loaded
+    }
+
+}
