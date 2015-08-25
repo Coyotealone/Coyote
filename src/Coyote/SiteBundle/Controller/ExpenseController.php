@@ -246,11 +246,11 @@ class ExpenseController extends Controller
         $form = $this->createDeleteForm($id);
         $form->handleRequest($request);
 
-        if ($form->isValid()) 
+        if ($form->isValid())
         {
             $em = $this->getDoctrine()->getManager();
             $entity = $em->getRepository('CoyoteSiteBundle:Expense')->find($id);
-            if (!$entity) 
+            if (!$entity)
             {
                 throw $this->createNotFoundException('Unable to find Expense entity.');
             }
@@ -323,7 +323,7 @@ class ExpenseController extends Controller
 	        		return $this->render('CoyoteSiteBundle:Expense:updatestatus.html.twig');
 	        	}
         	}
-        	else 
+        	else
         	{
         		return $this->render('CoyoteSiteBundle:Expense:updatestatus.html.twig');
         	}
@@ -355,8 +355,8 @@ class ExpenseController extends Controller
 			$session->set('month_expense', $_GET['month']);
 			$maxItems = 10;
 			$expenses = $this->getDoctrine()->getRepository('CoyoteSiteBundle:Expense')
-				->getListExpenseUser($this->getUser(), $date, $page, $maxItems);
-			$entities = $em->getRepository('CoyoteSiteBundle:Expense')->findExpense($date,
+				->getListAboutUserDate($this->getUser(), $date, $page, $maxItems);
+			$entities = $em->getRepository('CoyoteSiteBundle:Expense')->findAllByDateUser($date,
 					$this->getUser());
 			$expenses_count = count($expenses);
 			$pagination = array(
@@ -365,7 +365,7 @@ class ExpenseController extends Controller
 					'pages_count' => ceil($expenses_count / $maxItems),
 					'route_params' => array()
 			);
-		
+
 			return $this->render('CoyoteSiteBundle:Expense:show.html.twig', array(
 					'data' => $entities,
 					'pagination' => $pagination));
@@ -407,9 +407,9 @@ class ExpenseController extends Controller
 			return $this->render('CoyoteSiteBundle:Expense:indexprint.html.twig', array('month' => date('n'),
 					'year' => date('Y'), 'tab_mois' => $data->getTabMonth(), 'tab_num_mois' => $data->getTabNumMonth(),
 					'tab_annee' => $data->getTabYear(), 'tab_num_annee' => $data->getTabNumYear()));
-			
+
 		}
 	}
-	
+
 }
 

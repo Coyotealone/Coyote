@@ -126,8 +126,8 @@ class ScheduleController extends Controller
                 {
                     $timetable_id = $em->getRepository('CoyoteSiteBundle:Timetable')->findOneById(
                             $timetable_ids[($i-1)]->getId());
-                    $schedule[$i] = $em->getRepository('CoyoteSiteBundle:Schedule')->createSchedule($user, 
-                    		$timetable_id, $data['start'.$i], $data['end'.$i], $data['break'.$i], $deplacement[$i], 
+                    $schedule[$i] = $em->getRepository('CoyoteSiteBundle:Schedule')->createSchedule($user,
+                    		$timetable_id, $data['start'.$i], $data['end'.$i], $data['break'.$i], $deplacement[$i],
                     		$data['absence'.$i], $data['absenceday'.$i], $data['absencetime'.$i], $data['comment'.$i]);
                 }
                 else
@@ -143,7 +143,7 @@ class ScheduleController extends Controller
                     $list_id .= $i.';';
                 }
             }
-            
+
             $em->flush();
             $tab_id = explode(";", $list_id);
             $index = 0;
@@ -193,13 +193,13 @@ class ScheduleController extends Controller
                 {
                     $timetable_id = $em->getRepository('CoyoteSiteBundle:TimeTable')->findOneById(
                     		$timetable_ids[($i-1)]->getId());
-                    $schedule[$i] = $em->getRepository('CoyoteSiteBundle:Schedule')->createSchedulefm($user, 
-                    		$timetable_id, $deplacement[$i], $data['absence'.$i], $data['absenceday'.$i], 
+                    $schedule[$i] = $em->getRepository('CoyoteSiteBundle:Schedule')->createSchedulefm($user,
+                    		$timetable_id, $deplacement[$i], $data['absence'.$i], $data['absenceday'.$i],
                     		$data['absencetime'.$i], $data['comment'.$i], $data['day'.$i]);
                 }
                 else
                 {
-                    $schedule[$i] = $em->getRepository('CoyoteSiteBundle:Schedule')->updateSchedulefm($schedule[$i], 
+                    $schedule[$i] = $em->getRepository('CoyoteSiteBundle:Schedule')->updateSchedulefm($schedule[$i],
                     		$deplacement[$i], $data['absence'.$i], $data['absenceday'.$i], $data['absencetime'.$i],
                         	$data['comment'.$i], floatval($data['day'.$i]));
                 }
@@ -279,7 +279,7 @@ class ScheduleController extends Controller
                 {
                     $data_schedule = $em->getRepository('CoyoteSiteBundle:Schedule')->findAboutDateUser($user, $date);
                     $timeweek = $em->getRepository('CoyoteSiteBundle:Schedule')->countTimeWeek($data_schedule);
-                    $timemonth = $em->getRepository('CoyoteSiteBundle:Schedule')->findTimeMonth($year.'-'.$month.'-%', 
+                    $timemonth = $em->getRepository('CoyoteSiteBundle:Schedule')->findTimeMonth($year.'-'.$month.'-%',
                     		$user);
                     $date = '';
                     $day = '';
@@ -307,7 +307,7 @@ class ScheduleController extends Controller
                 }
             }
         }
-        return $this->render('CoyoteSiteBundle:Schedule:indexshow.html.twig', array('month' => date('n'), 
+        return $this->render('CoyoteSiteBundle:Schedule:indexshow.html.twig', array('month' => date('n'),
         		'year' => date('Y'), 'tab_mois' => $data->getTabMonth(), 'tab_num_mois' => $data->getTabNumMonth(),
                 'tab_annee' => $data->getTabYear()));
     }
@@ -356,7 +356,7 @@ class ScheduleController extends Controller
             {
                 $data_schedule = $em->getRepository('CoyoteSiteBundle:Schedule')->findAboutDateUser($user, $date);
                 $timeweek = $em->getRepository('CoyoteSiteBundle:Schedule')->countTimeWeek($data_schedule);
-                $timemonth = $em->getRepository('CoyoteSiteBundle:Schedule')->findTimeMonth($year.'-'.$month.'-%', 
+                $timemonth = $em->getRepository('CoyoteSiteBundle:Schedule')->findTimeMonth($year.'-'.$month.'-%',
                 		$user);
                 $date = '';
                 $day = '';
@@ -392,7 +392,7 @@ class ScheduleController extends Controller
             $html2pdf->Output($filename, 'D');
             return new Response('PDF réalisé');
         }
-        return $this->render('CoyoteSiteBundle:Schedule:indexprint.html.twig', array('month' => date('n'), 
+        return $this->render('CoyoteSiteBundle:Schedule:indexprint.html.twig', array('month' => date('n'),
         		'year' => date('Y'), 'tab_mois' => $data->getTabMonth(), 'tab_num_mois' => $data->getTabNumMonth(),
                 'tab_annee' => $data->getTabYear()));
     }
@@ -455,7 +455,7 @@ class ScheduleController extends Controller
         	$working_time_week = 0;
         	if ($holiday != null)
         		$working_time_week = $holiday->getHs();
-            $overtime = $em->getRepository('CoyoteSiteBundle:Schedule')->countOvertime($this->getUser(), 
+            $overtime = $em->getRepository('CoyoteSiteBundle:Schedule')->countOvertime($this->getUser(),
             		$working_time_week);
             return $this->render('CoyoteSiteBundle:Schedule:showovertime.html.twig', array('overtime' => $overtime));
         }
@@ -468,7 +468,7 @@ class ScheduleController extends Controller
     	{
     		$em = $this->getDoctrine()->getManager();
     		$date = new \DateTime($_POST['date']);
-    		$schedules_lock = $em->getRepository("CoyoteSiteBundle:Schedule")->postScheduleLocked($date, 
+    		$schedules_lock = $em->getRepository("CoyoteSiteBundle:Schedule")->postScheduleLocked($date,
     				$this->getUser());
     		if ($schedules_lock == "OK")
     		{
@@ -555,8 +555,7 @@ class ScheduleController extends Controller
         return $this->render('CoyoteSiteBundle:Schedule:indexprintyear.html.twig', array(
             'period' => $period, 'tab_period' => $data->getTabPeriod()));
     	}
-
+    }
     /*****************************************************************/
     /***********************Fonctions Erronées************************/
     /*****************************************************************/
-}
