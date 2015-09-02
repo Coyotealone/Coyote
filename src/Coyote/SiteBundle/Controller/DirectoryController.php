@@ -263,7 +263,7 @@ class DirectoryController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('CoyoteSiteBundle:Directory')->findAllByFunctionService($country);
-        $update = $em->getRepository('CoyoteSiteBundle:Directory')->udpateDate($country);
+        $update = $em->getRepository('CoyoteSiteBundle:Directory')->updateDate($country);
         $page = $this->render('CoyoteSiteBundle:Directory:pdfdirectorybyfunctionservice.html.twig',
                 array('entity' => $entity, 'update' => $update));
         $date = date("Ymd");
