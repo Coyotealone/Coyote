@@ -5,17 +5,8 @@ namespace Coyote\SiteBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Session\Session;
 
-use Coyote\SiteBundle\Form\ScheduleType;
-
-use Coyote\SiteBundle\Entity\Schedule;
-use Coyote\SiteBundle\Entity\Timetable;
-use Coyote\SiteBundle\Entity\User;
 use Coyote\SiteBundle\Entity\Data;
-
-use Doctrine\ORM\EntityRepository;
-use Coyote\SiteBundle\Entity\Holiday;
 
 /**
  * Schedule controller.
@@ -407,9 +398,7 @@ class ScheduleController extends Controller
         $em = $this->getDoctrine()->getManager();
         /** @var $request object request */
         $request = Request::createFromGlobals();
-        /** @var $dataexpense string data file */
-        //$data_request = $request->request->all();
-
+        
         if ($request->getMethod() == 'GET' && isset($_GET['pay_period']))
     	{
         	$year = explode('/', $_GET['pay_period']);
@@ -428,7 +417,6 @@ class ScheduleController extends Controller
         }
         else
         {
-            //return new Response($data_request['pay_period']);
             $data = new Data();
         	$date = date('Y-m-d');
         	$doctrine = $this->getDoctrine();

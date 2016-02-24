@@ -3,20 +3,13 @@
 namespace Coyote\SiteBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Session\Session;
 
-use Coyote\SiteBundle\Entity\User;
 use Coyote\SiteBundle\Entity\Expense;
-use Coyote\SiteBundle\Entity\Site;
-use Coyote\SiteBundle\Entity\Currency;
 use Coyote\SiteBundle\Entity\Data;
 
-use Doctrine\ORM\EntityRepository;
-
 use Coyote\SiteBundle\Form\ExpenseType;
-
 
 /**
  * Expense controller.

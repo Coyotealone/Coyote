@@ -2,12 +2,6 @@
 
 namespace Coyote\SiteBundle\Entity;
 
-use Coyote\SiteBundle\Entity\Site;
-use Coyote\SiteBundle\Entity\Currency;
-use Coyote\SiteBundle\Entity\Business;
-use Coyote\SiteBundle\Entity\Fee;
-use Coyote\SiteBundle\Entity\UserFees;
-use Coyote\SiteBundle\Entity\User;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
 use Doctrine\ORM\EntityRepository;

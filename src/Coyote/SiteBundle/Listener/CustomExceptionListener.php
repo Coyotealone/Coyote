@@ -3,7 +3,6 @@ namespace Coyote\SiteBundle\Listener;
  
 use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Bundle\TwigBundle\TwigEngine;
  
@@ -27,7 +26,7 @@ class CustomExceptionListener
     {
         // nous récupérons l'objet exception depuis l'évènement reçu
         $exception = $event->getException();
-        $code = "404";//$exception->getStatusCode();
+        $code = "404";
          
          
         $message = $this->templating->render('CoyoteSiteBundle:Exception:error.html.twig',

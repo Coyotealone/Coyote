@@ -173,6 +173,5 @@ class TimetableRepository extends EntityRepository
                 $count++;
         }
         return $count;
-        return count($timetable);
     }    
 }

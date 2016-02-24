@@ -2,8 +2,6 @@
 
 namespace Coyote\SiteBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-
 /**
  * Data
  */

@@ -3,14 +3,11 @@
 namespace Coyote\SiteBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Coyote\SiteBundle\Entity\Schedule;
 use Coyote\SiteBundle\Form\AbsenceType;
 use Coyote\SiteBundle\Form\AbsenceNewType;
-use Coyote\SiteBundle\Entity\Timetable;
-use Coyote\SiteBundle\Entity\Data;
 use Coyote\SiteBundle\Form\AbsenceNewWeekType;
 
 /**

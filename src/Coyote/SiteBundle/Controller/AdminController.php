@@ -5,13 +5,7 @@ namespace Coyote\SiteBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Session\Session;
 
-use Doctrine\ORM\EntityRepository;
-
-use Coyote\SiteBundle\Entity\Schedule;
-use Coyote\SiteBundle\Entity\Timetable;
-use Coyote\SiteBundle\Entity\User;
 use Coyote\SiteBundle\Entity\Data;
 
 /**

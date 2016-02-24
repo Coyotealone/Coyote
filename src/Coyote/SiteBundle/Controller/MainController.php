@@ -3,16 +3,9 @@
 namespace Coyote\SiteBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\Security\Core\SecurityContextInterface;
-
-use Coyote\SiteBundle\Entity\User;
-
-use Doctrine\ORM\EntityRepository;
-
 
 /**
  * Main controller.
@@ -52,10 +45,7 @@ class MainController extends Controller
 			$locale = $request->getLocale();
 			$data_quote = $em->getRepository('CoyoteSiteBundle:Quote')->findby(array
 					('week' => date('W'), 'year' => date('Y')));
-
-            //$this->container->get('request')->setLocale($locale);
-
-            return $this->render('CoyoteSiteBundle:Accueil:menu.html.twig', array('quote' => $data_quote,
+			return $this->render('CoyoteSiteBundle:Accueil:menu.html.twig', array('quote' => $data_quote,
 					'_locale' => $locale));
 		}
 	}
