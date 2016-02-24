@@ -763,7 +763,7 @@ class ScheduleRepository extends EntityRepository
         {
 	        $qb = $this->_em->createQueryBuilder();
 	        $timetable = $timetables[$i];
-	        if (($timetable->getDate()->format('l') != "Sunday") and ($timetable->getDate()->format('l') != "Saturday"))
+	        if (($timetable->getDate()->format('l') != "Sunday") && ($timetable->getDate()->format('l') != "Saturday"))
 	        {
 	        $countsave++;
 	        $qb->select('s')

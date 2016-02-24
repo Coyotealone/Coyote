@@ -169,7 +169,7 @@ class TimetableRepository extends EntityRepository
         $count = 0;
         foreach($timetable as $data)
         {
-            if($data->getDate()->format('l') != "Sunday" and $data->getDate()->format('l') != "Saturday")
+            if($data->getDate()->format('l') != "Sunday" && $data->getDate()->format('l') != "Saturday")
                 $count++;
         }
         return $count;

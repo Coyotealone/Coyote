@@ -202,11 +202,11 @@ class Timetable
     }
     public function working_time_day($start, $end, $break)// Calcul du temps de travail
     {
-    	if(empty($start) and empty($end) and empty($break))
+    	if(empty($start) && empty($end) && empty($break))
     		return "0:00";
-    	if($start == "00:00" and $end == "00:00" and $break == "00:00")
+    	if($start == "00:00" && $end == "00:00" && $break == "00:00")
     		return "0:00";
-    	if($start == "0:00" and $end == "0:00" and $break == "0:00")
+    	if($start == "0:00" && $end == "0:00" && $break == "0:00")
     		return "0:00";
     	else
     	{
