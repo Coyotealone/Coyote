@@ -22,8 +22,8 @@ class Timetable
     private $id;
 
     /**
-     * @var \DateTime
-     * @ORM\Column(name="date", type="datetime")
+     * @var \Date
+     * @ORM\Column(name="date", type="date")
      */
     private $date;
     
@@ -60,7 +60,7 @@ class Timetable
     /**
      * Set date
      *
-     * @param \DateTime $date
+     * @param \Date $date
      * @return Timetable
      */
     public function setDate($date)
@@ -73,7 +73,7 @@ class Timetable
     /**
      * Get date
      *
-     * @return \DateTime 
+     * @return \Date
      */
     public function getDate()
     {
