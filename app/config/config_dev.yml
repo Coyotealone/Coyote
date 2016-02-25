@@ -31,12 +31,3 @@ monolog:
 
 assetic:
     use_controller: true
-
-swiftmailer:
-    transport:  gmail
-    username:   pichonwebsite@gmail.com
-    password:   mortxxl90
-    transport:  smtp
-    encryption: ssl
-    auth_mode:  login
-    host:       smtp.gmail.com
