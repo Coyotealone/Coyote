@@ -1,0 +1,23 @@
+# FOSUserBundle Configuration
+fos_user:
+    db_driver:     orm                        # Le type de BDD à utiliser, nous utilisons l'ORM Doctrine depuis le début
+    firewall_name: main                       # Le nom du firewall derrière lequel on utilisera ces utilisateurs
+    user_class:    Coyote\SiteBundle\Entity\User # La classe de l'entité User que nous utilisons
+    from_email:
+        address:    pichonwebsite@gmail.com
+        sender_name: PichonSiteApp
+    registration:
+        confirmation:
+            from_email:
+                address:    pichonwebsite@gmail.com
+                sender_name: PichonSiteRegistration
+    resetting:
+        email:
+            from_email:
+                address:    pichonwebsite@gmail.com
+                sender_name: PichonSiteResetting
+    service:
+        mailer: fos_user.mailer.twig_swift
+    resetting:
+        email:
+            template: CoyoteSiteBundle:User:resetting.email.html.twig
