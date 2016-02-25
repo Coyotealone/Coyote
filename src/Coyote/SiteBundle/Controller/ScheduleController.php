@@ -484,7 +484,6 @@ class ScheduleController extends Controller
     		$doctrine = $this->getDoctrine();
     		$em = $doctrine->getManager();
     		$period = $_GET['pay_period'];
-    		//$user = $em->getRepository('CoyoteSiteBundle:User')->findOneById(46);
     		$user = $this->getUser();
     		$absencerttyear = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsenceYear($period, $user, "RTT");
     		$absencecayear = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsenceYear($period, $user, "CA");
