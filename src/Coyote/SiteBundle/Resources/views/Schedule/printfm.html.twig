@@ -25,33 +25,33 @@
 	</tr>
 	{% for entity in dataschedule %}
         <tr>
-            {% if entity.holiday == "1" %}
-                <td style="background:#7FC6BC; color:white; text-align:center">{{ entity.date|date("l")|trans}}</td>
-                <td style="background:#7FC6BC; color:white; text-align:center">{{ entity.date|date("d/m/Y")}}</td>
+            {#{% if entity.holiday == "1" %}
+                <td style="background:#7FC6BC; color:white; text-align:center">{{ entity.date_schedule|date("l")|trans}}</td>
+                <td style="background:#7FC6BC; color:white; text-align:center">{{ entity.date_schedule|date("d/m/Y")}}</td>
                 <td style="background:#7FC6BC; color:white; text-align:center">{{ entity.working_hours }}</td>
                 <td style="background:#7FC6BC; color:white; text-align:center">{{ entity.travel }}</td>
                 <td style="background:#7FC6BC; color:white; text-align:center">{{ entity.absence_name|trans }}</td>
                 <td style="background:#7FC6BC; color:white; text-align:center">{{ entity.absence_duration|trans }}</td>
-                <td style="width: 20%; background:#7FC6BC; color:white; text-align:center">{{ entity.comment }}</td>
-            {% elseif entity.date|date("l") == "Saturday" %}
-                <td style="background:#01B0F0; color:white; text-align:center">{{ entity.date|date("l")|trans}}</td>
-                <td style="background:#01B0F0; color:white; text-align:center">{{ entity.date|date("d/m/Y")}}</td>
+                <td style="width: 20%; background:#7FC6BC; color:white; text-align:center">{{ entity.comment }}</td>#}
+            {% if entity.date_schedule|date("l") == "Saturday" %}
+                <td style="background:#01B0F0; color:white; text-align:center">{{ entity.date_schedule|date("l")|trans}}</td>
+                <td style="background:#01B0F0; color:white; text-align:center">{{ entity.date_schedule|date("d/m/Y")}}</td>
                 <td style="background:#01B0F0; color:white; text-align:center">{{ entity.working_hours }}</td>
                 <td style="background:#01B0F0; color:white; text-align:center">{{ entity.travel }}</td>
                 <td style="background:#01B0F0; color:white; text-align:center">{{ entity.absence_name|trans }}</td>
                 <td style="background:#01B0F0; color:white; text-align:center">{{ entity.absence_duration|trans }}</td>
                 <td style="width: 20%; background:#01B0F0; color:white; text-align:center">{{ entity.comment }}</td>
-            {% elseif entity.date|date("l") == "Sunday" %}
-                <td style="background:#01B0F0; color:white; text-align:center">{{ entity.date|date("l")|trans}}</td>
-                <td style="background:#01B0F0; color:white; text-align:center">{{ entity.date|date("d/m/Y")}}</td>
+            {% elseif entity.date_schedule|date("l") == "Sunday" %}
+                <td style="background:#01B0F0; color:white; text-align:center">{{ entity.date_schedule|date("l")|trans}}</td>
+                <td style="background:#01B0F0; color:white; text-align:center">{{ entity.date_schedule|date("d/m/Y")}}</td>
                 <td style="background:#01B0F0; color:white; text-align:center">{{ entity.working_hours }}</td>
                 <td style="background:#01B0F0; color:white; text-align:center">{{ entity.travel }}</td>
                 <td style="background:#01B0F0; color:white; text-align:center">{{ entity.absence_name|trans }}</td>
                 <td style="background:#01B0F0; color:white; text-align:center">{{ entity.absence_duration|trans }}</td>
                 <td style="width: 20%; background:#01B0F0; color:white; text-align:center">{{ entity.comment }}</td>
             {% else %}
-                <td style="text-align:center">{{ entity.date|date("l")|trans}}</td>
-                <td style="text-align:center">{{ entity.date|date("d/m/Y")}}</td>
+                <td style="text-align:center">{{ entity.date_schedule|date("l")|trans}}</td>
+                <td style="text-align:center">{{ entity.date_schedule|date("d/m/Y")}}</td>
                 <td style="text-align:center">{{ entity.working_hours }}</td>
                 <td style="text-align:center">{{ entity.travel }}</td>
                 <td style="text-align:center">{{ entity.absence_name|trans }}</td>

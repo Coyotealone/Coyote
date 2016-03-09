@@ -52,6 +52,14 @@
         		<td>{{ form_widget(form.cellphone_number) }}</td>
             </tr>
             <tr>
+        		<th>{{ form_label(form.phone, 'directory.phone') }}</th>
+        	    <td>{{ form_widget(form.phone) }}</td>
+            </tr>
+            <tr>
+        		<th>{{ form_label(form.fax, 'directory.fax') }}</th>
+        	    <td>{{ form_widget(form.fax) }}</td>
+            </tr>
+            <tr>
         		<th>{{ form_label(form.function_service, 'directory.functionservice') }}*</th>
         		<td>{{ form_widget(form.function_service) }}</td>
             </tr>
@@ -66,6 +74,10 @@
             <tr>
         		<th>{{ form_label(form.country, 'directory.country') }}*</th>
         	    <td>{{ form_widget(form.country) }}</td>
+            </tr>
+			<tr>
+        		<th>{{ form_label(form.business, 'directory.business') }}*</th>
+        	    <td>{{ form_widget(form.business) }}</td>
             </tr>
         </table>
     </div>

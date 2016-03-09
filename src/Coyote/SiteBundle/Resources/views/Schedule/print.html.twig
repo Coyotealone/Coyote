@@ -39,7 +39,7 @@
                 {% set counter = counter + 1 %}
             </tr><tr>
             {% endif %}
-            {% if data.holiday == "1" %}
+            {#{% if data.holiday == "1" %}
                 <td style="background:#7FC6BC; color:white; text-align:center">{{ day[index]|trans}}</td>
                 <td style="background:#7FC6BC; color:white; text-align:center">{{ date[index] }}</td>
                 <td style="background:#7FC6BC; color:white; text-align:center">{{ data.start }}</td>
@@ -49,8 +49,8 @@
                 <td style="background:#7FC6BC; color:white; text-align:center">{{ data.travel }}</td>
                 <td style="background:#7FC6BC; color:white; text-align:center">{{ data.absence_name|trans }}</td>
                 <td style="background:#7FC6BC; color:white; text-align:center">{{ data.absence_duration }}</td>
-                <td style="background:#7FC6BC; color:white; width: 20%">{{ data.comment }}</td>
-            {% elseif day[index] == "Saturday" %}
+                <td style="background:#7FC6BC; color:white; width: 20%">{{ data.comment }}</td>#}
+            {% if day[index] == "Saturday" %}
                 <td style="background:#01B0F0; color:white; text-align:center">{{ day[index]|trans }}</td>
                 <td style="background:#01B0F0; color:white; text-align:center">{{ date[index]}}</td>
                 <td style="background:#01B0F0; color:white; text-align:center">{{ data.start }}</td>

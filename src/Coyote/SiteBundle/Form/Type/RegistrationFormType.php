@@ -33,7 +33,10 @@ class RegistrationFormType extends AbstractType
             ->add('website', null, array('label' => 'form.website',  'translation_domain' => 'messages', 'data' => 'www.pichonindustries.com'))
             ->add('roles', 'choice',  array( 'label' => 'form.roles','choices' => array('ROLE_TECH' => 'form.choices.technician',
                 'ROLE_CADRE' => 'form.choices.business', 'ROLE_TRADE' => 'form.choices.trade', 'ROLE_VISU' => 'form.choices.directory'),'multiple'  => true))
-            ->add('userfees', new UserFeesType(), array('required' => false, 'label' => 'userfees.userfees',  'translation_domain' => 'messages'));
+            ->add('code_car')
+            ->add('registration_car')
+            ->add('commercial_code')
+            ->add('commercial_service');
     }
 
     /*public function getParent()

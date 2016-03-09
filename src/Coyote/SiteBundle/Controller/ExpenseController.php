@@ -52,17 +52,27 @@ class ExpenseController extends Controller
         {
             return $this->redirect($this->generateUrl('fos_user_security_login'));
         }
-        if (!$this->getUser()->getUserfees())
-        {
-            return $this->redirect($this->generateUrl('main_menu'));
-        }
-        else
+        if ($this->get('security.context')->isGranted('ROLE_TRADE_PICHON'))
         {
             $currency = $em->getRepository('CoyoteSiteBundle:Currency')->findAllOrderByCode();
             $business = $em->getRepository('CoyoteSiteBundle:Business')->findAllOrderByName();
             $fee = $em->getRepository('CoyoteSiteBundle:Fee')->findAll();
+            $site = $em->getRepository('CoyoteSiteBundle:Site')->findById(9);
             return $this->render('CoyoteSiteBundle:Expense:create.html.twig',
-                array('currency' => $currency, 'business' => $business, 'fee' => $fee));
+                array('currency' => $currency, 'business' => $business, 'fee' => $fee, 'site' => $site));
+        }
+        if ($this->get('security.context')->isGranted('ROLE_TRADE_GILIBERT'))
+        {
+            $currency = $em->getRepository('CoyoteSiteBundle:Currency')->findAllOrderByCode();
+            $business = $em->getRepository('CoyoteSiteBundle:Business')->findAllOrderByName();
+            $fee = $em->getRepository('CoyoteSiteBundle:Fee')->findAll();
+            $site = $em->getRepository('CoyoteSiteBundle:Site')->findById(11);
+            return $this->render('CoyoteSiteBundle:Expense:create.html.twig',
+                array('currency' => $currency, 'business' => $business, 'fee' => $fee, 'site' => $site));
+        }
+        else
+        {
+	        return $this->redirect($this->generateUrl('main_menu'));
         }
     }
 
@@ -78,11 +88,8 @@ class ExpenseController extends Controller
         {
             return $this->redirect($this->generateUrl('fos_user_security_login'));
         }
-        if (!$this->getUser()->getUserfees())
-        {
-            return $this->redirect($this->generateUrl('main_menu'));
-        }
-        else
+        if ($this->get('security.context')->isGranted('ROLE_TRADE_GILIBERT') or 
+        	$this->get('security.context')->isGranted('ROLE_TRADE_PICHON'))
         {
             $count_expense = 0;
             $em = $this->getDoctrine()->getManager();
@@ -120,6 +127,10 @@ class ExpenseController extends Controller
             $this->get('session')->getFlashBag()->set('save_expense', $message);
             return $this->redirect($this->generateUrl('expense_create'));
         }
+        else
+        {
+            return $this->redirect($this->generateUrl('main_menu'));
+        }
     }
 
     /**
@@ -130,7 +141,8 @@ class ExpenseController extends Controller
      */
     public function posteditExpenseAction($id)
     {
-        if (!$this->getUser()->getUserfees())
+        $user = $this->get('security.context')->getToken()->getUser();
+        if ($user == "anon.")
         {
             return $this->redirect($this->generateUrl('main_menu'));
         }
@@ -145,8 +157,7 @@ class ExpenseController extends Controller
         return $this->render('CoyoteSiteBundle:Expense:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        ));
+            'delete_form' => $deleteForm->createView(),));
     }
 
     /**
@@ -190,7 +201,7 @@ class ExpenseController extends Controller
      */
     public function postupdateExpenseAction(Request $request, $id)
     {
-        if (!$this->getUser()->getUserfees())
+        if (!$this->get('security.context')->isGranted('ROLE_TRADE'))
             return $this->redirect($this->generateUrl('main_menu'));
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('CoyoteSiteBundle:Expense')->find($id);
@@ -206,7 +217,14 @@ class ExpenseController extends Controller
         {
             $date = $entity->getDate();
             $entity->setDate($date);
-            $site = $em->getRepository('CoyoteSiteBundle:Site')->findOneById(9);
+            if ($this->get('security.context')->isGranted('ROLE_TRADE_PICHON'))
+            {
+            	$site = $em->getRepository('CoyoteSiteBundle:Site')->findOneById(9);
+            }
+            if ($this->get('security.context')->isGranted('ROLE_TRADE_GILIBERT'))
+            {
+	            $site = $em->getRepository('CoyoteSiteBundle:Site')->findOneById(11);
+            }	
             $entity->setSite($site);
             $taux = $entity->getFee()->getRate();
             $ttc = $entity->getAmountTTC();
@@ -234,7 +252,7 @@ class ExpenseController extends Controller
      */
     public function deleteExpenseAction(Request $request, $id)
     {
-        if (!$this->getUser()->getUserfees())
+        if (!$this->get('security.context')->isGranted('ROLE_TRADE'))
             return $this->redirect($this->generateUrl('main_menu'));
         $form = $this->createDeleteForm($id);
         $form->handleRequest($request);
@@ -334,8 +352,9 @@ class ExpenseController extends Controller
      */
 	public function getExpensesAction($page)
 	{
-		if (!$this->getUser()->getUserfees())
-		{
+		$user = $this->get('security.context')->getToken()->getUser();
+        if ($user == "anon.")
+        {
 			return $this->redirect($this->generateUrl('main_menu'));
 		}
 		if (!empty($_GET['month']) && empty(!$_GET['year']))

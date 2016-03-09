@@ -39,8 +39,9 @@ class MainController extends Controller
 			$date = (new \DateTime($date));
 			$session->set('week', $date->format('W'));
 			$session->set('year', $date->format('Y'));
-			$date = $em->getRepository('CoyoteSiteBundle:Timetable')->findOneBy(array('date' => $date));
-			$session->set('period', $date->getPeriod());
+			//$date = $em->getRepository('CoyoteSiteBundle:Timetable')->findOneBy(array('date' => $date));
+			
+			$session->set('period', $em->getRepository('CoyoteSiteBundle:Schedule')->createPeriod(date('Y').'-'.date('m').'-'.date('d')));
 			$session->set('status', $data_user->getRoles());
 			$locale = $request->getLocale();
 			$data_quote = $em->getRepository('CoyoteSiteBundle:Quote')->findby(array

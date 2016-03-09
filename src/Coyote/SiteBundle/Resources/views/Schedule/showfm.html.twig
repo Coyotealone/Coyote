@@ -22,19 +22,19 @@
     		<th id='tab_time_absence'>{{'schedule.absence_time'|trans}}</th>
     		<th id='tab_time_comment'>{{'schedule.comment'|trans}}</th>
     	</tr>
-    	{% set week = dataschedule.0.date|date('W') %}
+    	{% set week = dataschedule.0.date_schedule|date('W') %}
     	{% for entity in dataschedule %}
-    	{% set date = entity.date %}
+    	{% set date = entity.date_schedule %}
             <tr>
-                {% if entity.holiday == "1" %}
+                {#{% if entity.holiday == "1" %}
                     <td style="background:#7FC6BC; color:white">{{ date|date("l")|trans}}</td>
                     <td style="background:#7FC6BC; color:white">{{ date|date("d/m/Y")}}</td>
                     <td style="background:#7FC6BC; color:white">{{ entity.working_hours }}</td>
                     <td style="background:#7FC6BC; color:white">{{ entity.travel }}</td>
                     <td style="background:#7FC6BC; color:white">{{ entity.absence_name|trans }}</td>
                     <td style="background:#7FC6BC; color:white">{{ entity.absence_duration }}</td>
-                    <td style="background:#7FC6BC; color:white">{{ entity.comment }}</td>
-                {% elseif date|date("l") == "Saturday" %}
+                    <td style="background:#7FC6BC; color:white">{{ entity.comment }}</td>#}
+                {% if date|date("l") == "Saturday" %}
                     <td style="background:#01B0F0; color:white">{{ date|date("l")|trans}}</td>
                     <td style="background:#01B0F0; color:white">{{ date|date("d/m/Y")}}</td>
                     <td style="background:#01B0F0; color:white">{{ entity.working_hours }}</td>

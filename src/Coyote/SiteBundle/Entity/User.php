@@ -92,12 +92,30 @@ class User extends BaseUser
      * @ORM\OneToMany(targetEntity="Schedule", mappedBy="user", cascade={"persist", "merge"})
      */
     private $schedules;
-
+    
     /**
-    * @ORM\OneToOne(targetEntity="UserFees", cascade={"persist"})
-    * @ORM\JoinColumn(nullable=true)
-    */
-    private $userfees;
+     * @var string
+     * @ORM\Column(name="code_car", type="integer", length=2, nullable=true)
+     */
+    private $code_car;
+    
+    /**
+     * @var string
+     * @ORM\Column(name="registration_car", type="string", length=9, nullable=true)
+     */
+    private $registration_car;
+    
+    /**
+     * @var string
+     * @ORM\Column(name="commercial_code", type="string", length=5, nullable=true)
+     */
+    private $commercial_code;
+    
+    /**
+     * @var string
+     * @ORM\Column(name="commercial_service", type="string", length=5, nullable=true)
+     */
+    private $commercial_service;
     
     /**
      * Constructor
@@ -405,25 +423,94 @@ class User extends BaseUser
     }
 
     /**
-     * Set userfees
+     * Set code_car
      *
-     * @param \Coyote\SiteBundle\Entity\UserFees $userfees
+     * @param integer $codeCar
      * @return User
      */
-    public function setUserfees(\Coyote\SiteBundle\Entity\UserFees $userfees = null)
+    public function setCodeCar($codeCar)
     {
-        $this->userfees = $userfees;
+        $this->code_car = $codeCar;
 
         return $this;
     }
 
     /**
-     * Get userfees
+     * Get code_car
      *
-     * @return \Coyote\SiteBundle\Entity\UserFees 
+     * @return integer 
      */
-    public function getUserfees()
+    public function getCodeCar()
     {
-        return $this->userfees;
+        return $this->code_car;
+    }
+
+    /**
+     * Set registration_car
+     *
+     * @param string $registrationCar
+     * @return User
+     */
+    public function setRegistrationCar($registrationCar)
+    {
+        $this->registration_car = $registrationCar;
+
+        return $this;
+    }
+
+    /**
+     * Get registration_car
+     *
+     * @return string 
+     */
+    public function getRegistrationCar()
+    {
+        return $this->registration_car;
+    }
+
+    /**
+     * Set commercial_code
+     *
+     * @param string $commercialCode
+     * @return User
+     */
+    public function setCommercialCode($commercialCode)
+    {
+        $this->commercial_code = $commercialCode;
+
+        return $this;
+    }
+
+    /**
+     * Get commercial_code
+     *
+     * @return string 
+     */
+    public function getCommercialCode()
+    {
+        return $this->commercial_code;
+    }
+
+    /**
+     * Set commercial_service
+     *
+     * @param string $commercialService
+     * @return User
+     */
+    public function setCommercialService($commercialService)
+    {
+        $this->commercial_service = $commercialService;
+
+        return $this;
+    }
+
+    /**
+     * Get commercial_service
+     *
+     * @return string 
+     */
+    public function getCommercialService()
+    {
+        return $this->commercial_service;
     }
 }

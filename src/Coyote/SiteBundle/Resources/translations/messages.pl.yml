@@ -5,6 +5,21 @@ userfees:
     service: Obsługa : 
     userfees: Handel
 
+business.pichon: Pichon
+business.gilibert: Gilibert
+business.pichongilibert: Pichon/Gilibert
+
+Prénom: Imię
+Nom: Nazwa
+Numéro de poste: numer Poste
+Numéro rapide: Krótki numer
+Téléphone portable: Telefon komórkowy
+Fonction / Service: Funkcja / usługi
+Responsable: odpowiedzialni
+Email: E-mail
+Pays: Kraj
+Entreprise: Enterprise
+
 function_service:
     empty:  " "
     accueil: 'Start / Sekretariat'
@@ -63,6 +78,12 @@ CSS: Urlop bezpłatny
 AT: przerwy w pracy
 MP: Urlop macierzyński / ojcowski
 Recup: Odzyskiwanie / Praca w godzinach nadliczbowych
+Aucune: Nic
+
+'Code car': Kod samochodowy
+'Registration car': Rejestracja samochodów
+'Commercial code': Kod Trade
+'Commercial service': Trade Service
 
 directory:
     title:
@@ -73,12 +94,16 @@ directory:
         directorybyfirstname: Telefon Katalogi Alfabetycznie
         directorybyfunctionservice: Katalogi telefoniczne przez służby
         directorypdf_services_french: Usługi Francja PDF
+        directorypdf_services_gilibert: Usługi Gilibert PDF
         directorypdf_services_poland: Polska Usługi katalog PDF
         directorypdf_user_french: PDF katalog alfabetyczny Francja
+        directorypdf_user_gilibert: PDF katalog alfabetyczny Gilibert
         directorypdf_user_poland: PDF katalog alfabetyczny Polska
         directory_services_french: Katalog Usługi Francja
+        directory_services_gilibert: Katalog Usługi Gilibert
         directory_services_poland: Katalog Usługi Polska
         directory_user_french: Katalog alfabetyczny Francja
+        directory_user_gilibert: Katalog alfabetyczny Gilibert
         directory_user_poland: Katalog alfabetyczny Polska
     back: Powrót do listy
     add_user: Dodawanie kontaktu
@@ -104,10 +129,14 @@ directory:
     required: Pole wymagane
     update: Aktualizacja
     print: Drukuj pDF
+    business: Biznes
+    phone: Telefon
+    fax: Fax
     nav:
         jobphonenumber: Numer Workstation
         quickphonenumber: Szybkie wybieranie numeru
         cellphonenumber: Numer Telefonu
+        phone: Telefon
 
 base:
     copyright: Copyright © 2015 PICHON - Wszystkie prawa zastrzeżone
@@ -160,9 +189,11 @@ base:
         directory:
             title: Katalog
             showfirstnameFrance: Katalog alfabetyczny Francja
-            showfirstnamePologne: Katalog alfabetyczny Pologne
+            showfirstnameGilibert: Katalog alfabetyczny Gilibert
+            showfirstnamePologne: Katalog alfabetyczny Polska
             showfunctionFrance: Katalog Usług Francji
-            showfunctionPologne: Katalog Usług Pologne
+            showfunctionGilibert: Katalog Usługs Gilibert
+            showfunctionPologne: Katalog Usług Polska
             index: Administracja katalog
             add_user: Dodawanie kontaktu
         flag:
@@ -201,12 +232,15 @@ admin:
     expense:
         title: Koszt
         trade: Handel
+        trade_pichon: Pichon Handel
+        trade_gilibert: Gilibert Handel
     accounting:
         title: Księgowość
         accountant: Księgowy
     designoffice:
         title: Biuro Projektowe
         responsible: Odpowiedzialny za biurze projektowym
+        user: Użytkownik
     title:
         indexchoicesuser: Wybór użytkownika
         choicesroles: Dodaj / Usuń role
@@ -360,6 +394,39 @@ expense:
         no_save: Brak zapisu wykonane
         no_update: Brak aktualizacji danych
         update: Aktualizacja wykonywana
+'Carburant sans TVA': 'paliwa bez VAT'
+'Carburant Camion Fourgon': Fuel Truck, Van
+'Carburant Voiture': paliwa samochodów
+'DIESEL UK carburant': UK Diesel
+'Cadeaux clients 5.5%': nagrody klientom 5,5%
+'Entretien Voitures': Opieka Samochody
+'Entretien Camion Fourgon': Ciężarówka Konserwacja, Van
+'Car maintenance UK': Konserwacja samochodów w Wielkiej Brytanii
+'Entree salon-foire sans TVA': wystawa Wejście / fair bez VAT
+'show VAT UK': wystawa UK / fair VAT
+'Fournitures sans TVA': Dostawy bez VAT
+'Fournitures': Wyposażenie
+'Fourniture 5,5%': Dostawa 5,5%
+'stationary UK fourniture': UK Supply
+'Hotel': Hotel
+'Hotel UK 20%': UK Hotel 20% 
+'Location vehicules': Wynajem samochodów
+'Telephone sans TVA': Toll VAT
+'Telephone UK 20%': Wielka Brytania Telefon 20%
+'Frais Postaux': opłaty pocztowe
+'Receptions sans TVA': Przyjęcia bez VAT
+'Receptions a 19,6%=>20%': Przyjęcia 20%
+'Receptions a 5,5%': Przyjęcia 5,5%
+'Receptions a 7%=>10%': Przyjęcia 10%
+'Entertaining UK 20% reception': UK Przyjęcia 20%
+'Repas sans TVA': Posiłki bez VAT
+'Repas a 19,6% => 20%': Posiłki 20%
+'Repas a 5,5%': Posiłki 5,5%
+'Repas a 7% => 10%': Posiłki 10%
+'meal UK 20%': UK posiłki 20%
+'Parki,Avio,Train,Taxi sans TVA': parking, samolot, pociąg, taksówki bez VAT
+'Parking,Taxi,Peages': parking, taksówka, opłaty drogowe
+'travel expansive UK': Travel UK
 
 # FOSUserBundle Translation #
 

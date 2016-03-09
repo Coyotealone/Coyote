@@ -19,12 +19,12 @@
                     <li><a href="{{ path('schedule_getscheduleuserprintmonth') }}">{{'base.nav.schedule.indexprint'|trans}}</a></li>
                     <li><a href="{{ path('schedule_getscheduleuserprintyear') }}">{{'base.nav.schedule.indexprintyear'|trans}}</a></li>
                     <li><a href="{{ path('schedule_getscheduleuser') }}">{{'base.nav.schedule.scheduleuserexcel'|trans}}</a></li>
-                    <li><a href="{{ path('absence') }}">{{'base.nav.schedule.absence'|trans}}</a></li>
+                    {#<li><a href="{{ path('absence') }}">{{'base.nav.schedule.absence'|trans}}</a></li>#}
                 </ul>
             </li>
             {% endif %}
 
-            {% if is_granted('ROLE_TRADE') %}
+            {% if is_granted('ROLE_TRADE') or is_granted('ROLE_TRADE_PICHON') or is_granted('ROLE_TRADE_GILIBERT') %}
             <li id="frais" class="dropdown">
               <a href="{{ path('expense_create') }}" class="dropdown-toggle" data-toggle="dropdown">{{'base.nav.expense.name'|trans}}<b class="caret"></b></a>
               <ul class="dropdown-menu">
@@ -47,10 +47,24 @@
               <a class="dropdown-toggle" data-toggle="dropdown">{{'base.nav.directory.title'|trans}}<b class="caret"></b></a>
 
               <ul class="dropdown-menu">
-                <li><a href="{{ path('directory_showdirectorybyfirstname', { 'country': 'FRANCE' }) }}">{{'base.nav.directory.showfirstnameFrance'|trans}}</a></li>
-                {#<li><a href="{{ path('directory_showdirectorybyfirstname', { 'country': 'POLOGNE' }) }}">{{'base.nav.directory.showfirstnamePologne'|trans}}</a></li>#}
-                <li><a href="{{ path('directory_showdirectorybyfunctionservice', { 'country': 'FRANCE' }) }}">{{'base.nav.directory.showfunctionFrance'|trans}}</a></li>
-                {#<li><a href="{{ path('directory_showdirectorybyfunctionservice', { 'country': 'POLOGNE' }) }}">{{'base.nav.directory.showfunctionPologne'|trans}}</a></li>#}
+                <li><a href="{{ path('directory_showdirectorybyfirstname', { 'country': 'FRANCE', 'business': 'Pichon' }) }}">
+                	{{'base.nav.directory.showfirstnameFrance'|trans}}
+                </a></li>
+                <li><a href="{{ path('directory_showdirectorybyfirstname', { 'country': 'FRANCE', 'business': 'Gilibert' }) }}">
+                	{{'base.nav.directory.showfirstnameGilibert'|trans}}
+                </a></li>
+                {#<li><a href="{{ path('directory_showdirectorybyfirstname', { 'country': 'POLOGNE' }) }}">
+                	{{'base.nav.directory.showfirstnamePologne'|trans}}
+                </a></li>#}
+                <li><a href="{{ path('directory_showdirectorybyfunctionservice', { 'country': 'FRANCE', 'business': 'Pichon' }) }}">
+                	{{'base.nav.directory.showfunctionFrance'|trans}}
+                </a></li>
+                <li><a href="{{ path('directory_showdirectorybyfunctionservice', { 'country': 'FRANCE', 'business': 'Gilibert' }) }}">
+                	{{'base.nav.directory.showfunctionGilibert'|trans}}
+                </a></li>
+                {#<li><a href="{{ path('directory_showdirectorybyfunctionservice', { 'country': 'POLOGNE' }) }}">
+                	{{'base.nav.directory.showfunctionPologne'|trans}}
+                </a></li>#}
                 {% if is_granted('ROLE_DIRECTORY') %}
                     <li class="divider"></li>
                     <li><a href="{{ path('directory') }}">{{'base.nav.directory.index'|trans}}</a></li>

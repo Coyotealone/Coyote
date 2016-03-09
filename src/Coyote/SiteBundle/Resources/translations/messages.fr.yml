@@ -5,6 +5,21 @@ userfees:
     service: Service : 
     userfees: Commercial
 
+business.pichon: Pichon
+business.gilibert: Gilibert
+business.pichongilibert: Pichon/Gilibert
+
+Prénom: Prénom
+Nom: Nom
+Numéro de poste: Numéro de poste
+Numéro rapide: Numéro rapide
+Téléphone portable: Téléphone portable
+Fonction / Service: Fonction / Service
+Responsable: Responsable
+Email: Email
+Pays: Pays
+Entreprise: Entreprise
+
 function_service:
     empty:  " "
     accueil: 'Accueil/Secrétariat'
@@ -63,6 +78,12 @@ CSS: Congés sans solde
 AT: Arrêt de travail
 MP: Maternité/Paternité
 Recup: Récup/Heures supp
+Aucune: Aucune
+
+'Code car': Code Voiture
+'Registration car': Immatriculation Voiture
+'Commercial code': Code Commercial Compta
+'Commercial service': Service Commercial Compta
 
 directory:
     title:
@@ -73,13 +94,17 @@ directory:
         directorybyfirstname: Annuaire Téléphonique Alphabétique
         directorybyfunctionservice: Annuaire Téléphonique par Services
         directorypdf_services_french: PDF Annuaire France par services
+        directorypdf_services_gilibert: PDF Annuaire Gilibert par services
         directorypdf_services_poland: PDF Annuaire Pologne par services
-        directorypdf_user_french: PDF Annuaire Alphabétique France
-        directorypdf_user_poland: PDF Annuaire Alphabétique Pologne
-        directory_services_french: Annuaire France par services
-        directory_services_poland: Annuaire Pologne par services
-        directory_user_french: Annuaire Alphabétique France
-        directory_user_poland: Annuaire Alphabétique Pologne
+        directorypdf_user_french: PDF Annuaire Alphabétique Pichon France
+        directorypdf_user_gilibert: PDF Annuaire Alphabétique Gilibert
+        directorypdf_user_poland: PDF Annuaire Alphabétique Pichon Pologne
+        directory_services_french: Annuaire Pichon France par services
+        directory_services_gilibert: Annuaire Gilibert par services
+        directory_services_poland: Annuaire Pichon Pologne par services
+        directory_user_french: Annuaire Alphabétique Pichon France
+        directory_user_gilibert: Annuaire Alphabétique Gilibert
+        directory_user_poland: Annuaire Alphabétique Pichon Pologne
     back: Retourner à la liste
     add_user: "Ajouter un contact"
     actions:
@@ -104,10 +129,14 @@ directory:
     required: Champs obligatoire
     update: Mise à jour
     print: Imprimer en PDF
+    business: Entreprise
+    phone: Téléphone
+    fax: Fax
     nav:
         jobphonenumber: N° Poste
         quickphonenumber: N° Rapide
         cellphonenumber: N° Portable
+        phone: Fixe
 
 base:
     copyright: Copyright ©2015 PICHON - Tous droits réservés
@@ -159,10 +188,12 @@ base:
             indexchoicesuser: Mise à jour des rôles utilisateurs
         directory:
             title: Annuaire
-            showfirstnameFrance: Annuaire alphabétique France
-            showfirstnamePologne: Annuaire alphabétique Pologne
-            showfunctionFrance: Annuaire des services France
-            showfunctionPologne: Annuaire des services Pologne
+            showfirstnameFrance: Alphabétique Pichon France
+            showfirstnameGilibert: Alphabétique Gilibert
+            showfirstnamePologne: Alphabétique Pichon Pologne
+            showfunctionFrance: Services Pichon France
+            showfunctionGilibert: Services Pichon Gilibert
+            showfunctionPologne: Services Pichon Pologne
             index: Administration annuaire
             add_user: "Ajout d'un contact"
         flag:
@@ -201,12 +232,15 @@ admin:
     expense:
         title: Notes de frais
         trade: Commercial
+        trade_pichon: Commercial Pichon
+        trade_gilibert: Commercial Gilibert
     accounting:
         title: Comptabilité
         accountant: Compable
     designoffice:
         title: "Bureau d'étude"
         responsible: "Responsable du bureau d'étude"
+        user: Utilisateur
     title:
         indexchoicesuser: "Choix de l'utilisateur"
         choicesroles: Ajout/Suppression de rôles
@@ -360,6 +394,39 @@ expense:
         no_save: Aucun enregistrement effectué
         no_update: Aucune donnée mise à jour
         update: Mise à jour effectuée
+'Carburant sans TVA': 'Carburant sans TVA'
+'Carburant Camion Fourgon': Carburant Camion Fourgon
+'Carburant Voiture': Carburant Voiture
+'DIESEL UK carburant': UK Carburant Diesel
+'Cadeaux clients 5.5%': Cadeaux clients 5,5%
+'Entretien Voitures': Entretien Voitures
+'Entretien Camion Fourgon': Entretien Camion Fourgon
+'Car maintenance UK': UK Maintenance Voiture
+'Entree salon-foire sans TVA': Entrée Salon/Foire sans TVA
+'show VAT UK': UK Salon/Foire TVA
+'Fournitures sans TVA': Fournitures sans TVA
+'Fournitures': Fournitures
+'Fourniture 5,5%': Fourniture 5,5%
+'stationary UK fourniture': UK Fourniture
+'Hotel': Hôtel
+'Hotel UK 20%': UK Hôtel 20% 
+'Location vehicules': Location véhicules
+'Telephone sans TVA': Téléphone sans TVA
+'Telephone UK 20%': UK Téléphone 20%
+'Frais Postaux': Frais Postaux
+'Receptions sans TVA': Réceptions sans TVA
+'Receptions a 19,6%=>20%': Réceptions à 20%
+'Receptions a 5,5%': Réceptions à 5,5%
+'Receptions a 7%=>10%': Réceptions à 10%
+'Entertaining UK 20% reception': UK Réceptions à 20%
+'Repas sans TVA': Repas sans TVA
+'Repas a 19,6% => 20%': Repas à 20%
+'Repas a 5,5%': Repas à 5,5%
+'Repas a 7% => 10%': Repas à 10%
+'meal UK 20%': UK Repas à 20%
+'Parki,Avio,Train,Taxi sans TVA': Parking, Avion, Train, Taxi sans TVA
+'Parking,Taxi,Peages': Parking, Taxi, Péages
+'travel expansive UK': UK Voyage
 
 # FOSUserBundle Translation #
 

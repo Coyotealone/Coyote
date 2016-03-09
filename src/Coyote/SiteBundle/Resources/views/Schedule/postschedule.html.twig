@@ -59,11 +59,12 @@
                     {% for key,date in data_timetable %}
                         <tr>
             				<td class='date'>{{ "schedule#{loop.index}"|trans }} :
-            				    {% if date.holiday == 1 %}
+            				    {#{% if date.holiday == 1 %}
             				        <input class='input_day' id="holiday" type='text' readonly name="date{{loop.index}}" id="date{{loop.index}}" value={{ date.date|date("d/m/Y") }} />
-            				    {% else %}
-            				        <input class='input_day' type='text' readonly name="date{{loop.index}}" id="date{{loop.index}}" value={{ date.date|date("d/m/Y") }} />
-            				    {% endif %}
+            				    {% else %}#}
+            				        <input class='input_day' type='text' readonly name="date{{loop.index}}" id="date{{ date }}" 
+            				        value={{ date|date("d/m/Y") }} />
+            				    {#{% endif %}#}
             				</td>
             				<td>
             					{% if attribute(time,loop.index0) is not empty and attribute(time,loop.index0).start %}
@@ -201,7 +202,8 @@
                     {% for key,date in data_timetable %}
                         <tr>
             				<td class='date'>{{ "schedule#{loop.index}"|trans }} :
-            				    <input class='input_day' type='text' readonly name="date{{loop.index}}" id="date{{loop.index}}" value={{ date.date|date("d/m/Y") }} />
+            				    <input class='input_day' type='text' readonly name="date{{loop.index}}" id="date{{loop.index}}" 
+            				    value={{ date|date("d/m/Y") }} />
             				</td>
             				<td class='day'>
             				    {% if attribute(time,loop.index0) is not empty %}

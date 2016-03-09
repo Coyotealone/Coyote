@@ -5,6 +5,7 @@ namespace Coyote\SiteBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 use Coyote\SiteBundle\Entity\Data;
 
@@ -26,19 +27,21 @@ class ScheduleController extends Controller
     	$request = $this->getRequest();
     	$session = $request->getSession();
 
-    	$date = $em->getRepository('CoyoteSiteBundle:Timetable')->createDateYearWeek(
+		$date = $em->getRepository('CoyoteSiteBundle:Schedule')->createDateYearWeek(
     			$session->get('year'), $session->get('week'));
 
-    	$data_timetable = $em->getRepository('CoyoteSiteBundle:Timetable')->findIdDate($date);
-
-    	$time = $em->getRepository('CoyoteSiteBundle:Schedule')->findAllAboutTimetableUser(
+    	$data_timetable = $em->getRepository('CoyoteSiteBundle:Schedule')->dateWeek($date);
+    	
+    	$time = $em->getRepository('CoyoteSiteBundle:Schedule')->findAllAboutTimetableUserNew(
     			$data_timetable, $this->getUser());
-
-    	$duration = $em->getRepository('CoyoteSiteBundle:Schedule')->createIdTimetableSession(
-    			$time, $data_timetable, $session);
+		//return new Response(count($time));
+    	
+    			
+		//$duration = $em->getRepository('CoyoteSiteBundle:Schedule')->createIdTimetableSession(
+    	//		$time, $data_timetable, $session);
 
     	return $this->render('CoyoteSiteBundle:Schedule:postschedule.html.twig',
-    			array('data_timetable' => $data_timetable, 'time' => $time, 'duration' => $duration));
+    			array('data_timetable' => $data_timetable, 'time' => $time));//, 'duration' => $duration));
     }
 
     /**
@@ -91,51 +94,12 @@ class ScheduleController extends Controller
             $doctrine = $this->getDoctrine();
             $em = $doctrine->getManager();
             $request = Request::createFromGlobals();
+            
             $data = $request->request->all();
-            $deplacement = null;
-            $timetable = null;
-            $schedule = null;
-            for($i=1;$i<8;$i++)
-            {
-                if (array_key_exists('travel'.$i, $data))
-                    $deplacement[$i] = $data['travel'.$i];
-                if (!array_key_exists('travel'.$i, $data))
-                    $deplacement[$i] = "";
-                $date = $em->getRepository('CoyoteSiteBundle:Timetable')->createDateString($data['date'.$i]);
-                $timetable[$i] = $em->getRepository('CoyoteSiteBundle:Timetable')->findByDate($date);
-                $schedule[$i] = $em->getRepository('CoyoteSiteBundle:Schedule')->findOneBy(array(
-                    'timetable' => $timetable[$i], 'user' => $user
-                ));
-            }
-            $date = $em->getRepository('CoyoteSiteBundle:Timetable')->createDateYearWeek(
-            $session->get('year'), $session->get('week'));
-            $timetable_ids = $em->getRepository('CoyoteSiteBundle:Timetable')->findIdDate($date);
-            $list_id = "";
-            for ($i=1;$i<8;$i++)
-            {
-                if (empty($schedule[$i]))
-                {
-                    $timetable_id = $em->getRepository('CoyoteSiteBundle:Timetable')->findOneById(
-                            $timetable_ids[($i-1)]->getId());
-                    $schedule[$i] = $em->getRepository('CoyoteSiteBundle:Schedule')->createSchedule($user,
-                    		$timetable_id, $data['start'.$i], $data['end'.$i], $data['break'.$i], $deplacement[$i],
-                    		$data['absence'.$i], $data['absenceday'.$i], $data['absencetime'.$i], $data['comment'.$i]);
-                }
-                else
-                {
-                    $schedule[$i] = $em->getRepository('CoyoteSiteBundle:Schedule')->updateSchedule(
-                    $schedule[$i], $data['start'.$i], $data['end'.$i], $data['break'.$i], $deplacement[$i],
-                    $data['absence'.$i], $data['absenceday'.$i], $data['absencetime'.$i],
-                    $data['comment'.$i]);
-                }
-                if ($schedule[$i] != null)
-                {
-                    $em->persist($schedule[$i]);
-                    $list_id .= $i.';';
-                }
-            }
-
-            $em->flush();
+            
+            $em->getRepository('CoyoteSiteBundle:Schedule')->postScheduleUser($user, $data);
+            
+            /*
             $tab_id = explode(";", $list_id);
             $index = 0;
             for($i=0;$i<count($tab_id)-1;$i++)
@@ -147,61 +111,24 @@ class ScheduleController extends Controller
                     $message = 'schedule.flash.no_save';
             }
             if (empty($message))
-            	$message = 'schedule.flash.locked';
+            	$message = 'schedule.flash.locked';*/
+            	
+            $message = 'schedule.flash.save';
             $this->get('session')->getFlashBag()->set('save_schedule', $message);
             return $this->redirect($this->generateUrl('schedule_getscheduleuserweek'));
         }
         if ($this->get('security.context')->isGranted('ROLE_CADRE'))
         {
-            $request = $this->getRequest();
+	        $request = $this->getRequest();
             $session = $request->getSession();
             $doctrine = $this->getDoctrine();
             $em = $doctrine->getManager();
             $request = Request::createFromGlobals();
+            
             $data = $request->request->all();
-            $deplacement = null;
-            $timetable = null;
-            $schedule = null;
-            for($i=1;$i<8;$i++)
-            {
-                if (array_key_exists('travel'.$i, $data))
-                    $deplacement[$i] = $data['travel'.$i];
-                if (!array_key_exists('travel'.$i, $data))
-                    $deplacement[$i] = "";
-                $date = $em->getRepository('CoyoteSiteBundle:Timetable')->createDateString($data['date'.$i]);
-                $timetable[$i] = $em->getRepository('CoyoteSiteBundle:Timetable')->findByDate($date);
-                $schedule[$i] = $em->getRepository('CoyoteSiteBundle:Schedule')->findOneBy(array(
-                            'timetable' => $timetable[$i], 'user' => $user));
-            }
-            $date = $em->getRepository('CoyoteSiteBundle:Timetable')->createDateYearWeek(
-            $session->get('year'), $session->get('week'));
-            $timetable_ids = $em->getRepository('CoyoteSiteBundle:Timetable')->findIdDate($date);
-            $user = $this->getUser();
-            $list_id = "";
-            for ($i=1;$i<8;$i++)
-            {
-            	if(empty($schedule[$i]))
-                {
-                    $timetable_id = $em->getRepository('CoyoteSiteBundle:TimeTable')->findOneById(
-                    		$timetable_ids[($i-1)]->getId());
-                    $schedule[$i] = $em->getRepository('CoyoteSiteBundle:Schedule')->createSchedulefm($user,
-                    		$timetable_id, $deplacement[$i], $data['absence'.$i], $data['absenceday'.$i],
-                    		$data['absencetime'.$i], $data['comment'.$i], $data['day'.$i]);
-                }
-                else
-                {
-                    $schedule[$i] = $em->getRepository('CoyoteSiteBundle:Schedule')->updateSchedulefm($schedule[$i],
-                    		$deplacement[$i], $data['absence'.$i], $data['absenceday'.$i], $data['absencetime'.$i],
-                        	$data['comment'.$i], floatval($data['day'.$i]));
-                }
-                if($schedule[$i] != null)
-                {
-                    $em->persist($schedule[$i]);
-                    $list_id .= $i.';';
-                }
-            }
-            $em->flush();
-            $tab_id = explode(";", $list_id);
+            
+            $em->getRepository('CoyoteSiteBundle:Schedule')->postScheduleUserfm($user, $data);
+           	/*$tab_id = explode(";", $list_id);
             $index = 0;
             for($i=0;$i<count($tab_id)-1;$i++)
             {
@@ -210,7 +137,8 @@ class ScheduleController extends Controller
                     $message = 'schedule.flash.save';
                 else
                     $message = 'schedule.flash.no_save';
-            }
+            }*/
+            $message = 'schedule.flash.save';
             $this->get('session')->getFlashBag()->set('save_schedule', $message);
             return $this->redirect($this->generateUrl('schedule_getscheduleuserweek'));
         }
@@ -224,12 +152,10 @@ class ScheduleController extends Controller
      */
     public function getScheduleUserMonthAction(Request $request)
     {
-        $data = new Data();
-
+	    $doctrine = $this->getDoctrine();
+        $em = $doctrine->getManager();
         if ($request->getMethod() == 'GET' && isset($_GET['year']) && isset($_GET['month']))
-        {
-            $doctrine = $this->getDoctrine();
-            $em = $doctrine->getManager();
+        {   
             $year = $_GET['year'];
             $month = $_GET['month'];
             if (empty($year) && empty($month))
@@ -277,9 +203,9 @@ class ScheduleController extends Controller
                     $week = '';
                     for ($i=0;$i<count($data_schedule);$i++)
                     {
-                        $day[$i] = $data_schedule[$i]['date']->format('l');
-                        $date[$i] = $data_schedule[$i]['date']->format('d/m/Y');
-                        $week[$i] = $data_schedule[$i]['date']->format('W');
+                        $day[$i] = $data_schedule[$i]['date_schedule']->format('l');
+                        $date[$i] = $data_schedule[$i]['date_schedule']->format('d/m/Y');
+                        $week[$i] = $data_schedule[$i]['date_schedule']->format('W');
                     }
                     return $this->render('CoyoteSiteBundle:Schedule:show.html.twig', array(
                         'day' => $day,
@@ -298,9 +224,13 @@ class ScheduleController extends Controller
                 }
             }
         }
+        $tab_month = $em->getRepository('CoyoteSiteBundle:User')->findMonth();
+        $tab_num_month = $em->getRepository('CoyoteSiteBundle:User')->findNumMonth();
+        $tab_year = $em->getRepository('CoyoteSiteBundle:User')->findYear();
+        
         return $this->render('CoyoteSiteBundle:Schedule:indexshow.html.twig', array('month' => date('n'),
-        		'year' => date('Y'), 'tab_mois' => $data->getTabMonth(), 'tab_num_mois' => $data->getTabNumMonth(),
-                'tab_annee' => $data->getTabYear()));
+        		'year' => date('Y'), 'tab_mois' => $tab_month, 'tab_num_mois' => $tab_num_month,
+                'tab_annee' => $tab_year));
     }
 
     /**
@@ -310,11 +240,10 @@ class ScheduleController extends Controller
      */
     public function getScheduleUserPrintMonthAction(Request $request)
     {
-        $data = new Data();
+	    $doctrine = $this->getDoctrine();
+        $em = $doctrine->getManager();
         if ($request->getMethod() == 'GET' && isset($_GET['year']) && isset($_GET['month']))
         {
-            $doctrine = $this->getDoctrine();
-            $em = $doctrine->getManager();
             $year = $_GET['year'];
             $month = $_GET['month'];
             $user = $this->getUser();
@@ -354,9 +283,9 @@ class ScheduleController extends Controller
                 $week = '';
                 for ($i=0;$i<count($data_schedule);$i++)
                 {
-                    $day[$i] = $data_schedule[$i]['date']->format('l');
-                    $date[$i] = $data_schedule[$i]['date']->format('d/m/Y');
-                    $week[$i] = $data_schedule[$i]['date']->format('W');
+                    $day[$i] = $data_schedule[$i]['date_schedule']->format('l');
+                    $date[$i] = $data_schedule[$i]['date_schedule']->format('d/m/Y');
+                    $week[$i] = $data_schedule[$i]['date_schedule']->format('W');
                 }
                 $page = $this->render('CoyoteSiteBundle:Schedule:print.html.twig', array(
                         'day' => $day,
@@ -383,9 +312,13 @@ class ScheduleController extends Controller
             $html2pdf->Output($filename, 'D');
             return new Response('PDF réalisé');
         }
+        $tab_month = $em->getRepository('CoyoteSiteBundle:User')->findMonth();
+        $tab_num_month = $em->getRepository('CoyoteSiteBundle:User')->findNumMonth();
+        $tab_year = $em->getRepository('CoyoteSiteBundle:User')->findYear();
+        
         return $this->render('CoyoteSiteBundle:Schedule:indexprint.html.twig', array('month' => date('n'),
-        		'year' => date('Y'), 'tab_mois' => $data->getTabMonth(), 'tab_num_mois' => $data->getTabNumMonth(),
-                'tab_annee' => $data->getTabYear()));
+        		'year' => date('Y'), 'tab_mois' => $tab_month, 'tab_num_mois' => $tab_num_month,
+                'tab_annee' => $tab_year));
     }
 
     /*****************************************************************/
@@ -417,14 +350,14 @@ class ScheduleController extends Controller
         }
         else
         {
-            $data = new Data();
-        	$date = date('Y-m-d');
+            $date = date('Y-m-d');
         	$doctrine = $this->getDoctrine();
         	$em = $doctrine->getManager();
-        	$period = $em->getRepository('CoyoteSiteBundle:Timetable')->findPeriodByDate($date);
+        	$tab_period = $em->getRepository('CoyoteSiteBundle:User')->findPeriod();
+        	$period = $em->getRepository('CoyoteSiteBundle:Schedule')->findPeriodByDate($date);
             /** show view */
             return $this->render('CoyoteSiteBundle:Schedule:indexscheduleuserexcel.html.twig', array(
-                'period' => $period, 'tab_period' => $data->getTabPeriod()));
+                'period' => $period, 'tab_period' => $tab_period));
         }
     }
 
@@ -478,11 +411,10 @@ class ScheduleController extends Controller
      */
     public function getScheduleUserPrintYearAction(Request $request)
     {
-    	$data = new Data();
+	    $doctrine = $this->getDoctrine();
+    	$em = $doctrine->getManager();
     	if ($request->getMethod() == 'GET' && isset($_GET['pay_period']))
     	{
-    		$doctrine = $this->getDoctrine();
-    		$em = $doctrine->getManager();
     		$period = $_GET['pay_period'];
     		$user = $this->getUser();
     		$absencerttyear = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsenceYear($period, $user, "RTT");
@@ -503,15 +435,15 @@ class ScheduleController extends Controller
     		if ($this->get('security.context')->isGranted('ROLE_TECH'))
     		{
     			$data_schedule = $em->getRepository('CoyoteSiteBundle:Schedule')->dataScheduleYear($user, $period);
-    			$timeweek = $em->getRepository('CoyoteSiteBundle:Schedule')->timeWeek($data_schedule);
+    			$timeweek = $em->getRepository('CoyoteSiteBundle:Schedule')->countTimeWeek($data_schedule);
     			$date = '';
     			$day = '';
     			$week = '';
     			for ($i=0;$i<count($data_schedule);$i++)
     			{
-    				$day[$i] = $data_schedule[$i]['date']->format('l');
-    				$date[$i] = $data_schedule[$i]['date']->format('d/m/Y');
-    				$week[$i] = $data_schedule[$i]['date']->format('W');
+    				$day[$i] = $data_schedule[$i]['date_schedule']->format('l');
+    				$date[$i] = $data_schedule[$i]['date_schedule']->format('d/m/Y');
+    				$week[$i] = $data_schedule[$i]['date_schedule']->format('W');
     			}
     			$page = $this->render('CoyoteSiteBundle:Schedule:printpayperiod.html.twig', array(
     				'day' => $day,
@@ -534,13 +466,13 @@ class ScheduleController extends Controller
     		$html2pdf->Output($filename, 'D');
     		return new Response('PDF réalisé');
     	}
-    	$data = new Data();
+    	$tab_period = $em->getRepository('CoyoteSiteBundle:User')->findPeriod();
     	$date = date('Y-m-d');
     	$doctrine = $this->getDoctrine();
     	$em = $doctrine->getManager();
-    	$period = $em->getRepository('CoyoteSiteBundle:Timetable')->findPeriodByDate($date);
+    	$period = $em->getRepository('CoyoteSiteBundle:Schedule')->findPeriodByDate($date);
         return $this->render('CoyoteSiteBundle:Schedule:indexprintyear.html.twig', array(
-            'period' => $period, 'tab_period' => $data->getTabPeriod()));
+            'period' => $period, 'tab_period' => $tab_period));
     	}
     }
     /*****************************************************************/

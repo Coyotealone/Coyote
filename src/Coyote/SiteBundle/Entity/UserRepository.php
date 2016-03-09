@@ -35,14 +35,22 @@ class UserRepository extends EntityRepository
                     case 'Cadre':
                         $user->addRole('ROLE_CADRE');
                         break;
-                    case 'Trade':
+                    case 'Trade_Pichon':
                         $user->addRole('ROLE_TRADE');
+                        $user->addRole('ROLE_TRADE_PICHON');
+                        break;
+                    case 'Trade_Gilibert':
+                        $user->addRole('ROLE_TRADE');
+                        $user->addRole('ROLE_TRADE_GILIBERT');
                         break;
                     case 'BE':
                         $user->addRole('ROLE_CHEF_BE');
                         break;
                     case 'Compta':
                         $user->addRole('ROLE_COMPTA');
+                        break;
+                    case 'BE_User':
+                        $user->addRole('ROLE_BE_USER');
                         break;
                 }
             }
@@ -57,14 +65,22 @@ class UserRepository extends EntityRepository
                     case 'Cadre':
                         $user->removeRole('ROLE_CADRE');
                         break;
-                    case 'Trade':
+                    case 'Trade_Pichon':
                         $user->removeRole('ROLE_TRADE');
+                        $user->removeRole('ROLE_TRADE_PICHON');
+                        break;
+                    case 'Trade_Gilibert':
+                        $user->removeRole('ROLE_TRADE');
+                        $user->removeRole('ROLE_TRADE_GILIBERT');
                         break;
                     case 'BE':
                         $user->removeRole('ROLE_CHEF_BE');
                         break;
                     case 'Compta':
                         $user->removeRole('ROLE_COMPTA');
+                        break;
+                    case 'BE_User':
+                        $user->removeRole('ROLE_BE_USER');
                         break;
                 }
             }
@@ -85,5 +101,77 @@ class UserRepository extends EntityRepository
     public function findEnabledOrderByName()
     {
         return $this->findBy(array('enabled' => 1), array('name' => 'ASC'));
+    }
+    
+    public function findUserBe($role)
+    {
+	    $qb = $this->_em->createQueryBuilder();
+        $qb->select('u.id')
+           ->from('CoyoteSiteBundle:User', 'u')
+           ->where('u.roles LIKE :role')
+           ->orderBy('u.id')
+           ->setParameters(array('role' => $role));
+        $ids_user_be = $qb->getQuery()->getResult();
+        $tab_ids = array();
+        for($i=0;$i<count($ids_user_be);$i++)
+        {
+	        array_push($tab_ids, $ids_user_be[$i]['id']);
+        }
+        return $tab_ids;
+    }
+    
+    public function findMonth()
+    {
+	    $tab_month = array();
+	    for($i=1;$i<=12;$i++)
+	    {
+		    if($i<10)
+		    	$value = 'month_0'.$i;
+		    else
+		    	$value = 'month_'.$i;
+		    array_push($tab_month, $value);
+	    }
+	    return $tab_month;
+    }
+    
+    public function findNumMonth()
+    {
+	    $tab_num_month = array();
+	    for($i=1;$i<=12;$i++)
+	    {
+		    if($i<10)
+		    	$value = '0'.$i;
+		    else
+		    	$value = $i;
+		    array_push($tab_num_month, $value);
+	    }
+	    return $tab_num_month;
+    }
+    
+    public function findYear()
+    {
+	    $year = date('Y');
+	    $year = $year-2;
+	    $tab_year = array();
+	    for($i=0;$i<5;$i++)
+	    {
+		    array_push($tab_year, $year+$i);
+	    }
+	    return $tab_year;
+    }
+    
+    public function findPeriod()
+    {
+	    $year = date('Y');
+	    $year = $year-2;
+	    $tab_period = array();
+	    for($i=0;$i<4;$i++)
+	    {
+		    $year_1 = $year+1;
+		    $period = $year."/".$year_1;
+		    array_push($tab_period, $period);
+		    $year++;
+	    }
+	    return $tab_period;
     }
 }

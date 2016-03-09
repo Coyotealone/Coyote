@@ -58,21 +58,21 @@ class AdminController extends Controller
             $request = Request::createFromGlobals();
             /** @var $data array data request */
             $data_request = $request->request->all();
-            /** check @var data */
+            
             if ($data_request == null)
             {
-                /** @var $data object Data */
-	            $data = new Data();
-	            /** show view */
+	            $tab_month = $em->getRepository('CoyoteSiteBundle:User')->findMonth();
+	            $tab_num_month = $em->getRepository('CoyoteSiteBundle:User')->findNumMonth();
+	            $tab_year = $em->getRepository('CoyoteSiteBundle:User')->findYear();
+                /** show view */
 	            return $this->render('CoyoteSiteBundle:Admin:index_export.html.twig', array('month' => date('n'),
-	                'year' => date('Y'), 'tab_mois' => $data->getTabMonth(), 'tab_num_mois' => $data->getTabNumMonth(),
-	                'tab_annee' => $data->getTabYear()));
+	                'year' => date('Y'), 'tab_mois' => $tab_month, 'tab_num_mois' => $tab_num_month,
+	                'tab_annee' => $tab_year));
             }
             else
             {
-                /** @var $data object Entity Data */
-                $data = new Data();
-                $filecsv = $em->getRepository('CoyoteSiteBundle:Schedule')->createFileUserBE($data->getTabUserIdBE(),
+	            $ids_user_be = $em->getRepository('CoyoteSiteBundle:User')->findUserBe("%ROLE_BE_USER%");
+	            $filecsv = $em->getRepository('CoyoteSiteBundle:Schedule')->createFileUserBE($ids_user_be,
                     $data_request['month'], $data_request['year']);
                 /** @var $filename string file name CSV */
                 $filename = 'datauser'.$data_request['month'].'/'.$data_request['year'].'.csv';
@@ -325,15 +325,15 @@ class AdminController extends Controller
         }
         else
         {
-            $data = new Data();
-        	$date = date('Y-m-d');
-        	$doctrine = $this->getDoctrine();
+            $date = date('Y-m-d');
+            $tab_period = $em->getRepository('CoyoteSiteBundle:User')->findPeriod();
+            $doctrine = $this->getDoctrine();
         	$em = $doctrine->getManager();
-        	$period = $em->getRepository('CoyoteSiteBundle:Timetable')->findPeriodByDate($date);
+        	$period = $em->getRepository('CoyoteSiteBundle:Schedule')->findPeriodByDate($date);
         	$tab_user = $em->getRepository('CoyoteSiteBundle:User')->findEnabledOrderByName();
             /** show view */
             return $this->render('CoyoteSiteBundle:Admin:indexscheduleuserexcel.html.twig', array(
-                'period' => $period, 'tab_period' => $data->getTabPeriod(), 'tab_user' => $tab_user));
+                'period' => $period, 'tab_period' => $tab_period, 'tab_user' => $tab_user));
         }
     }
 

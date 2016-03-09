@@ -12,15 +12,28 @@ use Doctrine\ORM\EntityRepository;
  */
 class DirectoryRepository extends EntityRepository
 {
-    public function findAllByFirstname($country)
+    public function findAllByFirstname($country, $business)
     {
-        return $this->findBy(array('country' => $country, 'enabled' => 1), array('firstname' => 'ASC'));
-    }
+	    $qb = $this->_em->createQueryBuilder();
+        $qb->select('d')
+           ->from('CoyoteSiteBundle:Directory', 'd')
+           ->where("d.country = :country and d.enabled = 1 and d.business like :business ")
+           ->orderBy('d.firstname', 'ASC')
+           ->setParameters(array('country' => $country, 'business' => '%GILIBERT%'));
+        $directories = $qb->getQuery()->getResult();
+        return $directories;
+	}
 
-    public function findAllByFunctionService($country)
+    public function findAllByFunctionService($country, $business)
     {
-        return $this->findBy(array('country' => $country, 'enabled' => 1), array('function_service' => 'ASC', 
-        		'leader' => 'DESC', 'firstname' => 'ASC'));
+	    $qb = $this->_em->createQueryBuilder();
+        $qb->select('d')
+           ->from('CoyoteSiteBundle:Directory', 'd')
+           ->where('d.country = :country and d.enabled = 1 and d.business like :business')
+           ->orderBy('d.function_service', 'ASC')
+           ->setParameters(array('country' => $country, 'business' => $business));
+        $directories = $qb->getQuery()->getResult();
+        return $directories;
     }
 
     public function findAll()

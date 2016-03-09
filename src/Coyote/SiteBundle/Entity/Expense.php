@@ -23,8 +23,8 @@ class Expense
     private $id;
 
     /**
-     * @var datetime
-     * @ORM\Column(name="date", type="datetime")
+     * @var date
+     * @ORM\Column(name="date", type="date")
      */
     private $date;
 
@@ -106,7 +106,7 @@ class Expense
     public function __construct()
     {
         $this->expenses = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->site = 9;
+        //$this->site = 9;
     }
 
     /**
@@ -300,29 +300,6 @@ class Expense
     public function getUpdatedAt()
     {
         return $this->updated_at;
-    }
-
-    /**
-     * Add expenses
-     *
-     * @param \Coyote\SiteBundle\Entity\UserFees $expenses
-     * @return Expense
-     */
-    public function addExpense(\Coyote\SiteBundle\Entity\UserFees $expenses)
-    {
-        $this->expenses[] = $expenses;
-
-        return $this;
-    }
-
-    /**
-     * Remove expenses
-     *
-     * @param \Coyote\SiteBundle\Entity\UserFees $expenses
-     */
-    public function removeExpense(\Coyote\SiteBundle\Entity\UserFees $expenses)
-    {
-        $this->expenses->removeElement($expenses);
     }
 
     /**

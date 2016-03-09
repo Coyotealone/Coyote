@@ -14,7 +14,7 @@
 {% block content %}
 
 <div class="icon-preview">
-    <a href="{{ path('directory_pdfdirectorybyfirstname', { 'country': country }) }}"><i class="mdi-action-print"></i> {{'directory.print'|trans}}</a>
+    <a href="{{ path('directory_pdfdirectorybyfirstname', { 'country': country, 'business': business }) }}"><i class="mdi-action-print"></i> {{'directory.print'|trans}}</a>
 </div>
 
 {% if entity|length > 0 %}
@@ -25,7 +25,9 @@
                 <th>{{'directory.name'|trans}}</th>
                 <th>{{'directory.jobphonenumber'|trans}}</th>
                 <th>{{'directory.quickphonenumber'|trans}}</th>
+                <th>{{'directory.phone'|trans}}</th>
                 <th>{{'directory.cellphonenumber'|trans}}</th>
+                <th>{{'directory.fax'|trans}}</th>
                 <th>{{'directory.mail'|trans}}</th>
             </tr>
         </thead>
@@ -40,7 +42,9 @@
             <td></td>
             {% endif %}
             <td>{{ data.quickphonenumber}}</td>
+            <td>{{ data.phone }}</td>
             <td>{{ data.cellphonenumber}}</td>
+            <td>{{ data.fax }}</td>
             <td>{{ data.mail }}</td>
         </tr>
         {% endfor %}

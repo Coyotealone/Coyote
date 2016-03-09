@@ -14,7 +14,7 @@
 {% block content %}
 
 <div class="icon-preview">
-    <a href="{{ path('directory_pdfdirectorybyfunctionservice', { 'country': country }) }}"><i class="mdi-action-print"></i> {{'directory.print'|trans}}</a>
+    <a href="{{ path('directory_pdfdirectorybyfunctionservice', { 'country': country , 'business': business}) }}"><i class="mdi-action-print"></i> {{'directory.print'|trans}}</a>
 </div>
 
 {% if entity|length > 0 %}
@@ -26,7 +26,9 @@
                 <th>{{'directory.name'|trans}}</th>
                 <th>{{'directory.jobphonenumber'|trans}}</th>
                 <th>{{'directory.quickphonenumber'|trans}}</th>
+                <th>{{'directory.phone'|trans}}</th>
                 <th>{{'directory.cellphonenumber'|trans}}</th>
+                <th>{{'directory.fax'|trans}}</th>
                 <th>{{'directory.mail'|trans}}</th>
             </tr>
         </thead>
@@ -34,7 +36,7 @@
         {% for data in entity %}
             {% if data.functionservice != functionservice %}
             <tr>
-                <td COLSPAN=6><b>{{ data.functionservice }}</b></td>
+                <td COLSPAN=9><b>{{ data.functionservice }}</b></td>
             </tr>
             {% endif %}
         <tr>
@@ -46,7 +48,9 @@
             <td></td>
             {% endif %}
             <td>{{ data.quickphonenumber}}</td>
+            <td>{{ data.phone }}</td>
             <td>{{ data.cellphonenumber}}</td>
+            <td>{{ data.fax }}</td>
             <td>{{ data.mail }}</td>
         </tr>
         {% set functionservice = data.functionservice %}

@@ -7,15 +7,15 @@
         <li><a href="{{ path('schedule_getscheduleuserweek') }}">{{'base.nav.schedule.index'|trans}}</a></li>
         <li><a href="{{ path('schedule_getscheduleusermonth') }}">{{'base.nav.schedule.indexshow'|trans}}</a></li>
         <li><a href="{{ path('schedule_getscheduleuserprintmonth') }}">{{'base.nav.schedule.indexprint'|trans}}</a></li>
-        <li><a href="{{ path('absence') }}">{{'base.nav.schedule.absence'|trans}}</a></li>
-        {% if is_granted('ROLE_TECH') %}
+        {#<li><a href="{{ path('absence') }}">{{'base.nav.schedule.absence'|trans}}</a></li>#}
+        {#{% if is_granted('ROLE_TECH') %}
         <li><a href="{{ path('schedule_overtime') }}">{{'base.nav.schedule.overtime'|trans}}</a></li>
-        {% endif %}
+        {% endif %}#}
       </ul>
     </li>
     {% endif %}
 
-    {% if is_granted('ROLE_TRADE') %}
+    {% if is_granted('ROLE_TRADE') or is_granted('ROLE_TRADE_PICHON') or is_granted('ROLE_TRADE_GILIBERT') %}
     <li id="frais" class="dropdown" style="margin: 0px 10px; float:left; ">
       <a href="{{ path('expense_create') }}" class="dropdown-toggle" data-toggle="dropdown">{{'base.nav.expense.name'|trans}}<b class="caret"></b></a>
       <ul class="dropdown-menu">

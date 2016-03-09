@@ -30,19 +30,19 @@ directory_delete:
     methods:  [POST, DELETE]
 
 directory_showdirectorybyfirstname:
-    path:     /showdirectorybyfirstname/{country}
+    path:     /showdirectorybyfirstname/{country}/{business}
     defaults: { _controller: "CoyoteSiteBundle:Directory:showDirectoryByFirstname" }
 
 directory_showdirectorybyfunctionservice:
-    path:     /showdirectorybyfunctionservice/{country}
+    path:     /showdirectorybyfunctionservice/{country}/{business}
     defaults: { _controller: "CoyoteSiteBundle:Directory:showDirectoryByFunctionService" }
 
 directory_pdfdirectorybyfirstname:
-    path:     /pdfdirectorybyfirstname/{country}
+    path:     /pdfdirectorybyfirstname/{country}/{business}
     defaults: { _controller: "CoyoteSiteBundle:Directory:printDirectoryByFirstname" }
 
 directory_pdfdirectorybyfunctionservice:
-    path:     /pdfdirectorybyfunctionservice/{country}
+    path:     /pdfdirectorybyfunctionservice/{country}/{business}
     defaults: { _controller: "CoyoteSiteBundle:Directory:printDirectoryByFunctionService" }
 
 directory_enabled:

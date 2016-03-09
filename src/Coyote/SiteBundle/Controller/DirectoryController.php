@@ -224,29 +224,29 @@ class DirectoryController extends Controller
         ;
     }
 
-    public function showDirectoryByFirstnameAction($country)
+    public function showDirectoryByFirstnameAction($country, $business)
     {
         $em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository('CoyoteSiteBundle:Directory')->findAllByFirstname($country);
+        $entity = $em->getRepository('CoyoteSiteBundle:Directory')->findAllByFirstname($country, '%'.$business.'%');
         return $this->render('CoyoteSiteBundle:Directory:showdirectorybyfirstname.html.twig',
-                array('entity' => $entity, 'country' => $country));
+                array('entity' => $entity, 'country' => $country, 'business' => $business));
     }
 
-    public function showDirectoryByFunctionServiceAction($country)
+    public function showDirectoryByFunctionServiceAction($country, $business)
     {
         $em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository('CoyoteSiteBundle:Directory')->findAllByFunctionService($country);
+        $entity = $em->getRepository('CoyoteSiteBundle:Directory')->findAllByFunctionService($country, '%'.$business.'%');
         return $this->render('CoyoteSiteBundle:Directory:showdirectorybyfunctionservice.html.twig',
-                array('entity' => $entity, 'country' => $country));
+                array('entity' => $entity, 'country' => $country, 'business' => $business));
     }
 
-    public function printDirectoryByFirstnameAction($country)
+    public function printDirectoryByFirstnameAction($country, $business)
     {
         $em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository('CoyoteSiteBundle:Directory')->findAllByFirstname($country);
+        $entity = $em->getRepository('CoyoteSiteBundle:Directory')->findAllByFirstname($country, '%'.$business.'%');
         $update = $em->getRepository('CoyoteSiteBundle:Directory')->updateDate($country);
         $page = $this->render('CoyoteSiteBundle:Directory:pdfdirectorybyfirstname.html.twig',
-                array('entity' => $entity, 'update' => $update));
+                array('entity' => $entity, 'update' => $update, 'business' => $business));
         $date = date("Ymd");
         $heure = date("His");
         $html = $page->getContent();
@@ -259,13 +259,13 @@ class DirectoryController extends Controller
         return new Response('PDF réalisé');
     }
 
-    public function printDirectoryByFunctionServiceAction($country)
+    public function printDirectoryByFunctionServiceAction($country, $business)
     {
         $em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository('CoyoteSiteBundle:Directory')->findAllByFunctionService($country);
+        $entity = $em->getRepository('CoyoteSiteBundle:Directory')->findAllByFunctionService($country, '%'.$business.'%');
         $update = $em->getRepository('CoyoteSiteBundle:Directory')->updateDate($country);
         $page = $this->render('CoyoteSiteBundle:Directory:pdfdirectorybyfunctionservice.html.twig',
-                array('entity' => $entity, 'update' => $update));
+                array('entity' => $entity, 'update' => $update, 'business' => $business));
         $date = date("Ymd");
         $heure = date("His");
         $html = $page->getContent();

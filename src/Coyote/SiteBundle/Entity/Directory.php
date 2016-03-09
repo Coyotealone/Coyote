@@ -45,12 +45,24 @@ class Directory
      * @ORM\Column(name="quick_phone_number", type="integer", nullable=true, options={"unsigned":true})
      */
     private $quick_phone_number;
+    
+    /**
+     * @var string
+     * @ORM\Column(name="phone", type="string", length=20, nullable=true)
+     */
+    private $phone;
 
     /**
      * @var string
      * @ORM\Column(name="cellphone_number", type="string", length=20, nullable=true)
      */
     private $cellphone_number;
+    
+    /**
+     * @var string
+     * @ORM\Column(name="fax", type="string", length=20, nullable=true)
+     */
+    private $fax;
 
     /**
      * @var string
@@ -99,7 +111,13 @@ class Directory
      * @ORM\Column(name="enabled_at", type="datetime", nullable=true)
      */
     private $enabled_at;
-
+    
+    /**
+     * @var string
+     * @ORM\Column(name="business", type="string", length=50)
+     */
+    private $business;
+    
     /**
      * 
      * @return string name
@@ -413,5 +431,74 @@ class Directory
     public function getEnabledAt()
     {
         return $this->enabled_at;
+    }
+    
+    /**
+     * Set business
+     *
+     * @param string $business
+     * @return Directory
+     */
+    public function setBusiness($business)
+    {
+        $this->business = $business;
+
+        return $this;
+    }
+
+    /**
+     * Get business
+     *
+     * @return string
+     */
+    public function getBusiness()
+    {
+        return $this->business;
+    }
+    
+    /**
+     * Set fax
+     *
+     * @param string $fax
+     * @return Directory
+     */
+    public function setFax($fax)
+    {
+        $this->fax = $fax;
+
+        return $this;
+    }
+
+    /**
+     * Get fax
+     *
+     * @return string
+     */
+    public function getFax()
+    {
+        return $this->fax;
+    }
+
+    /**
+     * Set phone
+     *
+     * @param string $phone
+     * @return Directory
+     */
+    public function setPhone($phone)
+    {
+        $this->phone = $phone;
+
+        return $this;
+    }
+
+    /**
+     * Get phone
+     *
+     * @return string 
+     */
+    public function getPhone()
+    {
+        return $this->phone;
     }
 }

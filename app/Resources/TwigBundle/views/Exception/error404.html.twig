@@ -1,0 +1,12 @@
+{% extends 'TwigBundle::layout.html.twig' %}
+
+{% block content %}
+
+    {% if  app.environment == 'dev' %}
+        <h2>Le serveur a retourné une erreur "{{ status_code }} {{ status_text }}".</h2>
+    {% else %}
+        <h1>{{ "exception.error_404"|trans }}</h1>
+        <h2>{{ "exception.error_back"|trans }}</h2>
+    {% endif %}
+
+{% endblock %}

@@ -59,6 +59,16 @@ class DirectoryType extends AbstractType
                     'label' => 'directory.functionservice', 'translation_domain' => 'messages'
                     ))
             ->add('leader')
+            ->add('business', 'choice', array(
+                    'choices'   => array(
+                                    'Pichon' => 'business.pichon',
+                                    'Gilibert' => 'business.gilibert',
+                                    'Pichon/Gilibert' => 'business.pichongilibert',
+                    ),
+                    'label' => 'directory.business', 'translation_domain' => 'messages'
+                    ))
+            ->add('phone')
+            ->add('fax')
         ;
     }
 

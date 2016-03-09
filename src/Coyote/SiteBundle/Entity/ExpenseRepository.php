@@ -74,13 +74,13 @@ class ExpenseRepository extends EntityRepository
         $userfees = '';
         foreach($res as $data)
         {
-            if ($data->getUser()->getUserFees()->getLogin() != $userfees)
-            {
-                $userfees = $data->getUser()->getUserFees()->getLogin();
-                $result .= "H;".$data->getUser()->getUserFees()->getLogin()."\r\n";
-            }
+            //if ($data->getUser()->getUserFees()->getLogin() != $userfees)
+            //{
+                $userfees = strtoupper($data->getUser()->getUsername());
+                $result .= "H;".strtoupper($data->getUser()->getUsername())."\r\n";
+            //}
             $result .= "D;";
-            $result .= $data->getUser()->getUserFees()->getLogin().";";//En majuscule
+            $result .= strtoupper($data->getUser()->getUsername()).";";//En majuscule
             $result .= $data->getSite()->getCode().";";
             $result .= $data->getDate()->format('dmy').";";
             $result .= $data->getFee()->getCode().";";
@@ -93,9 +93,9 @@ class ExpenseRepository extends EntityRepository
             $result .= $data->getAmountTVA().";";
             if($data->getFee()->getCode() == "ENTRE1")
             {
-                if ($data->getUser()->getUserFees()->getCar()->getCode() != 0)
+                if ($data->getUser()->getCodeCar() != 0)
                 {
-                    $result .= $data->getUser()->getUserFees()->getCar()->getCode().";;";
+                    $result .= $data->getUser()->getCodeCar().";;";
                 }
                 else
                 {
@@ -104,10 +104,10 @@ class ExpenseRepository extends EntityRepository
             }
             else
             {
-                $result .= $data->getUser()->getUserFees()->getCode().";;";
+                $result .= strtoupper($data->getUser()->getUsername()).";;";
             }
             $result .= $data->getBusiness()->getCode().";";
-            $result .= $data->getUser()->getUserFees()->getService().";";
+            $result .= $data->getUser()->getCommercialCode().";";
             $result .= $data->getComment().";\r\n";
 
         }
@@ -170,7 +170,7 @@ class ExpenseRepository extends EntityRepository
      */
     public function createExpense($user, $data, $increment)
     {
-        $site = $this->_em->getRepository('CoyoteSiteBundle:Site')->find(9);//$data['site'.$increment]);
+        $site = $this->_em->getRepository('CoyoteSiteBundle:Site')->find($data['site'.$increment]);
         $currency = $this->_em->getRepository('CoyoteSiteBundle:Currency')->find($data['devise'.$increment]);
         $business = $this->_em->getRepository('CoyoteSiteBundle:Business')->find($data['affaire'.$increment]);
         $fee = $this->_em->getRepository('CoyoteSiteBundle:Fee')->find($data['article'.$increment]);

@@ -11,12 +11,12 @@ web/bundles/*
 web/presence/*
 
 # Configuration files
-app/config/parameters.ini
-app/config/parameters.yml
-#app/config/config_dev.yml
-app/config/config_prod.yml
-app/config/config_test.yml
-app/config/config.yml
+/app/cache/*
+/app/config/parameters.yml
+/app/logs/*
+!app/cache/.gitkeep
+!app/logs/.gitkeep
+/app/phpunit.xml
 
 # Composer
 composer.phar
@@ -26,3 +26,5 @@ src/Coyote/SiteBundle/DataFixtures/*
 /vendor/
 
 .settings/org.eclipse.wst.common.project.facet.core.xml
+
+/src/Coyote/SiteBundle/Entity/*.php~

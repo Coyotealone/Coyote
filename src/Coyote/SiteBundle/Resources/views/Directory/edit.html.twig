@@ -39,6 +39,14 @@
         		<td>{{ form_widget(edit_form.cellphone_number) }}</td>
             </tr>
             <tr>
+        		<th>{{ form_label(edit_form.phone, 'directory.phone') }}</th>
+        	    <td>{{ form_widget(edit_form.phone) }}</td>
+            </tr>
+             <tr>
+        		<th>{{ form_label(edit_form.fax, 'directory.fax') }}*</th>
+        	    <td>{{ form_widget(edit_form.fax) }}</td>
+            </tr>
+            <tr>
         		<th>{{ form_label(edit_form.function_service, 'directory.functionservice'|trans) }}</th>
         		<td>{{ form_widget(edit_form.function_service) }}</td>
             </tr>
@@ -53,6 +61,10 @@
             <tr>
         		<th>{{ form_label(edit_form.country, 'directory.country'|trans) }}</th>
         	    <td>{{ form_widget(edit_form.country) }}</td>
+            </tr>
+            <tr>
+        		<th>{{ form_label(edit_form.business, 'directory.business'|trans) }}</th>
+        	    <td>{{ form_widget(edit_form.business) }}</td>
             </tr>
         </table>
     </div>

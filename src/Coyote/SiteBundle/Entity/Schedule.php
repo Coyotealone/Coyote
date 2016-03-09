@@ -119,11 +119,10 @@ class Schedule
     private $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Timetable")
-     * @ORM\JoinColumn(nullable=false)
+     * @var \Date
+     * @ORM\Column(name="date_schedule", type="date", nullable=false)
      */
-    private $timetable;
-
+    private $date_schedule;
 
     /**
      * Get id
@@ -411,57 +410,11 @@ class Schedule
     }
 
     /**
-     * Set timetable
-     *
-     * @param \Coyote\SiteBundle\Entity\Timetable $timetable
-     * @return Schedule
-     */
-    public function setTimetable(\Coyote\SiteBundle\Entity\Timetable $timetable = null)
-    {
-        $this->timetable = $timetable;
-
-        return $this;
-    }
-
-    /**
-     * Get timetable
-     *
-     * @return \Coyote\SiteBundle\Entity\Timetable
-     */
-    public function getTimetable()
-    {
-        return $this->timetable;
-    }
-    /**
      * Constructor
      */
     public function __construct()
     {
-        $this->timetable = new \Doctrine\Common\Collections\ArrayCollection();
         $this->locked = 0;
-    }
-
-    /**
-     * Add timetable
-     *
-     * @param \Coyote\SiteBundle\Entity\Timetable $timetable
-     * @return Schedule
-     */
-    public function addTimetable(\Coyote\SiteBundle\Entity\Timetable $timetable)
-    {
-        $this->timetable[] = $timetable;
-
-        return $this;
-    }
-
-    /**
-     * Remove timetable
-     *
-     * @param \Coyote\SiteBundle\Entity\Timetable $timetable
-     */
-    public function removeTimetable(\Coyote\SiteBundle\Entity\Timetable $timetable)
-    {
-        $this->timetable->removeElement($timetable);
     }
 
     /**
@@ -554,5 +507,30 @@ class Schedule
     public function getLockedAt()
     {
         return $this->locked_at;
+    }
+
+    
+
+    /**
+     * Set date_schedule
+     *
+     * @param \DateTime $dateSchedule
+     * @return Schedule
+     */
+    public function setDateSchedule($dateSchedule)
+    {
+        $this->date_schedule = $dateSchedule;
+
+        return $this;
+    }
+
+    /**
+     * Get date_schedule
+     *
+     * @return \DateTime 
+     */
+    public function getDateSchedule()
+    {
+        return $this->date_schedule;
     }
 }
