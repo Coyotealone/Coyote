@@ -5,6 +5,7 @@ namespace Coyote\SiteBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Response;
 
 use Coyote\SiteBundle\Entity\Expense;
 use Coyote\SiteBundle\Entity\Data;
@@ -352,6 +353,9 @@ class ExpenseController extends Controller
      */
 	public function getExpensesAction($page)
 	{
+    	$doctrine = $this->getDoctrine();
+        $em = $doctrine->getManager();
+        
 		$user = $this->get('security.context')->getToken()->getUser();
         if ($user == "anon.")
         {
@@ -359,7 +363,6 @@ class ExpenseController extends Controller
 		}
 		if (!empty($_GET['month']) && empty(!$_GET['year']))
 		{
-			$em = $this->getDoctrine()->getManager();
 			$date = $_GET['year'].'-'.$_GET['month'].'%';
 			$request = $this->getRequest();
 			$session = $request->getSession();
@@ -384,10 +387,13 @@ class ExpenseController extends Controller
 		}
 		else
 		{
-			$data = new Data();
+    		$tab_month = $em->getRepository('CoyoteSiteBundle:User')->findMonth();
+            $tab_num_month = $em->getRepository('CoyoteSiteBundle:User')->findNumMonth();
+            $tab_year = $em->getRepository('CoyoteSiteBundle:User')->findYear();
+            $tab_num_year = $em->getRepository('CoyoteSiteBundle:User')->findNumYear();
 			return $this->render('CoyoteSiteBundle:Expense:indexshow.html.twig', array('month' => date('n'),
-					'year' => date('Y'), 'tab_mois' => $data->getTabMonth(), 'tab_num_mois' => $data->getTabNumMonth(),
-					'tab_annee' => $data->getTabYear(), 'tab_num_annee' => $data->getTabNumYear()));
+					'year' => date('Y'), 'tab_mois' => $tab_month, 'tab_num_mois' => $tab_num_month,
+					'tab_annee' => $tab_year, 'tab_num_annee' => $tab_num_year));
 		}
 	}
 
@@ -415,10 +421,13 @@ class ExpenseController extends Controller
 		}
 		else
 		{
-			$data = new Data();
+    		$tab_month = $em->getRepository('CoyoteSiteBundle:User')->findMonth();
+            $tab_num_month = $em->getRepository('CoyoteSiteBundle:User')->findNumMonth();
+            $tab_year = $em->getRepository('CoyoteSiteBundle:User')->findYear();
+            $tab_num_year = $em->getRepository('CoyoteSiteBundle:User')->findNumYear();
 			return $this->render('CoyoteSiteBundle:Expense:indexprint.html.twig', array('month' => date('n'),
-					'year' => date('Y'), 'tab_mois' => $data->getTabMonth(), 'tab_num_mois' => $data->getTabNumMonth(),
-					'tab_annee' => $data->getTabYear(), 'tab_num_annee' => $data->getTabNumYear()));
+					'year' => date('Y'), 'tab_mois' => $tab_month, 'tab_num_mois' => $tab_num_month,
+					'tab_annee' => $tab_year, 'tab_num_annee' => $tab_num_year));
 
 		}
 	}

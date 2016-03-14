@@ -35,7 +35,7 @@ class ScheduleAdmin extends Admin
             ->add('created_at')
             ->add('updated_at')
             ->add('user')
-            ->add('timetable')
+            ->add('date_schedule')
         ;
     }
 

@@ -58,7 +58,7 @@ security:
 
                 # options du token csrf
                 csrf_parameter:                 _csrf_token
-                intention:                      authenticate
+                #intention:                      authenticate
 
             pattern: ^/
             anonymous: true

@@ -4,6 +4,7 @@ namespace Coyote\SiteBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class User
@@ -26,96 +27,96 @@ class User extends BaseUser
      * @var string
      * @ORM\Column(name="name", type="string", length=80)
      */
-    private $name;
+    protected $name;
 
     /**
      * @var string
      * @ORM\Column(name="address1", type="string", length=45)
      */
-    private $address1;
+    protected $address1;
 
     /**
      * @var string
      * @ORM\Column(name="address2", type="string", length=45, nullable=true)
      */
-    private $address2;
+    protected $address2;
 
     /**
      * @var string
      * @ORM\Column(name="zip_code", type="string", length=10)
      */
-    private $zip_code;
+    protected $zip_code;
 
     /**
      * @var string
      * @ORM\Column(name="postal_box", type="string", length=10, nullable=true)
      */
-    private $postal_box;
+    protected $postal_box;
 
     /**
      * @var string
      * @ORM\Column(name="city", type="string", length=80)
      */
-    private $city;
+    protected $city;
 
     /**
      * @var string
      * @ORM\Column(name="country", type="string", length=45)
      */
-    private $country;
+    protected $country;
 
     /**
      * @var string
      * @ORM\Column(name="phone", type="string", length=20)
      */
-    private $phone;
+    protected $phone;
 
     /**
      * @var string
      * @ORM\Column(name="cell", type="string", length=20, nullable=true)
      */
-    private $cell;
+    protected $cell;
 
     /**
      * @var string
      * @ORM\Column(name="fax", type="string", length=20, nullable=true)
      */
-    private $fax;
+    protected $fax;
 
     /**
      * @var string
      * @ORM\Column(name="website", type="string", length=100, nullable=true)
      */
-    private $website;
+    protected $website;
 
     /**
      * @ORM\OneToMany(targetEntity="Schedule", mappedBy="user", cascade={"persist", "merge"})
      */
-    private $schedules;
+    protected $schedules;
     
     /**
      * @var string
      * @ORM\Column(name="code_car", type="integer", length=2, nullable=true)
      */
-    private $code_car;
+    protected $code_car;
     
     /**
      * @var string
      * @ORM\Column(name="registration_car", type="string", length=9, nullable=true)
      */
-    private $registration_car;
+    protected $registration_car;
     
     /**
      * @var string
      * @ORM\Column(name="commercial_code", type="string", length=5, nullable=true)
      */
-    private $commercial_code;
+    protected $commercial_code;
     
     /**
      * @var string
      * @ORM\Column(name="commercial_service", type="string", length=5, nullable=true)
      */
-    private $commercial_service;
+    protected $commercial_service;
     
     /**
      * Constructor
@@ -512,5 +513,25 @@ class User extends BaseUser
     public function getCommercialService()
     {
         return $this->commercial_service;
+    }
+    
+    /**
+     * Get ExpiresAt
+     *
+     * @return \DateTime 
+     */
+    public function getExpiresAt()
+    {
+        return $this->expiresAt;
+    }
+    
+    /**
+     * Get CredentialsExpireAt
+     *
+     * @return \DateTime 
+     */
+    public function getCredentialsExpireAt()
+    {
+        return $this->credentialsExpireAt;
     }
 }

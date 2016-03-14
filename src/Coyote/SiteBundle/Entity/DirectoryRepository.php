@@ -19,7 +19,7 @@ class DirectoryRepository extends EntityRepository
            ->from('CoyoteSiteBundle:Directory', 'd')
            ->where("d.country = :country and d.enabled = 1 and d.business like :business ")
            ->orderBy('d.firstname', 'ASC')
-           ->setParameters(array('country' => $country, 'business' => '%GILIBERT%'));
+           ->setParameters(array('country' => $country, 'business' => $business));
         $directories = $qb->getQuery()->getResult();
         return $directories;
 	}

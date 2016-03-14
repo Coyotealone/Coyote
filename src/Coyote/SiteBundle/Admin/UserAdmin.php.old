@@ -44,10 +44,6 @@ class UserAdmin extends Admin
             ->add('cell')
             ->add('fax')
             ->add('website')
-            ->add('code_car')
-            ->add('registration_car')
-            ->add('commercial_code')
-            ->add('commercial_service')
         ;
     }
 
@@ -57,18 +53,12 @@ class UserAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add('id')
-            ->add('name')
             ->add('username')
+            ->add('name')
             ->add('email')
             ->add('enabled')
             ->add('locked')
-            ->add('passwordRequestedAt')
             ->add('roles')
-            ->add('code_car')
-            ->add('registration_car')
-            ->add('commercial_code')
-            ->add('commercial_service')
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'show' => array(),
@@ -89,18 +79,17 @@ class UserAdmin extends Admin
             ->add('usernameCanonical')
             ->add('email')
             ->add('emailCanonical')
-            ->add('enabled')
+            ->add('enabled', 'checkbox', array('required' => false))
             ->add('salt')
             ->add('password')
             ->add('lastLogin')
-            ->add('locked')
-            ->add('expired')
-            ->add('expiresAt')
-            ->add('confirmationToken')
-            ->add('passwordRequestedAt')
+            ->add('locked', 'checkbox', array('required' => false))
+            //->add('expiresAt')
+            //->add('confirmationToken')
+            //->add('passwordRequestedAt')
             ->add('roles')
-            ->add('credentialsExpired')
-            ->add('credentialsExpireAt')
+            //->add('credentialsExpired')
+            //->add('credentialsExpireAt')
             ->add('id')
             ->add('name')
             ->add('address1')
@@ -113,10 +102,6 @@ class UserAdmin extends Admin
             ->add('cell')
             ->add('fax')
             ->add('website')
-            ->add('code_car')
-            ->add('registration_car')
-            ->add('commercial_code')
-            ->add('commercial_service')
         ;
     }
 
@@ -154,10 +139,6 @@ class UserAdmin extends Admin
             ->add('cell')
             ->add('fax')
             ->add('website')
-            ->add('code_car')
-            ->add('registration_car')
-            ->add('commercial_code')
-            ->add('commercial_service')
         ;
     }
 }

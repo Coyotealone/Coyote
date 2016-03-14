@@ -160,6 +160,19 @@ class UserRepository extends EntityRepository
 	    return $tab_year;
     }
     
+    public function findNumYear()
+    {
+        $year = date('Y');
+        $year = $year-2;
+        $tab_year = array();
+        for($i=0;$i<5;$i++)
+	    {
+		    array_push($tab_year, $year);
+		    $year++;
+	    }
+	    return $tab_year;
+    }
+    
     public function findPeriod()
     {
 	    $year = date('Y');

@@ -1,8 +1,8 @@
 services:
-    coyote_site.registration.form.type:
-        class: Coyote\SiteBundle\Form\Type\RegistrationFormType
-        tags:
-            - { name: form.type, alias: coyote_site_registration }
+#    coyote_site.registration.form.type:
+#        class: Coyote\SiteBundle\Form\Type\RegistrationFormType
+#        tags:
+#            - { name: form.type, alias: coyote_site_registration }
     coyote_site.locale_listener:
         class: Coyote\SiteBundle\EventListener\LocaleListener
         arguments: ["%kernel.default_locale%"]

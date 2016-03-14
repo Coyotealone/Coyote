@@ -6,18 +6,14 @@ fos_user:
     from_email:
         address:    pichonwebsite@gmail.com
         sender_name: PichonSiteApp
-    registration:
-        confirmation:
-            from_email:
-                address:    pichonwebsite@gmail.com
-                sender_name: PichonSiteRegistration
     resetting:
         email:
             from_email:
                 address:    pichonwebsite@gmail.com
                 sender_name: PichonSiteResetting
+            template: CoyoteSiteBundle:User:resetting.email.html.twig
     service:
         mailer: fos_user.mailer.twig_swift
-    resetting:
-        email:
-            template: CoyoteSiteBundle:User:resetting.email.html.twig
+    registration:
+        form:
+            type: CoyoteSiteBundle\Form\RegistrationType

@@ -2,6 +2,9 @@ coyote_site:
     resource: "@CoyoteSiteBundle/Resources/config/routing.yml"
     prefix:   /
 
+#fos_user:
+#    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
 

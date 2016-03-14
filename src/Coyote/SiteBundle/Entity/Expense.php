@@ -23,7 +23,7 @@ class Expense
     private $id;
 
     /**
-     * @var date
+     * @var \Date
      * @ORM\Column(name="date", type="date")
      */
     private $date;
