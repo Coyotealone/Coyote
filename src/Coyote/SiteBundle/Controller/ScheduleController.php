@@ -378,7 +378,7 @@ class ScheduleController extends Controller
     public function postSchedulesLockedAction()
     {
     	$request = $this->getRequest();
-    	if ($request->getMethod() == 'POST' && filter_input(INPUT_POST, 'date', FILTER_UNSAFE_RAW)) )
+    	if ($request->getMethod() == 'POST' && filter_input(INPUT_POST, 'date', FILTER_UNSAFE_RAW))
     	{
     		$em = $this->getDoctrine()->getManager();
     		$date = new \DateTime(filter_input(INPUT_POST, 'date', FILTER_UNSAFE_RAW));
