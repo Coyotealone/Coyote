@@ -74,11 +74,11 @@ class ExpenseRepository extends EntityRepository
         $userfees = '';
         foreach($res as $data)
         {
-            //if ($data->getUser()->getUserFees()->getLogin() != $userfees)
-            //{
+            if (strtoupper($data->getUser()->getUsername()) != $userfees)
+            {
                 $userfees = strtoupper($data->getUser()->getUsername());
                 $result .= "H;".strtoupper($data->getUser()->getUsername())."\r\n";
-            //}
+            }
             $result .= "D;";
             $result .= strtoupper($data->getUser()->getUsername()).";";//En majuscule
             $result .= $data->getSite()->getCode().";";
@@ -104,12 +104,11 @@ class ExpenseRepository extends EntityRepository
             }
             else
             {
-                $result .= strtoupper($data->getUser()->getUsername()).";;";
+                $result .= strtoupper($data->getUser()->getCommercialCode()).";;";
             }
             $result .= $data->getBusiness()->getCode().";";
-            $result .= $data->getUser()->getCommercialCode().";";
+            $result .= $data->getUser()->getCommercialService().";";
             $result .= $data->getComment().";\r\n";
-
         }
         return $result;
     }

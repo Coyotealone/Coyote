@@ -89,12 +89,11 @@ class ExpenseController extends Controller
         {
             return $this->redirect($this->generateUrl('fos_user_security_login'));
         }
-        if ($this->get('security.context')->isGranted('ROLE_TRADE_GILIBERT') or 
+        if ($this->get('security.context')->isGranted('ROLE_TRADE_GILIBERT') || 
         	$this->get('security.context')->isGranted('ROLE_TRADE_PICHON'))
         {
             $count_expense = 0;
             $em = $this->getDoctrine()->getManager();
-            $request = Request::createFromGlobals();
             $data_request = $request->request->all();
             for($i=0;$i<6;$i++)
             {

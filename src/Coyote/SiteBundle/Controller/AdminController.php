@@ -30,7 +30,7 @@ class AdminController extends Controller
             /** @var $dataexpense string data file */
             $dataexpense = $em->getRepository('CoyoteSiteBundle:Expense')->createFileExpense();
             /** update status from Expense */
-            $em->getRepository('CoyoteSiteBundle:Expense')->updateStatusTo1($em);
+            //$em->getRepository('CoyoteSiteBundle:Expense')->updateStatusTo1($em);
             /** @return file txt downloaded with data expense */
             return new Response($dataexpense, 200, array(
                 'Content-Type' => 'application/force-download',
@@ -54,8 +54,6 @@ class AdminController extends Controller
         {
             /** @var $em object doctrine request */
             $em = $this->getDoctrine()->getManager();
-            /** @var $request object request */
-            $request = Request::createFromGlobals();
             /** @var $data array data request */
             $data_request = $request->request->all();
             
@@ -179,8 +177,6 @@ class AdminController extends Controller
         {
             /** @var $em object doctrine request */
             $em = $this->getDoctrine()->getManager();
-            /** @var $request object request */
-            $request = Request::createFromGlobals();
             /** @var $data array data request */
             $data_request = $request->request->all();
             /** check @var data */
@@ -213,8 +209,6 @@ class AdminController extends Controller
     {
         if ($this->get('security.context')->isGranted('ROLE_ADMIN'))
         {
-            /** @var $request object request */
-            $request = Request::createFromGlobals();
             /** @var $data array data request */
             $data_request = $request->request->all();
 
@@ -301,8 +295,6 @@ class AdminController extends Controller
     {
         /** @var $em object doctrine request */
         $em = $this->getDoctrine()->getManager();
-        /** @var $request object request */
-        $request = Request::createFromGlobals();
         /** @var $dataexpense string data file */
         $data_request = $request->request->all();
 

@@ -88,8 +88,7 @@ for($i=0;$i<365;$i++)
 	$id++;
 }
 
-
-function lundiPaques($year)
+private function lundiPaques($year)
 {
 	date_default_timezone_set('Europe/Paris');
 	date_default_timezone_set('UTC');
@@ -98,7 +97,7 @@ function lundiPaques($year)
 	return $date;
 }
 
-function jeudiAscension($year)
+private function jeudiAscension($year)
 {
 	date_default_timezone_set('Europe/Paris');
 	date_default_timezone_set('UTC');
@@ -107,7 +106,7 @@ function jeudiAscension($year)
 	return $date;
 }
 
-function lundiPentecote($year)
+private function lundiPentecote($year)
 {
 	date_default_timezone_set('Europe/Paris');
 	date_default_timezone_set('UTC');
@@ -116,7 +115,7 @@ function lundiPentecote($year)
 	return $date;
 }
 
-function paques($Jourj=0, $annee=NULL)
+private function paques($Jourj=0, $annee=NULL)
 {
     /* *** Algorithme de Oudin, calcul de Pâque postérieure à 1583 ***
      * Transcription pour le langage PHP par david96 le 23/03/2010

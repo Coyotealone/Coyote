@@ -93,10 +93,7 @@ class ScheduleController extends Controller
             $session = $request->getSession();
             $doctrine = $this->getDoctrine();
             $em = $doctrine->getManager();
-            $request = Request::createFromGlobals();
-            
             $data = $request->request->all();
-            
             $em->getRepository('CoyoteSiteBundle:Schedule')->postScheduleUser($user, $data);
             
             /*
@@ -123,8 +120,6 @@ class ScheduleController extends Controller
             $session = $request->getSession();
             $doctrine = $this->getDoctrine();
             $em = $doctrine->getManager();
-            $request = Request::createFromGlobals();
-            
             $data = $request->request->all();
             
             $em->getRepository('CoyoteSiteBundle:Schedule')->postScheduleUserfm($user, $data);
@@ -329,8 +324,6 @@ class ScheduleController extends Controller
     {
         /** @var $em object doctrine request */
         $em = $this->getDoctrine()->getManager();
-        /** @var $request object request */
-        $request = Request::createFromGlobals();
         
         if ($request->getMethod() == 'GET' && isset($_GET['pay_period']))
     	{

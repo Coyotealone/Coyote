@@ -23,7 +23,6 @@ class ContactController extends Controller
         $request = $this->get('request');
         if ($request->getMethod() == 'POST')
         {
-            $request = Request::createFromGlobals();
             $data = $request->request->all();
             $message = \Swift_Message::newInstance()
                 ->setContentType('text/html')
