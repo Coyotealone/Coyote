@@ -522,13 +522,13 @@ class ScheduleRepository extends EntityRepository
      * @param string $absence
      * @return number
      */
-    public function countAbsenceMonth($date, $user, $absence)
+    public function countAbsenceMonth($date, $user_id, $absence)
     {
         $qb = $this->_em->createQueryBuilder();
         $qb->select('s.absence_duration')
            ->from('CoyoteSiteBundle:Schedule', 's')
            ->where('s.user = :user and s.date_schedule LIKE :date and s.absence_name = :absence')
-           ->setParameters(array('user' => $user, 'date' => $date, 'absence' => $absence));
+           ->setParameters(array('user' => $user_id, 'date' => $date, 'absence' => $absence));
         $data_absence_duration = $qb->getQuery()
                                     ->getResult();
         $count_absence = 0.0;
@@ -1345,6 +1345,56 @@ class ScheduleRepository extends EntityRepository
 	    $period = $this->createPeriod($date);
 	    return $period;
     }
+    
+    public function allAbsences($month,$year,$user)
+    {
+        $absences = array();
+        $period = $this->findPeriod($month, $year);
+        $date = $year."-".$month."-%";
+        array_push($absences, $this->countAbsenceMonth($date, $user->getId(), "CA"));
+        array_push($absences, $this->countAbsenceMonth($date, $user->getId(), "CP"));
+        array_push($absences, $this->countAbsenceMonth($date, $user->getId(), "RTT"));
+        array_push($absences, $this->findAbsenceYear($period, $user, "CA"));
+        array_push($absences, $this->findAbsenceYear($period, $user, "CP"));
+        array_push($absences, $this->findAbsenceYear($period, $user, "RTT"));
+        return $absences;
+    }
+	
+	public function dataCadre($month,$year, $user)
+	{
+    	$data_cadre = array();
+    	$period = $this->findPeriod($month, $year);
+        $date = $year."-".$month."-%";
+        array_push($data_cadre, $this->findDayMonth($date, $user));
+        array_push($data_cadre, $this->findDayYear($period, $user));
+        array_push($data_cadre, $this->findAboutDateUserFM($user, $date));
+        return $data_cadre;
+	}
+	
+	public function dataTech($user,$month,$year)
+	{
+    	$data_tech = array();
+    	$date = $year."-".$month."-%";
+        $data_schedule = $this->findAboutDateUser($user, $date);
+        array_push($data_tech, $data_schedule);
+        array_push($data_tech, $this->countTimeWeek($data_schedule));
+        array_push($data_tech, $this->findTimeMonth($date, $user));
+        $date = array();
+        $day = array();
+        $week = array();
+        for ($i=0;$i<count($data_schedule);$i++)
+        {
+            $day[$i] = $data_schedule[$i]['date_schedule']->format('l');
+            $date[$i] = $data_schedule[$i]['date_schedule']->format('d/m/Y');
+            $week[$i] = $data_schedule[$i]['date_schedule']->format('W');
+        }
+        array_push($data_tech, $day);
+        array_push($data_tech, $date);
+        array_push($data_tech, $week);
+        return $data_tech;
+	}
+	
+                
 	
     /******************************************************************/
     /***********************Anciennes Fonctions************************/

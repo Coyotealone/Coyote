@@ -244,64 +244,26 @@ class ScheduleController extends Controller
             $year = filter_input(INPUT_GET, 'year', FILTER_UNSAFE_RAW);
             $month = filter_input(INPUT_GET, 'month', FILTER_UNSAFE_RAW);
             $user = $this->getUser();
-            $period = $em->getRepository('CoyoteSiteBundle:Schedule')->findPeriod($month, $year);
-            $date = $year."-".$month."-%";
-            $absenceca = $em->getRepository('CoyoteSiteBundle:Schedule')->countAbsenceMonth($date, $user->getId(), "CA");
-            $absencecp = $em->getRepository('CoyoteSiteBundle:Schedule')->countAbsenceMonth($date, $user->getId(), "CP");
-            $absencertt = $em->getRepository('CoyoteSiteBundle:Schedule')->countAbsenceMonth($date, $user->getId(), "RTT");
-            $absencerttyear = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsenceYear($period, $user, "RTT");
-            $absencecayear = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsenceYear($period, $user, "CA");
-            $absencecpyear = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsenceYear($period, $user, "CP");
+            $absences = $em->getRepository('CoyoteSiteBundle:Schedule')->allAbsences($month,$year,$user);
             if ($this->get('security.context')->isGranted('ROLE_CADRE'))
             {
-                $daymonth = $em->getRepository('CoyoteSiteBundle:Schedule')->findDayMonth($date, $user);
-                $dayyear = $em->getRepository('CoyoteSiteBundle:Schedule')->findDayYear($period, $user);
-                $dataschedule = $em->getRepository('CoyoteSiteBundle:Schedule')->findAboutDateUserFM($user, $date);
-                $page = $this->render('CoyoteSiteBundle:Schedule:printfm.html.twig', array(
-                                'dataschedule' => $dataschedule,
-                                'absencertt' => $absencertt,
-                                'absenceca' => $absenceca,
-                                'absencecp' => $absencecp,
-                                'rttyear' => $absencerttyear,
-                                'cpyear' => $absencecpyear,
-                                'cayear' => $absencecayear,
-                                'dayyear' => $dayyear,
-                                'daymonth' => $daymonth,
-                ));
+                $data_cadre = $em->getRepository('CoyoteSiteBundle:Schedule')->dataCadre($month,$year, $user);
+                $page = $this->render('CoyoteSiteBundle:Schedule:printfm.html.twig', array('dataschedule' => $data_cadre[2],
+                                'absencertt' => $absences[2],'absenceca' => $absences[0],'absencecp' => $absences[1],
+                                'rttyear' => $absences[5],'cpyear' => $absences[4],'cayear' => $absences[3],
+                                'dayyear' => $data_cadre[1],'daymonth' => $data_cadre[0]));
             }
             if ($this->get('security.context')->isGranted('ROLE_TECH'))
             {
-                $data_schedule = $em->getRepository('CoyoteSiteBundle:Schedule')->findAboutDateUser($user, $date);
-                $timeweek = $em->getRepository('CoyoteSiteBundle:Schedule')->countTimeWeek($data_schedule);
-                $timemonth = $em->getRepository('CoyoteSiteBundle:Schedule')->findTimeMonth($year.'-'.$month.'-%',
-                		$user);
-                $date = '';
-                $day = '';
-                $week = '';
-                for ($i=0;$i<count($data_schedule);$i++)
-                {
-                    $day[$i] = $data_schedule[$i]['date_schedule']->format('l');
-                    $date[$i] = $data_schedule[$i]['date_schedule']->format('d/m/Y');
-                    $week[$i] = $data_schedule[$i]['date_schedule']->format('W');
-                }
-                $page = $this->render('CoyoteSiteBundle:Schedule:print.html.twig', array(
-                        'day' => $day,
-                        'date' => $date,
-                        'week' => $week,
-                        'dataschedule' => $data_schedule,
-                        'absenceca' => $absenceca,
-                        'absencecp' => $absencecp,
-                        'absencertt' => $absencertt,
-                        'time' => $timemonth,
-                        'rttyear' => $absencerttyear,
-                        'cpyear' => $absencecpyear,
-                        'cayear' => $absencecayear,
-                        'timeweek' => $timeweek,));
+                $data_tech = $em->getRepository('CoyoteSiteBundle:Schedule')->dataTech($user,$month,$year);
+                $page = $this->render('CoyoteSiteBundle:Schedule:print.html.twig', array('day' => $data_tech[3], 
+                    'date' => $data_tech[4], 'week' => $data_tech[5], 'dataschedule' => $data_tech[0], 
+                    'absenceca' => $absences[0], 'absencecp' => $absences[1], 'absencertt' => $absences[2], 
+                    'time' => $data_tech[2], 'rttyear' => $absences[5], 'cpyear' => $absences[4], 
+                    'cayear' => $absences[3], 'timeweek' => $data_tech[1],));
             }
-            $date = date("Ymd");
-            $heure = date("His");
-            $html = $page->getContent();
-            $filename = $user->getName()."_presence".$date."-".$heure.".pdf";
+            
+            $filename = $user->getName()."_presence".date("Ymd")."-".date("His").".pdf";
             $html = $page->getContent();
             $html2pdf = new \Html2Pdf_Html2Pdf('P', 'A4', 'fr');
             $html2pdf->pdf->SetDisplayMode('real');
