@@ -167,14 +167,14 @@ class ExpenseRepository extends EntityRepository
      * @param mixed $increment
      * @return array Expense
      */
-    public function createExpense($user, $data, $increment)
+    public function createExpense($user, $data)
     {
         $count_expense = 0;
         for($i=0;$i<6;$i++)
         {
-            if (!empty($data_request['article'.$i]) && !empty($data_request['date'.$i])
-                        && !empty($data_request['devise'.$i]) && !empty($data_request['qte'.$i])
-                    	&& !empty($data_request['site'.$i]) && !empty($data_request['ttc'.$i]))
+            if (!empty($data['article'.$i]) && !empty($data['date'.$i])
+                        && !empty($data['devise'.$i]) && !empty($data['qte'.$i])
+                    	&& !empty($data['site'.$i]) && !empty($data['ttc'.$i]))
             {
                 $site = $this->_em->getRepository('CoyoteSiteBundle:Site')->find($data['site'.$i]);
                 $currency = $this->_em->getRepository('CoyoteSiteBundle:Currency')->find($data['devise'.$i]);
@@ -187,15 +187,15 @@ class ExpenseRepository extends EntityRepository
                 $expense->setBusiness($business);
                 $expense->setCurrency($currency);
                 $expense->setSite($site);
-                $expense->setComment($data['com'.$increment]);
+                $expense->setComment($data['com'.$i]);
                 $rate = $fee->getRate();
-                $price = $data['ttc'.$increment];
+                $price = $data['ttc'.$i];
                 $tva = $this->calculTVA($rate, $price);
                 $expense->setAmountTVA($tva);
                 $expense->setAmountTTC($price);
-                $expense->setAmount($data['qte'.$increment]);
+                $expense->setAmount($data['qte'.$i]);
                 $expense->setStatus(1);
-                $date = $this->checkDate($data['date'.$increment]);
+                $date = $this->checkDate($data['date'.$i]);
                 $format = 'd/m/y';
                 $date = \DateTime::createFromFormat($format, $date);
                 $expense->setDate($date);

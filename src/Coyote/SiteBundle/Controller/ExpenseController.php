@@ -93,9 +93,10 @@ class ExpenseController extends Controller
         	$this->get('security.context')->isGranted('ROLE_TRADE_PICHON'))
         {
             $em = $this->getDoctrine()->getManager();
+            $request = $this->getRequest();
             $data_request = $request->request->all();
             $count_expense = $em->getRepository('CoyoteSiteBundle:Expense')->createExpense($this->getUser(),
-                                $data_request, $i);
+                                $data_request);
             $message = $em->getRepository('CoyoteSiteBundle:Expense')->getMessagePutExpense($count_expense);
             if ($count_expense > 1)
             {
@@ -266,13 +267,13 @@ class ExpenseController extends Controller
 	            {
 	                $message = 'expense.flash.no_update';
 	                $this->get('session')->getFlashBag()->set('updatestatus', $message);
-	                return $this->render('CoyoteSiteBundle:Expense:updatestatus.html.twig');
 	            }
 	            else
 	            {
     	            $message = $em->getRepository('CoyoteSiteBundle:Expense')->postStatusExpense($id_start, $id_end);
 	                $this->get('session')->getFlashBag()->set('updatestatus', $message);
 	            }
+	            return $this->render('CoyoteSiteBundle:Expense:updatestatus.html.twig');
         	}
         	else
         	{

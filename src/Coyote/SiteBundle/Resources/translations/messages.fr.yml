@@ -36,7 +36,7 @@ function_service:
     maintenance: 'Maintenance'
     montage: 'Montage'
     ordonnancement: 'Ordonnancement'
-    organisation_qualite: Organisation/Qualité'
+    organisation_qualite: Organisation/Qualité
     rh: "Ressources Humaines"
     sav: 'S.A.V.'
     service_achats: 'Service Achats'
@@ -46,6 +46,27 @@ function_service:
     sous_traitance: 'Sous-Traitance'
     transport: 'Transport'
     usine: 'Usine'
+    achats_export_marketing: Achats/Export/Marketing
+    adm_ventes: ADM Ventes
+    approvisionnement: Approvisionnement
+    co_nord_est: Co Nord Est
+    co_sud_est: Co Sud Est
+    co_sud_ouest: Co Sud Ouest
+    comite_entreprise: "Comité d'entreprise" 
+    compta_fournisseurs: Compta Fournisseurs
+    debit: Débit
+    direction: Direction
+    direction_commerciale: Direction commerciale
+    direction_production: Direction production
+    export: Export
+    informatique: Informatique
+    methodes: Méthodes
+    pieces_sav: "Pièces/SAV"
+    salle_informatique: Salle Informatique
+    salle_reunion_etage: "Salle de réunion à l'étage"
+    salle_reunion_rdc: "Salle de réunino au rez-de-chaussé"
+    soudure: Soudure
+    stagiaire_be: Stagiaire BE
 
 country:
     fr: France

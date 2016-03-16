@@ -35,7 +35,7 @@ class AdminController extends Controller
             /** @var $dataexpense string data file */
             $dataexpense = $em->getRepository('CoyoteSiteBundle:Expense')->createFileExpense();
             /** update status from Expense */
-            $em->getRepository('CoyoteSiteBundle:Expense')->updateStatusTo1($em);
+            $em->getRepository('CoyoteSiteBundle:Expense')->updateStatusTo0();
             /** @return file txt downloaded with data expense */
             return new Response($dataexpense, 200, array(
                 'Content-Type' => 'application/force-download',
@@ -60,6 +60,7 @@ class AdminController extends Controller
             /** @var $em object doctrine request */
             $em = $this->getDoctrine()->getManager();
             /** @var $data array data request */
+            $request = $this->getRequest();
             $data_request = $request->request->all();
             
             if ($data_request == null)
@@ -123,7 +124,7 @@ class AdminController extends Controller
 
             $form = $formFactory->createForm();
             $form->setData($user);
-
+            $request = $this->getRequest();
             if ('POST' === $request->getMethod()) {
                 $form->bind($request);
 
@@ -182,6 +183,7 @@ class AdminController extends Controller
         {
             /** @var $em object doctrine request */
             $em = $this->getDoctrine()->getManager();
+            $request = $this->getRequest();
             /** @var $data array data request */
             $data_request = $request->request->all();
             /** check @var data */
@@ -214,6 +216,7 @@ class AdminController extends Controller
     {
         if ($this->get('security.context')->isGranted('ROLE_ADMIN'))
         {
+            $request = $this->getRequest();
             /** @var $data array data request */
             $data_request = $request->request->all();
 
@@ -300,6 +303,7 @@ class AdminController extends Controller
     {
         /** @var $em object doctrine request */
         $em = $this->getDoctrine()->getManager();
+        $request = $this->getRequest();
         /** @var $dataexpense string data file */
         $data_request = $request->request->all();
 

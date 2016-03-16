@@ -149,6 +149,7 @@ class ScheduleController extends Controller
     {
 	    $doctrine = $this->getDoctrine();
         $em = $doctrine->getManager();
+        $request = $this->getRequest();
         if ($request->getMethod() == 'GET' && filter_input(INPUT_GET, 'year', FILTER_UNSAFE_RAW) && filter_input(INPUT_GET, 'month', FILTER_UNSAFE_RAW))
         {   
             $year = filter_input(INPUT_GET, 'year', FILTER_UNSAFE_RAW);
@@ -237,6 +238,7 @@ class ScheduleController extends Controller
     {
 	    $doctrine = $this->getDoctrine();
         $em = $doctrine->getManager();
+        $request = $this->getRequest();
         if ($request->getMethod() == 'GET' && filter_input(INPUT_GET, 'month', FILTER_UNSAFE_RAW) && filter_input(INPUT_GET, 'year', FILTER_UNSAFE_RAW))
         {
             $year = filter_input(INPUT_GET, 'year', FILTER_UNSAFE_RAW);
@@ -324,10 +326,10 @@ class ScheduleController extends Controller
     {
         /** @var $em object doctrine request */
         $em = $this->getDoctrine()->getManager();
-        
+        $request = $this->getRequest();
         if ($request->getMethod() == 'GET' && filter_input(INPUT_GET, 'pay_period', FILTER_UNSAFE_RAW))
     	{
-        	$year = explode('/', filter_input(FILTER_GET, 'pay_period', FILTER_UNSAFE_RAW));
+        	$year = explode('/', filter_input(INPUT_GET, 'pay_period', FILTER_UNSAFE_RAW));
             $date_start = $year[0]."-06-01";
             $date_end = $year[1]."-05-31";
             /** @var $filename string */
@@ -406,6 +408,7 @@ class ScheduleController extends Controller
     {
 	    $doctrine = $this->getDoctrine();
     	$em = $doctrine->getManager();
+    	$request = $this->getRequest();
     	if ($request->getMethod() == 'GET' && filter_input(INPUT_GET, 'pay_period', FILTER_UNSAFE_RAW))
     	{
     		$period = filter_input(INPUT_GET, 'pay_period', FILTER_UNSAFE_RAW);
