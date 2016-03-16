@@ -199,11 +199,11 @@ class ExpenseRepository extends EntityRepository
                 $format = 'd/m/y';
                 $date = \DateTime::createFromFormat($format, $date);
                 $expense->setDate($date);
-                $em->persist($expense);
-                $em->flush();
+                $this->_em->persist($expense);
                 $count_expense ++;
             }
         }
+        $this->_em->flush();
         return $count_expense;
     }
 
@@ -355,8 +355,8 @@ class ExpenseRepository extends EntityRepository
                 $data_expense->setStatus(1);
                 $this->_em->persist($data_expense);
             }
-            $em->flush();
         }
+        $this->_em->flush();
         $message = 'expense.flash.update';
         
         return $message;

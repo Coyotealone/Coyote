@@ -445,29 +445,31 @@ profile:
 # Form field labels
 form:
     group_name: "Nom du groupe :"
-    username: "Nom d'utilisateur :"
-    email: "Adresse e-mail :"
+    username: "Nom d'utilisateur *:"
+    email: "Adresse e-mail *:"
     current_password: "Mot de passe actuel :"
-    password: "Mot de passe :"
-    password_confirmation: "Vérification :"
+    password: "Mot de passe *:"
+    password_confirmation: "Vérification *:"
     new_password: "Nouveau mot de passe :"
     new_password_confirmation: "Vérification :"
-    name: NOM Prénom :
-    adress1: Adresse :
+    name: NOM Prénom *:
+    adress1: Adresse *:
     adress2: Adresse(suite) :
-    zip_code: Code Postal :
+    zip_code: Code Postal *:
     postal_box: Boite Postal :
-    city: Ville :
-    country: Pays :
-    phone: N° Téléphone :
+    city: Ville *:
+    country: Pays *:
+    phone: N° Téléphone *:
     cell: N° Portable :
     website: Site Web :
-    roles: Rôles :
+    roles: Rôles *:
     fax: Fax :
     choices:
         technician: Technicien
         business: Cadre
         trade: Commercial
+        tradepichon: Commercial Pichon
+        tradegilibert: Commercial Gilibert
         directory: Annuaire
 
 # Registration

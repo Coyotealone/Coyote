@@ -3,7 +3,6 @@ imports:
     - { resource: security.yml }
     - { resource: fosuser.yml }
     - { resource: sonata.yml }
-    - { resource: @CoyoteSiteBundle/Resources/config/admin.yml }
 
 framework:
     #esi:             ~
