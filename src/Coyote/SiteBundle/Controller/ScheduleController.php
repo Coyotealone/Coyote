@@ -149,10 +149,10 @@ class ScheduleController extends Controller
     {
 	    $doctrine = $this->getDoctrine();
         $em = $doctrine->getManager();
-        if ($request->getMethod() == 'GET' && isset($_GET['year']) && isset($_GET['month']))
+        if ($request->getMethod() == 'GET' && filter_input(INPUT_GET, 'year', FILTER_UNSAFE_RAW) && filter_input(INPUT_GET, 'month', FILTER_UNSAFE_RAW))
         {   
-            $year = $_GET['year'];
-            $month = $_GET['month'];
+            $year = filter_input(INPUT_GET, 'year', FILTER_UNSAFE_RAW);
+            $month = filter_input(INPUT_GET, 'month', FILTER_UNSAFE_RAW);
             if (empty($year) && empty($month))
             {
                 return $this->redirect($this->generateUrl('schedule_indexshow'));
@@ -237,10 +237,10 @@ class ScheduleController extends Controller
     {
 	    $doctrine = $this->getDoctrine();
         $em = $doctrine->getManager();
-        if ($request->getMethod() == 'GET' && isset($_GET['year']) && isset($_GET['month']))
+        if ($request->getMethod() == 'GET' && filter_input(INPUT_GET, 'month', FILTER_UNSAFE_RAW) && filter_input(INPUT_GET, 'year', FILTER_UNSAFE_RAW))
         {
-            $year = $_GET['year'];
-            $month = $_GET['month'];
+            $year = filter_input(INPUT_GET, 'year', FILTER_UNSAFE_RAW);
+            $month = filter_input(INPUT_GET, 'month', FILTER_UNSAFE_RAW);
             $user = $this->getUser();
             $period = $em->getRepository('CoyoteSiteBundle:Schedule')->findPeriod($month, $year);
             $date = $year."-".$month."-%";
@@ -325,7 +325,7 @@ class ScheduleController extends Controller
         /** @var $em object doctrine request */
         $em = $this->getDoctrine()->getManager();
         
-        if ($request->getMethod() == 'GET' && isset($_GET['pay_period']))
+        if ($request->getMethod() == 'GET' && filter_input(INPUT_GET, 'pay_period', FILTER_UNSAFE_RAW))
     	{
         	$year = explode('/', filter_input(FILTER_GET, 'pay_period', FILTER_UNSAFE_RAW));
             $date_start = $year[0]."-06-01";
@@ -378,10 +378,10 @@ class ScheduleController extends Controller
     public function postSchedulesLockedAction()
     {
     	$request = $this->getRequest();
-    	if ($request->getMethod() == 'POST' && isset($_POST['date']) )
+    	if ($request->getMethod() == 'POST' && filter_input(INPUT_POST, 'date', FILTER_UNSAFE_RAW)) )
     	{
     		$em = $this->getDoctrine()->getManager();
-    		$date = new \DateTime($_POST['date']);
+    		$date = new \DateTime(filter_input(INPUT_POST, 'date', FILTER_UNSAFE_RAW));
     		$schedules_lock = $em->getRepository("CoyoteSiteBundle:Schedule")->postScheduleLocked($date,
     				$this->getUser());
     		if ($schedules_lock == "OK")
@@ -406,9 +406,9 @@ class ScheduleController extends Controller
     {
 	    $doctrine = $this->getDoctrine();
     	$em = $doctrine->getManager();
-    	if ($request->getMethod() == 'GET' && isset($_GET['pay_period']))
+    	if ($request->getMethod() == 'GET' && filter_input(INPUT_GET, 'pay_period', FILTER_UNSAFE_RAW))
     	{
-    		$period = $_GET['pay_period'];
+    		$period = filter_input(INPUT_GET, 'pay_period', FILTER_UNSAFE_RAW);
     		$user = $this->getUser();
     		$absencerttyear = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsenceYear($period, $user, "RTT");
     		$absencecayear = $em->getRepository('CoyoteSiteBundle:Schedule')->findAbsenceYear($period, $user, "CA");

@@ -37,10 +37,3 @@ schedule_postschedules_locked:
 schedule_getscheduleuser:
     pattern:    /getscheduleuser
     defaults:   { _controller: "CoyoteSiteBundle:Schedule:getScheduleUser" }
-
-
-
-
-schedule_indexexportprintyear:
-    pattern:    /indexexportprintyear
-    defaults:   { _controller: "CoyoteSiteBundle:Schedule:indexexportprintyear"}

@@ -303,12 +303,12 @@ class AdminController extends Controller
         /** @var $dataexpense string data file */
         $data_request = $request->request->all();
 
-        if ($request->getMethod() == 'GET' && isset($_GET['pay_period']))
+        if ($request->getMethod() == 'GET' && filter_input(INPUT_GET, 'pay_period', FILTER_UNSAFE_RAW))
     	{
-            $year = explode('/', $_GET['pay_period']);
+            $year = explode('/', filter_input(INPUT_GET, 'pay_period', FILTER_UNSAFE_RAW));
             $date_start = $year[0]."-06-01";
             $date_end = $year[1]."-05-31";
-            $user = $em->getRepository('CoyoteSiteBundle:User')->findOneById($_GET['user']);
+            $user = $em->getRepository('CoyoteSiteBundle:User')->findOneById(filter_input(INPUT_GET, 'user', FILTER_UNSAFE_RAW));
             /** @var $filename string */
             $filename = "export_period".$date_start."-".$date_end.$user->getName().".csv";
 
