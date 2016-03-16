@@ -327,7 +327,7 @@ class ScheduleController extends Controller
         
         if ($request->getMethod() == 'GET' && isset($_GET['pay_period']))
     	{
-        	$year = explode('/', $_GET['pay_period']);
+        	$year = explode('/', filter_input(FILTER_GET, 'pay_period', FILTER_UNSAFE_RAW));
             $date_start = $year[0]."-06-01";
             $date_end = $year[1]."-05-31";
             /** @var $filename string */

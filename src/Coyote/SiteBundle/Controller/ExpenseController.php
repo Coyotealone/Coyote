@@ -92,37 +92,14 @@ class ExpenseController extends Controller
         if ($this->get('security.context')->isGranted('ROLE_TRADE_GILIBERT') || 
         	$this->get('security.context')->isGranted('ROLE_TRADE_PICHON'))
         {
-            $count_expense = 0;
             $em = $this->getDoctrine()->getManager();
             $data_request = $request->request->all();
-            for($i=0;$i<6;$i++)
+            $count_expense = $em->getRepository('CoyoteSiteBundle:Expense')->createExpense($this->getUser(),
+                                $data_request, $i);
+            $message = $em->getRepository('CoyoteSiteBundle:Expense')->getMessagePutExpense($count_expense);
+            if ($count_expense > 1)
             {
-                if (!empty($data_request['article'.$i]) && !empty($data_request['date'.$i])
-                    && !empty($data_request['devise'.$i]) && !empty($data_request['qte'.$i])
-                	&& !empty($data_request['site'.$i]) && !empty($data_request['ttc'.$i]))
-                {
-                    $expense = $em->getRepository('CoyoteSiteBundle:Expense')->createExpense($this->getUser(),
-                        $data_request, $i);
-                    $em->persist($expense);
-                    $em->flush();
-                    $count_expense ++;
-                }
-            }
-            if ($count_expense >= 1 )
-            {
-                if ($count_expense > 1)
-                {
-                    $message = 'expense.flash.save_multiple';
-                    $session->set('countExpense', $count_expense);
-                }
-                else
-                {
-                    $message = 'expense.flash.save';
-                }
-            }
-            else
-            {
-                $message = 'expense.flash.no_save';
+                $session->set('countExpense', $count_expense);
             }
             $this->get('session')->getFlashBag()->set('save_expense', $message);
             return $this->redirect($this->generateUrl('expense_create'));
@@ -280,59 +257,22 @@ class ExpenseController extends Controller
     {
         if ($this->get('security.context')->isGranted('ROLE_ADMIN'))
         {
-        	if (array_key_exists('id_start', $_GET) && array_key_exists('id_end', $_GET))
+        	if (filter_input(INPUT_GET, 'id_start', FILTER_UNSAFE_RAW) && !empty(filter_input(INPUT_GET, 'id_end', FILTER_UNSAFE_RAW)))
         	{
-	        	if (!empty($_GET['id_start'] && !empty($_GET['id_end'])))
-	        	{
-		            $em = $this->getDoctrine()->getManager();
-		            $id_start = $_GET['id_start'];
-		            $id_end = $_GET['id_end'];
-		            if (empty($id_start) && empty($id_end))
-		            {
-		                $message = 'expense.flash.no_update';
-		                $this->get('session')->getFlashBag()->set('updatestatus', $message);
-		                return $this->render('CoyoteSiteBundle:Expense:updatestatus.html.twig');
-		            }
-		            else
-		            {
-		                if ($id_end > $id_start)
-		                {
-		                    for($i = $id_start; $i<=$id_end; $i++)
-		                    {
-		                        $data_expense = $em->getRepository('CoyoteSiteBundle:Expense')->find($i);
-		                        if ($data_expense != null)
-		                        {
-		                            $data_expense->setStatus(1);
-		                            $em->persist($data_expense);
-		                        }
-		                        $em->flush();
-		                    }
-		                    $message = 'expense.flash.update';
-		                    $this->get('session')->getFlashBag()->set('updatestatus', $message);
-		                }
-		                if ($id_start > $id_end)
-		                {
-		                    for($i = $id_end; $i<=$id_start; $i++)
-		                    {
-		                        $data_expense = $em->getRepository('CoyoteSiteBundle:Expense')->find($i);
-		                        $data_expense->setStatus(1);
-		                        $em->persist($data_expense);
-		                        $em->flush();
-		                    }
-		                    $message = 'expense.flash.update';
-		                    alert($message);
-		                    $this->get('session')->getFlashBag()->set('updatestatus', $message);
-		                }
-		                else
-		                {
-		                	return $this->render('CoyoteSiteBundle:Expense:updatestatus.html.twig');
-		                }
-		            }
-	        	}
-	        	else
-	        	{
-	        		return $this->render('CoyoteSiteBundle:Expense:updatestatus.html.twig');
-	        	}
+	            $em = $this->getDoctrine()->getManager();
+	            $id_start = filter_input(INPUT_GET, 'id_start', FILTER_UNSAFE_RAW);
+	            $id_end = filter_input(INPUT_GET, 'id_end', FILTER_UNSAFE_RAW);
+	            if (empty($id_start) && empty($id_end))
+	            {
+	                $message = 'expense.flash.no_update';
+	                $this->get('session')->getFlashBag()->set('updatestatus', $message);
+	                return $this->render('CoyoteSiteBundle:Expense:updatestatus.html.twig');
+	            }
+	            else
+	            {
+    	            $message = $em->getRepository('CoyoteSiteBundle:Expense')->postStatusExpense($id_start, $id_end);
+	                $this->get('session')->getFlashBag()->set('updatestatus', $message);
+	            }
         	}
         	else
         	{
@@ -360,13 +300,13 @@ class ExpenseController extends Controller
         {
 			return $this->redirect($this->generateUrl('main_menu'));
 		}
-		if (!empty($_GET['month']) && empty(!$_GET['year']))
+		if (filter_input(INPUT_GET, 'month') && filter_input(INPUT_GET, 'year'))
 		{
-			$date = $_GET['year'].'-'.$_GET['month'].'%';
+			$date = filter_input(INPUT_GET, 'year').'-'.filter_input(INPUT_GET, 'month').'%';
 			$request = $this->getRequest();
 			$session = $request->getSession();
-			$session->set('year_expense', $_GET['year']);
-			$session->set('month_expense', $_GET['month']);
+			$session->set('year_expense', filter_input(INPUT_GET, 'year'));
+			$session->set('month_expense', filter_input(INPUT_GET, 'month'));
 			$maxItems = 10;
 			$expenses = $this->getDoctrine()->getRepository('CoyoteSiteBundle:Expense')
 				->getListAboutUserDate($this->getUser(), $date, $page, $maxItems);
@@ -403,9 +343,9 @@ class ExpenseController extends Controller
 	public function getprintExpensesAction()
 	{
 		$em = $this->getDoctrine()->getManager();
-		if (!empty($_GET['year']) && !empty($_GET['month']))
+		if (filter_input(INPUT_GET, 'year') && filter_input(INPUT_GET, 'month'))
 		{
-			$date = $_GET['year'].'-'.$_GET['month'].'%';
+			$date = filter_input(INPUT_GET, 'year').'-'.filter_input(INPUT_GET, 'month').'%';
 			$data_expense = $em->getRepository('CoyoteSiteBundle:Expense')->findAllByDateUser($date,
 					$this->getUser());
 			$data_user = $em->getRepository('CoyoteSiteBundle:User')->find($this->getUser());

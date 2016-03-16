@@ -169,30 +169,42 @@ class ExpenseRepository extends EntityRepository
      */
     public function createExpense($user, $data, $increment)
     {
-        $site = $this->_em->getRepository('CoyoteSiteBundle:Site')->find($data['site'.$increment]);
-        $currency = $this->_em->getRepository('CoyoteSiteBundle:Currency')->find($data['devise'.$increment]);
-        $business = $this->_em->getRepository('CoyoteSiteBundle:Business')->find($data['affaire'.$increment]);
-        $fee = $this->_em->getRepository('CoyoteSiteBundle:Fee')->find($data['article'.$increment]);
-
-        $expense = new Expense();
-        $expense->setUser($user);
-        $expense->setFee($fee);
-        $expense->setBusiness($business);
-        $expense->setCurrency($currency);
-        $expense->setSite($site);
-        $expense->setComment($data['com'.$increment]);
-        $rate = $fee->getRate();
-        $price = $data['ttc'.$increment];
-        $tva = $this->calculTVA($rate, $price);
-        $expense->setAmountTVA($tva);
-        $expense->setAmountTTC($price);
-        $expense->setAmount($data['qte'.$increment]);
-        $expense->setStatus(1);
-        $date = $this->checkDate($data['date'.$increment]);
-        $format = 'd/m/y H:i:s';
-        $datetime = \DateTime::createFromFormat($format, $date.' 00:00:00');
-        $expense->setDate($datetime);
-        return $expense;
+        $count_expense = 0;
+        for($i=0;$i<6;$i++)
+        {
+            if (!empty($data_request['article'.$i]) && !empty($data_request['date'.$i])
+                        && !empty($data_request['devise'.$i]) && !empty($data_request['qte'.$i])
+                    	&& !empty($data_request['site'.$i]) && !empty($data_request['ttc'.$i]))
+            {
+                $site = $this->_em->getRepository('CoyoteSiteBundle:Site')->find($data['site'.$i]);
+                $currency = $this->_em->getRepository('CoyoteSiteBundle:Currency')->find($data['devise'.$i]);
+                $business = $this->_em->getRepository('CoyoteSiteBundle:Business')->find($data['affaire'.$i]);
+                $fee = $this->_em->getRepository('CoyoteSiteBundle:Fee')->find($data['article'.$i]);
+        
+                $expense = new Expense();
+                $expense->setUser($user);
+                $expense->setFee($fee);
+                $expense->setBusiness($business);
+                $expense->setCurrency($currency);
+                $expense->setSite($site);
+                $expense->setComment($data['com'.$increment]);
+                $rate = $fee->getRate();
+                $price = $data['ttc'.$increment];
+                $tva = $this->calculTVA($rate, $price);
+                $expense->setAmountTVA($tva);
+                $expense->setAmountTTC($price);
+                $expense->setAmount($data['qte'.$increment]);
+                $expense->setStatus(1);
+                $date = $this->checkDate($data['date'.$increment]);
+                $format = 'd/m/y';
+                $date = \DateTime::createFromFormat($format, $date);
+                $expense->setDate($date);
+                $em->persist($expense);
+                $em->flush();
+                $count_expense ++;
+            }
+        }
+        return $count_expense;
     }
 
     /**
@@ -285,5 +297,68 @@ class ExpenseRepository extends EntityRepository
         $q->setFirstResult(($page-1) * $maxperpage)
           ->setMaxResults($maxperpage);
         return new Paginator($q);
+    }
+    
+    public function getMessagePutExpense($count_expense)
+    {
+        if ($count_expense >= 1 )
+        {
+            if ($count_expense > 1)
+            {
+                $message = 'expense.flash.save_multiple';
+            }
+            else
+            {
+                $message = 'expense.flash.save';
+            }
+        }
+        else
+        {
+            $message = 'expense.flash.no_save';
+        }
+        return $message;
+    }
+    
+    public function postStatusExpense($start_id, $end_id)
+    {
+        if ($start_id > $end_id)
+        {
+            $id_start = $end_id;
+            $id_end = $start_id;
+        }
+        if ($start_id < $end_id)
+        {
+            $id_start = $start_id;
+            $id_end = $end_id;
+        }
+        if ($start_id == $end_id)
+        {
+            $data_expense = $this->_em->getRepository('CoyoteSiteBundle:Expense')->find($start_id);
+            if ($data_expense != null)
+            {
+                $data_expense->setStatus(1);
+                $this->_em->persist($data_expense);
+            }
+            $this->_em->flush();
+            return 'expense.flash.update'; 
+        }
+        else
+        {
+            $message = "expense.flahs.errorupdate";
+        }
+        
+        for($i = $id_start; $i<=$id_end; $i++)
+        {
+            $data_expense = $this->_em->getRepository('CoyoteSiteBundle:Expense')->find($i);
+            if ($data_expense != null)
+            {
+                $data_expense->setStatus(1);
+                $this->_em->persist($data_expense);
+            }
+            $em->flush();
+        }
+        $message = 'expense.flash.update';
+        
+        return $message;
     }
 }

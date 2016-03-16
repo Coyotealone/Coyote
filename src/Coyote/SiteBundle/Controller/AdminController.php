@@ -5,6 +5,11 @@ namespace Coyote\SiteBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use FOS\UserBundle\Event\GetResponseUserEvent;
+use FOS\UserBundle\Event\FormEvent;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use FOS\UserBundle\FOSUserEvents;
+use FOS\UserBundle\Event\FilterUserResponseEvent;
 
 use Coyote\SiteBundle\Entity\Data;
 
@@ -30,7 +35,7 @@ class AdminController extends Controller
             /** @var $dataexpense string data file */
             $dataexpense = $em->getRepository('CoyoteSiteBundle:Expense')->createFileExpense();
             /** update status from Expense */
-            //$em->getRepository('CoyoteSiteBundle:Expense')->updateStatusTo1($em);
+            $em->getRepository('CoyoteSiteBundle:Expense')->updateStatusTo1($em);
             /** @return file txt downloaded with data expense */
             return new Response($dataexpense, 200, array(
                 'Content-Type' => 'application/force-download',
