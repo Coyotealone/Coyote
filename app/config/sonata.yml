@@ -3,17 +3,34 @@ sonata_admin:
     title: Pichon Website Admin
     title_logo: bundles/coyotesite/images/logoadmin.png
     
-    #dashboard:
-    #    blocks:
-    #    - { position: left, type: sonata.admin.block.admin_list }
-    #    - { position: center, type: sonata.block.service.text, settings: { content: "<h2>Welcome!</h2> You can customize this dashboard by editing the sonata_admin.yml file. The current dashboard presents the recent items from the NewsBundle and a timeline with the latest action"} }
-    #    #- { position: center, type: sonata.timeline.block.timeline, settings: { context: SONATA_ADMIN, max_per_page: 25 }}
-    #    #- { position: right, type: sonata.news.block.recent_posts, settings: { title: Recent Posts, number: 7, mode: admin }}
+    dashboard:
+        blocks:
+        - { position: left, type: sonata.admin.block.admin_list }
+        #- { position: center, type: sonata.block.service.text, settings: { content: "<h2>Welcome!</h2> You can customize this dashboard by editing the sonata_admin.yml file. The current dashboard presents the recent items from the NewsBundle and a timeline with the latest action"} }
+        #- { position: center, type: sonata.timeline.block.timeline, settings: { context: SONATA_ADMIN, max_per_page: 25 }}
+        #- { position: right, type: sonata.news.block.recent_posts, settings: { title: Recent Posts, number: 7, mode: admin }}
         #- { position: right, type: sonata.news.block.recent_comments, settings: { title: Recent Comments, number: 7, mode: admin }}
-    #    - { position: right, type: sonata.block.service.rss, settings: { title: Sonata Projects Feeds, url: http://sonata-project.org/blog/archive.rss }}
-
+        #- { position: right, type: sonata.block.service.rss, settings: { title: Sonata Projects Feeds, url: http://sonata-project.org/blog/archive.rss }}
+            
 sonata_block:
-    default_contexts: [cms]
+    default_contexts: [sonata_page_bundle]
     blocks:
         sonata.admin.block.admin_list:
             contexts:   [admin]
+
+        #sonata.admin_doctrine_orm.block.audit:
+        #    contexts:   [admin]
+
+        sonata.block.service.text:
+        sonata.block.service.rss:
+
+        # Some specific block from the SonataMediaBundle
+        #sonata.media.block.media:
+        #sonata.media.block.gallery:
+        #sonata.media.block.feature_media:
+
+        # Some block with different templates
+        #acme.demo.block.demo:
+        #    templates:
+        #       - { name: 'Simple', template: 'AcmeDemoBundle:Block:demo_simple.html.twig' }
+        #       - { name: 'Big',    template: 'AcmeDemoBundle:Block:demo_big.html.twig' }

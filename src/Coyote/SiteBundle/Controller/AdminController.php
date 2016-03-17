@@ -37,10 +37,12 @@ class AdminController extends Controller
             /** update status from Expense */
             $em->getRepository('CoyoteSiteBundle:Expense')->updateStatusTo0();
             /** @return file txt downloaded with data expense */
-            return new Response($dataexpense, 200, array(
-                'Content-Type' => 'application/force-download',
-                'Content-Disposition' => 'attachment; filename="'.$filename.'"'
-            ));
+            if (count($dataexpense)>1)
+                return new Response($dataexpense, 200, array(
+                    'Content-Type' => 'application/force-download',
+                    'Content-Disposition' => 'attachment; filename="'.$filename.'"'));
+            else
+                return $this->redirect($this->generateUrl('main_menu'));
         }
         else
             /** redirect MainController:indexAction */

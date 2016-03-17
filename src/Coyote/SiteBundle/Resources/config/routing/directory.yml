@@ -1,14 +1,17 @@
 directory:
     path:     /admindirectory/
     defaults: { _controller: "CoyoteSiteBundle:Directory:index" }
+    methods:  GET
 
 directory_show:
     path:     /admindirectory/{id}/show
     defaults: { _controller: "CoyoteSiteBundle:Directory:show" }
+    methods:  [POST, PUT]
 
 directory_new:
     path:     /admindirectory/new
     defaults: { _controller: "CoyoteSiteBundle:Directory:new" }
+    methods:  GET
 
 directory_create:
     path:     /admindirectory/create
@@ -18,6 +21,7 @@ directory_create:
 directory_edit:
     path:     /admindirectory/{id}/edit
     defaults: { _controller: "CoyoteSiteBundle:Directory:edit" }
+    methods:  GET
 
 directory_update:
     path:     /admindirectory/{id}/update
@@ -32,18 +36,22 @@ directory_delete:
 directory_showdirectorybyfirstname:
     path:     /showdirectorybyfirstname/{country}/{business}
     defaults: { _controller: "CoyoteSiteBundle:Directory:showDirectoryByFirstname" }
+    methods:  GET
 
 directory_showdirectorybyfunctionservice:
     path:     /showdirectorybyfunctionservice/{country}/{business}
     defaults: { _controller: "CoyoteSiteBundle:Directory:showDirectoryByFunctionService" }
+    methods:  GET
 
 directory_pdfdirectorybyfirstname:
     path:     /pdfdirectorybyfirstname/{country}/{business}
     defaults: { _controller: "CoyoteSiteBundle:Directory:printDirectoryByFirstname" }
+    methods:  GET
 
 directory_pdfdirectorybyfunctionservice:
     path:     /pdfdirectorybyfunctionservice/{country}/{business}
     defaults: { _controller: "CoyoteSiteBundle:Directory:printDirectoryByFunctionService" }
+    methods:  GET
 
 directory_enabled:
     path:     /directory_enabled/{id}

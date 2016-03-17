@@ -1,29 +1,36 @@
 admin_exportexpense:
     pattern:    /exportexpense
     defaults:   { _controller: "CoyoteSiteBundle:Admin:getexportExpense" }
+    methods:    GET
 
 admin_exportdatauser:
     pattern:    /exportdatauser
     defaults:   { _controller: "CoyoteSiteBundle:Admin:getexportDataUser" }
+    methods:    [POST, PUT]
 
 admin_updateroles:
     pattern:    /updateroles
     defaults:   { _controller: "CoyoteSiteBundle:Admin:postrolesUser" }
+    methods:    [POST, PUT]
 
 admin_indexchoicesuser:
     pattern:    /indexchoicesuser
     defaults:   { _controller: "CoyoteSiteBundle:Admin:getchoicesUser" }
+    methods:    GET
 
 admin_choicesroles:
     pattern:    /choicesroles
     defaults:   { _controller: "CoyoteSiteBundle:Admin:postchoicesrolesUser" }
+    methods:    [POST, PUT]
 
 admin_showadmin:
     pattern:    /showadmin/{page}
     defaults:   { _controller: "CoyoteSiteBundle:Admin:getExpenses", page: 1 }
+    methods:    GET
     requirements:
         page:  \d+
 
 admin_getscheduleuser:
     pattern:    /getscheduleuser
     defaults:   { _controller: "CoyoteSiteBundle:Admin:getScheduleUser" }
+    methods:    GET

@@ -17,28 +17,12 @@ class UserAdmin extends Admin
     {
         $datagridMapper
             ->add('username')
-            ->add('usernameCanonical')
             ->add('email')
-            ->add('emailCanonical')
             ->add('enabled')
-            ->add('salt')
-            ->add('password')
-            ->add('lastLogin')
             ->add('locked')
-            ->add('expired')
-            ->add('expiresAt')
-            ->add('confirmationToken')
-            ->add('passwordRequestedAt')
             ->add('roles')
-            ->add('credentialsExpired')
-            ->add('credentialsExpireAt')
             ->add('id')
             ->add('name')
-            ->add('address1')
-            ->add('address2')
-            ->add('zip_code')
-            ->add('postal_box')
-            ->add('city')
             ->add('country')
             ->add('phone')
             ->add('cell')
@@ -63,7 +47,6 @@ class UserAdmin extends Admin
             ->add('email')
             ->add('enabled')
             ->add('locked')
-            ->add('passwordRequestedAt')
             ->add('roles')
             ->add('code_car')
             ->add('registration_car')
@@ -74,7 +57,8 @@ class UserAdmin extends Admin
                     'show' => array(),
                     'edit' => array(),
                     'delete' => array(),
-                )
+                ),
+                'attr' => array('class' => 'col-md-2')
             ))
         ;
     }
