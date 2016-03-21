@@ -606,15 +606,15 @@ class ScheduleRepository extends EntityRepository
 	    $ending_period = $date_period[1];
         
         $qb = $this->_em->createQueryBuilder();
-        $qb->select('s.working_hours')
+        $qb->select('s.working_time')
            ->from('CoyoteSiteBundle:Schedule', 's')
-           ->where('s.user = :user and s.date_schedule between :starting and :ending')
+           ->where('s.user = :user and s.date_schedule between :starting and :ending and s.working_time > 0')
            ->setParameters(array('user' => $user, 'starting' => $starting_period, 'ending' => $ending_period));
         $data_working_hours = $qb->getQuery()->getResult();
         $working_day = 0.0;
         foreach($data_working_hours as $value)
         {
-            $working_day = $working_day + $value['working_hours'];
+            $working_day = $working_day + $value['working_time'];
         }
         return $working_day;
     }

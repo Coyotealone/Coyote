@@ -1,4 +1,4 @@
 contact:
     pattern:    /
     defaults:   { _controller: "CoyoteSiteBundle:Contact:putContact" }
-    methods:  [POST, PUT]
+    methods:    GET
