@@ -1,0 +1,4 @@
+contact:
+    pattern:    /
+    defaults:   { _controller: "CoyoteFrontBundle:Contact:putContact" }
+    methods:    GET

@@ -1,0 +1,14 @@
+{% extends 'CoyoteFrontBundle:Base:base.html.twig' %}
+
+{% block content %}
+{% include "FOSUserBundle:Profile:show_content.html.twig" %}
+{% endblock content %}
+
+{% block nav %}
+    <!--[if lt IE 9]>
+        {{ include('CoyoteFrontBundle:Base:navigation_ie.html.twig') }}
+    <![endif]-->
+    <!--[if !IE]><!-->
+        {{ include('CoyoteFrontBundle:Base:navigation.html.twig') }}
+	<!--<![endif]-->
+{% endblock %}

@@ -1,0 +1,53 @@
+schedule_overtime:
+    pattern:    /overtime
+    defaults:   { _controller: "CoyoteAttendanceBundle:Schedule:showovertime"}
+    methods:    GET
+
+schedule_getscheduleuserweek:
+    pattern:    /time_attendance
+    defaults:   { _controller: "CoyoteAttendanceBundle:Schedule:getScheduleUserWeek"}
+    methods:    GET
+
+schedule_postscheduleuserweek:
+    pattern:    /time_attendance_save
+    defaults:   { _controller: "CoyoteAttendanceBundle:Schedule:postScheduleUserWeek"}
+    methods:    [POST, PUT]
+
+schedule_postweekless:
+    pattern:    /time_attendance/weekless
+    defaults:   { _controller: "CoyoteAttendanceBundle:Schedule:postWeekLess"}
+    methods:    GET
+
+schedule_postweekmore:
+    pattern:    /time_attendance/weekmore
+    defaults:   { _controller: "CoyoteAttendanceBundle:Schedule:postWeekMore"}
+    methods:    GET
+
+schedule_getscheduleusermonth:
+    pattern:    /time_attendance_month
+    defaults:   { _controller: "CoyoteAttendanceBundle:Schedule:getScheduleUserMonth"}
+    methods:    GET
+
+schedule_getscheduleuserprintmonth:
+    pattern:    /time_attendance_print_month
+    defaults:   { _controller: "CoyoteAttendanceBundle:Schedule:getScheduleUserPrintMonth"}
+    methods:    GET
+
+schedule_getscheduleuserprintyear:
+    pattern:    /time_attendance_print_year
+    defaults:   { _controller: "CoyoteAttendanceBundle:Schedule:getScheduleUserPrintYear"}
+    methods:    GET
+
+schedule_postschedules_locked:
+    pattern:    /schedules_locked
+    defaults:   { _controller: "CoyoteAttendanceBundle:Schedule:postSchedulesLocked" }
+    methods:    GET
+
+schedule_getscheduleuser:
+    pattern:    /getscheduleuser
+    defaults:   { _controller: "CoyoteAttendanceBundle:Schedule:getScheduleUser" }
+    methods:    GET
+
+schedule_exportdatauser:
+    pattern:    /exportdatauser
+    defaults:   { _controller: "CoyoteAttendanceBundle:Schedule:getexportDataUser" }

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Pichon-Website">
+        <meta name="author" content="Coyote">
+        <link rel="shortcut icon" href="{{ asset('bundles/coyotefront/images/pichonicon.ico') }}" />
+        <title>{{'base.title'|trans}}</title>
+
+        <link href="{{ asset('bundles/coyotefront/css/bootstrap.min.css')}}" rel="stylesheet">
+        <link href="{{ asset('bundles/coyotefront/css/material_design/roboto.min.css')}}" rel="stylesheet">
+        <link href="{{ asset('bundles/coyotefront/css/material_design/material-fullpalette.min.css')}}" rel="stylesheet">
+        <link href="{{ asset('bundles/coyotefront/css/material_design/ripples.min.css')}}" rel="stylesheet">
+        <link href="{{ asset('bundles/coyotefront/css/material_design/snackbar.min.css')}}" rel="stylesheet">
+        <link href="{{ asset('bundles/coyotefront/css/bootstrap-elements.css')}}" rel="stylesheet">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        {% block stylesheets %}
+        {% endblock %}
+        {% block javascripts %}
+        {% endblock %}
+    </head>
+    <body>
+        {% block nav %}
+        {% endblock nav %}
+
+        <div id="wrapper">
+            <!-- Page Content -->
+            <div id="page-content-wrapper">
+                <div class="container-fluid">
+                    <div class="row">
+                    </div>
+                    <header>
+                        {% block header %}
+                        {% endblock header %}
+                    </header>
+                    <section>
+                        <article>
+                            {% block content %}
+                            {% endblock content %}
+                        </article>
+                    </section>
+                </div>
+            </div>
+        </div>
+        <!--<script src="{{ asset('bundles/coyotefront/js/jquery-1.10.2.js') }}"></script>
+        <script src="{{ asset('bundles/coyotefront/js/jquery-ui.js') }}"></script>
+        <script src="{{ asset('bundles/coyotefront/js/jquery.min.js') }}"></script>-->
+        <script src="{{ asset('bundles/coyotefront/js/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('bundles/coyotefront/js/base_1.js') }}"></script>
+        <script src="{{ asset('bundles/coyotefront/js/ripples.min.js') }}"></script>
+        <script src="{{ asset('bundles/coyotefront/js/material.min.js') }}"></script>
+        <script src="{{ asset('bundles/coyotefront/js/snackbar.min.js') }}"></script>
+        <script src="{{ asset('bundles/coyotefront/js/jquery.nouislider.min.js') }}"></script>
+        <script src="{{ asset('bundles/coyotefront/js/base_2.js') }}"></script>
+        <script src="{{ asset('bundles/coyotefront/js/google_analytics.js') }}"></script>
+    </body>
+</html>

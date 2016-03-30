@@ -1,0 +1,30 @@
+#contenu-contact {
+    text-align: center;
+}
+
+/* Flash Message Valid */
+#flashmessage_valid {
+  font-family: "Coda","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: large;
+  color: white;
+  background-color: green;
+  text-align: center;
+}
+
+/* Flash Message Error */
+#flashmessage_error {
+    font-family: "Coda","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: large;
+    color: white;
+    background-color: red;
+    text-align: center;
+}
+
+/* Flash Message Warning */
+#flashmessage_warning{
+    font-family: "Coda","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: large;
+    color: white;
+    background-color: #f98729;
+    text-align: center;
+}

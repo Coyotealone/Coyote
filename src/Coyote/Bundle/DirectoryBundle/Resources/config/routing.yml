@@ -1,0 +1,3 @@
+coyote_directory_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: CoyoteDirectoryBundle:Default:index }

@@ -1,0 +1,48 @@
+{% extends 'CoyoteAttendanceBundle:Schedule:index.html.twig' %}
+
+{% block link %}
+
+    {{ include('CoyoteAttendanceBundle:Base:navigation.html.twig') }}
+
+{% endblock %}
+
+{% block content %}
+<p id="title">{{'schedule.title.indexshow'|trans}} </p>
+<form role="form" action="{{ path('schedule_getscheduleusermonth') }}" method='get'>
+    <table class='table'>
+    	<tr>
+    	    <th class="center">{{'schedule.month'|trans}}</th>
+    		<th class="center">{{'schedule.year'|trans}}</th>
+    	</tr>
+        <tr>
+            <td>
+                {% set counter = 0 %}
+                <select name='month' id='month' >
+                {% for mois in tab_num_mois %}
+                    {% if mois == month %}
+                    <option value={{mois}} selected>{{tab_mois[counter]|trans}}</option>
+                    {% else %}
+                    <option value={{mois}}>{{tab_mois[counter]|trans}}</option>
+                    {% endif %}
+                    {% set counter = counter + 1 %}
+                {% endfor %}
+                </select>
+            </td>
+            <td>
+                <select name='year' id='year' >
+                {% for annee in tab_annee %}
+                    {% if annee == year %}
+                    <option value={{annee}} selected>{{annee}}</option>
+                    {% else %}
+                    <option value={{annee}}>{{annee}}</option>
+                    {% endif %}
+                {% endfor %}
+                </select>
+            </td>
+        </tr>
+    </table>
+    <div id="btn_show">
+        <button class="btn btn-success" type="submit" value="Afficher" id="afficher">{{'schedule.submit.indexshow'|trans }}</button>
+    </div>
+</form>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'CoyoteFrontBundle:Base:base.html.twig' %}
+
+{% block nav %}
+    {{ include('CoyoteFrontBundle:Base:navigation_login.html.twig') }}
+{% endblock nav %}
+
+{% block content %}
+
+<div id="site">
+    <div id="box1">
+        <nav class="navitems , firstnavitems">
+            <header class="headerclass">{{'welcome'|trans}}</header>
+            <ul>
+                <li>
+                    <div class="box">
+                        <div class="image">
+                            <a class="navbar-brand" href="http://www.pichonindustries.com">
+                            <img src="{{ asset('bundles/coyotefront/images/Logo_PICHON.jpg') }}" alt="" /></a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </div>
+{% endblock %}

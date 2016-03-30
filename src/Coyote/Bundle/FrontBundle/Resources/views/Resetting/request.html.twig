@@ -1,0 +1,13 @@
+{% extends "CoyoteFrontBundle:Base:base.html.twig" %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/style_login.css') }}" type="text/css" media="all" />
+{% endblock %}
+
+{% block nav %}
+    {{ include('CoyoteFrontBundle:Base:navigation_login.html.twig') }}
+{% endblock %}
+
+{% block content %}
+    {% include "CoyoteFrontBundle:Resetting:request_content.html.twig" %}
+{% endblock content %}

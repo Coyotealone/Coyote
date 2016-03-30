@@ -1,0 +1,10 @@
+{% extends 'CoyoteFrontBundle:Base:base.html.twig' %}
+
+{% block content %}
+    <div class="jumbotron">
+        <h3>Maintenance</h3>
+        <a href="{{ path('fos_user_security_logout') }}">
+            {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+        </a>
+    </div>
+{% endblock %}

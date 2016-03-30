@@ -1,7 +1,14 @@
+parameters:
+    security.acl.permission.map.class: Sonata\AdminBundle\Security\Acl\Permission\AdminPermissionMap
+
 security:
     encoders:
-        FOS\UserBundle\Model\UserInterface: sha512
-    access_denied_url:                      main_menu
+        Application\Sonata\UserBundle\Entity\User:
+            algorithm: sha512
+            encode_as_base64: false
+            iterations: 1
+
+        Symfony\Component\Security\Core\User\User: plaintext
 
     role_hierarchy:
         ROLE_VISU:          	ROLE_VISU
@@ -17,81 +24,93 @@ security:
         ROLE_PICHON:        	[ROLE_TECH, ROLE_CADRE, ROLE_ADMIN]
         ROLE_TRADE:				[ROLE_TRADE_PICHON, ROLE_TRADE_GILIBERT]
         ROLE_ADMIN:         	[ROLE_ADMIN, ROLE_CHEF_BE, ROLE_COMPTA, ROLE_DIRECTORY]
-        ROLE_SUPER_ADMIN:   	[ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+        #ROLE_SUPER_ADMIN:   	[ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+        #ROLE_ADMIN:       ROLE_USER
+        ROLE_SUPER_ADMIN:       [ROLE_USER, ROLE_SONATA_ADMIN, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH, ROLE_SONATA_PAGE_ADMIN_PAGE_EDIT, ROLE_SONATA_PAGE_ADMIN_BLOCK_EDIT, ROLE_CHEF_BE]
+
+        SONATA:
+            # if you are not using acl then this line must be uncommented
+            #- ROLE_SONATA_PAGE_ADMIN_PAGE_EDIT
+            #- ROLE_SONATA_PAGE_ADMIN_BLOCK_EDIT
 
     providers:
-        main:
-            id: fos_user.user_provider.username
+        fos_userbundle:
+            id: fos_user.user_manager
+
+        in_memory:
+            memory:
+                users:
+                    admin: { password: admin, roles: 'ROLE_ADMIN' }
+
     firewalls:
-        main:
-            form_login:
-                # l'utilisateur est redirigé ici quand il/elle a besoin de se connecter
-                login_path:                     fos_user_security_login
-
-                # si défini à true, « forward » l'utilisateur vers le formulaire de
-                # login au lieu de le rediriger
-                use_forward:                    false
-
-                # soumet le formulaire de login vers cette URL
-                check_path:                     fos_user_security_check
-
-                # par défaut, le formulaire de login *doit* être un POST,
-                # et pas un GET
-                post_only:                      true
-
-                # options de redirection lorsque le login a réussi (vous
-                # pouvez en lire plus ci-dessous)
-                always_use_default_target_path: false
-                default_target_path:            /
-                target_path_parameter:          _target_path
-                use_referer:                    false
-
-                # options de redirection lorsque le login échoue (vous
-                # pouvez en lire plus ci-dessous)
-                failure_path:                   null
-                failure_forward:                false
-
-                # noms des champs pour le nom d'utilisateur et le mot
-                # de passe
-                username_parameter:             _username
-                password_parameter:             _password
-
-                # options du token csrf
-                csrf_parameter:                 _csrf_token
-                #intention:                      authenticate
-
-            pattern: ^/
-            anonymous: true
-            provider: main
-            logout:
-                path:   fos_user_security_logout
-                target: /
+        # Disabling the security for the web debug toolbar, the profiler and Assetic.
         dev:
-            pattern:  ^/(_(profiler|wdt)|css|images|js)/
+            pattern:  ^/(_(profiler|wdt)|css|images|js|admin/_(wdt|profiler)|api/_(wdt|profiler))/
             security: false
 
-        login:
-            pattern:  ^/demo/secured/login$
-            security: false
-
-        secured_area:
-            pattern:    /logout
+        # This firewall is used to handle the admin login area
+        # This part is handled by the Sonata User Bundle
+        admin:
+            pattern:            /admin(.*)
+            context:            user
             form_login:
-                check_path: fos_user_security_check
-                login_path: fos_user_security_login
+                provider:       fos_userbundle
+                login_path:     /admin/login
+                use_forward:    false
+                check_path:     /admin/login_check
+                failure_path:   null
             logout:
-                path:   /logout
-                target: /
+                path:           /admin/logout
+            anonymous:    true
+
+        api:
+            pattern:   /api/(.*)
+            http_basic:
+                realm:         "Secured Demo Area"
+                provider:       in_memory
+
+            stateless: true
+
+        # This firewall is used to handle the public login area
+        # This part is handled by the FOS User Bundle
+        main:
+            pattern:      .*
+            context:        user
+            form_login:
+                provider:       fos_userbundle
+                login_path:     /login
+                use_forward:    false
+                check_path:     /login_check
+                failure_path:   null
+            logout:
+                path: /logout
+                # We set invalidate_session to false because we want basket
+                # to be fully persisted even when user logout and login again
+                invalidate_session: false
+                #handlers: ['sonata.page.cms_manager_selector', 'sonata.basket.factory']
+            anonymous:    true
+            switch_user: true
 
     access_control:
+        # URL of FOSUserBundle which need to be available to anonymous users
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/contact/, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: .*/register/*, role: ROLE_ADMIN }
-        - { path: .*/expense/.*, role: [ROLE_TRADE, ROLE_SUPER_ADMIN, ROLE_ADMIN] }
-        - { path: .*/menu, role: [ROLE_TECH, ROLE_CADRE, ROLE_VISU] }
-        - { path: .*/schedule/.*, role: [ROLE_TECH, ROLE_CADRE, ROLE_SUPER_ADMIN, ROLE_ADMIN] }
-        - { path: .*/profile/.*, role: [ROLE_TECH, ROLE_CADRE, ROLE_SUPER_ADMIN, ROLE_ADMIN] }
-        - { path: .*/admin/.*, role: [ROLE_ADMIN, ROLE_CHEF_BE, ROLE_COMPTA] }
-        - { path: .*/absence/.*, role: [ROLE_ADMIN, ROLE_TECH, ROLE_CADRE] }
-        - { path: .*/directory/admindirectory/.*, role: [ROLE_ADMIN, ROLE_DIRECTORY] }
+
+        # Admin login page needs to be access without credential
+        - { path: ^/admin/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/logout$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/login-check$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+
+        # Secured part of the site
+        # This config requires being logged for the whole site and having the admin role for the admin part.
+        # It also secures the shop checkout process
+        # Change these rules to adapt them to your needs
+        - { path: ^/admin/, role: [ROLE_ADMIN, ROLE_SONATA_ADMIN] }
+        - { path: ^/profile/, role: IS_AUTHENTICATED_FULLY }
+        - { path: ^/shop/basket/step/, role: IS_AUTHENTICATED_FULLY }
+        - { path: ^/shop/user/, role: IS_AUTHENTICATED_FULLY }
+        - { path: ^/.*, role: IS_AUTHENTICATED_ANONYMOUSLY }
+
+    acl:
+        connection: default

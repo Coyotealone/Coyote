@@ -1,0 +1,19 @@
+main_menu:
+    pattern:    /menu
+    defaults:   { _controller: "CoyoteFrontBundle:Main:getMenu"}
+    methods:    GET
+
+main_login:
+    pattern:    /login
+    defaults:   { _controller: "CoyoteFrontBundle:Main:login"}
+    methods:    GET
+
+main_language:
+    pattern:    /language
+    defaults:   { _controller: "CoyoteFrontBundle:Main:postLanguage"}
+    methods:    GET
+
+main_index:
+    pattern:    /index
+    defaults:   { _controller: "CoyoteFrontBundle:Main:index"}
+    methods:    GET

@@ -1,0 +1,75 @@
+{% extends 'CoyoteAttendanceBundle:Schedule:index.html.twig' %}
+
+{% block content %}
+<p>{{'schedule.title.summary'|trans}}</p>
+
+<table>
+<tr>
+    <td style="background:#7FC6BC; color:white">{{'schedule.holiday'|trans}}</td>
+    <td style="background:#01B0F0; color:white">{{'schedule.weekend'|trans}}</td>
+</tr>
+</table>
+
+{% if dataschedule %}
+<div class='table-responsive'>
+    <table class='table' id='tab_expense'>
+    	<tr>
+    	    <th>{{'schedule.dayofweek'|trans}}</th>
+    		<th id='tab_time_date'>{{'schedule.date'|trans}}</th>
+    		<th id='tab_time_workinghours'>{{'schedule.working_hours'|trans}}</th>
+    		<th id='tab_time_travel'>{{'schedule.travel'|trans}}</th>
+    		<th id='tab_time_absence'>{{'schedule.absence'|trans}}</th>
+    		<th id='tab_time_absence'>{{'schedule.absence_time'|trans}}</th>
+    		<th id='tab_time_comment'>{{'schedule.comment'|trans}}</th>
+    	</tr>
+    	{% set week = dataschedule.0.date_schedule|date('W') %}
+    	{% for entity in dataschedule %}
+    	{% set date = entity.date_schedule %}
+            <tr>
+                {#{% if entity.holiday == "1" %}
+                    <td style="background:#7FC6BC; color:white">{{ date|date("l")|trans}}</td>
+                    <td style="background:#7FC6BC; color:white">{{ date|date("d/m/Y")}}</td>
+                    <td style="background:#7FC6BC; color:white">{{ entity.working_hours }}</td>
+                    <td style="background:#7FC6BC; color:white">{{ entity.travel }}</td>
+                    <td style="background:#7FC6BC; color:white">{{ entity.absence_name|trans }}</td>
+                    <td style="background:#7FC6BC; color:white">{{ entity.absence_duration }}</td>
+                    <td style="background:#7FC6BC; color:white">{{ entity.comment }}</td>#}
+                {% if date|date("l") == "Saturday" %}
+                    <td style="background:#01B0F0; color:white">{{ date|date("l")|trans}}</td>
+                    <td style="background:#01B0F0; color:white">{{ date|date("d/m/Y")}}</td>
+                    <td style="background:#01B0F0; color:white">{{ entity.working_hours }}</td>
+                    <td style="background:#01B0F0; color:white">{{ entity.travel }}</td>
+                    <td style="background:#01B0F0; color:white">{{ entity.absence_name|trans }}</td>
+                    <td style="background:#01B0F0; color:white">{{ entity.absence_duration }}</td>
+                    <td style="background:#01B0F0; color:white">{{ entity.comment }}</td>
+                {% elseif date|date("l") == "Sunday" %}
+                    <td style="background:#01B0F0; color:white">{{ date|date("l")|trans}}</td>
+                    <td style="background:#01B0F0; color:white">{{ date|date("d/m/Y")}}</td>
+                    <td style="background:#01B0F0; color:white">{{ entity.working_hours }}</td>
+                    <td style="background:#01B0F0; color:white">{{ entity.travel }}</td>
+                    <td style="background:#01B0F0; color:white">{{ entity.absence_name|trans }}</td>
+                    <td style="background:#01B0F0; color:white">{{ entity.absence_duration }}</td>
+                    <td style="background:#01B0F0; color:white">{{ entity.comment }}</td>
+                {% else %}
+                    <td>{{ date|date("l")|trans}}</td>
+                    <td>{{ date|date("d/m/Y")}}</td>
+                    <td>{{ entity.working_hours }}</td>
+                    <td>{{ entity.travel }}</td>
+                    <td>{{ entity.absence_name|trans }}</td>
+                    <td>{{ entity.absence_duration }}</td>
+                    <td>{{ entity.comment }}</td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+    {{'schedule.working_day_month_year'|trans }} : {{daymonth}} / {{dayyear}}<br>
+    {{'schedule.number_rtt_month_year'|trans}} : {{absencertt}} / {{rttyear}}<br>
+    {{'schedule.number_cp_month_year' | trans }} : {{absencecp}} / {{cpyear}} <br>
+    {{"schedule.number_ca_month_year" | trans }} : {{absenceca}} / {{cayear}}
+{% else %}
+<p style="text-align:center">{{'schedule.no_data_found'|trans}}</p>
+{% endif %}
+
+
+{% endblock %}
