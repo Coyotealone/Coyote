@@ -1,0 +1,59 @@
+directory:
+    path:     /admindirectory/
+    defaults: { _controller: "CoyoteDirectoryBundle:Directory:index" }
+    methods:  GET
+
+directory_show:
+    path:     /admindirectory/{id}/show
+    defaults: { _controller: "CoyoteDirectoryBundle:Directory:show" }
+    methods:  [POST, PUT]
+
+directory_new:
+    path:     /admindirectory/new
+    defaults: { _controller: "CoyoteDirectoryBundle:Directory:new" }
+    methods:  GET
+
+directory_create:
+    path:     /admindirectory/create
+    defaults: { _controller: "CoyoteDirectoryBundle:Directory:create" }
+    methods:  POST
+
+directory_edit:
+    path:     /admindirectory/{id}/edit
+    defaults: { _controller: "CoyoteDirectoryBundle:Directory:edit" }
+    methods:  GET
+
+directory_update:
+    path:     /admindirectory/{id}/update
+    defaults: { _controller: "CoyoteDirectoryBundle:Directory:update" }
+    methods:  [POST, PUT]
+
+directory_delete:
+    path:     /admindirectory/{id}/delete
+    defaults: { _controller: "CoyoteDirectoryBundle:Directory:delete" }
+    methods:  [POST, DELETE]
+
+directory_showdirectorybyfirstname:
+    path:     /showdirectorybyfirstname/{country}/{business}
+    defaults: { _controller: "CoyoteDirectoryBundle:Directory:showDirectoryByFirstname" }
+    methods:  GET
+
+directory_showdirectorybyfunctionservice:
+    path:     /showdirectorybyfunctionservice/{country}/{business}
+    defaults: { _controller: "CoyoteDirectoryBundle:Directory:showDirectoryByFunctionService" }
+    methods:  GET
+
+directory_pdfdirectorybyfirstname:
+    path:     /pdfdirectorybyfirstname/{country}/{business}
+    defaults: { _controller: "CoyoteDirectoryBundle:Directory:printDirectoryByFirstname" }
+    methods:  GET
+
+directory_pdfdirectorybyfunctionservice:
+    path:     /pdfdirectorybyfunctionservice/{country}/{business}
+    defaults: { _controller: "CoyoteDirectoryBundle:Directory:printDirectoryByFunctionService" }
+    methods:  GET
+
+directory_enabled:
+    path:     /directory_enabled/{id}
+    defaults: { _controller: "CoyoteDirectoryBundle:Directory:setEnabledDirectory" }
+    methods:  [POST, PUT]

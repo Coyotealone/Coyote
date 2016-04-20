@@ -1,6 +1,6 @@
 <?php
 
-namespace Coyote\SiteBundle\Form;
+namespace Coyote\Bundle\DirectoryBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -99,7 +99,7 @@ class DirectoryType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Coyote\SiteBundle\Entity\Directory'
+            'data_class' => 'Coyote\Bundle\DirectoryBundle\Entity\Directory'
         ));
     }
 
@@ -108,6 +108,6 @@ class DirectoryType extends AbstractType
      */
     public function getName()
     {
-        return 'coyote_sitebundle_directory';
+        return 'coyote_bundle_directorybundle_directory';
     }
 }

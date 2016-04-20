@@ -1,16 +1,13 @@
 <?php
 
-namespace Coyote\SiteBundle\Controller;
+namespace Coyote\Bundle\ExpenseBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Response;
 
-use Coyote\SiteBundle\Entity\Expense;
-use Coyote\SiteBundle\Entity\Data;
-
-use Coyote\SiteBundle\Form\ExpenseType;
+use Coyote\ExpenseBundle\Form\ExpenseType;
 
 /**
  * Expense controller.
@@ -32,7 +29,7 @@ class ExpenseController extends Controller
         }
         if ($this->get('security.context')->isGranted('ROLE_TRADE'))
         {
-            return $this->render('CoyoteSiteBundle:Expense:index.html.twig');
+            return $this->render('CoyoteExpenseBundle:Expense:index.html.twig');
         }
         else
         {
@@ -55,20 +52,20 @@ class ExpenseController extends Controller
         }
         if ($this->get('security.context')->isGranted('ROLE_TRADE_PICHON'))
         {
-            $currency = $em->getRepository('CoyoteSiteBundle:Currency')->findAllOrderByCode();
-            $business = $em->getRepository('CoyoteSiteBundle:Business')->findAllOrderByName();
-            $fee = $em->getRepository('CoyoteSiteBundle:Fee')->findAll();
-            $site = $em->getRepository('CoyoteSiteBundle:Site')->findById(9);
-            return $this->render('CoyoteSiteBundle:Expense:create.html.twig',
+            $currency = $em->getRepository('CoyoteExpenseBundle:Currency')->findAllOrderByCode();
+            $business = $em->getRepository('CoyoteExpenseBundle:Business')->findAllOrderByName();
+            $fee = $em->getRepository('CoyoteExpenseBundle:Fee')->findAll();
+            $site = $em->getRepository('CoyoteExpenseBundle:Site')->findById(9);
+            return $this->render('CoyoteExpenseBundle:Expense:create.html.twig',
                 array('currency' => $currency, 'business' => $business, 'fee' => $fee, 'site' => $site));
         }
         if ($this->get('security.context')->isGranted('ROLE_TRADE_GILIBERT'))
         {
-            $currency = $em->getRepository('CoyoteSiteBundle:Currency')->findAllOrderByCode();
-            $business = $em->getRepository('CoyoteSiteBundle:Business')->findAllOrderByName();
-            $fee = $em->getRepository('CoyoteSiteBundle:Fee')->findAll();
-            $site = $em->getRepository('CoyoteSiteBundle:Site')->findById(11);
-            return $this->render('CoyoteSiteBundle:Expense:create.html.twig',
+            $currency = $em->getRepository('CoyoteExpenseBundle:Currency')->findAllOrderByCode();
+            $business = $em->getRepository('CoyoteExpenseBundle:Business')->findAllOrderByName();
+            $fee = $em->getRepository('CoyoteExpenseBundle:Fee')->findAll();
+            $site = $em->getRepository('CoyoteExpenseBundle:Site')->findById(11);
+            return $this->render('CoyoteExpenseBundle:Expense:create.html.twig',
                 array('currency' => $currency, 'business' => $business, 'fee' => $fee, 'site' => $site));
         }
         else
@@ -89,15 +86,15 @@ class ExpenseController extends Controller
         {
             return $this->redirect($this->generateUrl('fos_user_security_login'));
         }
-        if ($this->get('security.context')->isGranted('ROLE_TRADE_GILIBERT') || 
+        if ($this->get('security.context')->isGranted('ROLE_TRADE_GILIBERT') ||
         	$this->get('security.context')->isGranted('ROLE_TRADE_PICHON'))
         {
             $em = $this->getDoctrine()->getManager();
             $request = $this->getRequest();
             $data_request = $request->request->all();
-            $count_expense = $em->getRepository('CoyoteSiteBundle:Expense')->createExpense($this->getUser(),
+            $count_expense = $em->getRepository('CoyoteExpenseBundle:Expense')->createExpense($this->getUser(),
                                 $data_request);
-            $message = $em->getRepository('CoyoteSiteBundle:Expense')->getMessagePutExpense($count_expense);
+            $message = $em->getRepository('CoyoteExpenseBundle:Expense')->getMessagePutExpense($count_expense);
             if ($count_expense > 1)
             {
                 $session->set('countExpense', $count_expense);
@@ -125,14 +122,14 @@ class ExpenseController extends Controller
             return $this->redirect($this->generateUrl('main_menu'));
         }
         $em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository('CoyoteSiteBundle:Expense')->find($id);
+        $entity = $em->getRepository('CoyoteExpenseBundle:Expense')->find($id);
         if (!$entity)
         {
             throw $this->createNotFoundException('Unable to find Expense entity.');
         }
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
-        return $this->render('CoyoteSiteBundle:Expense:edit.html.twig', array(
+        return $this->render('CoyoteExpenseBundle:Expense:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),));
@@ -182,7 +179,7 @@ class ExpenseController extends Controller
         if (!$this->get('security.context')->isGranted('ROLE_TRADE'))
             return $this->redirect($this->generateUrl('main_menu'));
         $em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository('CoyoteSiteBundle:Expense')->find($id);
+        $entity = $em->getRepository('CoyoteExpenseBundle:Expense')->find($id);
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Expense entity.');
         }
@@ -197,16 +194,16 @@ class ExpenseController extends Controller
             $entity->setDate($date);
             if ($this->get('security.context')->isGranted('ROLE_TRADE_PICHON'))
             {
-            	$site = $em->getRepository('CoyoteSiteBundle:Site')->findOneById(9);
+            	$site = $em->getRepository('CoyoteExpenseBundle:Site')->findOneById(9);
             }
             if ($this->get('security.context')->isGranted('ROLE_TRADE_GILIBERT'))
             {
-	            $site = $em->getRepository('CoyoteSiteBundle:Site')->findOneById(11);
-            }	
+	            $site = $em->getRepository('CoyoteExpenseBundle:Site')->findOneById(11);
+            }
             $entity->setSite($site);
             $taux = $entity->getFee()->getRate();
             $ttc = $entity->getAmountTTC();
-            $tva = $em->getRepository('CoyoteSiteBundle:Expense')->calculTVA($taux, $ttc);
+            $tva = $em->getRepository('CoyoteExpenseBundle:Expense')->calculTVA($taux, $ttc);
             $entity->setAmountTVA($tva);
 
             $em->flush();
@@ -214,7 +211,7 @@ class ExpenseController extends Controller
             return $this->redirect($this->generateUrl('expense_edit', array('id' => $id)));
         }
 
-        return $this->render('CoyoteSiteBundle:Expense:edit.html.twig', array(
+        return $this->render('CoyoteExpenseBundle:Expense:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -238,7 +235,7 @@ class ExpenseController extends Controller
         if ($form->isValid())
         {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('CoyoteSiteBundle:Expense')->find($id);
+            $entity = $em->getRepository('CoyoteExpenseBundle:Expense')->find($id);
             if (!$entity)
             {
                 throw $this->createNotFoundException('Unable to find Expense entity.');
@@ -270,19 +267,19 @@ class ExpenseController extends Controller
 	            }
 	            else
 	            {
-    	            $message = $em->getRepository('CoyoteSiteBundle:Expense')->postStatusExpense($id_start, $id_end);
+    	            $message = $em->getRepository('CoyoteExpenseBundle:Expense')->postStatusExpense($id_start, $id_end);
 	                $this->get('session')->getFlashBag()->set('updatestatus', $message);
 	            }
-	            return $this->render('CoyoteSiteBundle:Expense:updatestatus.html.twig');
+	            return $this->render('CoyoteExpenseBundle:Expense:updatestatus.html.twig');
         	}
         	else
         	{
-        		return $this->render('CoyoteSiteBundle:Expense:updatestatus.html.twig');
+        		return $this->render('CoyoteExpenseBundle:Expense:updatestatus.html.twig');
         	}
         }
         else
         {
-            return $this->render('CoyoteSiteBundle:Expense:updatestatus.html.twig');
+            return $this->render('CoyoteExpenseBundle:Expense:updatestatus.html.twig');
         }
     }
 
@@ -295,7 +292,7 @@ class ExpenseController extends Controller
 	{
     	$doctrine = $this->getDoctrine();
         $em = $doctrine->getManager();
-        
+
 		$user = $this->get('security.context')->getToken()->getUser();
         if ($user == "anon.")
         {
@@ -309,9 +306,9 @@ class ExpenseController extends Controller
 			$session->set('year_expense', filter_input(INPUT_GET, 'year'));
 			$session->set('month_expense', filter_input(INPUT_GET, 'month'));
 			$maxItems = 10;
-			$expenses = $this->getDoctrine()->getRepository('CoyoteSiteBundle:Expense')
+			$expenses = $this->getDoctrine()->getRepository('CoyoteExpenseBundle:Expense')
 				->getListAboutUserDate($this->getUser(), $date, $page, $maxItems);
-			$entities = $em->getRepository('CoyoteSiteBundle:Expense')->findAllByDateUser($date,
+			$entities = $em->getRepository('CoyoteExpenseBundle:Expense')->findAllByDateUser($date,
 					$this->getUser());
 			$expenses_count = count($expenses);
 			$pagination = array(
@@ -321,17 +318,17 @@ class ExpenseController extends Controller
 					'route_params' => array()
 			);
 
-			return $this->render('CoyoteSiteBundle:Expense:show.html.twig', array(
+			return $this->render('CoyoteExpenseBundle:Expense:show.html.twig', array(
 					'data' => $entities,
 					'pagination' => $pagination));
 		}
 		else
 		{
-    		$tab_month = $em->getRepository('CoyoteSiteBundle:User')->findMonth();
-            $tab_num_month = $em->getRepository('CoyoteSiteBundle:User')->findNumMonth();
-            $tab_year = $em->getRepository('CoyoteSiteBundle:User')->findYear();
-            $tab_num_year = $em->getRepository('CoyoteSiteBundle:User')->findNumYear();
-			return $this->render('CoyoteSiteBundle:Expense:indexshow.html.twig', array('month' => date('n'),
+    		$tab_month = $em->getRepository('CoyoteAttendanceBundle:Schedule')->findMonth();
+            $tab_num_month = $em->getRepository('CoyoteAttendanceBundle:Schedule')->findNumMonth();
+            $tab_year = $em->getRepository('CoyoteAttendanceBundle:Schedule')->findYear();
+            $tab_num_year = $em->getRepository('CoyoteAttendanceBundle:Schedule')->findNumYear();
+			return $this->render('CoyoteExpenseBundle:Expense:indexshow.html.twig', array('month' => date('n'),
 					'year' => date('Y'), 'tab_mois' => $tab_month, 'tab_num_mois' => $tab_num_month,
 					'tab_annee' => $tab_year, 'tab_num_annee' => $tab_num_year));
 		}
@@ -347,10 +344,10 @@ class ExpenseController extends Controller
 		if (filter_input(INPUT_GET, 'year') && filter_input(INPUT_GET, 'month'))
 		{
 			$date = filter_input(INPUT_GET, 'year').'-'.filter_input(INPUT_GET, 'month').'%';
-			$data_expense = $em->getRepository('CoyoteSiteBundle:Expense')->findAllByDateUser($date,
+			$data_expense = $em->getRepository('CoyoteExpenseBundle:Expense')->findAllByDateUser($date,
 					$this->getUser());
-			$data_user = $em->getRepository('CoyoteSiteBundle:User')->find($this->getUser());
-			$page = $this->render('CoyoteSiteBundle:Expense:print.html.twig', array('data' => $data_expense));
+			$data_user = $em->getRepository('ApplicationSonataUserBundle:User')->find($this->getUser());
+			$page = $this->render('CoyoteExpenseBundle:Expense:print.html.twig', array('data' => $data_expense));
 			$filename = $data_user->getName()."_expense".date("Ymd-His").".pdf";
 			$html = $page->getContent();
 			$html2pdf = new \Html2Pdf_Html2Pdf('P', 'A4', 'fr');
@@ -361,11 +358,11 @@ class ExpenseController extends Controller
 		}
 		else
 		{
-    		$tab_month = $em->getRepository('CoyoteSiteBundle:User')->findMonth();
-            $tab_num_month = $em->getRepository('CoyoteSiteBundle:User')->findNumMonth();
-            $tab_year = $em->getRepository('CoyoteSiteBundle:User')->findYear();
-            $tab_num_year = $em->getRepository('CoyoteSiteBundle:User')->findNumYear();
-			return $this->render('CoyoteSiteBundle:Expense:indexprint.html.twig', array('month' => date('n'),
+    		$tab_month = $em->getRepository('CoyoteAttendanceBundle:Schedule')->findMonth();
+            $tab_num_month = $em->getRepository('CoyoteAttendanceBundle:Schedule')->findNumMonth();
+            $tab_year = $em->getRepository('CoyoteAttendanceBundle:Schedule')->findYear();
+            $tab_num_year = $em->getRepository('CoyoteAttendanceBundle:Schedule')->findNumYear();
+			return $this->render('CoyoteExpenseBundle:Expense:indexprint.html.twig', array('month' => date('n'),
 					'year' => date('Y'), 'tab_mois' => $tab_month, 'tab_num_mois' => $tab_num_month,
 					'tab_annee' => $tab_year, 'tab_num_annee' => $tab_num_year));
 

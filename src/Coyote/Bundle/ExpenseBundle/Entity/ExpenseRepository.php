@@ -26,7 +26,7 @@ class ExpenseRepository extends EntityRepository
     {
         $query = $this->getEntityManager()
                         ->createQuery("
-	            SELECT e FROM CoyoteSiteBundle:Expense e
+	            SELECT e FROM CoyoteExpenseBundle:Expense e
 	            WHERE e.user = :user and e.date LIKE :date"
                         );
         $query->setParameters(array('date' => $date, 'user' => $user));
@@ -44,7 +44,7 @@ class ExpenseRepository extends EntityRepository
     {
         $query = $this->getEntityManager()
         			  ->createQuery("
-                        SELECT e FROM CoyoteSiteBundle:Expense e
+                        SELECT e FROM CoyoteExpenseBundle:Expense e
                         WHERE e.status = 1 ");
         $expense = $query->getResult();
         foreach($expense as $data)
@@ -66,7 +66,7 @@ class ExpenseRepository extends EntityRepository
     {
         $query = $this->getEntityManager()
                       ->createQuery("
-                        SELECT e FROM CoyoteSiteBundle:Expense e
+                        SELECT e FROM CoyoteExpenseBundle:Expense e
                         WHERE e.status = 1 ORDER BY e.user ");
         $res = $query->getResult();
 
@@ -176,11 +176,11 @@ class ExpenseRepository extends EntityRepository
                         && !empty($data['devise'.$i]) && !empty($data['qte'.$i])
                     	&& !empty($data['site'.$i]) && !empty($data['ttc'.$i]))
             {
-                $site = $this->_em->getRepository('CoyoteSiteBundle:Site')->find($data['site'.$i]);
-                $currency = $this->_em->getRepository('CoyoteSiteBundle:Currency')->find($data['devise'.$i]);
-                $business = $this->_em->getRepository('CoyoteSiteBundle:Business')->find($data['affaire'.$i]);
-                $fee = $this->_em->getRepository('CoyoteSiteBundle:Fee')->find($data['article'.$i]);
-        
+                $site = $this->_em->getRepository('CoyoteExpenseBundle:Site')->find($data['site'.$i]);
+                $currency = $this->_em->getRepository('CoyoteExpenseBundle:Currency')->find($data['devise'.$i]);
+                $business = $this->_em->getRepository('CoyoteExpenseBundle:Business')->find($data['affaire'.$i]);
+                $fee = $this->_em->getRepository('CoyoteExpenseBundle:Fee')->find($data['article'.$i]);
+
                 $expense = new Expense();
                 $expense->setUser($user);
                 $expense->setFee($fee);
@@ -219,7 +219,7 @@ class ExpenseRepository extends EntityRepository
     {
         $query = $this->getEntityManager()
                       ->createQuery("
-        	            SELECT e FROM CoyoteSiteBundle:Expense e
+        	            SELECT e FROM CoyoteExpenseBundle:Expense e
         	            WHERE e.id = :idstart ");
         $query->setParameters(array('idstart' => $id_start));
         return $query->getResult();
@@ -271,7 +271,7 @@ class ExpenseRepository extends EntityRepository
     {
         $q = $this->_em->createQueryBuilder()
         		  ->select('e')
-		          ->from('CoyoteSiteBundle:Expense','e')
+		          ->from('CoyoteExpenseBundle:Expense','e')
 		          ->where('e.status = :status')
 		          ->setParameters(array('status' => 1));
         $q->setFirstResult(($page-1) * $maxperpage)
@@ -291,14 +291,14 @@ class ExpenseRepository extends EntityRepository
     {
         $q = $this->_em->createQueryBuilder()
                   ->select('e')
-                  ->from('CoyoteSiteBundle:Expense','e')
+                  ->from('CoyoteExpenseBundle:Expense','e')
                   ->where('e.user = :user and e.date = :date')
                   ->setParameters(array('user' => $user, 'date' => $date ));
         $q->setFirstResult(($page-1) * $maxperpage)
           ->setMaxResults($maxperpage);
         return new Paginator($q);
     }
-    
+
     public function getMessagePutExpense($count_expense)
     {
         if ($count_expense >= 1 )
@@ -318,7 +318,7 @@ class ExpenseRepository extends EntityRepository
         }
         return $message;
     }
-    
+
     public function postStatusExpense($start_id, $end_id)
     {
         if ($start_id > $end_id)
@@ -333,23 +333,23 @@ class ExpenseRepository extends EntityRepository
         }
         if ($start_id == $end_id)
         {
-            $data_expense = $this->_em->getRepository('CoyoteSiteBundle:Expense')->find($start_id);
+            $data_expense = $this->_em->getRepository('CoyoteExpenseBundle:Expense')->find($start_id);
             if ($data_expense != null)
             {
                 $data_expense->setStatus(1);
                 $this->_em->persist($data_expense);
             }
             $this->_em->flush();
-            return 'expense.flash.update'; 
+            return 'expense.flash.update';
         }
         else
         {
             $message = "expense.flahs.errorupdate";
         }
-        
+
         for($i = $id_start; $i<=$id_end; $i++)
         {
-            $data_expense = $this->_em->getRepository('CoyoteSiteBundle:Expense')->find($i);
+            $data_expense = $this->_em->getRepository('CoyoteExpenseBundle:Expense')->find($i);
             if ($data_expense != null)
             {
                 $data_expense->setStatus(1);
@@ -358,7 +358,7 @@ class ExpenseRepository extends EntityRepository
         }
         $this->_em->flush();
         $message = 'expense.flash.update';
-        
+
         return $message;
     }
 }

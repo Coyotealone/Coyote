@@ -1,13 +1,8 @@
-{% extends 'CoyoteSiteBundle:Base:base.html.twig' %}
+{% extends 'CoyoteFrontBundle:Base:base.html.twig' %}
 
 {% block nav %}
 
-    <!--[if lt IE 9]>
-        {{ include('CoyoteSiteBundle:Base:navigation_ie.html.twig') }}
-    <![endif]-->
-    <!--[if !IE]><!-->
-        {{ include('CoyoteSiteBundle:Base:navigation.html.twig') }}
-	<!--<![endif]-->
+    {{ include('CoyoteFrontBundle:Base:navigation.html.twig') }}
 
 {% endblock %}
 

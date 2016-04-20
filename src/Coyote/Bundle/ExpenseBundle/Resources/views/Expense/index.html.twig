@@ -1,25 +1,22 @@
-{% extends 'CoyoteSiteBundle:Base:index.html.twig' %}
+{% extends 'CoyoteFrontBundle:Base:index.html.twig' %}
 
 {% block nav %}
-    <!--[if lt IE 9]>
-        {{ include('CoyoteSiteBundle:Base:navigation_ie.html.twig') }}
-    <![endif]-->
-    <!--[if !IE]><!-->
-        {{ include('CoyoteSiteBundle:Base:navigation.html.twig') }}
-	<!--<![endif]-->
+
+    {{ include('CoyoteFrontBundle:Base:navigation.html.twig') }}
+
 {% endblock %}
 
 {% block stylesheets %}
-	<link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/jquery-ui.css') }}" type="text/css" media="all" />
-    <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/style_expense.css') }}" type="text/css" media="all" />
-    <link rel="stylesheet" href="{{ asset('bundles/coyotesite/css/style.css') }}" type="text/css" media="all" />
+	<link rel="stylesheet" href="{{ asset('bundles/coyotefront/css/jquery-ui.css') }}" type="text/css" media="all" />
+    <link rel="stylesheet" href="{{ asset('bundles/coyotefront/css/style_expense.css') }}" type="text/css" media="all" />
+    <link rel="stylesheet" href="{{ asset('bundles/coyotefront/css/style.css') }}" type="text/css" media="all" />
 {% endblock %}
 
 {% block javascripts %}
-    <script src="{{ asset('bundles/coyotesite/js/jquery-1.10.2.js') }}"/></script>
-    <script src="{{ asset('bundles/coyotesite/js/jquery-ui.js') }}"/></script>
-    <script src="{{ asset('bundles/coyotesite/js/script_expense.js') }}"/></script>
-    <script src="{{ asset('bundles/coyotesite/js/script_expense_change.js') }}"/></script>
+    <script src="{{ asset('bundles/coyotefront/js/jquery-1.10.2.js') }}"/></script>
+    <script src="{{ asset('bundles/coyotefront/js/jquery-ui.js') }}"/></script>
+    <script src="{{ asset('bundles/coyotefront/js/script_expense.js') }}"/></script>
+    <script src="{{ asset('bundles/coyotefront/js/script_expense_change.js') }}"/></script>
 {% endblock %}
 
 {% block content %}

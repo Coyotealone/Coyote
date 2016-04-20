@@ -16,7 +16,7 @@ class DirectoryRepository extends EntityRepository
     {
 	    $qb = $this->_em->createQueryBuilder();
         $qb->select('d')
-           ->from('CoyoteSiteBundle:Directory', 'd')
+           ->from('CoyoteDirectoryBundle:Directory', 'd')
            ->where("d.country = :country and d.enabled = 1 and d.business like :business ")
            ->orderBy('d.firstname', 'ASC')
            ->setParameters(array('country' => $country, 'business' => $business));
@@ -28,7 +28,7 @@ class DirectoryRepository extends EntityRepository
     {
 	    $qb = $this->_em->createQueryBuilder();
         $qb->select('d')
-           ->from('CoyoteSiteBundle:Directory', 'd')
+           ->from('CoyoteDirectoryBundle:Directory', 'd')
            ->where('d.country = :country and d.enabled = 1 and d.business like :business')
            ->orderBy('d.function_service', 'ASC')
            ->setParameters(array('country' => $country, 'business' => $business));
@@ -51,7 +51,7 @@ class DirectoryRepository extends EntityRepository
     {
         $qb = $this->_em->createQueryBuilder();
         $qb->select('d')
-           ->from('CoyoteSiteBundle:Directory', 'd')
+           ->from('CoyoteDirectoryBundle:Directory', 'd')
            ->where('d.country = :country')
            ->orderBy('d.created_at', 'DESC')
            ->setParameters(array('country' => $country));
@@ -59,7 +59,7 @@ class DirectoryRepository extends EntityRepository
 
         $qb = $this->_em->createQueryBuilder();
         $qb->select('d')
-           ->from('CoyoteSiteBundle:Directory', 'd')
+           ->from('CoyoteDirectoryBundle:Directory', 'd')
            ->where('d.country = :country')
            ->orderBy('d.updated_at', 'DESC')
            ->setParameters(array('country' => $country));
