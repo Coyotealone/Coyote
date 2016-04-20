@@ -247,10 +247,8 @@ class DirectoryController extends Controller
         $update = $em->getRepository('CoyoteDirectoryBundle:Directory')->updateDate($country);
         $page = $this->render('CoyoteDirectoryBundle:Directory:pdfdirectorybyfirstname.html.twig',
                 array('entity' => $entity, 'update' => $update, 'business' => $business));
-        $date = date("Ymd");
-        $heure = date("His");
         $html = $page->getContent();
-        $filename = "annuaire".$date."-".$heure.".pdf";
+        $filename = "annuaire".date("Ymd")."-".date("His").".pdf";
         $html = $page->getContent();
         $html2pdf = new \Html2Pdf_Html2Pdf('P', 'A4', 'fr');
         $html2pdf->pdf->SetDisplayMode('real');
@@ -266,10 +264,8 @@ class DirectoryController extends Controller
         $update = $em->getRepository('CoyoteDirectoryBundle:Directory')->updateDate($country);
         $page = $this->render('CoyoteDirectoryBundle:Directory:pdfdirectorybyfunctionservice.html.twig',
                 array('entity' => $entity, 'update' => $update, 'business' => $business));
-        $date = date("Ymd");
-        $heure = date("His");
         $html = $page->getContent();
-        $filename = "annuaire".$date."-".$heure.".pdf";
+        $filename = "annuaire".date("Ymd")."-".date("His").".pdf";
         $html = $page->getContent();
         $html2pdf = new \Html2Pdf_Html2Pdf('P', 'A4', 'fr');
         $html2pdf->pdf->SetDisplayMode('real');

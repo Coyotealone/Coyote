@@ -78,9 +78,8 @@ class ScheduleController extends Controller
         }
         $request = $this->getRequest();
         $session = $request->getSession();
-        $doctrine = $this->getDoctrine();
-        $em = $doctrine->getManager();
-            
+        $em = $this->getDoctrine()->getManager();
+
         if ($this->get('security.context')->isGranted('ROLE_TECH'))
         {
             $data = $request->request->all();
@@ -107,11 +106,10 @@ class ScheduleController extends Controller
      */
     public function getScheduleUserMonthAction(Request $request)
     {
-	    $doctrine = $this->getDoctrine();
-        $em = $doctrine->getManager();
+	    $em = $this->getDoctrine()->getManager();
         $request = $this->getRequest();
         if ($request->getMethod() == 'GET' && filter_input(INPUT_GET, 'year', FILTER_UNSAFE_RAW) && filter_input(INPUT_GET, 'month', FILTER_UNSAFE_RAW))
-        {   
+        {
             $year = filter_input(INPUT_GET, 'year', FILTER_UNSAFE_RAW);
             $month = filter_input(INPUT_GET, 'month', FILTER_UNSAFE_RAW);
             if (empty($year) && empty($month))
@@ -125,23 +123,23 @@ class ScheduleController extends Controller
                 $user = $this->getUser();
                 $absences_month = $em->getRepository('CoyoteAttendanceBundle:Schedule')->allAbsencesMonth($month,$year,$user);
                 $absences_year = $em->getRepository('CoyoteAttendanceBundle:Schedule')->allAbsencesYear($month,$year,$user);
-                    
+
                 if ($this->get('security.context')->isGranted('ROLE_CADRE'))
                 {
                     $data_tech = $em->getRepository('CoyoteAttendanceBundle:Schedule')->dataTech($user,$month,$year);
-                    return $this->render('CoyoteAttendanceBundle:Schedule:showfm.html.twig', array('day' => $data_tech[3], 
-                        'date' => $data_tech[4], 'week' => $data_tech[5], 'dataschedule' => $data_tech[0], 
-                        'absenceca' => $absences_month[0], 'absencecp' => $absences_month[1], 'absencertt' => $absences_month[2], 
-                        'time' => $data_tech[2], 'rttyear' => $absences_year[2], 'cpyear' => $absences_year[1], 
+                    return $this->render('CoyoteAttendanceBundle:Schedule:showfm.html.twig', array('day' => $data_tech[3],
+                        'date' => $data_tech[4], 'week' => $data_tech[5], 'dataschedule' => $data_tech[0],
+                        'absenceca' => $absences_month[0], 'absencecp' => $absences_month[1], 'absencertt' => $absences_month[2],
+                        'time' => $data_tech[2], 'rttyear' => $absences_year[2], 'cpyear' => $absences_year[1],
                         'cayear' => $absences_year[0], 'timeweek' => $data_tech[1], 'holiday' => $data_tech[6]));
                 }
                 if ($this->get('security.context')->isGranted('ROLE_TECH'))
-                {   
+                {
                     $data_tech = $em->getRepository('CoyoteAttendanceBundle:Schedule')->dataTech($user,$month,$year);
-                    return $this->render('CoyoteAttendanceBundle:Schedule:show.html.twig', array('day' => $data_tech[3], 
-                        'date' => $data_tech[4], 'week' => $data_tech[5], 'dataschedule' => $data_tech[0], 
-                        'absenceca' => $absences_month[0], 'absencecp' => $absences_month[1], 'absencertt' => $absences_month[2], 
-                        'time' => $data_tech[2], 'rttyear' => $absences_year[2], 'cpyear' => $absences_year[1], 
+                    return $this->render('CoyoteAttendanceBundle:Schedule:show.html.twig', array('day' => $data_tech[3],
+                        'date' => $data_tech[4], 'week' => $data_tech[5], 'dataschedule' => $data_tech[0],
+                        'absenceca' => $absences_month[0], 'absencecp' => $absences_month[1], 'absencertt' => $absences_month[2],
+                        'time' => $data_tech[2], 'rttyear' => $absences_year[2], 'cpyear' => $absences_year[1],
                         'cayear' => $absences_year[0], 'timeweek' => $data_tech[1], 'holiday' => $data_tech[6]));
                 }
             }
@@ -149,7 +147,7 @@ class ScheduleController extends Controller
         $tab_month = $em->getRepository('CoyoteAttendanceBundle:Schedule')->findMonth();
         $tab_num_month = $em->getRepository('CoyoteAttendanceBundle:Schedule')->findNumMonth();
         $tab_year = $em->getRepository('CoyoteAttendanceBundle:Schedule')->findYear();
-        
+
         return $this->render('CoyoteAttendanceBundle:Schedule:indexshow.html.twig', array('month' => date('n'),
         		'year' => date('Y'), 'tab_mois' => $tab_month, 'tab_num_mois' => $tab_num_month,
                 'tab_annee' => $tab_year));
@@ -162,8 +160,7 @@ class ScheduleController extends Controller
      */
     public function getScheduleUserPrintMonthAction(Request $request)
     {
-	    $doctrine = $this->getDoctrine();
-        $em = $doctrine->getManager();
+	    $em = $this->getDoctrine()->getManager();
         $request = $this->getRequest();
         if ($request->getMethod() == 'GET' && filter_input(INPUT_GET, 'month', FILTER_UNSAFE_RAW) && filter_input(INPUT_GET, 'year', FILTER_UNSAFE_RAW))
         {
@@ -175,22 +172,22 @@ class ScheduleController extends Controller
             if ($this->get('security.context')->isGranted('ROLE_CADRE'))
             {
                 $data_tech = $em->getRepository('CoyoteAttendanceBundle:Schedule')->dataTech($user,$month,$year);
-                $page = $this->render('CoyoteAttendanceBundle:Schedule:printfm.html.twig', array('day' => $data_tech[3], 
-                    'date' => $data_tech[4], 'week' => $data_tech[5], 'dataschedule' => $data_tech[0], 
-                    'absenceca' => $absences_month[0], 'absencecp' => $absences_month[1], 'absencertt' => $absences_month[2], 
-                    'time' => $data_tech[2], 'rttyear' => $absences_year[2], 'cpyear' => $absences_year[1], 
+                $page = $this->render('CoyoteAttendanceBundle:Schedule:printfm.html.twig', array('day' => $data_tech[3],
+                    'date' => $data_tech[4], 'week' => $data_tech[5], 'dataschedule' => $data_tech[0],
+                    'absenceca' => $absences_month[0], 'absencecp' => $absences_month[1], 'absencertt' => $absences_month[2],
+                    'time' => $data_tech[2], 'rttyear' => $absences_year[2], 'cpyear' => $absences_year[1],
                     'cayear' => $absences_year[0], 'timeweek' => $data_tech[1], 'holiday' => $data_tech[6]));
             }
             if ($this->get('security.context')->isGranted('ROLE_TECH'))
             {
                 $data_tech = $em->getRepository('CoyoteAttendanceBundle:Schedule')->dataTech($user,$month,$year);
-                $page = $this->render('CoyoteAttendanceBundle:Schedule:print.html.twig', array('day' => $data_tech[3], 
-                    'date' => $data_tech[4], 'week' => $data_tech[5], 'dataschedule' => $data_tech[0], 
-                    'absenceca' => $absences_month[0], 'absencecp' => $absences_month[1], 'absencertt' => $absences_month[2], 
-                    'time' => $data_tech[2], 'rttyear' => $absences_year[2], 'cpyear' => $absences_year[1], 
+                $page = $this->render('CoyoteAttendanceBundle:Schedule:print.html.twig', array('day' => $data_tech[3],
+                    'date' => $data_tech[4], 'week' => $data_tech[5], 'dataschedule' => $data_tech[0],
+                    'absenceca' => $absences_month[0], 'absencecp' => $absences_month[1], 'absencertt' => $absences_month[2],
+                    'time' => $data_tech[2], 'rttyear' => $absences_year[2], 'cpyear' => $absences_year[1],
                     'cayear' => $absences_year[0], 'timeweek' => $data_tech[1], 'holiday' => $data_tech[6]));
             }
-            
+
             $filename = $user->getUsername()."_presence".date("Ymd")."-".date("His").".pdf";
             $html = $page->getContent();
             $html2pdf = new \Html2Pdf_Html2Pdf('P', 'A4', 'fr');
@@ -202,7 +199,7 @@ class ScheduleController extends Controller
         $tab_month = $em->getRepository('CoyoteAttendanceBundle:Schedule')->findMonth();
         $tab_num_month = $em->getRepository('CoyoteAttendanceBundle:Schedule')->findNumMonth();
         $tab_year = $em->getRepository('CoyoteAttendanceBundle:Schedule')->findYear();
-        
+
         return $this->render('CoyoteAttendanceBundle:Schedule:indexprint.html.twig', array('month' => date('n'),
         		'year' => date('Y'), 'tab_mois' => $tab_month, 'tab_num_mois' => $tab_num_month,
                 'tab_annee' => $tab_year));
@@ -220,7 +217,7 @@ class ScheduleController extends Controller
         if ($request->getMethod() == 'GET' && filter_input(INPUT_GET, 'pay_period', FILTER_UNSAFE_RAW))
     	{
         	$period = filter_input(INPUT_GET, 'pay_period', FILTER_UNSAFE_RAW);
-            
+
             if ($this->get('security.context')->isGranted('ROLE_CADRE'))
             {
                 /** @var $filename string */
@@ -283,8 +280,7 @@ class ScheduleController extends Controller
      */
     public function getScheduleUserPrintYearAction(Request $request)
     {
-	    $doctrine = $this->getDoctrine();
-    	$em = $doctrine->getManager();
+	    $em = $this->getDoctrine()->getManager();
     	$request = $this->getRequest();
     	if ($request->getMethod() == 'GET' && filter_input(INPUT_GET, 'pay_period', FILTER_UNSAFE_RAW))
     	{
@@ -294,7 +290,7 @@ class ScheduleController extends Controller
     		{
         		$data_tech = $em->getRepository('CoyoteAttendanceBundle:Schedule')->dataCadreYear($period, $user);
         		$absences_year = $em->getRepository('CoyoteAttendanceBundle:Schedule')->allAbsencesYearAboutPeriod($period,$user);
-    			
+
     			$page = $this->render('CoyoteAttendanceBundle:Schedule:printfmpayperiod.html.twig', array(
     				'day' => $data_tech[1], 'date' => $data_tech[2], 'week' => $data_tech[3], 'holiday' => $data_tech[4],
     				'dataschedule' => $data_tech[0], 'rttyear' => $absences_year[2], 'cpyear' => $absences_year[1],
@@ -304,7 +300,7 @@ class ScheduleController extends Controller
     		{
         		$data_tech = $em->getRepository('CoyoteAttendanceBundle:Schedule')->dataTechYear($period, $user);
         		$absences_year = $em->getRepository('CoyoteAttendanceBundle:Schedule')->allAbsencesYearAboutPeriod($period,$user);
-    			
+
     			$page = $this->render('CoyoteAttendanceBundle:Schedule:printpayperiod.html.twig', array(
     				'day' => $data_tech[2], 'date' => $data_tech[3], 'week' => $data_tech[4], 'holiday' => $data_tech[5],
     				'dataschedule' => $data_tech[0], 'rttyear' => $absences_year[2], 'cpyear' => $absences_year[1],
@@ -326,7 +322,7 @@ class ScheduleController extends Controller
         return $this->render('CoyoteAttendanceBundle:Schedule:indexprintyear.html.twig', array(
             'period' => $period, 'tab_period' => $tab_period));
     }
-    
+
     /**
      * Export data design office users.
      * @access public
@@ -341,7 +337,7 @@ class ScheduleController extends Controller
             $em = $this->getDoctrine()->getManager();
             /** @var $data array data request */
             $request = $this->getRequest();
-            
+
             if ($request->getMethod() == 'POST' && filter_input(INPUT_POST, 'month', FILTER_UNSAFE_RAW) && filter_input(INPUT_POST, 'year', FILTER_UNSAFE_RAW))
             {
                 $ids_user_be = $em->getRepository('CoyoteAttendanceBundle:Schedule')->findUserBe("%ROLE_BE_USER%");

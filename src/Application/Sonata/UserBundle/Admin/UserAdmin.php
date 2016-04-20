@@ -2,12 +2,8 @@
 
 namespace Application\Sonata\UserBundle\Admin;
 
-use Sonata\AdminBundle\Admin\Admin;
-use Sonata\AdminBundle\Datagrid\DatagridMapper;
-use Sonata\AdminBundle\Datagrid\ListMapper;
 #use Application\Sonata\UserBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Show\ShowMapper;
 
 use Sonata\UserBundle\Admin\Model\UserAdmin as BaseUserAdmin;
 
