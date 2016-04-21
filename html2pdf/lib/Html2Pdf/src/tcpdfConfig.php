@@ -37,22 +37,22 @@ if (!defined('K_TCPDF_EXTERNAL_CONFIG')) {
     define('K_TCPDF_EXTERNAL_CONFIG', true);
 
     // DOCUMENT_ROOT fix for IIS Webserver
-    if ((!isset($_SERVER['DOCUMENT_ROOT'])) || (empty($_SERVER['DOCUMENT_ROOT']))) {
-        if (isset($_SERVER['SCRIPT_FILENAME'])) {
-            $_SERVER['DOCUMENT_ROOT'] = str_replace(
+    if ((!isset(filter_input(INPUT_SERVER, 'DOCUMENT_ROOT'))) || (empty(filter_input(INPUT_SERVER, 'DOCUMENT_ROOT')))) {
+        if (isset(filter_input(INPUT_SERVER, 'SCRIPT_FILENAME'))) {
+            filter_input(INPUT_SERVER, 'DOCUMENT_ROOT') = str_replace(
                 '\\',
                 '/',
-                substr($_SERVER['SCRIPT_FILENAME'], 0, 0-strlen($_SERVER['PHP_SELF']))
+                substr(filter_input(INPUT_SERVER, 'SCRIPT_FILENAME'), 0, 0-strlen(filter_input(INPUT_SERVER, 'PHP_SELF')))
             );
-        } elseif (isset($_SERVER['PATH_TRANSLATED'])) {
-            $_SERVER['DOCUMENT_ROOT'] = str_replace(
+        } elseif (isset(filter_input(INPUT_SERVER, 'PATH_TRANSLATED'))) {
+            filter_input(INPUT_SERVER, 'DOCUMENT_ROOT') = str_replace(
                 '\\',
                 '/',
-                substr(str_replace('\\\\', '\\', $_SERVER['PATH_TRANSLATED']), 0, 0-strlen($_SERVER['PHP_SELF']))
+                substr(str_replace('\\\\', '\\', filter_input(INPUT_SERVER, 'PATH_TRANSLATED')), 0, 0-strlen(filter_input(INPUT_SERVER, 'PHP_SELF')))
             );
         } else {
             // define here your DOCUMENT_ROOT path if the previous fails
-            $_SERVER['DOCUMENT_ROOT'] = '/var/www';
+            filter_input(INPUT_SERVER, 'DOCUMENT_ROOT') = '/var/www';
         }
     }
 
@@ -63,14 +63,14 @@ if (!defined('K_TCPDF_EXTERNAL_CONFIG')) {
     define('K_PATH_MAIN', $kPathMain);
 
     // Automatic calculation for the following K_PATH_URL constant
-    if (isset($_SERVER['HTTP_HOST']) && (!empty($_SERVER['HTTP_HOST']))) {
-        if (isset($_SERVER['HTTPS']) && (!empty($_SERVER['HTTPS'])) && strtolower($_SERVER['HTTPS'])!='off') {
+    if (isset(filter_input(INPUT_SERVER, 'HTTP_HOST')) && (!empty(filter_input(INPUT_SERVER, 'HTTP_HOST')))) {
+        if (isset(filter_input(INPUT_SERVER, 'HTTPS')) && (!empty(filter_input(INPUT_SERVER, 'HTTPS'))) && strtolower(filter_input(INPUT_SERVER, 'HTTPS'))!='off') {
             $kPathUrl = 'https://';
         } else {
             $kPathUrl = 'http://';
         }
-        $kPathUrl .= $_SERVER['HTTP_HOST'];
-        $kPathUrl .= str_replace('\\', '/', substr(K_PATH_MAIN, (strlen($_SERVER['DOCUMENT_ROOT']) - 1)));
+        $kPathUrl .= filter_input(INPUT_SERVER, 'HTTP_HOST');
+        $kPathUrl .= str_replace('\\', '/', substr(K_PATH_MAIN, (strlen(filter_input(INPUT_SERVER, 'DOCUMENT_ROOT')) - 1)));
     }
 
     /**
