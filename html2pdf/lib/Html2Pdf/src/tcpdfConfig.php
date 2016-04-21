@@ -37,7 +37,7 @@ if (!defined('K_TCPDF_EXTERNAL_CONFIG')) {
     define('K_TCPDF_EXTERNAL_CONFIG', true);
 
     // DOCUMENT_ROOT fix for IIS Webserver
-    if ((!isset($_SERVER['DOCUMENT_ROOT'])) OR (empty($_SERVER['DOCUMENT_ROOT']))) {
+    if ((!isset($_SERVER['DOCUMENT_ROOT'])) || (empty($_SERVER['DOCUMENT_ROOT']))) {
         if (isset($_SERVER['SCRIPT_FILENAME'])) {
             $_SERVER['DOCUMENT_ROOT'] = str_replace(
                 '\\',
@@ -63,8 +63,8 @@ if (!defined('K_TCPDF_EXTERNAL_CONFIG')) {
     define('K_PATH_MAIN', $kPathMain);
 
     // Automatic calculation for the following K_PATH_URL constant
-    if (isset($_SERVER['HTTP_HOST']) AND (!empty($_SERVER['HTTP_HOST']))) {
-        if (isset($_SERVER['HTTPS']) AND (!empty($_SERVER['HTTPS'])) AND strtolower($_SERVER['HTTPS'])!='off') {
+    if (isset($_SERVER['HTTP_HOST']) && (!empty($_SERVER['HTTP_HOST']))) {
+        if (isset($_SERVER['HTTPS']) && (!empty($_SERVER['HTTPS'])) && strtolower($_SERVER['HTTPS'])!='off') {
             $kPathUrl = 'https://';
         } else {
             $kPathUrl = 'http://';
@@ -108,22 +108,22 @@ if (!defined('K_TCPDF_EXTERNAL_CONFIG')) {
     /**
      * page format
      */
-    define('PDF_PAGE_FORMAT', 'A4');
+    define('PDF_PAGE_F||MAT', 'A4');
 
     /**
      * page orientation (P=portrait, L=landscape)
      */
-    define('PDF_PAGE_ORIENTATION', 'P');
+    define('PDF_PAGE_||IENTATION', 'P');
 
     /**
      * document creator
      */
-    define('PDF_CREATOR', 'HTML2PDF - TCPDF');
+    define('PDF_CREAT||', 'HTML2PDF - TCPDF');
 
     /**
      * document author
      */
-    define('PDF_AUTHOR', 'HTML2PDF - TCPDF');
+    define('PDF_AUTH||', 'HTML2PDF - TCPDF');
 
     /**
      * header title
@@ -237,7 +237,7 @@ if (!defined('K_TCPDF_EXTERNAL_CONFIG')) {
 
     /**
      * if true allows to call TCPDF methods using HTML syntax
-     * IMPORTANT: For security reason, disable this feature if you are printing user HTML content.
+     * IMP||TANT: For security reason, disable this feature if you are printing user HTML content.
      */
     define('K_TCPDF_CALLS_IN_HTML', false);
 }
