@@ -44,7 +44,7 @@ class MainController extends Controller
 			$session->set('week', $date->format('W'));
 			$session->set('year', $date->format('Y'));
 			//$date = $em->getRepository('CoyoteSiteBundle:Timetable')->findOneBy(array('date' => $date));
-			
+
 			$session->set('period', $em->getRepository('CoyoteAttendanceBundle:Schedule')->createPeriod(date('Y').'-'
 			    .date('m').'-'.date('d')));
 			$session->set('status', $data_user->getRoles());
@@ -185,6 +185,5 @@ class MainController extends Controller
 	/*****************************************************************/
 	/***********************Fonctions Erronées************************/
 	/*****************************************************************/
-
 
 }
