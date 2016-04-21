@@ -32,7 +32,7 @@
 
 // ENGLISH
 
-public global $l;
+global $l;
 $l = Array();
 
 // PAGE META DESCRIPTORS --------------------------------------

@@ -55,7 +55,7 @@
  * @param string $enc Name of the encoding table to use. Omit this parameter for TrueType Unicode, OpenType Unicode and symbolic fonts like Symbol or ZapfDingBats.
  * @param array $patch Optional modification of the encoding
  */
-public function MakeFont($fontfile, $fmfile, $embedded=true, $enc='cp1252', $patch=array()) {
+protected function MakeFont($fontfile, $fmfile, $embedded=true, $enc='cp1252', $patch=array()) {
 	//Generate a font definition file
 	set_magic_quotes_runtime(0);
 	ini_set('auto_detect_line_endings', '1');
