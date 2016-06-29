@@ -112,15 +112,15 @@ sonata_page:
     page_defaults:
         homepage: { decorate: false, enabled: true }
 
-    caches:
-        esi:
-            token:    add an unique token here # default is a random value
-            version:  3                        # version 3 is the default on debian wheezy ...
-            servers:
-                # you need to ajust this configuration to match your varnish configuration
-                - %sonata_page.varnish.command%
-        ssi:
-            token:    add an unique token here # default is a random value
+#     caches:
+#         esi:
+#             token:    4da024710ab9fb3190061255d78ad7b31dc47a3c
+#             version:  3                        # version 3 is the default on debian wheezy ...
+#             servers:
+#                 # you need to ajust this configuration to match your varnish configuration
+#                 - %sonata_page.varnish.command%
+#         ssi:
+#             token:    add an unique token here # default is a random value
 
     catch_exceptions:
         not_found: [404]    # render 404 page with "not_found" key (name generated: _page_internal_error_{key})

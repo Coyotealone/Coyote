@@ -10,7 +10,6 @@
     <div class="navbar-collapse collapse navbar-inverse-collapse">
         <ul class="nav navbar-nav">
             <li><a href="{{path('main_menu')}}">{{'base.nav.accueil'|trans}}</a></li>
-
             {% if is_granted('ROLE_TECH') or is_granted('ROLE_CADRE') %}
             <li class="dropdown">
                 <a href="{{ path('schedule_getscheduleuserweek') }}" class="dropdown-toggle" data-toggle="dropdown">{{'base.nav.schedule.name'|trans}}<b class="caret"></b></a>
@@ -23,7 +22,6 @@
                 </ul>
             </li>
             {% endif %}
-
             {% if is_granted('ROLE_CHEF_BE') %}
         	<li id="presence_admin" class="dropdown">
               <a href=# class="dropdown-toggle" data-toggle="dropdown">{{'base.nav.schedule_admin.name'|trans}}<b class="caret"></b></a>
@@ -32,8 +30,6 @@
               </ul>
             </li>
             {% endif %}
-
-
             {% if is_granted('ROLE_TRADE') or is_granted('ROLE_TRADE_PICHON') or is_granted('ROLE_TRADE_GILIBERT') %}
             <li id="frais" class="dropdown">
               <a href="{{ path('expense_create') }}" class="dropdown-toggle" data-toggle="dropdown">{{'base.nav.expense.name'|trans}}<b class="caret"></b></a>

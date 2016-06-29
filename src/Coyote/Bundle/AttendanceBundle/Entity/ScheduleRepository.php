@@ -1116,15 +1116,6 @@ class ScheduleRepository extends EntityRepository
         }
 
 		return $result;
-        $qb = $this->_em->createQueryBuilder();
-        $qb->select('t')
-	        ->from('CoyoteAttendanceBundle:Timetable', 't')
-	        ->where('t.date >= :date')
-	        ->setParameters(array('date' => $date->format('Y-m-d')));
-        $data_timetable = $qb->getQuery()
-	        ->setMaxResults(7)
-	        ->getResult();
-        return $data_timetable;
     }
 
 	public function dateWeek($date)
@@ -1246,10 +1237,6 @@ class ScheduleRepository extends EntityRepository
     	{
         	date_default_timezone_set('UTC');
 
-            /*$start = "8:00";
-            $end = "18:00";
-            $break = "1:23";*/
-
             $start_new = $start->format("H:i");
             $end_new = $end->format("H:i");
             $break_new = $break->format("H:i");
@@ -1288,6 +1275,7 @@ class ScheduleRepository extends EntityRepository
             $worktime_end = $worktime_middle - $break_end;
 
             $worktime = $this->second_to_hour($worktime_end);*/
+
             return  new \DateTime($worktime, new \DateTimeZone('Europe/Paris'));
     	}
     	else

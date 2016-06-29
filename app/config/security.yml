@@ -37,11 +37,6 @@ security:
         fos_userbundle:
             id: fos_user.user_manager
 
-        in_memory:
-            memory:
-                users:
-                    admin: { password: admin, roles: 'ROLE_ADMIN' }
-
     firewalls:
         # Disabling the security for the web debug toolbar, the profiler and Assetic.
         dev:
@@ -67,7 +62,7 @@ security:
             pattern:   /api/(.*)
             http_basic:
                 realm:         "Secured Demo Area"
-                provider:       in_memory
+                provider:       fos_userbundle
 
             stateless: true
 

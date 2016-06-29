@@ -1,9 +1,0 @@
-#coyote_expense_homepage:
-#    path:     /hello/{name}
-#    defaults: { _controller: CoyoteExpenseBundle:Default:index }
-
-# coyote_expense:
-#     resource: "@CoyoteExpenseBundle/Resources/config/routing/expense.yml"
-#     prefix:   /{_locale}/
-#     requirements:
-#         _locale: fr|en|pl

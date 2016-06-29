@@ -5,7 +5,6 @@ namespace Coyote\Bundle\ExpenseBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Session\Session;
-use Symfony\Component\HttpFoundation\Response;
 
 use Coyote\ExpenseBundle\Entity\Expense;
 

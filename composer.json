@@ -1,4 +1,5 @@
 {
+    "description" : "The \"Symfony Standard Edition\" distribution",
     "name": "root/pichon",
     "license": "proprietary",
     "type": "project",

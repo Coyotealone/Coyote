@@ -29,10 +29,10 @@ class RegistrationType extends AbstractType
             ->add('cell', null, array('required' => false, 'label' => 'form.cell',  'translation_domain' => 'messages'))
             ->add('fax', null, array('label' => 'form.fax',  'translation_domain' => 'messages', 'data' => ''))
             ->add('website', null, array('label' => 'form.website',  'translation_domain' => 'messages', 'data' => ''))
-            ->add('roles', 'choice',  array( 
+            ->add('roles', 'choice',  array(
                     'label' => 'form.roles','choices' => array(
                         'ROLE_TECH' => 'form.choices.technician',
-                        'ROLE_CADRE' => 'form.choices.business', 
+                        'ROLE_CADRE' => 'form.choices.business',
                         'ROLE_TRADE' => 'form.choices.trade',
                         'ROLE_TRADE_PICHON' => 'form.choices.tradepichon',
                         'ROLE_TRADE_GILIBERT' => 'form.choices.tradegilibert',

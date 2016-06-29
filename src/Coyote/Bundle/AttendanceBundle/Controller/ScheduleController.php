@@ -78,8 +78,8 @@ class ScheduleController extends Controller
         }
         $request = $this->getRequest();
         $session = $request->getSession();
-        $doctrine = $this->getDoctrine();
-        $em = $doctrine->getManager();
+
+        $em = $this->getDoctrine()->getManager();
 
         if ($this->get('security.context')->isGranted('ROLE_TECH'))
         {
@@ -107,8 +107,7 @@ class ScheduleController extends Controller
      */
     public function getScheduleUserMonthAction(Request $request)
     {
-	    $doctrine = $this->getDoctrine();
-        $em = $doctrine->getManager();
+	    $em = $this->getDoctrine()->getManager();
         $request = $this->getRequest();
         if ($request->getMethod() == 'GET' && filter_input(INPUT_GET, 'year', FILTER_UNSAFE_RAW) && filter_input(INPUT_GET, 'month', FILTER_UNSAFE_RAW))
         {
@@ -130,6 +129,7 @@ class ScheduleController extends Controller
                 {
                     $data_tech = $em->getRepository('CoyoteAttendanceBundle:Schedule')->dataTech($user,$month,$year);
                     return $this->render('CoyoteFrontBundle:Schedule:showfm.html.twig', array('day' => $data_tech[3],
+
                         'date' => $data_tech[4], 'week' => $data_tech[5], 'dataschedule' => $data_tech[0],
                         'absenceca' => $absences_month[0], 'absencecp' => $absences_month[1], 'absencertt' => $absences_month[2],
                         'time' => $data_tech[2], 'rttyear' => $absences_year[2], 'cpyear' => $absences_year[1],
@@ -162,8 +162,7 @@ class ScheduleController extends Controller
      */
     public function getScheduleUserPrintMonthAction(Request $request)
     {
-	    $doctrine = $this->getDoctrine();
-        $em = $doctrine->getManager();
+	    $em = $this->getDoctrine()->getManager();
         $request = $this->getRequest();
         if ($request->getMethod() == 'GET' && filter_input(INPUT_GET, 'month', FILTER_UNSAFE_RAW) && filter_input(INPUT_GET, 'year', FILTER_UNSAFE_RAW))
         {
@@ -283,8 +282,7 @@ class ScheduleController extends Controller
      */
     public function getScheduleUserPrintYearAction(Request $request)
     {
-	    $doctrine = $this->getDoctrine();
-    	$em = $doctrine->getManager();
+	    $em = $this->getDoctrine()->getManager();
     	$request = $this->getRequest();
     	if ($request->getMethod() == 'GET' && filter_input(INPUT_GET, 'pay_period', FILTER_UNSAFE_RAW))
     	{

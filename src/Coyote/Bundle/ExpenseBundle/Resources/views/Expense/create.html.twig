@@ -8,12 +8,7 @@
 {% endblock %}
 
 {% block nav %}
-    <!--[if lt IE 9]>
-        {{ include('CoyoteFrontBundle:Base:navigation_ie.html.twig') }}
-    <![endif]-->
-    <!--[if !IE]><!-->
-        {{ include('CoyoteFrontBundle:Base:navigation.html.twig') }}
-	<!--<![endif]-->
+    {{ include('CoyoteFrontBundle:Base:navigation.html.twig') }}
 {% endblock %}
 
 {% block content %}

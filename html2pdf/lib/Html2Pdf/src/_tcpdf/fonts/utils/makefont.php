@@ -7,20 +7,20 @@
 // License     : GNU LGPL (http://www.gnu.org/copyleft/lesser.html)
 // 	----------------------------------------------------------------------------
 // 	Copyright (C) 2008  Nicola Asuni - Tecnick.com S.r.l.
-// 	
+//
 // 	This program is free software: you can redistribute it and/or modify
 // 	it under the terms of the GNU Lesser General Public License as published by
 // 	the Free Software Foundation, either version 2.1 of the License, or
 // 	(at your option) any later version.
-// 	
+//
 // 	This program is distributed in the hope that it will be useful,
 // 	but WITHOUT ANY WARRANTY; without even the implied warranty of
 // 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // 	GNU Lesser General Public License for more details.
-// 	
+//
 // 	You should have received a copy of the GNU Lesser General Public License
 // 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
-// 	
+//
 // 	See LICENSE.TXT file for more information.
 //  ----------------------------------------------------------------------------
 //
@@ -48,14 +48,14 @@
 */
 
 /**
- * 
+ *
  * @param string $fontfile path to font file (TTF, OTF or PFB).
  * @param string $fmfile font metrics file (UFM or AFM).
  * @param boolean $embedded Set to false to not embed the font, true otherwise (default).
  * @param string $enc Name of the encoding table to use. Omit this parameter for TrueType Unicode, OpenType Unicode and symbolic fonts like Symbol or ZapfDingBats.
  * @param array $patch Optional modification of the encoding
  */
-function MakeFont($fontfile, $fmfile, $embedded=true, $enc='cp1252', $patch=array()) {
+protected function MakeFont($fontfile, $fmfile, $embedded=true, $enc='cp1252', $patch=array()) {
 	//Generate a font definition file
 	set_magic_quotes_runtime(0);
 	ini_set('auto_detect_line_endings', '1');
@@ -208,7 +208,7 @@ function MakeFont($fontfile, $fmfile, $embedded=true, $enc='cp1252', $patch=arra
  * Read the specified encoding map.
  * @param string $enc map name (see /enc/ folder for valid names).
  */
-function ReadMap($enc) {
+public function ReadMap($enc) {
 	//Read a map file
 	$file = dirname(__FILE__).'/enc/'.strtolower($enc).'.map';
 	$a = file($file);
@@ -235,7 +235,7 @@ function ReadMap($enc) {
 /**
  * Read UFM file
  */
-function ReadUFM($file, &$cidtogidmap) {
+public function ReadUFM($file, &$cidtogidmap) {
 	//Prepare empty CIDToGIDMap
 	$cidtogidmap = str_pad('', (256 * 256 * 2), "\x00");
 	//Read a font metric file
@@ -310,7 +310,7 @@ function ReadUFM($file, &$cidtogidmap) {
 /**
  * Read AFM file
  */
-function ReadAFM($file,&$map) {
+public function ReadAFM($file,&$map) {
 	//Read a font metric file
 	$a = file($file);
 	if(empty($a)) {
@@ -436,7 +436,7 @@ function ReadAFM($file,&$map) {
 	return $fm;
 }
 
-function MakeFontDescriptor($fm, $symbolic=false) {
+public function MakeFontDescriptor($fm, $symbolic=false) {
 	//Ascent
 	$asc = (isset($fm['Ascender']) ? $fm['Ascender'] : 1000);
 	$fd = "array('Ascent'=>".$asc;
@@ -493,7 +493,7 @@ function MakeFontDescriptor($fm, $symbolic=false) {
 	return $fd;
 }
 
-function MakeWidthArray($fm) {
+public function MakeWidthArray($fm) {
 	//Make character width array
 	$s = 'array(';
 	$cw = $fm['Widths'];
@@ -509,7 +509,7 @@ function MakeWidthArray($fm) {
 	return $s;
 }
 
-function MakeFontEncoding($map) {
+public function MakeFontEncoding($map) {
 	//Build differences from reference encoding
 	$ref = ReadMap('cp1252');
 	$s = '';
@@ -526,7 +526,7 @@ function MakeFontEncoding($map) {
 	return rtrim($s);
 }
 
-function SaveToFile($file, $s, $mode='t') {
+public function SaveToFile($file, $s, $mode='t') {
 	$f = fopen($file, 'w'.$mode);
 	if(!$f) {
 		die('Can\'t write to file '.$file);
@@ -535,17 +535,17 @@ function SaveToFile($file, $s, $mode='t') {
 	fclose($f);
 }
 
-function ReadShort($f) {
+public function ReadShort($f) {
 	$a = unpack('n1n', fread($f, 2));
 	return $a['n'];
 }
 
-function ReadLong($f) {
+public function ReadLong($f) {
 	$a = unpack('N1N', fread($f, 4));
 	return $a['N'];
 }
 
-function CheckTTF($file) {
+public function CheckTTF($file) {
 	//Check if font license allows embedding
 	$f = fopen($file, 'rb');
 	if (!$f) {

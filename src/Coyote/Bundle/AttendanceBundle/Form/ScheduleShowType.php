@@ -1,6 +1,6 @@
 <?php
 
-namespace Coyote\SiteBundle\Form;
+namespace Coyote\Bundle\AttendanceBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -27,14 +27,14 @@ class ScheduleShowType extends AbstractType
             ->add('timetable')
         ;
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Coyote\SiteBundle\Entity\Schedule'
+            'data_class' => 'Coyote\Bundle\AttendanceBundle\Entity\Schedule'
         ));
     }
 
@@ -43,6 +43,6 @@ class ScheduleShowType extends AbstractType
      */
     public function getName()
     {
-        return 'coyote_sitebundle_schedule';
+        return 'coyote_bundle_attendancebundle_schedule';
     }
 }

@@ -36,7 +36,7 @@ directory_delete:
 directory_showdirectorybyfirstname:
     path:     /showdirectorybyfirstname/{country}/{business}
     defaults: { _controller: "CoyoteDirectoryBundle:Directory:showDirectoryByFirstname" }
-
+    methods:  GET
 
 directory_showdirectorybyfunctionservice:
     path:     /showdirectorybyfunctionservice/{country}/{business}
@@ -57,9 +57,6 @@ directory_enabled:
     path:     /directory_enabled/{id}
     defaults: { _controller: "CoyoteDirectoryBundle:Directory:setEnabledDirectory" }
     methods:  [POST, PUT]
-
-#/{orderby}/{business}/{country}
-
 
 directory_showdirectory:
     path:       /show/{orderby}/{business}/{country}

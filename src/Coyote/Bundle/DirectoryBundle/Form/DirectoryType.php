@@ -108,6 +108,6 @@ class DirectoryType extends AbstractType
      */
     public function getName()
     {
-        return 'coyote_directorybundle_directory';
+        return 'coyote_bundle_directorybundle_directory';
     }
 }
