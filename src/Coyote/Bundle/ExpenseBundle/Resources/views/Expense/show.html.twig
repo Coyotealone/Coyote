@@ -1,4 +1,4 @@
-{% extends 'CoyoteSiteBundle:Expense:index.html.twig' %}
+{% extends 'CoyoteFrontBundle:Expense:index.html.twig' %}
 
 {% block content %}
 
@@ -51,7 +51,7 @@
     </table>
 </div><br>
 {% if pagination.pages_count > 1 %}
-    {{ include('CoyoteSiteBundle:Base:pagination.html.twig') }}
+    {{ include('CoyoteFrontBundle:Base:pagination.html.twig') }}
 {% endif %}
 {% else %}
     <p id="title">{{'expense.message'|trans}}</p>

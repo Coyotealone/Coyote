@@ -26,8 +26,8 @@ class ExportCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
     	$em = $this->getContainer()->get('doctrine')->getManager();
-    	$dataexpense = $em->getRepository('CoyoteSiteBundle:Expense')->createFileExpense();
-    	$em->getRepository('CoyoteSiteBundle:Expense')->updateStatusTo0($em);
+    	$dataexpense = $em->getRepository('CoyoteExpenseBundle:Expense')->createFileExpense();
+    	$em->getRepository('CoyoteExpenseBundle:Expense')->updateStatusTo0($em);
     	$output->write($dataexpense);
     }
 }

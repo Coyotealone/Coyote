@@ -11,12 +11,7 @@
     {% elseif is_granted('ROLE_COMPTA') %}
 	    {{ include('CoyoteFrontBundle:Base:navigation_admin.html.twig') }}
     {% else %}
-    <!--[if lt IE 9]>
-        {{ include('CoyoteFrontBundle:Base:navigation_ie.html.twig') }}
-    <![endif]-->
-    <!--[if !IE]><!-->
         {{ include('CoyoteFrontBundle:Base:navigation.html.twig') }}
-	<!--<![endif]-->
 	{% endif %}
 
 {% endblock %}

@@ -1,0 +1,53 @@
+{% extends 'CoyoteFrontBundle:Expense:index.html.twig' %}
+
+{% block content %}
+
+{% for flashMessage in app.session.flashbag.get('save_expense') %}
+
+    <p id="flashmessage">{{ flashMessage|trans }}</p>
+
+{% endfor %}
+<p id="title">{{'expense.title.showadmin'|trans}}</p>
+
+{% if data|length > 0 %}
+    <div class='table-responsive'>
+        <table class='table' id='tab_expense'>
+        	<tr>
+        	    <th>{{ 'expense.id'|trans }}</th>
+        	    <th>{{ 'expense.username'|trans }}</th>
+        		<th id='tab_expense_site'>{{ 'expense.site'|trans}}</th>
+        		<th id='tab_expense_date'>{{ 'expense.date'|trans}}</th>
+        		<th id='tab_expense_item'>{{ 'expense.item'|trans}}</th>
+        		<th id='tab_expense_devise'>{{ 'expense.currency'|trans}}</th>
+        		<th id='tab_expense_qte'>{{ 'expense.amount'|trans}}</th>
+        		<th id='tab_expense_amounttc'>{{ 'expense.amountttc'|trans}}</th>
+        		<th id='tab_expense_amounttva'>{{ 'expense.amounttva'|trans}}</th>
+        		<th id='tab_expense_business'>{{ 'expense.business'|trans}}</th>
+        		<th id='tab_expense_comment'>{{ 'expense.comment'|trans}}</th>
+        	</tr>
+        	{% for entity in data %}
+                <tr>
+                    <td>{{ entity.id }}</a></td>
+                    <td>{{ entity.user.username }}</td>
+                    <td>{{ entity.site.code }}</td>
+                    <td>{{ entity.date|date("d/m/y") }}</td>
+                    <td>{{ entity.fee.code }}</td>
+                    <td>{{ entity.currency.code }}</td>
+                    <td>{{ entity.amount }}</td>
+                    <td>{{ entity.amountttc }}</td>
+                    <td>{{ entity.amounttva }}</td>
+                    <td id='tab_expense_business'>{{ entity.business.name }}</td>
+                    <td id='tab_expense_comment'>{{ entity.comment }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div><br>
+
+{% if pagination.pages_count > 1 %}
+{{ include('CoyoteExpenseBundle:Base:pagination.html.twig') }}
+{% endif %}
+{% else %}
+    <p id="title">{{'expense.message'|trans}}</p>
+{% endif %}
+
+{% endblock %}

@@ -34,19 +34,19 @@
 	<li id="presence_admin" class="dropdown" style="margin: 0px 10px; float:left; ">
       <a href=# class="dropdown-toggle" data-toggle="dropdown">{{'base.nav.schedule_admin.name'|trans}}<b class="caret"></b></a>
       <ul class="dropdown-menu">
-        <li><a href="{{ path('admin_exportdatauser')}}">{{'base.nav.schedule_admin.indexexport'|trans}}</a></li>
+        {#<li><a href="{{ path('admin_exportdatauser')}}">{{'base.nav.schedule_admin.indexexport'|trans}}</a></li>#}
       </ul>
     </li>
     {% endif %}
 
     {% if is_granted('ROLE_COMPTA') %}
     <li id="frais_admin" class="dropdown" style="margin: 0px 10px; float:left;">
-      <a href="{{ path('admin_exportexpense') }}" class="dropdown-toggle" data-toggle="dropdown">{{'base.nav.expense_admin.name'|trans}}<b class="caret"></b></a>
+      {#<a href="{{ path('admin_exportexpense') }}" class="dropdown-toggle" data-toggle="dropdown">{{'base.nav.expense_admin.name'|trans}}<b class="caret"></b></a>
       <ul class="dropdown-menu">
         <li><a href="{{ path('admin_exportexpense') }}">{{'base.nav.expense_admin.exportexpense'|trans}}</a></li>
         <li><a href="{{ path('admin_showadmin') }}">{{'base.nav.expense.showadmin'|trans}}</a></li>
       </ul>
-    </li>
+    </li>#}
     {% endif %}
 
     {% if is_granted('ROLE_ADMIN') %}

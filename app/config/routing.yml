@@ -4,7 +4,7 @@ coyote_front:
 
 coyote_directory:
     resource: "@CoyoteDirectoryBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /directory
 
 coyote_expense:
     resource: "@CoyoteExpenseBundle/Resources/config/routing.yml"
@@ -12,6 +12,7 @@ coyote_expense:
 
 coyote_attendance:
     resource: "@CoyoteAttendanceBundle/Resources/config/routing.yml"
+    prefix:   /attendance
 
 sonata_user_security:
     resource: "@SonataUserBundle/Resources/config/routing/sonata_security_1.xml"
@@ -28,9 +29,9 @@ sonata_user_register:
     resource: "@SonataUserBundle/Resources/config/routing/sonata_registration_1.xml"
     prefix: /register
 
-sonata_user_change_password:
-    resource: "@SonataUserBundle/Resources/config/routing/sonata_change_password_1.xml"
-    prefix: /profile
+#sonata_user_change_password:
+#    resource: "@SonataUserBundle/Resources/config/routing/sonata_change_password_1.xml"
+#    prefix: /profile
 
 sonata_user:
     resource: '@SonataUserBundle/Resources/config/routing/admin_security.xml'
@@ -44,11 +45,3 @@ _sonata_admin:
     resource: .
     type: sonata_admin
     prefix: /admin
-
-gallery:
-    resource: '@SonataMediaBundle/Resources/config/routing/gallery.xml'
-    prefix: /media/gallery
-
-media:
-    resource: '@SonataMediaBundle/Resources/config/routing/media.xml'
-    prefix: /media

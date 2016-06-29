@@ -1,6 +1,6 @@
-<?php 
+<?php
 
-namespace Coyote\FrontBundle\Form;
+namespace Coyote\Bundle\FrontBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -15,7 +15,7 @@ class ContactType extends AbstractType
           ->add('content', 'textarea')
           ;
     }
-    
+
     public function getName()
     {
         return 'contact';

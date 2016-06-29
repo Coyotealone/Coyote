@@ -1,0 +1,38 @@
+{% extends 'CoyoteFrontBundle:Expense:index.html.twig' %}
+
+{% block nav %}
+    {{ include('CoyoteFrontBundle:Base:navigation.html.twig') }}
+{% endblock %}
+
+{% block content %}
+{% for flashMessage in app.session.flashbag.get('updatestatus') %}
+    {% set message = flashMessage %}
+    {% if message == "expense.flash.update" %}
+        <p id="flashmessage_valid">{{ flashMessage|trans }}</p>
+    {% endif %}
+    {% if message == "expense.flash.no_update" %}
+        <p id="flashmessage_warning">{{ flashMessage|trans }}</p>
+    {% endif %}
+{% endfor %}
+<p id="title">{{'expense.title.updatestatus'|trans}} </p>
+
+<form role="form" action="{{ path('expense_updatestatus') }}" method='get'>
+    <table class='table' id='tab_expense'>
+    	<tr>
+    	    <th class="center">{{'expense.id_start'|trans}}</th>
+    		<th class="center">{{'expense.id_end'|trans}}</th>
+    	</tr>
+        <tr>
+            <td>
+                <input class='input' type='time' name='id_start' id='id_start' maxlength='5' />
+            </td>
+            <td>
+                <input class='input' type='time' name='id_end' id='id_end' maxlength='5' />
+            </td>
+        </tr>
+    </table>
+    <div id="btn_update">
+        <button class='btn btn-primary' type="submit" value="Afficher" id="afficher">{{ 'expense.submit.update'|trans }}</button>
+    </div>
+</form>
+{% endblock %}

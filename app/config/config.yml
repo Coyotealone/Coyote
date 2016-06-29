@@ -6,7 +6,7 @@ imports:
     - { resource: sonata/sonata_user.yml }
     - { resource: fos/fos_user.yml }
     - { resource: sonata/sonata_admin.yml }
-    - { resource: sonata/sonata_media.yml }
+    #- { resource: sonata/sonata_media.yml }
     #- { resource: assetic.yml }
     #- { resource: sonata/sonata_intl.yml }
     #- { resource: sonata/sonata_notification.yml }

@@ -1,0 +1,24 @@
+<?php
+
+namespace Coyote\Bundle\DirectoryBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Sonata\UserBundle\Entity\BaseGroup as BaseGroup;
+
+/**
+ * Class Group
+ * @author Coyote
+ * @ORM\Entity
+ * @ORM\Table(name="group")
+ * @ORM\Entity(repositoryClass="Coyote\Bundle\DirectoryBundle\Entity\GroupRepository");
+ * @ORM\HasLifecycleCallbacks
+ */
+class Group extends BaseGroup
+{
+    /**
+    * @ORM\Id
+    * @ORM\Column(type="integer")
+    * @ORM\GeneratedValue(strategy="AUTO")
+    */
+    protected $id;
+}

@@ -10,7 +10,7 @@ class AppKernel extends Kernel
         date_default_timezone_set('Europe/Paris');
         parent::__construct($environment, $debug);
     }
-    
+
     public function registerBundles()
     {
         $bundles = array(
@@ -21,30 +21,31 @@ class AppKernel extends Kernel
             new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
-            
+
             // Sonata Admin
             new Sonata\CoreBundle\SonataCoreBundle(),
             new Sonata\BlockBundle\SonataBlockBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
             new Sonata\AdminBundle\SonataAdminBundle(),
-            
+
             // Sonata Easy-Extends
             new Sonata\EasyExtendsBundle\SonataEasyExtendsBundle(),
-            
+
             // Sonata User
             new FOS\UserBundle\FOSUserBundle(),
             new Sonata\UserBundle\SonataUserBundle('FOSUserBundle'),
             new Application\Sonata\UserBundle\ApplicationSonataUserBundle(),
-            
+
             // Sonata Media
-            new Sonata\MediaBundle\SonataMediaBundle(),
-            new JMS\SerializerBundle\JMSSerializerBundle(),
-            new Sonata\IntlBundle\SonataIntlBundle(),
-            new Application\Sonata\MediaBundle\ApplicationSonataMediaBundle(),
-            
+            //new Sonata\MediaBundle\SonataMediaBundle(),
+            //new JMS\SerializerBundle\JMSSerializerBundle(),
+            //new Sonata\IntlBundle\SonataIntlBundle(),
+            //new Application\Sonata\MediaBundle\ApplicationSonataMediaBundle(),
+
             // Sonata Notification
-            new Sonata\NotificationBundle\SonataNotificationBundle(),
+            //new Sonata\NotificationBundle\SonataNotificationBundle(),
+
             new Coyote\Bundle\AttendanceBundle\CoyoteAttendanceBundle(),
             new Coyote\Bundle\ExpenseBundle\CoyoteExpenseBundle(),
             new Coyote\Bundle\DirectoryBundle\CoyoteDirectoryBundle(),

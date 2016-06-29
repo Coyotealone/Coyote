@@ -1,0 +1,68 @@
+{% extends 'CoyoteFrontBundle:Base:index.html.twig' %}
+
+{% block nav %}
+    {{ include('CoyoteFrontBundle:Base:navigation.html.twig') }}
+{% endblock %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{ asset('bundles/coyotefront/css/jquery-ui.css') }}" type="text/css" media="all" />
+    <link rel="stylesheet" href="{{ asset('bundles/coyotefront/css/style.css') }}" type="text/css" media="all" />
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('bundles/coyotefront/js/jquery-1.10.2.js') }}"/></script>
+    <script src="{{ asset('bundles/coyotefront/js/jquery-ui.js') }}"/></script>
+{% endblock %}
+
+{% block content %}
+
+<div class="icon-preview">
+
+    {{ form_start(showform) }}
+        {{ form_widget(showform) }}
+    {{ form_end(showform) }}
+
+</div>
+
+<div class="icon-preview">
+    <a href="{{ path('directory_pdfdirectorybyfirstname', { 'country': country, 'business': business }) }}"><i class="mdi-action-print"></i> {{'directory.print'|trans}}</a>
+</div>
+
+{% if entity|length > 0 %}
+    <table class="table table-striped table-hover ">
+        <thead>
+            <tr>
+                <th>{{'directory.firstname'|trans}}</th>
+                <th>{{'directory.name'|trans}}</th>
+                <th>{{'directory.jobphonenumber'|trans}}</th>
+                <th>{{'directory.quickphonenumber'|trans}}</th>
+                <th>{{'directory.phone'|trans}}</th>
+                <th>{{'directory.cellphonenumber'|trans}}</th>
+                <th>{{'directory.fax'|trans}}</th>
+                <th>{{'directory.mail'|trans}}</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for data in entity %}
+        <tr>
+            <td>{{ data.firstname }}</td>
+            <td>{{ data.name }}</td>
+            {% if data.jobphonenumber != 0 %}
+            <td>{{ data.jobphonenumber }}</td>
+            {% else %}
+            <td></td>
+            {% endif %}
+            <td>{{ data.quickphonenumber}}</td>
+            <td>{{ data.phone }}</td>
+            <td>{{ data.cellphonenumber}}</td>
+            <td>{{ data.fax }}</td>
+            <td>{{ data.mail }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>{{'directory.empty'|trans}}</p>
+{% endif %}
+
+{% endblock %}

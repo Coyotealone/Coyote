@@ -5,9 +5,12 @@ namespace Coyote\Bundle\DirectoryBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 use Coyote\Bundle\DirectoryBundle\Entity\Directory;
+
 use Coyote\Bundle\DirectoryBundle\Form\DirectoryType;
+use Coyote\Bundle\DirectoryBundle\Form\ShowType;
 
 /**
  * Directory controller.
@@ -24,12 +27,13 @@ class DirectoryController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('CoyoteSiteBundle:Directory')->findAll();
+        $entities = $em->getRepository('CoyoteDirectoryBundle:Directory')->findAll();
 
-        return $this->render('CoyoteSiteBundle:Directory:index.html.twig', array(
+        return $this->render('CoyoteFrontBundle:Directory:index.html.twig', array(
             'entities' => $entities,
         ));
     }
+
     /**
      * Creates a new Directory entity.
      *
@@ -49,7 +53,7 @@ class DirectoryController extends Controller
             return $this->redirect($this->generateUrl('directory_show', array('id' => $entity->getId())));
         }
 
-        return $this->render('CoyoteSiteBundle:Directory:new.html.twig', array(
+        return $this->render('CoyoteFrontBundle:Directory:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
@@ -83,7 +87,7 @@ class DirectoryController extends Controller
         $entity = new Directory();
         $form   = $this->createCreateForm($entity);
 
-        return $this->render('CoyoteSiteBundle:Directory:new.html.twig', array(
+        return $this->render('CoyoteFrontBundle:Directory:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
@@ -97,7 +101,7 @@ class DirectoryController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('CoyoteSiteBundle:Directory')->find($id);
+        $entity = $em->getRepository('CoyoteDirectoryBundle:Directory')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Directory entity.');
@@ -105,7 +109,7 @@ class DirectoryController extends Controller
 
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('CoyoteSiteBundle:Directory:show.html.twig', array(
+        return $this->render('CoyoteFrontBundle:Directory:show.html.twig', array(
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -119,7 +123,7 @@ class DirectoryController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('CoyoteSiteBundle:Directory')->find($id);
+        $entity = $em->getRepository('CoyoteDirectoryBundle:Directory')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Directory entity.');
@@ -128,7 +132,7 @@ class DirectoryController extends Controller
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('CoyoteSiteBundle:Directory:edit.html.twig', array(
+        return $this->render('CoyoteFrontBundle:Directory:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -161,7 +165,7 @@ class DirectoryController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('CoyoteSiteBundle:Directory')->find($id);
+        $entity = $em->getRepository('CoyoteDirectoryBundle:Directory')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Directory entity.');
@@ -177,7 +181,7 @@ class DirectoryController extends Controller
             return $this->redirect($this->generateUrl('directory_edit', array('id' => $id)));
         }
 
-        return $this->render('CoyoteSiteBundle:Directory:edit.html.twig', array(
+        return $this->render('CoyoteFrontBundle:Directory:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -194,7 +198,7 @@ class DirectoryController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('CoyoteSiteBundle:Directory')->find($id);
+            $entity = $em->getRepository('CoyoteDirectoryBundle:Directory')->find($id);
 
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find Directory entity.');
@@ -227,25 +231,25 @@ class DirectoryController extends Controller
     public function showDirectoryByFirstnameAction($country, $business)
     {
         $em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository('CoyoteSiteBundle:Directory')->findAllByFirstname($country, '%'.$business.'%');
-        return $this->render('CoyoteSiteBundle:Directory:showdirectorybyfirstname.html.twig',
+        $entity = $em->getRepository('CoyoteDirectoryBundle:Directory')->findAllByFirstname($country, '%'.$business.'%');
+        return $this->render('CoyoteFrontBundle:Directory:showdirectorybyfirstname.html.twig',
                 array('entity' => $entity, 'country' => $country, 'business' => $business));
     }
 
     public function showDirectoryByFunctionServiceAction($country, $business)
     {
         $em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository('CoyoteSiteBundle:Directory')->findAllByFunctionService($country, '%'.$business.'%');
-        return $this->render('CoyoteSiteBundle:Directory:showdirectorybyfunctionservice.html.twig',
+        $entity = $em->getRepository('CoyoteDirectoryBundle:Directory')->findAllByFunctionService($country, '%'.$business.'%');
+        return $this->render('CoyoteFrontBundle:Directory:showdirectorybyfunctionservice.html.twig',
                 array('entity' => $entity, 'country' => $country, 'business' => $business));
     }
 
     public function printDirectoryByFirstnameAction($country, $business)
     {
         $em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository('CoyoteSiteBundle:Directory')->findAllByFirstname($country, '%'.$business.'%');
-        $update = $em->getRepository('CoyoteSiteBundle:Directory')->updateDate($country);
-        $page = $this->render('CoyoteSiteBundle:Directory:pdfdirectorybyfirstname.html.twig',
+        $entity = $em->getRepository('CoyoteDirectoryBundle:Directory')->findAllByFirstname($country, '%'.$business.'%');
+        $update = $em->getRepository('CoyoteDirectoryBundle:Directory')->updateDate($country);
+        $page = $this->render('CoyoteFrontBundle:Directory:pdfdirectorybyfirstname.html.twig',
                 array('entity' => $entity, 'update' => $update, 'business' => $business));
         $date = date("Ymd");
         $heure = date("His");
@@ -262,9 +266,9 @@ class DirectoryController extends Controller
     public function printDirectoryByFunctionServiceAction($country, $business)
     {
         $em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository('CoyoteSiteBundle:Directory')->findAllByFunctionService($country, '%'.$business.'%');
-        $update = $em->getRepository('CoyoteSiteBundle:Directory')->updateDate($country);
-        $page = $this->render('CoyoteSiteBundle:Directory:pdfdirectorybyfunctionservice.html.twig',
+        $entity = $em->getRepository('CoyoteDirectoryBundle:Directory')->findAllByFunctionService($country, '%'.$business.'%');
+        $update = $em->getRepository('CoyoteDirectoryBundle:Directory')->updateDate($country);
+        $page = $this->render('CoyoteFrontBundle:Directory:pdfdirectorybyfunctionservice.html.twig',
                 array('entity' => $entity, 'update' => $update, 'business' => $business));
         $date = date("Ymd");
         $heure = date("His");
@@ -281,10 +285,43 @@ class DirectoryController extends Controller
     public function setEnabledDirectoryAction($id)
     {
 	    $em = $this->getDoctrine()->getManager();
-	    $entity = $em->getRepository('CoyoteSiteBundle:Directory')->findOneById($id);
-	    $em->getRepository('CoyoteSiteBundle:Directory')->updateEnable($entity);
+	    $entity = $em->getRepository('CoyoteDirectoryBundle:Directory')->findOneById($id);
+	    $em->getRepository('CoyoteDirectoryBundle:Directory')->updateEnable($entity);
 	    $em->persist($entity);
 	    $em->flush();
 	    return $this->redirect($this->generateUrl('directory'));
+    }
+
+    public function showDirectoryAction($orderby, $business, $country, Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $directory = new Directory();
+        $form = $this->createForm(ShowType::class, $directory);
+
+        if ($request->getMethod() == 'POST') {
+
+            $postData = $request->request->get('coyote_directorybundle_show');
+            $country = $postData['country'];
+            $orderby = $postData['orderby'];
+            $business = $postData['business'];
+            if ($orderby == "alpha")
+            {
+                $entity = $em->getRepository('CoyoteDirectoryBundle:Directory')->findAllByFirstname($country, '%'.$business.'%');
+                return $this->render('CoyoteFrontBundle:Directory:showdirectorybyfirstname.html.twig',
+                        array('entity' => $entity, 'country' => $country, 'business' => $business, 'showform' => $form->createView()));
+            }
+            else
+            {
+                $entity = $em->getRepository('CoyoteDirectoryBundle:Directory')->findAllByFunctionService($country, '%'.$business.'%');
+                return $this->render('CoyoteFrontBundle:Directory:showdirectorybyfunctionservice.html.twig',
+                    array('entity' => $entity, 'country' => $country, 'business' => $business, 'showform' => $form->createView()));
+            }
+        }
+        else
+        {
+            $entity = $em->getRepository('CoyoteDirectoryBundle:Directory')->findAllByFirstname($country, '%'.$business.'%');
+            return $this->render('CoyoteFrontBundle:Directory:showdirectorybyfirstname.html.twig',
+                    array('entity' => $entity, 'country' => $country, 'business' => $business, 'showform' => $form->createView(),));
+        }
     }
 }

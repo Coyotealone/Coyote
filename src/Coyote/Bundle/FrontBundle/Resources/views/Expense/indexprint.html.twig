@@ -1,0 +1,54 @@
+{% extends 'CoyoteFrontBundle:Expense:index.html.twig' %}
+
+{% block javascripts %}
+    <script src="{{ asset('bundles/coyotefront/js/jquery-1.10.2.js') }}"/></script>
+    <script src="{{ asset('bundles/coyotefront/js/jquery-ui.js') }}"/></script>
+    <script src="{{ asset('bundles/coyotefront/js/script_expense.js') }}"/></script>
+    <script src="{{ asset('bundles/coyotefront/js/script_expense_change.js') }}"/></script>
+{% endblock %}
+
+{% block nav %}
+    {{ include('CoyoteFrontBundle:Base:navigation.html.twig') }}
+{% endblock %}
+
+{% block content %}
+<p id="title">{{'expense.title.indexprint'|trans}} </p>
+
+<form role="form" action="{{ path('expense_printexpenses') }}" method='get'>
+    <table class='table'>
+    	<tr>
+    	    <th class="center">{{'expense.month'|trans}}</th>
+    		<th class="center">{{'expense.year'|trans}}</th>
+    	</tr>
+        <tr>
+            <td>
+                {% set counter = 0 %}
+                <select name='month' id='month' >
+                {% for mois in tab_num_mois %}
+                    {% if mois == month %}
+                    <option value={{mois}} selected>{{tab_mois[counter]|trans}}</option>
+                    {% else %}
+                    <option value={{mois}}>{{tab_mois[counter]|trans}}</option>
+                    {% endif %}
+                    {% set counter = counter + 1 %}
+                {% endfor %}
+                </select>
+            </td>
+            <td>
+                {% set counter = 0 %}
+                <select name='year' id='year' >
+                {% for annee in tab_annee %}
+                    {% if annee == year %}
+                    <option value={{tab_num_annee[counter]}} selected>{{annee}}</option>
+                    {% else %}
+                    <option value={{tab_num_annee[counter]}}>{{annee}}</option>
+                    {% endif %}
+                    {% set counter = counter + 1 %}
+                {% endfor %}
+                </select>
+            </td>
+        </tr>
+    </table>
+    <button class='btn btn-primary' type="submit" value="Afficher" id="afficher">{{'expense.submit.download'|trans }}</button>
+</form>
+{% endblock %}

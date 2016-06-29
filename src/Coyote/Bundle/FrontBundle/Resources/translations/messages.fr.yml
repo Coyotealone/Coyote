@@ -23,10 +23,10 @@ Comptes utilisateurs: Comptes utilisateurs
 Annuaire: Annuaire
 
 userfees:
-    login: Identifiant : 
-    car: Véhicule : 
-    code: Code : 
-    service: Service : 
+    login: Identifiant :
+    car: Véhicule :
+    code: Code :
+    service: Service :
     userfees: Commercial
 
 business.pichon: Pichon
@@ -76,7 +76,7 @@ function_service:
     co_nord_est: Co Nord Est
     co_sud_est: Co Sud Est
     co_sud_ouest: Co Sud Ouest
-    comite_entreprise: "Comité d'entreprise" 
+    comite_entreprise: "Comité d'entreprise"
     compta_fournisseurs: Compta Fournisseurs
     debit: Débit
     direction: Direction
@@ -182,6 +182,17 @@ directory:
         quickphonenumber: N° Rapide
         cellphonenumber: N° Portable
         phone: Fixe
+    busi:
+        pichon: PICHON
+        gilibert: GILIBERT
+        pichongilibert: PICHON/GILIBERT
+    orderby:
+        alpha: Alphabétique
+        service: Par service
+        title: Par ordre
+    nation:
+        fr: FRANCE
+        pl: POLOGNE
 
 base:
     copyright: Copyright ©2015 PICHON - Tous droits réservés
@@ -241,6 +252,7 @@ base:
             showfunctionPologne: Services Pichon Pologne
             index: Administration annuaire
             add_user: "Ajout d'un contact"
+            show: Consultation
         flag:
             french: Français
             english: Anglais
@@ -455,7 +467,7 @@ expense:
 'Fourniture 5,5%': Fourniture 5,5%
 'stationary UK fourniture': UK Fourniture
 'Hotel': Hôtel
-'Hotel UK 20%': UK Hôtel 20% 
+'Hotel UK 20%': UK Hôtel 20%
 'Location vehicules': Location véhicules
 'Telephone sans TVA': Téléphone sans TVA
 'Telephone UK 20%': UK Téléphone 20%

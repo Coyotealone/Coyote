@@ -1,0 +1,38 @@
+{% extends 'CoyoteFrontBundle:Base:index.html.twig' %}
+
+{% block nav %}
+    {{ include('CoyoteFrontBundle:Base:navigation.html.twig') }}
+{% endblock nav %}
+
+{% block javascripts %}
+    <!--[if IE]>
+        <script src="{{ asset('bundles/coyotefront/js/jquery.js') }}"></script>
+        <script src="{{ asset('bundles/coyotefront/js/script_timeusers_ie.js') }}"></script>
+        <script src="{{ asset('bundles/coyotefront/js/script_timeusers_change.js') }}"/></script>
+    <![endif]-->
+    <!--[if !IE]><!-->
+        <script src="{{ asset('bundles/coyotefront/js/jquery.js') }}"></script>
+        {% if is_granted('ROLE_TECH') %}
+        <script src="{{ asset('bundles/coyotefront/js/script_timeusers.js') }}"/></script>
+        <script src="{{ asset('bundles/coyotefront/js/script_timeusers_change.js') }}"/></script>
+        {% endif %}
+        {% if is_granted('ROLE_CADRE') %}
+        <script src="{{ asset('bundles/coyotefront/js/script_timeframework.js') }}"/></script>
+        <script src="{{ asset('bundles/coyotefront/js/script_timeframework_change.js') }}"/></script>
+        {% endif %}
+    <!--<![endif]-->
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('bundles/coyotefront/css/style_schedule.css') }}" type="text/css" media="all" />
+{% endblock %}
+
+{% block content %}
+    <div class="jumbotron">
+        <p class="lead">{{'schedule.title.index'|trans}}</p>
+        <p>
+        	<a href={{ path('schedule_user')}} class="btn_white">{{'schedule.title.hour'|trans}}</a>
+        	<a href={{ path('schedule_framework')}} class="btn_white">{{'schedule.title.day'|trans}}</a>
+	  	</p>
+    </div>
+{% endblock %}

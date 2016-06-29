@@ -29,8 +29,6 @@ class MainController extends Controller
 		}
 		if ($this->get('security.context')->isGranted('ROLE_SUPER_ADMIN'))
 		{
-    		//$this->container->get('request')->setLocale('en');
-    		//$session->set('lang', "en");
     		$request->getSession()->set('_locale', 'en');
             $request->setLocale('en');
 			return $this->redirect($this->generateUrl('sonata_admin_dashboard'));
@@ -44,7 +42,7 @@ class MainController extends Controller
 			$session->set('week', $date->format('W'));
 			$session->set('year', $date->format('Y'));
 			//$date = $em->getRepository('CoyoteSiteBundle:Timetable')->findOneBy(array('date' => $date));
-			
+
 			$session->set('period', $em->getRepository('CoyoteAttendanceBundle:Schedule')->createPeriod(date('Y').'-'
 			    .date('m').'-'.date('d')));
 			$session->set('status', $data_user->getRoles());

@@ -10,7 +10,7 @@ doctrine:
                     FOSUserBundle: ~
                     SonataUserBundle: ~
                     #ApplicationSonataUserBundle: ~
-                    
+
 # if you change the class configuration, please also alter the fos_user.yml file
 sonata_user:
     security_acl:             false

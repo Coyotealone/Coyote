@@ -1,0 +1,78 @@
+<?php
+
+namespace Coyote\Bundle\DirectoryBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Sonata\UserBundle\Entity\BaseUser as BaseUser;
+
+/**
+ * Class User
+ * @author Coyote
+ * @ORM\Entity
+ * @ORM\Table(name="user")
+ * @ORM\Entity(repositoryClass="Coyote\Bundle\DirectoryBundle\Entity\UserRepository");
+ * @ORM\HasLifecycleCallbacks
+ */
+class User extends BaseUser
+{
+    /**
+    * @ORM\Id
+    * @ORM\Column(type="integer")
+    * @ORM\GeneratedValue(strategy="AUTO")
+    */
+    protected $id;
+
+    /**
+     * @var string
+     * @ORM\Column(name="job_phone_number", type="string", nullable=true)
+     */
+    private $job_phone_number;
+
+    /**
+     * @var integer
+     * @ORM\Column(name="quick_phone_number", type="integer", nullable=true, options={"unsigned":true})
+     */
+    private $quick_phone_number;
+
+    /**
+     * @var string
+     * @ORM\Column(name="cellphone_number", type="string", length=20, nullable=true)
+     */
+    private $cellphone_number;
+
+    /**
+     * @var string
+     * @ORM\Column(name="fax", type="string", length=20, nullable=true)
+     */
+    private $fax;
+
+    /**
+     * @var string
+     * @ORM\Column(name="country", type="string", length=20)
+     */
+    private $country;
+
+    /**
+     * @var string
+     * @ORM\Column(name="function_service", type="string", length=200)
+     */
+    private $function_service;
+
+    /**
+     * @var boolean
+     * @ORM\Column(name="leader", type="boolean", nullable=true)
+     */
+    private $leader;
+
+    /**
+     * @var \DateTime
+     * @ORM\Column(name="enabled_at", type="datetime", nullable=true)
+     */
+    private $lock_at;
+
+    /**
+     * @var string
+     * @ORM\Column(name="business", type="string", length=50)
+     */
+    private $business;
+}

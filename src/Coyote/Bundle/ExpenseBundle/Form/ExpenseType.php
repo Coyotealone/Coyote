@@ -1,6 +1,6 @@
 <?php
 
-namespace Coyote\SiteBundle\Form;
+namespace Coyote\ExpenseBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -50,7 +50,7 @@ class ExpenseType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Coyote\SiteBundle\Entity\Expense'
+            'data_class' => 'Coyote\ExpenseBundle\Entity\Expense'
         ));
     }
 
@@ -59,6 +59,6 @@ class ExpenseType extends AbstractType
      */
     public function getName()
     {
-        return 'coyote_sitebundle_expense';
+        return 'coyote_expensebundle_expense';
     }
 }

@@ -122,10 +122,10 @@ class ScheduleRepository extends EntityRepository
         for($i=1;$i<8;$i++)
         {
 	        $schedule = null;
-	        
+
 	        $date_temp = explode('/', $data['date'.$i]);
 	        $date = new \DateTime(date($date_temp[2].'-'.$date_temp[1].'-'.$date_temp[0]), new \DateTimeZone('Europe/Paris'));
-			
+
 	        $qb = $this->_em->createQueryBuilder();
 	        $qb->select('s')
 	           ->from('CoyoteAttendanceBundle:Schedule', 's')
@@ -147,12 +147,12 @@ class ScheduleRepository extends EntityRepository
 	public function createSchedule($user, $data, $i)
 	{
 		$schedule_travel = null;
-		
+
 		if (array_key_exists('travel'.$i, $data))
             $schedule_travel = 1;
         if (!array_key_exists('travel'.$i, $data))
             $schedule_travel = 0;
-            
+
         $schedule_start = $data['start'.$i];
         $schedule_end = $data['end'.$i];
         $schedule_break = $data['break'.$i];
@@ -163,8 +163,8 @@ class ScheduleRepository extends EntityRepository
         $schedule_date = date('Y-m-d',strtotime(date($date_temp[2].'-'.$date_temp[1].'-'.$date_temp[0])));
         $schedule_absenceday = $data['absenceday'.$i];
         $schedule_absencetime = $data['absencetime'.$i];
-        
-        if (empty($schedule_start) && empty($schedule_end) && empty($schedule_break) && empty($schedule_travel) && 
+
+        if (empty($schedule_start) && empty($schedule_end) && empty($schedule_break) && empty($schedule_travel) &&
 			empty($schedule_comment) && ($schedule_absence == "Aucune"))
         {
             return null;
@@ -173,9 +173,12 @@ class ScheduleRepository extends EntityRepository
         {
             $schedule = new Schedule();
             $schedule->setUser($user);
+            $date_start = null;
             $date_end = null;
             $date_break = null;
-            $date_start = null;
+
+            $schedule->setWorkingHours(0);
+
             $schedule->setDateSchedule(new \DateTime($schedule_date), new \DateTimeZone('Europe/Paris'));
 	        if (!empty($schedule_start))
 	        {
@@ -200,11 +203,11 @@ class ScheduleRepository extends EntityRepository
             }
             if (!empty($date_start) && !empty($date_break) && !empty($date_end))
             {
-                $working_time_day = $this->working_time_day($date_start, $date_break, $date_end);
+                $working_time_day = $this->working_time_day($date_start, $date_end, $date_break);
                 $schedule->setWorkingTime($working_time_day);
                 $working_hours_day = $this->working_hours_day($working_time_day);
+                $schedule->setWorkingHours($working_hours_day);
             }
-            $schedule->setWorkingHours(0);
             $schedule->setTravel($schedule_travel);
             $schedule->setAbsenceName($schedule_absence);
             if ($schedule_absence == "Aucune")
@@ -224,16 +227,16 @@ class ScheduleRepository extends EntityRepository
             return $schedule;
         }
 	}
-	
+
 	public function updateSchedule($user, $data, $i, $schedule)
 	{
 		$schedule_travel = null;
-		
+
 		if (array_key_exists('travel'.$i, $data))
             $schedule_travel = 1;
         if (!array_key_exists('travel'.$i, $data))
             $schedule_travel = 0;
-            
+
         $schedule_start = $data['start'.$i];
         $schedule_end = $data['end'.$i];
         $schedule_break = $data['break'.$i];
@@ -244,8 +247,8 @@ class ScheduleRepository extends EntityRepository
         $schedule_date = date('Y-m-d',strtotime(date($date_temp[2].'-'.$date_temp[1].'-'.$date_temp[0])));
         $schedule_absenceday = $data['absenceday'.$i];
         $schedule_absencetime = $data['absencetime'.$i];
-            
-		if (empty($schedule_start) && empty($schedule_end) && empty($schedule_break) && empty($schedule_travel) && 
+
+		if (empty($schedule_start) && empty($schedule_end) && empty($schedule_break) && empty($schedule_travel) &&
 			empty($schedule_comment) && ($schedule_absence == "Aucune"))
         {
             return null;
@@ -299,11 +302,11 @@ class ScheduleRepository extends EntityRepository
             $schedule->setComment($schedule_comment);
             $this->_em->persist($schedule);
             $this->_em->flush();
-            
+
             return $schedule;
         }
 	}
-	
+
 	public function postScheduleUserfm($user, $data)
 	{
 		//$schedule = $this->_em->getRepository('CoyoteAttendanceBundle:Schedule')->find(array('user' => $user, 'date' => $data['date'.$i]));
@@ -311,10 +314,10 @@ class ScheduleRepository extends EntityRepository
         for($i=1;$i<8;$i++)
         {
 	        $schedule = null;
-	        
+
 	        $date_temp = explode('/', $data['date'.$i]);
 	        $date = new \DateTime(date($date_temp[2].'-'.$date_temp[1].'-'.$date_temp[0]), new \DateTimeZone('Europe/Paris'));
-			
+
 	        $qb = $this->_em->createQueryBuilder();
 	        $qb->select('s')
 	           ->from('CoyoteAttendanceBundle:Schedule', 's')
@@ -336,12 +339,12 @@ class ScheduleRepository extends EntityRepository
 	public function createSchedulefm($user, $data, $i)
 	{
 		$schedule_travel = null;
-		
+
 		if (array_key_exists('travel'.$i, $data))
             $schedule_travel = 1;
         if (!array_key_exists('travel'.$i, $data))
             $schedule_travel = 0;
-            
+
         $schedule_day = $data['day'.$i];
         $schedule_comment = $data['comment'.$i];
         $schedule_absence = $data['absence'.$i];
@@ -350,7 +353,7 @@ class ScheduleRepository extends EntityRepository
         $schedule_date = date('Y-m-d',strtotime(date($date_temp[2].'-'.$date_temp[1].'-'.$date_temp[0])));
         $schedule_absenceday = $data['absenceday'.$i];
         $schedule_absencetime = $data['absencetime'.$i];
-        
+
         if (empty($schedule_day) && empty($schedule_travel) && empty($schedule_comment) && ($schedule_absence == "Aucune"))
         {
             return null;
@@ -380,16 +383,16 @@ class ScheduleRepository extends EntityRepository
             return $schedule;
         }
 	}
-	
+
 	public function updateSchedulefm($user, $data, $i, $schedule)
 	{
 		$schedule_travel = null;
-		
+
 		if (array_key_exists('travel'.$i, $data))
             $schedule_travel = 1;
         if (!array_key_exists('travel'.$i, $data))
             $schedule_travel = 0;
-		
+
 		$schedule_day = $data['day'.$i];
         $schedule_comment = $data['comment'.$i];
         $schedule_absence = $data['absence'.$i];
@@ -398,7 +401,7 @@ class ScheduleRepository extends EntityRepository
         $schedule_date = date('Y-m-d',strtotime(date($date_temp[2].'-'.$date_temp[1].'-'.$date_temp[0])));
         $schedule_absenceday = $data['absenceday'.$i];
         $schedule_absencetime = $data['absencetime'.$i];
-            
+
 		if (empty($schedule_day) && empty($schedule_travel) && empty($schedule_comment) && ($schedule_absence == "Aucune"))
         {
             return null;
@@ -425,7 +428,7 @@ class ScheduleRepository extends EntityRepository
             return $schedule;
         }
 	}
-	
+
     /*************************getScheduleAction************************/
 
     /**
@@ -540,7 +543,7 @@ class ScheduleRepository extends EntityRepository
 	    $date_period = explode('/', $date_period);
 	    $starting_period = $date_period[0];
 	    $ending_period = $date_period[1];
-        
+
         $qb = $this->_em->createQueryBuilder();
         $qb->select('s.working_time')
            ->from('CoyoteAttendanceBundle:Schedule', 's')
@@ -791,7 +794,7 @@ class ScheduleRepository extends EntityRepository
         }
         return $result;
     }
-    
+
     /**
      * nameUser function.
      *
@@ -962,7 +965,7 @@ class ScheduleRepository extends EntityRepository
         	$this->_em->flush();
         	return "OK";
         }
-        
+
         public function createFileUser($user, $period)
         {
             $date_period = $this->createDateAboutPeriod($period);
@@ -1016,7 +1019,7 @@ class ScheduleRepository extends EntityRepository
         	}
         	return $result;
         }
-        
+
         public function createFileUserFM($user, $period)
         {
             $date_period = $this->createDateAboutPeriod($period);
@@ -1044,7 +1047,7 @@ class ScheduleRepository extends EntityRepository
         		$result .= $data['date_schedule']->format('l').';'.$data['date_schedule']->format('Y-m-d').';';
         		$result .= $data['working_hours'].";";
         		$result .= $data['travel'].";".$data['absence_name'].";".$data['absence_duration'].";".$data['comment'].";\r\n";
-        		
+
         	}
         	return $result;
         }
@@ -1095,7 +1098,7 @@ class ScheduleRepository extends EntityRepository
         $date = date( "Y-m-d", strtotime($year."W".$week."1") );
         return $date;
     }
-    
+
     /**
      * Function to search Timetable about a date.
      * @access public
@@ -1111,7 +1114,7 @@ class ScheduleRepository extends EntityRepository
             $result--;
             $date->modify("-".$result." day");
         }
-    
+
 		return $result;
         $qb = $this->_em->createQueryBuilder();
         $qb->select('t')
@@ -1123,18 +1126,18 @@ class ScheduleRepository extends EntityRepository
 	        ->getResult();
         return $data_timetable;
     }
-	
+
 	public function dateWeek($date)
 	{
 		$date_array = array();
 		for($i=0;$i<7;$i++)
 		{
-			$date_add = date('Y-m-d', strtotime("$date +".$i." day")); 
+			$date_add = date('Y-m-d', strtotime("$date +".$i." day"));
 			array_push($date_array, $date_add);
 		}
 		return $date_array;
 	}
-	
+
 	/**
      * Function to find data about user and timetable.
      * @access public
@@ -1146,7 +1149,7 @@ class ScheduleRepository extends EntityRepository
     {
         $index = 0;
         $time = null;
-        
+
         foreach($date as $data)
         {
             $qb = $this->_em->createQueryBuilder();
@@ -1163,15 +1166,15 @@ class ScheduleRepository extends EntityRepository
         }
         return $time;
     }
-    
+
     public function createPeriod($date)
     {
 	    $date_explode = date_parse($date);
 		$year = $date_explode['year'];
-	    
+
 	    $contractDateBegin = date('Y-m-d', strtotime($year.'-01-01'));
 	    $contractDateEnd = date('Y-m-d', strtotime($year.'-05-31'));
-	    
+
 	    if (($date > $contractDateBegin) && ($date < $contractDateEnd))
 	    {
 		    $year_1 = $year-1;
@@ -1185,14 +1188,14 @@ class ScheduleRepository extends EntityRepository
 	    	return $period;
 	    }
     }
-    
+
     public function createDateAboutPeriod($period)
     {
 	    $period_explode = explode('/', $period);
-		
+
 	    $contractDateBegin = date('Y-m-d', strtotime($period_explode[0].'-01-01'));
 	    $contractDateEnd = date('Y-m-d', strtotime($period_explode[1].'-05-31'));
-	    
+
 	    return $contractDateBegin.'/'.$contractDateEnd;
     }
 
@@ -1216,7 +1219,7 @@ class ScheduleRepository extends EntityRepository
     		return $restime;
     	}
     }
-    
+
     public function hour_to_second($time)// Transformation d'un temps en H:M en seconde
     {
     	$timesec = explode(':', $time);
@@ -1230,7 +1233,7 @@ class ScheduleRepository extends EntityRepository
     	else
     		return "0";
     }
-    
+
     public function working_time_day($start, $end, $break)// Calcul du temps de travail
     {
     	if(empty($start) && empty($end) && empty($break))
@@ -1242,34 +1245,49 @@ class ScheduleRepository extends EntityRepository
     	if($start != "" && $end != "" && $break != "")
     	{
         	date_default_timezone_set('UTC');
-        	
-        	$start = $start->format("H:i");
-            $end = $end->format("H:i");
-            $break = $break->format("H:i");
-            
-            $start = explode(':', $start);
-            $start = mktime($start[0], $start[1], 0, date('n'), date('j'), date('Y'));
-            
-            if ($end == "0:00" || $end == "00:00")
-                $end = "24:00";
-            $end = explode(':', $end);
-            $end = mktime($end[0], $end[1], 0, date('n'), date('j'), date('Y'));
-            
-            $break = explode(':', $break);
-            $break = mktime($break[0], $break[1], 0, date('n'), date('j'), date('Y'));
-            
-            $worktime = $end - $start ;
-            
-            $worktime = $this->second_to_hour($worktime);
-            
-            $worktime = explode(':', $worktime);
-            
-            $worktime = mktime($worktime[0], $worktime[1], 0, date('n'), date('j'), date('Y'));
-            
-            $worktime = $worktime - $break;
-            
-            $worktime = $this->second_to_hour($worktime); // HH:mm
-            
+
+            /*$start = "8:00";
+            $end = "18:00";
+            $break = "1:23";*/
+
+            $start_new = $start->format("H:i");
+            $end_new = $end->format("H:i");
+            $break_new = $break->format("H:i");
+
+            $start_second = $this->hour_to_second($start_new);
+            $end_second = $this->hour_to_second($end_new);
+            $break_second = $this->hour_to_second($break_new);
+
+            $res = $end_second-$start_second-$break_second;
+            $worktime = $this->second_to_hour($res);
+
+            //$worktime = $break_new;
+
+            /*$start_explode = explode(':', $start_new);
+            $start_end = mktime($start_explode[0], $start_explode[1], 0, date('n'), date('j'), date('Y'));
+
+            if ($end_new == "0:00" || $end_new == "00:00")
+                $end_new = "24:00";
+            $end_explode = explode(':', $end_new);
+            $end_end = mktime($end_explode[0], $end_explode[1], 0, date('n'), date('j'), date('Y'));
+
+            $break_explode = explode(':', $break_new);
+            $break_end = mktime($break_explode[0], $break_explode[1], 0, date('n'), date('j'), date('Y'));
+
+            $worktime_second = $end_end - $start_end;
+
+            //$worktime = $this->hour_to_second($start) - $this->hour_to_second($break);
+
+            //$worktime = $this->hour_to_second($end) - $worktime;
+
+            $worktime_hour = $this->second_to_hour($worktime_second);
+            $worktime_explode = explode(':', $worktime_hour);
+
+            $worktime_middle = mktime($worktime_explode[0], $worktime_explode[1], 0, date('n'), date('j'), date('Y'));
+
+            $worktime_end = $worktime_middle - $break_end;
+
+            $worktime = $this->second_to_hour($worktime_end);*/
             return  new \DateTime($worktime, new \DateTimeZone('Europe/Paris'));
     	}
     	else
@@ -1277,7 +1295,7 @@ class ScheduleRepository extends EntityRepository
         	return null;
     	}
     }
-    
+
     public function working_hours_day($worktime)// Calcul de la journée de travail
     {
     	if($worktime == "00:00" || $worktime == "0:00")
@@ -1292,7 +1310,7 @@ class ScheduleRepository extends EntityRepository
     		$timeday = 1;
     	return $timeday;
     }
-    
+
     function working_time_week($time1, $time2, $time3, $time4, $time5, $time6, $time7)
     {
     	$timetotsec = $time1 + $time2 + $time3 + $time4 + $time5 + $time6 + $time7;
@@ -1305,14 +1323,14 @@ class ScheduleRepository extends EntityRepository
     	$restime = $hh.':'.$mm;
     	return $restime;
     }
-    
+
     public function dataScheduleYear($user, $period)
     {
 	    $date_period = $this->createDateAboutPeriod($period);
 	    $date_period = explode('/', $date_period);
 	    $starting_period = $date_period[0];
 	    $ending_period = $date_period[1];
-        
+
         $qb = $this->_em->createQueryBuilder();
         $qb->select('s.working_time, s.date_schedule, s.start, s.end, s.break, s.travel, s.absence_name, s.absence_duration, s.comment')
            ->from('CoyoteAttendanceBundle:Schedule', 's')
@@ -1320,17 +1338,17 @@ class ScheduleRepository extends EntityRepository
            ->setParameters(array('user' => $user, 'starting' => $starting_period, 'ending' => $ending_period))
            ->orderBy('s.date_schedule');
         $schedules = $qb->getQuery()->getResult();
-        
+
         return $schedules;
     }
-    
+
     public function dataScheduleFMYear($user, $period)
     {
 	    $date_period = $this->createDateAboutPeriod($period);
 	    $date_period = explode('/', $date_period);
 	    $starting_period = $date_period[0];
 	    $ending_period = $date_period[1];
-        
+
         $qb = $this->_em->createQueryBuilder();
         $qb->select('s.working_hours, s.date_schedule, s.travel, s.absence_name, s.absence_duration, s.comment')
            ->from('CoyoteAttendanceBundle:Schedule', 's')
@@ -1338,10 +1356,10 @@ class ScheduleRepository extends EntityRepository
            ->setParameters(array('user' => $user, 'starting' => $starting_period, 'ending' => $ending_period))
            ->orderBy('s.date_schedule');
         $schedules = $qb->getQuery()->getResult();
-        
+
         return $schedules;
     }
-    
+
     /**
      * find period respect to date function.
      *
@@ -1354,7 +1372,7 @@ class ScheduleRepository extends EntityRepository
 	    $period = $this->createPeriod($date);
 	    return $period;
     }
-    
+
     public function allAbsencesMonth($month,$year,$user)
     {
         $absences = array();
@@ -1364,7 +1382,7 @@ class ScheduleRepository extends EntityRepository
         array_push($absences, $this->countAbsenceMonth($date, $user->getId(), "RTT"));
         return $absences;
     }
-    
+
     public function allAbsencesYear($month,$year,$user)
     {
         $period = $this->findPeriodAboutMonthYear($month, $year);
@@ -1374,7 +1392,7 @@ class ScheduleRepository extends EntityRepository
         array_push($absences, $this->findAbsenceYear($period, $user, "RTT"));
         return $absences;
     }
-	
+
 	public function allAbsencesYearAboutPeriod($period,$user)
     {
         $absences = array();
@@ -1383,8 +1401,8 @@ class ScheduleRepository extends EntityRepository
         array_push($absences, $this->findAbsenceYear($period, $user, "RTT"));
         return $absences;
     }
-	
-	
+
+
 	public function findMonth()
     {
 	    $tab_month = array();
@@ -1398,7 +1416,7 @@ class ScheduleRepository extends EntityRepository
 	    }
 	    return $tab_month;
     }
-    
+
     public function findNumMonth()
     {
 	    $tab_num_month = array();
@@ -1412,7 +1430,7 @@ class ScheduleRepository extends EntityRepository
 	    }
 	    return $tab_num_month;
     }
-    
+
     public function findYear()
     {
 	    $year = date('Y');
@@ -1424,7 +1442,7 @@ class ScheduleRepository extends EntityRepository
 	    }
 	    return $tab_year;
     }
-    
+
     public function findNumYear()
     {
         $year = date('Y');
@@ -1437,7 +1455,7 @@ class ScheduleRepository extends EntityRepository
 	    }
 	    return $tab_year;
     }
-    
+
     public function findPeriod()
     {
 	    $year = date('Y');
@@ -1452,13 +1470,13 @@ class ScheduleRepository extends EntityRepository
 	    }
 	    return $tab_period;
     }
-	
+
 	public function findHoliday($date)
     {
         $year = $date->format('Y');
         $month = $date->format('m');
         $day = $date->format('d');
-        
+
         $jourdelan = "-01-01";
         $fetetravail = "-05-01";
         $huitmai = "-05-08";
@@ -1467,7 +1485,7 @@ class ScheduleRepository extends EntityRepository
         $toussaint = "-11-01";
         $armistice = "-11-11";
         $noel = "-12-25";
-        	
+
     	if($date == $year."06-01")
     		return 1;
     	if($date->format("Y-m-d") == $year.$jourdelan)
@@ -1495,7 +1513,7 @@ class ScheduleRepository extends EntityRepository
     	else
     	    return 0;
     }
-    
+
     public function lundiPaques($year)
     {
     	date_default_timezone_set('Europe/Paris');
@@ -1504,7 +1522,7 @@ class ScheduleRepository extends EntityRepository
     	$date = date('Y-m-d', strtotime("$date_paques +1 day"));
     	return $date;
     }
-    
+
     public function jeudiAscension($year)
     {
     	date_default_timezone_set('Europe/Paris');
@@ -1513,7 +1531,7 @@ class ScheduleRepository extends EntityRepository
     	$date = date('Y-m-d', strtotime("$date_paques +39 day"));
     	return $date;
     }
-    
+
     public function lundiPentecote($year)
     {
     	date_default_timezone_set('Europe/Paris');
@@ -1522,7 +1540,7 @@ class ScheduleRepository extends EntityRepository
     	$date = date('Y-m-d', strtotime("$date_paques +50 day"));
     	return $date;
     }
-    
+
     public function paques($Jourj=0, $annee=NULL)
     {
         /* *** Algorithme de Oudin, calcul de Pâque postérieure à 1583 ***
@@ -1536,13 +1554,13 @@ class ScheduleRepository extends EntityRepository
          * par défaut c'est l'année en cours.
          * */
         $annee=($annee==NULL) ? date("Y") : $annee;
-    
+
         $G = $annee%19;
         $C = floor($annee/100);
         $C_4 = floor($C/4);
         $E = floor((8*$C + 13)/25);
         $H = (19*$G + $C - $C_4 - $E + 15)%30;
-    
+
         if($H==29)
         {
             $H=28;
@@ -1561,10 +1579,10 @@ class ScheduleRepository extends EntityRepository
         $R = 28 + $I - $J2; // résultat final :)
         $mois = $R>30 ? 4 : 3; // mois (1 = janvier, ... 3 = mars...)
         $Jour = $mois==3 ? $R : $R-31;
-    
+
         return date("Y-m-d",mktime(0,0,0,$mois,$Jour+$Jourj,$annee));
     }
-    
+
 	public function dataTech($user,$month,$year)
 	{
     	$data_tech = array();
@@ -1590,7 +1608,7 @@ class ScheduleRepository extends EntityRepository
         array_push($data_tech, $holiday);
         return $data_tech;
 	}
-    
+
     public function dataTechYear($period, $user)
     {
         $data_tech = array();
@@ -1614,7 +1632,7 @@ class ScheduleRepository extends EntityRepository
         array_push($data_tech, $holiday);
         return $data_tech;
     }
-    
+
     public function dataCadre($user,$month,$year)
 	{
     	$data_cadre = array();
@@ -1634,7 +1652,7 @@ class ScheduleRepository extends EntityRepository
 		array_push($data_cadre, $holiday);
         return $data_cadre;
 	}
-	
+
 	public function dataCadreYear($period, $user)
 	{
     	$data_cadre = array();
@@ -1657,7 +1675,7 @@ class ScheduleRepository extends EntityRepository
         array_push($data_cadre, $holiday);
         return $data_cadre;
 	}
-	
+
 	public function findUserBe($role)
     {
 	    $qb = $this->_em->createQueryBuilder();
@@ -1674,8 +1692,8 @@ class ScheduleRepository extends EntityRepository
         }
         return $tab_ids;
     }
-	
-    
+
+
     /******************************************************************/
     /***********************Anciennes Fonctions************************/
     /******************************************************************/

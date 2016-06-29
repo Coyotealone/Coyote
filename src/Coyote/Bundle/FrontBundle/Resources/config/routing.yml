@@ -31,3 +31,21 @@ CoyoteFrontBundle_resetting:
 CoyoteFrontBundle_accueil:
     path:     /
     defaults: { _controller: CoyoteFrontBundle:Main:redirect }
+
+CoyoteFrontBundle_expense:
+    resource: "@CoyoteExpenseBundle/Resources/config/routing/expense.yml"
+    prefix:   /{_locale}/expense
+    requirements:
+        _locale: fr|en|pl
+
+CoyoteFrontBundle_directory:
+    resource: "@CoyoteDirectoryBundle/Resources/config/routing/directory.yml"
+    prefix:   /{_locale}/directory
+    requirements:
+        _locale: fr|en|pl
+
+CoyoteFrontBundle_changePassword:
+    resource: "@CoyoteFrontBundle/Resources/config/routing/changePassword.yml"
+    prefix: /{_locale}/profile
+    requirements:
+        _locale: fr|en|pl

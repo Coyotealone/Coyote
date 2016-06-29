@@ -1,6 +1,6 @@
 <?php
 
-namespace Coyote\SiteBundle\Form;
+namespace Coyote\Bundle\DirectoryBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -82,9 +82,9 @@ class DirectoryType extends AbstractType
             ->add('leader')
             ->add('business', 'choice', array(
                     'choices'   => array(
-                                    'Pichon' => 'business.pichon',
-                                    'Gilibert' => 'business.gilibert',
-                                    'Pichon/Gilibert' => 'business.pichongilibert',
+                                    'PICHON' => 'business.pichon',
+                                    'GILIBERT' => 'business.gilibert',
+                                    'PICHON/GILIBERT' => 'business.pichongilibert',
                     ),
                     'label' => 'directory.business', 'translation_domain' => 'messages'
                     ))
@@ -99,7 +99,7 @@ class DirectoryType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Coyote\SiteBundle\Entity\Directory'
+            'data_class' => 'Coyote\Bundle\DirectoryBundle\Entity\Directory'
         ));
     }
 
@@ -108,6 +108,6 @@ class DirectoryType extends AbstractType
      */
     public function getName()
     {
-        return 'coyote_sitebundle_directory';
+        return 'coyote_directorybundle_directory';
     }
 }
