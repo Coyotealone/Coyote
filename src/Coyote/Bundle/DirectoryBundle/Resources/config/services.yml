@@ -1,4 +1,6 @@
 services:
-#    coyote_directory.example:
-#        class: Coyote\Bundle\DirectoryBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]
+    coyote_directory.admin.directory:
+        class: Coyote\Bundle\DirectoryBundle\Admin\DirectoryAdmin
+        arguments: [~, Coyote\Bundle\DirectoryBundle\Entity\Directory, SonataAdminBundle:CRUD]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Directory, label: Directory }

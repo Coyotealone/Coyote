@@ -1,4 +1,6 @@
 services:
-#    coyote_attendance.example:
-#        class: Coyote\Bundle\AttendanceBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]
+    coyote_attendance.admin.schedule:
+        class: Coyote\Bundle\AttendanceBundle\Admin\ScheduleAdmin
+        arguments: [~, Coyote\Bundle\AttendanceBundle\Entity\Schedule, SonataAdminBundle:CRUD]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Schedule, label: Schedule }

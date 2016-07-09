@@ -8,8 +8,8 @@ doctrine:
             default:
                 mappings:
                     FOSUserBundle: ~
-                    SonataUserBundle: ~
-                    #ApplicationSonataUserBundle: ~
+                    #SonataUserBundle: ~
+                    ApplicationSonataUserBundle: ~
 
 # if you change the class configuration, please also alter the fos_user.yml file
 sonata_user:
@@ -17,9 +17,29 @@ sonata_user:
     table:
         user_group:           fos_user_user_group
 
-    impersonating:
-        route:                page_slug
-        parameters:           { path: / }
+    class:                  # Entity Classes
+        user:               Application\Sonata\UserBundle\Entity\User
+        group:              Application\Sonata\UserBundle\Entity\Group
+
+    admin:                  # Admin Classes
+        user:
+            #class:          Sonata\UserBundle\Admin\Entity\UserAdmin
+            controller:     SonataAdminBundle:CRUD
+            translation:    SonataUserBundle
+
+            class:          Application\Sonata\UserBundle\Admin\Model\UserAdmin
+            #Sonata\UserBundle\Admin\Entity\UserAdmin
+            #controller:     ApplicationSonataUserBundle:UserCRUD /** you can also override CURD controller for your admin class*/
+            #translation:    SonataUserBundle
+
+        group:
+            class:          Sonata\UserBundle\Admin\Entity\GroupAdmin
+            controller:     SonataAdminBundle:CRUD
+            translation:    SonataUserBundle
+
+#    impersonating:
+#        route:                page_slug
+#        parameters:           { path: / }
 
     #google_authenticator:
     #    server:               %sonata_user.google_authenticator.server%

@@ -1,8 +1,8 @@
 <?php
 
-namespace Application\Sonata\UserBundle\Admin;
+namespace Application\Sonata\UserBundle\Admin\Model;
 
-#use Application\Sonata\UserBundle\Form\FormMapper;
+use Application\Sonata\UserBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 
 use Sonata\UserBundle\Admin\Model\UserAdmin as BaseUserAdmin;

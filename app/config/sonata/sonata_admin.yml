@@ -19,21 +19,21 @@ sonata_admin:
 
     title:      Pichon Admin
     title_logo: bundles/coyotefront/images/logoadmin.png
-    options:
-        html5_validate: false # does not use html5 validation
-        pager_links: 5 # pager max links to display
+#    options:
+#        html5_validate: false # does not use html5 validation
+#        pager_links: 5 # pager max links to display
 
-    templates:
-        # default global templates
-        # the layout template include javascript/stylesheet to the formatter bundle,
-        # if you don't need it use the default one: SonataAdminBundle::standard_layout.html.twig
-        layout:  SonataAdminBundle::standard_layout.html.twig
-        ajax:    SonataAdminBundle::ajax_layout.html.twig
-
-        # default value if done set, actions templates, should extends a global templates
-        list:    SonataAdminBundle:CRUD:list.html.twig
-        show:    SonataAdminBundle:CRUD:show.html.twig
-        edit:    SonataAdminBundle:CRUD:edit.html.twig
+#     templates:
+#         # default global templates
+#         # the layout template include javascript/stylesheet to the formatter bundle,
+#         # if you don't need it use the default one: SonataAdminBundle::standard_layout.html.twig
+#         layout:  SonataAdminBundle::standard_layout.html.twig
+#         ajax:    SonataAdminBundle::ajax_layout.html.twig
+#
+#         # default value if done set, actions templates, should extends a global templates
+#         list:    SonataAdminBundle:CRUD:list.html.twig
+#         show:    SonataAdminBundle:CRUD:show.html.twig
+#         edit:    SonataAdminBundle:CRUD:edit.html.twig
 
     dashboard:
         blocks:
@@ -59,7 +59,7 @@ sonata_admin:
 #                     - sonata.media.admin.media
 #                     - sonata.media.admin.gallery
 #                     - sonata.comment.admin.thread
-# 
+#
 #             sonata.admin.group.site_builder:
 #                 label:           Site Builder
 #                 label_catalogue: SonataDemoBundle
@@ -67,7 +67,7 @@ sonata_admin:
 #                 items:
 #                     - sonata.page.admin.page
 #                     - sonata.page.admin.site
-# 
+#
 #             sonata.admin.group.administration:
 #                 label:           sonata_administration
 #                 label_catalogue: SonataAdminBundle
@@ -77,7 +77,7 @@ sonata_admin:
 #                     - sonata.user.admin.group
 #                     - sonata.page.admin.site
 #                     - sonata.notification.admin.message
-# 
+#
 #             sonata.admin.group.demo:
 #                 label: Demo
 #                 icon:  '<i class="fa fa-play-circle"></i>'
@@ -87,18 +87,18 @@ sonata_admin:
 #                     - sonata.demo.admin.color
 #                     - sonata.demo.admin.material
 
-    assets:
-        stylesheets:
-            # The sandbox includes default pre-optimized version of some css and js
-            # So you can either use them, and add your custom assets here
-            #   ~ or ~
-            # tweak the assetic.yml and the following lines
-            - assetic/sonata_admin_css.css
-            - assetic/sonata_formatter_css.css
-            - assetic/sonata_jqueryui_css.css
-            - bundles/sonatademo/css/demo.css
-
-#            - bundles/sonataformatter/markitup/skins/sonata/style.css
+#     assets:
+#         stylesheets:
+#             # The sandbox includes default pre-optimized version of some css and js
+#             # So you can either use them, and add your custom assets here
+#             #   ~ or ~
+#             # tweak the assetic.yml and the following lines
+#             - assetic/sonata_admin_css.css
+#             - assetic/sonata_formatter_css.css
+#             - assetic/sonata_jqueryui_css.css
+#             - bundles/sonatademo/css/demo.css
+#
+# #            - bundles/sonataformatter/markitup/skins/sonata/style.css
 #            - bundles/sonataformatter/markitup/sets/markdown/style.css
 #            - bundles/sonataformatter/markitup/sets/html/style.css
 #            - bundles/sonataformatter/markitup/sets/textile/style.css
@@ -114,11 +114,11 @@ sonata_admin:
 #            - bundles/sonataadmin/css/layout.css
 #            - bundles/sonatapage/sonata-page.back.min.css
 
-        javascripts:
-            - assetic/sonata_admin_js.js
-            - assetic/sonata_jqueryui_js.js
-            - assetic/sonata_formatter_js.js
-            - bundles/sonataformatter/vendor/ckeditor/ckeditor.js
+#         javascripts:
+#             - assetic/sonata_admin_js.js
+#             - assetic/sonata_jqueryui_js.js
+#             - assetic/sonata_formatter_js.js
+#            - bundles/sonataformatter/vendor/ckeditor/ckeditor.js
 
 #            - bundles/sonataadmin/vendor/jquery/dist/jquery.min.js
 #            - bundles/sonataadmin/vendor/jqueryui/ui/jquery.ui.core.js

@@ -486,7 +486,7 @@ class Schedule
         return $this->locked_at;
     }
 
-    
+
 
     /**
      * Set date_schedule
@@ -504,7 +504,7 @@ class Schedule
     /**
      * Get date_schedule
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDateSchedule()
     {
@@ -527,7 +527,7 @@ class Schedule
     /**
      * Get user
      *
-     * @return \Application\Sonata\UserBundle\Entity\User 
+     * @return \Application\Sonata\UserBundle\Entity\User
      */
     public function getUser()
     {
