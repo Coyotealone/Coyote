@@ -22,12 +22,6 @@ CoyoteFrontBundle_profil:
     requirements:
         _locale: fr|en|pl
 
-CoyoteFrontBundle_resetting:
-    resource: "@CoyoteFrontBundle/Resources/config/routing/resetting.yml"
-    prefix:   /{_locale}/resetting
-    requirements:
-        _locale: fr|en|pl
-
 CoyoteFrontBundle_accueil:
     path:     /
     defaults: { _controller: CoyoteFrontBundle:Main:redirect }

@@ -3,6 +3,7 @@
 namespace Coyote\Bundle\ExpenseBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Session\Session;
 
@@ -47,27 +48,22 @@ class ExpenseController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->get('security.context')->getToken()->getUser();
+        $sites = null;
         if ($user == "anon.")
         {
             return $this->redirect($this->generateUrl('fos_user_security_login'));
         }
-        if ($this->get('security.context')->isGranted('ROLE_TRADE_PICHON'))
+        $listRoles = $user->getRoles();
+        $sites = $em->getRepository('CoyoteExpenseBundle:Site')->getSitesaboutRoles($listRoles);
+
+        if (!empty($sites))
         {
             $currency = $em->getRepository('CoyoteExpenseBundle:Currency')->findAllOrderByCode();
             $business = $em->getRepository('CoyoteExpenseBundle:Business')->findAllOrderByName();
             $fee = $em->getRepository('CoyoteExpenseBundle:Fee')->findAll();
-            $site = $em->getRepository('CoyoteExpenseBundle:Site')->findById(9);
+
             return $this->render('CoyoteFrontBundle:Expense:create.html.twig',
-                array('currency' => $currency, 'business' => $business, 'fee' => $fee, 'site' => $site));
-        }
-        if ($this->get('security.context')->isGranted('ROLE_TRADE_GILIBERT'))
-        {
-            $currency = $em->getRepository('CoyoteExpenseBundle:Currency')->findAllOrderByCode();
-            $business = $em->getRepository('CoyoteExpenseBundle:Business')->findAllOrderByName();
-            $fee = $em->getRepository('CoyoteExpenseBundle:Fee')->findAll();
-            $site = $em->getRepository('CoyoteExpenseBundle:Site')->findById(11);
-            return $this->render('CoyoteFrontBundle:Expense:create.html.twig',
-                array('currency' => $currency, 'business' => $business, 'fee' => $fee, 'site' => $site));
+                array('currency' => $currency, 'business' => $business, 'fee' => $fee, 'sites' => $sites));
         }
         else
         {

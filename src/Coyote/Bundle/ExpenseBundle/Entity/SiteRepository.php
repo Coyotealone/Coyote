@@ -12,4 +12,13 @@ use Doctrine\ORM\EntityRepository;
  */
 class SiteRepository extends EntityRepository
 {
+    public function getSitesaboutRoles($roles)
+    {
+        $sites = $this->createQueryBuilder('s')
+                    ->where("s.roles IN (:roles)")
+                    ->setParameter('roles', $roles)
+                    ->getQuery()->getResult();
+        return $sites;
+        return $this->findBy(array(), array('roles' => $roles));
+    }
 }

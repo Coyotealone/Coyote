@@ -46,7 +46,9 @@
     	<tr>
     		<th id='tab_expense_site'>
     			<select name='site{{i}}' id='site{{i}}'>
-                    <option value={{site.0.id}}>{{ site.0.code }}</option>
+    			    {% for site in sites %}
+                    <option value={{site.id}}>{{ site.code }}</option>
+                    {% endfor %}
     			</select>
     		</th>
     		<th id='tab_expense_date'>

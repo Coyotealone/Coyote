@@ -9,7 +9,6 @@ use Doctrine\ORM\Mapping as ORM;
  * @author Coyote
  * @ORM\Entity
  * @ORM\Table(name="site")
- * @ORM\Entity(repositoryClass="Coyote\Bundle\ExpenseBundle\Entity\SiteRepository");
  */
 class Site
 {
@@ -147,29 +146,5 @@ class Site
     public function __toString()
     {
         return $this->name;
-    }
-
-    /**
-     * Set roles
-     *
-     * @param string $roles
-     *
-     * @return Site
-     */
-    public function setRoles($roles)
-    {
-        $this->roles = $roles;
-
-        return $this;
-    }
-
-    /**
-     * Get roles
-     *
-     * @return string
-     */
-    public function getRoles()
-    {
-        return $this->roles;
     }
 }
