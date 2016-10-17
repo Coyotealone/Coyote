@@ -1,0 +1,55 @@
+expense_updatestatus:
+    pattern:    /updatestatus
+    defaults:   { _controller: "CoyoteExpenseBundle:Expense:poststatusExpenses"}
+    methods:    GET
+
+expense_index:
+    pattern:    /
+    defaults:   { _controller: "CoyoteExpenseBundle:Expense:getIndex"}
+    methods:    GET
+
+expense_create:
+    pattern:    /create
+    defaults:   { _controller: "CoyoteExpenseBundle:Expense:putcreateExpense"}
+    methods:    GET
+
+expense_save:
+    pattern:    /save
+    defaults:   { _controller: "CoyoteExpenseBundle:Expense:putExpenses"}
+    requirements:
+        _method:    POST
+
+expense_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "CoyoteExpenseBundle:Expense:posteditExpense" }
+    methods:  [POST, PUT]
+
+expense_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "CoyoteExpenseBundle:Expense:postupdateExpense" }
+    requirements: { _method: post|put }
+
+expense_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "CoyoteExpenseBundle:Expense:deleteExpense" }
+    requirements: { _method: post|delete }
+
+expense_indexshowexpenses:
+    pattern:  /show_expenses/{page}
+    defaults: { _controller: "CoyoteExpenseBundle:Expense:getExpenses", page: 1}
+    requirements:
+        _method: get
+        page:  \d+
+
+expense_showexpenses:
+    pattern:  /show_expenses/{page}
+    defaults: { _controller: "CoyoteExpenseBundle:Expense:getExpenses", page: 1}
+    requirements:
+        _method: get
+        page:  \d+
+
+expense_printexpenses:
+    pattern:  /print_expenses
+    defaults: { _controller: "CoyoteExpenseBundle:Expense:getprintExpenses" }
+    requirements:
+        _method: get

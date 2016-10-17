@@ -1,0 +1,5 @@
+coyote_attendance_schedule:
+    resource: "@CoyoteAttendanceBundle/Resources/config/routing/schedule.yml"
+    prefix:   /{_locale}
+    requirements:
+        _locale: fr|en|pl

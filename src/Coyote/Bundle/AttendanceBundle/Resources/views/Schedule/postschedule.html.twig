@@ -1,0 +1,275 @@
+{% extends 'CoyoteAttendanceBundle:Schedule:index.html.twig' %}
+
+{% block javascripts %}
+    <!--[if IE]>
+        <script src="{{ asset('bundles/coyotefront/js/jquery.js') }}"></script>
+        <script src="{{ asset('bundles/coyotefront/js/script_timeusers_ie.js') }}"></script>
+        <script src="{{ asset('bundles/coyotefront/js/script_timeusers_change.js') }}"/></script>
+    <![endif]-->
+    <!--[if !IE]><!-->
+        <script src="{{ asset('bundles/coyotefront/js/jquery.js') }}"></script>
+        {% if is_granted('ROLE_TECH') %}
+        <script src="{{ asset('bundles/coyotefront/js/script_timeusers.js') }}"/></script>
+        <script src="{{ asset('bundles/coyotefront/js/script_timeusers_change.js') }}"/></script>
+        {% endif %}
+        {% if is_granted('ROLE_CADRE') %}
+        <script src="{{ asset('bundles/coyotefront/js/script_timeframework.js') }}"/></script>
+        <script src="{{ asset('bundles/coyotefront/js/script_timeframework_change.js') }}"/></script>
+        {% endif %}
+    <!--<![endif]-->
+{% endblock %}
+
+{% block content %}
+    {% for flashMessage in app.session.flashbag.get('save_schedule') %}
+        {% set message = flashMessage %}
+        {% if message == "schedule.flash.save" %}
+            <p id="flashmessage_valid">{{ flashMessage|trans }}</p>
+        {% elseif message == "schedule.flash.no_save" %}
+            <p id="flashmessage_error">{{ flashMessage|trans }}</p>
+        {% elseif message == "schedule.flash.locked" %}
+            <p id="flashmessage_warning">{{ flashMessage|trans }}</p>
+        {% endif %}
+    {% endfor %}
+
+    {% if is_granted('ROLE_TECH') %}
+        <form role="form" action="{{ path('schedule_postscheduleuserweek') }}" method='post'>
+            <p id="title">
+            <button class="btn btn-primary" type="submit" value="Save" id="save">{{ 'schedule.submit.save'|trans }}</button>
+                <b>{{'schedule.title.new'|trans}} - </b>
+                {{'schedule.message_week'|trans({'%no_week%': app.session.get('week'), '%year%': app.session.get('year')})}}
+            </p>
+
+            <div class='table-responsive'>
+        	    <table id="time_table" class="table">
+                    <thead>
+        		    	<tr>
+            				<td>{{'schedule.dayofweek'|trans}}</td>
+            				<td>{{'schedule.start'|trans}}</td>
+            				<td>{{'schedule.end'|trans}}</td>
+            				<td>{{'schedule.break'|trans}}</td>
+            				<td>{{'schedule.working_time'|trans}}</td>
+            				<td>{{'schedule.travel'|trans}}</td>
+            				<td>{{'schedule.absence'|trans}}</td>
+            				<td>{{'schedule.absence_time'|trans}}</td>
+            				<td>{{'schedule.comment'|trans}}</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    {% for key,date in data_timetable %}
+                        <tr>
+            				<td class='date'>{{ "schedule#{loop.index}"|trans }} :
+            				    <input class='input_day' type='text' readonly name="date{{loop.index}}" id="date{{ date }}" value={{ date|date("d/m/Y") }} />
+            				</td>
+            				<td>
+            					{% if attribute(time,loop.index0) is not empty and attribute(time,loop.index0).start %}
+            				        <input class='input_time' type='text' name="start{{loop.index}}" id="start{{loop.index}}" maxlength='5'
+            				        data-value={{ attribute(time,loop.index0).start|date("H:i") }} value={{ attribute(time,loop.index0).start|date("H:i") }} />
+            				    {% else %}
+            				        <input class='input_time' type='text' name="start{{loop.index}}" id="start{{loop.index}}" maxlength='5'>
+            				    {% endif %}
+            				</td>
+            				<td>
+            					{% if attribute(time,loop.index0) is not empty and attribute(time,loop.index0).end %}
+            				        <input class='input_time' type='text' name="end{{loop.index}}" id="end{{loop.index}}" maxlength='5'
+            				        data-value={{ attribute(time,loop.index0).end|date("H:i") }} value={{ attribute(time,loop.index0).end|date("H:i") }} />
+            				    {% else %}
+            				        <input class='input_time' type='text' name="end{{loop.index}}" id="end{{loop.index}}" maxlength='5' />
+            				    {% endif %}
+            				</td>
+            				<td>
+            					{% if attribute(time,loop.index0) is not empty and attribute(time,loop.index0).break %}
+            				        <input class='input_time' type='text' name="break{{loop.index}}" id="break{{loop.index}}" maxlength='5'
+            				        data-value={{ attribute(time,loop.index0).break|date("H:i") }} value={{ attribute(time,loop.index0).break|date("H:i") }} />
+            				    {% else %}
+            				        <input class='input_time' type='text' name="break{{loop.index}}" id="break{{loop.index}}" maxlength='5' />
+            				    {% endif %}
+            				</td>
+            				<td>
+            					{% if attribute(time,loop.index0) is not empty and attribute(time,loop.index0).workingtime %}
+            				        <input class='input_time' type='text' name="workingtime{{loop.index}}" id="workingtime{{loop.index}}" disabled
+            				        data-value={{ attribute(time,loop.index0).workingtime|date("H:i") }} value={{ attribute(time,loop.index0).workingtime|date("H:i") }} />
+            				    {% else %}
+            				        <input class='input_time' type='text' name="workingtime{{loop.index}}" id="workingtime{{loop.index}}" readonly />
+            				    {% endif %}
+            				</td>
+            				<td>
+            				    <div class="checkbox">
+            				        <label>
+                					{% if attribute(time,loop.index0) is not empty and attribute(time,loop.index0).travel %}
+                				        <input type="checkbox" name="travel{{loop.index}}" id="travel{{loop.index}}"
+                				        data-value={{ attribute(time,loop.index0).travel }} >
+                				    {% else %}
+                				        <input type="checkbox" name="travel{{loop.index}}" id="travel{{loop.index}}">
+                                    </label>
+                                </div>
+            				    {% endif %}
+            				</td>
+            				<td class="select_absence">
+            					{% if attribute(time,loop.index0) is not empty and attribute(time,loop.index0).absencename %}
+            				        <select name='absence{{loop.index}}' id="absence{{loop.index}}" data-value={{ attribute(time,loop.index0).absencename }} >
+            				    {% else %}
+            					   <select name="absence{{loop.index}}" id="absence{{loop.index}}" >
+            					{% endif %}
+                					<option value='Aucune'></option>
+                					<option value='RTT'>{{'schedule.rtt'|trans}}</option>
+                					<option value='CP'>{{'schedule.cp'|trans}}</option>
+                					<option value='CA'>{{'schedule.ca'|trans}}</option>
+                					<option value='CSS'>{{'schedule.css'|trans}}</option>
+                					<option value="AT">{{'schedule.at'|trans}}</option>
+                					<option value="MP">{{'schedule.mp'|trans}}</option>
+                					<option value="Recup">{{'schedule.recup'|trans}}</option>
+                					<option value="Autre">{{'schedule.various'|trans}}</option>
+            					</select>
+            				</td>
+            				<td class='absence_day' >
+            					{% if attribute(time,loop.index0) is not empty and attribute(time,loop.index0).absenceduration %}
+            				        <select name="absenceday{{loop.index}}" id="absenceday{{loop.index}}" data-value={{attribute(time,loop.index0).absenceduration}} >
+            				    {% else %}
+            					   <select name="absenceday{{loop.index}}" id="absenceday{{loop.index}}" >
+            				    {% endif %}
+            					    <option value="empty"></option>
+            					    <option value='0.5'>0,5</option>
+                                    <option value='1'>1</option>
+            					</select>
+            					<input class='input_time' type='text' name="absencetime{{loop.index}}" id="absencetime{{loop.index}}" maxlength='5' />
+            				</td>
+            				<td>
+            					{% if attribute(time,loop.index0) is not empty and attribute(time,loop.index0).comment %}
+            				        <input type='text' name="comment{{loop.index}}" id="comment{{loop.index}}" placeholder="{{'schedule.write_comment'|trans}}"
+            				        data-value={{ attribute(time,loop.index0).comment }} value="{{ attribute(time,loop.index0).comment }}" />
+            				    {% else %}
+            				        <input type='text' name="comment{{loop.index}}" id="comment{{loop.index}}" placeholder='{{'schedule.write_comment'|trans}}' value='' />
+            				    {% endif %}
+            				</td>
+            			</tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div id="write_auto">
+            	{{'schedule.message'|trans}}
+        		<br>
+		        <input type='checkbox' name='check_1' id='check_1'> {{ 'schedule.monday'|trans }}
+        		<input type='checkbox' name='check_2' id='check_2'> {{ 'schedule.tuesday'|trans }}
+        		<input type='checkbox' name='check_3' id='check_3'> {{ 'schedule.wednesday'|trans }}
+        		<input type='checkbox' name='check_4' id='check_4'> {{ 'schedule.thursday'|trans }}
+        		<input type='checkbox' name='check_5' id='check_5'> {{ 'schedule.friday'|trans }}
+        		<input type='checkbox' name='check_6' id='check_6'> {{ 'schedule.saturday'|trans }}
+        		<input type='checkbox' name='check_7' id='check_7'> {{ 'schedule.sunday'|trans }} |
+        		{{ 'schedule.start'|trans }} <input class='input_time' type='text' id='startauto'>
+        		{{ 'schedule.end'|trans }} <input class='input_time' type='text' id='endauto'>
+        		{{ 'schedule.break'|trans }} <input class='input_time' type='text' id='breakauto'>
+        	</div>
+        	<div id="buttons">
+            	<a id='work_less' class="btn btn-info" href="{{ path('schedule_postweekless')}}" >{{'schedule.submit.previous_week'|trans}}</a>
+                <a id='saisie_auto' class="btn btn-success" onclick='saisie_auto()'>{{'schedule.write_auto'|trans}}</a>
+                <a id='work_more' class="btn btn-info" href="{{ path('schedule_postweekmore')}}" >{{'schedule.submit.next_week'|trans}}</a>
+                <br>
+                {{'schedule.working_time_week'|trans}} <input readonly type="text" id="timeweek"></input>
+        	</div>
+        </form>
+
+
+    {% endif %}
+    {% if is_granted('ROLE_CADRE') %}
+    <form role="form" action="{{ path('schedule_postscheduleuserweek') }}" method='post'>
+        <div id="contenu">
+            <p id="title">
+                <button class='btn btn-primary' type="submit" value="Save" id="save">{{ 'schedule.submit.save'|trans }}</button>
+                 <b>{{'schedule.title.new'|trans}} - </b>
+                {{'schedule.message_week'|trans({'%no_week%': app.session.get('week'), '%year%': app.session.get('year')})}}
+            </p>
+            <div class='table-responsive'>
+        	    <table id='table_temps' class='table'>
+                    <thead>
+        		    	<tr>
+            				<td>{{'schedule.dayofweek'|trans}}</td>
+            				<td>{{'schedule.working_hours'|trans}}</td>
+            				<td>{{'schedule.travel'|trans}}</td>
+            				<td>{{'schedule.absence'|trans}}</td>
+            				<td>{{'schedule.absence_time'|trans}}</td>
+            				<td>{{'schedule.comment'|trans}}</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    {% for key,date in data_timetable %}
+                        <tr>
+            				<td class='date'>{{ "schedule#{loop.index}"|trans }} :
+            				    <input class='input_day' type='text' readonly name="date{{loop.index}}" id="date{{loop.index}}" 
+            				    value={{ date|date("d/m/Y") }} />
+            				</td>
+            				<td class='day'>
+            				    {% if attribute(time,loop.index0) is not empty %}
+            					    <select name="day{{loop.index}}" id="day{{loop.index}}" data-value={{ attribute(time,loop.index0).workinghours }} >
+            					{% else %}
+            					    <select name="day{{loop.index}}" id="day{{loop.index}}">
+            					{% endif %}
+            						<option selected="selected" value="empty"></option>
+            						<option value='0'>0</option>
+            						<option value='0.5'>1/2</option>
+            						<option value='1'>1</option>
+            					</select>
+            				</td>
+            				<td>
+            				    <div class="checkbox">
+            				        <label>
+                				    {% if attribute(time,loop.index0) is not empty and attribute(time,loop.index0).travel %}
+                				        <input type="checkbox" name="travel{{loop.index}}" id="travel{{loop.index}}"
+                				        data-value={{ attribute(time,loop.index0).travel }} >
+                				    {% else %}
+                				        <input type="checkbox" name="travel{{loop.index}}" id="travel{{loop.index}}">
+                				    {% endif %}
+            				        </label>
+            				    </div>
+            				</td>
+            				<td class="select_absence">
+            				    {% if attribute(time,loop.index0) is not empty and attribute(time,loop.index0).absencename %}
+            				        <select name="absence{{loop.index}}" id="absence{{loop.index}}" data-value={{ attribute(time,loop.index0).absencename }} >
+            				    {% else %}
+            					   <select name="absence{{loop.index}}" id="absence{{loop.index}}" >
+            					{% endif %}
+                					<option value='Aucune'></option>
+                					<option value='RTT'>{{'schedule.rtt'|trans}}</option>
+                					<option value='CP'>{{'schedule.cp'|trans}}</option>
+                					<option value='CA'>{{'schedule.ca'|trans}}</option>
+                					<option value='CSS'>{{'schedule.css'|trans}}</option>
+                					<option value="AT">{{'schedule.at'|trans}}</option>
+                					<option value="MP">{{'schedule.mp'|trans}}</option>
+                					<option value="Autre">{{'schedule.various'|trans}}</option>
+            					</select>
+            				</td>
+            				<td class='absence_day' >
+            				    {% if attribute(time,loop.index0) is not empty and attribute(time,loop.index0).absenceduration %}
+            				        <select name="absenceday{{loop.index}}" id="absenceday{{loop.index}}" data-value={{attribute(time,loop.index0).absenceduration}} >
+            				    {% else %}
+            					   <select name="absenceday{{loop.index}}" id="absenceday{{loop.index}}" >
+            				    {% endif %}
+            					    <option value="empty"></option>
+            					    <option value='0.5'>0,5</option>
+                                    <option value='1'>1</option>
+            					</select>
+            					<input class='input_time' type='text' name="absencetime{{loop.index}}" id="absencetime{{loop.index}}" maxlength='5' />
+            				</td>
+            				<td>
+            				    {% if attribute(time,loop.index0) is not empty and attribute(time,loop.index0).comment %}
+            				        <input type='text' name="comment{{loop.index}}" id="comment{{loop.index}}" placeholder="{{'schedule.write_comment'|trans}}"
+            				        data-value={{ attribute(time,loop.index0).comment }} value="{{ attribute(time,loop.index0).comment }}" />
+            				    {% else %}
+            				        <input type='text' name="comment{{loop.index}}" id="comment{{loop.index}}" placeholder='{{'schedule.write_comment'|trans}}' value='' />
+            				    {% endif %}
+            				</td>
+            			</tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div id="buttons">
+                <a id='work_less' class='btn btn-info' href="{{ path('schedule_postweekless')}}" >{{'schedule.submit.previous_week'|trans}}</a>
+                <a id='work_more' class='btn btn-info' href="{{ path('schedule_postweekmore')}}" >{{'schedule.submit.next_week'|trans}}</a>
+            </div>
+        </form>
+    {% endif %}
+
+{% endblock content %}

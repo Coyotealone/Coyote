@@ -1,0 +1,16 @@
+{% extends "CoyoteFrontBundle:Base:base.html.twig" %}
+
+{% block nav %}
+
+    <!--[if lt IE 9]>
+        {{ include('CoyoteFrontBundle:Base:navigation_ie.html.twig') }}
+    <![endif]-->
+    <!--[if !IE]><!-->
+        {{ include('CoyoteFrontBundle:Base:navigation.html.twig') }}
+	<!--<![endif]-->
+
+{% endblock %}
+
+{% block content %}
+    <p>{{ 'registration.check_email'|trans({'%email%': user.email}) }}</p>
+{% endblock content %}

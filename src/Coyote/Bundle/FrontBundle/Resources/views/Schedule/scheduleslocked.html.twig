@@ -1,0 +1,50 @@
+{% extends 'CoyoteFrontBundle:Base:index.html.twig' %}
+
+{% block javascripts %}
+    <script src="{{ asset('bundles/coyotefront/js/jquery-1.10.2.js') }}"/></script>
+    <script src="{{ asset('bundles/coyotefront/js/jquery-ui.js') }}"/></script>
+    <script src="{{ asset('bundles/coyotefront/js/script_scheduleslocked.js') }}"/></script>
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('bundles/coyotefront/css/jquery-ui.css') }}" type="text/css" media="all" />
+{% endblock %}
+
+{% block nav %}
+
+    <!--[if lt IE 9]>
+        {{ include('CoyoteFrontBundle:Base:navigation_ie.html.twig') }}
+    <![endif]-->
+    <!--[if !IE]><!-->
+        {{ include('CoyoteFrontBundle:Base:navigation.html.twig') }}
+    <!--<![endif]-->
+
+{% endblock %}
+
+{% block content %}
+
+	{% for flashMessage in app.session.flashbag.get('schedules_locked') %}
+        {% set message = flashMessage %}
+        {% if message == "schedule.flash.schedules_locked" %}
+            <p id="flashmessage_valid">{{ flashMessage|trans }}</p>
+        {% endif %}
+    {% endfor %}
+
+<p id="title">{{'schedule.title.schedules_locked'|trans}} </p>
+<form role="form" action="{{ path('schedule_postschedules_locked') }}" method='post'>
+	<p>{{ 'schedule.schedules_lock_message'|trans }}</p>
+    <div class='table-responsive'>
+        <table class='table' id='tab_expense'>
+            <tr>
+                <th class="center">{{ 'schedule.date'|trans }}</th>
+            </tr>
+            <td>
+                <input type='text' name='date' id='date' >
+            </td>
+        </table>
+    </div>
+    <div id="btn_submit">
+        <button class='btn btn-primary' type="submit" value="Enregistrer" id="enregistrer">{{ 'schedule.submit.update'|trans }}</button>
+    </div>
+</form>
+{% endblock %}

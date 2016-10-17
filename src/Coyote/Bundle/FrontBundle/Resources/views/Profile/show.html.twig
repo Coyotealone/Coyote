@@ -1,0 +1,9 @@
+{% extends 'CoyoteFrontBundle:Base:base.html.twig' %}
+
+{% block content %}
+{% include "FOSUserBundle:Profile:show_content.html.twig" %}
+{% endblock content %}
+
+{% block nav %}
+    {{ include('CoyoteFrontBundle:Base:navigation.html.twig') }}
+{% endblock %}

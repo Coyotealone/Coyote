@@ -1,0 +1,13 @@
+{% block nav_attendance %}
+            {% if is_granted('ROLE_TECH') or is_granted('ROLE_CADRE') %}
+                <a href="{{ path('schedule_getscheduleuserweek') }}" class="dropdown-toggle" data-toggle="dropdown">{{'base.nav.schedule.name'|trans}}<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="{{ path('schedule_getscheduleuserweek') }}">{{'base.nav.schedule.index'|trans}}</a></li>
+                    <li><a href="{{ path('schedule_getscheduleusermonth') }}">{{'base.nav.schedule.indexshow'|trans}}</a></li>
+                    <li><a href="{{ path('schedule_getscheduleuserprintmonth') }}">{{'base.nav.schedule.indexprint'|trans}}</a></li>
+                    <li><a href="{{ path('schedule_getscheduleuserprintyear') }}">{{'base.nav.schedule.indexprintyear'|trans}}</a></li>
+                    <li><a href="{{ path('schedule_getscheduleuser') }}">{{'base.nav.schedule.scheduleuserexcel'|trans}}</a></li>
+                </ul>
+            
+            {% endif %}
+{% endblock nav_attendance %}

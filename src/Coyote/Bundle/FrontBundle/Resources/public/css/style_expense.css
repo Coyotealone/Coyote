@@ -1,0 +1,58 @@
+#btn_show {
+    text-align: center;
+}
+
+article {
+    text-align: center;
+}
+
+#title {
+    text-align: center;
+}
+
+.center {
+    text-align: center;
+}
+
+#tab_expense {
+  min-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#tab_expense_date input {
+  min-width: 85px;
+  max-width: 85px;
+}
+
+#tab_expense_item select {
+  max-width: 100px;
+}
+
+#tab_expense_qte input {
+  text-align: center;
+  max-width: 50px;
+}
+
+#tab_expense_amount input {
+  text-align: center;
+  max-width: 50px;
+}
+
+#tab_expense_amountttc input {
+  text-align: center;
+  max-width: 50px;
+}
+
+#tab_expense_amounttva input {
+  text-align: center;
+  max-width: 50px;
+}
+
+#tab_expense_business select {
+  max-width: 75px;
+}
+
+#tab_expense_comment input {
+  max-width: 200px;
+}

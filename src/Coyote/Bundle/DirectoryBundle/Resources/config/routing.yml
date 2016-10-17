@@ -1,0 +1,3 @@
+CoyoteDirectoryBundle_directory:
+    resource: "@CoyoteDirectoryBundle/Resources/config/routing/directory.yml"
+    prefix:   /{_locale}/directory

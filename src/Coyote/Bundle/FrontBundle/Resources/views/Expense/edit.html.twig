@@ -1,0 +1,46 @@
+{% extends 'CoyoteFrontBundle:Expense:index.html.twig' %}
+
+{% block javascripts %}
+    <script src="{{ asset('bundles/coyotefront/js/jquery-1.10.2.js') }}"/></script>
+    <script src="{{ asset('bundles/coyotefront/js/jquery-ui.js') }}"/></script>
+    <script src="{{ asset('bundles/coyotefront/js/script_expense_edit.js') }}"/></script>
+{% endblock %}
+
+{% block content %}
+<h3>{{'expense.title.edit'|trans}}</h3>
+<form action="{{ path('expense_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+    <input type="hidden" name="_method" value="PUT" />
+    <div class='table-responsive'>
+    <table class='table' id='tab_expense'>
+    	<tr>
+    		<th id='tab_expense_date' maxlength="6">{{ form_label(edit_form.date, 'expense.date'|trans) }}</th>
+    		<th id='tab_expense_item'>{{ form_label(edit_form.fee, 'expense.item'|trans) }}</th>
+    		<th id='tab_expense_devise'>{{ form_label(edit_form.currency, 'expense.currency'|trans) }}</th>
+    		<th id='tab_expense_qte'>{{ form_label(edit_form.amount, 'expense.amount'|trans) }}</th>
+    		<th id='tab_expense_amountttc'>{{ form_label(edit_form.amount_TTC, 'expense.amountttc'|trans) }}</th>
+    		<th id='tab_expense_amounttva'>{{ form_label(edit_form.amount_TVA, 'expense.amounttva'|trans) }}</th>
+    		<th id='tab_expense_business'>{{ form_label(edit_form.business, 'expense.business'|trans) }}</th>
+    		<th id='tab_expense_comment'>{{ form_label(edit_form.comment, 'expense.comment'|trans) }}</th>
+    	</tr>
+        <tr>
+            <td id='tab_expense_date'>{{ form_widget(edit_form.date) }}</td>
+            <td id='tab_expense_item'>{{ form_widget(edit_form.fee) }}</td>
+            <td id='tab_expense_devise'>{{ form_widget(edit_form.currency) }}</td>
+            <td id='tab_expense_qte'>{{ form_widget(edit_form.amount) }}</td>
+            <td id='tab_expense_amountttc'>{{ form_widget(edit_form.amount_TTC) }}</td>
+            <td id='tab_expense_amounttva'>{{ form_widget(edit_form.amount_TVA) }}</td>
+            <td id='tab_expense_business'>{{ form_widget(edit_form.business) }}</td>
+            <td id='tab_expense_comment'>{{ form_widget(edit_form.comment) }}</td>
+        </tr>
+    </table>
+</div>
+    {{ form_widget(edit_form._token) }}
+    <p>
+        <button type="submit" class="btn btn-success">{{ 'expense.submit.update'|trans }}</button>
+    </p>
+</form>
+    <a class='btn_white' href="{{ path('expense_showexpenses', {'year': app.session.get('year_expense'), 'month': app.session.get('month_expense')} ) }}">
+        {{ 'expense.submit.back'|trans }}
+    </a>
+
+{% endblock %}

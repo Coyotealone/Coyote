@@ -1,0 +1,94 @@
+<page>
+<div id="lien">
+    {% if business == 'Pichon' %}
+    	<img src="./bundles/coyotefront/images/Logo_PICHON.jpg" alt="PICHON" id="logo"/>
+    {% endif %}
+    {% if business == 'Gilibert' %}
+    	<img src="./bundles/coyotefront/images/Logo-Gilibert.jpg" alt="PICHON" id="logo"/>
+    {% endif %}
+    <h3>{{'directory.title.directorybyfunctionservice'|trans}}</h3><br>
+    {{'directory.update'|trans}} : {{ update }}
+</div>
+
+{% if entity %}
+{% set index = 0 %}
+{% set functionservice = "" %}
+<table class='table' id='tab_expense' style="width:900px">
+    <thead style="width:900px">
+        <tr>
+            <th style="background:#0D47A1; color:white; width: 100px; text-align:center">{{'directory.firstname'|trans}}</th>
+            <th style="background:#0D47A1; color:white; width: 100px; text-align:center">{{'directory.name'|trans}}</th>
+            <th style="background:#0D47A1; color:white; width: 60px; text-align:center">{{'directory.nav.jobphonenumber'|trans}}</th>
+            {% if business == 'Pichon' %}
+            <th style="background:#0D47A1; color:white; width: 60px; text-align:center">{{'directory.nav.quickphonenumber'|trans}}</th>
+            {% endif %}
+            {% if business == 'Gilibert' %}
+            <th style="background:#0D47A1; color:white; width: 100px; text-align:center">{{'directory.nav.phone'|trans}}</th>
+            {% endif %}
+            <th style="background:#0D47A1; color:white; width: 100px; text-align:center">{{'directory.nav.cellphonenumber'|trans}}</th>
+            <th style="background:#0D47A1; color:white; width: 200px; text-align:center">{{'directory.mail'|trans}}</th>
+        </tr>
+    </thead>
+	<tbody style="width:900px">
+        {% for data in entity %}
+            {% if data.functionservice != functionservice %}
+            <tr>
+                <td COLSPAN=6><b>{{ data.functionservice }}</b></td>
+            </tr>
+            {% endif %}
+            {% if data.leader == 1 %}
+            <tr>
+                <td style="background:#2196F3; color:white; text-align:center">{{ data.firstname }}</td>
+                <td style="background:#2196F3; color:white; text-align:center">{{ data.name }}</td>
+                <td style="background:#2196F3; color:white; text-align:center">{{ data.jobphonenumber }}</td>
+                {% if business == 'Pichon' %}
+                <td style="background:#2196F3; text-align:center">{{ data.quickphonenumber }}</td>
+                {% endif %}
+                {% if business == 'Gilibert' %}
+                <td style="background:#2196F3; text-align:center">{{ data.phone }}</td>
+                {% endif %}
+                <td style="background:#2196F3; color:white; text-align:center">{{ data.cellphonenumber }}</td>
+                <td style="background:#2196F3; color:white; text-align:center">{{ data.mail }}</td>
+            </tr>
+            {% elseif data.leader == 0  and index == 1 %}
+            <tr>
+                <td style="background:#E0E0E0; text-align:center">{{ data.firstname }}</td>
+                <td style="background:#E0E0E0; text-align:center">{{ data.name }}</td>
+                <td style="background:#E0E0E0; text-align:center">{{ data.jobphonenumber }}</td>
+                {% if business == 'Pichon' %}
+                <td style="background:#E0E0E0; text-align:center">{{ data.quickphonenumber }}</td>
+                {% endif %}
+                {% if business == 'Gilibert' %}
+                <td style="background:#E0E0E0; text-align:center">{{ data.phone }}</td>
+                {% endif %}
+                <td style="background:#E0E0E0; text-align:center">{{ data.cellphonenumber }}</td>
+                <td style="background:#E0E0E0; text-align:center">{{ data.mail }}</td>
+            </tr>
+            {% else %}
+            <tr>
+                <td style="background:#F5F5F5; text-align:center">{{ data.firstname }}</td>
+                <td style="background:#F5F5F5; text-align:center">{{ data.name }}</td>
+                <td style="background:#F5F5F5; text-align:center">{{ data.jobphonenumber }}</td>
+                {% if business == 'Pichon' %}
+                <td style="background:#F5F5F5; text-align:center">{{ data.quickphonenumber }}</td>
+                {% endif %}
+                {% if business == 'Gilibert' %}
+                <td style="background:#F5F5F5; text-align:center">{{ data.phone }}</td>
+                {% endif %}
+                <td style="background:#F5F5F5; text-align:center">{{ data.cellphonenumber }}</td>
+                <td style="background:#F5F5F5; text-align:center">{{ data.mail }}</td>
+            </tr>
+            {% endif %}
+            {% set functionservice = data.functionservice %}
+            {% if index == 1 %}
+                {% set index = 0 %}
+            {% else %}
+                {% set index = 1 %}
+            {% endif %}
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p style="text-align:center">{{'directory.empty'|trans}}</p>
+{% endif %}
+</page>

@@ -1,0 +1,51 @@
+{% extends 'CoyoteFrontBundle:Expense:index.html.twig' %}
+
+{% block nav %}
+
+    {{ include('CoyoteFrontBundle:Base:navigation.html.twig') }}
+
+{% endblock %}
+
+{% block content %}
+<p id="title">{{'expense.title.indexshow'|trans}} </p>
+
+<form role="form" action="{{ path('expense_showexpenses', { 'month': 'month', 'year': 'year' }) }}" method='get'>
+    <table class='table' id='tab_expense'>
+    	<tr>
+    	    <th class="center">{{'expense.month'|trans}}</th>
+    		<th class="center">{{'expense.year'|trans}}</th>
+    	</tr>
+        <tr>
+            <td class="center">
+                {% set counter = 0 %}
+                <select name='month' id='month' >
+                {% for mois in tab_num_mois %}
+                    {% if mois == month %}
+                    <option value={{mois}} selected>{{tab_mois[counter]|trans}}</option>
+                    {% else %}
+                    <option value={{mois}}>{{tab_mois[counter]|trans}}</option>
+                    {% endif %}
+                    {% set counter = counter + 1 %}
+                {% endfor %}
+                </select>
+            </td>
+            <td class="center">
+                {% set counter = 0 %}
+                <select name='year' id='year' >
+                {% for annee in tab_annee %}
+                    {% if annee == year %}
+                    <option value={{tab_num_annee[counter]}} selected>{{annee}}</option>
+                    {% else %}
+                    <option value={{tab_num_annee[counter]}}>{{annee}}</option>
+                    {% endif %}
+                    {% set counter = counter + 1 %}
+                {% endfor %}
+                </select>
+            </td>
+        </tr>
+    </table>
+    <div id="btn_show">
+        <button class='btn btn-primary' type="submit" value="Afficher" id="afficher">{{ 'expense.submit.show'|trans }}</button>
+    </div>
+</form>
+{% endblock %}

@@ -1,0 +1,113 @@
+<div class="navbar navbar-inverse">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-inverse-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="{{path('main_menu')}}"><img alt="Pichon" src="{{ asset('bundles/coyotesite/images/Logo-PICHON_80.png') }}"></a>
+    </div>
+    <div class="navbar-collapse collapse navbar-inverse-collapse">
+        <ul class="nav navbar-nav">
+            <li><a href="{{path('main_menu')}}">{{'base.nav.accueil'|trans}}</a></li>
+            {% if is_granted('ROLE_TECH') or is_granted('ROLE_CADRE') %}
+        	<li class="dropdown">
+                <a href="{{ path('schedule_getscheduleuserweek') }}" class="dropdown-toggle" data-toggle="dropdown">{{'base.nav.schedule.name'|trans}}<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="{{ path('schedule_getscheduleuserweek') }}">{{'base.nav.schedule.index'|trans}}</a></li>
+                    <li><a href="{{ path('schedule_getscheduleusermonth') }}">{{'base.nav.schedule.indexshow'|trans}}</a></li>
+                    <li><a href="{{ path('schedule_getscheduleuserprintmonth') }}">{{'base.nav.schedule.indexprint'|trans}}</a></li>
+                    <li><a href="{{ path('schedule_getscheduleuserprintyear') }}">{{'base.nav.schedule.indexprintyear'|trans}}</a></li>
+                    <li><a href="{{ path('schedule_getscheduleuser') }}">{{'base.nav.schedule.scheduleuserexcel'|trans}}</a></li>
+                    {#<li><a href="{{ path('absence') }}">{{'base.nav.schedule.absence'|trans}}</a></li>#}
+                </ul>
+            </li>
+            {% endif %}
+
+            {% if is_granted('ROLE_TRADE') or is_granted('ROLE_TRADE_PICHON') or is_granted('ROLE_TRADE_GILIBERT') %}
+            <li id="frais" class="dropdown">
+              <a href="{{ path('expense_create') }}" class="dropdown-toggle" data-toggle="dropdown">{{'base.nav.expense.name'|trans}}<b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="{{ path('expense_create') }}">{{'base.nav.expense.create'|trans}}</a></li>
+                <li><a href="{{ path('expense_indexshowexpenses') }}">{{'base.nav.expense.indexshow'|trans}}</a></li>
+                <li><a href="{{ path('expense_printexpenses') }}">{{'base.nav.expense.indexprint'|trans}}</a></li>
+              </ul>
+            </li>
+            {% endif %}
+            {% if not is_granted('ROLE_VISU') %}
+            <li id="profil" class="dropdown">
+              <a href="{{ path('profil_profile') }}" class="dropdown-toggle" data-toggle="dropdown">{{'base.nav.profile.name'|trans}}<b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="{{ path('profil_profile') }}">{{'base.nav.profile.profile'|trans}}</a></li>
+                <li><a href="{{ path('profil_changepassword') }}">{{'base.nav.profile.changepassword'|trans}}</a></li>
+              </ul>
+            </li>
+            {% endif %}
+            <li id="directory" class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown">{{'base.nav.directory.title'|trans}}<b class="caret"></b></a>
+
+              <ul class="dropdown-menu">
+                <li><a href="{{ path('directory_showdirectorybyfirstname', { 'country': 'FRANCE', 'business': 'Pichon' }) }}">
+                	{{'base.nav.directory.showfirstnameFrance'|trans}}
+                </a></li>
+                <li><a href="{{ path('directory_showdirectorybyfirstname', { 'country': 'FRANCE', 'business': 'Gilibert' }) }}">
+                	{{'base.nav.directory.showfirstnameGilibert'|trans}}
+                </a></li>
+                {#<li><a href="{{ path('directory_showdirectorybyfirstname', { 'country': 'POLOGNE' }) }}">
+                	{{'base.nav.directory.showfirstnamePologne'|trans}}
+                </a></li>#}
+                <li><a href="{{ path('directory_showdirectorybyfunctionservice', { 'country': 'FRANCE', 'business': 'Pichon' }) }}">
+                	{{'base.nav.directory.showfunctionFrance'|trans}}
+                </a></li>
+                <li><a href="{{ path('directory_showdirectorybyfunctionservice', { 'country': 'FRANCE', 'business': 'Gilibert' }) }}">
+                	{{'base.nav.directory.showfunctionGilibert'|trans}}
+                </a></li>
+                {#<li><a href="{{ path('directory_showdirectorybyfunctionservice', { 'country': 'POLOGNE' }) }}">
+                	{{'base.nav.directory.showfunctionPologne'|trans}}
+                </a></li>#}
+                {% if is_granted('ROLE_DIRECTORY') %}
+                    <li class="divider"></li>
+                    <li><a href="{{ path('directory') }}">{{'base.nav.directory.index'|trans}}</a></li>
+                    <li><a href="{{ path('directory_new') }}">{{'base.nav.directory.add_user'|trans}}</a></li>
+                {% endif %}
+              </ul>
+            </li>
+
+            {% if is_granted('ROLE_CHEF_BE') %}
+        	<li id="presence_admin" class="dropdown">
+              <a href=# class="dropdown-toggle" data-toggle="dropdown">{{'base.nav.schedule_admin.name'|trans}}<b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="{{ path('admin_exportdatauser')}}">{{'base.nav.schedule_admin.indexexport'|trans}}</a></li>
+              </ul>
+            </li>
+            {% endif %}
+
+            {% if is_granted('ROLE_COMPTA') %}
+            <li id="frais_admin" class="dropdown">
+              <a href="{{ path('admin_exportexpense') }}" class="dropdown-toggle" data-toggle="dropdown">{{'base.nav.expense_admin.name'|trans}}<b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="{{ path('admin_exportexpense') }}">{{'base.nav.expense_admin.exportexpense'|trans}}</a></li>
+                <li><a href="{{ path('admin_showadmin') }}">{{'base.nav.expense.showadmin'|trans}}</a></li>
+              </ul>
+            </li>
+            {% endif %}
+
+            {% if is_granted('ROLE_ADMIN') %}
+            <li id="profil_admin" class="dropdown">
+                <a href="{{ path('fos_user_registration_register') }}" class="dropdown-toggle" data-toggle="dropdown">{{'base.nav.profile_admin.name'|trans}}<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="{{ path('fos_user_registration_register') }}">{{'base.nav.profile_admin.register'|trans}}</a></li>
+                    <li><a href="{{ path('admin_indexchoicesuser') }}">{{'base.nav.profile_admin.indexchoicesuser'|trans}}</a></li>
+                    <li><a href="{{ path('schedule_postschedules_locked') }}">{{'base.nav.schedule_admin.schedules_locked'|trans}}</a></li>
+                    <li><a href="{{ path('expense_updatestatus') }}">{{'base.nav.expense.indexupdatestatus'|trans}}</a></li>
+                    <li><a href="{{ path('admin_getscheduleuser') }}">{{'base.nav.schedule_admin.scheduleuserexcel'|trans}}</a></li>
+                </ul>
+            </li>
+            {% endif %}
+        <li>
+        	<button type="button" class="btn btn-primary navbar-btn" onclick="window.location.href='{{ path('fos_user_security_logout') }}'">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+        	</button>
+        </li>
+        </ul>
+    </div>
+</div>

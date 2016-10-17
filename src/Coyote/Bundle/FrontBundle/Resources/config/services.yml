@@ -1,0 +1,10 @@
+services:
+#    coyote_site.registration.form.type:
+#        class: Coyote\FrontBundle\Form\Type\RegistrationFormType
+#        tags:
+#            - { name: form.type, alias: coyote_site_registration }
+    coyote_front.locale_listener:
+        class: Coyote\Bundle\FrontBundle\EventListener\LocaleListener
+        arguments: ["%kernel.default_locale%"]
+        tags:
+            - { name: kernel.event_subscriber }

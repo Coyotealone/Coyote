@@ -1,0 +1,117 @@
+{% extends 'CoyoteFrontBundle:Expense:index.html.twig' %}
+
+{% block javascripts %}
+    <script src="{{ asset('bundles/coyotefront/js/jquery-1.10.2.js') }}"/></script>
+    <script src="{{ asset('bundles/coyotefront/js/jquery-ui.js') }}"/></script>
+    <script src="{{ asset('bundles/coyotefront/js/script_expense.js') }}"/></script>
+    <script src="{{ asset('bundles/coyotefront/js/script_expense_change.js') }}"/></script>
+{% endblock %}
+
+{% block nav %}
+    {{ include('CoyoteFrontBundle:Base:navigation.html.twig') }}
+{% endblock %}
+
+{% block content %}
+
+{% for flashMessage in app.session.flashbag.get('save_expense') %}
+    {% set message = flashMessage %}
+    {% if message == 'expense.flash.no_save' %}
+        <p id="flashmessage_error">{{ flashMessage|trans }}</p>
+    {% endif %}
+    {% if message == 'expense.flash.save' %}
+        <p id="flashmessage_valid">{{ flashMessage|trans }}</p>
+    {% endif %}
+    {% if message == 'expense.flash.save_multiple' %}
+        <p id="flashmessage_valid">{{ flashMessage|trans({'%count%': app.session.get('countExpense') }) }}</p>
+    {% endif %}
+{% endfor %}
+
+<p id="title">{{'expense.title.create'|trans}} </p>
+
+<form role="form" action="{{ path('expense_save') }}" method='post'>
+<div class='table-responsive'>
+    <table class='table' id='tab_expense'>
+    	<tr>
+    		<th id='tab_expense_site'>{{ 'expense.site'|trans }}<sup>1</sup></th>
+    		<th id='tab_expense_date'>{{ 'expense.date'|trans }}<SUP>1</SUP> <SUP>2</SUP></th>
+    		<th id='tab_expense_item'>{{ 'expense.item'|trans }}<sup>1</sup></th>
+    		<th id='tab_expense_devise'>{{ 'expense.currency'|trans }}  </th>
+    		<th id='tab_expense_qte'>{{ 'expense.amount'|trans }}<sup>1</sup></th>
+    		<th id='tab_expense_amountttc'>{{ 'expense.amountttc'|trans }}<sup>1</sup></th>
+    		<th id='tab_expense_amounttva'>{{ 'expense.amounttva'|trans }}<sup>1</sup></th>
+    		<th id='tab_expense_business'>{{ 'expense.business'|trans }}</th>
+    		<th id='tab_expense_comment'>{{ 'expense.comment'|trans }}</th>
+    	</tr>
+    	{% for i in 0..5 %}
+    	<tr>
+    		<th id='tab_expense_site'>
+    		    <select name='site{{i}}' id='site{{i}}'>
+                {% for site in sites %}
+    			    <option value={{site.id}}>{{ site.code }}</option>
+    			{% endfor %}
+    			</select>
+    		</th>
+    		<th id='tab_expense_date'>
+    		<input type='text' name='date{{i}}' id='date{{i}}' maxlength="6" >
+    		<th id='tab_expense_item'>
+    		    <select name='article{{i}}' id='article{{i}}' class='itemfrais'>
+    		        <option></option>
+    				{% for datafee in fee %}
+    				    <option id={{ datafee.id }} data-value={{ datafee.rate }} value={{ datafee.id }}>
+    				    {{ datafee.code }} : {{ datafee.name | trans }}</option>
+    				{% endfor %}
+    			</select>
+            </th>
+    		<th id='tab_expense_devise'>
+    			<select name='devise{{i}}' id='devise{{i}}'>
+    			    {% if app.session.get('lang') == "en" %}
+        			    {% for datacurrency in currency %}
+        			        {% if datacurrency.code == "GBP" %}
+        			            <option value={{ datacurrency.id }} selected>{{ datacurrency.code }}</option>
+        			        {% else %}
+                                <option value={{ datacurrency.id }} >{{ datacurrency.code }}</option>
+        			        {% endif %}
+    			        {% endfor %}
+    			    {% elseif app.session.get('lang') == "pl" %}
+        			    {% for datacurrency in currency %}
+        			        {% if datacurrency.code == "PLN" %}
+        			            <option value={{ datacurrency.id }} selected>{{ datacurrency.code }}</option>
+        			        {% else %}
+                                <option value={{ datacurrency.id }} >{{ datacurrency.code }}</option>
+        			        {% endif %}
+    			        {% endfor %}
+    			    {% else %}
+        			    {% for datacurrency in currency %}
+        			        {% if datacurrency.code == "EUR" %}
+        			            <option value={{ datacurrency.id }} selected>{{ datacurrency.code }}</option>
+        			        {% else %}
+                                <option value={{ datacurrency.id }} >{{ datacurrency.code }}</option>
+        			        {% endif %}
+    			        {% endfor %}
+    			    {% endif %}
+    			</select>
+    		</th>
+    		<th id='tab_expense_qte'><input type='text' name='qte{{i}}' id='qte{{i}}' ></th>
+    		<th id='tab_expense_amountttc'><input type='text' name='ttc{{i}}' id='ttc{{i}}' ></th>
+    		<th id='tab_expense_amounttva'><input type='text' name='tva{{i}}' id='tva{{i}}' readonly></th>
+    		<th id='tab_expense_business'>
+    			<select name='affaire{{i}}' id='affaire{{i}}'>
+    			    {% for databusiness in business %}
+    			         <option value={{ databusiness.id }}>{{ databusiness.name }}</option>
+    			    {% endfor %}
+    			</select>
+    		</th>
+    		<th id='tab_expense_comment'><input type='text' name='com{{i}}' id='com{{i}}' ></th>
+    	</tr>
+    	{% endfor %}
+    </table>
+</div><br>
+
+<p><sup>1</sup> {{'base.required'|trans}}</p>
+<p><sup>2</sup> {{'base.date'|trans}}</p>
+<div id="btn_save">
+    <button class='btn btn-primary' type="submit" value="Enregistrer" id="enregistrer">{{ 'expense.submit.save'|trans }}</button>
+</div>
+</form>
+
+{% endblock %}

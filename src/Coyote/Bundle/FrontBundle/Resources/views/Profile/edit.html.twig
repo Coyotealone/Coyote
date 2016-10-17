@@ -1,0 +1,17 @@
+{% extends 'CoyoteFrontBundle:Base:base.html.twig' %}
+
+{% block content %}
+{% include "FOSUserBundle:Profile:edit_content.html.twig" %}
+{% endblock content %}
+
+{% block nav %}
+
+    {% if is_granted('ROLE_CHEF_BE') %}
+	    {{ include('CoyoteFrontBundle:Base:navigation_admin.html.twig') }}
+    {% elseif is_granted('ROLE_COMPTA') %}
+	    {{ include('CoyoteFrontBundle:Base:navigation_admin.html.twig') }}
+    {% else %}
+        {{ include('CoyoteFrontBundle:Base:navigation.html.twig') }}
+	{% endif %}
+
+{% endblock %}

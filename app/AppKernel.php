@@ -19,24 +19,43 @@ class AppKernel extends Kernel
             new Symfony\Bundle\TwigBundle\TwigBundle(),
             new Symfony\Bundle\MonologBundle\MonologBundle(),
             new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
-            new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
-            new Coyote\SiteBundle\CoyoteSiteBundle(),
-            new FOS\UserBundle\FOSUserBundle(),
+
+            // Sonata Admin
             new Sonata\CoreBundle\SonataCoreBundle(),
             new Sonata\BlockBundle\SonataBlockBundle(),
+            new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
             new Sonata\AdminBundle\SonataAdminBundle(),
-            new Knp\Bundle\MenuBundle\KnpMenuBundle(),
-            new JMS\SerializerBundle\JMSSerializerBundle(),
+
+            // Sonata Easy-Extends
+            new Sonata\EasyExtendsBundle\SonataEasyExtendsBundle(),
+
+            // Sonata User
+            new FOS\UserBundle\FOSUserBundle(),
+            new Sonata\UserBundle\SonataUserBundle('FOSUserBundle'),
+            new Application\Sonata\UserBundle\ApplicationSonataUserBundle(),
+
+            // Sonata Media
+            //new Sonata\MediaBundle\SonataMediaBundle(),
+            //new JMS\SerializerBundle\JMSSerializerBundle(),
+            //new Sonata\IntlBundle\SonataIntlBundle(),
+            //new Application\Sonata\MediaBundle\ApplicationSonataMediaBundle(),
+
+            // Sonata Notification
+            //new Sonata\NotificationBundle\SonataNotificationBundle(),
+
+            new Coyote\Bundle\AttendanceBundle\CoyoteAttendanceBundle(),
+            new Coyote\Bundle\ExpenseBundle\CoyoteExpenseBundle(),
+            new Coyote\Bundle\DirectoryBundle\CoyoteDirectoryBundle(),
+            new Coyote\Bundle\FrontBundle\CoyoteFrontBundle(),
         );
 
-        if (in_array($this->getEnvironment(), array('dev', 'test'))) {
+        if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
             $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
             $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
-            $bundles[] = new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle();
         }
 
         return $bundles;
@@ -44,6 +63,6 @@ class AppKernel extends Kernel
 
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
-        $loader->load(__DIR__.'/config/config_'.$this->getEnvironment().'.yml');
+        $loader->load($this->getRootDir().'/config/config_'.$this->getEnvironment().'.yml');
     }
 }

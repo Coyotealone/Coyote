@@ -1,0 +1,19 @@
+profil_changepassword:
+    pattern:    /changepassword
+    defaults:   { _controller: "CoyoteFrontBundle:ChangePassword:changePassword" }
+    methods:    GET
+
+profil_profile:
+    pattern:    /
+    defaults:   { _controller: "CoyoteFrontBundle:Profile:getprofilUser" }
+    methods:    GET
+
+profil_resetting:
+    pattern:    /resetting
+    defaults:   { _controller: "CoyoteFrontBundle:Profile:resetting"}
+    methods:    [POST, PUT]
+
+profil_profile_edit:
+    pattern:    /edit
+    defaults:   { _controller: "CoyoteFrontBundle:Profile:profiledit"}
+    methods:    GET

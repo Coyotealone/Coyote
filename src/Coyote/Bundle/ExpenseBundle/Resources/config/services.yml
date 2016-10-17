@@ -1,0 +1,30 @@
+services:
+    coyote_expense.admin.business:
+        class: Coyote\Bundle\ExpenseBundle\Admin\BusinessAdmin
+        arguments: [~, Coyote\Bundle\ExpenseBundle\Entity\Business, SonataAdminBundle:CRUD]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Expense, label: Business }
+
+    coyote_expense.admin.currency:
+        class: Coyote\Bundle\ExpenseBundle\Admin\CurrencyAdmin
+        arguments: [~, Coyote\Bundle\ExpenseBundle\Entity\Currency, SonataAdminBundle:CRUD]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Expense, label: Currency }
+
+    coyote_expense.admin.expense:
+        class: Coyote\Bundle\ExpenseBundle\Admin\ExpenseAdmin
+        arguments: [~, Coyote\Bundle\ExpenseBundle\Entity\Expense, SonataAdminBundle:CRUD]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Expense, label: Expense }
+
+    coyote_expense.admin.fee:
+        class: Coyote\Bundle\ExpenseBundle\Admin\FeeAdmin
+        arguments: [~, Coyote\Bundle\ExpenseBundle\Entity\Fee, SonataAdminBundle:CRUD]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Expense, label: Fee }
+
+    coyote_expense.admin.site:
+        class: Coyote\Bundle\ExpenseBundle\Admin\SiteAdmin
+        arguments: [~, Coyote\Bundle\ExpenseBundle\Entity\Site, SonataAdminBundle:CRUD]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Expense, label: Site }

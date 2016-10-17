@@ -1,0 +1,17 @@
+{% extends 'CoyoteFrontBundle:Base:base.html.twig' %}
+
+{% block nav %}
+
+    {{ include('CoyoteFrontBundle:Base:navigation.html.twig') }}
+
+{% endblock %}
+
+{% block content %}
+    <div class="jumbotron">
+        <p class="lead">{{'schedule.title.index'|trans}}</p>
+        <p>
+        	<a href={{ path('schedule_user')}} class="btn_white">{{'schedule.title.absenceday'|trans}}</a>
+        	<a href={{ path('schedule_framework')}} class="btn_white">{{'schedule.title.absenceweek'|trans}}</a>
+	  	</p>
+    </div>
+{% endblock %}
