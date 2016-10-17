@@ -24,25 +24,25 @@ class Schedule
 
     /**
      * @var \Time
-     * @ORM\Column(name="start", type="time")
+     * @ORM\Column(name="start", type="time", nullable=true)
      */
     private $start;
 
     /**
      * @var \Time
-     * @ORM\Column(name="end", type="time")
+     * @ORM\Column(name="end", type="time", nullable=true)
      */
     private $end;
 
     /**
      * @var \Time
-     * @ORM\Column(name="break", type="time")
+     * @ORM\Column(name="break", type="time", nullable=true)
      */
     private $break;
 
     /**
      * @var \Time
-     * @ORM\Column(name="working_time", type="time")
+     * @ORM\Column(name="working_time", type="time", nullable=true)
      */
     private $working_time;
 

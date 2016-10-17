@@ -48,7 +48,7 @@ class HTML2PDF_myPdf extends TCPDF
         parent::__construct($orientation, $unit, $format, $unicode, $encoding, $diskcache);
 
         // init the specific parameters used by HTML2PDF
-        $this->SetCreator(PDF_CREATOR);
+        //$this->SetCreator(PDF_CREATOR);
         $this->SetAutoPageBreak(false, 0);
         $this->linestyleCap = '2 J';
         $this->setPrintHeader(false);

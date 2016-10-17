@@ -19,6 +19,7 @@ class SiteAdmin extends AbstractAdmin
             ->add('id')
             ->add('code')
             ->add('name')
+            ->add('roles')
         ;
     }
 
@@ -31,6 +32,7 @@ class SiteAdmin extends AbstractAdmin
             ->add('id')
             ->add('code')
             ->add('name')
+            ->add('roles')
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'show' => array(),
@@ -49,6 +51,7 @@ class SiteAdmin extends AbstractAdmin
         $formMapper
             ->add('code')
             ->add('name')
+            ->add('roles')
         ;
     }
 
@@ -61,6 +64,7 @@ class SiteAdmin extends AbstractAdmin
             ->add('id')
             ->add('code')
             ->add('name')
+            ->add('roles')
         ;
     }
 }

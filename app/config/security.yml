@@ -14,8 +14,8 @@ security:
         ROLE_VISU:            ROLE_VISU                       #Consulter annuaire
         ROLE_TECH:            ROLE_TECH                       #Saisir temps de présence en heures
         ROLE_CADRE:           ROLE_CADRE                      #Saisir temps de présence en jours
-        ROLE_TRADE_PICHON:    ROLE_TRADE_PICHON               #Saisir Notes de frais Société PICHON
-        ROLE_TRADE_GILIBERT:  ROLE_TRADE_GILIBERT             #Saisir Notes de frais Société GILIBERT
+        ROLE_TRADE_PICHON:    [ROLE_TRADE_PICHON, ROLE_VISU]  #Saisir Notes de frais Société PICHON
+        ROLE_TRADE_GILIBERT:  [ROLE_TRADE_GILIBERT, ROLE_VISU] #Saisir Notes de frais Société GILIBERT
         ROLE_COMPTA:          ROLE_COMPTA                     #Consulter les notes de frais en attente de transfert
         ROLE_CHEF_BE:         ROLE_CHEF_BE                    #Récupérer temps de présence users BE
         ROLE_DIRECTORY:       ROLE_DIRECTORY                  #Administration annuaire

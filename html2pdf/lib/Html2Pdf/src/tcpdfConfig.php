@@ -37,8 +37,8 @@ if (!defined('K_TCPDF_EXTERNAL_CONFIG')) {
     define('K_TCPDF_EXTERNAL_CONFIG', true);
 
     // DOCUMENT_ROOT fix for IIS Webserver
-    if ((!isset(filter_input(INPUT_SERVER, 'DOCUMENT_ROOT'))) || (empty(filter_input(INPUT_SERVER, 'DOCUMENT_ROOT')))) {
-        if (isset(filter_input(INPUT_SERVER, 'SCRIPT_FILENAME'))) {
+    /*if ((null !== (filter_input(INPUT_SERVER, 'DOCUMENT_ROOT'))) || (empty(filter_input(INPUT_SERVER, 'DOCUMENT_ROOT')))) {
+        if (null == (filter_input(INPUT_SERVER, 'SCRIPT_FILENAME'))) {
             filter_input(INPUT_SERVER, 'DOCUMENT_ROOT') = str_replace(
                 '\\',
                 '/',
@@ -54,7 +54,7 @@ if (!defined('K_TCPDF_EXTERNAL_CONFIG')) {
             // define here your DOCUMENT_ROOT path if the previous fails
             filter_input(INPUT_SERVER, 'DOCUMENT_ROOT') = '/var/www';
         }
-    }
+    }*/
 
     // Automatic calculation for the following K_PATH_MAIN constant
     $kPathMain = str_replace('\\', '/', dirname(__FILE__));
@@ -63,8 +63,8 @@ if (!defined('K_TCPDF_EXTERNAL_CONFIG')) {
     define('K_PATH_MAIN', $kPathMain);
 
     // Automatic calculation for the following K_PATH_URL constant
-    if (isset(filter_input(INPUT_SERVER, 'HTTP_HOST')) && (!empty(filter_input(INPUT_SERVER, 'HTTP_HOST')))) {
-        if (isset(filter_input(INPUT_SERVER, 'HTTPS')) && (!empty(filter_input(INPUT_SERVER, 'HTTPS'))) && strtolower(filter_input(INPUT_SERVER, 'HTTPS'))!='off') {
+    if (null !== (filter_input(INPUT_SERVER, 'HTTP_HOST')) && (!empty(filter_input(INPUT_SERVER, 'HTTP_HOST')))) {
+        if (null !== (filter_input(INPUT_SERVER, 'HTTPS')) && (!empty(filter_input(INPUT_SERVER, 'HTTPS'))) && strtolower(filter_input(INPUT_SERVER, 'HTTPS'))!='off') {
             $kPathUrl = 'https://';
         } else {
             $kPathUrl = 'http://';

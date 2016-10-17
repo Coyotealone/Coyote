@@ -29,11 +29,11 @@
 	{% set counter = 0 %}
 	{% set week_ = week[0] %}
 	{% set index = -1 %}
-	
+
 	{% for data in dataschedule %}
     	{% set index = index + 1 %}
     	<tr style="width:900px;">
-            
+
             {% if week_ != week[index] %}
                 <td colspan=10 style="width: 30%; background:#99CCCC; color:white; text-align:center">{{"schedule.hours_worked_week"|trans}} : {{timeweek[counter]}}</td>
                 {% set counter = counter + 1 %}

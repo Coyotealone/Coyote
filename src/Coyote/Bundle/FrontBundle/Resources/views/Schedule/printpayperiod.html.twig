@@ -30,11 +30,9 @@
 	{% set counter = 0 %}
 	{% set week_ = week[0] %}
 	{% set index = -1 %}
-	
 	{% for data in dataschedule %}
     	{% set index = index + 1 %}
     	<tr style="width:900px;">
-            
             {% if week_ != week[index] %}
                 <td colspan=10 style="width: 30%; background:#99CCCC; color:white; text-align:center">{{"schedule.hours_worked_week"|trans}} : {{timeweek[counter]}}</td>
                 {% set counter = counter + 1 %}
@@ -51,97 +49,106 @@
                 <td style="background:#7FC6BC; color:white; text-align:center">{{ data.absence_name|trans }}</td>
                 <td style="background:#7FC6BC; color:white; text-align:center">{{ data.absence_duration }}</td>
                 <td style="background:#7FC6BC; color:white; width: 20%">{{ data.comment }}</td>
+            {% endif %}
             {% if day[index] == "Saturday" %}
                 <td style="background:#01B0F0; color:white; text-align:center">{{ day[index]|trans }}</td>
                 <td style="background:#01B0F0; color:white; text-align:center">{{ date[index]}}</td>
-                {% if data.start is empty %}
-                    <td style="background:#01B0F0; color:white; text-align:center">{{ "" }}</td>
-                {% else %}
-                    <td style="background:#01B0F0; color:white; text-align:center">{{ data.start|date("H:i", false) }}</td>
-                {% endif %}
-                {% if data.end is empty %}
-                    <td style="background:#01B0F0; color:white; text-align:center">{{ "" }}</td>
-                {% else %}
-                    <td style="background:#01B0F0; color:white; text-align:center">{{ data.end|date("H:i", false) }}</td>
-                {% endif %}
-                {% if data.break is empty %}
-                    <td style="background:#01B0F0; color:white; text-align:center">{{ "" }}</td>
-                {% else %}
-                    <td style="background:#01B0F0; color:white; text-align:center">{{ data.break|date("H:i", false) }}</td>
-                {% endif %}
-                {% if data.working_time is empty %}
-                    <td style="background:#01B0F0; color:white; text-align:center">{{ "" }}</td>
-                {% else %}
-                    <td style="background:#01B0F0; color:white; text-align:center">{{ data.working_time|date("H:i", false) }}</td>
-                {% endif %}
-                <td style="background:#01B0F0; color:white; text-align:center">{{ data.travel }}</td>
-                <td style="background:#01B0F0; color:white; text-align:center">{{ data.absence_name|trans }}</td>
-                <td style="background:#01B0F0; color:white; text-align:center">{{ data.absence_duration }}</td>
-                <td style="background:#01B0F0; color:white; width: 20%">{{ data.comment }}</td>
+            {% if data.start is empty %}
+                <td style="background:#01B0F0; color:white; text-align:center">{{ "" }}</td>
+            {% else %}
+                <td style="background:#01B0F0; color:white; text-align:center">{{ data.start|date("H:i", false) }}</td>
+            {% endif %}
+
+            {% if data.end is empty %}
+                <td style="background:#01B0F0; color:white; text-align:center">{{ "" }}</td>
+            {% else %}
+                <td style="background:#01B0F0; color:white; text-align:center">{{ data.end|date("H:i", false) }}</td>
+            {% endif %}
+
+            {% if data.break is empty %}
+                <td style="background:#01B0F0; color:white; text-align:center">{{ "" }}</td>
+            {% else %}
+                <td style="background:#01B0F0; color:white; text-align:center">{{ data.break|date("H:i", false) }}</td>
+            {% endif %}
+
+            {% if data.working_time is empty %}
+                <td style="background:#01B0F0; color:white; text-align:center">{{ "" }}</td>
+            {% else %}
+                <td style="background:#01B0F0; color:white; text-align:center">{{ data.working_time|date("H:i", false) }}</td>
+            {% endif %}
+
+            <td style="background:#01B0F0; color:white; text-align:center">{{ data.travel }}</td>
+            <td style="background:#01B0F0; color:white; text-align:center">{{ data.absence_name|trans }}</td>
+            <td style="background:#01B0F0; color:white; text-align:center">{{ data.absence_duration }}</td>
+            <td style="background:#01B0F0; color:white; width: 20%">{{ data.comment }}</td>
             {% elseif day[index] == "Sunday" %}
                 <td style="background:#01B0F0; color:white; text-align:center">{{ day[index]|trans }}</td>
                 <td style="background:#01B0F0; color:white; text-align:center">{{ date[index]}}</td>
-                {% if data.start is empty %}
-                    <td style="background:#01B0F0; color:white; text-align:center">{{ "" }}</td>
-                {% else %}
-                    <td style="background:#01B0F0; color:white; text-align:center">{{ data.start|date("H:i", false) }}</td>
-                {% endif %}
-                {% if data.end is empty %}
-                    <td style="background:#01B0F0; color:white; text-align:center">{{ "" }}</td>
-                {% else %}
-                    <td style="background:#01B0F0; color:white; text-align:center">{{ data.end|date("H:i", false) }}</td>
-                {% endif %}
-                {% if data.break is empty %}
-                    <td style="background:#01B0F0; color:white; text-align:center">{{ "" }}</td>
-                {% else %}
-                    <td style="background:#01B0F0; color:white; text-align:center">{{ data.break|date("H:i", false) }}</td>
-                {% endif %}
-                {% if data.working_time is empty %}
-                    <td style="background:#01B0F0; color:white; text-align:center">{{ "" }}</td>
-                {% else %}
-                    <td style="background:#01B0F0; color:white; text-align:center">{{ data.working_time|date("H:i", false) }}</td>
-                {% endif %}
-                <td style="background:#01B0F0; color:white; text-align:center">{{ data.travel }}</td>
-                <td style="background:#01B0F0; color:white; text-align:center">{{ data.absence_name|trans }}</td>
-                <td style="background:#01B0F0; color:white; text-align:center">{{ data.absence_duration }}</td>
-                <td style="background:#01B0F0; color:white; width: 20%">{{ data.comment }}</td>
+            {% if data.start is empty %}
+                <td style="background:#01B0F0; color:white; text-align:center">{{ "" }}</td>
+            {% else %}
+                <td style="background:#01B0F0; color:white; text-align:center">{{ data.start|date("H:i", false) }}</td>
+            {% endif %}
+            {% if data.end is empty %}
+                <td style="background:#01B0F0; color:white; text-align:center">{{ "" }}</td>
+            {% else %}
+                <td style="background:#01B0F0; color:white; text-align:center">{{ data.end|date("H:i", false) }}</td>
+            {% endif %}
+            {% if data.break is empty %}
+                <td style="background:#01B0F0; color:white; text-align:center">{{ "" }}</td>
+            {% else %}
+                <td style="background:#01B0F0; color:white; text-align:center">{{ data.break|date("H:i", false) }}</td>
+            {% endif %}
+            {% if data.working_time is empty %}
+                <td style="background:#01B0F0; color:white; text-align:center">{{ "" }}</td>
+            {% else %}
+                <td style="background:#01B0F0; color:white; text-align:center">{{ data.working_time|date("H:i", false) }}</td>
+            {% endif %}
+            <td style="background:#01B0F0; color:white; text-align:center">{{ data.travel }}</td>
+            <td style="background:#01B0F0; color:white; text-align:center">{{ data.absence_name|trans }}</td>
+            <td style="background:#01B0F0; color:white; text-align:center">{{ data.absence_duration }}</td>
+            <td style="background:#01B0F0; color:white; width: 20%">{{ data.comment }}</td>
         </tr>
         <tr>
             {% else %}
-                <td style="text-align:center" >{{ day[index]|trans }}</td>
-                <td style="text-align:center" >{{ date[index]}}</td>
-                {% if data.start is empty %}
-                    <td style="text-align:center">{{ "" }}</td>
-                {% else %}
-                    <td style="text-align:center">{{ data.start|date("H:i", false) }}</td>
-                {% endif %}
-                {% if data.end is empty %}
-                    <td style="text-align:center">{{ "" }}</td>
-                {% else %}
-                    <td style="text-align:center">{{ data.end|date("H:i", false) }}</td>
-                {% endif %}
-                {% if data.break is empty %}
-                    <td style="text-align:center">{{ "" }}</td>
-                {% else %}
-                    <td style="text-align:center">{{ data.break|date("H:i", false) }}</td>
-                {% endif %}
-                {% if data.working_time is empty %}
-                    <td style="text-align:center">{{ "" }}</td>
-                {% else %}
-                    <td style="text-align:center">{{ data.working_time|date("H:i", false) }}</td>
-                {% endif %}
-                <td style="text-align:center" >{{ data.travel }}</td>
-                <td style="text-align:center" >{{ data.absence_name|trans }}</td>
-                <td style="text-align:center" >{{ data.absence_duration }}</td>
-                <td style="width: 20%;">{{ data.comment }}</td>
+            <td style="text-align:center" >{{ day[index]|trans }}</td>
+            <td style="text-align:center" >{{ date[index]}}</td>
+            {% if data.start is empty %}
+                <td style="text-align:center">{{ "" }}</td>
+            {% else %}
+                <td style="text-align:center">{{ data.start|date("H:i", false) }}</td>
+            {% endif %}
+
+            {% if data.end is empty %}
+                <td style="text-align:center">{{ "" }}</td>
+            {% else %}
+                <td style="text-align:center">{{ data.end|date("H:i", false) }}</td>
+            {% endif %}
+
+            {% if data.break is empty %}
+                <td style="text-align:center">{{ "" }}</td>
+            {% else %}
+                <td style="text-align:center">{{ data.break|date("H:i", false) }}</td>
+            {% endif %}
+
+            {% if data.working_time is empty %}
+                <td style="text-align:center">{{ "" }}</td>
+            {% else %}
+                <td style="text-align:center">{{ data.working_time|date("H:i", false) }}</td>
+            {% endif %}
+
+            <td style="text-align:center" >{{ data.travel }}</td>
+            <td style="text-align:center" >{{ data.absence_name|trans }}</td>
+            <td style="text-align:center" >{{ data.absence_duration }}</td>
+            <td style="width: 20%;">{{ data.comment }}</td>
             {% endif %}
             {% set week_ = week[index] %}
         </tr>
-            {% if loop.last %}
+        {% if loop.last %}
         <tr>
             <td colspan=10 style="width: 30%; background:#99CCCC; color:white; text-align:center">{{"schedule.hours_worked_week"|trans}} : {{timeweek[counter]}}</td>
         </tr>
-            {% endif %}
+        {% endif %}
     {% endfor %}
 
 </table>

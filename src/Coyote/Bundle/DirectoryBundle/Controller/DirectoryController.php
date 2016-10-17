@@ -294,8 +294,8 @@ class DirectoryController extends Controller
         $directory = new Directory();
         $form = $this->createForm(ShowType::class, $directory);
 
-        if ($request->getMethod() == 'POST') {
-
+        if ($request->getMethod() == 'POST')
+        {
             $postData = $request->request->get('coyote_directorybundle_show');
             $country = $postData['country'];
             $orderby = $postData['orderby'];

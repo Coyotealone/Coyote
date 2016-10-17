@@ -1,7 +1,15 @@
 <page>
+{% if is_granted('ROLE_TRADE_PICHON') %}
 <div id="lien">
-    <img src="./bundles/coyotefront/images/Logo_Pichon.jpg" alt="PICHON" id="logo"/>
+    <img src="./bundles/coyotefront/images/Logo_PICHON.jpg" alt="PICHON" id="logo"/>
 </div>
+{% endif %}
+{% if is_granted('ROLE_TRADE_GILIBERT') %}
+<div id="lien">
+    <img src="./bundles/coyotefront/images/Logo-Gilibert.jpg" alt="PICHON" id="logo"/>
+</div>
+{% endif %}
+
 <p style="text-align:center">{{'expense.title.print'|trans}}</p>
 
 {% if data %}
