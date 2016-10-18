@@ -17,3 +17,7 @@ main_index:
     pattern:    /index
     defaults:   { _controller: "CoyoteFrontBundle:Main:index"}
     methods:    GET
+
+main_backoffice:
+    pattern:    /backoffice
+    defaults:   { _controller: "CoyoteFrontBundle:Main:getBackOffice"}
