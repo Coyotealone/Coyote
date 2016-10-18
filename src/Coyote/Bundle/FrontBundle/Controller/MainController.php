@@ -60,7 +60,8 @@ class MainController extends Controller
 		}
 		else
 		{
-    		if (!empty($data_user->getLocale()))
+    		$data_user = $em->getRepository('ApplicationSonataUserBundle:User')->findOneById($this->getUser());
+			if (!empty($data_user->getLocale()))
 			{
     			$locale = $data_user->getLocale();
 			}
