@@ -6,15 +6,6 @@
 
 {% block content %}
     <div>
-        <p class="lead">{{'accueil.menu.message'|trans }}<br>
-        {% if quote %}
-            {% if app.request.locale == "fr" %}
-                <blockquote>
-                    <p>"{{quote.0.citation}}"</p>
-                    <small><cite title="Source Title">{{quote.0.author}}</cite></small>
-                </blockquote>
-            {% endif %}
-        {% endif %}
-        </p>
+        <p class="lead">{{'accueil.menu.message'|trans }}</p>
     </div>
 {% endblock %}

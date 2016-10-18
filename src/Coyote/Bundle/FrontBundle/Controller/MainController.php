@@ -27,12 +27,6 @@ class MainController extends Controller
 		{
 			return $this->redirect($this->generateUrl('main_login', array('_locale' => $locale)));
 		}
-		if ($this->get('security.context')->isGranted('ROLE_SUPER_ADMIN'))
-		{
-    		$request->getSession()->set('_locale', 'en');
-            $request->setLocale('en');
-			return $this->redirect($this->generateUrl('sonata_admin_dashboard'));
-		}
 		else
 		{
 			$em = $this->getDoctrine()->getManager();
@@ -41,17 +35,41 @@ class MainController extends Controller
 			$date = (new \DateTime($date));
 			$session->set('week', $date->format('W'));
 			$session->set('year', $date->format('Y'));
-			//$date = $em->getRepository('CoyoteSiteBundle:Timetable')->findOneBy(array('date' => $date));
-
 			$session->set('period', $em->getRepository('CoyoteAttendanceBundle:Schedule')->createPeriod(date('Y').'-'
 			    .date('m').'-'.date('d')));
 			$session->set('status', $data_user->getRoles());
-			$locale = $request->getLocale();
-			$quotes = null;//$em->getRepository('CoyoteSiteBundle:Quote')->findby(array
-				//('week' => date('W'), 'year' => date('Y')));
-			return $this->render('CoyoteFrontBundle:Accueil:menu.html.twig', array('quote' => $quotes,
-				'_locale' => $locale));
+			if (!empty($data_user->getLocale()))
+			{
+    			$locale = $data_user->getLocale();
+			}
+			else
+			{
+                $locale = $request->getLocale();
+            }
+			return $this->render('CoyoteFrontBundle:Accueil:menu.html.twig', array('_locale' => $locale));
 		}
+	}
+
+	public function getBackOfficeAction(Request $request)
+	{
+    	if ($this->get('security.context')->isGranted('ROLE_SUPER_ADMIN'))
+		{
+    		$request->getSession()->set('_locale', 'en');
+            $request->setLocale('en');
+			return $this->redirect($this->generateUrl('sonata_admin_dashboard'));
+		}
+		else
+		{
+    		if (!empty($data_user->getLocale()))
+			{
+    			$locale = $data_user->getLocale();
+			}
+			else
+			{
+                $locale = $request->getLocale();
+            }
+		    return $this->render('CoyoteFrontBundle:Accueil:menu.html.twig', array('_locale' => $locale));
+        }
 	}
 
 	/**
