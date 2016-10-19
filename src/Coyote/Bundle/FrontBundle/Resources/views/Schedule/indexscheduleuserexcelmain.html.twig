@@ -1,0 +1,42 @@
+{% extends 'CoyoteFrontBundle:Schedule:index.html.twig' %}
+
+{% block link %}
+
+    {{ include('CoyoteFrontBundle:Base:navigation.html.twig') }}
+
+{% endblock %}
+
+{% block content %}
+<p id="title">{{"admin.title.indexscheduleuserexcel"|trans}} </p>
+<form role="form" action="{{ path('main_getscheduleuser') }}" method='get'>
+    <table class='table'>
+    	<tr>
+    		<th class="center">{{'admin.period'|trans}}</th>
+    	    <td class="center">
+                <select name='pay_period' id='pay_period' >
+                {% for pay_period in tab_period %}
+                    {% if pay_period == period %}
+                    <option value={{pay_period}} selected>{{pay_period}}</option>
+                    {% else %}
+                    <option value={{pay_period}}>{{pay_period}}</option>
+                    {% endif %}
+                {% endfor %}
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th class="center">{{'admin.user'|trans}}</th>
+            <td class="center">
+                <select name='user' id='user' >
+                {% for user in tab_user %}
+                    <option value={{user.id}}>{{user.firstname}}</option>
+                {% endfor %}
+                </select>
+            </td>
+        </tr>
+    </table>
+    <div id="btn_show">
+        <button class='btn btn-primary' type="submit" value="Afficher" id="afficher">{{'admin.submit.download'|trans }}</button>
+    </div>
+</form>
+{% endblock %}

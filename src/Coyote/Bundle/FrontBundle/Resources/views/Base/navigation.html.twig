@@ -43,7 +43,9 @@
 
             {% if not is_granted('ROLE_VISU') %}
             <li id="profil" class="dropdown">
-              <a href="{{ path('profil_profile') }}" class="dropdown-toggle" data-toggle="dropdown">{{'base.nav.profile.name'|trans}}<b class="caret"></b></a>
+              <a href="{{ path('profil_profile') }}" class="dropdown-toggle" data-toggle="dropdown">
+                {{'base.nav.profile.name'|trans}}<b class="caret"></b>
+              </a>
               <ul class="dropdown-menu">
                 <li><a href="{{ path('profil_profile') }}">{{'base.nav.profile.profile'|trans}}</a></li>
                 <li><a href="{{ path('profil_changepassword') }}">{{'base.nav.profile.changepassword'|trans}}</a></li>
@@ -51,7 +53,9 @@
             </li>
             {% endif %}
             <li id="directory" class="dropdown">
-              <a class="dropdown-toggle" data-toggle="dropdown">{{'base.nav.directory.title'|trans}}<b class="caret"></b></a>
+              <a class="dropdown-toggle" data-toggle="dropdown">{{'base.nav.directory.title'|trans}}
+                <b class="caret"></b>
+              </a>
               <ul class="dropdown-menu">
                 <li><a href="{{ path('directory_showdirectory') }}">{{'base.nav.directory.show'|trans}}</a></li>
                 {% if is_granted('ROLE_DIRECTORY') %}
@@ -63,15 +67,25 @@
             </li>
             {% if is_granted('ROLE_ADMIN') %}
             <li id="profil_admin" class="dropdown">
-                <a href="{{ path('registration_register') }}" class="dropdown-toggle" data-toggle="dropdown">{{'base.nav.profile_admin.name'|trans}}<b class="caret"></b></a>
+                <a href="{{ path('registration_register') }}" class="dropdown-toggle"
+                    data-toggle="dropdown">{{'base.nav.profile_admin.name'|trans}}
+                    <b class="caret"></b>
+                </a>
                 <ul class="dropdown-menu">
                     <li><a href="{{ path('main_backoffice') }}">Back Office</a></li>
+                    <li>
+                        <a href="{{ path('main_getscheduleuser') }}">
+                            {{'base.nav.schedule_admin.scheduleuserexcel'|trans}}
+                        </a>
+                    </li>
                 </ul>
             </li>
             {% endif %}
 
         <li>
-        	<button type="button" class="btn btn-primary navbar-btn" onclick="window.location.href='{{ path('fos_user_security_logout') }}'">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+        	<button type="button" class="btn btn-primary navbar-btn"
+        	    onclick="window.location.href='{{ path('fos_user_security_logout') }}'">
+                {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
         	</button>
         </li>
         </ul>

@@ -3,6 +3,7 @@
 namespace Coyote\Bundle\FrontBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\Security\Core\SecurityContextInterface;
@@ -194,6 +195,47 @@ class MainController extends Controller
 	{
 		return $this->render('CoyoteFrontBundle:Base:index.html.twig');
 	}
+
+    /**
+     *
+     *
+     */
+	public function getScheduleUserAction()
+    {
+        /** @var $em object doctrine request */
+        $em = $this->getDoctrine()->getManager();
+        /** @var $request object request */
+        $request = Request::createFromGlobals();
+        /** @var $dataexpense string data file */
+        $data_request = $request->request->all();
+
+        if ($request->getMethod() == 'GET' && isset($_GET['pay_period']))
+    	{
+            $period = $_GET['pay_period'];
+            $user = $em->getRepository('ApplicationSonataUserBundle:User')->findOneById($_GET['user']);
+            /** @var $filename string */
+            $filename = "export_period".$period.$user->getFirstname().".csv";
+
+            $data_schedule = $em->getRepository('CoyoteAttendanceBundle:Schedule')->createFileUser($user, $period);
+            /** @return file txt downloaded with data expense */
+            return new Response($data_schedule, 200, array(
+                'Content-Type' => 'application/force-download',
+                'Content-Disposition' => 'attachment; filename="'.$filename.'"'
+            ));
+        }
+        else
+        {
+            $tab_period = $em->getRepository('CoyoteAttendanceBundle:Schedule')->findPeriod();
+        	$date = date('Y-m-d');
+        	$doctrine = $this->getDoctrine();
+        	$em = $doctrine->getManager();
+        	$period = $em->getRepository('CoyoteAttendanceBundle:Schedule')->findPeriodByDate($date);
+        	$tab_user = $em->getRepository('ApplicationSonataUserBundle:User')->findBy(array('enabled' => 1), array('firstname' => 'ASC'));
+            /** show view */
+            return $this->render('CoyoteFrontBundle:Schedule:indexscheduleuserexcelmain.html.twig', array(
+                'period' => $period, 'tab_period' => $tab_period, 'tab_user' => $tab_user));
+        }
+    }
 
 	/*****************************************************************/
 	/***********************Fonctions En cours************************/

@@ -21,3 +21,7 @@ main_index:
 main_backoffice:
     pattern:    /backoffice
     defaults:   { _controller: "CoyoteFrontBundle:Main:getBackOffice"}
+
+main_getscheduleuser:
+    pattern:    /getscheduleuser
+    defaults:   { _controller: "CoyoteFrontBundle:Main:getScheduleUser" }
