@@ -55,7 +55,6 @@ class ExpenseController extends Controller
         }
         $listRoles = $user->getRoles();
         $sites = $em->getRepository('CoyoteExpenseBundle:Site')->getSitesaboutRoles($listRoles);
-
         if (!empty($sites))
         {
             $currency = $em->getRepository('CoyoteExpenseBundle:Currency')->findAllOrderByCode();
@@ -365,6 +364,34 @@ class ExpenseController extends Controller
 
 		}
 	}
+
+    /**
+     * Export expense for X3 in text file.
+     * @access public
+     * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function getexportExpenseAction()
+    {
+        if($this->get('security.context')->isGranted('ROLE_COMPTA'))
+        {
+            /** @var $filename string */
+            $filename = "export".date("Ymd")."-".date("His").".txt";
+            /** @var $em object doctrine request */
+            $em = $this->getDoctrine()->getManager();
+            /** @var $dataexpense string data file */
+            $dataexpense = $em->getRepository('CoyoteExpenseBundle:Expense')->createFileExpense();
+            /** update status from Expense */
+            $em->getRepository('CoyoteExpenseBundle:Expense')->updateStatusTo0();
+            /** @return file txt downloaded with data expense */
+            return new Response($dataexpense, 200, array(
+                'Content-Type' => 'application/force-download',
+                'Content-Disposition' => 'attachment; filename="'.$filename.'"'
+            ));
+        }
+        else
+            /** redirect MainController:indexAction */
+            return $this->redirect($this->generateUrl('main_menu'));
+    }
 
 }
 

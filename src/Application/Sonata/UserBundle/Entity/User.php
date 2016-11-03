@@ -31,6 +31,122 @@ class User extends BaseUser
     protected $id;
 
     /**
+     * @var integer
+     */
+    protected $code_car;
+
+    /**
+     * @var string
+     */
+    protected $registration_car;
+
+    /**
+     * @var string
+     */
+    protected $commercial_code;
+
+    /**
+     * @var string
+     */
+    protected $commercial_service;
+
+    /**
+     * Set code_car
+     *
+     * @param integer $codeCar
+     *
+     * @return User
+     */
+    public function setCodeCar($codeCar)
+    {
+        $this->code_car = $codeCar;
+
+        return $this;
+    }
+
+    /**
+     * Get code_car
+     *
+     * @return integer
+     */
+    public function getCodeCar()
+    {
+        return $this->code_car;
+    }
+
+    /**
+     * Set registration_car
+     *
+     * @param string $registrationCar
+     *
+     * @return User
+     */
+    public function setRegistrationCar($registrationCar)
+    {
+        $this->registration_car = $registrationCar;
+
+        return $this;
+    }
+
+    /**
+     * Get registration_car
+     *
+     * @return string
+     */
+    public function getRegistrationCar()
+    {
+        return $this->registration_car;
+    }
+
+    /**
+     * Set commercialCode
+     *
+     * @param boolean $commercialCode
+     *
+     * @return User
+     */
+    public function setCommercialCode($commercialCode)
+    {
+        $this->commercial_code = $commercialCode;
+
+        return $this;
+    }
+
+    /**
+     * Get commercialCode
+     *
+     * @return boolean
+     */
+    public function getCommercialCode()
+    {
+        return $this->commercial_code;
+    }
+
+    /**
+     * Set commercialService
+     *
+     * @param boolean $commercialService
+     *
+     * @return User
+     */
+    public function setCommercialService($commercialService)
+    {
+        $this->commercial_service = $commercialService;
+
+        return $this;
+    }
+
+    /**
+     * Get commercialService
+     *
+     * @return boolean
+     */
+    public function getCommercialService()
+    {
+        return $this->commercial_service;
+    }
+
+    /**
      * Get id
      *
      * @return int $id
@@ -39,4 +155,5 @@ class User extends BaseUser
     {
         return $this->id;
     }
+
 }

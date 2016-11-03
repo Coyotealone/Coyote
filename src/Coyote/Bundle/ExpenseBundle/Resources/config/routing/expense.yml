@@ -53,3 +53,8 @@ expense_printexpenses:
     defaults: { _controller: "CoyoteExpenseBundle:Expense:getprintExpenses" }
     requirements:
         _method: get
+
+expense_getexportexpense:
+    pattern:  /getexportexpense
+    defaults: { _controller: "CoyoteExpenseBundle:Expense:getexportExpense" }
+

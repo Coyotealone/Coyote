@@ -1,8 +1,8 @@
 userfees:
-    login: Login : 
-    car: Car : 
-    code: Code : 
-    service: Service : 
+    login: Login :
+    car: Car :
+    code: Code :
+    service: Service :
     userfees: Trade
 
 business.pichon: Pichon
@@ -409,7 +409,7 @@ expense:
 'Fourniture 5,5%': Supply 5,5%
 'stationary UK fourniture': UK Supply
 'Hotel': Hotel
-'Hotel UK 20%': UK Hotel 20% 
+'Hotel UK 20%': UK Hotel 20%
 'Location vehicules': Car Rental
 'Telephone sans TVA': Toll VAT
 'Telephone UK 20%': UK Phone 20%

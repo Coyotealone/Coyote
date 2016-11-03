@@ -9,6 +9,10 @@
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
+        <field name="code_car" type="integer" nullable="true" />
+        <field name="registration_car" type="string" length="9" nullable="true" />
+        <field name="commercial_code" type="string" length="5" nullable="true" />
+        <field name="commercial_service" type="string" length="5" nullable="true" />
 
     </entity>
 
